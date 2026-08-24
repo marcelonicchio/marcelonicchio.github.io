@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "entity": "Marcelo Nicchio",
+  "canonicalUrl": "https://marcelonicchio.github.io/",
+  "updated": "2026-08-24",
+  "purpose": "Canonical experience record used to keep PT/EN biographies, thematic pages and machine-readable entity data consistent. Evidence status is editorial metadata, not a public confidence score.",
+  "experience": [
+    {
+      "id": "coitado-do-proximo",
+      "period": "1992-2003",
+      "field": "music",
+      "name": "Coitado do Próximo",
+      "role": ["founder", "composer", "drummer"],
+      "evidenceStatus": "mixed",
+      "publicSources": [
+        "https://www.youtube.com/watch?v=V624sY_rl8I",
+        "https://youtu.be/0-RXucDYMfk",
+        "https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s"
+      ],
+      "note": "Founding and early chronology are autobiographical; later performances have surviving public audiovisual records."
+    },
+    {
+      "id": "metropole-radio",
+      "period": "1994-1995",
+      "field": "communication",
+      "name": "Metrópole — Rádio Nova Paulista FM 103.7",
+      "role": ["host", "music curator"],
+      "evidenceStatus": "preserved-private",
+      "note": "A complete Velhas Virgens interview survives in MP3; broader schedule and duration remain autobiographical until further archival evidence is published."
+    },
+    {
+      "id": "folhateen-2001",
+      "period": "2001-04-23",
+      "field": "communication",
+      "name": "Folha de S.Paulo / Folhateen",
+      "role": ["interview subject"],
+      "evidenceStatus": "public-external",
+      "publicSources": [
+        "https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm"
+      ],
+      "note": "Printed cover used the headline 'Órfãos do Rock'; the internal article is archived online as 'Onde estão os ídolos?'."
+    },
+    {
+      "id": "sinal-verde",
+      "period": "2003-2006",
+      "field": "communication",
+      "name": "Revista Sinal Verde / Prateleira Cultural",
+      "role": ["columnist", "cultural critic"],
+      "evidenceStatus": "preserved-primary",
+      "note": "Approximately twenty unique preserved pieces document culture, media and recurring digital-culture themes."
+    },
+    {
+      "id": "psinet",
+      "period": "2000",
+      "field": "internet",
+      "name": "PSINet",
+      "role": ["corporate hosting sales"],
+      "evidenceStatus": "mixed",
+      "note": "Employment/career information is autobiographical and privately supportable; a few team photographs survive."
+    },
+    {
+      "id": "mirantte-news",
+      "period": "2004-2008",
+      "field": "internet",
+      "name": "Mirantte News",
+      "role": ["site director"],
+      "evidenceStatus": "preserved-primary",
+      "note": "Contemporary material directly identifies Marcelo Nicchio as director. Founder/ownership details remain autobiographical pending minimal registry evidence."
+    },
+    {
+      "id": "homens-na-cozinha",
+      "period": "1998",
+      "field": "audiovisual",
+      "name": "Homens na Cozinha",
+      "role": ["executive production / fundraising"],
+      "evidenceStatus": "partial",
+      "note": "Public episodes exist; episode-level credits still require cataloguing."
+    },
+    {
+      "id": "meia-noite-e-uns",
+      "period": "2006",
+      "field": "audiovisual",
+      "name": "Meia-Noite e Uns",
+      "role": ["Artistic Director", "co-Executive Producer"],
+      "evidenceStatus": "public-primary",
+      "publicSources": [
+        "https://www.youtube.com/watch?v=kLQAlzgwmy0",
+        "https://www.youtube.com/watch?v=f-JZfMoHh1I",
+        "https://www.youtube.com/watch?v=6s6843Mq5MA",
+        "https://www.youtube.com/watch?v=tIGlLDpzQ7E"
+      ],
+      "note": "Surviving credits directly support Artistic Direction, co-Executive Production with Cristiano Gonçalves, and Dreamsnetwork.tv realization. Creative-concept and corporate-partnership details are autobiographical unless separately documented."
+    },
+    {
+      "id": "o-arquiteto-da-apoteose",
+      "period": "2019-present",
+      "field": "audiovisual",
+      "name": "O Arquiteto da Apoteose",
+      "role": ["writer", "director"],
+      "status": "work-in-progress",
+      "evidenceStatus": "preserved-private",
+      "note": "Making-of material survives; the project must never be described as a completed or released documentary."
+    },
+    {
+      "id": "autopsia",
+      "period": "2021",
+      "field": "audiovisual",
+      "name": "Autópsia",
+      "role": ["creator", "artistic director"],
+      "status": "development project",
+      "evidenceStatus": "preserved-private",
+      "note": "Official project deck survives; any public version requires rights and privacy review."
+    },
+    {
+      "id": "cookieweb",
+      "period": "2010-2012",
+      "field": "search-performance",
+      "name": "CookieWEB",
+      "role": ["SEM coordination", "SEM management"],
+      "evidenceStatus": "career-history"
+    },
+    {
+      "id": "petlove",
+      "period": "2012-2013",
+      "field": "search-performance",
+      "name": "Petlove",
+      "role": ["digital media internalization"],
+      "evidenceStatus": "career-history",
+      "note": "Operational scale figures are autobiographical/professional-account claims unless independently sourced."
+    },
+    {
+      "id": "best-kenshoo",
+      "period": "2014",
+      "field": "search-performance",
+      "name": "BEST / Kenshoo",
+      "role": ["Performance Manager", "instructor"],
+      "evidenceStatus": "mixed",
+      "publicSources": [
+        "https://youtu.be/p-1Uc-zD4TE",
+        "https://youtu.be/hOKqH6yxQ4g",
+        "https://youtu.be/C1Z3wD8t03A",
+        "https://youtu.be/3h-z53IN6AI"
+      ],
+      "note": "Workshop role/content is publicly documented. Exact two-day schedule remains autobiographical until the removed event page or equivalent source is recovered."
+    },
+    {
+      "id": "clickland",
+      "period": "2012-present",
+      "field": "search-performance",
+      "name": "Clickland Digital Ltda.",
+      "role": ["operator", "founder (autobiographical)"],
+      "evidenceStatus": "preserved-primary",
+      "note": "Historical homepage and business card directly support agency existence, Search positioning and Marcelo Nicchio's association. Corporate ownership/founding should be separately corroborated if presented as externally verified."
+    },
+    {
+      "id": "melissa-1",
+      "period": "2026-01",
+      "field": "human-ai-interaction",
+      "name": "Melissa 1.0",
+      "role": ["author", "independent researcher"],
+      "evidenceStatus": "public-persistent",
+      "note": "Four public Zenodo deposits, all January 2026. The broader research cycle may begin in 2025, but deposits must not be dated to 2025."
+    },
+    {
+      "id": "punk-rock-orchestra-v1",
+      "period": "2026-05",
+      "field": "human-ai-interaction",
+      "name": "The Punk Rock Orchestra v1",
+      "role": ["author", "methodology developer"],
+      "evidenceStatus": "public-persistent",
+      "note": "Multiple repository instances represent one work/version, not multiple separate publications."
+    },
+    {
+      "id": "punk-rock-orchestra-v2",
+      "period": "2026-present",
+      "field": "human-ai-interaction",
+      "name": "The Punk Rock Orchestra v2",
+      "role": ["author", "methodology developer"],
+      "status": "work-in-progress",
+      "evidenceStatus": "not-yet-published",
+      "note": "Do not assert future DOI, repository deposit, formal publication or review outcome before it exists."
+    }
+  ]
+}

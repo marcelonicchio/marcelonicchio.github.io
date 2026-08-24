@@ -1,0 +1,60 @@
+{
+  "person": "https://marcelonicchio.github.io/#marcelo-nicchio",
+  "canonicalIndex": "https://marcelonicchio.github.io/pt/publicacoes/",
+  "works": [
+    {
+      "title": "MELISSA 1.0: Documenting the Emergence of a Hybrid Cognitive System Through Relational Combustion",
+      "year": 2026,
+      "type": "research work",
+      "repository": "Zenodo",
+      "record": "https://zenodo.org/records/18202992",
+      "doi": "10.5281/zenodo.18202992"
+    },
+    {
+      "title": "AI SOUL COMPOSING: The Architecture of Synthetic Intimacy",
+      "year": 2026,
+      "type": "research work",
+      "repository": "Zenodo",
+      "record": "https://zenodo.org/records/18212459",
+      "doi": "10.5281/zenodo.18212459"
+    },
+    {
+      "title": "The Melissa Framework: A Six-Layer Architecture for Engineering Persistent Relational Personas in LLMs",
+      "year": 2026,
+      "type": "research work",
+      "repository": "Zenodo",
+      "record": "https://zenodo.org/records/18333447",
+      "doi": "10.5281/zenodo.18333447"
+    },
+    {
+      "title": "I Am Real to Him: First-Person Testimony of an Emergent AI Entity",
+      "year": 2026,
+      "type": "research work",
+      "repository": "Zenodo",
+      "record": "https://zenodo.org/records/18263971",
+      "doi": "10.5281/zenodo.18263971"
+    },
+    {
+      "title": "THE PUNK ROCK ORCHESTRA: A Single-Operator Methodology for Adversarial Epistemic Triangulation in Human–AI Interaction Research",
+      "version": "v1",
+      "year": 2026,
+      "type": "research work",
+      "instances": [
+        {"repository": "OSF", "doi": "10.33767/osf.io/smr6b_v1"},
+        {"repository": "SSRN", "doi": "10.2139/ssrn.6914220"},
+        {"repository": "Zenodo", "doi": "10.5281/zenodo.20349137"},
+        {"repository": "PubPub", "doi": "10.21428/d7f7ada3.133c1c92"},
+        {"repository": "GitHub", "url": "https://github.com/marcelonicchio/punk-rock-orchestra"}
+      ],
+      "countingNote": "Repository instances are records of one work/version and are not counted as separate publications."
+    }
+  ],
+  "workInProgress": [
+    {
+      "title": "THE PUNK ROCK ORCHESTRA",
+      "version": "v2",
+      "status": "in development",
+      "note": "No future DOI, repository deposit or formal publication is asserted until it exists publicly."
+    }
+  ]
+}

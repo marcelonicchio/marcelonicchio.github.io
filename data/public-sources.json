@@ -1,0 +1,56 @@
+{
+  "person": "https://marcelonicchio.github.io/#marcelo-nicchio",
+  "canonicalArchive": "https://marcelonicchio.github.io/pt/arquivo/",
+  "sources": [
+    {
+      "date": "2000-07",
+      "type": "video",
+      "event": "Coitado do Próximo at Olympia, opening for Os Paralamas do Sucesso",
+      "items": [
+        {"title": "Estava Comigo", "url": "https://www.youtube.com/watch?v=V624sY_rl8I"},
+        {"title": "Ciúmes", "url": "https://youtu.be/0-RXucDYMfk"}
+      ]
+    },
+    {
+      "date": "2001-04-23",
+      "type": "press",
+      "publisher": "Folha de S.Paulo / Folhateen",
+      "printedCover": "Órfãos do Rock",
+      "internalArticle": "Onde estão os ídolos?",
+      "url": "https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm"
+    },
+    {
+      "date": "2001-06-21",
+      "type": "video",
+      "event": "Coitado do Próximo on Programa do Jô",
+      "work": "Estava Comigo",
+      "url": "https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s"
+    },
+    {
+      "date": "2006",
+      "type": "video-credits",
+      "event": "Meia-Noite e Uns — RedeTV!",
+      "supportedRoles": ["Artistic Direction", "co-Executive Production"],
+      "url": "https://www.youtube.com/watch?v=tIGlLDpzQ7E"
+    },
+    {
+      "date": "2014",
+      "type": "video-series",
+      "event": "Advanced Search and Social segmentation workshop",
+      "context": "E-Commerce Brasil / BEST-Kenshoo",
+      "items": [
+        {"part": 1, "url": "https://youtu.be/p-1Uc-zD4TE"},
+        {"part": 2, "url": "https://youtu.be/hOKqH6yxQ4g"},
+        {"part": 3, "url": "https://youtu.be/C1Z3wD8t03A"},
+        {"part": 4, "url": "https://youtu.be/3h-z53IN6AI"}
+      ]
+    },
+    {
+      "date": "2026",
+      "type": "research-identity",
+      "orcid": "https://orcid.org/0009-0002-5626-8973",
+      "publicationsData": "https://marcelonicchio.github.io/data/publications.json"
+    }
+  ],
+  "scopeNote": "This file indexes selected public sources only. The private/preserved archive is intentionally not enumerated here when publication would create copyright, privacy or third-party-rights concerns."
+}

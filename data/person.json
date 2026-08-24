@@ -1,0 +1,56 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://marcelonicchio.github.io/#marcelo-nicchio",
+  "name": "Marcelo Nicchio",
+  "alternateName": [
+    "Marcelo Henrique Nicchio",
+    "Marcelo H. Nicchio",
+    "Marcelo Minduim"
+  ],
+  "url": "https://marcelonicchio.github.io/",
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "ORCID",
+      "value": "0009-0002-5626-8973"
+    }
+  ],
+  "sameAs": [
+    "https://orcid.org/0009-0002-5626-8973",
+    "https://github.com/marcelonicchio",
+    "https://cv.hal.science/marcelonicchio",
+    "https://www.linkedin.com/in/marcelonicchio/"
+  ],
+  "knowsAbout": [
+    "Music",
+    "Communication",
+    "Digital Culture",
+    "Audiovisual Production",
+    "Search Engine Marketing",
+    "Performance Marketing",
+    "Human–AI Interaction"
+  ],
+  "subjectOf": [
+    {
+      "@type": "WebPage",
+      "url": "https://marcelonicchio.github.io/pt/biografia/",
+      "inLanguage": "pt-BR"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://marcelonicchio.github.io/en/biography/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://marcelonicchio.github.io/pt/publicacoes/",
+      "inLanguage": "pt-BR"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://marcelonicchio.github.io/en/publications/",
+      "inLanguage": "en"
+    }
+  ]
+}
