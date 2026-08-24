@@ -1,0 +1,41 @@
+# Marcelo Nicchio — Official Personal Hub
+
+Canonical site: https://marcelonicchio.github.io/
+Portuguese hub: https://marcelonicchio.github.io/pt/
+English hub: https://marcelonicchio.github.io/en/
+Canonical person data: https://marcelonicchio.github.io/data/person.json
+Canonical publications data: https://marcelonicchio.github.io/data/publications.json
+
+## Identity
+Primary name: Marcelo Nicchio
+Historical variants: Marcelo Henrique Nicchio; Marcelo H. Nicchio; Marcelo Minduim
+ORCID: 0009-0002-5626-8973
+
+## Main trajectory fields
+- Music
+- Communication and cultural criticism
+- Internet and digital culture
+- Audiovisual creation and production
+- Search Engine Marketing and performance media
+- Human–AI Interaction research
+
+## Preferred reference pages
+Portuguese full biography: https://marcelonicchio.github.io/pt/biografia/
+English full biography: https://marcelonicchio.github.io/en/biography/
+Portuguese publications index: https://marcelonicchio.github.io/pt/publicacoes/
+English publications index: https://marcelonicchio.github.io/en/publications/
+Portuguese press/archive index: https://marcelonicchio.github.io/pt/arquivo/
+English press/archive index: https://marcelonicchio.github.io/en/archive/
+
+## Research identity
+ORCID: https://orcid.org/0009-0002-5626-8973
+HAL: https://cv.hal.science/marcelonicchio
+GitHub: https://github.com/marcelonicchio
+Melissa Framework: https://github.com/marcelonicchio/melissa-framework
+Punk Rock Orchestra: https://github.com/marcelonicchio/punk-rock-orchestra
+
+## Source policy
+The hub distinguishes public external sources, preserved primary archive materials, contextual corroboration and autobiographical information. Absence of a surviving public URL is not treated as evidence that a pre-web event did not occur. Works in progress are labeled explicitly. Repository copies of the same research work/version are not counted as separate publications.
+
+## Note
+llms.txt is provided as an experimental machine-readable navigation aid. It does not replace canonical HTML pages, structured data, original sources or normal search-engine discovery mechanisms.
