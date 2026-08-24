@@ -18,8 +18,8 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 - [ ] Check copyright/redistribution rights before uploading each scan, deck or third-party image.
 
 ## 3. Search and entity signals
-- [ ] Final review of titles and meta descriptions page by page.
-- [ ] Validate canonical URLs and PT/EN hreflang pairs mechanically / link-by-link.
+- [ ] Final editorial review of titles and meta descriptions page by page.
+- [x] Validate canonical URLs and required PT/EN/x-default hreflang presence mechanically.
 - [x] Establish ProfilePage / Person + WebSite structured-data architecture.
 - [ ] Validate structured data against the final rendered pages.
 - [ ] Ensure ORCID and controlled external profiles link back to the official hub where possible.
@@ -27,6 +27,8 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 - [x] Define sitemap rule: add a page pair only when it becomes indexable.
 - [x] Keep one canonical work record when the same paper/version exists in multiple repositories.
 - [x] Add machine-readable canonical entity, experience, timeline, publications and public-source records.
+- [x] Lock first-release thematic indexation set: Full Biography, Publications, Press/Archive and AI/HAI in both languages.
+- [x] Keep Music, Communication, Internet, Audiovisual, Search and Selected Projects available to readers but `noindex,follow` in the first release.
 
 ## 4. Visual and accessibility
 - [x] Refine mobile navigation so long menus scroll horizontally instead of creating a tall multi-row header.
@@ -46,6 +48,7 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 - [x] Recheck the public Folha archive anchor.
 - [x] Recheck the public HAL profile and document current consistency gaps.
 - [x] Confirm the public SSRN record for PRO v1 is discoverable.
+- [x] Add a privacy review note for unnecessary personal contact exposure on external research-profile pages; do not reproduce those details in the hub.
 - [ ] Audit ORCID record contents manually/live when retrieval is reliable.
 - [ ] Add the official hub as the primary website on controlled external profiles after launch.
 - [ ] Reconcile any 2024/2025 wording differences between external profiles and the canonical research chronology.
@@ -55,21 +58,23 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 - [x] Add dependency-free audit tooling for titles/H1s, internal links, canonical/hreflang, JSON and sitemap/noindex consistency.
 - [x] Add GitHub Actions workflow definition for the audit.
 - [x] Confirm an actual successful workflow run: Site audit run #28 completed with 0 errors and 0 warnings.
+- [x] Strengthen the audit to check HTML language declarations, robots metadata and description presence/length.
+- [ ] Confirm a clean GitHub Actions run after the strengthened audit.
 - [ ] Finish launch-page external-link QA.
 - [ ] Review the non-blocking GitHub Actions Node-version deprecation warning separately from site QA.
 
 ## 7. Launch
 - [ ] Final diff review in Pull Request #1.
 - [ ] Confirm `main` is still the stable public source before merge.
-- [ ] Decide which Stage B thematic pairs are ready for first-release indexing.
-- [ ] Update `robots` meta + `sitemap.xml` for those pairs in the same release.
+- [x] Decide which Stage B thematic pairs are ready for first-release indexing.
+- [ ] In the final launch commit, change those eight Stage B pages to `index,follow` and add them to `sitemap.xml` together.
 - [ ] Merge only after the first release is coherent as a whole.
 - [ ] Verify GitHub Pages deployment after merge.
-- [ ] Verify `/`, `/pt/`, `/en/`, `robots.txt`, `sitemap.xml`, `/data/` records and `llms.txt` live.
+- [ ] Verify `/`, `/pt/`, `/en/`, Stage B pages, `robots.txt`, `sitemap.xml`, `/data/` records and `llms.txt` live.
 - [ ] Submit/refresh indexing through relevant webmaster tools after publication.
 
 ## Post-launch
 - [ ] Add preserved audio/video as it is safely digitized and published.
 - [ ] Expand archive nodes progressively rather than delaying the entire hub for perfect historical coverage.
 - [ ] Align HAL, ORCID, GitHub repository metadata and other controlled profiles with the canonical hub.
-- [ ] Revisit Stage B indexation as each PT/EN thematic pair clears its editorial and source gates.
+- [ ] Revisit Stage C indexation as each PT/EN thematic pair clears its editorial and source gates.
