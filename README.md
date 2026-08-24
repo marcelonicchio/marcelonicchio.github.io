@@ -19,6 +19,13 @@ https://marcelonicchio.github.io
 - `/en/` — English hub
 - thematic sections — biography, music, communication, internet/digital culture, audiovisual, Search/Performance, AI/HAI, publications, projects and archive
 
+## Machine-readable authority layer
+
+- `/data/person.json` — canonical person/entity record
+- `/data/publications.json` — canonical research/publication record with work/version distinction
+- `/llms.txt` — experimental machine-readable navigation guide; not treated as a search-ranking mechanism or replacement for HTML/Schema.org
+- `/sitemap.xml` — currently exposes only pages intended to be indexable at launch
+
 ## Search and editorial rules
 
 - unfinished thematic pages remain `noindex,follow`
@@ -26,5 +33,14 @@ https://marcelonicchio.github.io
 - the root profile uses Schema.org `ProfilePage` / `Person`
 - evidence is linked where it adds historical context or verification
 - autobiographical facts are not silently removed merely because pre-web documentation did not survive
+- WIP projects are labeled explicitly
+- repository copies of one research work/version are not counted as separate publications
+- future DOIs, repository deposits or publication outcomes are never asserted before they exist
+
+## Internal review notes
+
+- `docs/launch-checklist.md` — pre-publication checklist
+- `docs/editorial-fact-audit.md` — factual precision rules and cross-language checks
+- `docs/visual-archive-plan.md` — first-wave archive-image curation and rights strategy
 
 `index.html` is the website entry point. `README.md` documents the repository and development process.
