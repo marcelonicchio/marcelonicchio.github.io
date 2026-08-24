@@ -5,6 +5,7 @@ Portuguese hub: https://marcelonicchio.github.io/pt/
 English hub: https://marcelonicchio.github.io/en/
 Canonical person data: https://marcelonicchio.github.io/data/person.json
 Canonical publications data: https://marcelonicchio.github.io/data/publications.json
+Selected public source data: https://marcelonicchio.github.io/data/public-sources.json
 
 ## Identity
 Primary name: Marcelo Nicchio
