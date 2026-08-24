@@ -2,7 +2,7 @@
 
 Internal working document for post-launch entity reconciliation.
 
-The goal is not to make every external profile identical. The goal is to make name, chronology, URLs, research-version metadata and current positioning compatible with the canonical hub.
+The goal is not to make every external profile identical. The goal is to make name, chronology, URLs, research-version metadata, current positioning and public-contact exposure compatible with the canonical hub.
 
 ## HAL
 
@@ -52,6 +52,11 @@ The public SSRN record for `The Punk Rock Orchestra` is discoverable and identif
 Authority rule:
 - treat SSRN as one public instance of PRO v1, not a separate work from the OSF, Zenodo, PubPub and GitHub instances.
 
+Privacy review:
+- the public SSRN record currently exposes direct personal contact information in its author/contact area;
+- do not duplicate those contact details into the hub or machine-readable records;
+- review the SSRN profile/record settings after launch and reduce public contact exposure where the platform permits it, while preserving the research record itself.
+
 ## Folha de S.Paulo
 
 The official Folha archive was rechecked during QA and confirms:
@@ -66,5 +71,7 @@ This remains one of the strongest independent historical anchors in the hub.
 External profiles should point inward to the hub whenever the platform allows it. The hub should point outward only to profiles and records that materially help entity resolution, verification, preservation or access.
 
 No platform biography should be rewritten merely to repeat SEO phrases. Consistency of facts is the target; verbatim duplication is not.
+
+Privacy is part of authority maintenance: external records may remain useful as corroborating sources without the hub reproducing unnecessary personal contact details.
 
 This is a post-launch alignment queue, not a reason to delay the first public release once the site itself has passed launch QA.
