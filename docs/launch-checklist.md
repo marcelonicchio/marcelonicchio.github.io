@@ -49,6 +49,7 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 - [ ] Audit ORCID record contents manually/live when retrieval is reliable.
 - [ ] Add the official hub as the primary website on controlled external profiles after launch.
 - [ ] Reconcile any 2024/2025 wording differences between external profiles and the canonical research chronology.
+- [x] Treat external-profile normalization as a post-launch authority task rather than a blocker for the first site release.
 
 ## 6. Technical QA
 - [x] Add dependency-free audit tooling for titles/H1s, internal links, canonical/hreflang, JSON and sitemap/noindex consistency.
