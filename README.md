@@ -22,6 +22,7 @@ https://marcelonicchio.github.io
 ## Machine-readable authority layer
 
 - `/data/person.json` — canonical person/entity record
+- `/data/experience.json` — canonical experience record with editorial evidence status
 - `/data/timeline.json` — selected lifetime chronology with source/evidence status
 - `/data/publications.json` — canonical research/publication record with work/version distinction
 - `/data/public-sources.json` — selected public external/source records
@@ -32,17 +33,19 @@ https://marcelonicchio.github.io
 
 - unfinished thematic pages remain `noindex,follow`
 - canonical URLs and `hreflang` are defined for PT/EN equivalents
-- the root profile uses Schema.org `ProfilePage` / `Person`
+- the root profile uses Schema.org `WebSite` + `ProfilePage` / `Person`
 - evidence is linked where it adds historical context or verification
 - autobiographical facts are not silently removed merely because pre-web documentation did not survive
 - WIP projects are labeled explicitly
 - repository copies of one research work/version are not counted as separate publications
 - future DOIs, repository deposits or publication outcomes are never asserted before they exist
+- founder/ownership claims remain distinct from roles directly supported by surviving public records
 
 ## Internal review notes
 
 - `docs/launch-checklist.md` — pre-publication checklist
 - `docs/editorial-fact-audit.md` — factual precision rules and cross-language checks
 - `docs/visual-archive-plan.md` — first-wave archive-image curation and rights strategy
+- `docs/indexation-plan.md` — staged plan for moving thematic PT/EN pairs from `noindex` to public indexing
 
 `index.html` is the website entry point. `README.md` documents the repository and development process.
