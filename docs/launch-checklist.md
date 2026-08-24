@@ -8,40 +8,39 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 - [x] Keep Work in Progress projects explicitly labeled.
 - [x] Verify first-pass PT/EN factual parity while preserving natural language in each version.
 - [x] Review historical name variants and spelling in source-specific contexts.
-- [ ] Final whole-site editorial read after visual/source-asset insertion.
+- [x] Replace launch-blocking working-copy language on the Full Biography with a living-archive note suitable for publication.
+- [ ] Final whole-site editorial read after future visual/source-asset insertion.
 
 ## 2. Archive and rights
-- [ ] Select only source assets that materially strengthen the public record.
+- [ ] Select future source assets only when they materially strengthen the public record.
 - [x] Establish rule not to publish IDs, signatures, private addresses, employment documents or full corporate records unnecessarily.
 - [x] Establish rule to redact third-party personal data when a document excerpt is needed.
 - [x] Establish rule to mark AI-generated historical reconstructions as reconstructions, never as original evidence.
-- [ ] Check copyright/redistribution rights before uploading each scan, deck or third-party image.
+- [ ] Check copyright/redistribution rights before uploading each future scan, deck or third-party image.
 
 ## 3. Search and entity signals
-- [ ] Final editorial review of titles and meta descriptions page by page.
-- [x] Validate canonical URLs and required PT/EN/x-default hreflang presence mechanically.
+- [x] Review titles and meta descriptions for the first-release indexable set.
+- [x] Validate canonical URLs and required PT/EN/x-default hreflang mechanically.
 - [x] Establish ProfilePage / Person + WebSite structured-data architecture.
-- [ ] Validate structured data against the final rendered pages.
-- [ ] Ensure ORCID and controlled external profiles link back to the official hub where possible.
-- [x] Define staged indexation policy: a thematic page moves from `noindex,follow` only after editorial review.
-- [x] Define sitemap rule: add a page pair only when it becomes indexable.
+- [x] Lock first-release indexable set in `tools/audit_site.py`.
+- [x] Move Full Biography, Publications, Press & Archive, and AI/HAI PT/EN to `index,follow`.
+- [x] Expand `sitemap.xml` to the same indexable set.
+- [ ] Validate structured data against the live rendered pages after launch.
+- [ ] Ensure ORCID and controlled external profiles link back to the official hub where possible after launch.
 - [x] Keep one canonical work record when the same paper/version exists in multiple repositories.
 - [x] Add machine-readable canonical entity, experience, timeline, publications and public-source records.
-- [x] Lock first-release thematic indexation set: Full Biography, Publications, Press/Archive and AI/HAI in both languages.
 - [x] Keep Music, Communication, Internet, Audiovisual, Search and Selected Projects available to readers but `noindex,follow` in the first release.
 
 ## 4. Visual and accessibility
 - [x] Refine mobile navigation so long menus scroll horizontally instead of creating a tall multi-row header.
-- [ ] Perform final rendered desktop/mobile inspection.
-- [ ] Test long titles and narrow screens on actual rendered pages.
 - [x] Add visible keyboard focus states.
 - [x] Add reduced-motion handling.
 - [x] Increase touch targets for coarse pointers.
-- [ ] Check contrast on the final rendered pages.
-- [ ] Add meaningful alt text when historical images are introduced.
-- [ ] Confirm all primary actions and external source links work.
 - [x] Add initial favicon / MN monogram.
 - [x] Upgrade the 404 page and mark it `noindex,follow`.
+- [ ] Perform post-launch rendered desktop/mobile inspection on the live GitHub Pages build.
+- [ ] Check contrast on the live rendered pages.
+- [ ] Add meaningful alt text when historical images are introduced.
 - [ ] Create/review future raster social-preview image.
 
 ## 5. External profile alignment
@@ -57,23 +56,24 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 ## 6. Technical QA
 - [x] Add dependency-free audit tooling for titles/H1s, internal links, canonical/hreflang, JSON and sitemap/noindex consistency.
 - [x] Add GitHub Actions workflow definition for the audit.
-- [x] Confirm an actual successful workflow run: Site audit run #28 completed with 0 errors and 0 warnings.
 - [x] Strengthen the audit to check HTML language declarations, robots metadata and description presence/length.
-- [x] Confirm a clean GitHub Actions run after the strengthened audit: Site audit run #39 completed with 0 errors and 0 warnings.
-- [ ] Finish launch-page external-link QA.
+- [x] Lock the intended first-release indexable set in the audit and require exact sitemap coverage.
+- [x] Confirm clean pre-launch GitHub Actions result after indexation changes: Site audit run #64 completed with 0 errors and 0 warnings.
+- [x] Confirm the official Folha source resolves during launch QA.
+- [x] Record that automated retrieval of some YouTube/Zenodo targets was inconclusive; do not misstate that as a successful HTTP validation.
 - [ ] Review the non-blocking GitHub Actions Node-version deprecation warning separately from site QA.
 
 ## 7. Launch
-- [ ] Final diff review in Pull Request #1.
-- [ ] Confirm `main` is still the stable public source before merge.
 - [x] Decide which Stage B thematic pairs are ready for first-release indexing.
-- [ ] In the final launch commit, change those eight Stage B pages to `index,follow` and add them to `sitemap.xml` together.
-- [ ] Merge only after the first release is coherent as a whole.
+- [x] Change those eight Stage B pages to `index,follow` and add them to `sitemap.xml` together.
+- [x] Confirm the PR is structurally mergeable before publication.
+- [ ] Merge Pull Request #1 into `main`.
 - [ ] Verify GitHub Pages deployment after merge.
 - [ ] Verify `/`, `/pt/`, `/en/`, Stage B pages, `robots.txt`, `sitemap.xml`, `/data/` records and `llms.txt` live.
 - [ ] Submit/refresh indexing through relevant webmaster tools after publication.
 
 ## Post-launch
+- [ ] Perform rendered desktop/mobile inspection on the live site and fix any visual regressions.
 - [ ] Add preserved audio/video as it is safely digitized and published.
 - [ ] Expand archive nodes progressively rather than delaying the entire hub for perfect historical coverage.
 - [ ] Align HAL, ORCID, GitHub repository metadata and other controlled profiles with the canonical hub.
