@@ -14,6 +14,20 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://marcelonicchio.github.io"
 
+LAUNCH_INDEXABLE = {
+    "index.html",
+    "pt/index.html",
+    "en/index.html",
+    "pt/biografia/index.html",
+    "en/biography/index.html",
+    "pt/publicacoes/index.html",
+    "en/publications/index.html",
+    "pt/arquivo/index.html",
+    "en/archive/index.html",
+    "pt/ia-hai/index.html",
+    "en/ai-hai/index.html",
+}
+
 
 class PageParser(HTMLParser):
     def __init__(self):
@@ -102,7 +116,8 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
         parser.feed(path.read_text(encoding="utf-8"))
         rel = path.relative_to(ROOT).as_posix()
         url = page_url(path)
-        robots_by_url[url] = robots_value(parser)
+        robots = robots_value(parser)
+        robots_by_url[url] = robots
 
         if parser.title_count != 1:
             errors.append(f"{rel}: expected exactly one <title>, found {parser.title_count}")
@@ -124,8 +139,8 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
             elif len(descriptions[0]) > 190:
                 warnings.append(f"{rel}: meta description is long ({len(descriptions[0])} chars)")
 
-        robots = meta_values(parser, "robots")
-        if rel != "404.html" and len(robots) != 1:
+        robots_tags = meta_values(parser, "robots")
+        if rel != "404.html" and len(robots_tags) != 1:
             errors.append(f"{rel}: expected exactly one robots meta tag")
 
         if rel != "404.html":
@@ -144,12 +159,12 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
                 if expected not in langs:
                     errors.append(f"{rel}: missing hreflang {expected}")
 
-        if rel in {"index.html", "pt/index.html", "en/index.html"}:
-            if "noindex" in robots_value(parser):
-                errors.append(f"{rel}: launch foundation page must not be noindex")
-        elif rel not in {"404.html"} and (rel.startswith("pt/") or rel.startswith("en/")):
-            if "noindex" not in robots_value(parser):
-                warnings.append(f"{rel}: thematic page is indexable; confirm this is intentional")
+        if rel in LAUNCH_INDEXABLE:
+            if "noindex" in robots:
+                errors.append(f"{rel}: launch-indexable page must not be noindex")
+        elif rel != "404.html" and (rel.startswith("pt/") or rel.startswith("en/")):
+            if "noindex" not in robots:
+                warnings.append(f"{rel}: non-launch thematic page is indexable; confirm this is intentional")
 
     return robots_by_url
 
@@ -174,11 +189,20 @@ def audit_sitemap(errors: list[str], robots_by_url: dict[str, str]) -> None:
     urls = [node.text.strip() for node in tree.findall(".//s:loc", ns) if node.text]
     if len(urls) != len(set(urls)):
         errors.append("sitemap.xml: duplicate URLs found")
+    sitemap_urls = set(urls)
     for url in urls:
         if not url.startswith(SITE + "/"):
             errors.append(f"sitemap.xml: non-canonical host {url}")
         if "noindex" in robots_by_url.get(url, ""):
             errors.append(f"sitemap.xml: includes noindex page {url}")
+
+    expected_launch_urls = {page_url(ROOT / rel) for rel in LAUNCH_INDEXABLE}
+    missing = sorted(expected_launch_urls - sitemap_urls)
+    extra = sorted(sitemap_urls - expected_launch_urls)
+    for url in missing:
+        errors.append(f"sitemap.xml: missing launch-indexable URL {url}")
+    for url in extra:
+        warnings.append(f"sitemap.xml: URL is outside launch-indexable set {url}")
 
 
 def main() -> int:
