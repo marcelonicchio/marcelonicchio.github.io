@@ -54,8 +54,9 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 ## 6. Technical QA
 - [x] Add dependency-free audit tooling for titles/H1s, internal links, canonical/hreflang, JSON and sitemap/noindex consistency.
 - [x] Add GitHub Actions workflow definition for the audit.
-- [ ] Confirm an actual successful workflow run before treating CI as a release gate.
+- [x] Confirm an actual successful workflow run: Site audit run #28 completed with 0 errors and 0 warnings.
 - [ ] Finish launch-page external-link QA.
+- [ ] Review the non-blocking GitHub Actions Node-version deprecation warning separately from site QA.
 
 ## 7. Launch
 - [ ] Final diff review in Pull Request #1.
