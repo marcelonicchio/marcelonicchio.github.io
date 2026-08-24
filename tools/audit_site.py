@@ -178,7 +178,7 @@ def audit_json(errors: list[str]) -> None:
             errors.append(f"{path.relative_to(ROOT)}: invalid JSON: {exc}")
 
 
-def audit_sitemap(errors: list[str], robots_by_url: dict[str, str]) -> None:
+def audit_sitemap(errors: list[str], warnings: list[str], robots_by_url: dict[str, str]) -> None:
     path = ROOT / "sitemap.xml"
     try:
         tree = ET.parse(path)
@@ -210,7 +210,7 @@ def main() -> int:
     warnings: list[str] = []
     robots_by_url = audit_html(errors, warnings)
     audit_json(errors)
-    audit_sitemap(errors, robots_by_url)
+    audit_sitemap(errors, warnings, robots_by_url)
 
     print(f"HTML/SEO audit completed: {len(errors)} error(s), {len(warnings)} warning(s).")
     for item in warnings:
