@@ -65,3 +65,5 @@ This remains one of the strongest independent historical anchors in the hub.
 External profiles should point inward to the hub whenever the platform allows it. The hub should point outward only to profiles and records that materially help entity resolution, verification, preservation or access.
 
 No platform biography should be rewritten merely to repeat SEO phrases. Consistency of facts is the target; verbatim duplication is not.
+
+This is a post-launch alignment queue, not a reason to delay the first public release once the site itself has passed launch QA.
