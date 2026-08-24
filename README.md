@@ -57,4 +57,6 @@ https://marcelonicchio.github.io
 - `docs/parity-status.md` — current PT/EN factual-parity status by section
 - `docs/external-profile-alignment.md` — post-launch reconciliation plan for HAL, ORCID, GitHub and other authority nodes
 
+The remaining pre-merge work is concentrated in rendered visual QA, metadata/link verification, first-wave rights-safe archive assets and the final decision about which thematic PT/EN pairs should be indexable at launch.
+
 `index.html` is the website entry point. `README.md` documents the repository and development process.
