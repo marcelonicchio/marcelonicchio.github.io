@@ -16,9 +16,10 @@ Public profile checked on 2026-08-24:
 
 Post-launch action:
 1. add `https://marcelonicchio.github.io/` as the primary personal website;
-2. reconcile 2024/2025 wording so that `career transition`, `research interest` and `public research cycle` are not conflated;
-3. shorten the profile so the current AI phase does not erase the earlier lifetime;
-4. keep exact publication titles and identifiers synchronized with `data/publications.json`.
+2. keep Medium, if retained, as a publication/profile node rather than the canonical personal website;
+3. reconcile 2024/2025 wording so that `career transition`, `research interest` and `public research cycle` are not conflated;
+4. shorten the profile so the current AI phase does not erase the earlier lifetime;
+5. keep exact publication titles and identifiers synchronized with `data/publications.json`.
 
 ## ORCID
 
