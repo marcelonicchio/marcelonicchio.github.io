@@ -29,15 +29,34 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 - [x] Add machine-readable canonical entity, experience, timeline, publications and public-source records.
 
 ## 4. Visual and accessibility
-- [ ] Review desktop and mobile navigation.
-- [ ] Test long titles and narrow screens.
-- [ ] Check contrast and focus states.
+- [x] Refine mobile navigation so long menus scroll horizontally instead of creating a tall multi-row header.
+- [ ] Perform final rendered desktop/mobile inspection.
+- [ ] Test long titles and narrow screens on actual rendered pages.
+- [x] Add visible keyboard focus states.
+- [x] Add reduced-motion handling.
+- [x] Increase touch targets for coarse pointers.
+- [ ] Check contrast on the final rendered pages.
 - [ ] Add meaningful alt text when historical images are introduced.
 - [ ] Confirm all primary actions and external source links work.
 - [x] Add initial favicon / MN monogram.
-- [ ] Create/review future social-preview image.
+- [x] Upgrade the 404 page and mark it `noindex,follow`.
+- [ ] Create/review future raster social-preview image.
 
-## 5. Launch
+## 5. External profile alignment
+- [x] Recheck the public Folha archive anchor.
+- [x] Recheck the public HAL profile and document current consistency gaps.
+- [x] Confirm the public SSRN record for PRO v1 is discoverable.
+- [ ] Audit ORCID record contents manually/live when retrieval is reliable.
+- [ ] Add the official hub as the primary website on controlled external profiles after launch.
+- [ ] Reconcile any 2024/2025 wording differences between external profiles and the canonical research chronology.
+
+## 6. Technical QA
+- [x] Add dependency-free audit tooling for titles/H1s, internal links, canonical/hreflang, JSON and sitemap/noindex consistency.
+- [x] Add GitHub Actions workflow definition for the audit.
+- [ ] Confirm an actual successful workflow run before treating CI as a release gate.
+- [ ] Finish launch-page external-link QA.
+
+## 7. Launch
 - [ ] Final diff review in Pull Request #1.
 - [ ] Confirm `main` is still the stable public source before merge.
 - [ ] Decide which Stage B thematic pairs are ready for first-release indexing.
@@ -50,4 +69,5 @@ This checklist tracks the first public release of the Marcelo Nicchio authority 
 ## Post-launch
 - [ ] Add preserved audio/video as it is safely digitized and published.
 - [ ] Expand archive nodes progressively rather than delaying the entire hub for perfect historical coverage.
-- [ ] Review external profile consistency after the canonical hub is live.
+- [ ] Align HAL, ORCID, GitHub repository metadata and other controlled profiles with the canonical hub.
+- [ ] Revisit Stage B indexation as each PT/EN thematic pair clears its editorial and source gates.
