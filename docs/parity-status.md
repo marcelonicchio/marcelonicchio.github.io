@@ -5,14 +5,14 @@ This file tracks whether each Portuguese/English page pair has received a factua
 Audited pairs so far:
 - Hub homepages: PT / EN
 - Full Biography: PT / EN
+- Music: PT / EN
+- Communication & Culture: PT / EN
 - Internet & Digital Culture: PT / EN
 - Audiovisual: PT / EN
 - Search & Performance: PT / EN
 - AI & Human-AI Interaction: PT / EN
 
 Pairs still awaiting the same detailed pass:
-- Music
-- Communication & Culture
 - Publications & Research
 - Selected Projects
 - Press & Archive
