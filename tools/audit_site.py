@@ -9,7 +9,6 @@ import json
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,10 +26,13 @@ class PageParser(HTMLParser):
         self.alternates = []
         self.metas = []
         self.h1_count = 0
+        self.html_lang = ""
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-        if tag == "title":
+        if tag == "html":
+            self.html_lang = attrs.get("lang", "").strip()
+        elif tag == "title":
             self.title_count += 1
             self.in_title = True
         elif tag == "a" and attrs.get("href"):
@@ -81,11 +83,14 @@ def target_exists(href: str, source: Path) -> bool:
     return target.exists()
 
 
+def meta_values(parser: PageParser, name: str) -> list[str]:
+    wanted = name.lower()
+    return [attrs.get("content", "").strip() for attrs in parser.metas if attrs.get("name", "").lower() == wanted]
+
+
 def robots_value(parser: PageParser) -> str:
-    for attrs in parser.metas:
-        if attrs.get("name", "").lower() == "robots":
-            return attrs.get("content", "").lower()
-    return ""
+    values = meta_values(parser, "robots")
+    return values[0].lower() if values else ""
 
 
 def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
@@ -103,6 +108,25 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
             errors.append(f"{rel}: expected exactly one <title>, found {parser.title_count}")
         if parser.h1_count != 1:
             errors.append(f"{rel}: expected exactly one <h1>, found {parser.h1_count}")
+        if not parser.html_lang:
+            errors.append(f"{rel}: missing html lang attribute")
+        elif rel.startswith("pt/") and parser.html_lang.lower() != "pt-br":
+            errors.append(f"{rel}: expected lang=pt-BR, found {parser.html_lang!r}")
+        elif rel.startswith("en/") and not parser.html_lang.lower().startswith("en"):
+            errors.append(f"{rel}: expected English lang attribute, found {parser.html_lang!r}")
+
+        descriptions = meta_values(parser, "description")
+        if rel != "404.html":
+            if len(descriptions) != 1 or not descriptions[0]:
+                errors.append(f"{rel}: expected exactly one non-empty meta description")
+            elif len(descriptions[0]) < 70:
+                warnings.append(f"{rel}: meta description is short ({len(descriptions[0])} chars)")
+            elif len(descriptions[0]) > 190:
+                warnings.append(f"{rel}: meta description is long ({len(descriptions[0])} chars)")
+
+        robots = meta_values(parser, "robots")
+        if rel != "404.html" and len(robots) != 1:
+            errors.append(f"{rel}: expected exactly one robots meta tag")
 
         if rel != "404.html":
             if len(parser.canonicals) != 1:
