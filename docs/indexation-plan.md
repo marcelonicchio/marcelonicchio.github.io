@@ -14,12 +14,14 @@ These are already listed in `sitemap.xml`.
 
 ## Stage B — first authority pages
 
-Best candidates to become indexable immediately after final factual/link review:
+The first-release indexation set is now defined as:
 
 1. `/pt/biografia/` + `/en/biography/`
 2. `/pt/publicacoes/` + `/en/publications/`
 3. `/pt/arquivo/` + `/en/archive/`
 4. `/pt/ia-hai/` + `/en/ai-hai/`
+
+These eight thematic URLs will remain `noindex,follow` during branch development. Their robots directives and `sitemap.xml` entries should be changed together only in the final launch commit, after the remaining rendered visual check and link QA.
 
 Why these first:
 
@@ -32,7 +34,7 @@ Do not release one language of a pair for indexing while leaving the counterpart
 
 ## Stage C — historical thematic pages
 
-Release after PT/EN parity and archive wording are reviewed:
+Keep `noindex,follow` in the first release and revisit progressively after public archive material is added or the final page-level source review is complete:
 
 - Music
 - Communication & Culture
@@ -40,14 +42,14 @@ Release after PT/EN parity and archive wording are reviewed:
 - Audiovisual
 - Search & Performance
 
-These pages contain a higher mix of public evidence, preserved private material and autobiographical history. That is acceptable, but wording must consistently distinguish those categories.
+These pages already have substantial content, but they contain a higher mix of public evidence, preserved private material and autobiographical history. Keeping them available to readers while temporarily outside indexing lets the hub launch without pretending every historical section has the same documentary density.
 
 ## Stage D — synthesis pages
 
+Keep `noindex,follow` until they add distinct information architecture value rather than mainly summarizing existing sections:
+
 - Selected Projects
 - future cross-field continuity / methodological-line page, if created
-
-These should be released only when they add information architecture value rather than duplicate existing thematic pages.
 
 ## Release procedure for any thematic pair
 
