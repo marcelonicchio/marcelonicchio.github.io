@@ -2,12 +2,24 @@
 
 Official personal hub for Marcelo Nicchio.
 
-Published at https://marcelonicchio.github.io
+This repository publishes the website at:
 
-- `index.html`: public language entry page.
-- `pt/` and `en/`: full language versions.
-- `styles.css`: shared design.
-- `robots.txt` and `sitemap.xml`: crawler discovery.
-- `.nojekyll`: static HTML/CSS deployment.
+https://marcelonicchio.github.io
 
-The README documents the repository. The public homepage is `index.html`.
+## Current workflow
+
+- `main` — stable public site.
+- `site-v1` — active development branch for the new bilingual hub.
+- Pull Request #1 — review surface before publication.
+
+## Site structure
+
+- `index.html` — public language gateway.
+- `styles.css` — shared visual system.
+- `pt/` — Portuguese hub and thematic pages.
+- `en/` — English hub and thematic pages.
+- `robots.txt` — crawler instructions.
+- `sitemap.xml` — public URL map.
+- `.nojekyll` — keeps the site as plain static HTML/CSS.
+
+The README documents the repository. It is not the website homepage while `index.html` exists.
