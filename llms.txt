@@ -4,6 +4,7 @@ Canonical site: https://marcelonicchio.github.io/
 Portuguese hub: https://marcelonicchio.github.io/pt/
 English hub: https://marcelonicchio.github.io/en/
 Canonical person data: https://marcelonicchio.github.io/data/person.json
+Canonical lifetime timeline: https://marcelonicchio.github.io/data/timeline.json
 Canonical publications data: https://marcelonicchio.github.io/data/publications.json
 Selected public source data: https://marcelonicchio.github.io/data/public-sources.json
 
