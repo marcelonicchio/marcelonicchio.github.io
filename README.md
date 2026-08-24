@@ -22,7 +22,9 @@ https://marcelonicchio.github.io
 ## Machine-readable authority layer
 
 - `/data/person.json` — canonical person/entity record
+- `/data/timeline.json` — selected lifetime chronology with source/evidence status
 - `/data/publications.json` — canonical research/publication record with work/version distinction
+- `/data/public-sources.json` — selected public external/source records
 - `/llms.txt` — experimental machine-readable navigation guide; not treated as a search-ranking mechanism or replacement for HTML/Schema.org
 - `/sitemap.xml` — currently exposes only pages intended to be indexable at launch
 
