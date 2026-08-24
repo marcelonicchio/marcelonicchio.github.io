@@ -47,5 +47,6 @@ https://marcelonicchio.github.io
 - `docs/editorial-fact-audit.md` — factual precision rules and cross-language checks
 - `docs/visual-archive-plan.md` — first-wave archive-image curation and rights strategy
 - `docs/indexation-plan.md` — staged plan for moving thematic PT/EN pairs from `noindex` to public indexing
+- `docs/parity-status.md` — current PT/EN factual-parity status by section
 
 `index.html` is the website entry point. `README.md` documents the repository and development process.
