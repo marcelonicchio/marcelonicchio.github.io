@@ -2,24 +2,29 @@
 
 Official personal hub for Marcelo Nicchio.
 
-This repository publishes the website at:
+The public site is served from the `main` branch at:
 
 https://marcelonicchio.github.io
 
-## Current workflow
+## Current development workflow
 
-- `main` — stable public site.
-- `site-v1` — active development branch for the new bilingual hub.
-- Pull Request #1 — review surface before publication.
+- `main` — public, stable site
+- `site-v1` — active development branch
+- Pull Request #1 — review surface before publication
 
-## Site structure
+## Site architecture
 
-- `index.html` — public language gateway.
-- `styles.css` — shared visual system.
-- `pt/` — Portuguese hub and thematic pages.
-- `en/` — English hub and thematic pages.
-- `robots.txt` — crawler instructions.
-- `sitemap.xml` — public URL map.
-- `.nojekyll` — keeps the site as plain static HTML/CSS.
+- `/` — language entry / canonical hub root
+- `/pt/` — Portuguese hub
+- `/en/` — English hub
+- thematic sections — biography, music, communication, internet/digital culture, audiovisual, Search/Performance, AI/HAI, publications, projects and archive
 
-The README documents the repository. It is not the website homepage while `index.html` exists.
+## Search and editorial rules
+
+- unfinished thematic pages remain `noindex,follow`
+- canonical URLs and `hreflang` are defined for PT/EN equivalents
+- the root profile uses Schema.org `ProfilePage` / `Person`
+- evidence is linked where it adds historical context or verification
+- autobiographical facts are not silently removed merely because pre-web documentation did not survive
+
+`index.html` is the website entry point. `README.md` documents the repository and development process.
