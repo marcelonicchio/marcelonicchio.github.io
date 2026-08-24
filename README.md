@@ -41,6 +41,11 @@ https://marcelonicchio.github.io
 - future DOIs, repository deposits or publication outcomes are never asserted before they exist
 - founder/ownership claims remain distinct from roles directly supported by surviving public records
 
+## Quality-control tooling
+
+- `tools/audit_site.py` — dependency-free structural audit for HTML titles/H1s, canonicals, hreflang, internal links, JSON validity and sitemap/noindex consistency
+- `.github/workflows/site-audit.yml` — runs the static audit in the development workflow when GitHub Actions executes it
+
 ## Internal review notes
 
 - `docs/launch-checklist.md` — pre-publication checklist
