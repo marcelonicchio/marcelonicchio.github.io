@@ -45,6 +45,8 @@ https://marcelonicchio.github.io
 
 - `tools/audit_site.py` — dependency-free structural audit for HTML titles/H1s, canonicals, hreflang, internal links, JSON validity and sitemap/noindex consistency
 - `.github/workflows/site-audit.yml` — runs the static audit in the development workflow when GitHub Actions executes it
+- `styles.css` — includes visible keyboard focus, reduced-motion handling, coarse-pointer touch targets and horizontally scrollable mobile navigation
+- `404.html` — explicit `noindex,follow` recovery page with PT/EN routes
 
 ## Internal review notes
 
@@ -53,5 +55,6 @@ https://marcelonicchio.github.io
 - `docs/visual-archive-plan.md` — first-wave archive-image curation and rights strategy
 - `docs/indexation-plan.md` — staged plan for moving thematic PT/EN pairs from `noindex` to public indexing
 - `docs/parity-status.md` — current PT/EN factual-parity status by section
+- `docs/external-profile-alignment.md` — post-launch reconciliation plan for HAL, ORCID, GitHub and other authority nodes
 
 `index.html` is the website entry point. `README.md` documents the repository and development process.
