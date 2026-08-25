@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "person": "https://marcelonicchio.github.io/#marcelo-nicchio",
+  "updated": "2026-08-25",
+  "purpose": "Canonical registry for Marcelo Nicchio's external profiles and network presence. Used to keep site-wide footer links and identity data synchronized.",
+  "profiles": [
+    {"id":"linkedin","label":"LinkedIn","url":"https://www.linkedin.com/in/marcelonicchio/","sameAs":true},
+    {"id":"medium","label":"Medium","url":"https://medium.com/@marcelonicchio","sameAs":true},
+    {"id":"substack","label":"Substack","url":"https://substack.com/@marcelonicchio","sameAs":true},
+    {"id":"x","label":"X","url":"https://x.com/marcelonicchio","sameAs":true},
+    {"id":"facebook","label":"Facebook","url":"https://www.facebook.com/marcelonicchio","sameAs":true},
+    {"id":"instagram","label":"Instagram","url":"https://www.instagram.com/marcelonicchio/","sameAs":true},
+    {"id":"youtube","label":"YouTube","url":"https://www.youtube.com/@MarceloNicchio","sameAs":true},
+    {"id":"orcid","label":"ORCID","url":"https://orcid.org/0009-0002-5626-8973","sameAs":true},
+    {"id":"github","label":"GitHub","url":"https://github.com/marcelonicchio","sameAs":true},
+    {"id":"osf","label":"OSF","url":"https://osf.io/user/b4y7r","sameAs":true},
+    {"id":"ssrn","label":"SSRN","url":"https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=11881088","sameAs":true,"identifier":"SSRN Author ID 11881088"},
+    {"id":"hal","label":"HAL Science","url":"https://cv.hal.science/marcelonicchio","sameAs":true,"identifier":"IdHAL marcelonicchio"},
+    {"id":"pubpub","label":"PubPub","url":"https://www.pubpub.org/user/marcelo-nicchio","sameAs":true},
+    {"id":"academia","label":"Academia.edu","url":"https://independent.academia.edu/MarceloNicchio","sameAs":true},
+    {"id":"internetarchive","label":"Internet Archive","url":"https://archive.org/details/@marcelo_nicchio","sameAs":true},
+    {"id":"whatsapp","label":"WhatsApp · @marcelonicchio","url":"https://wa.me/marcelonicchio","sameAs":false,"identifier":"@marcelonicchio","note":"WhatsApp username deep-link resolution is still rolling out in 2026; keep this URL under review until universally resolvable."}
+  ]
+}
