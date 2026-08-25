@@ -1,0 +1,39 @@
+name: Apply presence hardening
+
+on:
+  push:
+    branches:
+      - presence-hardening-v1
+    paths:
+      - .github/workflows/apply-presence-hardening.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: presence-hardening-v1
+          fetch-depth: 0
+      - name: Synchronize presence
+        run: python tools/sync_presence.py
+      - name: Audit presence
+        run: python tools/audit_presence.py
+      - name: Audit site
+        run: python tools/audit_site.py
+      - name: Commit synchronized pages
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No synchronization changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html' 'pt/**/*.html' 'en/**/*.html' styles.css data/person.json
+          git commit -m "Apply presence hardening across the hub"
+          git push origin HEAD:presence-hardening-v1
