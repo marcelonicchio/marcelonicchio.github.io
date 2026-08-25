@@ -1,0 +1,149 @@
+name: Finalize home portrait
+
+on:
+  push:
+    branches: [home-portrait-asset]
+    paths:
+      - '.portrait-finalize'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: home-portrait-asset
+          fetch-depth: 0
+      - name: Finalize portrait asset and metadata
+        shell: bash
+        run: |
+          if [ ! -f .portrait-finalize ]; then
+            echo "No finalize request present; nothing to do."
+            exit 0
+          fi
+
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, re, struct
+
+          IMAGE_PATH = Path('assets/img/marcelo-home-portrait.png')
+          IMAGE_URL = 'https://marcelonicchio.github.io/assets/img/marcelo-home-portrait.png'
+          EXPECTED_SHA256 = '012666e46c449bd095e0467ed1921e965bf1a1ccaf44fb852234d8d39965614e'
+          EXPECTED_SIZE = 225596
+          EXPECTED_DIMENSIONS = (717, 717)
+
+          data = IMAGE_PATH.read_bytes()
+          assert len(data) == EXPECTED_SIZE, (len(data), EXPECTED_SIZE)
+          assert hashlib.sha256(data).hexdigest() == EXPECTED_SHA256
+          assert data[:8] == b'\x89PNG\r\n\x1a\n'
+          width, height = struct.unpack('>II', data[16:24])
+          assert (width, height) == EXPECTED_DIMENSIONS, (width, height)
+
+          def add_meta(html: str, lang: str) -> str:
+              if 'property="og:image"' not in html:
+                  m = re.search(r'<meta property="og:site_name" content="[^"]*">', html)
+                  if not m:
+                      raise RuntimeError(f'og:site_name not found in {lang}')
+                  alt = 'Retrato de Marcelo Nicchio' if lang == 'pt' else 'Portrait of Marcelo Nicchio'
+                  block = (
+                      f'<meta property="og:image" content="{IMAGE_URL}">'
+                      f'<meta property="og:image:type" content="image/png">'
+                      f'<meta property="og:image:width" content="717">'
+                      f'<meta property="og:image:height" content="717">'
+                      f'<meta property="og:image:alt" content="{alt}">'
+                  )
+                  html = html[:m.end()] + block + html[m.end():]
+              if 'name="twitter:image"' not in html:
+                  m = re.search(r'<meta name="twitter:description" content="[^"]*">', html)
+                  if not m:
+                      raise RuntimeError(f'twitter:description not found in {lang}')
+                  html = html[:m.end()] + f'<meta name="twitter:image" content="{IMAGE_URL}">' + html[m.end():]
+              return html
+
+          def add_person_image_to_jsonld(html: str) -> str:
+              pattern = re.compile(r'(<script type="application/ld\+json">\s*)(.*?)(\s*</script>)', re.S)
+              def repl(match):
+                  obj = json.loads(match.group(2))
+                  changed = False
+                  def walk(v):
+                      nonlocal changed
+                      if isinstance(v, dict):
+                          if v.get('@type') == 'Person' and v.get('@id') == 'https://marcelonicchio.github.io/#marcelo-nicchio':
+                              if v.get('image') != IMAGE_URL:
+                                  v['image'] = IMAGE_URL
+                                  changed = True
+                          for child in v.values():
+                              walk(child)
+                      elif isinstance(v, list):
+                          for child in v:
+                              walk(child)
+                  walk(obj)
+                  if not changed and IMAGE_URL not in json.dumps(obj, ensure_ascii=False):
+                      raise RuntimeError('Canonical Person entity not found in JSON-LD')
+                  rendered = json.dumps(obj, ensure_ascii=False, separators=(',', ':'))
+                  return match.group(1) + rendered + match.group(3)
+              html2, count = pattern.subn(repl, html)
+              if count < 1:
+                  raise RuntimeError('JSON-LD block not found')
+              return html2
+
+          for path, lang in [(Path('index.html'), 'en'), (Path('pt/index.html'), 'pt'), (Path('en/index.html'), 'en')]:
+              html = path.read_text(encoding='utf-8')
+              html = add_meta(html, lang)
+              html = add_person_image_to_jsonld(html)
+              if path.name == 'index.html' and path.parent == Path('.'):
+                  start = html.find('<figure class="gateway-portrait">')
+                  end = html.find('</figure>', start)
+                  if start < 0 or end < 0:
+                      raise RuntimeError('Gateway portrait figure not found')
+                  end += len('</figure>')
+                  figure = (
+                      '<figure class="gateway-portrait">'
+                      '<img src="/assets/img/marcelo-home-portrait.png" '
+                      'alt="Portrait of Marcelo Nicchio" width="717" height="717" decoding="async">'
+                      '</figure>'
+                  )
+                  html = html[:start] + figure + html[end:]
+                  if 'data:image/jpeg;base64,' in html:
+                      raise RuntimeError('Inline portrait base64 still present')
+              path.write_text(html, encoding='utf-8')
+
+          person_path = Path('data/person.json')
+          person = json.loads(person_path.read_text(encoding='utf-8'))
+          person['image'] = IMAGE_URL
+          person_path.write_text(json.dumps(person, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # Final assertions against the updated source.
+          root = Path('index.html').read_text(encoding='utf-8')
+          assert '/assets/img/marcelo-home-portrait.png' in root
+          assert 'data:image/jpeg;base64,' not in root
+          for p in ['index.html', 'pt/index.html', 'en/index.html']:
+              text = Path(p).read_text(encoding='utf-8')
+              assert text.count('property="og:image"') == 1, p
+              assert text.count('name="twitter:image"') == 1, p
+              assert IMAGE_URL in text, p
+
+          print('Portrait validated:', EXPECTED_DIMENSIONS, EXPECTED_SIZE, EXPECTED_SHA256)
+          PY
+
+          rm -rf .image-staging/home-portrait
+          rm -f assets/img/marcelo-home-portrait.webp
+          rm -f .portrait-finalize
+
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Finalize high-resolution home portrait"
+          git push origin home-portrait-asset
