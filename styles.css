@@ -176,3 +176,15 @@ a:focus-visible,.button:focus-visible{outline:2px solid var(--accent-soft);outli
 @media(prefers-reduced-motion:reduce){.presence-link{transition:none}.presence-link:hover,.presence-link:focus-visible{transform:none}}
 @media(forced-colors:active){.presence-panel,.presence-link{border-color:CanvasText}}
 /* presence-footer:end */
+
+
+/* Thread media system */
+.thread-media{margin:30px 0 36px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.018)}
+.thread-media>a{display:block;background:#050506}
+.thread-media img{display:block;width:100%;height:auto}
+.thread-media figcaption{padding:14px 16px 16px;color:var(--muted);font-size:.88rem;line-height:1.5}
+.thread-media figcaption strong{display:block;color:var(--soft);font-size:.94rem;margin-bottom:5px}
+.thread-media-note{display:block}
+.thread-media-open{display:inline-flex;margin-top:10px;text-decoration:none;color:#f1c5c1;font-weight:720}
+.thread-media-open:focus-visible{outline:2px solid var(--accent-soft);outline-offset:4px;border-radius:6px}
+@media(max-width:580px){.thread-media{margin:24px 0 30px;border-radius:14px}.thread-media figcaption{padding:12px 13px 14px}}

@@ -54,3 +54,14 @@ Value: machine-readable, rights-safe and visually consistent evidence for the cu
 - Avoid fake vintage effects.
 - Reconstructed imagery must be explicitly labeled as reconstruction.
 - Never imply that an AI reconstruction is an original historical artifact.
+
+
+## Placement taxonomy
+
+Three editorial placement modes are used for visual material:
+
+1. **Link only** — the page provides a text link or thumbnail to open the image at full size. Best for scans, documents and material whose value is inspection rather than narrative rhythm.
+2. **Link + thread** — the image appears inside the narrative and also opens at full size in a new tab. Best for strong historical photographs, key video frames and major reconstructions.
+3. **Thread only** — the image appears as part of the narrative composition without a separate full-size action. Best for portraits and supporting visual material.
+
+The same asset may use different placement modes in different contexts. Provenance labels remain independent of placement: original photograph, video frame, scan, reconstruction, etc.
