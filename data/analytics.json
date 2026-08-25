@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "provider": "Google Analytics 4",
+  "measurementId": "G-MQPK9VX0MF",
+  "enabled": true,
+  "updated": "2026-08-25",
+  "note": "Canonical analytics configuration for the Hub. The site uses the standard Google tag supplied by the site owner. Privacy/consent requirements are reviewed separately from tag synchronization."
+}
