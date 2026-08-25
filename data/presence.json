@@ -19,6 +19,6 @@
     {"id":"pubpub","label":"PubPub","url":"https://www.pubpub.org/user/marcelo-nicchio","sameAs":true},
     {"id":"academia","label":"Academia.edu","url":"https://independent.academia.edu/MarceloNicchio","sameAs":true},
     {"id":"internetarchive","label":"Internet Archive","url":"https://archive.org/details/@marcelo_nicchio","sameAs":true},
-    {"id":"whatsapp","label":"WhatsApp · @marcelonicchio","url":"https://wa.me/marcelonicchio","sameAs":false,"identifier":"@marcelonicchio","note":"WhatsApp username deep-link resolution is still rolling out in 2026; keep this URL under review until universally resolvable."}
+    {"id":"whatsapp","label":"WhatsApp · @marcelonicchio","url":"https://wa.me/marcelonicchio","sameAs":false,"render":false,"identifier":"@marcelonicchio","note":"Username reserved for future WhatsApp username linking. Do not render until Meta publishes a stable public username deep-link format."}
   ]
 }
