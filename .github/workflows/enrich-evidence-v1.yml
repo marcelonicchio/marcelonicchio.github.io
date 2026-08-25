@@ -1,0 +1,225 @@
+name: Enrich historical evidence v1
+
+on:
+  push:
+    branches: [archive-evidence-v1]
+    paths:
+      - '.enrich-evidence-v1'
+
+permissions:
+  contents: write
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: archive-evidence-v1
+          fetch-depth: 0
+      - name: Update canonical evidence and bilingual pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              s = p.read_text(encoding='utf-8')
+              if old not in s:
+                  raise RuntimeError(f'Expected source text not found in {path}: {old[:120]}')
+              if s.count(old) != 1:
+                  raise RuntimeError(f'Expected one source occurrence in {path}, found {s.count(old)}')
+              p.write_text(s.replace(old, new, 1), encoding='utf-8')
+
+          # Canonical experience record.
+          p = Path('data/experience.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          data['updated'] = '2026-08-25'
+          exp = data['experience']
+
+          def idx(entry_id):
+              return next(i for i, e in enumerate(exp) if e.get('id') == entry_id)
+
+          if not any(e.get('id') == 'livraria-cultura' for e in exp):
+              exp.insert(idx('psinet') + 1, {
+                  'id': 'livraria-cultura',
+                  'period': '2000-10 to 2001-01',
+                  'field': 'culture-retail',
+                  'name': 'Livraria Cultura',
+                  'role': ['technical bookseller', 'summer job'],
+                  'evidenceStatus': 'mixed',
+                  'note': 'A preserved business card directly supports Marcelo Henrique Nicchio\'s association with Livraria Cultura. The October 2000 to January 2001 dates, technical-books sales role and summer-job classification are autobiographical.'
+              })
+
+          if not any(e.get('id') == 'nicchio-associados' for e in exp):
+              exp.insert(idx('homens-na-cozinha') + 1, {
+                  'id': 'nicchio-associados',
+                  'period': '1998-2000',
+                  'field': 'audiovisual',
+                  'name': 'Nicchio & Associados S/C Ltda.',
+                  'role': ['cultural producer', 'fundraising support'],
+                  'evidenceStatus': 'mixed',
+                  'note': 'A preserved business card directly identifies Marcelo Henrique Nicchio as Produtor Cultural. Specific fundraising activity connected to Carandiru and Domésticas remains autobiographical/private unless independently corroborated.'
+              })
+
+          if not any(e.get('id') == 'dreamsnetwork' for e in exp):
+              exp.insert(idx('meia-noite-e-uns') + 1, {
+                  'id': 'dreamsnetwork',
+                  'period': '2006',
+                  'field': 'audiovisual',
+                  'name': 'DreamsNetwork / Dreamsnetwork.tv',
+                  'role': ['executive producer'],
+                  'evidenceStatus': 'preserved-primary',
+                  'note': 'A preserved business card identifies Marcelo Nicchio as Produtor Executivo at DreamsNetwork. Public Meia-Noite e Uns credits independently identify Dreamsnetwork.tv as the production entity. The card does not establish corporate ownership or partnership.'
+              })
+
+          if not any(e.get('id') == 'ad-dialetto' for e in exp):
+              exp.insert(idx('best-kenshoo') + 1, {
+                  'id': 'ad-dialetto',
+                  'period': '2015',
+                  'field': 'search-performance',
+                  'name': 'Ad.Dialetto',
+                  'role': ['performance-agency work'],
+                  'evidenceStatus': 'mixed',
+                  'note': 'A preserved business card directly supports Marcelo Nicchio\'s association with Ad.Dialetto but does not state a job title. Máquina de Vendas/Ricardo Eletro account responsibility and internal operating metrics remain autobiographical/professional-account claims.'
+              })
+
+          mir = exp[idx('mirantte-news')]
+          mir['note'] = 'Contemporary material directly identifies Marcelo Nicchio as director. A preserved business card independently supports his association with Mirantte News and its domain. Founder/ownership details remain autobiographical pending minimal registry evidence.'
+
+          click = exp[idx('clickland')]
+          click['note'] = 'Two preserved historical homepage captures and a professional business card directly support agency existence, Premium Search Agency positioning, Google program badges and Marcelo Nicchio\'s association. Corporate ownership/founding remains autobiographical unless separately corroborated.'
+
+          p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # Timeline.
+          p = Path('data/timeline.json')
+          tl = json.loads(p.read_text(encoding='utf-8'))
+          events = tl['events']
+
+          old = next(e for e in events if e['date'] == '1998-2000' and 'Nicchio & Associados' in e['event'])
+          old['event'] = 'Worked through Nicchio & Associados as a cultural producer and contributed to fundraising connected to the feature films Carandiru and Domésticas.'
+          old['evidence'] = 'preserved business card for cultural-producer role; project-specific fundraising remains autobiographical/private archive'
+
+          if not any(e['date'] == '2000-10–2001-01' and 'Livraria Cultura' in e['event'] for e in events):
+              pos = next(i for i, e in enumerate(events) if e['date'] == '2000' and 'PSINet' in e['event'])
+              events.insert(pos + 1, {
+                  'date': '2000-10–2001-01',
+                  'domain': 'culture and retail',
+                  'event': 'Worked at Livraria Cultura after leaving PSINet, in a summer job selling technical books.',
+                  'evidence': 'preserved business card for association; dates, role and summer-job classification autobiographical'
+              })
+
+          ad = next(e for e in events if e['date'] == '2015' and 'Ad.Dialetto' in e['event'])
+          ad['evidence'] = 'preserved business card for agency association; account responsibility and operating details autobiographical'
+
+          p.write_text(json.dumps(tl, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # PT biography: Livraria Cultura and Nicchio & Associados role.
+          replace_once(
+              'pt/biografia/index.html',
+              '<p>Em 1996 passou a usar internet comercial pela STI. Em 2000 trabalhou na <strong>PSINet</strong>, multinacional de infraestrutura e hosting, na área comercial de Hosting Corporativo.</p>',
+              '<p>Em 1996 passou a usar internet comercial pela STI. Em 2000 trabalhou na <strong>PSINet</strong>, multinacional de infraestrutura e hosting, na área comercial de Hosting Corporativo. Após sair da PSINet, trabalhou de <strong>outubro de 2000 a janeiro de 2001</strong> na <strong>Livraria Cultura</strong>, em um <em>summer job</em> como vendedor de livros técnicos.</p>'
+          )
+          replace_once(
+              'pt/biografia/index.html',
+              '<p>Em 1998, Nicchio trabalhou na produção executiva do programa <strong>Homens na Cozinha</strong>, exibido pela Band, concentrando-se em captação de recursos. Entre 1998 e 2000, por meio da Nicchio &amp; Associados, também contribuiu em captações ligadas aos longas <em>Carandiru</em> e <em>Domésticas</em>.</p>',
+              '<p>Em 1998, Nicchio trabalhou na produção executiva do programa <strong>Homens na Cozinha</strong>, exibido pela Band, concentrando-se em captação de recursos. Entre 1998 e 2000, por meio da <strong>Nicchio &amp; Associados</strong> — onde um cartão profissional preservado o identifica como <strong>Produtor Cultural</strong> — também contribuiu em captações ligadas aos longas <em>Carandiru</em> e <em>Domésticas</em>.</p>'
+          )
+
+          # EN biography.
+          replace_once(
+              'en/biography/index.html',
+              '<p>In 1996 he began using commercial internet access through STI. In 2000 he worked at <strong>PSINet</strong>, the multinational hosting and infrastructure company, in corporate hosting sales.</p>',
+              '<p>In 1996 he began using commercial internet access through STI. In 2000 he worked at <strong>PSINet</strong>, the multinational hosting and infrastructure company, in corporate hosting sales. After leaving PSINet, from <strong>October 2000 to January 2001</strong> he worked at <strong>Livraria Cultura</strong> in what he describes as a <em>summer job</em>, selling technical books.</p>'
+          )
+          replace_once(
+              'en/biography/index.html',
+              '<p>In 1998, Nicchio worked in executive production for <strong>Homens na Cozinha</strong>, broadcast by Band, focusing on fundraising. Between 1998 and 2000, through Nicchio &amp; Associados, he also contributed to fundraising connected to the feature films <em>Carandiru</em> and <em>Domésticas</em>.</p>',
+              '<p>In 1998, Nicchio worked in executive production for <strong>Homens na Cozinha</strong>, broadcast by Band, focusing on fundraising. Between 1998 and 2000, through <strong>Nicchio &amp; Associados</strong> — where a preserved business card identifies him as <strong>Produtor Cultural / Cultural Producer</strong> — he also contributed to fundraising connected to the feature films <em>Carandiru</em> and <em>Domésticas</em>.</p>'
+          )
+
+          # PT Search: Ad.Dialetto evidence upgrade and status split.
+          replace_once(
+              'pt/search-performance/index.html',
+              '<section id="dialetto" class="chapter"><h2>2015 — Ad.Dialetto / Máquina de Vendas</h2><p>Na Ad.Dialetto, Nicchio assumiu a operação da conta da Máquina de Vendas/Ricardo Eletro. Segundo seu relato profissional, a missão envolveu reconstruir uma equipe e trabalhar com orçamento mensal da ordem de R$ 1 milhão, orientado por ROI por categoria.</p><p>O período é pouco documentado visualmente. Ele permanece na biografia como parte da trajetória, sem a criação artificial de “cases” retroativos ou resultados que não possam ser sustentados.</p></section>',
+              '<section id="dialetto" class="chapter"><h2>2015 — Ad.Dialetto / Máquina de Vendas</h2><p>Um <strong>cartão profissional preservado</strong> comprova a associação de Marcelo Nicchio à Ad.Dialetto em 2015, embora o cartão não informe cargo. Segundo seu relato profissional, ele assumiu a operação da conta da Máquina de Vendas/Ricardo Eletro; a missão envolveu reconstruir uma equipe e trabalhar com orçamento mensal da ordem de R$ 1 milhão, orientado por ROI por categoria.</p><p>O cartão fortalece a evidência do vínculo sem transformar detalhes operacionais internos em fatos externamente verificados. Responsabilidade pela conta, orçamento e resultados continuam qualificados como relato profissional quando não houver fonte independente.</p></section>'
+          )
+          replace_once(
+              'pt/search-performance/index.html',
+              '<div class="evidence"><div class="evidence-top"><strong>CookieWEB / Petlove / Ad.Dialetto / Driven</strong><span class="status">carreira</span></div><p>Documentação pública e privada é desigual; métricas internas permanecem qualificadas como relato profissional quando apropriado.</p></div>',
+              '<div class="evidence"><div class="evidence-top"><strong>Ad.Dialetto</strong><span class="status">preservado</span></div><p>Cartão profissional preservado confirma a associação à agência; operação de conta e métricas internas permanecem relato profissional.</p></div><div class="evidence"><div class="evidence-top"><strong>CookieWEB / Petlove / Driven</strong><span class="status">carreira</span></div><p>Documentação pública e privada é desigual; métricas internas permanecem qualificadas como relato profissional quando apropriado.</p></div>'
+          )
+
+          # EN Search.
+          replace_once(
+              'en/search-performance/index.html',
+              '<section id="dialetto" class="chapter"><h2>2015 — Ad.Dialetto / Máquina de Vendas</h2><p>At Ad.Dialetto, Nicchio took responsibility for the Máquina de Vendas/Ricardo Eletro account. According to his professional account, the assignment involved rebuilding a team and working with a monthly media budget of roughly R$1 million, managed through ROI by product category.</p><p>The period has little surviving visual documentation. It remains part of the biography without manufacturing retrospective case studies or unsupported performance claims.</p></section>',
+              '<section id="dialetto" class="chapter"><h2>2015 — Ad.Dialetto / Máquina de Vendas</h2><p>A <strong>preserved professional business card</strong> directly supports Marcelo Nicchio\'s association with Ad.Dialetto in 2015, although the card does not state a job title. According to his professional account, he took responsibility for the Máquina de Vendas/Ricardo Eletro account; the assignment involved rebuilding a team and working with a monthly media budget of roughly R$1 million, managed through ROI by product category.</p><p>The card strengthens evidence of the professional relationship without turning internal operating details into externally verified facts. Account responsibility, budget and performance details remain attributed to his professional account where no independent source exists.</p></section>'
+          )
+          replace_once(
+              'en/search-performance/index.html',
+              '<div class="evidence"><div class="evidence-top"><strong>CookieWEB / Petlove / Ad.Dialetto / Driven</strong><span class="status">career history</span></div><p>Public and private documentation is uneven; internal metrics remain attributed to professional accounts where appropriate.</p></div>',
+              '<div class="evidence"><div class="evidence-top"><strong>Ad.Dialetto</strong><span class="status">preserved</span></div><p>A preserved business card confirms the agency association; account responsibility and internal metrics remain attributed to the professional account.</p></div><div class="evidence"><div class="evidence-top"><strong>CookieWEB / Petlove / Driven</strong><span class="status">career history</span></div><p>Public and private documentation is uneven; internal metrics remain attributed to professional accounts where appropriate.</p></div>'
+          )
+
+          # PT Audiovisual: direct card evidence for titles/associations.
+          replace_once(
+              'pt/audiovisual/index.html',
+              '<section id="cinema" class="chapter"><h2>1998–2000 — captação para cinema</h2><p>Por meio da <strong>Nicchio &amp; Associados S/C Ltda.</strong>, empresa familiar que operava projetos ligados a incentivos fiscais, Nicchio colaborou com captação de recursos para projetos culturais e cinematográficos. Entre os projetos citados em sua biografia estão <em>Carandiru</em> e <em>Domésticas</em>.</p><p>Documentação societária e comercial dessa fase pode existir em arquivo familiar, mas não será publicada integralmente se contiver dados pessoais ou de terceiros. O site usará apenas informação mínima necessária e, quando apropriado, documentação redigida.</p></section>',
+              '<section id="cinema" class="chapter"><h2>1998–2000 — captação para cinema</h2><p>Por meio da <strong>Nicchio &amp; Associados S/C Ltda.</strong>, empresa familiar que operava projetos ligados a incentivos fiscais, Nicchio colaborou com captação de recursos para projetos culturais e cinematográficos. Um <strong>cartão profissional preservado</strong> identifica Marcelo Henrique Nicchio como <strong>Produtor Cultural</strong> na empresa. Entre os projetos citados em sua biografia estão <em>Carandiru</em> e <em>Domésticas</em>; a participação nesses projetos específicos permanece autobiográfica/arquivo privado enquanto não houver corroboracão independente adequada.</p><p>Documentação societária e comercial dessa fase pode existir em arquivo familiar, mas não será publicada integralmente se contiver dados pessoais ou de terceiros. O site usará apenas informação mínima necessária e, quando apropriado, documentação redigida.</p></section>'
+          )
+          replace_once(
+              'pt/audiovisual/index.html',
+              '<p>Também segundo esse relato, o título originalmente desejado era <strong>Meia-Noite e Um</strong>, ligado a um blog de mesmo nome e à intenção de iniciar o programa às 00:01. A impossibilidade de garantir o minuto exato na grade levou à mudança para <strong>Meia-Noite e Uns</strong>. A relação societária entre Nicchio e Cristiano Gonçalves na Dreamsnetwork.tv permanece, por enquanto, como informação autobiográfica até que um registro empresarial mínimo seja incorporado ao arquivo.</p>',
+              '<p>Também segundo esse relato, o título originalmente desejado era <strong>Meia-Noite e Um</strong>, ligado a um blog de mesmo nome e à intenção de iniciar o programa às 00:01. A impossibilidade de garantir o minuto exato na grade levou à mudança para <strong>Meia-Noite e Uns</strong>. Um <strong>cartão profissional preservado da DreamsNetwork</strong> identifica Marcelo Nicchio como <strong>Produtor Executivo</strong>, reforçando documentalmente sua associação profissional à realizadora. O cartão, porém, não comprova relação societária; a relação societária entre Nicchio e Cristiano Gonçalves permanece, por enquanto, como informação autobiográfica até que um registro empresarial mínimo seja incorporado ao arquivo.</p>'
+          )
+          replace_once(
+              'pt/audiovisual/index.html',
+              '<div class="evidence"><div class="evidence-top"><strong>Meia-Noite e Uns</strong><span class="status">forte</span></div><p>Vídeos públicos + créditos finais preservados.</p></div>',
+              '<div class="evidence"><div class="evidence-top"><strong>Meia-Noite e Uns / DreamsNetwork</strong><span class="status">forte</span></div><p>Vídeos públicos + créditos finais preservados + cartão profissional identificando Marcelo Nicchio como Produtor Executivo na DreamsNetwork.</p></div><div class="evidence"><div class="evidence-top"><strong>Nicchio &amp; Associados</strong><span class="status">preservado</span></div><p>Cartão profissional identifica Marcelo Henrique Nicchio como Produtor Cultural; projetos específicos de captação continuam qualificados separadamente.</p></div>'
+          )
+
+          # EN Audiovisual.
+          replace_once(
+              'en/audiovisual/index.html',
+              '<section id="film" class="chapter"><h2>1998–2000 — film fundraising</h2><p>Through <strong>Nicchio &amp; Associados S/C Ltda.</strong>, a family company involved in tax-incentive projects, Nicchio contributed to fundraising work connected to cultural and film projects. His biography names <em>Carandiru</em> and <em>Domésticas</em>.</p><p>Corporate and commercial documents from this phase may still exist in family files, but they will not be published in full if they expose personal or third-party information. The site will use only the minimum information necessary and, where appropriate, redacted documentation.</p></section>',
+              '<section id="film" class="chapter"><h2>1998–2000 — film fundraising</h2><p>Through <strong>Nicchio &amp; Associados S/C Ltda.</strong>, a family company involved in tax-incentive projects, Nicchio contributed to fundraising work connected to cultural and film projects. A <strong>preserved professional business card</strong> identifies Marcelo Henrique Nicchio as <strong>Produtor Cultural / Cultural Producer</strong> at the company. His biography names <em>Carandiru</em> and <em>Domésticas</em>; involvement in those specific projects remains autobiographical/private-archive material until suitable independent corroboration is available.</p><p>Corporate and commercial documents from this phase may still exist in family files, but they will not be published in full if they expose personal or third-party information. The site will use only the minimum information necessary and, where appropriate, redacted documentation.</p></section>'
+          )
+          replace_once(
+              'en/audiovisual/index.html',
+              '<p>Also according to that account, the intended title was <strong>Meia-Noite e Um</strong> (“12:01 a.m.”), linked to a blog of the same name and to the idea of beginning the program one minute after midnight. Because the exact minute could not be guaranteed in the schedule, the title became <strong>Meia-Noite e Uns</strong>. The business partnership between Nicchio and Cristiano Gonçalves in Dreamsnetwork.tv remains autobiographical for now, pending incorporation of minimal corporate-registry evidence.</p>',
+              '<p>Also according to that account, the intended title was <strong>Meia-Noite e Um</strong> (“12:01 a.m.”), linked to a blog of the same name and to the idea of beginning the program one minute after midnight. Because the exact minute could not be guaranteed in the schedule, the title became <strong>Meia-Noite e Uns</strong>. A <strong>preserved DreamsNetwork business card</strong> identifies Marcelo Nicchio as <strong>Produtor Executivo / Executive Producer</strong>, directly strengthening evidence of his professional association with the production entity. The card does not establish corporate ownership or partnership; the business partnership between Nicchio and Cristiano Gonçalves remains autobiographical for now, pending incorporation of minimal corporate-registry evidence.</p>'
+          )
+          replace_once(
+              'en/audiovisual/index.html',
+              '<div class="evidence"><div class="evidence-top"><strong>Meia-Noite e Uns</strong><span class="status">strong</span></div><p>Public videos + preserved end credits.</p></div>',
+              '<div class="evidence"><div class="evidence-top"><strong>Meia-Noite e Uns / DreamsNetwork</strong><span class="status">strong</span></div><p>Public videos + preserved end credits + a business card identifying Marcelo Nicchio as Executive Producer at DreamsNetwork.</p></div><div class="evidence"><div class="evidence-top"><strong>Nicchio &amp; Associados</strong><span class="status">preserved</span></div><p>A professional business card identifies Marcelo Henrique Nicchio as Cultural Producer; project-specific fundraising claims remain separately qualified.</p></div>'
+          )
+
+          # Public source files must not leak raw business-card contact details.
+          for path in [
+              'pt/biografia/index.html','en/biography/index.html',
+              'pt/search-performance/index.html','en/search-performance/index.html',
+              'pt/audiovisual/index.html','en/audiovisual/index.html',
+              'data/experience.json','data/timeline.json']:
+              s = Path(path).read_text(encoding='utf-8')
+              for forbidden in ['98799-7767', '8203-1720', '6950.5628', '3024 3599', 'marcelo.nicchio@addialeto.net']:
+                  if forbidden in s:
+                      raise RuntimeError(f'PII-like contact detail leaked into {path}: {forbidden}')
+
+          print('Historical evidence enrichment complete.')
+          PY
+
+          rm -f .enrich-evidence-v1
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Enrich historical career evidence"
+          git push origin archive-evidence-v1
