@@ -1,0 +1,44 @@
+name: Apply Minduim reconstruction v3
+
+on:
+  push:
+    branches:
+      - archive-minduim-v3
+    paths:
+      - .github/workflows/apply-minduim-v3.yml
+
+permissions:
+  contents: write
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: archive-minduim-v3
+          fetch-depth: 0
+
+      - name: Reconstruct and verify WebP
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .tmp/minduim/chunk*.b64 > /tmp/minduim.b64
+          test "$(wc -c < /tmp/minduim.b64)" -eq 98044
+          base64 --decode /tmp/minduim.b64 > assets/archive/minduim-bbs-1993-reconstruction.webp
+          test "$(stat -c%s assets/archive/minduim-bbs-1993-reconstruction.webp)" -eq 73532
+          echo "4cdc13ddd40bc271038944130f951d1f9e1e9f9259b38339cac847d6bf188c0f  assets/archive/minduim-bbs-1993-reconstruction.webp" | sha256sum -c -
+          file assets/archive/minduim-bbs-1993-reconstruction.webp
+
+      - name: Commit verified binary and remove staging files
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .tmp/minduim
+          rm .github/workflows/apply-minduim-v3.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add verified Minduim BBS reconstruction asset"
+          git push origin HEAD:archive-minduim-v3
