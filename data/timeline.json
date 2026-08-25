@@ -2,37 +2,211 @@
   "person": "https://marcelonicchio.github.io/#marcelo-nicchio",
   "scope": "Selected lifetime chronology; not an exhaustive CV.",
   "events": [
-    {"date":"1989-1990","domain":"music","event":"Played snare drum in the Mocidade Alegre samba-school percussion section.","evidence":"autobiographical"},
-    {"date":"1990-1991","domain":"music","event":"Studied at Conservatório Antonino Simalha.","evidence":"autobiographical"},
-    {"date":"1992","domain":"music","event":"Founded Coitado do Próximo as composer and drummer.","evidence":"preserved primary archive"},
-    {"date":"1992-1996","domain":"internet and digital culture","event":"Participated in BBS environments including SP Online/STI and Mandic; created the experimental Minduim BBS using RemoteAccess and two telephone lines.","evidence":"autobiographical"},
-    {"date":"1993","domain":"communication","event":"Maintained a cultural column on Tremonte BBS.","evidence":"autobiographical"},
-    {"date":"1994-1995","domain":"communication","event":"Presented and curated the weekday Metrópole radio program on Rádio Nova Paulista FM 103.7.","evidence":"preserved primary audio"},
-    {"date":"1994","domain":"music","event":"Coitado do Próximo recorded the demo Pegue o seu Celular / Mulher SP; Marcelo Nicchio was interviewed by Kid Vinil on 97FM; the band opened for 365 at Aeroanta.","evidence":"mixed autobiographical and preserved archive"},
-    {"date":"1997","domain":"music","event":"Recorded the first Coitado do Próximo album, Meu Querido Diário, at Estúdio Asas, produced by Edson X.","evidence":"preserved primary archive"},
-    {"date":"1998","domain":"audiovisual","event":"Worked in executive production/fundraising for Homens na Cozinha, broadcast by Band.","evidence":"autobiographical; external credits to be checked"},
-    {"date":"1998-2000","domain":"audiovisual","event":"Contributed through Nicchio & Associados to fundraising connected to the feature films Carandiru and Domésticas.","evidence":"autobiographical/private archive"},
-    {"date":"1999-2000","domain":"music","event":"Pre-produced the second Coitado do Próximo album, Eu Não Tô Nem Aí, co-produced by Fábio Badi Crepaldi and Marcelo Nicchio.","evidence":"preserved primary archive"},
-    {"date":"2000-07","domain":"music","event":"Coitado do Próximo opened for Os Paralamas do Sucesso at Olympia in São Paulo.","evidence":"public video","url":"https://www.youtube.com/watch?v=V624sY_rl8I"},
-    {"date":"2000","domain":"internet and infrastructure","event":"Worked at PSINet in corporate hosting sales.","evidence":"autobiographical/preserved photographs"},
-    {"date":"2001-04-23","domain":"press and culture","event":"Appeared in Folhateen / Folha de S.Paulo in the edition whose printed cover line was Órfãos do Rock; internal article: Onde estão os ídolos?.","evidence":"external contemporary press","url":"https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm"},
-    {"date":"2001-06-21","domain":"music and television","event":"Coitado do Próximo appeared on Programa do Jô on Rede Globo and performed Estava Comigo, composed by Marcelo Nicchio.","evidence":"public video","url":"https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s"},
-    {"date":"2003-2006","domain":"communication and culture","event":"Wrote the Prateleira Cultural column and other pieces for Sinal Verde magazine, including recurring digital-culture topics such as RSS, Skype/VoIP, Google Earth, online radio and Orkut.","evidence":"preserved print scans"},
-    {"date":"2004-2008","domain":"internet and digital products","event":"Created and operated Mirantte News; preserved contemporary material identifies Marcelo Nicchio as director of the portal.","evidence":"preserved contemporary material"},
-    {"date":"2006","domain":"audiovisual","event":"Credited for Artistic Direction and co-Executive Production of Meia-Noite e Uns on RedeTV!; Dreamsnetwork.tv identified as production entity.","evidence":"public video credits","url":"https://www.youtube.com/watch?v=tIGlLDpzQ7E"},
-    {"date":"2008-2009","domain":"search and performance","event":"Deepened professional work in SEM and completed certifications under the Google Advertising Professional program.","evidence":"autobiographical/historical professional records"},
-    {"date":"2010-2012","domain":"search and performance","event":"Worked at CookieWEB, progressing from SEM coordination to management.","evidence":"autobiographical/preserved professional material"},
-    {"date":"2012-2013","domain":"search and performance","event":"Worked at Petlove on the internalization of digital media operations.","evidence":"private employment record"},
-    {"date":"2012-present","domain":"search and performance","event":"Developed Clickland Digital, an agency focused on small and medium-sized businesses, created with Carlos Portela.","evidence":"preserved website/business material plus autobiographical founder detail"},
-    {"date":"2014","domain":"search and performance","event":"Worked at BEST within the Kenshoo ecosystem and taught advanced Search and Social segmentation workshops for E-Commerce Brasil.","evidence":"public video series","url":"https://youtu.be/hOKqH6yxQ4g"},
-    {"date":"2015","domain":"search and performance","event":"Worked at Ad.Dialetto, including work connected to Máquina de Vendas / Ricardo Eletro.","evidence":"autobiographical"},
-    {"date":"2019-present","domain":"audiovisual","event":"Developing O Arquiteto da Apoteose, a documentary project about Sidnei França; unfinished work in progress.","evidence":"unpublished making-of archive"},
-    {"date":"2021","domain":"audiovisual","event":"Developed the Autópsia content/television project during the pandemic; project not released.","evidence":"project presentation/private archive"},
-    {"date":"2023-2024","domain":"search and performance","event":"Worked remotely at Driven.CX.","evidence":"autobiographical"},
-    {"date":"2023-12","domain":"music","event":"Coitado do Próximo reunited for a surprise performance at Cassasp.","evidence":"preserved video"},
-    {"date":"2025","domain":"human-ai interaction","event":"Began the current independent Human–AI Interaction research cycle.","evidence":"research development chronology"},
-    {"date":"2026-01","domain":"human-ai interaction","event":"Published four Melissa 1.0 research works on Zenodo, each with its own DOI.","evidence":"public persistent records","url":"https://marcelonicchio.github.io/data/publications.json"},
-    {"date":"2026-05","domain":"human-ai interaction","event":"Released The Punk Rock Orchestra v1, with instances on OSF, SSRN, Zenodo, PubPub and GitHub.","evidence":"public persistent records","url":"https://github.com/marcelonicchio/punk-rock-orchestra"},
-    {"date":"2026","domain":"human-ai interaction","event":"Developing Punk Rock Orchestra v2 as the intended definitive version closing the current Melissa → PRO research cycle.","evidence":"work in progress","note":"No future DOI, repository deposit or formal publication is asserted until it exists publicly."}
+    {
+      "date": "1989-1990",
+      "domain": "music",
+      "event": "Played snare drum in the Mocidade Alegre samba-school percussion section.",
+      "evidence": "autobiographical"
+    },
+    {
+      "date": "1990-1991",
+      "domain": "music",
+      "event": "Studied at Conservatório Antonino Simalha.",
+      "evidence": "autobiographical"
+    },
+    {
+      "date": "1992",
+      "domain": "music",
+      "event": "Founded Coitado do Próximo as composer and drummer.",
+      "evidence": "preserved primary archive"
+    },
+    {
+      "date": "1992-1996",
+      "domain": "internet and digital culture",
+      "event": "Participated in BBS environments including SP Online/STI and Mandic; created the experimental Minduim BBS using RemoteAccess and two telephone lines.",
+      "evidence": "autobiographical"
+    },
+    {
+      "date": "1993",
+      "domain": "communication",
+      "event": "Maintained a cultural column on Tremonte BBS.",
+      "evidence": "autobiographical"
+    },
+    {
+      "date": "1994-1995",
+      "domain": "communication",
+      "event": "Presented and curated the weekday Metrópole radio program on Rádio Nova Paulista FM 103.7.",
+      "evidence": "preserved primary audio"
+    },
+    {
+      "date": "1994",
+      "domain": "music",
+      "event": "Coitado do Próximo recorded the demo Pegue o seu Celular / Mulher SP; Marcelo Nicchio was interviewed by Kid Vinil on 97FM; the band opened for 365 at Aeroanta.",
+      "evidence": "mixed autobiographical and preserved archive"
+    },
+    {
+      "date": "1997",
+      "domain": "music",
+      "event": "Recorded the first Coitado do Próximo album, Meu Querido Diário, at Estúdio Asas, produced by Edson X.",
+      "evidence": "preserved primary archive"
+    },
+    {
+      "date": "1998",
+      "domain": "audiovisual",
+      "event": "Worked in executive production/fundraising for Homens na Cozinha, broadcast by Band.",
+      "evidence": "autobiographical; external credits to be checked"
+    },
+    {
+      "date": "1998-2000",
+      "domain": "audiovisual",
+      "event": "Worked through Nicchio & Associados as a cultural producer and contributed to fundraising connected to the feature films Carandiru and Domésticas.",
+      "evidence": "preserved business card for cultural-producer role; project-specific fundraising remains autobiographical/private archive"
+    },
+    {
+      "date": "1999-2000",
+      "domain": "music",
+      "event": "Pre-produced the second Coitado do Próximo album, Eu Não Tô Nem Aí, co-produced by Fábio Badi Crepaldi and Marcelo Nicchio.",
+      "evidence": "preserved primary archive"
+    },
+    {
+      "date": "2000-07",
+      "domain": "music",
+      "event": "Coitado do Próximo opened for Os Paralamas do Sucesso at Olympia in São Paulo.",
+      "evidence": "public video",
+      "url": "https://www.youtube.com/watch?v=V624sY_rl8I"
+    },
+    {
+      "date": "2000",
+      "domain": "internet and infrastructure",
+      "event": "Worked at PSINet in corporate hosting sales.",
+      "evidence": "autobiographical/preserved photographs"
+    },
+    {
+      "date": "2000-10–2001-01",
+      "domain": "culture and retail",
+      "event": "Worked at Livraria Cultura after leaving PSINet, in a summer job selling technical books.",
+      "evidence": "preserved business card for association; dates, role and summer-job classification autobiographical"
+    },
+    {
+      "date": "2001-04-23",
+      "domain": "press and culture",
+      "event": "Appeared in Folhateen / Folha de S.Paulo in the edition whose printed cover line was Órfãos do Rock; internal article: Onde estão os ídolos?.",
+      "evidence": "external contemporary press",
+      "url": "https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm"
+    },
+    {
+      "date": "2001-06-21",
+      "domain": "music and television",
+      "event": "Coitado do Próximo appeared on Programa do Jô on Rede Globo and performed Estava Comigo, composed by Marcelo Nicchio.",
+      "evidence": "public video",
+      "url": "https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s"
+    },
+    {
+      "date": "2003-2006",
+      "domain": "communication and culture",
+      "event": "Wrote the Prateleira Cultural column and other pieces for Sinal Verde magazine, including recurring digital-culture topics such as RSS, Skype/VoIP, Google Earth, online radio and Orkut.",
+      "evidence": "preserved print scans"
+    },
+    {
+      "date": "2004-2008",
+      "domain": "internet and digital products",
+      "event": "Created and operated Mirantte News; preserved contemporary material identifies Marcelo Nicchio as director of the portal.",
+      "evidence": "preserved contemporary material"
+    },
+    {
+      "date": "2006",
+      "domain": "audiovisual",
+      "event": "Credited for Artistic Direction and co-Executive Production of Meia-Noite e Uns on RedeTV!; Dreamsnetwork.tv identified as production entity.",
+      "evidence": "public video credits",
+      "url": "https://www.youtube.com/watch?v=tIGlLDpzQ7E"
+    },
+    {
+      "date": "2008-2009",
+      "domain": "search and performance",
+      "event": "Deepened professional work in SEM and completed certifications under the Google Advertising Professional program.",
+      "evidence": "autobiographical/historical professional records"
+    },
+    {
+      "date": "2010-2012",
+      "domain": "search and performance",
+      "event": "Worked at CookieWEB, progressing from SEM coordination to management.",
+      "evidence": "autobiographical/preserved professional material"
+    },
+    {
+      "date": "2012-2013",
+      "domain": "search and performance",
+      "event": "Worked at Petlove on the internalization of digital media operations.",
+      "evidence": "private employment record"
+    },
+    {
+      "date": "2012-present",
+      "domain": "search and performance",
+      "event": "Developed Clickland Digital, an agency focused on small and medium-sized businesses, created with Carlos Portela.",
+      "evidence": "preserved website/business material plus autobiographical founder detail"
+    },
+    {
+      "date": "2014",
+      "domain": "search and performance",
+      "event": "Worked at BEST within the Kenshoo ecosystem and taught advanced Search and Social segmentation workshops for E-Commerce Brasil.",
+      "evidence": "public video series",
+      "url": "https://youtu.be/hOKqH6yxQ4g"
+    },
+    {
+      "date": "2015",
+      "domain": "search and performance",
+      "event": "Worked at Ad.Dialetto, including work connected to Máquina de Vendas / Ricardo Eletro.",
+      "evidence": "preserved business card for agency association; account responsibility and operating details autobiographical"
+    },
+    {
+      "date": "2019-present",
+      "domain": "audiovisual",
+      "event": "Developing O Arquiteto da Apoteose, a documentary project about Sidnei França; unfinished work in progress.",
+      "evidence": "unpublished making-of archive"
+    },
+    {
+      "date": "2021",
+      "domain": "audiovisual",
+      "event": "Developed the Autópsia content/television project during the pandemic; project not released.",
+      "evidence": "project presentation/private archive"
+    },
+    {
+      "date": "2023-2024",
+      "domain": "search and performance",
+      "event": "Worked remotely at Driven.CX.",
+      "evidence": "autobiographical"
+    },
+    {
+      "date": "2023-12",
+      "domain": "music",
+      "event": "Coitado do Próximo reunited for a surprise performance at Cassasp.",
+      "evidence": "preserved video"
+    },
+    {
+      "date": "2025",
+      "domain": "human-ai interaction",
+      "event": "Began the current independent Human–AI Interaction research cycle.",
+      "evidence": "research development chronology"
+    },
+    {
+      "date": "2026-01",
+      "domain": "human-ai interaction",
+      "event": "Published four Melissa 1.0 research works on Zenodo, each with its own DOI.",
+      "evidence": "public persistent records",
+      "url": "https://marcelonicchio.github.io/data/publications.json"
+    },
+    {
+      "date": "2026-05",
+      "domain": "human-ai interaction",
+      "event": "Released The Punk Rock Orchestra v1, with instances on OSF, SSRN, Zenodo, PubPub and GitHub.",
+      "evidence": "public persistent records",
+      "url": "https://github.com/marcelonicchio/punk-rock-orchestra"
+    },
+    {
+      "date": "2026",
+      "domain": "human-ai interaction",
+      "event": "Developing Punk Rock Orchestra v2 as the intended definitive version closing the current Melissa → PRO research cycle.",
+      "evidence": "work in progress",
+      "note": "No future DOI, repository deposit or formal publication is asserted until it exists publicly."
+    }
   ]
 }
