@@ -1,0 +1,36 @@
+name: Apply Minduim reconstruction
+
+on:
+  push:
+    branches:
+      - archive-minduim-bbs
+    paths:
+      - tools/apply_minduim_reconstruction.py
+      - .github/workflows/apply-minduim-reconstruction.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: archive-minduim-bbs
+          fetch-depth: 0
+      - name: Apply reconstruction to PT/EN pages
+        run: python tools/apply_minduim_reconstruction.py
+      - name: Commit integrated pages
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/internet/index.html en/internet/index.html pt/arquivo/index.html en/archive/index.html styles.css
+          git commit -m "Publish Minduim BBS reconstruction in Internet and Archive"
+          git push origin HEAD:archive-minduim-bbs
