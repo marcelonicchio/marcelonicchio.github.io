@@ -158,3 +158,21 @@ a:focus-visible,.button:focus-visible{outline:2px solid var(--accent-soft);outli
   .site-header,.card,.authority-item,.fact,.evidence,.callout,.note,.lang-card{border-color:CanvasText}
   .button,.evidence-links a,.page-tools a{border:1px solid ButtonText}
 }
+
+/* presence-footer:start */
+.presence-panel{margin-bottom:30px;padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.012));display:grid;grid-template-columns:minmax(170px,.46fr) minmax(0,1.54fr);gap:24px;align-items:center}
+.presence-head strong{display:block;color:var(--text);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.presence-head span{display:block;margin-top:3px;color:var(--muted);font-size:.75rem}
+.presence-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;align-items:center}
+.presence-link{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;min-width:42px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.018);color:var(--soft);text-decoration:none;transition:border-color .18s ease,background .18s ease,color .18s ease,transform .18s ease}
+.presence-link svg{display:block;width:20px;height:20px;fill:currentColor}
+.presence-link:hover,.presence-link:focus-visible{opacity:1;color:var(--text);border-color:rgba(211,164,160,.6);background:rgba(155,47,47,.10);transform:translateY(-2px)}
+.presence-link:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
+.presence-link::after{content:attr(data-label);position:absolute;left:50%;bottom:calc(100% + 9px);z-index:30;transform:translate(-50%,4px);padding:5px 8px;border:1px solid var(--line);border-radius:7px;background:#171719;color:var(--text);font-size:.7rem;font-weight:700;line-height:1;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .14s ease,transform .14s ease;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.presence-link:hover::after,.presence-link:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){.presence-panel{grid-template-columns:1fr;gap:14px}.presence-links{justify-content:flex-start}}
+@media(max-width:580px){.presence-panel{padding:16px}.presence-links{gap:7px}.presence-link{width:40px;height:40px;min-width:40px}.presence-link svg{width:19px;height:19px}}
+@media(pointer:coarse){.presence-link::after{display:none}.presence-link{min-height:44px}}
+@media(prefers-reduced-motion:reduce){.presence-link{transition:none}.presence-link:hover,.presence-link:focus-visible{transform:none}}
+@media(forced-colors:active){.presence-panel,.presence-link{border-color:CanvasText}}
+/* presence-footer:end */
