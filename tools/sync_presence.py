@@ -34,14 +34,20 @@ def render_block(profiles, pt: bool) -> str:
     new_tab = "abre em nova aba" if pt else "opens in a new tab"
     links = []
     for p in profiles:
+        if not p.get("render", True):
+            continue
         label = p["label"]
         url = p["url"]
         ident = p["id"]
         safe_label = html.escape(label, quote=True)
         safe_url = html.escape(url, quote=True)
+        rel_parts = ["noopener", "noreferrer"]
+        if p.get("sameAs"):
+            rel_parts.insert(0, "me")
+        rel = " ".join(rel_parts)
         links.append(
-            f'        <a class="presence-link" href="{safe_url}" target="_blank" rel="noopener noreferrer" '
-            f'data-label="{safe_label}" title="{safe_label}" aria-label="{safe_label} — {new_tab}">'
+            f'        <a class="presence-link" href="{safe_url}" target="_blank" rel="{rel}" '
+            f'data-label="{safe_label}" aria-label="{safe_label} — {new_tab}">'
             f'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="{SPRITE}#{ident}"></use></svg></a>'
         )
     joined = "\n".join(links)
@@ -132,7 +138,8 @@ def main():
     html_changed = sync_html(profiles)
     person_changed = sync_person(profiles)
     styles_changed = sync_styles()
-    print(f"Presence sync: {len(html_changed)} HTML file(s) changed.")
+    rendered = sum(1 for p in profiles if p.get("render", True))
+    print(f"Presence sync: {len(html_changed)} HTML file(s) changed; {rendered} profile(s) rendered.")
     if person_changed:
         print("Updated data/person.json sameAs.")
     if styles_changed:
