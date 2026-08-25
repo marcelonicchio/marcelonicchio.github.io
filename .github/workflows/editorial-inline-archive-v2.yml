@@ -1,0 +1,294 @@
+name: Editorial inline archive v2
+
+on:
+  push:
+    branches: [editorial-inline-archive]
+    paths:
+      - '.editorial-inline-archive-v2'
+
+permissions:
+  contents: write
+
+jobs:
+  reorganize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: editorial-inline-archive
+          fetch-depth: 0
+
+      - name: Reorganize documentary material into narrative flow
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet pillow
+          mkdir -p /tmp/mn-archive assets/archive
+
+          base='https://raw.githubusercontent.com/marcelonicchio/marcelonicchio.github.io/38fbeaa3848a2429318022f520b98ff2e32d2315/assets/img'
+          curl -fsSL "$base/cartao_livraria_cultura02.jpg" -o /tmp/mn-archive/livraria.jpg
+          curl -fsSL "$base/cartao_addialeto03.JPG" -o /tmp/mn-archive/dialetto.jpg
+          curl -fsSL "$base/cartao_dreamsnetwork06.jpg" -o /tmp/mn-archive/dreams.jpg
+          curl -fsSL "$base/cartao_nicchio_asssociados02.jpg" -o /tmp/mn-archive/nicchio.jpg
+          curl -fsSL "$base/cartao_miranttenews02.jpg" -o /tmp/mn-archive/mirantte.jpg
+          curl -fsSL "$base/ScreenShot010.jpg" -o /tmp/mn-archive/clickland-card.jpg
+          curl -fsSL "$base/nonameclicklandsite.jpg" -o /tmp/mn-archive/clickland-home.jpg
+
+          python - <<'PY'
+          from PIL import Image, ImageDraw
+          from pathlib import Path
+
+          out = Path('assets/archive')
+          out.mkdir(parents=True, exist_ok=True)
+
+          def save(im, name, quality=90):
+              im.convert('RGB').save(out / name, 'WEBP', quality=quality, method=6)
+
+          # Privacy-safe documentary derivatives: preserve identity/context, omit contact details.
+          im = Image.open('/tmp/mn-archive/livraria.jpg').convert('RGB').crop((20,80,975,300))
+          ImageDraw.Draw(im).rectangle((455,84,950,118), fill=(241,240,235))
+          save(im, 'livraria-cultura-card-2000.webp')
+
+          im = Image.open('/tmp/mn-archive/dialetto.jpg').convert('RGB').crop((20,30,855,320))
+          d = ImageDraw.Draw(im)
+          d.rectangle((490,135,830,182), fill=(35,35,34))
+          d.rectangle((490,215,830,260), fill=(35,35,34))
+          save(im, 'ad-dialetto-card-2015.webp')
+
+          im = Image.open('/tmp/mn-archive/dreams.jpg').convert('RGB').crop((15,45,815,335))
+          ImageDraw.Draw(im).rectangle((445,125,795,255), fill=(226,224,218))
+          save(im, 'dreamsnetwork-card-2006.webp')
+
+          im = Image.open('/tmp/mn-archive/nicchio.jpg').convert('RGB').crop((0,0,960,325))
+          save(im, 'nicchio-associados-card.webp')
+
+          im = Image.open('/tmp/mn-archive/mirantte.jpg').convert('RGB').crop((0,0,868,330))
+          save(im, 'mirantte-news-card.webp')
+
+          im = Image.open('/tmp/mn-archive/clickland-card.jpg').convert('RGB')
+          ImageDraw.Draw(im).rectangle((330,190,735,335), fill=(5,5,5))
+          save(im, 'clickland-card.webp')
+
+          im = Image.open('/tmp/mn-archive/clickland-home.jpg').convert('RGB').crop((0,110,1490,832))
+          h = round(im.height * 1280 / im.width)
+          im = im.resize((1280,h), Image.Resampling.LANCZOS)
+          save(im, 'clickland-home-historical.webp', 88)
+          PY
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          def rd(path): return Path(path).read_text(encoding='utf-8')
+          def wr(path, s): Path(path).write_text(s, encoding='utf-8')
+
+          def remove_first_note(path):
+              s = rd(path)
+              s, n = re.subn(r'\n?<div class="note">.*?</div>\n?', '\n', s, count=1, flags=re.S)
+              if n: wr(path, s)
+
+          def neutral_bio_note(path, pt):
+              s = rd(path)
+              text = ('<div class="note"><strong>Arquivo vivo.</strong> Esta biografia é atualizada à medida que novos registros, imagens, áudios e vídeos são digitalizados e incorporados.</div>' if pt else
+                      '<div class="note"><strong>Living archive.</strong> This biography is updated as new records, images, audio and video are digitized and incorporated.</div>')
+              s, n = re.subn(r'<div class="note">.*?</div>', text, s, count=1, flags=re.S)
+              if n != 1: raise RuntimeError(f'Biography note not found: {path}')
+              wr(path, s)
+
+          def bounds(s, section_id):
+              start = s.find(f'<section id="{section_id}" class="chapter">')
+              if start < 0: return None
+              end = s.find('</section>', start)
+              if end < 0: raise RuntimeError(f'Unclosed section {section_id}')
+              return start, end + len('</section>')
+
+          def append_to_section(path, section_id, snippet):
+              s = rd(path); b = bounds(s, section_id)
+              if not b: raise RuntimeError(f'Section {section_id} not found in {path}')
+              if snippet.strip() in s: return
+              start, end = b
+              close = s.rfind('</section>', start, end)
+              wr(path, s[:close] + snippet + s[close:])
+
+          def insert_after_section(path, section_id, snippet):
+              s = rd(path); b = bounds(s, section_id)
+              if not b: raise RuntimeError(f'Section {section_id} not found in {path}')
+              if snippet.strip() in s: return
+              wr(path, s[:b[1]] + '\n' + snippet + s[b[1]:])
+
+          def remove_section(path, section_id):
+              s = rd(path); b = bounds(s, section_id)
+              if not b: return
+              wr(path, s[:b[0]] + s[b[1]:])
+
+          def remove_aside_link(path, section_id):
+              s = rd(path)
+              s = re.sub(rf'<a href="#{re.escape(section_id)}">.*?</a>', '', s, count=1, flags=re.S)
+              wr(path, s)
+
+          def remove_aside_note(path):
+              s = rd(path)
+              s = re.sub(r'<p class="aside-note">.*?</p>', '', s, count=1, flags=re.S)
+              wr(path, s)
+
+          def insert_after_paragraph(path, needle, snippet):
+              s = rd(path); i = s.find(needle)
+              if i < 0: raise RuntimeError(f'Needle not found in {path}: {needle}')
+              j = s.find('</p>', i)
+              if j < 0: raise RuntimeError(f'Paragraph end not found in {path}')
+              j += 4
+              if snippet.strip() not in s:
+                  wr(path, s[:j] + snippet + s[j:])
+
+          def replace_text(path, old, new):
+              s = rd(path)
+              if old in s: wr(path, s.replace(old, new, 1))
+
+          def card(src, alt, title, label):
+              return f'''\n<div class="inline-records"><a class="inline-record" href="{src}" target="_blank" rel="noopener noreferrer"><img src="{src}" loading="lazy" decoding="async" alt="{alt}"><span><strong>{title}</strong><small>{label} ↗</small></span></a></div>'''
+
+          def cards(items):
+              inner = ''.join(f'<a class="inline-record" href="{src}" target="_blank" rel="noopener noreferrer"><img src="{src}" loading="lazy" decoding="async" alt="{alt}"><span><strong>{title}</strong><small>{label} ↗</small></span></a>' for src,alt,title,label in items)
+              return '\n<div class="inline-records inline-records--two">' + inner + '</div>'
+
+          def links(items):
+              return '\n<div class="evidence-links inline-links">' + ''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer">{label}</a>' for url,label in items) + '</div>'
+
+          # Inline-document styling.
+          css = rd('styles.css')
+          if '.inline-records{' not in css:
+              marker = '.page-tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}'
+              if marker not in css: raise RuntimeError('CSS marker missing')
+              css += '''\n\n/* Documentary material in narrative flow */\n.inline-records{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:18px 0 6px}\n.inline-records--two{grid-template-columns:repeat(2,minmax(0,1fr))}\n.inline-record{display:block;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.018);text-decoration:none;color:var(--text)}\n.inline-record:hover{opacity:1;border-color:#4a4a4f}\n.inline-record img{display:block;width:100%;height:auto;max-height:330px;object-fit:contain;background:#e7e4de}\n.inline-record span{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px}\n.inline-record strong{font-size:.9rem}\n.inline-record small{font-size:.72rem;color:var(--accent-soft);white-space:nowrap}\n.inline-links{margin:14px 0 5px}\n@media(max-width:580px){.inline-records--two{grid-template-columns:1fr}.inline-record span{align-items:flex-start;flex-direction:column;gap:3px}}\n'''
+              wr('styles.css', css)
+
+          # Full biographies: source links/images accompany the corresponding passage; detached evidence appendix disappears.
+          neutral_bio_note('pt/biografia/index.html', True)
+          neutral_bio_note('en/biography/index.html', False)
+
+          insert_after_paragraph('pt/biografia/index.html', 'apareceu no <strong>Programa do Jô</strong>', links([
+              ('https://www.youtube.com/watch?v=V624sY_rl8I','Olympia — Estava Comigo ↗'),
+              ('https://youtu.be/0-RXucDYMfk','Olympia — Ciúmes ↗'),
+              ('https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s','Programa do Jô ↗')]))
+          insert_after_paragraph('en/biography/index.html', 'appeared on <strong>Programa do Jô</strong>', links([
+              ('https://www.youtube.com/watch?v=V624sY_rl8I','Olympia — Estava Comigo ↗'),
+              ('https://youtu.be/0-RXucDYMfk','Olympia — Ciúmes ↗'),
+              ('https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s','Programa do Jô ↗')]))
+
+          insert_after_paragraph('pt/biografia/index.html', 'arquivo oficial da Folha como <em>Onde estão os ídolos?</em>', links([
+              ('https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm','Folha — matéria ↗'),
+              ('https://www1.folha.uol.com.br/fsp/folhatee/inde23042001.htm','Folha — edição ↗')]))
+          insert_after_paragraph('en/biography/index.html', "Folha's official archive as <em>Onde estão os ídolos?</em>", links([
+              ('https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm','Folha — article ↗'),
+              ('https://www1.folha.uol.com.br/fsp/folhatee/inde23042001.htm','Folha — issue ↗')]))
+
+          insert_after_paragraph('pt/biografia/index.html', 'um <em>summer job</em> como vendedor de livros técnicos', card('/assets/archive/livraria-cultura-card-2000.webp','Cartão profissional da Livraria Cultura com o nome Marcelo Henrique Nicchio; contatos omitidos na versão pública.','Livraria Cultura · cartão profissional','Abrir registro'))
+          insert_after_paragraph('en/biography/index.html', 'selling technical books', card('/assets/archive/livraria-cultura-card-2000.webp','Livraria Cultura professional card with the name Marcelo Henrique Nicchio; contact details omitted from the public version.','Livraria Cultura · professional card','Open record'))
+
+          insert_after_paragraph('pt/biografia/index.html', 'integração de mapas/rotas via MapLink', card('/assets/archive/mirantte-news-card.webp','Cartão profissional do Mirantte News com marca, slogan e nome Marcelo Nicchio.','Mirantte News · cartão profissional','Abrir registro'))
+          insert_after_paragraph('en/biography/index.html', 'MapLink map/routing integration', card('/assets/archive/mirantte-news-card.webp','Mirantte News professional card with brand, tagline and the name Marcelo Nicchio.','Mirantte News · professional card','Open record'))
+
+          insert_after_paragraph('pt/biografia/index.html', 'Produtor Cultural</strong> — também contribuiu', card('/assets/archive/nicchio-associados-card.webp','Cartão da Nicchio & Associados identificando Marcelo Henrique Nicchio como Produtor Cultural.','Nicchio & Associados · Produtor Cultural','Abrir registro'))
+          insert_after_paragraph('en/biography/index.html', 'Cultural Producer</strong> — he also contributed', card('/assets/archive/nicchio-associados-card.webp','Nicchio & Associados card identifying Marcelo Henrique Nicchio as Cultural Producer.','Nicchio & Associados · Cultural Producer','Open record'))
+
+          insert_after_paragraph('pt/biografia/index.html', 'Dreamsnetwork.tv como realizadora', card('/assets/archive/dreamsnetwork-card-2006.webp','Cartão DreamsNetwork identificando Marcelo Nicchio como Produtor Executivo.','DreamsNetwork · Produtor Executivo','Abrir registro') + links([('https://www.youtube.com/watch?v=tIGlLDpzQ7E','Meia-Noite e Uns — créditos finais ↗')]))
+          insert_after_paragraph('en/biography/index.html', 'Dreamsnetwork.tv as the production entity', card('/assets/archive/dreamsnetwork-card-2006.webp','DreamsNetwork card identifying Marcelo Nicchio as Executive Producer.','DreamsNetwork · Executive Producer','Open record') + links([('https://www.youtube.com/watch?v=tIGlLDpzQ7E','Meia-Noite e Uns — end credits ↗')]))
+
+          insert_after_paragraph('pt/biografia/index.html', 'Em 2015 passou pela Ad.Dialetto', card('/assets/archive/ad-dialetto-card-2015.webp','Cartão profissional da Ad.Dialetto com o nome Marcelo Nicchio.','Ad.Dialetto · cartão profissional','Abrir registro'))
+          insert_after_paragraph('en/biography/index.html', 'In 2015 he worked at Ad.Dialetto', card('/assets/archive/ad-dialetto-card-2015.webp','Ad.Dialetto professional card with the name Marcelo Nicchio.','Ad.Dialetto · professional card','Open record'))
+
+          insert_after_paragraph('pt/biografia/index.html', 'badges dos programas Google exibidos à época', cards([
+              ('/assets/archive/clickland-card.webp','Cartão profissional Clickland com Marcelo Nicchio e selos Google.','Clickland · cartão profissional','Abrir cartão'),
+              ('/assets/archive/clickland-home-historical.webp','Captura histórica da home da Clickland com a assinatura Premium Search Agency.','Clickland · home histórica','Abrir página')]))
+          insert_after_paragraph('en/biography/index.html', 'Google program badges displayed at the time', cards([
+              ('/assets/archive/clickland-card.webp','Clickland professional card with Marcelo Nicchio and Google badges.','Clickland · professional card','Open card'),
+              ('/assets/archive/clickland-home-historical.webp','Historical Clickland homepage showing the Premium Search Agency positioning.','Clickland · historical homepage','Open page')]))
+
+          for p, sid in [('pt/biografia/index.html','fontes'),('en/biography/index.html','sources')]:
+              remove_section(p,sid); remove_aside_link(p,sid); remove_aside_note(p)
+
+          # Internet & Digital Culture: evidence lives under PSINet/Livraria/Mirantte, not in a status appendix.
+          for p in ['pt/internet/index.html','en/internet/index.html']:
+              remove_first_note(p); remove_aside_note(p)
+
+          replace_text('pt/internet/index.html', '<p>Há algumas fotografias preservadas com a equipe da PSINet. Elas podem funcionar como documentação visual contextual, mas não serão apresentadas como prova de cargo, escopo ou resultados além do que efetivamente mostrarem.</p>', '<p>Algumas fotografias de equipe desse período estão preservadas e serão incorporadas aqui conforme o acervo for digitalizado.</p>')
+          replace_text('en/internet/index.html', '<p>A small number of photographs with the PSINet team survive in the personal archive. They may serve as contextual visual documentation but will not be presented as proof of job title, scope or results beyond what the images themselves support.</p>', '<p>Several team photographs from this period survive and will be incorporated here as the archive is digitized.</p>')
+
+          pt_livraria = '''<section id="livraria-cultura" class="chapter"><h2>2000–2001 — Livraria Cultura</h2><p>Logo depois de sair da PSINet, Nicchio trabalhou de <strong>outubro de 2000 a janeiro de 2001</strong> na <strong>Livraria Cultura</strong>, no Shopping Villa-Lobos. Foi um <em>summer job</em> como vendedor de livros técnicos.</p>''' + card('/assets/archive/livraria-cultura-card-2000.webp','Cartão profissional da Livraria Cultura com o nome Marcelo Henrique Nicchio; contatos omitidos na versão pública.','Livraria Cultura · cartão profissional','Abrir registro') + '</section>'
+          en_livraria = '''<section id="livraria-cultura" class="chapter"><h2>2000–2001 — Livraria Cultura</h2><p>Immediately after leaving PSINet, Nicchio worked at <strong>Livraria Cultura</strong>, at Shopping Villa-Lobos, from <strong>October 2000 to January 2001</strong>. It was a <em>summer job</em> selling technical books.</p>''' + card('/assets/archive/livraria-cultura-card-2000.webp','Livraria Cultura professional card with the name Marcelo Henrique Nicchio; contact details omitted from the public version.','Livraria Cultura · professional card','Open record') + '</section>'
+          insert_after_section('pt/internet/index.html','psinet',pt_livraria)
+          insert_after_section('en/internet/index.html','psinet',en_livraria)
+
+          append_to_section('pt/internet/index.html','mirantte',card('/assets/archive/mirantte-news-card.webp','Cartão profissional do Mirantte News com marca, slogan e nome Marcelo Nicchio.','Mirantte News · cartão profissional','Abrir registro'))
+          append_to_section('en/internet/index.html','mirantte',card('/assets/archive/mirantte-news-card.webp','Mirantte News professional card with brand, tagline and the name Marcelo Nicchio.','Mirantte News · professional card','Open record'))
+          for p,sid in [('pt/internet/index.html','arquivo'),('en/internet/index.html','archive')]:
+              remove_section(p,sid); remove_aside_link(p,sid)
+          replace_text('pt/internet/index.html','<a href="#mirantte">Mirantte News</a>','<a href="#livraria-cultura">Livraria Cultura</a><a href="#mirantte">Mirantte News</a>')
+          replace_text('en/internet/index.html','<a href="#mirantte">Mirantte News</a>','<a href="#livraria-cultura">Livraria Cultura</a><a href="#mirantte">Mirantte News</a>')
+
+          # Search: preserve BEST/Kenshoo as the inline model; add Ad.Dialetto and Clickland directly to their entries.
+          for p in ['pt/search-performance/index.html','en/search-performance/index.html']:
+              remove_first_note(p); remove_aside_note(p)
+          append_to_section('pt/search-performance/index.html','dialetto',card('/assets/archive/ad-dialetto-card-2015.webp','Cartão profissional da Ad.Dialetto com o nome Marcelo Nicchio.','Ad.Dialetto · cartão profissional','Abrir registro'))
+          append_to_section('en/search-performance/index.html','dialetto',card('/assets/archive/ad-dialetto-card-2015.webp','Ad.Dialetto professional card with the name Marcelo Nicchio.','Ad.Dialetto · professional card','Open record'))
+          append_to_section('pt/search-performance/index.html','clickland',cards([
+              ('/assets/archive/clickland-card.webp','Cartão profissional Clickland com Marcelo Nicchio e selos Google.','Clickland · cartão profissional','Abrir cartão'),
+              ('/assets/archive/clickland-home-historical.webp','Captura histórica da home da Clickland com a assinatura Premium Search Agency.','Clickland · home histórica','Abrir página')]))
+          append_to_section('en/search-performance/index.html','clickland',cards([
+              ('/assets/archive/clickland-card.webp','Clickland professional card with Marcelo Nicchio and Google badges.','Clickland · professional card','Open card'),
+              ('/assets/archive/clickland-home-historical.webp','Historical Clickland homepage showing the Premium Search Agency positioning.','Clickland · historical homepage','Open page')]))
+          for p,sid in [('pt/search-performance/index.html','estado'),('en/search-performance/index.html','status')]:
+              remove_section(p,sid); remove_aside_link(p,sid)
+
+          # Audiovisual: cards sit inside the company/project story; public video links already remain inline.
+          for p in ['pt/audiovisual/index.html','en/audiovisual/index.html']:
+              remove_first_note(p); remove_aside_note(p)
+          append_to_section('pt/audiovisual/index.html','cinema',card('/assets/archive/nicchio-associados-card.webp','Cartão da Nicchio & Associados identificando Marcelo Henrique Nicchio como Produtor Cultural.','Nicchio & Associados · Produtor Cultural','Abrir registro'))
+          append_to_section('en/audiovisual/index.html','film',card('/assets/archive/nicchio-associados-card.webp','Nicchio & Associados card identifying Marcelo Henrique Nicchio as Cultural Producer.','Nicchio & Associados · Cultural Producer','Open record'))
+          append_to_section('pt/audiovisual/index.html','meia-noite',card('/assets/archive/dreamsnetwork-card-2006.webp','Cartão DreamsNetwork identificando Marcelo Nicchio como Produtor Executivo.','DreamsNetwork · Produtor Executivo','Abrir registro'))
+          append_to_section('en/audiovisual/index.html','meia-noite',card('/assets/archive/dreamsnetwork-card-2006.webp','DreamsNetwork card identifying Marcelo Nicchio as Executive Producer.','DreamsNetwork · Executive Producer','Open record'))
+          for p,sid in [('pt/audiovisual/index.html','estado'),('en/audiovisual/index.html','status')]:
+              remove_section(p,sid); remove_aside_link(p,sid)
+
+          # Communication: Folha links accompany the Folha entry; future Metrópole audio and Sinal Verde scans will go in those entries.
+          for p in ['pt/comunicacao/index.html','en/communication/index.html']:
+              remove_first_note(p); remove_aside_note(p)
+          append_to_section('pt/comunicacao/index.html','folha',links([
+              ('https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm','Matéria — Onde estão os ídolos? ↗'),
+              ('https://www1.folha.uol.com.br/fsp/folhatee/inde23042001.htm','Índice da edição ↗')]))
+          append_to_section('en/communication/index.html','folha',links([
+              ('https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm','Article — Onde estão os ídolos? ↗'),
+              ('https://www1.folha.uol.com.br/fsp/folhatee/inde23042001.htm','Issue index ↗')]))
+          for p,sid in [('pt/comunicacao/index.html','registros'),('en/communication/index.html','records')]:
+              remove_section(p,sid); remove_aside_link(p,sid)
+
+          # Music: public Olympia and Jô records accompany the corresponding chronological moments.
+          for p in ['pt/musica/index.html','en/music/index.html']:
+              remove_first_note(p); remove_aside_note(p)
+          replace_text('pt/musica/index.html','<div class="phase-year">jul. 2000</div><div><h3>Olympia</h3><p>Apresentação no Olympia, em São Paulo, na abertura de Os Paralamas do Sucesso. Dois registros audiovisuais sobrevivem publicamente.</p></div></div>', '<div class="phase-year">jul. 2000</div><div><h3>Olympia</h3><p>Apresentação no Olympia, em São Paulo, na abertura de Os Paralamas do Sucesso.</p>' + links([('https://www.youtube.com/watch?v=V624sY_rl8I','Estava Comigo ↗'),('https://youtu.be/0-RXucDYMfk','Ciúmes ↗')]) + '</div></div>')
+          replace_text('en/music/index.html','<div class="phase-year">Jul. 2000</div><div><h3>Olympia</h3><p>Performance at Olympia in São Paulo, opening for Os Paralamas do Sucesso. Two audiovisual records survive publicly.</p></div></div>', '<div class="phase-year">Jul. 2000</div><div><h3>Olympia</h3><p>Performance at Olympia in São Paulo, opening for Os Paralamas do Sucesso.</p>' + links([('https://www.youtube.com/watch?v=V624sY_rl8I','Estava Comigo ↗'),('https://youtu.be/0-RXucDYMfk','Ciúmes ↗')]) + '</div></div>')
+          replace_text('pt/musica/index.html','<div class="phase-year">21 jun. 2001</div><div><h3>Programa do Jô</h3><p>Entrevista e apresentação na Rede Globo. O Coitado do Próximo tocou <em>Estava Comigo</em>, composição de Marcelo Nicchio.</p></div></div>', '<div class="phase-year">21 jun. 2001</div><div><h3>Programa do Jô</h3><p>Entrevista e apresentação na Rede Globo. O Coitado do Próximo tocou <em>Estava Comigo</em>, composição de Marcelo Nicchio.</p>' + links([('https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s','Programa do Jô — Estava Comigo ↗')]) + '</div></div>')
+          replace_text('en/music/index.html','<div class="phase-year">Jun. 21, 2001</div><div><h3>Programa do Jô</h3><p>Interview and performance on Rede Globo. Coitado do Próximo performed <em>Estava Comigo</em>, a composition by Marcelo Nicchio.</p></div></div>', '<div class="phase-year">Jun. 21, 2001</div><div><h3>Programa do Jô</h3><p>Interview and performance on Rede Globo. Coitado do Próximo performed <em>Estava Comigo</em>, a composition by Marcelo Nicchio.</p>' + links([('https://www.youtube.com/watch?v=4NKHy_C8wsI&t=8s','Programa do Jô — Estava Comigo ↗')]) + '</div></div>')
+          for p,sid in [('pt/musica/index.html','registros'),('en/music/index.html','records')]:
+              remove_section(p,sid); remove_aside_link(p,sid)
+
+          # Light editorial de-forensification: remove recurring public-facing caveat sentences while keeping privacy/WIP/reconstruction facts.
+          replace_text('pt/biografia/index.html',' Não são conhecidas capturas de tela originais sobreviventes; o episódio permanece documentado autobiograficamente.',' Não são conhecidas capturas de tela originais sobreviventes.')
+          replace_text('en/biography/index.html',' No surviving original screenshots are currently known; the project remains an autobiographical record.',' No surviving original screenshots are currently known.')
+          replace_text('pt/biografia/index.html',' A condição de fundador faz parte do relato autobiográfico e será diferenciada daquilo que as fontes públicas comprovam diretamente.','')
+          replace_text('en/biography/index.html',' Founder status is part of the autobiographical account and is kept distinct from what public sources directly verify.','')
+          replace_text('pt/biografia/index.html',' Conceito artístico, história do nome e outros detalhes de bastidores permanecem como relato autobiográfico quando não houver registro público independente.','')
+          replace_text('en/biography/index.html',' Artistic concept, naming history and other behind-the-scenes details remain autobiographical where no independent public record exists.','')
+
+          rm -f .editorial-inline-archive-v2
+          PY
+
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Move documentary records into narrative flow"
+          git push origin editorial-inline-archive
