@@ -23,3 +23,5 @@ jobs:
         run: python tools/audit_site.py
       - name: Audit site-wide external presence
         run: python tools/audit_presence.py
+      - name: Audit Google Analytics installation
+        run: python tools/audit_analytics.py
