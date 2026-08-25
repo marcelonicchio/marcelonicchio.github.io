@@ -1,0 +1,38 @@
+name: Sync presence footer
+
+on:
+  push:
+    branches:
+      - site-presence-footer
+    paths:
+      - data/presence.json
+      - tools/sync_presence.py
+      - assets/brand/social-sprite.svg
+      - .github/workflows/sync-presence-footer.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: site-presence-footer
+          fetch-depth: 0
+      - name: Synchronize external presence
+        run: python tools/sync_presence.py
+      - name: Commit synchronized site
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No synchronization changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html' 'pt/**/*.html' 'en/**/*.html' styles.css data/person.json
+          git commit -m "Add external presence footer across the hub"
+          git push origin HEAD:site-presence-footer
