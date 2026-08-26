@@ -1,0 +1,110 @@
+name: Autopsia editorial migration
+
+on:
+  push:
+    branches:
+      - autopsia-public-deck
+    paths:
+      - '.github/workflows/autopsia-editorial.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: autopsia-public-deck
+          fetch-depth: 0
+
+      - name: Update Autopsia in Audiovisual and Full Biography
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace(path, old, new):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              if old not in text:
+                  raise SystemExit(f'Expected block not found in {path}: {old[:120]!r}')
+              text = text.replace(old, new, 1)
+              p.write_text(text, encoding='utf-8')
+
+          # PT Audiovisual: metadata / hero copy.
+          replace(
+              'pt/audiovisual/index.html',
+              'Trajetória audiovisual de Marcelo Nicchio: televisão, direção artística, produção executiva, cinema e projetos em desenvolvimento.',
+              'Trajetória audiovisual de Marcelo Nicchio: televisão, direção artística, produção executiva, cinema, projetos gravados e obras em desenvolvimento.'
+          )
+          replace(
+              'pt/audiovisual/index.html',
+              'Televisão, produção executiva, direção artística, cinema e projetos autorais aparecem de forma recorrente na trajetória — às vezes como trabalho concluído e exibido, outras vezes como criação em desenvolvimento.',
+              'Televisão, produção executiva, direção artística, cinema e projetos autorais aparecem de forma recorrente na trajetória — entre trabalhos exibidos, projetos gravados não lançados e obras ainda em desenvolvimento.'
+          )
+          replace(
+              'pt/audiovisual/index.html',
+              '<div class="fact"><span>Projetos WIP</span><strong>2019 → presente</strong></div>',
+              '<div class="fact"><span>Projeto gravado</span><strong>Autópsia · 2021</strong></div>'
+          )
+
+          old_pt_av = '''<section id="autopsia" class="chapter"><h2>2021 — Autópsia</h2><p><strong>Autópsia</strong> foi desenvolvido durante a pandemia como um projeto para streaming/pay-TV, ambientado em um bar e pensado como espaço de conversa sobre cultura, colapso e fim do mundo. Nicchio atuou como criador e diretor artístico.</p><p>O projeto reuniu nomes como Paulo César Pereio, Ângela Ro Ro, Claudio Prado, Luiz Thunderbird, Luiz Felipe Pondé, Eduardo Marinho, João Gordo, Mario Bortolotto e Anselmo Vasconcellos, com Julio Piconi na direção e Paulão de Carvalho na direção de conteúdo. O deck oficial do projeto é preservado em arquivo privado; a publicação integral dependerá de revisão de direitos de imagens, marcas e materiais de terceiros.</p><p>Uma versão pública sanitizada da apresentação poderá documentar o projeto sem implicar lançamento, aquisição por emissora ou cessão de direitos que não tenha ocorrido.</p></section>'''
+          new_pt_av = '''<section id="autopsia" class="chapter"><h2>2021 — Autópsia</h2><p><strong>Autópsia</strong> foi concebido e produzido durante a pandemia como um projeto audiovisual de <strong>documentário/entretenimento</strong> para streaming/pay-TV. Ambientado no Espaço Cultural Cemitério de Automóveis, em São Paulo, o formato foi desenhado para <strong>10 episódios de uma hora</strong>, combinando debates com poesia, apresentações musicais e performances teatrais. O projeto chegou à filmagem e possui material gravado, mas não foi lançado publicamente.</p><p>Na ficha técnica da apresentação original, <strong>Marcelo Nicchio</strong> aparece em <strong>Ideia Original</strong> e <strong>Direção Artística</strong> e integra a <strong>Criação</strong> ao lado de Paulão de Carvalho, Julio Piconi e Eduardo Fabro. Julio Piconi assina a Direção Geral, Paulão de Carvalho a Direção de Conteúdo, Sidnei França a Direção de Arte e Eduardo Fabro a Direção Executiva.</p><p>A apresentação é anterior às filmagens e registra o conceito, referências, estrutura de episódios e propostas de elenco e convidados daquele estágio do projeto — algumas se concretizaram e outras não. O material filmado permanece no acervo e não é disponibilizado publicamente; o deck original preserva a identidade e a personalidade do projeto.</p><div class="inline-records"><a class="inline-record" href="/assets/archive/autopsia-apresentacao.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf"><img src="/assets/archive/autopsia-thumb.webp" loading="lazy" decoding="async" alt="Logo de Autópsia — A Vida Como Ela Era."><span><strong>Autópsia · apresentação original de desenvolvimento</strong><small>PDF · 41 páginas ↗</small></span></a></div></section>'''
+          replace('pt/audiovisual/index.html', old_pt_av, new_pt_av)
+
+          # EN Audiovisual: metadata / hero copy.
+          replace(
+              'en/audiovisual/index.html',
+              "Marcelo Nicchio's audiovisual trajectory: television, artistic direction, executive production, film and works in progress.",
+              "Marcelo Nicchio's audiovisual trajectory: television, artistic direction, executive production, film, recorded projects and works in progress."
+          )
+          replace(
+              'en/audiovisual/index.html',
+              'Television, executive production, artistic direction, film and original projects recur throughout the trajectory — sometimes as completed and broadcast work, sometimes as projects still in development.',
+              'Television, executive production, artistic direction, film and original projects recur throughout the trajectory — across broadcast work, recorded but unreleased projects and works still in development.'
+          )
+          replace(
+              'en/audiovisual/index.html',
+              '<div class="fact"><span>Works in progress</span><strong>2019 → present</strong></div>',
+              '<div class="fact"><span>Recorded project</span><strong>Autópsia · 2021</strong></div>'
+          )
+
+          old_en_av = '''<section id="autopsia" class="chapter"><h2>2021 — Autópsia</h2><p><strong>Autópsia</strong> was developed during the pandemic as a streaming/pay-TV project set in a bar and conceived as a space for conversations about culture, collapse and the end of the world. Nicchio worked as creator and artistic director.</p><p>The project assembled figures including Paulo César Pereio, Ângela Ro Ro, Claudio Prado, Luiz Thunderbird, Luiz Felipe Pondé, Eduardo Marinho, João Gordo, Mario Bortolotto and Anselmo Vasconcellos, with Julio Piconi directing and Paulão de Carvalho leading content. The official project deck survives in a private archive; full publication depends on a rights review covering third-party images, marks and other materials.</p><p>A sanitized public version of the presentation may later document the project without implying broadcast, acquisition or rights transfers that did not occur.</p></section>'''
+          new_en_av = '''<section id="autopsia" class="chapter"><h2>2021 — Autópsia</h2><p><strong>Autópsia</strong> was conceived and produced during the pandemic as an audiovisual <strong>documentary/entertainment</strong> project for streaming/pay-TV. Set at Espaço Cultural Cemitério de Automóveis in São Paulo, the format was designed as <strong>10 one-hour episodes</strong>, combining debates with poetry, musical presentations and theatrical performances. The project reached filming and has recorded material, but it was not publicly released.</p><p>In the original presentation credits, <strong>Marcelo Nicchio</strong> is credited with the <strong>Original Idea</strong> and <strong>Artistic Direction</strong> and is part of <strong>Creation</strong> alongside Paulão de Carvalho, Julio Piconi and Eduardo Fabro. Julio Piconi is credited with General Direction, Paulão de Carvalho with Content Direction, Sidnei França with Art Direction and Eduardo Fabro with Executive Direction.</p><p>The presentation predates filming and records the concept, references, episode structure and proposed cast and guests at that stage of the project — some were realized and others were not. The filmed material remains in the archive and is not published; the original deck preserves the project's identity and personality.</p><div class="inline-records"><a class="inline-record" href="/assets/archive/autopsia-apresentacao.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf"><img src="/assets/archive/autopsia-thumb.webp" loading="lazy" decoding="async" alt="Autópsia — A Vida Como Ela Era logo."><span><strong>Autópsia · original development presentation</strong><small>PDF · 41 pages ↗</small></span></a></div></section>'''
+          replace('en/audiovisual/index.html', old_en_av, new_en_av)
+
+          # PT Full Biography: distinguish WIP documentary from filmed/unreleased Autopsia and duplicate the document reference.
+          old_pt_bio = '''<div class="evidence-links inline-links"><a href="https://www.youtube.com/watch?v=tIGlLDpzQ7E" target="_blank" rel="noopener noreferrer">Meia-Noite e Uns — créditos finais ↗</a></div><p>Projetos posteriores incluem <strong>O Arquiteto da Apoteose</strong>, documentário iniciado em 2019 sobre Sidnei França e ainda não finalizado, e <strong>Autópsia</strong>, projeto de conteúdo desenvolvido durante a pandemia e apresentado a potenciais parceiros. Ambos são tratados neste hub como trabalhos em desenvolvimento, não como obras lançadas.</p></section>'''
+          new_pt_bio = '''<div class="evidence-links inline-links"><a href="https://www.youtube.com/watch?v=tIGlLDpzQ7E" target="_blank" rel="noopener noreferrer">Meia-Noite e Uns — créditos finais ↗</a></div><p>Projetos posteriores incluem <strong>O Arquiteto da Apoteose</strong>, documentário iniciado em 2019 sobre Sidnei França e ainda não finalizado. Em 2021, durante a pandemia, Nicchio concebeu e produziu <strong>Autópsia</strong>, projeto audiovisual de documentário/entretenimento que chegou à filmagem e possui material gravado, mas não foi lançado publicamente. A apresentação original registra Marcelo Nicchio em <strong>Ideia Original</strong> e <strong>Direção Artística</strong> e como integrante da <strong>Criação</strong> ao lado de Paulão de Carvalho, Julio Piconi e Eduardo Fabro.</p><div class="inline-records"><a class="inline-record" href="/assets/archive/autopsia-apresentacao.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf"><img src="/assets/archive/autopsia-thumb.webp" loading="lazy" decoding="async" alt="Logo de Autópsia — A Vida Como Ela Era."><span><strong>Autópsia · apresentação original de desenvolvimento</strong><small>PDF · 41 páginas ↗</small></span></a></div></section>'''
+          replace('pt/biografia/index.html', old_pt_bio, new_pt_bio)
+
+          # EN Full Biography.
+          old_en_bio = '''<div class="evidence-links inline-links"><a href="https://www.youtube.com/watch?v=tIGlLDpzQ7E" target="_blank" rel="noopener noreferrer">Meia-Noite e Uns — end credits ↗</a></div><p>Later projects include <strong>O Arquiteto da Apoteose</strong>, a documentary begun in 2019 about Sidnei França and still unfinished, and <strong>Autópsia</strong>, a content project developed during the pandemic and presented to potential partners. Both are treated in this hub as works in development, not released productions.</p></section>'''
+          new_en_bio = '''<div class="evidence-links inline-links"><a href="https://www.youtube.com/watch?v=tIGlLDpzQ7E" target="_blank" rel="noopener noreferrer">Meia-Noite e Uns — end credits ↗</a></div><p>Later projects include <strong>O Arquiteto da Apoteose</strong>, a documentary begun in 2019 about Sidnei França and still unfinished. In 2021, during the pandemic, Nicchio conceived and produced <strong>Autópsia</strong>, an audiovisual documentary/entertainment project that reached filming and has recorded material but was not publicly released. The original presentation credits Marcelo Nicchio with the <strong>Original Idea</strong> and <strong>Artistic Direction</strong> and as part of <strong>Creation</strong> alongside Paulão de Carvalho, Julio Piconi and Eduardo Fabro.</p><div class="inline-records"><a class="inline-record" href="/assets/archive/autopsia-apresentacao.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf"><img src="/assets/archive/autopsia-thumb.webp" loading="lazy" decoding="async" alt="Autópsia — A Vida Como Ela Era logo."><span><strong>Autópsia · original development presentation</strong><small>PDF · 41 pages ↗</small></span></a></div></section>'''
+          replace('en/biography/index.html', old_en_bio, new_en_bio)
+
+          # Guardrails: obsolete Autopsia caveats should be gone from the four edited pages.
+          for path in [
+              'pt/audiovisual/index.html', 'en/audiovisual/index.html',
+              'pt/biografia/index.html', 'en/biography/index.html'
+          ]:
+              text = Path(path).read_text(encoding='utf-8')
+              if 'sanitiz' in text.lower() and 'autops' in text.lower():
+                  raise SystemExit(f'Obsolete sanitized-copy language remains in {path}')
+              if '/assets/archive/autopsia-apresentacao.pdf' not in text:
+                  raise SystemExit(f'Autopsia PDF reference missing in {path}')
+              if '/assets/archive/autopsia-thumb.webp' not in text:
+                  raise SystemExit(f'Autopsia thumbnail reference missing in {path}')
+          PY
+
+          git diff --check
+
+          rm .github/workflows/autopsia-editorial.yml
+          git config user.name "Marcelo Nicchio Hub automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add pt/audiovisual/index.html en/audiovisual/index.html pt/biografia/index.html en/biography/index.html .github/workflows/autopsia-editorial.yml
+          git commit -m "Publish Autopsia as filmed unreleased audiovisual project [skip ci]"
+          git push origin HEAD:autopsia-public-deck
