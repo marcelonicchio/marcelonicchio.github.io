@@ -2,6 +2,7 @@
   const links = [...document.querySelectorAll('a.inline-record')];
   if (!links.length) return;
 
+  const isPortuguese = document.documentElement.lang?.startsWith('pt');
   const isImage = (href) => {
     try {
       const url = new URL(href, window.location.href);
@@ -16,8 +17,8 @@
   lightbox.hidden = true;
   lightbox.setAttribute('aria-hidden', 'true');
   lightbox.innerHTML = `
-    <div class="archive-lightbox__panel" role="dialog" aria-modal="true" aria-label="Visualização ampliada / Enlarged view">
-      <button class="archive-lightbox__close" type="button" aria-label="Fechar / Close">×</button>
+    <div class="archive-lightbox__panel" role="dialog" aria-modal="true" aria-label="${isPortuguese ? 'Visualização ampliada' : 'Enlarged view'}">
+      <button class="archive-lightbox__close" type="button" aria-label="${isPortuguese ? 'Fechar' : 'Close'}">×</button>
       <img class="archive-lightbox__image" alt="">
       <div class="archive-lightbox__caption"></div>
     </div>`;
@@ -52,7 +53,7 @@
   links.forEach((link) => {
     if (!isImage(link.href)) return;
     const helper = link.querySelector('small');
-    if (helper) helper.textContent = document.documentElement.lang?.startsWith('pt') ? 'Clique para ampliar' : 'Click to enlarge';
+    if (helper) helper.textContent = isPortuguese ? 'Clique para ampliar' : 'Click to enlarge';
     link.addEventListener('click', (event) => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
