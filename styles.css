@@ -188,3 +188,16 @@ a:focus-visible,.button:focus-visible{outline:2px solid var(--accent-soft);outli
 .thread-media-open{display:inline-flex;margin-top:10px;text-decoration:none;color:#f1c5c1;font-weight:720}
 .thread-media-open:focus-visible{outline:2px solid var(--accent-soft);outline-offset:4px;border-radius:6px}
 @media(max-width:580px){.thread-media{margin:24px 0 30px;border-radius:14px}.thread-media figcaption{padding:12px 13px 14px}}
+
+
+/* Documentary material in narrative flow */
+.inline-records{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:18px 0 6px}
+.inline-records--two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.inline-record{display:block;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.018);text-decoration:none;color:var(--text)}
+.inline-record:hover{opacity:1;border-color:#4a4a4f}
+.inline-record img{display:block;width:100%;height:auto;max-height:330px;object-fit:contain;background:#e7e4de}
+.inline-record span{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px}
+.inline-record strong{font-size:.9rem}
+.inline-record small{font-size:.72rem;color:var(--accent-soft);white-space:nowrap}
+.inline-links{margin:14px 0 5px}
+@media(max-width:580px){.inline-records--two{grid-template-columns:1fr}.inline-record span{align-items:flex-start;flex-direction:column;gap:3px}}
