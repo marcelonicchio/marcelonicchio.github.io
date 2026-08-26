@@ -1,0 +1,86 @@
+name: Clean card image copy
+
+on:
+  push:
+    branches:
+      - card-thumbnail-lightbox
+    paths:
+      - '.github/workflows/cleanup-card-alt-copy.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: card-thumbnail-lightbox
+          fetch-depth: 0
+
+      - name: Remove obsolete redaction language
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          pages = [
+              Path('pt/biografia/index.html'),
+              Path('pt/internet/index.html'),
+              Path('pt/audiovisual/index.html'),
+              Path('pt/search-performance/index.html'),
+              Path('en/biography/index.html'),
+              Path('en/internet/index.html'),
+              Path('en/audiovisual/index.html'),
+              Path('en/search-performance/index.html'),
+          ]
+
+          replacements = {
+              '; contatos omitidos na versão pública.': '.',
+              '; dados de contato omitidos na versão pública.': '.',
+              '; contatos e endereço omitidos na versão pública.': '.',
+              '; contact details omitted from the public version.': '.',
+              '; contacts omitted from the public version.': '.',
+              '; contact details and address omitted from the public version.': '.',
+          }
+
+          changed = []
+          for page in pages:
+              text = page.read_text(encoding='utf-8')
+              original = text
+              for old, new in replacements.items():
+                  text = text.replace(old, new)
+              if text != original:
+                  page.write_text(text, encoding='utf-8')
+                  changed.append(str(page))
+
+          leftovers = []
+          pat = re.compile(r'omitid|omitt|redact', re.I)
+          for page in pages:
+              for n, line in enumerate(page.read_text(encoding='utf-8').splitlines(), 1):
+                  if pat.search(line):
+                      leftovers.append(f'{page}:{n}: {line.strip()}')
+
+          print('Updated pages:')
+          print('\n'.join(changed) or '(none)')
+          if leftovers:
+              print('\nObsolete redaction language still present:')
+              print('\n'.join(leftovers))
+              raise SystemExit(1)
+          PY
+
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+          git diff --check
+
+          rm .github/workflows/cleanup-card-alt-copy.yml
+
+          git config user.name "Marcelo Nicchio Hub automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add pt en .github/workflows/cleanup-card-alt-copy.yml
+          git commit -m "Align card copy with full historical images"
+          git push origin HEAD:card-thumbnail-lightbox
