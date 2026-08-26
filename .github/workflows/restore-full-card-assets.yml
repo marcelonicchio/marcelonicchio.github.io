@@ -1,0 +1,75 @@
+name: Restore full historical card assets
+
+on:
+  push:
+    branches:
+      - card-thumbnail-lightbox
+    paths:
+      - '.github/workflows/restore-full-card-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: card-thumbnail-lightbox
+          fetch-depth: 0
+
+      - name: Restore full unredacted card images
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet pillow
+          mkdir -p /tmp/mn-cards assets/archive
+
+          base='https://raw.githubusercontent.com/marcelonicchio/marcelonicchio.github.io/38fbeaa3848a2429318022f520b98ff2e32d2315/assets/img'
+          curl -fsSL "$base/cartao_livraria_cultura02.jpg" -o /tmp/mn-cards/livraria.jpg
+          curl -fsSL "$base/cartao_addialeto03.JPG" -o /tmp/mn-cards/dialetto.jpg
+          curl -fsSL "$base/cartao_dreamsnetwork06.jpg" -o /tmp/mn-cards/dreams.jpg
+          curl -fsSL "$base/cartao_nicchio_asssociados02.jpg" -o /tmp/mn-cards/nicchio.jpg
+          curl -fsSL "$base/cartao_miranttenews02.jpg" -o /tmp/mn-cards/mirantte.jpg
+          curl -fsSL "$base/ScreenShot010.jpg" -o /tmp/mn-cards/clickland.jpg
+
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          jobs = [
+              ('/tmp/mn-cards/livraria.jpg', 'assets/archive/livraria-cultura-card-2000.webp'),
+              ('/tmp/mn-cards/dialetto.jpg', 'assets/archive/ad-dialetto-card-2015.webp'),
+              ('/tmp/mn-cards/dreams.jpg', 'assets/archive/dreamsnetwork-card-2006.webp'),
+              ('/tmp/mn-cards/nicchio.jpg', 'assets/archive/nicchio-associados-card.webp'),
+              ('/tmp/mn-cards/mirantte.jpg', 'assets/archive/mirantte-news-card.webp'),
+              ('/tmp/mn-cards/clickland.jpg', 'assets/archive/clickland-card.webp'),
+          ]
+
+          for src, dest in jobs:
+              with Image.open(src) as raw:
+                  im = ImageOps.exif_transpose(raw).convert('RGB')
+                  original_size = im.size
+                  # Preserve the complete photographed card: no crop, no masking, no redaction.
+                  im.save(dest, 'WEBP', quality=92, method=6)
+                  out = Path(dest)
+                  with Image.open(out) as check:
+                      if check.size != original_size:
+                          raise RuntimeError(f'Dimension mismatch for {dest}: {check.size} != {original_size}')
+                  print(f'{dest}: {original_size[0]}x{original_size[1]} · {out.stat().st_size} bytes · full frame preserved')
+          PY
+
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+          git diff --check
+
+          rm -f docs/CARD_THUMBNAIL_NOTE.md
+          rm -f .github/workflows/restore-full-card-assets.yml
+
+          git config user.name "Marcelo Nicchio Hub automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/archive docs/CARD_THUMBNAIL_NOTE.md .github/workflows/restore-full-card-assets.yml
+          git commit -m "Restore full unredacted historical business cards [skip ci]"
+          git push origin HEAD:card-thumbnail-lightbox
