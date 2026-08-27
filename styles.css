@@ -282,3 +282,25 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
   .archive-lightbox__caption{font-size:.92rem;line-height:1.45;color:var(--soft)}
   .archive-lightbox__counter{font-size:.76rem}
 }
+
+
+/* Meia-Noite entry hierarchy refinement */
+.chapter--meia-noite{padding-bottom:58px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,.09)}
+.chapter--meia-noite .thread-media{margin-top:26px;margin-bottom:30px}
+.record-media-block{display:grid;grid-template-columns:minmax(150px,.42fr) minmax(0,1fr);gap:22px;align-items:center;margin:30px 0 34px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.022)}
+.record-media-block__head span{display:block;font-size:.69rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.record-media-block__head strong{display:block;margin-top:4px;font-size:1rem;color:var(--text)}
+.record-media-block__links{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:flex-end}
+.record-media-block__links a{font-size:.86rem;font-weight:720;text-decoration:none;color:var(--soft);white-space:nowrap}
+.record-media-block__links a:hover{color:var(--text);opacity:1}
+.record-gallery__head{background:linear-gradient(90deg,rgba(255,255,255,.085),rgba(255,255,255,.035));border-color:#3b3b40;box-shadow:inset 3px 0 0 rgba(211,164,160,.58)}
+.record-gallery__head strong{color:var(--text)}
+.record-gallery__head::after{color:#c7c2b9}
+.chapter--meia-noite .record-gallery{margin-bottom:0}
+@media(max-width:580px){
+  .chapter--meia-noite{padding-bottom:42px;margin-bottom:10px}
+  .record-media-block{grid-template-columns:1fr;gap:12px;padding:16px;margin:26px 0 30px}
+  .record-media-block__links{justify-content:flex-start;gap:8px 14px}
+  .record-media-block__links a{font-size:.9rem}
+  .record-gallery__head{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035))}
+}
