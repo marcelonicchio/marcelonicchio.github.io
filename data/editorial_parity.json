@@ -231,10 +231,14 @@
       "accepted_on": "2026-08-27"
     },
     "music-authorship": {
-      "revision": 1,
-      "pt_hash": "9cc61ca5563e651982a3a38b9f3cc3e269919537615c03b8287d0a98d7af6e33",
-      "en_hash": "56bfff36ff9c8a91c070a5c555cc8611fb037b280ca322fc3fd8f90d61c3774f",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "a2c4f5cd6322665f5cffaf3f23d2be642bd9ac9f69f7eb03e7f89e0186931a71",
+      "en_hash": "25665d7f97ddd3b9d934d5f0121ba1c4c216cb39280a6026e7c8181da5ad9c79",
+      "accepted_on": "2026-08-27",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "communication-themes": {
       "revision": 1,
@@ -255,10 +259,14 @@
       "accepted_on": "2026-08-27"
     },
     "hai-identity": {
-      "revision": 1,
-      "pt_hash": "cbe3b16efd1a884271adec8fe5eac7d0a16eede07f894020cce7d9f4e7ab73cd",
-      "en_hash": "5cfaf9b76e5c7f2d37269da37cc94f58fefaacfdbe8622c224c24573ddcbb202",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "351f2e4ba32d21d4ae6dbe4d850142fef152c7c7177343179f5e6de85c64041e",
+      "en_hash": "4761ab898d3cd534bde97a1182a08aa9768e0daa77498b023c56b8c7639a427e",
+      "accepted_on": "2026-08-27",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     }
   }
 }
