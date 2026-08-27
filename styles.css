@@ -304,3 +304,12 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
   .record-media-block__links a{font-size:.9rem}
   .record-gallery__head{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035))}
 }
+
+
+/* Global long-form entry spacing */
+.article-body > .chapter{padding-bottom:58px;margin-bottom:18px}
+.article-body > .callout + .chapter{margin-top:48px}
+@media(max-width:580px){
+  .article-body > .chapter{padding-bottom:42px;margin-bottom:10px}
+  .article-body > .callout + .chapter{margin-top:36px}
+}
