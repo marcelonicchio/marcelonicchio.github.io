@@ -107,7 +107,7 @@
       "id": "music-coitado-1992",
       "era": "cruzamentos-1992-2000",
       "domain": "music",
-      "date": "1992",
+      "date": "5 jul. 1992",
       "title": {
         "pt": "Fundação e primeiro show",
         "en": "Foundation and first show"
@@ -125,7 +125,8 @@
           "selector": "[data-bio-key='music-coitado-1992']",
           "parent_selector": "#coitado"
         }
-      }
+      },
+      "date_en": "Jul. 5, 1992"
     },
     {
       "id": "internet-bbs",
