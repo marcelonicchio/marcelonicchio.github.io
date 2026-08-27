@@ -1,0 +1,68 @@
+name: Reorganize Meia-Noite e Uns entry
+
+on:
+  push:
+    branches: [meia-noite-entry-cleanup]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: meia-noite-entry-cleanup
+      - name: Reorganize Meia-Noite entry and refine gallery framing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          def rebuild(path, lang):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              m = re.search(r'<section id="meia-noite" class="chapter">(.*?)</section>', text, re.S)
+              if not m:
+                  raise SystemExit(f'Meia-Noite section not found in {path}')
+              inner = m.group(1)
+              h2 = re.search(r'<h2>.*?</h2>', inner, re.S).group(0)
+              paras = re.findall(r'<p>.*?</p>', inner, re.S)
+              fig = re.search(r'<figure class="thread-media.*?</figure>', inner, re.S)
+              if len(paras) < 3 or not fig:
+                  raise SystemExit(f'Unexpected Meia-Noite structure in {path}')
+              gallery_pos = inner.find('<div class="record-gallery"')
+              if gallery_pos < 0:
+                  raise SystemExit(f'Gallery not found in {path}')
+              gallery = inner[gallery_pos:]
+
+              if lang == 'pt':
+                  video = '''<div class="record-media-block" aria-label="Vídeos preservados de Meia-Noite e Uns"><div class="record-media-block__head"><span>Vídeos preservados</span><strong>Assista ao programa</strong></div><div class="record-media-block__links"><a href="https://www.youtube.com/watch?v=kLQAlzgwmy0" target="_blank" rel="noopener noreferrer">Bloco 1 ↗</a><a href="https://www.youtube.com/watch?v=f-JZfMoHh1I" target="_blank" rel="noopener noreferrer">Bloco 2 ↗</a><a href="https://www.youtube.com/watch?v=6s6843Mq5MA" target="_blank" rel="noopener noreferrer">Bloco 3 ↗</a><a href="https://www.youtube.com/watch?v=tIGlLDpzQ7E" target="_blank" rel="noopener noreferrer">Vinheta e créditos ↗</a></div></div>'''
+              else:
+                  video = '''<div class="record-media-block" aria-label="Preserved Meia-Noite e Uns videos"><div class="record-media-block__head"><span>Preserved videos</span><strong>Watch the program</strong></div><div class="record-media-block__links"><a href="https://www.youtube.com/watch?v=kLQAlzgwmy0" target="_blank" rel="noopener noreferrer">Block 1 ↗</a><a href="https://www.youtube.com/watch?v=f-JZfMoHh1I" target="_blank" rel="noopener noreferrer">Block 2 ↗</a><a href="https://www.youtube.com/watch?v=6s6843Mq5MA" target="_blank" rel="noopener noreferrer">Block 3 ↗</a><a href="https://www.youtube.com/watch?v=tIGlLDpzQ7E" target="_blank" rel="noopener noreferrer">Title sequence & credits ↗</a></div></div>'''
+
+              new_inner = h2 + paras[0] + paras[1] + fig.group(0) + paras[2] + video + gallery
+              new_section = '<section id="meia-noite" class="chapter chapter--meia-noite">' + new_inner + '</section>'
+              text = text[:m.start()] + new_section + text[m.end():]
+              p.write_text(text, encoding='utf-8')
+
+          rebuild('pt/audiovisual/index.html', 'pt')
+          rebuild('en/audiovisual/index.html', 'en')
+
+          css_path = Path('styles.css')
+          css = css_path.read_text(encoding='utf-8')
+          marker = '/* Meia-Noite entry hierarchy refinement */'
+          if marker not in css:
+              css += '''\n\n/* Meia-Noite entry hierarchy refinement */\n.chapter--meia-noite{padding-bottom:58px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,.09)}\n.chapter--meia-noite .thread-media{margin-top:26px;margin-bottom:30px}\n.record-media-block{display:grid;grid-template-columns:minmax(150px,.42fr) minmax(0,1fr);gap:22px;align-items:center;margin:30px 0 34px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.022)}\n.record-media-block__head span{display:block;font-size:.69rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}\n.record-media-block__head strong{display:block;margin-top:4px;font-size:1rem;color:var(--text)}\n.record-media-block__links{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:flex-end}\n.record-media-block__links a{font-size:.86rem;font-weight:720;text-decoration:none;color:var(--soft);white-space:nowrap}\n.record-media-block__links a:hover{color:var(--text);opacity:1}\n.record-gallery__head{background:linear-gradient(90deg,rgba(255,255,255,.085),rgba(255,255,255,.035));border-color:#3b3b40;box-shadow:inset 3px 0 0 rgba(211,164,160,.58)}\n.record-gallery__head strong{color:var(--text)}\n.record-gallery__head::after{color:#c7c2b9}\n.chapter--meia-noite .record-gallery{margin-bottom:0}\n@media(max-width:580px){\n  .chapter--meia-noite{padding-bottom:42px;margin-bottom:10px}\n  .record-media-block{grid-template-columns:1fr;gap:12px;padding:16px;margin:26px 0 30px}\n  .record-media-block__links{justify-content:flex-start;gap:8px 14px}\n  .record-media-block__links a{font-size:.9rem}\n  .record-gallery__head{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035))}\n}\n'''
+              css_path.write_text(css, encoding='utf-8')
+          PY
+      - name: Commit cleanup
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/audiovisual/index.html en/audiovisual/index.html styles.css
+          git commit -m "Reorganize Meia-Noite e Uns entry hierarchy"
+          git push origin HEAD:meia-noite-entry-cleanup
