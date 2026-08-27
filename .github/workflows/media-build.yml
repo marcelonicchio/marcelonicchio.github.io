@@ -1,0 +1,48 @@
+name: Build gallery media
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guard main
+        run: |
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            echo "Run this workflow on a short-lived working branch, not directly on main."
+            exit 1
+          fi
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install media dependency
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Build responsive derivatives
+        run: python tools/build_gallery_media.py
+      - name: Synchronize gallery markup
+        run: python tools/sync_galleries.py
+      - name: Audit media output
+        run: |
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+      - name: Commit generated media
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/galleries.json assets/media/galleries pt en
+          if git diff --cached --quiet; then
+            echo "No generated media changes."
+          else
+            git commit -m "Build gallery media and synchronize pages"
+            git push
+          fi
