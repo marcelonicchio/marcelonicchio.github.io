@@ -1,0 +1,54 @@
+name: Apply first-show date to Full Biography
+
+on:
+  push:
+    branches: [full-biography-chronology]
+    paths:
+      - tools/_apply_first_show_full_bio.py
+      - .github/workflows/apply-first-show-full-bio.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: full-biography-chronology
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+      - name: Propagate exact first-show date
+        run: python tools/_apply_first_show_full_bio.py
+      - name: Check gallery derivatives
+        run: python tools/build_gallery_media.py --check
+      - name: Check gallery sync
+        run: python tools/sync_galleries.py --check
+      - name: Audit galleries
+        run: python tools/audit_galleries.py
+      - name: Check Full Biography sync
+        run: python tools/sync_full_biography.py --check
+      - name: Audit Full Biography coverage
+        run: python tools/audit_full_biography.py
+      - name: Audit navigation
+        run: python tools/sync_navigation.py --check
+      - name: Audit site
+        run: python tools/audit_site.py
+      - name: Audit presence
+        run: python tools/audit_presence.py
+      - name: Audit analytics
+        run: python tools/audit_analytics.py
+      - name: Commit propagated update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Confirm first Coitado do Próximo show on July 5, 1992"
+          git push origin HEAD:full-biography-chronology
