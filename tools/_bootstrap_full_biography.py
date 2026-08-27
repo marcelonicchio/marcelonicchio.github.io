@@ -61,15 +61,20 @@ def patch_manifest_metadata() -> None:
     path = ROOT / "data/full_biography.json"
     data = json.loads(path.read_text(encoding="utf-8"))
 
-    # The EN audiovisual vertical uses #architect while PT uses #arquiteto.
-    selector_fixed = False
+    found_architect = False
+    found_livraria = False
     for entry in data["entries"]:
         if entry["id"] == "audiovisual-arquiteto":
             entry["source"]["en"]["selector"] = "#architect"
-            selector_fixed = True
-            break
-    if not selector_fixed:
+            found_architect = True
+        elif entry["id"] == "livraria-cultura":
+            entry["source"]["pt"]["path"] = "content/full-biography/pt/livraria-cultura.inc"
+            entry["source"]["en"]["path"] = "content/full-biography/en/livraria-cultura.inc"
+            found_livraria = True
+    if not found_architect:
         raise SystemExit("audiovisual-arquiteto not found in Full Biography manifest")
+    if not found_livraria:
+        raise SystemExit("livraria-cultura not found in Full Biography manifest")
 
     overrides = {
         "music-olympia": "Jul. 2000",
