@@ -247,7 +247,7 @@
     {
       "id": "music-album-1997",
       "era": "cruzamentos-1992-2000",
-      "date": "1997",
+      "date": "1997–1998",
       "domain": "music",
       "source": {
         "pt": {
@@ -361,7 +361,7 @@
     {
       "id": "music-olympia",
       "era": "cruzamentos-1992-2000",
-      "date": "jul. 2000",
+      "date": "25 jun. 2000",
       "domain": "music",
       "source": {
         "pt": {
@@ -377,7 +377,7 @@
           "parent_selector": "#stages"
         }
       },
-      "date_en": "Jul. 2000"
+      "date_en": "Jun. 25, 2000"
     },
     {
       "id": "livraria-cultura",
