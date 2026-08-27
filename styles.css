@@ -251,3 +251,34 @@ html.archive-lightbox-open,html.archive-lightbox-open body{overflow:hidden}
 @media(max-width:580px){.record-gallery{margin-top:26px}.record-gallery__rail{grid-template-columns:minmax(0,1fr)}.record-gallery__arrow{display:none!important}.record-gallery__item{flex-basis:132px;border-radius:9px}.archive-lightbox__panel{padding-left:40px;padding-right:40px}.archive-lightbox__nav{width:32px;height:32px;font-size:1.25rem}.archive-lightbox__nav--prev{left:4px}.archive-lightbox__nav--next{right:4px}.archive-lightbox__meta{gap:10px}.archive-lightbox__caption{font-size:.76rem}.archive-lightbox__counter{font-size:.68rem}}
 @media(pointer:coarse){.record-gallery__item:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.record-gallery__item{transition:none}.record-gallery__item:hover{transform:none}}
+
+
+/* Record gallery v2 refinements */
+.record-gallery{border-top:0;padding-top:0}
+.record-gallery__head{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);margin-bottom:14px}
+.record-gallery__head strong{font-size:.9rem;letter-spacing:.1em}
+.record-gallery__head::after{font-size:.86rem;color:var(--soft);font-weight:700}
+html[lang^="pt"] .record-gallery__head::after{content:"Navegue pelas fotos"}
+html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
+.record-gallery__arrow{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:800}
+.record-gallery__arrow:hover:not(:disabled){background:#fff;color:#080809;border-color:#fff}
+.archive-lightbox__nav{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:800}
+.archive-lightbox__nav:hover:not(:disabled){background:#fff;color:#080809;border-color:#fff}
+@media(max-width:580px){
+  .record-gallery__head{align-items:flex-start;flex-direction:column;gap:2px;padding:13px 14px}
+  .record-gallery__head strong{font-size:.92rem}
+  .record-gallery__head::after{font-size:.88rem;color:var(--muted)}
+  html[lang^="pt"] .record-gallery__head::after{content:"Deslize para ver mais"}
+  html[lang^="en"] .record-gallery__head::after{content:"Swipe to see more"}
+  .record-gallery__strip{gap:12px;padding-right:18vw;scroll-snap-type:x mandatory}
+  .record-gallery__item{flex:0 0 72vw;max-width:330px;aspect-ratio:4/3}
+  .archive-lightbox{padding:0}
+  .archive-lightbox__panel{width:100vw;max-height:100dvh;padding:44px 8px 14px;border-radius:0}
+  .archive-lightbox__image{max-width:100%;max-height:calc(100dvh - 135px)}
+  .archive-lightbox__nav{width:34px;height:34px;font-size:1.3rem;background:rgba(243,239,231,.94);color:#0a0a0b;border-color:rgba(243,239,231,.94)}
+  .archive-lightbox__nav--prev{left:6px}
+  .archive-lightbox__nav--next{right:6px}
+  .archive-lightbox__meta{padding:0 6px;gap:12px}
+  .archive-lightbox__caption{font-size:.92rem;line-height:1.45;color:var(--soft)}
+  .archive-lightbox__counter{font-size:.76rem}
+}
