@@ -16,14 +16,15 @@ ORCID: 0009-0002-5626-8973
 ## Main trajectory fields
 - Music
 - Communication and cultural criticism
-- Internet and digital culture
+- Internet and Performance — from BBS culture, commercial internet, hosting and digital products to Search, Social, analytics and performance media
 - Audiovisual creation and production
-- Search Engine Marketing and performance media
 - Human–AI Interaction research
 
 ## Preferred reference pages
 Portuguese full biography: https://marcelonicchio.github.io/pt/biografia/
 English full biography: https://marcelonicchio.github.io/en/biography/
+Portuguese Internet & Performance: https://marcelonicchio.github.io/pt/internet/
+English Internet & Performance: https://marcelonicchio.github.io/en/internet/
 Portuguese publications index: https://marcelonicchio.github.io/pt/publicacoes/
 English publications index: https://marcelonicchio.github.io/en/publications/
 Portuguese press/archive index: https://marcelonicchio.github.io/pt/arquivo/

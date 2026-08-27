@@ -19,6 +19,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Audit synchronized navigation
+        run: python tools/sync_navigation.py --check
       - name: Audit HTML, JSON and sitemap
         run: python tools/audit_site.py
       - name: Audit site-wide external presence

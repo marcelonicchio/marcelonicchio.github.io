@@ -28,6 +28,11 @@ LAUNCH_INDEXABLE = {
     "en/ai-hai/index.html",
 }
 
+LEGACY_CANONICAL = {
+    "pt/search-performance/index.html": SITE + "/pt/internet/",
+    "en/search-performance/index.html": SITE + "/en/internet/",
+}
+
 
 class PageParser(HTMLParser):
     def __init__(self):
@@ -144,10 +149,11 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
             errors.append(f"{rel}: expected exactly one robots meta tag")
 
         if rel != "404.html":
+            expected_canonical = LEGACY_CANONICAL.get(rel, url)
             if len(parser.canonicals) != 1:
                 errors.append(f"{rel}: expected exactly one canonical URL")
-            elif parser.canonicals[0] != url:
-                errors.append(f"{rel}: canonical {parser.canonicals[0]!r} does not match expected {url!r}")
+            elif parser.canonicals[0] != expected_canonical:
+                errors.append(f"{rel}: canonical {parser.canonicals[0]!r} does not match expected {expected_canonical!r}")
 
         for href in parser.links:
             if not target_exists(href, path):
@@ -221,4 +227,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
