@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "entity": "Marcelo Nicchio",
   "canonicalUrl": "https://marcelonicchio.github.io/",
-  "updated": "2026-08-25",
+  "updated": "2026-08-27",
   "purpose": "Canonical experience record used to keep PT/EN biographies, thematic pages and machine-readable entity data consistent. Evidence status is editorial metadata, not a public confidence score.",
   "experience": [
     {
@@ -10,11 +10,7 @@
       "period": "1992-2003",
       "field": "music",
       "name": "Coitado do Próximo",
-      "role": [
-        "founder",
-        "composer",
-        "drummer"
-      ],
+      "role": ["founder", "composer", "drummer"],
       "evidenceStatus": "mixed",
       "publicSources": [
         "https://www.youtube.com/watch?v=V624sY_rl8I",
@@ -28,10 +24,7 @@
       "period": "1994-1995",
       "field": "communication",
       "name": "Metrópole — Rádio Nova Paulista FM 103.7",
-      "role": [
-        "host",
-        "music curator"
-      ],
+      "role": ["host", "music curator"],
       "evidenceStatus": "preserved-private",
       "note": "A complete Velhas Virgens interview survives in MP3; broader schedule and duration remain autobiographical until further archival evidence is published."
     },
@@ -40,13 +33,9 @@
       "period": "2001-04-23",
       "field": "communication",
       "name": "Folha de S.Paulo / Folhateen",
-      "role": [
-        "interview subject"
-      ],
+      "role": ["interview subject"],
       "evidenceStatus": "public-external",
-      "publicSources": [
-        "https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm"
-      ],
+      "publicSources": ["https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm"],
       "note": "Printed cover used the headline 'Órfãos do Rock'; the internal article is archived online as 'Onde estão os ídolos?'."
     },
     {
@@ -54,21 +43,16 @@
       "period": "2003-2006",
       "field": "communication",
       "name": "Revista Sinal Verde / Prateleira Cultural",
-      "role": [
-        "columnist",
-        "cultural critic"
-      ],
+      "role": ["columnist", "cultural critic"],
       "evidenceStatus": "preserved-primary",
       "note": "Approximately twenty unique preserved pieces document culture, media and recurring digital-culture themes."
     },
     {
       "id": "psinet",
       "period": "2000",
-      "field": "internet",
+      "field": "internet-performance",
       "name": "PSINet",
-      "role": [
-        "corporate hosting sales"
-      ],
+      "role": ["corporate hosting sales"],
       "evidenceStatus": "mixed",
       "note": "Employment/career information is autobiographical and privately supportable; a few team photographs survive."
     },
@@ -77,21 +61,16 @@
       "period": "2000-10 to 2001-01",
       "field": "culture-retail",
       "name": "Livraria Cultura",
-      "role": [
-        "technical bookseller",
-        "summer job"
-      ],
+      "role": ["technical bookseller", "summer job"],
       "evidenceStatus": "mixed",
-      "note": "A preserved business card directly supports Marcelo Henrique Nicchio's association with Livraria Cultura. The October 2000 to January 2001 dates, technical-books sales role and summer-job classification are autobiographical."
+      "note": "A short summer job preserved only in the Full Biography chronology; it is not part of the Internet & Performance thematic axis."
     },
     {
       "id": "mirantte-news",
       "period": "2004-2008",
-      "field": "internet",
+      "field": "internet-performance",
       "name": "Mirantte News",
-      "role": [
-        "site director"
-      ],
+      "role": ["site director"],
       "evidenceStatus": "preserved-primary",
       "note": "Contemporary material directly identifies Marcelo Nicchio as director. A preserved business card independently supports his association with Mirantte News and its domain. Founder/ownership details remain autobiographical pending minimal registry evidence."
     },
@@ -100,9 +79,7 @@
       "period": "1998",
       "field": "audiovisual",
       "name": "Homens na Cozinha",
-      "role": [
-        "executive production / fundraising"
-      ],
+      "role": ["executive production / fundraising"],
       "evidenceStatus": "partial",
       "note": "Public episodes exist; episode-level credits still require cataloguing."
     },
@@ -111,10 +88,7 @@
       "period": "1998-2000",
       "field": "audiovisual",
       "name": "Nicchio & Associados S/C Ltda.",
-      "role": [
-        "cultural producer",
-        "fundraising support"
-      ],
+      "role": ["cultural producer", "fundraising support"],
       "evidenceStatus": "mixed",
       "note": "A preserved business card directly identifies Marcelo Henrique Nicchio as Produtor Cultural. Specific fundraising activity connected to Carandiru and Domésticas remains autobiographical/private unless independently corroborated."
     },
@@ -123,10 +97,7 @@
       "period": "2006",
       "field": "audiovisual",
       "name": "Meia-Noite e Uns",
-      "role": [
-        "Artistic Director",
-        "co-Executive Producer"
-      ],
+      "role": ["Artistic Director", "co-Executive Producer"],
       "evidenceStatus": "public-primary",
       "publicSources": [
         "https://www.youtube.com/watch?v=kLQAlzgwmy0",
@@ -141,21 +112,16 @@
       "period": "2006",
       "field": "audiovisual",
       "name": "DreamsNetwork / Dreamsnetwork.tv",
-      "role": [
-        "executive producer"
-      ],
+      "role": ["executive producer"],
       "evidenceStatus": "preserved-primary",
-      "note": "A preserved business card identifies Marcelo Nicchio as Produtor Executivo at DreamsNetwork. Public Meia-Noite e Uns credits independently identify Dreamsnetwork.tv as the production entity. The card does not establish corporate ownership or partnership."
+      "note": "A preserved business card identifies Marcelo Nicchio as Produtor Executivo at DreamsNetwork. Public Meia-Noite e Uns credits independently identify Dreamsnetwork.tv as the production entity."
     },
     {
       "id": "o-arquiteto-da-apoteose",
       "period": "2019-present",
       "field": "audiovisual",
       "name": "O Arquiteto da Apoteose",
-      "role": [
-        "writer",
-        "director"
-      ],
+      "role": ["writer", "director"],
       "status": "work-in-progress",
       "evidenceStatus": "preserved-private",
       "note": "Making-of material survives; the project must never be described as a completed or released documentary."
@@ -165,45 +131,43 @@
       "period": "2021",
       "field": "audiovisual",
       "name": "Autópsia",
-      "role": [
-        "creator",
-        "artistic director"
-      ],
+      "role": ["creator", "artistic director"],
       "status": "development project",
       "evidenceStatus": "preserved-private",
-      "note": "Official project deck survives; any public version requires rights and privacy review."
+      "note": "Official project deck survives."
     },
     {
       "id": "cookieweb",
       "period": "2010-2012",
-      "field": "search-performance",
+      "field": "internet-performance",
       "name": "CookieWEB",
-      "role": [
-        "SEM coordination",
-        "SEM management"
-      ],
+      "role": ["SEM coordination", "SEM management"],
       "evidenceStatus": "career-history"
     },
     {
       "id": "petlove",
       "period": "2012-2013",
-      "field": "search-performance",
+      "field": "internet-performance",
       "name": "Petlove",
-      "role": [
-        "digital media internalization"
-      ],
+      "role": ["digital media internalization"],
       "evidenceStatus": "career-history",
       "note": "Operational scale figures are autobiographical/professional-account claims unless independently sourced."
     },
     {
+      "id": "clickland",
+      "period": "2012-present",
+      "field": "internet-performance",
+      "name": "Clickland Digital Ltda.",
+      "role": ["founder", "operator"],
+      "evidenceStatus": "preserved-primary",
+      "note": "Founded by Marcelo Nicchio and Carlos Portela in September 2012. Regular commercial activity was wound down around 2021 or later, but the company remains active as a backup operating/legal structure. It must not be presented as Marcelo's current primary professional activity."
+    },
+    {
       "id": "best-kenshoo",
       "period": "2014",
-      "field": "search-performance",
+      "field": "internet-performance",
       "name": "BEST / Kenshoo",
-      "role": [
-        "Performance Manager",
-        "instructor"
-      ],
+      "role": ["Performance Manager", "instructor"],
       "evidenceStatus": "mixed",
       "publicSources": [
         "https://youtu.be/p-1Uc-zD4TE",
@@ -211,40 +175,39 @@
         "https://youtu.be/C1Z3wD8t03A",
         "https://youtu.be/3h-z53IN6AI"
       ],
-      "note": "Workshop role/content is publicly documented. Exact two-day schedule remains autobiographical until the removed event page or equivalent source is recovered."
+      "note": "Workshop role/content is publicly documented."
     },
     {
       "id": "ad-dialetto",
       "period": "2015",
-      "field": "search-performance",
+      "field": "internet-performance",
       "name": "Ad.Dialetto",
-      "role": [
-        "performance-agency work"
-      ],
+      "role": ["performance-agency work"],
       "evidenceStatus": "mixed",
-      "note": "A preserved business card directly supports Marcelo Nicchio's association with Ad.Dialetto but does not state a job title. Máquina de Vendas/Ricardo Eletro account responsibility and internal operating metrics remain autobiographical/professional-account claims."
+      "note": "A preserved business card directly supports Marcelo Nicchio's association with Ad.Dialetto."
     },
     {
-      "id": "clickland",
-      "period": "2012-present",
-      "field": "search-performance",
-      "name": "Clickland Digital Ltda.",
-      "role": [
-        "operator",
-        "founder (autobiographical)"
-      ],
-      "evidenceStatus": "preserved-primary",
-      "note": "Two preserved historical homepage captures and a professional business card directly support agency existence, Premium Search Agency positioning, Google program badges and Marcelo Nicchio's association. Corporate ownership/founding remains autobiographical unless separately corroborated."
+      "id": "independent-digital-operations",
+      "period": "2016-2020",
+      "field": "internet-performance",
+      "name": "Independent digital operations",
+      "role": ["performance and digital media projects"],
+      "evidenceStatus": "career-history"
+    },
+    {
+      "id": "driven-cx",
+      "period": "2023-2024",
+      "field": "internet-performance",
+      "name": "Driven.cx",
+      "role": ["full-time remote agency work"],
+      "evidenceStatus": "career-history"
     },
     {
       "id": "melissa-1",
       "period": "2026-01",
       "field": "human-ai-interaction",
       "name": "Melissa 1.0",
-      "role": [
-        "author",
-        "independent researcher"
-      ],
+      "role": ["author", "independent researcher"],
       "evidenceStatus": "public-persistent",
       "note": "Four public Zenodo deposits, all January 2026. The broader research cycle may begin in 2025, but deposits must not be dated to 2025."
     },
@@ -253,10 +216,7 @@
       "period": "2026-05",
       "field": "human-ai-interaction",
       "name": "The Punk Rock Orchestra v1",
-      "role": [
-        "author",
-        "methodology developer"
-      ],
+      "role": ["author", "methodology developer"],
       "evidenceStatus": "public-persistent",
       "note": "Multiple repository instances represent one work/version, not multiple separate publications."
     },
@@ -265,10 +225,7 @@
       "period": "2026-present",
       "field": "human-ai-interaction",
       "name": "The Punk Rock Orchestra v2",
-      "role": [
-        "author",
-        "methodology developer"
-      ],
+      "role": ["author", "methodology developer"],
       "status": "work-in-progress",
       "evidenceStatus": "not-yet-published",
       "note": "Do not assert future DOI, repository deposit, formal publication or review outcome before it exists."
