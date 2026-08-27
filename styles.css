@@ -214,3 +214,9 @@ a:focus-visible,.button:focus-visible{outline:2px solid var(--accent-soft);outli
 .archive-lightbox__close:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
 html.archive-lightbox-open,html.archive-lightbox-open body{overflow:hidden}
 @media(max-width:580px){.inline-record{width:min(260px,88vw)}.inline-record img{max-height:170px}.archive-lightbox{padding:10px}.archive-lightbox__panel{width:96vw;max-height:96vh;padding:42px 10px 12px;border-radius:14px}.archive-lightbox__image{max-height:80vh}}
+
+
+/* Meia-Noite e Uns editorial thread image pilot */
+.thread-media:has(img[src$="/meianoiteeuns-thread.jpg"]){width:58%;margin-left:auto;margin-right:auto}
+@media(max-width:900px){.thread-media:has(img[src$="/meianoiteeuns-thread.jpg"]){width:72%}}
+@media(max-width:580px){.thread-media:has(img[src$="/meianoiteeuns-thread.jpg"]){width:100%}}
