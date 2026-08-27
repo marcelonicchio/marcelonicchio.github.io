@@ -1,0 +1,264 @@
+{
+  "version": 1,
+  "policy": "PT and EN hashes represent a jointly reviewed editorial checkpoint. Source drift requires explicit re-acceptance after both languages are reviewed.",
+  "entries": {
+    "music-origins": {
+      "revision": 1,
+      "pt_hash": "30fe270302c1ed9989b8182f6b2a40da6f16a292190848f4c6424a88c5490c0d",
+      "en_hash": "9b7be9037069030efcad392e6f0f83d9a3655459625ac357a9dd4ea92f68cb4e",
+      "accepted_on": "2026-08-27"
+    },
+    "music-coitado-1992": {
+      "revision": 1,
+      "pt_hash": "5d67dea7b4f40578754c5401eb31000b6eaff027dd2ac865e4a6c13760944c6d",
+      "en_hash": "804a52bee896ecdd0dcc262b81876b49434c4d5d119e83611b85cc3c0d34c183",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-bbs": {
+      "revision": 1,
+      "pt_hash": "6936888707afe6abdd4941e33161bc3f4502dc49293775e462281baee5d003d5",
+      "en_hash": "c25eb15228ea8e5cda35d1498f367549dcbac19baa4fad5773c23ae3d8ba2d8b",
+      "accepted_on": "2026-08-27"
+    },
+    "communication-tremonte": {
+      "revision": 1,
+      "pt_hash": "9abc87d721237ae1f930ca914283f5caeb5cdd440e3ec04f41ae3aec95f8f552",
+      "en_hash": "04f35d19cba4cc3d0e9a8c67bc80a2062a60c377d0c0ec6ae8125dba7387ed66",
+      "accepted_on": "2026-08-27"
+    },
+    "music-circuit": {
+      "revision": 1,
+      "pt_hash": "ce73fa504c718b4c52b35813d93fa4ec692f1ecbd1333507483a2352c259ddc0",
+      "en_hash": "acd5c3b2e4a1d60b6867d912105efa51cb51d5dd2a468b023dd1504bd95ea607",
+      "accepted_on": "2026-08-27"
+    },
+    "music-coitado-1994": {
+      "revision": 1,
+      "pt_hash": "64951a7c9aa66e06471d172b3d3b44929f259e9705fe4f6f9075c7029f6c6b74",
+      "en_hash": "fa47c452bd6c2134ed3f5e7492dedac4f5b5236935dbf0f074bb94ba4e619bbf",
+      "accepted_on": "2026-08-27"
+    },
+    "communication-metropole": {
+      "revision": 1,
+      "pt_hash": "e398ef893b5896997a5c05676efbc640dbe8e3bba02466bf70288cdc9be6daed",
+      "en_hash": "2453ee0fbac6e047bafd8e195b8dc0d8a730df7cb070287f58b6c233f5c4fbdb",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-commercial": {
+      "revision": 1,
+      "pt_hash": "0cecaafdc055194fff12a392a05e1e9de30098aa3e747c55bcefb6cdd2b42fe8",
+      "en_hash": "6f4a388f5c07c336e55c6332ac7427691f3f893a1483159540c3f5b70b426690",
+      "accepted_on": "2026-08-27"
+    },
+    "music-album-1997": {
+      "revision": 1,
+      "pt_hash": "a5208fd26558e5193834242558cfa7d22b272851fecd4cd0794e586f1cfc9367",
+      "en_hash": "6cd44e313b40038dec3ac0b96b30be2137b87862e9ab9f8f10ea3d4a219fd255",
+      "accepted_on": "2026-08-27"
+    },
+    "audiovisual-homens": {
+      "revision": 1,
+      "pt_hash": "2e1f0b4e5d10e5c6b5be206e1bc1e173ea9a42516cb1abf4998917d1bbad1573",
+      "en_hash": "08923f29bb67ff9cc94b5d4ef9a884eee4011343fcf92496166e23838088a9d7",
+      "accepted_on": "2026-08-27"
+    },
+    "audiovisual-film": {
+      "revision": 1,
+      "pt_hash": "05c2447a859948a0ac391001da7ed72038297a6bb57f0c7aae8e5aed7fb9843a",
+      "en_hash": "ad2b8118f68d65e6b0571f0e994ecf1c68f32e4c2ec0ce99f01cec63dff3546c",
+      "accepted_on": "2026-08-27"
+    },
+    "music-festival-1998-1999": {
+      "revision": 1,
+      "pt_hash": "e8ac7010327669dabd1862cc1a4e9e5a16b48b1afe8ec5107a31b668a254f2e8",
+      "en_hash": "3ba447071fb7ec420479a70961b0f58e8e47b63945c725d8f0990351a8699728",
+      "accepted_on": "2026-08-27"
+    },
+    "music-album-1999-2000": {
+      "revision": 1,
+      "pt_hash": "818612e7228269e73f98efffd1bbfcc098495545dceb2e3ecc0d3e3d06fe2e12",
+      "en_hash": "c5619717961f59ce6bca0397a23c72565b451b84a61c62b620ece3cc6550497b",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-psinet": {
+      "revision": 1,
+      "pt_hash": "58f8be96a47b3b49c808dcb602ab9ad8d904ed9c38723453a93af4c804c81149",
+      "en_hash": "5eed180f14931cf54a6f36a12fb524a66ff2c6ce16407ee651eae71243d58fc8",
+      "accepted_on": "2026-08-27"
+    },
+    "music-olympia": {
+      "revision": 1,
+      "pt_hash": "55e4e82aad2914cbeac94262365a7c81481d48d3ba7d3efcd26255df6a9569f3",
+      "en_hash": "13a46b7f1157f8b3a9b62c3e09d366cde16aa3e5a2bae07537ad6a295b36511f",
+      "accepted_on": "2026-08-27"
+    },
+    "livraria-cultura": {
+      "revision": 1,
+      "pt_hash": "c5f4e5a03a278978779b59fc76e4847456595094e26a2a48c60eeae91fbf6e76",
+      "en_hash": "23162dc9d656c52cd136ffc7e214f461661b1b6429c64702ea1399ca63ff9f71",
+      "accepted_on": "2026-08-27"
+    },
+    "communication-folha": {
+      "revision": 1,
+      "pt_hash": "9f702737e2ed84562313c237360427d55155ab27b55232181e588e138ce5ebf2",
+      "en_hash": "d4b3f033f3ecd874b02d8b5fc7b7b0f481aa359f52c40247bed162fc8fd48b9a",
+      "accepted_on": "2026-08-27"
+    },
+    "music-programa-jo": {
+      "revision": 1,
+      "pt_hash": "7694faef3d75180b8ddf82d4ac643f45c3a553ab7e8caf32ca7954cd7dc015ea",
+      "en_hash": "fd830eca98ae532a3b3da557203b7f40d4274cb52eb358645b951e5d4686b4d0",
+      "accepted_on": "2026-08-27"
+    },
+    "music-active-2001-2003": {
+      "revision": 1,
+      "pt_hash": "6594aeb6f7a5d0627f312cf3c358b2426dd5a5339ef35561b6c75e09e1eb2db2",
+      "en_hash": "a4eaf0f3371f78f0cf038956272698ee735c0d187f1fcf6a17a6a70ebeff89e3",
+      "accepted_on": "2026-08-27"
+    },
+    "music-end-2003": {
+      "revision": 1,
+      "pt_hash": "fc4b27af18b60e42700c42b8da0e391f6527486c5d1b9393ac7cb3c51334b432",
+      "en_hash": "dfb959cffc58bcce0a4da75a3b9405720cf65efc135c311d0a21a25a9b6d54aa",
+      "accepted_on": "2026-08-27"
+    },
+    "communication-sinal-verde": {
+      "revision": 1,
+      "pt_hash": "6eb2644a7ea6194200580cdf72ec3e92df22604f181d6370b7adb397adc05976",
+      "en_hash": "9229af2dd4753c18127577296d7a7640e28208e659e5d493337710b99e7828d4",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-mirantte": {
+      "revision": 1,
+      "pt_hash": "c6da339e08a1d5ab0b854220b5f96f03d239d93c36804b9604b358f5f73bb7bc",
+      "en_hash": "910f589c406a10c839c39bd395bea3db68431274ce2aa08b1a8806fc1f8259d1",
+      "accepted_on": "2026-08-27"
+    },
+    "audiovisual-meia-noite": {
+      "revision": 1,
+      "pt_hash": "762b1dc114e9094ac50ee8438c4592aac9b4404922ad95f550456af3704a3768",
+      "en_hash": "5eb023843d56efd45f639e1647cb16fc34e9bb26f0dd906f0f4489964ae36494",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-sem": {
+      "revision": 1,
+      "pt_hash": "e33a359f1abd8508ef661f1afcc2dbf7cfba183cc46bdd14f2a2f2cb5b129a4b",
+      "en_hash": "0aeabefe8ba47de40fd8a6212b4481419d23c0ef085a288237011d57f03394d1",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-cookieweb": {
+      "revision": 1,
+      "pt_hash": "45b2eaf33a6ae0dfa2b1b176fba615f11910a1d1349bbbcb9710dd0df61f0e07",
+      "en_hash": "586b29e70d392c5363194c517d7c0873d99d1983f6a6322fa6d40dd1f0096dfd",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-petlove": {
+      "revision": 1,
+      "pt_hash": "a3bdcbcfb1b5b17f1b9afd5acc20719bdecafbd2d309dc670dbc17067d6a4a30",
+      "en_hash": "25684cc7317afc283092bde7c77fad1992aa8619e39ded3c6871edf2293f9643",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-clickland": {
+      "revision": 1,
+      "pt_hash": "52d682d1a8734e955daf241c3f1df06bce8d7567c0ef67fc013c22069eaf7653",
+      "en_hash": "5395a51737ae1ad8381e2fa35c77c50929e16a5d232b4fe86798c37bae84a102",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-best": {
+      "revision": 1,
+      "pt_hash": "9ae91991b0b45fd2d1fe6735b2a768efb84427ce4e24905301fcff72f3dcce98",
+      "en_hash": "957f6d5160aebcc5984ccd72ce6eb36dd9010bb3f47bcbabf4926f138f718613",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-dialetto": {
+      "revision": 1,
+      "pt_hash": "9978345023b574140e3213d70b92da070d4a58a182f70b38ae47a9e61b9f38d8",
+      "en_hash": "0042831fe2a175d623d507af170b3c2ddf8ffec32e7ad3effb653240aa9fcfb5",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-independent": {
+      "revision": 1,
+      "pt_hash": "a84a9d1b764cfd5f6222beb008d523c99c5735da2e09d895d71dc0667e983a25",
+      "en_hash": "5457b4aff1b4e44466314d3d58cd93c5eb64d41de5f2db591afe4778af9b0a96",
+      "accepted_on": "2026-08-27"
+    },
+    "audiovisual-arquiteto": {
+      "revision": 1,
+      "pt_hash": "178c27e46f1ab677ef5000b4bd81b497c16575a674e3c59cd411714ab10c67fd",
+      "en_hash": "d44d0731e22700d191b0ba6388b460e9e4f56cd24bc5af7fc794964a3152df0c",
+      "accepted_on": "2026-08-27"
+    },
+    "audiovisual-autopsia": {
+      "revision": 1,
+      "pt_hash": "1510e7c411659fa6cdb60f9b3dd9ba6b62bb3b5c27566b78011e446293d7ddee",
+      "en_hash": "6f7a62cd55dbf9171a160f5346d430261a03fb4478649443f2b044afdca4b46b",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-driven": {
+      "revision": 1,
+      "pt_hash": "b1902e9e4abcc67c4fbec8da39752b0b292f96ea8769c5bb0f65c70d9dd19a6e",
+      "en_hash": "5c6bcc77fb6eaba36e082e3e45bb9ea1571a8b45f3e12852925f82c84239bdc4",
+      "accepted_on": "2026-08-27"
+    },
+    "music-reunion-2023": {
+      "revision": 1,
+      "pt_hash": "b49dba7016e56fdc1aa0d893f65a95ce75ddfa7a25f6956232b53ddcf20383a6",
+      "en_hash": "91bb305cafb8a0bdea77bef3f0ed2958ae5995acc48df56967dea73c5e889d7d",
+      "accepted_on": "2026-08-27"
+    },
+    "hai-cycle": {
+      "revision": 1,
+      "pt_hash": "27e0c891e6c25288a77ed34988d3c83bc18a176e520dda82ffb292ae6f8148ce",
+      "en_hash": "26ab0bce6321aff9db4a26d98723c011b58840c78fbef3a145ede1d0b41bd14e",
+      "accepted_on": "2026-08-27"
+    },
+    "hai-melissa": {
+      "revision": 1,
+      "pt_hash": "c567567871cdf7b6dd4353b12b876007e5fb8c7b7a54110e66e430eac8dd70dd",
+      "en_hash": "da6e8a0c6d3a199245f719b0fa97efdf3ffcb12de4c0600f1f149870a2720190",
+      "accepted_on": "2026-08-27"
+    },
+    "hai-pro1": {
+      "revision": 1,
+      "pt_hash": "87ce767e93349af3f0bf2a6c979754ff92305de6fa56fb2332f8ed01b82ef4bb",
+      "en_hash": "de626b534d77606fe11f81f1407441e3f9cacf66c816417a64f3be1631375b65",
+      "accepted_on": "2026-08-27"
+    },
+    "hai-pro2": {
+      "revision": 1,
+      "pt_hash": "1334ce92ea0dadb27243dc07d156add01a7ec6faf36e8bec4cf10b1eba5fd4d5",
+      "en_hash": "4f5452e5a34c0b6b6ce3c8e016a4bf8591169449e538a5883c45a5308d2d44c1",
+      "accepted_on": "2026-08-27"
+    },
+    "music-authorship": {
+      "revision": 1,
+      "pt_hash": "9cc61ca5563e651982a3a38b9f3cc3e269919537615c03b8287d0a98d7af6e33",
+      "en_hash": "56bfff36ff9c8a91c070a5c555cc8611fb037b280ca322fc3fd8f90d61c3774f",
+      "accepted_on": "2026-08-27"
+    },
+    "communication-themes": {
+      "revision": 1,
+      "pt_hash": "21cea1f74d3ccba9d9725234a2556f44107f4058a72808f8f77b3b403c5a5aab",
+      "en_hash": "1a2b06d1658523ff2a3deccaad076534f96a7bb7bc71eefd45c666906eb2a463",
+      "accepted_on": "2026-08-27"
+    },
+    "communication-names": {
+      "revision": 1,
+      "pt_hash": "0e62028baae502a0c0e2a4d186920ede6d88513263d4b76de6f5dd79a41ead70",
+      "en_hash": "4b5462ae612515b46f48e4b0ae247cd16946d006f14db28041c03d3263d46879",
+      "accepted_on": "2026-08-27"
+    },
+    "internet-continuity": {
+      "revision": 1,
+      "pt_hash": "a8af1b290158da82c5f653009d47d12eaa4106709665fc283daba3db077fbe9c",
+      "en_hash": "8314c17972120596e093b19c3b1ee01785f7a8c47bf212c5940272a7adedc093",
+      "accepted_on": "2026-08-27"
+    },
+    "hai-identity": {
+      "revision": 1,
+      "pt_hash": "cbe3b16efd1a884271adec8fe5eac7d0a16eede07f894020cce7d9f4e7ab73cd",
+      "en_hash": "5cfaf9b76e5c7f2d37269da37cc94f58fefaacfdbe8622c224c24573ddcbb202",
+      "accepted_on": "2026-08-27"
+    }
+  }
+}
