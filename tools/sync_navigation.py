@@ -12,20 +12,18 @@ def normalize_nav_block(block: str, lang: str) -> str:
     if lang == "pt":
         internet_href = '/pt/internet/'
         search_pattern = r'<a href="/pt/search-performance/">[^<]*</a>'
-        canonical_anchor = '<a href="/pt/internet/">Internet &amp; Performance</a>'
+        canonical_anchor = '<a href="/pt/internet/">Internet & Performance</a>'
         replacements = (
-            ('href="/pt/internet/">Internet</a>', 'href="/pt/internet/">Internet &amp; Performance</a>'),
-            ('href="/pt/internet/">Internet & Cultura Digital</a>', 'href="/pt/internet/">Internet &amp; Performance</a>'),
-            ('href="/pt/internet/">Internet & Performance</a>', 'href="/pt/internet/">Internet &amp; Performance</a>'),
+            ('href="/pt/internet/">Internet</a>', 'href="/pt/internet/">Internet & Performance</a>'),
+            ('href="/pt/internet/">Internet & Cultura Digital</a>', 'href="/pt/internet/">Internet & Performance</a>'),
         )
     else:
         internet_href = '/en/internet/'
         search_pattern = r'<a href="/en/search-performance/">[^<]*</a>'
-        canonical_anchor = '<a href="/en/internet/">Internet &amp; Performance</a>'
+        canonical_anchor = '<a href="/en/internet/">Internet & Performance</a>'
         replacements = (
-            ('href="/en/internet/">Internet</a>', 'href="/en/internet/">Internet &amp; Performance</a>'),
-            ('href="/en/internet/">Internet & Digital Culture</a>', 'href="/en/internet/">Internet &amp; Performance</a>'),
-            ('href="/en/internet/">Internet & Performance</a>', 'href="/en/internet/">Internet &amp; Performance</a>'),
+            ('href="/en/internet/">Internet</a>', 'href="/en/internet/">Internet & Performance</a>'),
+            ('href="/en/internet/">Internet & Digital Culture</a>', 'href="/en/internet/">Internet & Performance</a>'),
         )
 
     had_internet = f'href="{internet_href}"' in block
@@ -54,7 +52,7 @@ def normalize_other_links(text: str, lang: str) -> str:
         before, after, label = match.groups()
         clean = label.strip()
         if clean in {"Search", "Search & Performance", "Search &amp; Performance"}:
-            label = "Internet &amp; Performance"
+            label = "Internet & Performance"
         return f'<a{before}href="{target}"{after}>{label}</a>'
 
     return re.sub(pattern, repl, text)
