@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "updated": "2026-08-27",
+  "derivativePolicy": {
+    "format": "webp",
+    "widths": [480, 768],
+    "quality": 78,
+    "outputRoot": "assets/media/galleries"
+  },
+  "galleries": [
+    {
+      "id": "meia-noite-e-uns",
+      "sourceRoot": "assets/archive/audiovisual/meia-noite-e-uns",
+      "targets": {
+        "pt": ["pt/audiovisual/index.html"],
+        "en": ["en/audiovisual/index.html"]
+      },
+      "title": {
+        "pt": "Fotos",
+        "en": "Photos"
+      },
+      "items": [
+        {"id":"01","source":"meianoiteeuns_01_resumo.jpg","caption":{"pt":"Visão geral de Meia-Noite e Uns.","en":"Overview of Meia-Noite e Uns."}},
+        {"id":"02","source":"meianoiteeuns_02_marcelo_nicchio_cristiano_gonçales.jpg","caption":{"pt":"Marcelo Nicchio e Cristiano Gonçales.","en":"Marcelo Nicchio and Cristiano Gonçales."}},
+        {"id":"03","source":"meianoiteeuns_03_soninhafrancine.jpg","caption":{"pt":"Soninha Francine.","en":"Soninha Francine."}},
+        {"id":"04","source":"meianoiteeuns_04_soninhafrancine.jpg","caption":{"pt":"Soninha Francine.","en":"Soninha Francine."}},
+        {"id":"05","source":"meianoiteeuns_05_soninhafrancine_paulodecarvalho.jpg","caption":{"pt":"Soninha Francine e Paulão de Carvalho.","en":"Soninha Francine and Paulão de Carvalho."}},
+        {"id":"06","source":"meianoiteeuns_06_carolromano_diretora.JPG","caption":{"pt":"Carol Romano, diretora.","en":"Carol Romano, director."}},
+        {"id":"07","source":"meianoiteeuns_07_soninhafrancine_belcoelho.JPG","caption":{"pt":"Soninha Francine e Bel Coelho.","en":"Soninha Francine and Bel Coelho."}},
+        {"id":"08","source":"meianoiteeuns_08_soninhafrancine.jpg","caption":{"pt":"Soninha Francine.","en":"Soninha Francine."}},
+        {"id":"09","source":"meianoiteeuns_09_soninhafrancine_e_equipe.jpg","caption":{"pt":"Soninha Francine e equipe.","en":"Soninha Francine and the team."}},
+        {"id":"10","source":"meianoiteeuns_10_soninhafrancine.jpg","caption":{"pt":"Soninha Francine.","en":"Soninha Francine."}},
+        {"id":"11","source":"meianoiteeuns_11_carolromano_e_equipe.JPG","caption":{"pt":"Carol Romano e equipe.","en":"Carol Romano and the team."}},
+        {"id":"12","source":"meianoiteeuns_12_carolromano_andreberaldino-oculos_e_equipe.JPG","caption":{"pt":"Carol Romano, André Beraldino e equipe.","en":"Carol Romano, André Beraldino and the team."}},
+        {"id":"13","source":"meianoiteeuns_13_cristianogonçales_marcelonicchio.jpg","caption":{"pt":"Cristiano Gonçales e Marcelo Nicchio.","en":"Cristiano Gonçales and Marcelo Nicchio."}},
+        {"id":"14","source":"meianoiteeuns_14_resumo01.jpg","caption":{"pt":"Visão geral de Meia-Noite e Uns.","en":"Overview of Meia-Noite e Uns."}},
+        {"id":"15","source":"meianoiteeuns_15_dreamsnetworklogo.jpg","caption":{"pt":"Dreamsnetwork.tv.","en":"Dreamsnetwork.tv."}},
+        {"id":"16","source":"meianoiteeuns_16_paulodecarvalho.JPG","caption":{"pt":"Paulão de Carvalho.","en":"Paulão de Carvalho."}},
+        {"id":"17","source":"meianoiteeuns_17_paulodecarvalho_carolromano_camilacamargo.JPG","caption":{"pt":"Paulão de Carvalho, Carol Romano e Camila Camargo.","en":"Paulão de Carvalho, Carol Romano and Camila Camargo."}},
+        {"id":"18","source":"meianoiteeuns_18_produção.JPG","caption":{"pt":"Produção de Meia-Noite e Uns.","en":"Meia-Noite e Uns production."}},
+        {"id":"19","source":"meianoiteeuns_19_cristianogonçales.JPG","caption":{"pt":"Cristiano Gonçales.","en":"Cristiano Gonçales."}},
+        {"id":"20","source":"meianoiteeuns_20_marcelonicchio_cristianogonçales.JPG","caption":{"pt":"Marcelo Nicchio e Cristiano Gonçales.","en":"Marcelo Nicchio and Cristiano Gonçales."}},
+        {"id":"21","source":"meianoiteeuns_21_creditos01.JPG","caption":{"pt":"Créditos de Meia-Noite e Uns — quadro 1.","en":"Meia-Noite e Uns credits — frame 1."}},
+        {"id":"22","source":"meianoiteeuns_22_creditos02.JPG","caption":{"pt":"Créditos de Meia-Noite e Uns — quadro 2.","en":"Meia-Noite e Uns credits — frame 2."}}
+      ]
+    }
+  ]
+}
