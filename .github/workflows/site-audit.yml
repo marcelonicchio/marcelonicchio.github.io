@@ -29,6 +29,8 @@ jobs:
         run: python tools/sync_galleries.py --check
       - name: Audit gallery registry and rendering
         run: python tools/audit_galleries.py
+      - name: Audit PT EN editorial parity
+        run: python tools/editorial_parity.py --check
       - name: Audit synchronized Full Biography
         run: python tools/sync_full_biography.py --check
       - name: Audit Full Biography coverage
