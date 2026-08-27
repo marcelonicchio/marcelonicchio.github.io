@@ -51,16 +51,26 @@ def patch_music_phase_keys() -> None:
         path = ROOT / rel
         text = path.read_text(encoding="utf-8")
         if "data-bio-key=" in text:
-            # Bootstrap is intentionally one-shot; avoid silently double-tagging.
             raise SystemExit(f"{rel} already contains data-bio-key attributes")
         for year, title, key in phases:
             text = tag_phase(text, year, title, key)
         path.write_text(text, encoding="utf-8")
 
 
-def add_english_dates() -> None:
+def patch_manifest_metadata() -> None:
     path = ROOT / "data/full_biography.json"
     data = json.loads(path.read_text(encoding="utf-8"))
+
+    # The EN audiovisual vertical uses #architect while PT uses #arquiteto.
+    selector_fixed = False
+    for entry in data["entries"]:
+        if entry["id"] == "audiovisual-arquiteto":
+            entry["source"]["en"]["selector"] = "#architect"
+            selector_fixed = True
+            break
+    if not selector_fixed:
+        raise SystemExit("audiovisual-arquiteto not found in Full Biography manifest")
+
     overrides = {
         "music-olympia": "Jul. 2000",
         "livraria-cultura": "Oct. 2000–Jan. 2001",
@@ -80,6 +90,7 @@ def add_english_dates() -> None:
     missing = set(overrides) - found
     if missing:
         raise SystemExit(f"Date override ids not found: {sorted(missing)}")
+
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
@@ -127,7 +138,7 @@ def self_clean() -> None:
             path.unlink()
 
 
-add_english_dates()
+patch_manifest_metadata()
 patch_music_phase_keys()
 append_styles()
 ensure_lightbox_script()
