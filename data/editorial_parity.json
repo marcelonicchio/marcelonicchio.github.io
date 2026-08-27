@@ -3,10 +3,14 @@
   "policy": "PT and EN hashes represent a jointly reviewed editorial checkpoint. Source drift requires explicit re-acceptance after both languages are reviewed.",
   "entries": {
     "music-origins": {
-      "revision": 1,
-      "pt_hash": "30fe270302c1ed9989b8182f6b2a40da6f16a292190848f4c6424a88c5490c0d",
-      "en_hash": "9b7be9037069030efcad392e6f0f83d9a3655459625ac357a9dd4ea92f68cb4e",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "8fe0b9f9e875ed8bdbc912eb17ca5ca7edcd6ef7d9c3ec9fa09b684804c74637",
+      "en_hash": "4e51d18a6eee8ced0a52587dad088ed9e7df76618c2f6b3ceb35588cb52f87f4",
+      "accepted_on": "2026-08-27",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-coitado-1992": {
       "revision": 1,
@@ -33,10 +37,14 @@
       "accepted_on": "2026-08-27"
     },
     "music-coitado-1994": {
-      "revision": 1,
-      "pt_hash": "64951a7c9aa66e06471d172b3d3b44929f259e9705fe4f6f9075c7029f6c6b74",
-      "en_hash": "fa47c452bd6c2134ed3f5e7492dedac4f5b5236935dbf0f074bb94ba4e619bbf",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "587e9a7965d43c367f001fa1824d20a7d7053b114edfac74412e416e2164d7df",
+      "en_hash": "4c6bfc7a0ca304650229cb51c88285eef967a308c21eb01be0e2250af2c0f9af",
+      "accepted_on": "2026-08-27",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "communication-metropole": {
       "revision": 1,
