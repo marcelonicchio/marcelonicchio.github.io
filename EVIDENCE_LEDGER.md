@@ -60,6 +60,15 @@ This file tracks what a source actually supports, what remains autobiographical,
 - Does not directly support: founder or ownership status.
 - Public handling: use only a sanitized/cropped derivative if later published.
 
+## 2026-08-27 intake — Meia-Noite e Uns image batch
+
+- Intake: 22 selected image files were uploaded by Marcelo Nicchio to the project repository and associated with the 2006 **Meia-Noite e Uns** record.
+- Public use: the batch is used only in the editorial context of the program, as a record-associated gallery; the separate thread collage remains a narrative image rather than part of this gallery.
+- Identified people in current captions include Marcelo Nicchio, Cristiano Gonçales, Soninha Francine, Paulão de Carvalho, Bel Coelho, Carol Romano, André Beraldino and Camila Camargo, plus production/team views and credit frames.
+- Third-party handling review: the current use is limited to professional/program context and does not expose private contact, account or residential data in the page presentation.
+- Provenance/rights scope: the exact photographer, original capture source and rights holder are not individually recorded for every file in this intake. Do not infer or claim photographic ownership from repository possession alone; add item-level provenance or credit later when known.
+- Technical handling: original files remain the full-size lightbox targets. Responsive WebP derivatives are generated separately for thumbnail delivery so presentation optimization does not overwrite or silently replace the historical source files.
+
 ## Current editorial effect
 
-The 2026-08-25 intake upgrades documentary support for Ad.Dialetto, DreamsNetwork, Nicchio & Associados, Mirantte News and Clickland, and adds Livraria Cultura as a documented professional association with autobiographical role/date detail. Public pages may describe those distinctions, but raw cards remain non-public-source material until a privacy-safe derivative is prepared.
+The 2026-08-25 intake upgrades documentary support for Ad.Dialetto, DreamsNetwork, Nicchio & Associados, Mirantte News and Clickland, and adds Livraria Cultura as a documented professional association with autobiographical role/date detail. The 2026-08-27 Meia-Noite e Uns intake establishes the first registered multi-image gallery workflow while keeping source-level rights/provenance claims deliberately narrow. Public pages may integrate these materials organically, while the ledger remains backstage editorial infrastructure.
