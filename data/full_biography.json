@@ -104,20 +104,26 @@
       }
     },
     {
-      "id": "music-coitado",
+      "id": "music-coitado-1992",
       "era": "cruzamentos-1992-2000",
-      "date": "1992–1994",
       "domain": "music",
+      "date": "1992",
+      "title": {
+        "pt": "Fundação e primeiro show",
+        "en": "Foundation and first show"
+      },
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "section",
-          "selector": "#coitado"
+          "kind": "subunit",
+          "selector": "[data-bio-key='music-coitado-1992']",
+          "parent_selector": "#coitado"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "section",
-          "selector": "#coitado"
+          "kind": "subunit",
+          "selector": "[data-bio-key='music-coitado-1992']",
+          "parent_selector": "#coitado"
         }
       }
     },
@@ -174,6 +180,30 @@
           "kind": "phase",
           "selector": "[data-bio-key='music-circuit-1993-1995']",
           "parent_selector": "#stages"
+        }
+      }
+    },
+    {
+      "id": "music-coitado-1994",
+      "era": "cruzamentos-1992-2000",
+      "domain": "music",
+      "date": "1994",
+      "title": {
+        "pt": "Demo-tape e Kid Vinil",
+        "en": "Demo tape and Kid Vinil"
+      },
+      "source": {
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "subunit",
+          "selector": "[data-bio-key='music-coitado-1994']",
+          "parent_selector": "#coitado"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "subunit",
+          "selector": "[data-bio-key='music-coitado-1994']",
+          "parent_selector": "#coitado"
         }
       }
     },

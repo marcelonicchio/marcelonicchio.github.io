@@ -44,8 +44,8 @@ def main() -> int:
 
     for lang in ("pt", "en"):
         covered_sections: dict[str, set[str]] = defaultdict(set)
-        registered_phase_keys: dict[str, set[str]] = defaultdict(set)
-        phase_parents: dict[str, set[str]] = defaultdict(set)
+        registered_unit_keys: dict[str, set[str]] = defaultdict(set)
+        keyed_parents: dict[str, set[str]] = defaultdict(set)
         source_paths: set[str] = set()
 
         for entry in all_entries:
@@ -69,17 +69,17 @@ def main() -> int:
                 sid = selector_id(spec["selector"])
                 if sid:
                     covered_sections[path].add(sid)
-            elif spec["kind"] == "phase":
+            elif spec["kind"] in {"phase", "subunit"}:
                 parent = selector_id(spec.get("parent_selector"))
                 if not parent:
-                    fail(errors, f"{entry['id']}:{lang}: phase has no simple parent selector")
+                    fail(errors, f"{entry['id']}:{lang}: keyed unit has no simple parent selector")
                 else:
-                    phase_parents[path].add(parent)
+                    keyed_parents[path].add(parent)
                 key_match = re.search(r"data-bio-key=['\"]([^'\"]+)['\"]", spec["selector"])
                 if not key_match:
-                    fail(errors, f"{entry['id']}:{lang}: phase selector must use data-bio-key")
+                    fail(errors, f"{entry['id']}:{lang}: keyed unit selector must use data-bio-key")
                 else:
-                    registered_phase_keys[path].add(key_match.group(1))
+                    registered_unit_keys[path].add(key_match.group(1))
             else:
                 fail(errors, f"{entry['id']}:{lang}: unsupported kind {spec['kind']!r}")
 
@@ -97,7 +97,7 @@ def main() -> int:
                     fail(errors, f"{lang}: chapter without id in {path}")
                     continue
                 actual_ids.add(sid)
-            covered = covered_sections[path] | phase_parents[path]
+            covered = covered_sections[path] | keyed_parents[path]
             missing = sorted(actual_ids - covered)
             stale = sorted(covered - actual_ids)
             if missing:
@@ -105,22 +105,23 @@ def main() -> int:
             if stale:
                 fail(errors, f"{lang}: manifest references missing chapters in {path}: {stale}")
 
-            for parent_id in phase_parents[path]:
+            for parent_id in keyed_parents[path]:
                 parent = body.select_one(f"#{parent_id}")
                 if parent is None:
                     continue
-                phases = parent.select(".phase")
-                actual_keys = {phase.get("data-bio-key") for phase in phases}
-                if None in actual_keys:
-                    fail(errors, f"{lang}: unregistered .phase without data-bio-key inside #{parent_id} in {path}")
-                    actual_keys.discard(None)
-                expected_keys = registered_phase_keys[path]
+                keyed = parent.select("[data-bio-key]")
+                actual_keys = {node.get("data-bio-key") for node in keyed}
+                expected_keys = registered_unit_keys[path]
                 missing_keys = sorted(actual_keys - expected_keys)
-                stale_keys = sorted(expected_keys - actual_keys)
                 if missing_keys:
-                    fail(errors, f"{lang}: phase keys missing from manifest in {path}: {missing_keys}")
+                    fail(errors, f"{lang}: keyed biography units missing from manifest in {path}: {missing_keys}")
+                parent_expected = {
+                    key for key in expected_keys
+                    if parent.select_one(f'[data-bio-key="{key}"]') is not None
+                }
+                stale_keys = sorted(parent_expected - actual_keys)
                 if stale_keys:
-                    fail(errors, f"{lang}: manifest phase keys missing from source in {path}: {stale_keys}")
+                    fail(errors, f"{lang}: manifest biography unit keys missing from source in {path}: {stale_keys}")
 
         target_path = ROOT / manifest["targets"][lang]["path"]
         if not target_path.exists():

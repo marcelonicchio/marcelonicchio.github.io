@@ -77,9 +77,26 @@ def render_section(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[s
     section["class"] = classes
     section["data-bio-entry"] = entry["id"]
     section["data-bio-domain"] = entry["domain"]
+    heading = section.find("h2", recursive=False)
+    if heading is not None:
+        clean = re.sub(r"^\s*\d{4}(?:[–-](?:\d{2,4}|presente|present))?\s+—\s+", "", heading.get_text(" ", strip=True), flags=re.I)
+        if clean != heading.get_text(" ", strip=True):
+            heading.clear()
+            heading.append(clean)
     meta = BeautifulSoup(meta_html(entry, lang, manifest, context=context), "html.parser").div
     section.insert(0, meta)
     return str(section)
+
+
+def render_subunit(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[str, Any]) -> str:
+    title = entry["title"][lang]
+    body = node.decode_contents()
+    meta = meta_html(entry, lang, manifest, context=False)
+    return (
+        f'<section id="bio-{entry["id"]}" class="chapter bio-entry" '
+        f'data-bio-entry="{entry["id"]}" data-bio-domain="{entry["domain"]}">'
+        f'{meta}<h2>{html.escape(title)}</h2>{body}</section>'
+    )
 
 
 def render_phase(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[str, Any]) -> str:
@@ -113,6 +130,9 @@ def render_entry(entry: dict[str, Any], lang: str, manifest: dict[str, Any], *, 
     if kind == "phase":
         node = select_exactly_one(soup, spec["selector"], f"{entry['id']}:{lang}")
         return render_phase(node, entry, lang, manifest)
+    if kind == "subunit":
+        node = select_exactly_one(soup, spec["selector"], f"{entry['id']}:{lang}")
+        return render_subunit(node, entry, lang, manifest)
     if kind == "fragment":
         node = soup.find("section")
         if node is None:
