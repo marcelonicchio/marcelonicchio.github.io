@@ -220,3 +220,34 @@ html.archive-lightbox-open,html.archive-lightbox-open body{overflow:hidden}
 .thread-media:has(img[src$="/meianoiteeuns-thread.jpg"]){width:58%;margin-left:auto;margin-right:auto}
 @media(max-width:900px){.thread-media:has(img[src$="/meianoiteeuns-thread.jpg"]){width:72%}}
 @media(max-width:580px){.thread-media:has(img[src$="/meianoiteeuns-thread.jpg"]){width:100%}}
+
+
+/* Record-associated gallery system */
+.record-gallery{margin:30px 0 10px;padding-top:22px;border-top:1px solid rgba(255,255,255,.07)}
+.record-gallery__head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.record-gallery__head strong{font-size:.78rem;text-transform:uppercase;letter-spacing:.11em;color:var(--accent-soft)}
+.record-gallery__rail{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center}
+.record-gallery__strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:#3c3c40 transparent;padding:2px 0 9px}
+.record-gallery__item{flex:0 0 152px;aspect-ratio:4/3;display:block;overflow:hidden;scroll-snap-align:start;border:1px solid var(--line);border-radius:11px;background:#050506;text-decoration:none;transition:border-color .18s ease,transform .18s ease}
+.record-gallery__item img{display:block;width:100%;height:100%;object-fit:contain;background:#050506}
+.record-gallery__item:hover{opacity:1;border-color:#66666b;transform:translateY(-2px)}
+.record-gallery__item:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
+.record-gallery__arrow{width:36px;height:36px;display:inline-grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:#111214;color:var(--text);font:inherit;font-size:1.35rem;line-height:1;cursor:pointer}
+.record-gallery__arrow:hover:not(:disabled){border-color:#626268;background:#17181a}
+.record-gallery__arrow:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
+.record-gallery__arrow:disabled{opacity:.28;cursor:default}
+.record-gallery__arrow[hidden]{display:none}
+.archive-lightbox__panel{padding-left:58px;padding-right:58px}
+.archive-lightbox__nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid var(--line);border-radius:999px;background:#111214;color:var(--text);font:inherit;font-size:1.55rem;line-height:1;cursor:pointer}
+.archive-lightbox__nav--prev{left:9px}
+.archive-lightbox__nav--next{right:9px}
+.archive-lightbox__nav:hover:not(:disabled){border-color:#626268}
+.archive-lightbox__nav:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
+.archive-lightbox__nav:disabled{opacity:.24;cursor:default}
+.archive-lightbox__nav[hidden]{display:none}
+.archive-lightbox__meta{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-top:12px}
+.archive-lightbox__caption{margin-top:0;text-align:left}
+.archive-lightbox__counter{flex:0 0 auto;color:var(--accent-soft);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.74rem;letter-spacing:.05em}
+@media(max-width:580px){.record-gallery{margin-top:26px}.record-gallery__rail{grid-template-columns:minmax(0,1fr)}.record-gallery__arrow{display:none!important}.record-gallery__item{flex-basis:132px;border-radius:9px}.archive-lightbox__panel{padding-left:40px;padding-right:40px}.archive-lightbox__nav{width:32px;height:32px;font-size:1.25rem}.archive-lightbox__nav--prev{left:4px}.archive-lightbox__nav--next{right:4px}.archive-lightbox__meta{gap:10px}.archive-lightbox__caption{font-size:.76rem}.archive-lightbox__counter{font-size:.68rem}}
+@media(pointer:coarse){.record-gallery__item:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.record-gallery__item{transition:none}.record-gallery__item:hover{transform:none}}
