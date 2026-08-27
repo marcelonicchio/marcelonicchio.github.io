@@ -80,6 +80,8 @@ def render_section(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[s
     heading = section.find("h2", recursive=False)
     if heading is not None:
         clean = re.sub(r"^\s*\d{4}(?:[–-](?:\d{2,4}|presente|present))?\s+—\s+", "", heading.get_text(" ", strip=True), flags=re.I)
+        if clean and clean[0].islower():
+            clean = clean[0].upper() + clean[1:]
         if clean != heading.get_text(" ", strip=True):
             heading.clear()
             heading.append(clean)
