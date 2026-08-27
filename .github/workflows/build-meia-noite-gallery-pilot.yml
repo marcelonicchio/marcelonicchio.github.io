@@ -1,0 +1,157 @@
+name: Build Meia-Noite e Uns gallery pilot
+
+on:
+  push:
+    branches: [meia-noite-gallery-pilot]
+
+permissions:
+  contents: write
+
+jobs:
+  build-gallery:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: meia-noite-gallery-pilot
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Add record gallery markup and styles
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import html, re
+
+          base = '/assets/archive/audiovisual/meia-noite-e-uns/'
+          files = [
+              'meianoiteeuns_01_resumo.jpg',
+              'meianoiteeuns_02_marcelo_nicchio_cristiano_gonçales.jpg',
+              'meianoiteeuns_03_soninhafrancine.jpg',
+              'meianoiteeuns_04_soninhafrancine.jpg',
+              'meianoiteeuns_05_soninhafrancine_paulodecarvalho.jpg',
+              'meianoiteeuns_06_carolromano_diretora.JPG',
+              'meianoiteeuns_07_soninhafrancine_belcoelho.JPG',
+              'meianoiteeuns_08_soninhafrancine.jpg',
+              'meianoiteeuns_09_soninhafrancine_e_equipe.jpg',
+              'meianoiteeuns_10_soninhafrancine.jpg',
+              'meianoiteeuns_11_carolromano_e_equipe.JPG',
+              'meianoiteeuns_12_carolromano_andreberaldino-oculos_e_equipe.JPG',
+              'meianoiteeuns_13_cristianogonçales_marcelonicchio.jpg',
+              'meianoiteeuns_14_resumo01.jpg',
+              'meianoiteeuns_15_dreamsnetworklogo.jpg',
+              'meianoiteeuns_16_paulodecarvalho.JPG',
+              'meianoiteeuns_17_paulodecarvalho_carolromano_camilacamargo.JPG',
+              'meianoiteeuns_18_produção.JPG',
+              'meianoiteeuns_19_cristianogonçales.JPG',
+              'meianoiteeuns_20_marcelonicchio_cristianogonçales.JPG',
+              'meianoiteeuns_21_creditos01.JPG',
+              'meianoiteeuns_22_creditos02.JPG',
+          ]
+
+          captions_pt = [
+              'Visão geral de Meia-Noite e Uns.',
+              'Marcelo Nicchio e Cristiano Gonçales.',
+              'Soninha Francine.',
+              'Soninha Francine.',
+              'Soninha Francine e Paulão de Carvalho.',
+              'Carol Romano, diretora.',
+              'Soninha Francine e Bel Coelho.',
+              'Soninha Francine.',
+              'Soninha Francine e equipe.',
+              'Soninha Francine.',
+              'Carol Romano e equipe.',
+              'Carol Romano, André Beraldino e equipe.',
+              'Cristiano Gonçales e Marcelo Nicchio.',
+              'Visão geral de Meia-Noite e Uns.',
+              'Dreamsnetwork.tv.',
+              'Paulão de Carvalho.',
+              'Paulão de Carvalho, Carol Romano e Camila Camargo.',
+              'Produção de Meia-Noite e Uns.',
+              'Cristiano Gonçales.',
+              'Marcelo Nicchio e Cristiano Gonçales.',
+              'Créditos de Meia-Noite e Uns — quadro 1.',
+              'Créditos de Meia-Noite e Uns — quadro 2.',
+          ]
+          captions_en = [
+              'Overview of Meia-Noite e Uns.',
+              'Marcelo Nicchio and Cristiano Gonçales.',
+              'Soninha Francine.',
+              'Soninha Francine.',
+              'Soninha Francine and Paulão de Carvalho.',
+              'Carol Romano, director.',
+              'Soninha Francine and Bel Coelho.',
+              'Soninha Francine.',
+              'Soninha Francine and the team.',
+              'Soninha Francine.',
+              'Carol Romano and the team.',
+              'Carol Romano, André Beraldino and the team.',
+              'Cristiano Gonçales and Marcelo Nicchio.',
+              'Overview of Meia-Noite e Uns.',
+              'Dreamsnetwork.tv.',
+              'Paulão de Carvalho.',
+              'Paulão de Carvalho, Carol Romano and Camila Camargo.',
+              'Meia-Noite e Uns production.',
+              'Cristiano Gonçales.',
+              'Marcelo Nicchio and Cristiano Gonçales.',
+              'Meia-Noite e Uns credits — frame 1.',
+              'Meia-Noite e Uns credits — frame 2.',
+          ]
+
+          def gallery_markup(lang):
+              pt = lang == 'pt'
+              captions = captions_pt if pt else captions_en
+              title = 'Fotos · 22' if pt else 'Photos · 22'
+              prev = 'Fotos anteriores' if pt else 'Previous photos'
+              nxt = 'Próximas fotos' if pt else 'Next photos'
+              open_word = 'Ampliar' if pt else 'Enlarge'
+              parts = [
+                  '<div class="record-gallery" data-gallery="meia-noite-e-uns" aria-labelledby="meia-noite-gallery-title">',
+                  f'<div class="record-gallery__head"><strong id="meia-noite-gallery-title">{title}</strong></div>',
+                  '<div class="record-gallery__rail">',
+                  f'<button class="record-gallery__arrow record-gallery__arrow--prev" type="button" data-gallery-prev hidden aria-label="{prev}">‹</button>',
+                  '<div class="record-gallery__strip" data-gallery-strip tabindex="0">',
+              ]
+              for filename, caption in zip(files, captions):
+                  href = base + filename
+                  attr_caption = html.escape(caption, quote=True)
+                  parts.append(
+                      f'<a class="record-gallery__item" href="{html.escape(href, quote=True)}" data-caption="{attr_caption}" aria-label="{open_word}: {attr_caption}">'
+                      f'<img src="{html.escape(href, quote=True)}" loading="lazy" decoding="async" alt="{attr_caption}">'
+                      '</a>'
+                  )
+              parts.extend([
+                  '</div>',
+                  f'<button class="record-gallery__arrow record-gallery__arrow--next" type="button" data-gallery-next hidden aria-label="{nxt}">›</button>',
+                  '</div>',
+                  '</div>'
+              ])
+              return ''.join(parts)
+
+          card_pattern = re.compile(r'(<div class="inline-records"><a class="inline-record" href="/assets/archive/dreamsnetwork-card-2006\.webp".*?</a></div>)(</section>)', re.S)
+          for lang, path in [('pt', Path('pt/audiovisual/index.html')), ('en', Path('en/audiovisual/index.html'))]:
+              text = path.read_text(encoding='utf-8')
+              if 'data-gallery="meia-noite-e-uns"' in text:
+                  continue
+              match = card_pattern.search(text)
+              if not match:
+                  raise SystemExit(f'Dreamsnetwork card anchor not found in {path}')
+              text = text[:match.start()] + match.group(1) + gallery_markup(lang) + match.group(2) + text[match.end():]
+              path.write_text(text, encoding='utf-8')
+
+          css_path = Path('styles.css')
+          css = css_path.read_text(encoding='utf-8')
+          marker = '/* Record-associated gallery system */'
+          if marker not in css:
+              css += '''\n\n/* Record-associated gallery system */\n.record-gallery{margin:30px 0 10px;padding-top:22px;border-top:1px solid rgba(255,255,255,.07)}\n.record-gallery__head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}\n.record-gallery__head strong{font-size:.78rem;text-transform:uppercase;letter-spacing:.11em;color:var(--accent-soft)}\n.record-gallery__rail{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center}\n.record-gallery__strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:#3c3c40 transparent;padding:2px 0 9px}\n.record-gallery__item{flex:0 0 152px;aspect-ratio:4/3;display:block;overflow:hidden;scroll-snap-align:start;border:1px solid var(--line);border-radius:11px;background:#050506;text-decoration:none;transition:border-color .18s ease,transform .18s ease}\n.record-gallery__item img{display:block;width:100%;height:100%;object-fit:contain;background:#050506}\n.record-gallery__item:hover{opacity:1;border-color:#66666b;transform:translateY(-2px)}\n.record-gallery__item:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}\n.record-gallery__arrow{width:36px;height:36px;display:inline-grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:#111214;color:var(--text);font:inherit;font-size:1.35rem;line-height:1;cursor:pointer}\n.record-gallery__arrow:hover:not(:disabled){border-color:#626268;background:#17181a}\n.record-gallery__arrow:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}\n.record-gallery__arrow:disabled{opacity:.28;cursor:default}\n.record-gallery__arrow[hidden]{display:none}\n.archive-lightbox__panel{padding-left:58px;padding-right:58px}\n.archive-lightbox__nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid var(--line);border-radius:999px;background:#111214;color:var(--text);font:inherit;font-size:1.55rem;line-height:1;cursor:pointer}\n.archive-lightbox__nav--prev{left:9px}\n.archive-lightbox__nav--next{right:9px}\n.archive-lightbox__nav:hover:not(:disabled){border-color:#626268}\n.archive-lightbox__nav:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}\n.archive-lightbox__nav:disabled{opacity:.24;cursor:default}\n.archive-lightbox__nav[hidden]{display:none}\n.archive-lightbox__meta{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-top:12px}\n.archive-lightbox__caption{margin-top:0;text-align:left}\n.archive-lightbox__counter{flex:0 0 auto;color:var(--accent-soft);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.74rem;letter-spacing:.05em}\n@media(max-width:580px){.record-gallery{margin-top:26px}.record-gallery__rail{grid-template-columns:minmax(0,1fr)}.record-gallery__arrow{display:none!important}.record-gallery__item{flex-basis:132px;border-radius:9px}.archive-lightbox__panel{padding-left:40px;padding-right:40px}.archive-lightbox__nav{width:32px;height:32px;font-size:1.25rem}.archive-lightbox__nav--prev{left:4px}.archive-lightbox__nav--next{right:4px}.archive-lightbox__meta{gap:10px}.archive-lightbox__caption{font-size:.76rem}.archive-lightbox__counter{font-size:.68rem}}\n@media(pointer:coarse){.record-gallery__item:hover{transform:none}}\n@media(prefers-reduced-motion:reduce){.record-gallery__item{transition:none}.record-gallery__item:hover{transform:none}}\n'''
+              css_path.write_text(css, encoding='utf-8')
+          PY
+      - name: Commit gallery pilot
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/audiovisual/index.html en/audiovisual/index.html styles.css
+          git commit -m "Add Meia-Noite e Uns record gallery pilot"
+          git push origin HEAD:meia-noite-gallery-pilot
