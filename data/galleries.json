@@ -1,0 +1,517 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "updated": "2026-08-27",
+  "derivativePolicy": {
+    "format": "webp",
+    "widths": [
+      480,
+      768
+    ],
+    "quality": 78,
+    "outputRoot": "assets/media/galleries"
+  },
+  "galleries": [
+    {
+      "id": "meia-noite-e-uns",
+      "sourceRoot": "assets/archive/audiovisual/meia-noite-e-uns",
+      "targets": {
+        "pt": [
+          "pt/audiovisual/index.html"
+        ],
+        "en": [
+          "en/audiovisual/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Fotos",
+        "en": "Photos"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "meianoiteeuns_01_resumo.jpg",
+          "caption": {
+            "pt": "Visão geral de Meia-Noite e Uns.",
+            "en": "Overview of Meia-Noite e Uns."
+          },
+          "width": 604,
+          "height": 427,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-480.webp",
+              "width": 480,
+              "height": 339
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-768.webp",
+              "width": 604,
+              "height": 427
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "meianoiteeuns_02_marcelo_nicchio_cristiano_gonçales.jpg",
+          "caption": {
+            "pt": "Marcelo Nicchio e Cristiano Gonçales.",
+            "en": "Marcelo Nicchio and Cristiano Gonçales."
+          },
+          "width": 600,
+          "height": 400,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-02-480.webp",
+              "width": 480,
+              "height": 320
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-02-768.webp",
+              "width": 600,
+              "height": 400
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "meianoiteeuns_03_soninhafrancine.jpg",
+          "caption": {
+            "pt": "Soninha Francine.",
+            "en": "Soninha Francine."
+          },
+          "width": 613,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-03-480.webp",
+              "width": 480,
+              "height": 720
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-03-768.webp",
+              "width": 613,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "meianoiteeuns_04_soninhafrancine.jpg",
+          "caption": {
+            "pt": "Soninha Francine.",
+            "en": "Soninha Francine."
+          },
+          "width": 613,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-04-480.webp",
+              "width": 480,
+              "height": 720
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-04-768.webp",
+              "width": 613,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "meianoiteeuns_05_soninhafrancine_paulodecarvalho.jpg",
+          "caption": {
+            "pt": "Soninha Francine e Paulão de Carvalho.",
+            "en": "Soninha Francine and Paulão de Carvalho."
+          },
+          "width": 776,
+          "height": 517,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-05-480.webp",
+              "width": 480,
+              "height": 320
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-05-768.webp",
+              "width": 768,
+              "height": 512
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "meianoiteeuns_06_carolromano_diretora.JPG",
+          "caption": {
+            "pt": "Carol Romano, diretora.",
+            "en": "Carol Romano, director."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-06-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-06-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "meianoiteeuns_07_soninhafrancine_belcoelho.JPG",
+          "caption": {
+            "pt": "Soninha Francine e Bel Coelho.",
+            "en": "Soninha Francine and Bel Coelho."
+          },
+          "width": 1379,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-07-480.webp",
+              "width": 480,
+              "height": 320
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-07-768.webp",
+              "width": 768,
+              "height": 512
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "meianoiteeuns_08_soninhafrancine.jpg",
+          "caption": {
+            "pt": "Soninha Francine.",
+            "en": "Soninha Francine."
+          },
+          "width": 610,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-08-480.webp",
+              "width": 480,
+              "height": 723
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-08-768.webp",
+              "width": 610,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "meianoiteeuns_09_soninhafrancine_e_equipe.jpg",
+          "caption": {
+            "pt": "Soninha Francine e equipe.",
+            "en": "Soninha Francine and the team."
+          },
+          "width": 1000,
+          "height": 667,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-09-480.webp",
+              "width": 480,
+              "height": 320
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-09-768.webp",
+              "width": 768,
+              "height": 512
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "meianoiteeuns_10_soninhafrancine.jpg",
+          "caption": {
+            "pt": "Soninha Francine.",
+            "en": "Soninha Francine."
+          },
+          "width": 1000,
+          "height": 664,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-10-480.webp",
+              "width": 480,
+              "height": 319
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-10-768.webp",
+              "width": 768,
+              "height": 510
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "meianoiteeuns_11_carolromano_e_equipe.JPG",
+          "caption": {
+            "pt": "Carol Romano e equipe.",
+            "en": "Carol Romano and the team."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-11-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-11-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "meianoiteeuns_12_carolromano_andreberaldino-oculos_e_equipe.JPG",
+          "caption": {
+            "pt": "Carol Romano, André Beraldino e equipe.",
+            "en": "Carol Romano, André Beraldino and the team."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-12-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-12-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "meianoiteeuns_13_cristianogonçales_marcelonicchio.jpg",
+          "caption": {
+            "pt": "Cristiano Gonçales e Marcelo Nicchio.",
+            "en": "Cristiano Gonçales and Marcelo Nicchio."
+          },
+          "width": 600,
+          "height": 400,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-13-480.webp",
+              "width": 480,
+              "height": 320
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-13-768.webp",
+              "width": 600,
+              "height": 400
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "meianoiteeuns_14_resumo01.jpg",
+          "caption": {
+            "pt": "Visão geral de Meia-Noite e Uns.",
+            "en": "Overview of Meia-Noite e Uns."
+          },
+          "width": 955,
+          "height": 675,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-14-480.webp",
+              "width": 480,
+              "height": 339
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-14-768.webp",
+              "width": 768,
+              "height": 543
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "meianoiteeuns_15_dreamsnetworklogo.jpg",
+          "caption": {
+            "pt": "Dreamsnetwork.tv.",
+            "en": "Dreamsnetwork.tv."
+          },
+          "width": 564,
+          "height": 406,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-15-480.webp",
+              "width": 480,
+              "height": 346
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-15-768.webp",
+              "width": 564,
+              "height": 406
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "meianoiteeuns_16_paulodecarvalho.JPG",
+          "caption": {
+            "pt": "Paulão de Carvalho.",
+            "en": "Paulão de Carvalho."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-16-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-16-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "meianoiteeuns_17_paulodecarvalho_carolromano_camilacamargo.JPG",
+          "caption": {
+            "pt": "Paulão de Carvalho, Carol Romano e Camila Camargo.",
+            "en": "Paulão de Carvalho, Carol Romano and Camila Camargo."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-17-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-17-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "meianoiteeuns_18_produção.JPG",
+          "caption": {
+            "pt": "Produção de Meia-Noite e Uns.",
+            "en": "Meia-Noite e Uns production."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-18-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-18-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "meianoiteeuns_19_cristianogonçales.JPG",
+          "caption": {
+            "pt": "Cristiano Gonçales.",
+            "en": "Cristiano Gonçales."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-19-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-19-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "20",
+          "source": "meianoiteeuns_20_marcelonicchio_cristianogonçales.JPG",
+          "caption": {
+            "pt": "Marcelo Nicchio e Cristiano Gonçales.",
+            "en": "Marcelo Nicchio and Cristiano Gonçales."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-20-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-20-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "21",
+          "source": "meianoiteeuns_21_creditos01.JPG",
+          "caption": {
+            "pt": "Créditos de Meia-Noite e Uns — quadro 1.",
+            "en": "Meia-Noite e Uns credits — frame 1."
+          },
+          "width": 1058,
+          "height": 784,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-21-480.webp",
+              "width": 480,
+              "height": 356
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-21-768.webp",
+              "width": 768,
+              "height": 569
+            }
+          }
+        },
+        {
+          "id": "22",
+          "source": "meianoiteeuns_22_creditos02.JPG",
+          "caption": {
+            "pt": "Créditos de Meia-Noite e Uns — quadro 2.",
+            "en": "Meia-Noite e Uns credits — frame 2."
+          },
+          "width": 1057,
+          "height": 778,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-22-480.webp",
+              "width": 480,
+              "height": 353
+            },
+            "768": {
+              "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-22-768.webp",
+              "width": 768,
+              "height": 565
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
