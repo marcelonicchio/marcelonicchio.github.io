@@ -21,12 +21,30 @@
     }
   },
   "domains": {
-    "music": {"pt": "Música", "en": "Music"},
-    "communication": {"pt": "Comunicação & Cultura", "en": "Communication & Culture"},
-    "internet": {"pt": "Internet & Performance", "en": "Internet & Performance"},
-    "audiovisual": {"pt": "Audiovisual", "en": "Audiovisual"},
-    "hai": {"pt": "IA/HAI", "en": "AI/HAI"},
-    "context": {"pt": "Parêntese cronológico", "en": "Chronological aside"}
+    "music": {
+      "pt": "Música",
+      "en": "Music"
+    },
+    "communication": {
+      "pt": "Comunicação & Cultura",
+      "en": "Communication & Culture"
+    },
+    "internet": {
+      "pt": "Internet & Performance",
+      "en": "Internet & Performance"
+    },
+    "audiovisual": {
+      "pt": "Audiovisual",
+      "en": "Audiovisual"
+    },
+    "hai": {
+      "pt": "IA/HAI",
+      "en": "AI/HAI"
+    },
+    "context": {
+      "pt": "Parêntese cronológico",
+      "en": "Chronological aside"
+    }
   },
   "eras": [
     {
@@ -73,8 +91,16 @@
       "date": "1989–1991",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "section", "selector": "#origens"},
-        "en": {"path": "en/music/index.html", "kind": "section", "selector": "#origins"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "section",
+          "selector": "#origens"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "section",
+          "selector": "#origins"
+        }
       }
     },
     {
@@ -83,8 +109,16 @@
       "date": "1992–1994",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "section", "selector": "#coitado"},
-        "en": {"path": "en/music/index.html", "kind": "section", "selector": "#coitado"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "section",
+          "selector": "#coitado"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "section",
+          "selector": "#coitado"
+        }
       }
     },
     {
@@ -93,8 +127,16 @@
       "date": "1992–1996",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#bbs"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#bbs"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#bbs"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#bbs"
+        }
       }
     },
     {
@@ -103,8 +145,16 @@
       "date": "1993",
       "domain": "communication",
       "source": {
-        "pt": {"path": "pt/comunicacao/index.html", "kind": "section", "selector": "#bbs"},
-        "en": {"path": "en/communication/index.html", "kind": "section", "selector": "#bbs"}
+        "pt": {
+          "path": "pt/comunicacao/index.html",
+          "kind": "section",
+          "selector": "#bbs"
+        },
+        "en": {
+          "path": "en/communication/index.html",
+          "kind": "section",
+          "selector": "#bbs"
+        }
       }
     },
     {
@@ -113,8 +163,18 @@
       "date": "1993–1995",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-circuit-1993-1995']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-circuit-1993-1995']", "parent_selector": "#stages"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-circuit-1993-1995']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-circuit-1993-1995']",
+          "parent_selector": "#stages"
+        }
       }
     },
     {
@@ -123,8 +183,16 @@
       "date": "1994–1995",
       "domain": "communication",
       "source": {
-        "pt": {"path": "pt/comunicacao/index.html", "kind": "section", "selector": "#radio"},
-        "en": {"path": "en/communication/index.html", "kind": "section", "selector": "#radio"}
+        "pt": {
+          "path": "pt/comunicacao/index.html",
+          "kind": "section",
+          "selector": "#radio"
+        },
+        "en": {
+          "path": "en/communication/index.html",
+          "kind": "section",
+          "selector": "#radio"
+        }
       }
     },
     {
@@ -133,8 +201,16 @@
       "date": "1996",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#internet"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#internet"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#internet"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#internet"
+        }
       }
     },
     {
@@ -143,8 +219,18 @@
       "date": "1997",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-album-1997']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-album-1997']", "parent_selector": "#stages"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-album-1997']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-album-1997']",
+          "parent_selector": "#stages"
+        }
       }
     },
     {
@@ -153,8 +239,16 @@
       "date": "1998",
       "domain": "audiovisual",
       "source": {
-        "pt": {"path": "pt/audiovisual/index.html", "kind": "section", "selector": "#homens"},
-        "en": {"path": "en/audiovisual/index.html", "kind": "section", "selector": "#homens"}
+        "pt": {
+          "path": "pt/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#homens"
+        },
+        "en": {
+          "path": "en/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#homens"
+        }
       }
     },
     {
@@ -163,8 +257,16 @@
       "date": "1998–2000",
       "domain": "audiovisual",
       "source": {
-        "pt": {"path": "pt/audiovisual/index.html", "kind": "section", "selector": "#cinema"},
-        "en": {"path": "en/audiovisual/index.html", "kind": "section", "selector": "#film"}
+        "pt": {
+          "path": "pt/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#cinema"
+        },
+        "en": {
+          "path": "en/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#film"
+        }
       }
     },
     {
@@ -173,8 +275,18 @@
       "date": "1998–1999",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-festival-1998-1999']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-festival-1998-1999']", "parent_selector": "#stages"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-festival-1998-1999']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-festival-1998-1999']",
+          "parent_selector": "#stages"
+        }
       }
     },
     {
@@ -183,8 +295,18 @@
       "date": "1999–2000",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-album-1999-2000']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-album-1999-2000']", "parent_selector": "#stages"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-album-1999-2000']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-album-1999-2000']",
+          "parent_selector": "#stages"
+        }
       }
     },
     {
@@ -193,8 +315,16 @@
       "date": "2000",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#psinet"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#psinet"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#psinet"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#psinet"
+        }
       }
     },
     {
@@ -203,9 +333,20 @@
       "date": "jul. 2000",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-olympia-2000']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-olympia-2000']", "parent_selector": "#stages"}
-      }
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-olympia-2000']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-olympia-2000']",
+          "parent_selector": "#stages"
+        }
+      },
+      "date_en": "Jul. 2000"
     },
     {
       "id": "livraria-cultura",
@@ -213,9 +354,16 @@
       "date": "out. 2000–jan. 2001",
       "domain": "context",
       "source": {
-        "pt": {"path": "content/full-biography/pt/livraria-cultura.html", "kind": "fragment"},
-        "en": {"path": "content/full-biography/en/livraria-cultura.html", "kind": "fragment"}
-      }
+        "pt": {
+          "path": "content/full-biography/pt/livraria-cultura.inc",
+          "kind": "fragment"
+        },
+        "en": {
+          "path": "content/full-biography/en/livraria-cultura.inc",
+          "kind": "fragment"
+        }
+      },
+      "date_en": "Oct. 2000–Jan. 2001"
     },
     {
       "id": "communication-folha",
@@ -223,9 +371,18 @@
       "date": "23 abr. 2001",
       "domain": "communication",
       "source": {
-        "pt": {"path": "pt/comunicacao/index.html", "kind": "section", "selector": "#folha"},
-        "en": {"path": "en/communication/index.html", "kind": "section", "selector": "#folha"}
-      }
+        "pt": {
+          "path": "pt/comunicacao/index.html",
+          "kind": "section",
+          "selector": "#folha"
+        },
+        "en": {
+          "path": "en/communication/index.html",
+          "kind": "section",
+          "selector": "#folha"
+        }
+      },
+      "date_en": "Apr. 23, 2001"
     },
     {
       "id": "music-programa-jo",
@@ -233,9 +390,20 @@
       "date": "21 jun. 2001",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-jo-2001']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-jo-2001']", "parent_selector": "#stages"}
-      }
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-jo-2001']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-jo-2001']",
+          "parent_selector": "#stages"
+        }
+      },
+      "date_en": "Jun. 21, 2001"
     },
     {
       "id": "music-active-2001-2003",
@@ -243,8 +411,18 @@
       "date": "2001–2003",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-active-2001-2003']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-active-2001-2003']", "parent_selector": "#stages"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-active-2001-2003']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-active-2001-2003']",
+          "parent_selector": "#stages"
+        }
       }
     },
     {
@@ -253,8 +431,18 @@
       "date": "2003",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-end-2003']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-end-2003']", "parent_selector": "#stages"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-end-2003']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-end-2003']",
+          "parent_selector": "#stages"
+        }
       }
     },
     {
@@ -263,8 +451,16 @@
       "date": "2003–2006",
       "domain": "communication",
       "source": {
-        "pt": {"path": "pt/comunicacao/index.html", "kind": "section", "selector": "#sinal-verde"},
-        "en": {"path": "en/communication/index.html", "kind": "section", "selector": "#sinal-verde"}
+        "pt": {
+          "path": "pt/comunicacao/index.html",
+          "kind": "section",
+          "selector": "#sinal-verde"
+        },
+        "en": {
+          "path": "en/communication/index.html",
+          "kind": "section",
+          "selector": "#sinal-verde"
+        }
       }
     },
     {
@@ -273,8 +469,16 @@
       "date": "2004–2008",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#mirantte"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#mirantte"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#mirantte"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#mirantte"
+        }
       }
     },
     {
@@ -283,8 +487,16 @@
       "date": "2006",
       "domain": "audiovisual",
       "source": {
-        "pt": {"path": "pt/audiovisual/index.html", "kind": "section", "selector": "#meia-noite"},
-        "en": {"path": "en/audiovisual/index.html", "kind": "section", "selector": "#meia-noite"}
+        "pt": {
+          "path": "pt/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#meia-noite"
+        },
+        "en": {
+          "path": "en/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#meia-noite"
+        }
       }
     },
     {
@@ -293,8 +505,16 @@
       "date": "2008–2009",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#sem"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#sem"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#sem"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#sem"
+        }
       }
     },
     {
@@ -303,8 +523,16 @@
       "date": "2010–2012",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#cookieweb"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#cookieweb"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#cookieweb"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#cookieweb"
+        }
       }
     },
     {
@@ -313,8 +541,16 @@
       "date": "2012–2013",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#petlove"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#petlove"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#petlove"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#petlove"
+        }
       }
     },
     {
@@ -323,9 +559,18 @@
       "date": "set. 2012–presente",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#clickland"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#clickland"}
-      }
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#clickland"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#clickland"
+        }
+      },
+      "date_en": "Sep. 2012–present"
     },
     {
       "id": "internet-best",
@@ -333,8 +578,16 @@
       "date": "2014",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#best"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#best"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#best"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#best"
+        }
       }
     },
     {
@@ -343,8 +596,16 @@
       "date": "2015",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#dialetto"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#dialetto"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#dialetto"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#dialetto"
+        }
       }
     },
     {
@@ -353,8 +614,16 @@
       "date": "2016–2020",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#independente"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#independent"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#independente"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#independent"
+        }
       }
     },
     {
@@ -363,8 +632,16 @@
       "date": "2019",
       "domain": "audiovisual",
       "source": {
-        "pt": {"path": "pt/audiovisual/index.html", "kind": "section", "selector": "#arquiteto"},
-        "en": {"path": "en/audiovisual/index.html", "kind": "section", "selector": "#arquiteto"}
+        "pt": {
+          "path": "pt/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#arquiteto"
+        },
+        "en": {
+          "path": "en/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#architect"
+        }
       }
     },
     {
@@ -373,8 +650,16 @@
       "date": "2021",
       "domain": "audiovisual",
       "source": {
-        "pt": {"path": "pt/audiovisual/index.html", "kind": "section", "selector": "#autopsia"},
-        "en": {"path": "en/audiovisual/index.html", "kind": "section", "selector": "#autopsia"}
+        "pt": {
+          "path": "pt/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#autopsia"
+        },
+        "en": {
+          "path": "en/audiovisual/index.html",
+          "kind": "section",
+          "selector": "#autopsia"
+        }
       }
     },
     {
@@ -383,8 +668,16 @@
       "date": "2023–2024",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#driven"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#driven"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#driven"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#driven"
+        }
       }
     },
     {
@@ -393,9 +686,20 @@
       "date": "dez. 2023",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "phase", "selector": "[data-bio-key='music-reunion-2023']", "parent_selector": "#palcos"},
-        "en": {"path": "en/music/index.html", "kind": "phase", "selector": "[data-bio-key='music-reunion-2023']", "parent_selector": "#stages"}
-      }
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-reunion-2023']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-reunion-2023']",
+          "parent_selector": "#stages"
+        }
+      },
+      "date_en": "Dec. 2023"
     },
     {
       "id": "hai-cycle",
@@ -403,8 +707,16 @@
       "date": "2025–2026",
       "domain": "hai",
       "source": {
-        "pt": {"path": "pt/ia-hai/index.html", "kind": "section", "selector": "#ciclo"},
-        "en": {"path": "en/ai-hai/index.html", "kind": "section", "selector": "#cycle"}
+        "pt": {
+          "path": "pt/ia-hai/index.html",
+          "kind": "section",
+          "selector": "#ciclo"
+        },
+        "en": {
+          "path": "en/ai-hai/index.html",
+          "kind": "section",
+          "selector": "#cycle"
+        }
       }
     },
     {
@@ -413,9 +725,18 @@
       "date": "jan. 2026",
       "domain": "hai",
       "source": {
-        "pt": {"path": "pt/ia-hai/index.html", "kind": "section", "selector": "#melissa"},
-        "en": {"path": "en/ai-hai/index.html", "kind": "section", "selector": "#melissa"}
-      }
+        "pt": {
+          "path": "pt/ia-hai/index.html",
+          "kind": "section",
+          "selector": "#melissa"
+        },
+        "en": {
+          "path": "en/ai-hai/index.html",
+          "kind": "section",
+          "selector": "#melissa"
+        }
+      },
+      "date_en": "Jan. 2026"
     },
     {
       "id": "hai-pro1",
@@ -423,9 +744,18 @@
       "date": "maio 2026",
       "domain": "hai",
       "source": {
-        "pt": {"path": "pt/ia-hai/index.html", "kind": "section", "selector": "#pro1"},
-        "en": {"path": "en/ai-hai/index.html", "kind": "section", "selector": "#pro1"}
-      }
+        "pt": {
+          "path": "pt/ia-hai/index.html",
+          "kind": "section",
+          "selector": "#pro1"
+        },
+        "en": {
+          "path": "en/ai-hai/index.html",
+          "kind": "section",
+          "selector": "#pro1"
+        }
+      },
+      "date_en": "May 2026"
     },
     {
       "id": "hai-pro2",
@@ -433,9 +763,18 @@
       "date": "em desenvolvimento",
       "domain": "hai",
       "source": {
-        "pt": {"path": "pt/ia-hai/index.html", "kind": "section", "selector": "#pro2"},
-        "en": {"path": "en/ai-hai/index.html", "kind": "section", "selector": "#pro2"}
-      }
+        "pt": {
+          "path": "pt/ia-hai/index.html",
+          "kind": "section",
+          "selector": "#pro2"
+        },
+        "en": {
+          "path": "en/ai-hai/index.html",
+          "kind": "section",
+          "selector": "#pro2"
+        }
+      },
+      "date_en": "in development"
     }
   ],
   "context_entries": [
@@ -444,8 +783,16 @@
       "date": "Música",
       "domain": "music",
       "source": {
-        "pt": {"path": "pt/musica/index.html", "kind": "section", "selector": "#autoria"},
-        "en": {"path": "en/music/index.html", "kind": "section", "selector": "#authorship"}
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "section",
+          "selector": "#autoria"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "section",
+          "selector": "#authorship"
+        }
       }
     },
     {
@@ -453,8 +800,16 @@
       "date": "Comunicação",
       "domain": "communication",
       "source": {
-        "pt": {"path": "pt/comunicacao/index.html", "kind": "section", "selector": "#temas"},
-        "en": {"path": "en/communication/index.html", "kind": "section", "selector": "#themes"}
+        "pt": {
+          "path": "pt/comunicacao/index.html",
+          "kind": "section",
+          "selector": "#temas"
+        },
+        "en": {
+          "path": "en/communication/index.html",
+          "kind": "section",
+          "selector": "#themes"
+        }
       }
     },
     {
@@ -462,8 +817,16 @@
       "date": "Comunicação",
       "domain": "communication",
       "source": {
-        "pt": {"path": "pt/comunicacao/index.html", "kind": "section", "selector": "#nomes"},
-        "en": {"path": "en/communication/index.html", "kind": "section", "selector": "#names"}
+        "pt": {
+          "path": "pt/comunicacao/index.html",
+          "kind": "section",
+          "selector": "#nomes"
+        },
+        "en": {
+          "path": "en/communication/index.html",
+          "kind": "section",
+          "selector": "#names"
+        }
       }
     },
     {
@@ -471,8 +834,16 @@
       "date": "Internet & Performance",
       "domain": "internet",
       "source": {
-        "pt": {"path": "pt/internet/index.html", "kind": "section", "selector": "#continuidade"},
-        "en": {"path": "en/internet/index.html", "kind": "section", "selector": "#continuity"}
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#continuidade"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#continuity"
+        }
       }
     },
     {
@@ -480,8 +851,16 @@
       "date": "IA/HAI",
       "domain": "hai",
       "source": {
-        "pt": {"path": "pt/ia-hai/index.html", "kind": "section", "selector": "#identidade"},
-        "en": {"path": "en/ai-hai/index.html", "kind": "section", "selector": "#identity"}
+        "pt": {
+          "path": "pt/ia-hai/index.html",
+          "kind": "section",
+          "selector": "#identidade"
+        },
+        "en": {
+          "path": "en/ai-hai/index.html",
+          "kind": "section",
+          "selector": "#identity"
+        }
       }
     }
   ]
