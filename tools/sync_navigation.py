@@ -10,13 +10,35 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def normalize_nav_block(block: str, lang: str) -> str:
     if lang == "pt":
-        block = block.replace('href="/pt/internet/">Internet</a>', 'href="/pt/internet/">Internet &amp; Performance</a>')
-        block = block.replace('href="/pt/internet/">Internet & Cultura Digital</a>', 'href="/pt/internet/">Internet &amp; Performance</a>')
-        block = re.sub(r'<a href="/pt/search-performance/">[^<]*</a>', '', block)
+        internet_href = '/pt/internet/'
+        search_pattern = r'<a href="/pt/search-performance/">[^<]*</a>'
+        canonical_anchor = '<a href="/pt/internet/">Internet &amp; Performance</a>'
+        replacements = (
+            ('href="/pt/internet/">Internet</a>', 'href="/pt/internet/">Internet &amp; Performance</a>'),
+            ('href="/pt/internet/">Internet & Cultura Digital</a>', 'href="/pt/internet/">Internet &amp; Performance</a>'),
+            ('href="/pt/internet/">Internet & Performance</a>', 'href="/pt/internet/">Internet &amp; Performance</a>'),
+        )
     else:
-        block = block.replace('href="/en/internet/">Internet</a>', 'href="/en/internet/">Internet &amp; Performance</a>')
-        block = block.replace('href="/en/internet/">Internet & Digital Culture</a>', 'href="/en/internet/">Internet &amp; Performance</a>')
-        block = re.sub(r'<a href="/en/search-performance/">[^<]*</a>', '', block)
+        internet_href = '/en/internet/'
+        search_pattern = r'<a href="/en/search-performance/">[^<]*</a>'
+        canonical_anchor = '<a href="/en/internet/">Internet &amp; Performance</a>'
+        replacements = (
+            ('href="/en/internet/">Internet</a>', 'href="/en/internet/">Internet &amp; Performance</a>'),
+            ('href="/en/internet/">Internet & Digital Culture</a>', 'href="/en/internet/">Internet &amp; Performance</a>'),
+            ('href="/en/internet/">Internet & Performance</a>', 'href="/en/internet/">Internet &amp; Performance</a>'),
+        )
+
+    had_internet = f'href="{internet_href}"' in block
+    had_search = re.search(search_pattern, block) is not None
+
+    for old, new in replacements:
+        block = block.replace(old, new)
+
+    if had_search and not had_internet:
+        block = re.sub(search_pattern, canonical_anchor, block, count=1)
+    elif had_search:
+        block = re.sub(search_pattern, '', block)
+
     return block
 
 
