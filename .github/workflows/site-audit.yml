@@ -19,8 +19,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install media audit dependency
-        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Install audit dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
       - name: Audit synchronized navigation
         run: python tools/sync_navigation.py --check
       - name: Audit gallery derivatives
@@ -29,6 +29,10 @@ jobs:
         run: python tools/sync_galleries.py --check
       - name: Audit gallery registry and rendering
         run: python tools/audit_galleries.py
+      - name: Audit synchronized Full Biography
+        run: python tools/sync_full_biography.py --check
+      - name: Audit Full Biography coverage
+        run: python tools/audit_full_biography.py
       - name: Audit HTML, JSON and sitemap
         run: python tools/audit_site.py
       - name: Audit site-wide external presence
