@@ -1,0 +1,71 @@
+name: Temporary Block 3A integration
+
+on:
+  push:
+    branches:
+      - work/block3a-cookieweb-search
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/block3a-cookieweb-search
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+
+      - name: Apply reviewed Block 3A source changes
+        run: python tools/_temp_apply_block3a.py
+
+      - name: Build responsive CookieWEB gallery media
+        run: python tools/build_gallery_media.py
+
+      - name: Synchronize gallery markup
+        run: python tools/sync_galleries.py
+
+      - name: Accept reviewed PT EN parity checkpoints
+        run: |
+          python tools/editorial_parity.py --accept internet-mirantte
+          python tools/editorial_parity.py --accept internet-sem
+          python tools/editorial_parity.py --accept internet-cookieweb
+
+      - name: Synchronize Full Biography
+        run: python tools/sync_full_biography.py
+
+      - name: Run complete local audit suite
+        run: |
+          python tools/sync_navigation.py --check
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+
+      - name: Remove temporary integration machinery
+        run: |
+          rm tools/_temp_apply_block3a.py
+          rm .github/workflows/temp-block3a-integration.yml
+
+      - name: Commit integrated Block 3A
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Expand Mirantte, Search and CookieWEB biography"
+          git push origin HEAD:work/block3a-cookieweb-search
