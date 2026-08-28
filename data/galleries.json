@@ -970,6 +970,772 @@
           }
         }
       ]
+    },
+    {
+      "id": "mirantte-news",
+      "sourceRoot": "assets/archive/internet/mirantte-news",
+      "targets": {
+        "pt": [
+          "pt/internet/index.html"
+        ],
+        "en": [
+          "en/internet/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Mirantte News — telas e registros",
+        "en": "Mirantte News — screens and records"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "miranttenews01- marcelonicchio_luizkechichian.jpg",
+          "caption": {
+            "pt": "Reportagem sobre o Mirantte News com Marcelo Nicchio e Luiz Kechichian.",
+            "en": "Article about Mirantte News featuring Marcelo Nicchio and Luiz Kechichian."
+          },
+          "width": 1530,
+          "height": 2029,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-01-480.webp",
+              "width": 480,
+              "height": 637
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-01-768.webp",
+              "width": 768,
+              "height": 1018
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "miranttenews02-home.jpg",
+          "caption": {
+            "pt": "Página inicial do Mirantte News.",
+            "en": "Mirantte News homepage."
+          },
+          "width": 720,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-02-480.webp",
+              "width": 480,
+              "height": 613
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-02-768.webp",
+              "width": 720,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "miranttenews03-24horas.jpg",
+          "caption": {
+            "pt": "Categoria 24 Horas do Mirantte News.",
+            "en": "Mirantte News 24 Horas category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-03-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-03-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "miranttenews04-alimentacao.jpg",
+          "caption": {
+            "pt": "Categoria Alimentação do Mirantte News.",
+            "en": "Mirantte News Food category page."
+          },
+          "width": 717,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-04-480.webp",
+              "width": 480,
+              "height": 615
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-04-768.webp",
+              "width": 717,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "miranttenews05-animais.jpg",
+          "caption": {
+            "pt": "Categoria Animais do Mirantte News.",
+            "en": "Mirantte News Pets category page."
+          },
+          "width": 737,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-05-480.webp",
+              "width": 480,
+              "height": 599
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-05-768.webp",
+              "width": 737,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "miranttenews06-auto.jpg",
+          "caption": {
+            "pt": "Categoria Auto do Mirantte News.",
+            "en": "Mirantte News Auto category page."
+          },
+          "width": 735,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-06-480.webp",
+              "width": 480,
+              "height": 600
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-06-768.webp",
+              "width": 735,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "miranttenews07-beleza.jpg",
+          "caption": {
+            "pt": "Categoria Beleza do Mirantte News.",
+            "en": "Mirantte News Beauty category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-07-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-07-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "miranttenews08-casaeconstrucao.jpg",
+          "caption": {
+            "pt": "Categoria Casa e Construção do Mirantte News.",
+            "en": "Mirantte News Home and Construction category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-08-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-08-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "miranttenews09-delivery.jpg",
+          "caption": {
+            "pt": "Categoria Delivery do Mirantte News.",
+            "en": "Mirantte News Delivery category page."
+          },
+          "width": 735,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-09-480.webp",
+              "width": 480,
+              "height": 600
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-09-768.webp",
+              "width": 735,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "miranttenews10-diversaoelazer.jpg",
+          "caption": {
+            "pt": "Categoria Diversão e Lazer do Mirantte News.",
+            "en": "Mirantte News Entertainment and Leisure category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-10-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-10-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "miranttenews11-educacao.jpg",
+          "caption": {
+            "pt": "Categoria Educação do Mirantte News.",
+            "en": "Mirantte News Education category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-11-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-11-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "miranttenews12-esporte.jpg",
+          "caption": {
+            "pt": "Categoria Esporte do Mirantte News.",
+            "en": "Mirantte News Sports category page."
+          },
+          "width": 729,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-12-480.webp",
+              "width": 480,
+              "height": 605
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-12-768.webp",
+              "width": 729,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "miranttenews13-eletro.jpg",
+          "caption": {
+            "pt": "Categoria Eletro do Mirantte News.",
+            "en": "Mirantte News Electronics category page."
+          },
+          "width": 729,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-13-480.webp",
+              "width": 480,
+              "height": 605
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-13-768.webp",
+              "width": 729,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "miranttenews14-gastronomia.jpg",
+          "caption": {
+            "pt": "Categoria Gastronomia do Mirantte News.",
+            "en": "Mirantte News Gastronomy category page."
+          },
+          "width": 730,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-14-480.webp",
+              "width": 480,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-14-768.webp",
+              "width": 730,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "miranttenews15-festaseeventos.jpg",
+          "caption": {
+            "pt": "Categoria Festas e Eventos do Mirantte News.",
+            "en": "Mirantte News Parties and Events category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-15-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-15-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "miranttenews16-hotelmotelflats.jpg",
+          "caption": {
+            "pt": "Categoria Hotéis, Motéis e Flats do Mirantte News.",
+            "en": "Mirantte News Hotels, Motels and Flats category page."
+          },
+          "width": 729,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-16-480.webp",
+              "width": 480,
+              "height": 605
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-16-768.webp",
+              "width": 729,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "miranttenews17-gastronomia.jpg",
+          "caption": {
+            "pt": "Outra tela da categoria Gastronomia do Mirantte News.",
+            "en": "Another Mirantte News Gastronomy category screen."
+          },
+          "width": 729,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-17-480.webp",
+              "width": 480,
+              "height": 605
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-17-768.webp",
+              "width": 729,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "miranttenews18-info.jpg",
+          "caption": {
+            "pt": "Categoria Info do Mirantte News.",
+            "en": "Mirantte News Info category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-18-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-18-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "miranttenews19-moda.jpg",
+          "caption": {
+            "pt": "Categoria Moda do Mirantte News.",
+            "en": "Mirantte News Fashion category page."
+          },
+          "width": 729,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-19-480.webp",
+              "width": 480,
+              "height": 605
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-19-768.webp",
+              "width": 729,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "20",
+          "source": "miranttenews20-noite.jpg",
+          "caption": {
+            "pt": "Categoria Noite do Mirantte News.",
+            "en": "Mirantte News Nightlife category page."
+          },
+          "width": 728,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-20-480.webp",
+              "width": 480,
+              "height": 606
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-20-768.webp",
+              "width": 728,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "21",
+          "source": "miranttenews21-presentes.jpg",
+          "caption": {
+            "pt": "Categoria Presentes do Mirantte News.",
+            "en": "Mirantte News Gifts category page."
+          },
+          "width": 730,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-21-480.webp",
+              "width": 480,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-21-768.webp",
+              "width": 730,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "22",
+          "source": "miranttenews22-saude.jpg",
+          "caption": {
+            "pt": "Categoria Saúde do Mirantte News.",
+            "en": "Mirantte News Health category page."
+          },
+          "width": 729,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-22-480.webp",
+              "width": 480,
+              "height": 605
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-22-768.webp",
+              "width": 729,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "23",
+          "source": "miranttenews23-paginacolunistas.jpg",
+          "caption": {
+            "pt": "Página de colunistas do Mirantte News.",
+            "en": "Mirantte News columnists page."
+          },
+          "width": 730,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-23-480.webp",
+              "width": 480,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-23-768.webp",
+              "width": 730,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "24",
+          "source": "miranttenews24-paginaresultados.jpg",
+          "caption": {
+            "pt": "Página de resultados de busca do Mirantte News.",
+            "en": "Mirantte News search results page."
+          },
+          "width": 719,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-24-480.webp",
+              "width": 480,
+              "height": 614
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-24-768.webp",
+              "width": 719,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "25",
+          "source": "miranttenews25-paginamateria.jpg",
+          "caption": {
+            "pt": "Página de matéria editorial do Mirantte News.",
+            "en": "Mirantte News editorial article page."
+          },
+          "width": 778,
+          "height": 801,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-25-480.webp",
+              "width": 480,
+              "height": 494
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-25-768.webp",
+              "width": 768,
+              "height": 791
+            }
+          }
+        },
+        {
+          "id": "26",
+          "source": "miranttenews26-livrodereceitas.jpg",
+          "caption": {
+            "pt": "Livro de receitas do Mirantte News.",
+            "en": "Mirantte News recipe book feature."
+          },
+          "width": 615,
+          "height": 385,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-26-480.webp",
+              "width": 480,
+              "height": 300
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-26-768.webp",
+              "width": 615,
+              "height": 385
+            }
+          }
+        },
+        {
+          "id": "27",
+          "source": "miranttenews27-hotsite01.jpg",
+          "caption": {
+            "pt": "Exemplo de hot-site de anunciante no Mirantte News.",
+            "en": "Example of an advertiser hot-site on Mirantte News."
+          },
+          "width": 782,
+          "height": 784,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-27-480.webp",
+              "width": 480,
+              "height": 481
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-27-768.webp",
+              "width": 768,
+              "height": 770
+            }
+          }
+        },
+        {
+          "id": "28",
+          "source": "miranttenews28-maplink01.jpg",
+          "caption": {
+            "pt": "Integração MapLink no Mirantte News — registro 1 de 4.",
+            "en": "Mirantte News MapLink integration — record 1 of 4."
+          },
+          "width": 778,
+          "height": 798,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-28-480.webp",
+              "width": 480,
+              "height": 492
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-28-768.webp",
+              "width": 768,
+              "height": 788
+            }
+          }
+        },
+        {
+          "id": "29",
+          "source": "miranttenews29-maplink02.jpg",
+          "caption": {
+            "pt": "Integração MapLink no Mirantte News — registro 2 de 4.",
+            "en": "Mirantte News MapLink integration — record 2 of 4."
+          },
+          "width": 723,
+          "height": 459,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-29-480.webp",
+              "width": 480,
+              "height": 305
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-29-768.webp",
+              "width": 723,
+              "height": 459
+            }
+          }
+        },
+        {
+          "id": "30",
+          "source": "miranttenews30-maplink03.jpg",
+          "caption": {
+            "pt": "Integração MapLink no Mirantte News — registro 3 de 4.",
+            "en": "Mirantte News MapLink integration — record 3 of 4."
+          },
+          "width": 720,
+          "height": 701,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-30-480.webp",
+              "width": 480,
+              "height": 467
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-30-768.webp",
+              "width": 720,
+              "height": 701
+            }
+          }
+        },
+        {
+          "id": "31",
+          "source": "miranttenews31-maplink04.jpg",
+          "caption": {
+            "pt": "Integração MapLink no Mirantte News — registro 4 de 4.",
+            "en": "Mirantte News MapLink integration — record 4 of 4."
+          },
+          "width": 722,
+          "height": 620,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-31-480.webp",
+              "width": 480,
+              "height": 412
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-31-768.webp",
+              "width": 722,
+              "height": 620
+            }
+          }
+        },
+        {
+          "id": "32",
+          "source": "miranttenews32-radio_online.jpg",
+          "caption": {
+            "pt": "Recurso de rádio online do Mirantte News.",
+            "en": "Mirantte News online radio feature."
+          },
+          "width": 536,
+          "height": 340,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-32-480.webp",
+              "width": 480,
+              "height": 304
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-32-768.webp",
+              "width": 536,
+              "height": 340
+            }
+          }
+        },
+        {
+          "id": "33",
+          "source": "miranttenews33-renatocarriel_webmaster.JPG",
+          "caption": {
+            "pt": "Renato Carriel, webmaster do Mirantte News.",
+            "en": "Renato Carriel, Mirantte News webmaster."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-33-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-33-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "34",
+          "source": "miranttenews34-escritorio.JPG",
+          "caption": {
+            "pt": "Escritório do Mirantte News.",
+            "en": "Mirantte News office."
+          },
+          "width": 1379,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-34-480.webp",
+              "width": 480,
+              "height": 320
+            },
+            "768": {
+              "path": "assets/media/galleries/mirantte-news/mirantte-news-34-768.webp",
+              "width": 768,
+              "height": 512
+            }
+          }
+        }
+      ]
     }
   ]
 }
