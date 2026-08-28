@@ -187,9 +187,9 @@
       ]
     },
     "internet-cookieweb": {
-      "revision": 3,
-      "pt_hash": "830a051094a6431fbacb0941e7a0d6eeb810f3830c3181d74d802039a4aff073",
-      "en_hash": "df31cda8dc688853c0db8b21b07d17bb4a25a2de5816dc2c38862b5509062947",
+      "revision": 4,
+      "pt_hash": "bf9d50b3d403c178eba8a72a3bcabb5ccdf097677bde6705273c7f118f02dbb7",
+      "en_hash": "6937e1c3c6f8dc091e4b4ed9cee83a332eb273d60699de08f7f17ba68a938241",
       "accepted_on": "2026-08-28",
       "changed_languages": [
         "pt",
