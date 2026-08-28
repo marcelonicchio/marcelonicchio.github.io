@@ -1,0 +1,65 @@
+name: Temporary Folhateen integration preview
+
+on:
+  push:
+    branches: [work/folhateen-cover-thread]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+      - name: Integrate cover in working copy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          src = Path('assets/archive/communication/folhateen/capafolhateen.png')
+          dst = Path('assets/media/thread/folhateen-cover-2001.webp')
+          dst.parent.mkdir(parents=True, exist_ok=True)
+          im = Image.open(src).convert('RGB')
+          if im.width > 1440:
+              im = im.resize((1440, round(im.height * 1440 / im.width)), Image.Resampling.LANCZOS)
+          im.save(dst, 'WEBP', quality=84, method=6)
+
+          pt = Path('pt/comunicacao/index.html')
+          en = Path('en/communication/index.html')
+          pt_text = pt.read_text(encoding='utf-8')
+          en_text = en.read_text(encoding='utf-8')
+          pt_marker = '<section id="folha" class="chapter"><h2>Folha de S.Paulo — “Órfãos do Rock”</h2>'
+          en_marker = '<section id="folha" class="chapter"><h2>Folha de S.Paulo — “Órfãos do Rock”</h2>'
+          pt_figure = '<figure class="thread-media thread-media--linked"><a href="/assets/archive/communication/folhateen/capafolhateen.png" target="_blank" rel="noopener noreferrer" aria-label="Abrir a capa do Folhateen em tamanho maior"><img src="/assets/media/thread/folhateen-cover-2001.webp" loading="lazy" decoding="async" alt="Capa do Folhateen com a chamada Órfãos do Rock, edição de 23 de abril de 2001."></a><figcaption><strong>Folhateen — “Órfãos do Rock”, 23 abr. 2001.</strong><span class="thread-media-note">Capa restaurada digitalmente com auxílio de IA a partir do exemplar original preservado.</span><a class="thread-media-open" href="/assets/archive/communication/folhateen/capafolhateen.png" target="_blank" rel="noopener noreferrer">Abrir imagem em tamanho maior ↗</a></figcaption></figure>'
+          en_figure = '<figure class="thread-media thread-media--linked"><a href="/assets/archive/communication/folhateen/capafolhateen.png" target="_blank" rel="noopener noreferrer" aria-label="Open the Folhateen cover at full size"><img src="/assets/media/thread/folhateen-cover-2001.webp" loading="lazy" decoding="async" alt="Folhateen cover with the headline Órfãos do Rock, April 23, 2001 issue."></a><figcaption><strong>Folhateen — “Órfãos do Rock”, Apr. 23, 2001.</strong><span class="thread-media-note">Cover digitally restored with AI assistance from the preserved original copy.</span><a class="thread-media-open" href="/assets/archive/communication/folhateen/capafolhateen.png" target="_blank" rel="noopener noreferrer">Open full-size image ↗</a></figcaption></figure>'
+          if pt_text.count(pt_marker) != 1 or en_text.count(en_marker) != 1:
+              raise SystemExit('Folhateen markers not unique')
+          pt.write_text(pt_text.replace(pt_marker, pt_marker + pt_figure, 1), encoding='utf-8')
+          en.write_text(en_text.replace(en_marker, en_marker + en_figure, 1), encoding='utf-8')
+          PY
+      - name: Update parity and Full Biography
+        run: |
+          python tools/editorial_parity.py --accept communication-folha
+          python tools/sync_full_biography.py
+      - name: Run audits
+        run: |
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: folhateen-integration
+          path: |
+            pt/comunicacao/index.html
+            en/communication/index.html
+            pt/biografia/index.html
+            en/biography/index.html
+            data/editorial_parity.json
+            assets/media/thread/folhateen-cover-2001.webp
