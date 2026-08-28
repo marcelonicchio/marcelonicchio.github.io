@@ -1,0 +1,115 @@
+name: Temporary Goobec thread integration
+
+on:
+  push:
+    branches:
+      - work/goobec-thread-photo
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: work/goobec-thread-photo
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+
+      - name: Generate optimized thread image and insert PT/EN markup
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          src = Path('assets/archive/internet/goobec/goobec01-tratado-300kb.png')
+          out = Path('assets/media/thread/goobec-class-2009.webp')
+          out.parent.mkdir(parents=True, exist_ok=True)
+
+          with Image.open(src) as im:
+              im.load()
+              ow, oh = im.size
+              if ow > 1200:
+                  nh = round(oh * 1200 / ow)
+                  im = im.resize((1200, nh), Image.Resampling.LANCZOS)
+              if im.mode not in ('RGB', 'RGBA'):
+                  im = im.convert('RGB')
+              im.save(out, 'WEBP', quality=82, method=6)
+              w, h = im.size
+
+          print(f'Goobec original: {ow}x{oh}')
+          print(f'Goobec webp: {w}x{h} / {out.stat().st_size} bytes')
+
+          marker = '</p><div class="inline-records"><a class="inline-record" href="/assets/archive/internet/google-gap/marcelonicchio-gap01.jpg"'
+
+          figures = {
+              'pt/internet/index.html': (
+                  '<figure class="thread-media thread-media--linked">'
+                  '<a href="/assets/archive/internet/goobec/goobec01-tratado-300kb.png" target="_blank" rel="noopener noreferrer" aria-label="Abrir fotografia da turma da Goobec em tamanho maior">'
+                  f'<img src="/assets/media/thread/goobec-class-2009.webp" width="{w}" height="{h}" loading="lazy" decoding="async" alt="Turma do curso de Google AdWords da Goobec, em 2009, com Marcelo Nicchio entre os participantes.">'
+                  '</a>'
+                  '<figcaption><strong>Turma de Google AdWords da Goobec, 2009.</strong>'
+                  '<span class="thread-media-note">Fotografia original do período, restaurada digitalmente com auxílio de IA.</span>'
+                  '<a class="thread-media-open" href="/assets/archive/internet/goobec/goobec01-tratado-300kb.png" target="_blank" rel="noopener noreferrer">Abrir imagem em tamanho maior ↗</a>'
+                  '</figcaption></figure>'
+              ),
+              'en/internet/index.html': (
+                  '<figure class="thread-media thread-media--linked">'
+                  '<a href="/assets/archive/internet/goobec/goobec01-tratado-300kb.png" target="_blank" rel="noopener noreferrer" aria-label="Open the Goobec class photograph at full size">'
+                  f'<img src="/assets/media/thread/goobec-class-2009.webp" width="{w}" height="{h}" loading="lazy" decoding="async" alt="Goobec Google AdWords class in 2009, with Marcelo Nicchio among the participants.">'
+                  '</a>'
+                  '<figcaption><strong>Goobec Google AdWords class, 2009.</strong>'
+                  '<span class="thread-media-note">Original period photograph, digitally restored with AI assistance.</span>'
+                  '<a class="thread-media-open" href="/assets/archive/internet/goobec/goobec01-tratado-300kb.png" target="_blank" rel="noopener noreferrer">Open full-size image ↗</a>'
+                  '</figcaption></figure>'
+              ),
+          }
+
+          for path_s, figure in figures.items():
+              path = Path(path_s)
+              text = path.read_text(encoding='utf-8')
+              if 'goobec-class-2009.webp' in text:
+                  raise SystemExit(f'{path_s}: image already present')
+              if text.count(marker) != 1:
+                  raise SystemExit(f'{path_s}: expected one GAP marker, found {text.count(marker)}')
+              text = text.replace(marker, '</p>' + figure + '<div class="inline-records"><a class="inline-record" href="/assets/archive/internet/google-gap/marcelonicchio-gap01.jpg"', 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Accept reviewed PT EN parity for CookieWEB unit
+        run: python tools/editorial_parity.py --accept internet-cookieweb
+
+      - name: Synchronize Full Biography
+        run: python tools/sync_full_biography.py
+
+      - name: Run full audit suite
+        run: |
+          python tools/sync_navigation.py --check
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+
+      - name: Remove temporary workflow and commit generated integration
+        run: |
+          rm .github/workflows/_tmp-goobec-thread.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/internet/index.html en/internet/index.html pt/biografia/index.html en/biography/index.html data/editorial_parity.json assets/media/thread/goobec-class-2009.webp .github/workflows/_tmp-goobec-thread.yml
+          git commit -m "Add Goobec class photo to GAP thread"
+          git push origin HEAD:work/goobec-thread-photo
