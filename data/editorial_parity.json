@@ -119,10 +119,10 @@
       "accepted_on": "2026-08-27"
     },
     "communication-folha": {
-      "revision": 2,
-      "pt_hash": "83f446b5f5f73ea7f800524ef336283d27a73e4e9612e4fb3c5d1473b111b35f",
-      "en_hash": "72c62d359d8584a2272b02ef6139fd405cd8bb1e37aea09c490d4bec8de2ad0b",
-      "accepted_on": "2026-08-27",
+      "revision": 3,
+      "pt_hash": "8b01efaa4d72edaafc8c69794a30d1c6b56242bdf5097c75c69d624b7a2830f1",
+      "en_hash": "bacd87782436123592d24b0ffc690fb1fb098238c69c52dfdf625fdf6e0efafa",
+      "accepted_on": "2026-08-28",
       "changed_languages": [
         "pt",
         "en"
