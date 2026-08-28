@@ -1,0 +1,117 @@
+name: Temporary Mirantte gallery integration
+
+on:
+  push:
+    branches: [work/block3a-cookieweb-search]
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/block3a-cookieweb-search
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+      - name: Register Mirantte gallery and placeholders
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('.')
+          registry_path = root / 'data/galleries.json'
+          data = json.loads(registry_path.read_text(encoding='utf-8'))
+
+          files = [
+              ('01','miranttenews01- marcelonicchio_luizkechichian.jpg','Reportagem sobre o Mirantte News com Marcelo Nicchio e Luiz Kechichian.','Article about Mirantte News featuring Marcelo Nicchio and Luiz Kechichian.'),
+              ('02','miranttenews02-home.jpg','Página inicial do Mirantte News.','Mirantte News homepage.'),
+              ('03','miranttenews03-24horas.jpg','Categoria 24 Horas do Mirantte News.','Mirantte News 24 Horas category page.'),
+              ('04','miranttenews04-alimentacao.jpg','Categoria Alimentação do Mirantte News.','Mirantte News Food category page.'),
+              ('05','miranttenews05-animais.jpg','Categoria Animais do Mirantte News.','Mirantte News Pets category page.'),
+              ('06','miranttenews06-auto.jpg','Categoria Auto do Mirantte News.','Mirantte News Auto category page.'),
+              ('07','miranttenews07-beleza.jpg','Categoria Beleza do Mirantte News.','Mirantte News Beauty category page.'),
+              ('08','miranttenews08-casaeconstrucao.jpg','Categoria Casa e Construção do Mirantte News.','Mirantte News Home and Construction category page.'),
+              ('09','miranttenews09-delivery.jpg','Categoria Delivery do Mirantte News.','Mirantte News Delivery category page.'),
+              ('10','miranttenews10-diversaoelazer.jpg','Categoria Diversão e Lazer do Mirantte News.','Mirantte News Entertainment and Leisure category page.'),
+              ('11','miranttenews11-educacao.jpg','Categoria Educação do Mirantte News.','Mirantte News Education category page.'),
+              ('12','miranttenews12-esporte.jpg','Categoria Esporte do Mirantte News.','Mirantte News Sports category page.'),
+              ('13','miranttenews13-eletro.jpg','Categoria Eletro do Mirantte News.','Mirantte News Electronics category page.'),
+              ('14','miranttenews14-gastronomia.jpg','Categoria Gastronomia do Mirantte News.','Mirantte News Gastronomy category page.'),
+              ('15','miranttenews15-festaseeventos.jpg','Categoria Festas e Eventos do Mirantte News.','Mirantte News Parties and Events category page.'),
+              ('16','miranttenews16-hotelmotelflats.jpg','Categoria Hotéis, Motéis e Flats do Mirantte News.','Mirantte News Hotels, Motels and Flats category page.'),
+              ('17','miranttenews17-gastronomia.jpg','Outra tela da categoria Gastronomia do Mirantte News.','Another Mirantte News Gastronomy category screen.'),
+              ('18','miranttenews18-info.jpg','Categoria Info do Mirantte News.','Mirantte News Info category page.'),
+              ('19','miranttenews19-moda.jpg','Categoria Moda do Mirantte News.','Mirantte News Fashion category page.'),
+              ('20','miranttenews20-noite.jpg','Categoria Noite do Mirantte News.','Mirantte News Nightlife category page.'),
+              ('21','miranttenews21-presentes.jpg','Categoria Presentes do Mirantte News.','Mirantte News Gifts category page.'),
+              ('22','miranttenews22-saude.jpg','Categoria Saúde do Mirantte News.','Mirantte News Health category page.'),
+              ('23','miranttenews23-paginacolunistas.jpg','Página de colunistas do Mirantte News.','Mirantte News columnists page.'),
+              ('24','miranttenews24-paginaresultados.jpg','Página de resultados de busca do Mirantte News.','Mirantte News search results page.'),
+              ('25','miranttenews25-paginamateria.jpg','Página de matéria editorial do Mirantte News.','Mirantte News editorial article page.'),
+              ('26','miranttenews26-livrodereceitas.jpg','Livro de receitas do Mirantte News.','Mirantte News recipe book feature.'),
+              ('27','miranttenews27-hotsite01.jpg','Exemplo de hot-site de anunciante no Mirantte News.','Example of an advertiser hot-site on Mirantte News.'),
+              ('28','miranttenews28-maplink01.jpg','Integração MapLink no Mirantte News — registro 1 de 4.','Mirantte News MapLink integration — record 1 of 4.'),
+              ('29','miranttenews29-maplink02.jpg','Integração MapLink no Mirantte News — registro 2 de 4.','Mirantte News MapLink integration — record 2 of 4.'),
+              ('30','miranttenews30-maplink03.jpg','Integração MapLink no Mirantte News — registro 3 de 4.','Mirantte News MapLink integration — record 3 of 4.'),
+              ('31','miranttenews31-maplink04.jpg','Integração MapLink no Mirantte News — registro 4 de 4.','Mirantte News MapLink integration — record 4 of 4.'),
+              ('32','miranttenews32-radio_online.jpg','Recurso de rádio online do Mirantte News.','Mirantte News online radio feature.'),
+              ('33','miranttenews33-renatocarriel_webmaster.JPG','Renato Carriel, webmaster do Mirantte News.','Renato Carriel, Mirantte News webmaster.'),
+              ('34','miranttenews34-escritorio.JPG','Escritório do Mirantte News.','Mirantte News office.'),
+          ]
+
+          gallery = {
+              'id': 'mirantte-news',
+              'sourceRoot': 'assets/archive/internet/mirantte-news',
+              'targets': {'pt':['pt/internet/index.html'], 'en':['en/internet/index.html']},
+              'title': {'pt':'Mirantte News — telas e registros', 'en':'Mirantte News — screens and records'},
+              'items': [
+                  {'id': iid, 'source': src, 'caption': {'pt': pt, 'en': en}}
+                  for iid, src, pt, en in files
+              ],
+          }
+          data['galleries'] = [g for g in data.get('galleries', []) if g.get('id') != 'mirantte-news'] + [gallery]
+          registry_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          for rel in ('pt/internet/index.html','en/internet/index.html'):
+              path = root / rel
+              text = path.read_text(encoding='utf-8')
+              if '<!-- gallery:mirantte-news:start -->' in text or '<!-- gallery:mirantte-news -->' in text:
+                  continue
+              needle = '<div class="inline-records"><a class="inline-record" href="/assets/archive/mirantte-news-card.webp"'
+              if needle not in text:
+                  raise SystemExit(f'Mirantte card insertion point not found in {rel}')
+              text = text.replace(needle, '<!-- gallery:mirantte-news -->' + needle, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+      - name: Build and synchronize media
+        run: |
+          python tools/build_gallery_media.py
+          python tools/sync_galleries.py
+          python tools/editorial_parity.py --accept internet-mirantte
+          python tools/sync_full_biography.py
+      - name: Audit
+        run: |
+          python tools/sync_navigation.py --check
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+      - name: Commit integration and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/temp-integrate-mirantte-gallery.yml
+          git add data/galleries.json data/editorial_parity.json pt/internet/index.html en/internet/index.html pt/biografia/index.html en/biography/index.html assets/media/galleries/mirantte-news
+          git commit -m 'Integrate Mirantte News visual archive'
+          git push
