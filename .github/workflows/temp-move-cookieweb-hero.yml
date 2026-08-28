@@ -1,0 +1,77 @@
+name: Temporary CookieWEB hero reposition
+
+on:
+  push:
+    branches:
+      - work/block3a-cookieweb-search
+
+permissions:
+  contents: write
+
+jobs:
+  reposition:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: work/block3a-cookieweb-search
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audit dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+      - name: Move CookieWEB opening photo
+        shell: python
+        run: |
+          from pathlib import Path
+
+          edits = [
+              (
+                  Path('pt/internet/index.html'),
+                  '<section id="cookieweb" class="chapter"><h2>2010–2012 — Beleza na Web e CookieWEB: Search em escala</h2>',
+                  '<figure class="thread-media thread-media--linked"><a href="/assets/archive/internet/cookieweb/cookieweb_02.jpg" target="_blank" rel="noopener noreferrer" aria-label="Abrir foto da equipe da CookieWEB em tamanho maior"><img src="/assets/archive/internet/cookieweb/cookieweb_02.jpg" loading="lazy" decoding="async" alt="Equipe da CookieWEB em um momento de confraternização com sorvetes."></a><figcaption><strong>Equipe da CookieWEB.</strong><span class="thread-media-note">Um dos registros do cotidiano da equipe durante o período de expansão da operação.</span><a class="thread-media-open" href="/assets/archive/internet/cookieweb/cookieweb_02.jpg" target="_blank" rel="noopener noreferrer">Abrir imagem em tamanho maior ↗</a></figcaption></figure>'
+              ),
+              (
+                  Path('en/internet/index.html'),
+                  '<section id="cookieweb" class="chapter"><h2>2010–2012 — Beleza na Web and CookieWEB: Search at scale</h2>',
+                  '<figure class="thread-media thread-media--linked"><a href="/assets/archive/internet/cookieweb/cookieweb_02.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the CookieWEB team photo at full size"><img src="/assets/archive/internet/cookieweb/cookieweb_02.jpg" loading="lazy" decoding="async" alt="CookieWEB team during an informal moment with ice cream."></a><figcaption><strong>CookieWEB team.</strong><span class="thread-media-note">One of the surviving records of everyday team life during the operation\'s expansion.</span><a class="thread-media-open" href="/assets/archive/internet/cookieweb/cookieweb_02.jpg" target="_blank" rel="noopener noreferrer">Open full-size image ↗</a></figcaption></figure>'
+              ),
+          ]
+
+          for path, heading, figure in edits:
+              text = path.read_text(encoding='utf-8')
+              if text.count(figure) != 1:
+                  raise SystemExit(f'{path}: expected figure exactly once, found {text.count(figure)}')
+              if text.count(heading) != 1:
+                  raise SystemExit(f'{path}: expected heading exactly once, found {text.count(heading)}')
+              text = text.replace(figure, '', 1)
+              text = text.replace(heading, heading + figure, 1)
+              path.write_text(text, encoding='utf-8')
+      - name: Accept reviewed parity and synchronize Full Biography
+        run: |
+          python tools/editorial_parity.py --accept internet-cookieweb
+          python tools/sync_full_biography.py
+      - name: Audit
+        run: |
+          python tools/sync_navigation.py --check
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+      - name: Commit change and remove temporary workflow
+        run: |
+          rm .github/workflows/temp-move-cookieweb-hero.yml
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add -A
+          git commit -m "Move CookieWEB team photo to chapter opening"
+          git push origin HEAD:work/block3a-cookieweb-search
