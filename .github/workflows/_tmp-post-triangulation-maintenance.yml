@@ -1,0 +1,276 @@
+name: Temporary post-triangulation maintenance
+
+on:
+  push:
+    branches: [work/post-triangulation-maintenance]
+
+permissions:
+  contents: write
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: work/post-triangulation-maintenance
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install audit dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
+
+      - name: Move Goobec thread photo into the 2008–2009 Search section
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          configs = {
+              'pt/internet/index.html': 'Durante a imersão, ministrada por <strong>João Dalla</strong>, conheceu outro aluno: <strong>Herik Mourão</strong>.',
+              'en/internet/index.html': 'During the immersion course taught by <strong>João Dalla</strong>, he met another student: <strong>Herik Mourão</strong>.',
+          }
+
+          for path_s, needle in configs.items():
+              path = Path(path_s)
+              text = path.read_text(encoding='utf-8')
+              img_marker = 'goobec-class-2009.webp'
+              pos = text.find(img_marker)
+              if pos < 0:
+                  raise SystemExit(f'{path_s}: Goobec figure not found')
+              fig_start = text.rfind('<figure class="thread-media thread-media--linked">', 0, pos)
+              fig_end = text.find('</figure>', pos)
+              if fig_start < 0 or fig_end < 0:
+                  raise SystemExit(f'{path_s}: could not isolate Goobec figure')
+              fig_end += len('</figure>')
+              figure = text[fig_start:fig_end]
+              text = text[:fig_start] + text[fig_end:]
+
+              target = text.find(needle)
+              if target < 0:
+                  raise SystemExit(f'{path_s}: Goobec course paragraph not found')
+              para_end = text.find('</p>', target)
+              if para_end < 0:
+                  raise SystemExit(f'{path_s}: target paragraph end not found')
+              para_end += len('</p>')
+              text = text[:para_end] + figure + text[para_end:]
+
+              sem_start = text.find('<section id="sem"')
+              cookieweb_start = text.find('<section id="cookieweb"')
+              new_pos = text.find(img_marker)
+              if not (sem_start < new_pos < cookieweb_start):
+                  raise SystemExit(f'{path_s}: Goobec figure did not land in #sem')
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Fix Folhateen archival filenames to 2001
+        run: |
+          git mv 'assets/archive/communication/folhateen/folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (1-2) - 300dpi.jpg' 'assets/archive/communication/folhateen/folhateen - 23-04-2001 - Reportagem - Órfãos do Rock Pag 1de2 (1-2) - 300dpi.jpg'
+          git mv 'assets/archive/communication/folhateen/folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (2-2) - 300dpi.jpg' 'assets/archive/communication/folhateen/folhateen - 23-04-2001 - Reportagem - Órfãos do Rock Pag 1de2 (2-2) - 300dpi.jpg'
+          git mv 'assets/archive/communication/folhateen/folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 2de2 - 300dpi.jpg' 'assets/archive/communication/folhateen/folhateen - 23-04-2001 - Reportagem - Órfãos do Rock Pag 2de2 - 300dpi.jpg'
+          if grep -R '23-04-2000' pt en data docs tools assets/archive/communication/folhateen --include='*.html' --include='*.md' --include='*.json' --include='*.py'; then
+            echo 'Stale Folhateen 2000 reference found' >&2
+            exit 1
+          fi
+
+      - name: Accept moved PT EN units and synchronize Full Biography
+        run: |
+          python tools/editorial_parity.py --accept internet-sem
+          python tools/editorial_parity.py --accept internet-cookieweb
+          python tools/sync_full_biography.py
+
+      - name: Add social preview metadata to Full Biography
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          pages = {
+              'pt/biografia/index.html': {
+                  'author': '  <meta name="author" content="Marcelo Nicchio">',
+                  'title': 'Biografia completa — Marcelo Nicchio',
+                  'description': 'Biografia completa de Marcelo Nicchio: música, comunicação, Internet & Performance, audiovisual e pesquisa independente em Human–AI Interaction.',
+                  'url': 'https://marcelonicchio.github.io/pt/biografia/',
+                  'alt': 'Retrato de Marcelo Nicchio',
+              },
+              'en/biography/index.html': {
+                  'author': '  <meta name="author" content="Marcelo Nicchio">',
+                  'title': 'Complete biography — Marcelo Nicchio',
+                  'description': "Complete biography of Marcelo Nicchio: music, communication, Internet & Performance, audiovisual work and independent Human–AI Interaction research.",
+                  'url': 'https://marcelonicchio.github.io/en/biography/',
+                  'alt': 'Portrait of Marcelo Nicchio',
+              },
+          }
+
+          for path_s, meta in pages.items():
+              path = Path(path_s)
+              text = path.read_text(encoding='utf-8')
+              if 'property="og:image"' in text:
+                  raise SystemExit(f'{path_s}: og:image already exists; refusing duplicate insertion')
+              block = f'''\n  <meta property="og:type" content="profile">\n  <meta property="og:title" content="{meta['title']}">\n  <meta property="og:description" content="{meta['description']}">\n  <meta property="og:url" content="{meta['url']}">\n  <meta property="og:site_name" content="Marcelo Nicchio — Official Hub">\n  <meta property="og:image" content="https://marcelonicchio.github.io/assets/img/marcelo-home-portrait.png">\n  <meta property="og:image:type" content="image/png">\n  <meta property="og:image:width" content="717">\n  <meta property="og:image:height" content="717">\n  <meta property="og:image:alt" content="{meta['alt']}">\n  <meta name="twitter:card" content="summary">\n  <meta name="twitter:title" content="{meta['title']}">\n  <meta name="twitter:description" content="{meta['description']}">\n  <meta name="twitter:image" content="https://marcelonicchio.github.io/assets/img/marcelo-home-portrait.png">'''
+              if text.count(meta['author']) != 1:
+                  raise SystemExit(f'{path_s}: author marker count is not 1')
+              text = text.replace(meta['author'], meta['author'] + block, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Add page-weight auditor and CI report
+        run: |
+          cat > tools/audit_page_weight.py <<'PY'
+          #!/usr/bin/env python3
+          """Report HTML/image delivery weight without turning the budget into a hard gate.
+
+          By default this auditor only warns when a page exceeds the configured image
+          budget. Use --strict explicitly if a future policy chooses to make the budget
+          blocking. Masters linked only through <a href> are intentionally excluded:
+          this measures page delivery, not archival repository weight.
+          """
+          from __future__ import annotations
+
+          import argparse
+          from pathlib import Path
+          from urllib.parse import unquote, urlsplit
+
+          from bs4 import BeautifulSoup
+
+          ROOT = Path(__file__).resolve().parents[1]
+
+
+          def local_file(url: str | None) -> Path | None:
+              if not url:
+                  return None
+              url = url.strip()
+              if url.startswith(('http://', 'https://', '//', 'data:')):
+                  return None
+              parsed = urlsplit(url)
+              rel = unquote(parsed.path).lstrip('/')
+              if not rel:
+                  return None
+              return ROOT / rel
+
+
+          def srcset_urls(value: str | None) -> list[str]:
+              if not value:
+                  return []
+              urls = []
+              for candidate in value.split(','):
+                  candidate = candidate.strip()
+                  if candidate:
+                      urls.append(candidate.split()[0])
+              return urls
+
+
+          def mib(value: int) -> str:
+              return f'{value / (1024 * 1024):.2f} MiB'
+
+
+          def main() -> int:
+              parser = argparse.ArgumentParser()
+              parser.add_argument('--warn-mb', type=float, default=4.0,
+                                  help='warning threshold for estimated image payload (default: 4 MiB)')
+              parser.add_argument('--strict', action='store_true',
+                                  help='exit non-zero when the warning threshold is exceeded')
+              args = parser.parse_args()
+              threshold = int(args.warn_mb * 1024 * 1024)
+
+              rows = []
+              missing: list[tuple[str, str]] = []
+              over = []
+
+              for html in sorted(ROOT.rglob('*.html')):
+                  if '.git' in html.parts:
+                      continue
+                  soup = BeautifulSoup(html.read_text(encoding='utf-8'), 'html.parser')
+                  images = soup.find_all('img')
+                  src_files: set[Path] = set()
+                  chosen_max_files: set[Path] = set()
+
+                  for img in images:
+                      candidates = []
+                      src = local_file(img.get('src'))
+                      if src is not None:
+                          candidates.append(src)
+                          if src.exists():
+                              src_files.add(src)
+                          else:
+                              missing.append((str(html.relative_to(ROOT)), str(src.relative_to(ROOT))))
+                      for url in srcset_urls(img.get('srcset')):
+                          p = local_file(url)
+                          if p is not None:
+                              candidates.append(p)
+                              if not p.exists():
+                                  missing.append((str(html.relative_to(ROOT)), str(p.relative_to(ROOT))))
+
+                      existing = [p for p in candidates if p.exists()]
+                      if existing:
+                          chosen_max_files.add(max(existing, key=lambda p: p.stat().st_size))
+
+                  src_bytes = sum(p.stat().st_size for p in src_files)
+                  estimated_bytes = sum(p.stat().st_size for p in chosen_max_files)
+                  html_bytes = html.stat().st_size
+                  rel = str(html.relative_to(ROOT))
+                  rows.append((estimated_bytes, src_bytes, html_bytes, len(images), rel))
+                  if estimated_bytes > threshold:
+                      over.append((rel, estimated_bytes))
+
+              rows.sort(reverse=True)
+              print(f'Page-weight report — warning threshold: {args.warn_mb:.2f} MiB')
+              print('estimated=max local src/srcset candidate per image; linked archival masters are excluded')
+              for estimated, src_bytes, html_bytes, count, rel in rows:
+                  print(f'{rel}: images={count}, estimated={mib(estimated)}, src-only={mib(src_bytes)}, html={html_bytes / 1024:.1f} KiB')
+
+              for rel, size in over:
+                  print(f'::warning file={rel}::Estimated image payload {mib(size)} exceeds {args.warn_mb:.2f} MiB review threshold')
+
+              if missing:
+                  unique_missing = sorted(set(missing))
+                  for rel, asset in unique_missing:
+                      print(f'::warning file={rel}::Referenced local image candidate not found: {asset}')
+
+              if args.strict and over:
+                  return 1
+              return 0
+
+
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          PY
+
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/site-audit.yml')
+          text = path.read_text(encoding='utf-8')
+          marker = '      - name: Audit Full Biography coverage\n        run: python tools/audit_full_biography.py\n'
+          addition = marker + '      - name: Report page image weight\n        run: python tools/audit_page_weight.py\n'
+          if 'Report page image weight' in text:
+              raise SystemExit('page-weight audit step already exists')
+          if text.count(marker) != 1:
+              raise SystemExit('site-audit insertion marker count is not 1')
+          path.write_text(text.replace(marker, addition, 1), encoding='utf-8')
+          PY
+
+      - name: Run page-weight report and full audit suite
+        run: |
+          python tools/audit_page_weight.py
+          python tools/sync_navigation.py --check
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+
+      - name: Remove temporary workflow and commit maintenance
+        run: |
+          rm .github/workflows/_tmp-post-triangulation-maintenance.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Apply post-triangulation maintenance"
+          git push origin HEAD:work/post-triangulation-maintenance
