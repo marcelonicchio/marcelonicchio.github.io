@@ -1,0 +1,33 @@
+name: Temporary Block 3 status update
+
+on:
+  push:
+    branches:
+      - work/block3a-cookieweb-search
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/block3a-cookieweb-search
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Update workflow documentation
+        run: python tools/_temp_update_block3_status.py
+      - name: Remove temporary files
+        run: |
+          rm tools/_temp_update_block3_status.py
+          rm .github/workflows/temp-update-block3-status.yml
+      - name: Commit documentation status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update Full Biography Block 3 status"
+          git push origin HEAD:work/block3a-cookieweb-search
