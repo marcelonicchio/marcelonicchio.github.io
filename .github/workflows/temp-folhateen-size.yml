@@ -28,13 +28,14 @@ jobs:
           if marker in text:
               raise SystemExit('Folhateen sizing rule already present')
           anchor = '/* Record-associated gallery system */'
-          rule = '''/* Folhateen cover responsive thread sizing */
-.thread-media:has(img[src$="/folhateen-cover-2001.webp"]){width:50%;margin-left:auto;margin-right:auto}
-@media(max-width:900px){.thread-media:has(img[src$="/folhateen-cover-2001.webp"]){width:72%}}
-@media(max-width:640px){.thread-media:has(img[src$="/folhateen-cover-2001.webp"]){width:100%}}
-
-
-'''
+          rule = '\n'.join([
+              '/* Folhateen cover responsive thread sizing */',
+              '.thread-media:has(img[src$="/folhateen-cover-2001.webp"]){width:50%;margin-left:auto;margin-right:auto}',
+              '@media(max-width:900px){.thread-media:has(img[src$="/folhateen-cover-2001.webp"]){width:72%}}',
+              '@media(max-width:640px){.thread-media:has(img[src$="/folhateen-cover-2001.webp"]){width:100%}}',
+              '',
+              ''
+          ])
           if text.count(anchor) != 1:
               raise SystemExit('CSS anchor not unique')
           p.write_text(text.replace(anchor, rule + anchor, 1), encoding='utf-8')
