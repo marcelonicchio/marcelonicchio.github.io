@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "updated": "2026-08-27",
+  "updated": "2026-08-28",
   "derivativePolicy": {
     "format": "webp",
     "widths": [
@@ -508,6 +508,464 @@
               "path": "assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-22-768.webp",
               "width": 768,
               "height": 565
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cookieweb",
+      "sourceRoot": "assets/archive/internet/cookieweb",
+      "targets": {
+        "pt": [
+          "pt/internet/index.html"
+        ],
+        "en": [
+          "en/internet/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Fotos da CookieWEB",
+        "en": "CookieWEB photos"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "cookieweb01-aniversario_marcelo2012_01.jpg",
+          "caption": {
+            "pt": "Aniversário de Marcelo Nicchio na CookieWEB, 2012.",
+            "en": "Marcelo Nicchio's birthday at CookieWEB, 2012."
+          },
+          "width": 686,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-01-480.webp",
+              "width": 480,
+              "height": 643
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-01-768.webp",
+              "width": 686,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "cookieweb01-aniversario_marcelo2012_02.jpg",
+          "caption": {
+            "pt": "Aniversário de Marcelo Nicchio na CookieWEB, 2012.",
+            "en": "Marcelo Nicchio's birthday at CookieWEB, 2012."
+          },
+          "width": 960,
+          "height": 717,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-02-480.webp",
+              "width": 480,
+              "height": 358
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-02-768.webp",
+              "width": 768,
+              "height": 574
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "cookieweb01-aniversario_marcelo2012-03.jpg",
+          "caption": {
+            "pt": "Aniversário de Marcelo Nicchio na CookieWEB, 2012.",
+            "en": "Marcelo Nicchio's birthday at CookieWEB, 2012."
+          },
+          "width": 960,
+          "height": 717,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-03-480.webp",
+              "width": 480,
+              "height": 358
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-03-768.webp",
+              "width": 768,
+              "height": 574
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "cookieweb01-aniversario_marcelo2012-04.jpg",
+          "caption": {
+            "pt": "Aniversário de Marcelo Nicchio na CookieWEB, 2012.",
+            "en": "Marcelo Nicchio's birthday at CookieWEB, 2012."
+          },
+          "width": 960,
+          "height": 717,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-04-480.webp",
+              "width": 480,
+              "height": 358
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-04-768.webp",
+              "width": 768,
+              "height": 574
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "cookieweb02-festajunina_01.jpg",
+          "caption": {
+            "pt": "Festa junina da equipe da CookieWEB, 2011.",
+            "en": "CookieWEB team at the agency's June festival, 2011."
+          },
+          "width": 604,
+          "height": 453,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-05-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-05-768.webp",
+              "width": 604,
+              "height": 453
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "cookieweb02-festajunina_02.jpg",
+          "caption": {
+            "pt": "Festa junina da equipe da CookieWEB, 2011.",
+            "en": "CookieWEB team at the agency's June festival, 2011."
+          },
+          "width": 919,
+          "height": 684,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-06-480.webp",
+              "width": 480,
+              "height": 357
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-06-768.webp",
+              "width": 768,
+              "height": 572
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "cookieweb02-festajunina_03.jpg",
+          "caption": {
+            "pt": "Festa junina da equipe da CookieWEB, 2011.",
+            "en": "CookieWEB team at the agency's June festival, 2011."
+          },
+          "width": 960,
+          "height": 720,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-07-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-07-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "cookieweb03-hopihari_01.JPG",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 1015,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-08-480.webp",
+              "width": 480,
+              "height": 435
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-08-768.webp",
+              "width": 768,
+              "height": 695
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "cookieweb03-hopihari_02.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 720,
+          "height": 540,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-09-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-09-768.webp",
+              "width": 720,
+              "height": 540
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "cookieweb03-hopihari_03.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 686,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-10-480.webp",
+              "width": 480,
+              "height": 643
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-10-768.webp",
+              "width": 686,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "cookieweb03-hopihari_04.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 720,
+          "height": 540,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-11-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-11-768.webp",
+              "width": 720,
+              "height": 540
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "cookieweb03-hopihari_05.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 720,
+          "height": 540,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-12-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-12-768.webp",
+              "width": 720,
+              "height": 540
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "cookieweb03-hopihari_06.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 720,
+          "height": 540,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-13-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-13-768.webp",
+              "width": 720,
+              "height": 540
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "cookieweb03-hopihari_07.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 720,
+          "height": 540,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-14-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-14-768.webp",
+              "width": 720,
+              "height": 540
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "cookieweb03-hopihari_08.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 720,
+          "height": 540,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-15-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-15-768.webp",
+              "width": 720,
+              "height": 540
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "cookieweb03-hopihari_09.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 960,
+          "height": 720,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-16-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-16-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "cookieweb03-hopihari_10.jpg",
+          "caption": {
+            "pt": "Equipe da CookieWEB no Hopi Hari, confraternização de fim de ano de 2011.",
+            "en": "CookieWEB team at Hopi Hari for the 2011 year-end gathering."
+          },
+          "width": 720,
+          "height": 540,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-17-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-17-768.webp",
+              "width": 720,
+              "height": 540
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "cookieweb04-marcelonicchio_natansztamfater.jpg",
+          "caption": {
+            "pt": "Marcelo Nicchio e Natan Sztamfater no aniversário de Nicchio, 2012.",
+            "en": "Marcelo Nicchio and Natan Sztamfater at Nicchio's birthday, 2012."
+          },
+          "width": 2048,
+          "height": 1536,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-18-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-18-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "cookieweb05-marcelonicchio_e_equipe.jpg",
+          "caption": {
+            "pt": "Marcelo Nicchio com integrantes da equipe da CookieWEB.",
+            "en": "Marcelo Nicchio with members of the CookieWEB team."
+          },
+          "width": 426,
+          "height": 320,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-19-480.webp",
+              "width": 426,
+              "height": 320
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-19-768.webp",
+              "width": 426,
+              "height": 320
+            }
+          }
+        },
+        {
+          "id": "20",
+          "source": "cookieweb06-prontoparaasferias.jpg",
+          "caption": {
+            "pt": "Mala “ROI Maniac” antes das férias de Marcelo Nicchio, 2012.",
+            "en": "The “ROI Maniac” suitcase before Marcelo Nicchio's vacation, 2012."
+          },
+          "width": 689,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-20-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/cookieweb/cookieweb-20-768.webp",
+              "width": 689,
+              "height": 919
             }
           }
         }

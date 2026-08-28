@@ -161,10 +161,10 @@
       ]
     },
     "internet-mirantte": {
-      "revision": 2,
-      "pt_hash": "c0cf73e8d9a632e7dfa80fee7ff2bf78216e554d6c5a431dc6c220a2a10e2ed4",
-      "en_hash": "a332e5f8c8689c30188d15a7f2e4df817ca6a786c99c29be91932ae8e9e22b33",
-      "accepted_on": "2026-08-27",
+      "revision": 3,
+      "pt_hash": "3aff6953a28fb5ad7c9a7732125a68c49c09ae49500766d9240a7e1dae24700b",
+      "en_hash": "a013557563e93450e49c1c00217800cd2a0841abe3cb9f5cde62ee1f674c2cf6",
+      "accepted_on": "2026-08-28",
       "changed_languages": [
         "pt",
         "en"
@@ -177,16 +177,24 @@
       "accepted_on": "2026-08-27"
     },
     "internet-sem": {
-      "revision": 1,
-      "pt_hash": "e33a359f1abd8508ef661f1afcc2dbf7cfba183cc46bdd14f2a2f2cb5b129a4b",
-      "en_hash": "0aeabefe8ba47de40fd8a6212b4481419d23c0ef085a288237011d57f03394d1",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "1915e6f83adcb8d5674e7261aaf18c06e00de9fca60294780445cdbfc0ad3e2a",
+      "en_hash": "7bc17400944e02206c6374226194922f6ef6291c72c4ac391ce10a32f3b1827b",
+      "accepted_on": "2026-08-28",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "internet-cookieweb": {
-      "revision": 1,
-      "pt_hash": "45b2eaf33a6ae0dfa2b1b176fba615f11910a1d1349bbbcb9710dd0df61f0e07",
-      "en_hash": "586b29e70d392c5363194c517d7c0873d99d1983f6a6322fa6d40dd1f0096dfd",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "b3acfea068867c6fdf543231b688d7b7f3b6a0dcdd6efac236b44937c8915603",
+      "en_hash": "1641cf88ef61c9c9e3bf5d59f6df369f90ff80518b864b596d93f23db3c41fe5",
+      "accepted_on": "2026-08-28",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "internet-petlove": {
       "revision": 1,
