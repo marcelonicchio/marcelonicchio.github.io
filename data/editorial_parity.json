@@ -177,9 +177,9 @@
       "accepted_on": "2026-08-27"
     },
     "internet-sem": {
-      "revision": 2,
-      "pt_hash": "1915e6f83adcb8d5674e7261aaf18c06e00de9fca60294780445cdbfc0ad3e2a",
-      "en_hash": "7bc17400944e02206c6374226194922f6ef6291c72c4ac391ce10a32f3b1827b",
+      "revision": 3,
+      "pt_hash": "f2ff4274b54e5ec61621d31d3e6bec8fa12ef7fe3f9db4ba9cc725a05a52c73b",
+      "en_hash": "85e18456bec19065c110b900938d8dc609ec49b18e1bdb1506ab6941b70d5424",
       "accepted_on": "2026-08-28",
       "changed_languages": [
         "pt",
@@ -187,9 +187,9 @@
       ]
     },
     "internet-cookieweb": {
-      "revision": 4,
-      "pt_hash": "bf9d50b3d403c178eba8a72a3bcabb5ccdf097677bde6705273c7f118f02dbb7",
-      "en_hash": "6937e1c3c6f8dc091e4b4ed9cee83a332eb273d60699de08f7f17ba68a938241",
+      "revision": 5,
+      "pt_hash": "830a051094a6431fbacb0941e7a0d6eeb810f3830c3181d74d802039a4aff073",
+      "en_hash": "df31cda8dc688853c0db8b21b07d17bb4a25a2de5816dc2c38862b5509062947",
       "accepted_on": "2026-08-28",
       "changed_languages": [
         "pt",
