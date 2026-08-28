@@ -35,6 +35,8 @@ jobs:
         run: python tools/sync_full_biography.py --check
       - name: Audit Full Biography coverage
         run: python tools/audit_full_biography.py
+      - name: Report page image weight
+        run: python tools/audit_page_weight.py
       - name: Audit HTML, JSON and sitemap
         run: python tools/audit_site.py
       - name: Audit site-wide external presence
