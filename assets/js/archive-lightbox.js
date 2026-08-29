@@ -1,4 +1,28 @@
 (() => {
+  const params = new URLSearchParams(window.location.search);
+  const prototypeRequested = params.get('ux') === 'disclosure';
+  const prototypePaths = new Set([
+    '/pt/biografia/',
+    '/en/biography/',
+    '/pt/internet/',
+    '/en/internet/'
+  ]);
+
+  if (!prototypeRequested || !prototypePaths.has(window.location.pathname)) return;
+
+  const stylesheet = document.createElement('link');
+  stylesheet.rel = 'stylesheet';
+  stylesheet.href = '/assets/progressive-disclosure-prototype.css';
+  stylesheet.dataset.uxPrototype = 'disclosure';
+  document.head.appendChild(stylesheet);
+
+  const script = document.createElement('script');
+  script.src = '/assets/js/progressive-disclosure-prototype.js';
+  script.dataset.uxPrototype = 'disclosure';
+  document.head.appendChild(script);
+})();
+
+(() => {
   const isPortuguese = document.documentElement.lang?.startsWith('pt');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const coarsePointer = window.matchMedia('(pointer: coarse)');
