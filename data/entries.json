@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "status": "pilot",
+  "principles": {
+    "reader_pages_keep_full_text": true,
+    "chapter_pages_are_selective": true,
+    "topic_tags_do_not_imply_pages": true,
+    "indexing_changes_require_explicit_review": true
+  },
+  "entries": [
+    {
+      "id": "internet-mirantte",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {"pt": "2004–2008", "en": "2004–2008"},
+      "title": {
+        "pt": "Mirantte News: produto digital, aquisição e a descoberta de Search",
+        "en": "Mirantte News: digital product, acquisition and the discovery of Search"
+      },
+      "summary": {
+        "pt": "O Mirantte News levou Marcelo Nicchio do problema de aquisição de tráfego de um produto digital regional à entrada profissional em Search, passando pela parceria MapLink/UOL, pelo contato com Tiago Luz e pela transição posterior para o Procure SP.",
+        "en": "Mirantte News took Marcelo Nicchio from the traffic-acquisition problem of a regional digital product into professional Search work, through the MapLink/UOL partnership, contact with Tiago Luz and the later transition to Procure SP."
+      },
+      "topic_ids": ["digital-product", "search-marketing", "paid-media", "acquisition"],
+      "media": {"galleries": ["mirantte-news"]},
+      "source": {"kind": "reader-section"},
+      "reader_targets": {
+        "pt": [
+          {"path": "pt/internet/index.html", "selector": "#mirantte"},
+          {"path": "pt/biografia/index.html", "selector": "#bio-internet-mirantte"}
+        ],
+        "en": [
+          {"path": "en/internet/index.html", "selector": "#mirantte"},
+          {"path": "en/biography/index.html", "selector": "#bio-internet-mirantte"}
+        ]
+      },
+      "chapter_page": {
+        "status": "candidate",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/internet/mirantte-news/index.html",
+        "en_path": "en/internet/mirantte-news/index.html"
+      }
+    },
+    {
+      "id": "internet-cookieweb",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {"pt": "2010–2012", "en": "2010–2012"},
+      "title": {
+        "pt": "Beleza na Web e CookieWEB: Search em escala",
+        "en": "Beleza na Web and CookieWEB: Search at scale"
+      },
+      "summary": {
+        "pt": "Da primeira grande conta de e-commerce à construção e liderança da área de SEM da CookieWEB, o ciclo reúne escala operacional, formação de equipe, certificações GAP, mais de 22 contas simultâneas e a decisão de encerrar a fase em 2012 por qualidade de vida.",
+        "en": "From a first large e-commerce account to building and leading CookieWEB's SEM operation, this cycle combines operational scale, team development, GAP certifications, more than 22 simultaneous accounts and the decision to leave in 2012 for quality-of-life reasons."
+      },
+      "topic_ids": ["search-marketing", "sem", "performance-marketing", "team-leadership", "google-ads"],
+      "media": {"galleries": ["cookieweb"], "credential_group": "google-gap"},
+      "source": {"kind": "reader-section"},
+      "reader_targets": {
+        "pt": [
+          {"path": "pt/internet/index.html", "selector": "#cookieweb"},
+          {"path": "pt/biografia/index.html", "selector": "#bio-internet-cookieweb"}
+        ],
+        "en": [
+          {"path": "en/internet/index.html", "selector": "#cookieweb"},
+          {"path": "en/biography/index.html", "selector": "#bio-internet-cookieweb"}
+        ]
+      },
+      "chapter_page": {
+        "status": "candidate",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/internet/cookieweb/index.html",
+        "en_path": "en/internet/cookieweb/index.html"
+      }
+    },
+    {
+      "id": "communication-folha",
+      "kind": "chapter",
+      "domain": "communication",
+      "date": {"pt": "23 abr. 2001", "en": "Apr. 23, 2001"},
+      "title": {
+        "pt": "Folha de S.Paulo — “Órfãos do Rock”",
+        "en": "Folha de S.Paulo — “Órfãos do Rock”"
+      },
+      "summary": {
+        "pt": "Participação na matéria de capa do Folhateen publicada após a morte de Joey Ramone, com falas de Marcelo Nicchio sobre cultura punk, faça-você-mesmo, mercado underground brasileiro e permanência do rock.",
+        "en": "Marcelo Nicchio appeared in a Folhateen cover story published after Joey Ramone's death, discussing punk culture, do-it-yourself practice, Brazil's underground market and the persistence of rock."
+      },
+      "topic_ids": ["press", "punk-rock", "cultural-criticism"],
+      "media": {"thread_image": "folhateen-cover-2001"},
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/communication-folha.inc",
+        "en_path": "content/entries/en/communication-folha.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {"path": "pt/comunicacao/index.html", "selector": "#folha"},
+          {"path": "pt/biografia/index.html", "selector": "#bio-communication-folha"}
+        ],
+        "en": [
+          {"path": "en/communication/index.html", "selector": "#folha"},
+          {"path": "en/biography/index.html", "selector": "#bio-communication-folha"}
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/comunicacao/folhateen-orfaos-do-rock/index.html",
+        "en_path": "en/communication/folhateen-orphans-of-rock/index.html"
+      }
+    },
+    {
+      "id": "audiovisual-meia-noite",
+      "kind": "chapter",
+      "domain": "audiovisual",
+      "date": {"pt": "2006", "en": "2006"},
+      "title": {"pt": "Meia-Noite e Uns", "en": "Meia-Noite e Uns"},
+      "summary": {
+        "pt": "Programa de literatura com linguagem pop exibido pela RedeTV! em 2006, com Direção Artística e Produção Executiva de Marcelo Nicchio, conceito visual e narrativo autoral, trilha em parceria com Badi e amplo acervo de fotos e vídeos preservados.",
+        "en": "A pop-language literature program aired by RedeTV! in 2006, with Marcelo Nicchio as Artistic Director and Executive Producer, an authored visual and narrative concept, music created with Badi and a substantial preserved photo and video archive."
+      },
+      "topic_ids": ["television", "art-direction", "executive-production", "literature"],
+      "media": {"galleries": ["meia-noite-e-uns"], "known_video_count": 4},
+      "source": {"kind": "reader-section"},
+      "reader_targets": {
+        "pt": [
+          {"path": "pt/audiovisual/index.html", "selector": "#meia-noite"},
+          {"path": "pt/biografia/index.html", "selector": "#bio-audiovisual-meia-noite"}
+        ],
+        "en": [
+          {"path": "en/audiovisual/index.html", "selector": "#meia-noite"},
+          {"path": "en/biography/index.html", "selector": "#bio-audiovisual-meia-noite"}
+        ]
+      },
+      "chapter_page": {
+        "status": "candidate",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/audiovisual/meia-noite-e-uns/index.html",
+        "en_path": "en/audiovisual/meia-noite-e-uns/index.html"
+      }
+    },
+    {
+      "id": "internet-goobec-gap",
+      "kind": "landmark-set",
+      "domain": "internet",
+      "date": {"pt": "2009–2010", "en": "2009–2010"},
+      "title": {
+        "pt": "Goobec e certificações Google Advertising Professional",
+        "en": "Goobec and Google Advertising Professional certifications"
+      },
+      "summary": {
+        "pt": "A formação em Google AdWords na Goobec em 2009 e as certificações GAP obtidas durante o início do ciclo CookieWEB marcam a passagem do aprendizado autodidata para uma profissionalização formal em Search.",
+        "en": "Google AdWords training at Goobec in 2009 and the GAP certifications earned at the beginning of the CookieWEB cycle mark the shift from self-directed learning to formal professionalization in Search."
+      },
+      "topic_ids": ["google-ads", "training", "certification", "search-marketing"],
+      "media": {"thread_image": "goobec-class-2009", "credential_group": "google-gap"},
+      "source": {"kind": "composite-reader-landmarks"},
+      "landmarks": {
+        "pt": [
+          {"path": "pt/internet/index.html", "selector": "#sem", "contains": "Goobec"},
+          {"path": "pt/internet/index.html", "selector": "#cookieweb", "contains": "Google Advertising Professional — GAP"}
+        ],
+        "en": [
+          {"path": "en/internet/index.html", "selector": "#sem", "contains": "Goobec"},
+          {"path": "en/internet/index.html", "selector": "#cookieweb", "contains": "Google Advertising Professional"}
+        ]
+      },
+      "chapter_page": {"status": "none", "indexing": "none"}
+    },
+    {
+      "id": "internet-best",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {"pt": "2014", "en": "2014"},
+      "title": {
+        "pt": "BEST / Kenshoo: Search + Social + tecnologia",
+        "en": "BEST / Kenshoo: Search + Social + technology"
+      },
+      "summary": {
+        "pt": "Atuação como Gerente de Performance na BEST em uma operação ligada à Kenshoo no Brasil, combinando onboarding de tecnologia, otimização para grandes varejistas e um workshop do E-Commerce Brasil preservado em quatro partes.",
+        "en": "Work as Performance Manager at BEST in an operation connected to Kenshoo in Brazil, combining technology onboarding, optimization for major retailers and an E-Commerce Brasil workshop preserved in four parts."
+      },
+      "topic_ids": ["performance-marketing", "search-marketing", "social-ads", "kenshoo", "ecommerce"],
+      "media": {"known_video_count": 4},
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/internet-best.inc",
+        "en_path": "content/entries/en/internet-best.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {"path": "pt/internet/index.html", "selector": "#best"},
+          {"path": "pt/biografia/index.html", "selector": "#bio-internet-best"}
+        ],
+        "en": [
+          {"path": "en/internet/index.html", "selector": "#best"},
+          {"path": "en/biography/index.html", "selector": "#bio-internet-best"}
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/internet/best-kenshoo/index.html",
+        "en_path": "en/internet/best-kenshoo/index.html"
+      }
+    }
+  ]
+}
