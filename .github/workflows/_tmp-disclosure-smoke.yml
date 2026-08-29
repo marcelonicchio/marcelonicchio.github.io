@@ -18,6 +18,9 @@ jobs:
         with:
           ref: work/disclosure-ux-prototype
 
+      - name: Install parser dependency
+        run: python3 -m pip install --disable-pip-version-check beautifulsoup4
+
       - name: Check JavaScript syntax
         run: |
           node --check assets/js/archive-lightbox.js
