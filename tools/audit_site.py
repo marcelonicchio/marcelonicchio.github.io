@@ -5,14 +5,17 @@ Checks structural SEO/entity basics without trying to score content quality.
 """
 from __future__ import annotations
 
+from collections import Counter
 import json
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://marcelonicchio.github.io"
+SITE_HOST = "marcelonicchio.github.io"
 
 LAUNCH_INDEXABLE = {
     "index.html",
@@ -46,9 +49,12 @@ class PageParser(HTMLParser):
         self.metas = []
         self.h1_count = 0
         self.html_lang = ""
+        self.ids = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if attrs.get("id"):
+            self.ids.append(attrs["id"].strip())
         if tag == "html":
             self.html_lang = attrs.get("lang", "").strip()
         elif tag == "title":
@@ -85,21 +91,87 @@ def page_url(path: Path) -> str:
     return SITE + "/" + rel
 
 
-def target_exists(href: str, source: Path) -> bool:
-    if not href or href.startswith(("http://", "https://", "mailto:", "tel:", "#", "javascript:")):
-        return True
-    clean = href.split("#", 1)[0].split("?", 1)[0]
-    if not clean:
-        return True
-    if clean.startswith("/"):
-        target = ROOT / clean.lstrip("/")
+def resolve_local_target(href: str, source: Path) -> tuple[Path, str] | None:
+    """Resolve a same-site link to a repository path + decoded fragment.
+
+    External HTTP(S), mailto, tel and javascript targets are outside this static
+    repository audit and return None. Absolute links to this site's own host are
+    audited exactly like root-relative links.
+    """
+    if not href:
+        return None
+    lowered = href.lstrip().lower()
+    if lowered.startswith(("mailto:", "tel:", "javascript:", "data:")):
+        return None
+
+    parsed = urlsplit(href)
+    if parsed.scheme in {"http", "https"} or parsed.netloc:
+        if parsed.hostname != SITE_HOST:
+            return None
+    elif parsed.scheme:
+        return None
+
+    clean_path = unquote(parsed.path or "")
+    fragment = unquote(parsed.fragment or "")
+
+    if not clean_path:
+        target = source
+    elif clean_path.startswith("/"):
+        target = ROOT / clean_path.lstrip("/")
     else:
-        target = source.parent / clean
-    if target.is_dir():
+        target = source.parent / clean_path
+
+    target = target.resolve()
+    try:
+        target.relative_to(ROOT)
+    except ValueError:
+        return target, fragment
+
+    if target.is_dir() or clean_path.endswith("/") or (clean_path and target.suffix == ""):
         target = target / "index.html"
-    elif target.suffix == "":
-        target = target / "index.html"
-    return target.exists()
+    return target, fragment
+
+
+def parse_page(path: Path, cache: dict[Path, PageParser]) -> PageParser | None:
+    resolved = path.resolve()
+    if resolved in cache:
+        return cache[resolved]
+    if not resolved.exists() or not resolved.is_file() or resolved.suffix.lower() not in {".html", ".htm"}:
+        return None
+    parser = PageParser()
+    parser.feed(resolved.read_text(encoding="utf-8"))
+    cache[resolved] = parser
+    return parser
+
+
+def audit_local_reference(
+    href: str,
+    source: Path,
+    source_rel: str,
+    errors: list[str],
+    page_cache: dict[Path, PageParser],
+    *,
+    label: str = "internal link",
+) -> None:
+    resolved = resolve_local_target(href, source)
+    if resolved is None:
+        return
+    target, fragment = resolved
+    try:
+        target.relative_to(ROOT)
+    except ValueError:
+        errors.append(f"{source_rel}: {label} escapes repository root {href!r}")
+        return
+    if not target.exists():
+        errors.append(f"{source_rel}: broken {label} {href!r}")
+        return
+    if not fragment:
+        return
+    parser = parse_page(target, page_cache)
+    if parser is None:
+        return
+    if fragment not in set(parser.ids):
+        errors.append(f"{source_rel}: broken fragment in {label} {href!r} (missing id={fragment!r})")
 
 
 def meta_values(parser: PageParser, name: str) -> list[str]:
@@ -114,11 +186,15 @@ def robots_value(parser: PageParser) -> str:
 
 def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
     robots_by_url = {}
-    for path in sorted(ROOT.rglob("*.html")):
-        if ".git" in path.parts:
-            continue
-        parser = PageParser()
-        parser.feed(path.read_text(encoding="utf-8"))
+    page_cache: dict[Path, PageParser] = {}
+    pages = sorted(path for path in ROOT.rglob("*.html") if ".git" not in path.parts)
+
+    # Parse once up front so cross-page fragment checks do not repeatedly read HTML.
+    for path in pages:
+        parse_page(path, page_cache)
+
+    for path in pages:
+        parser = page_cache[path.resolve()]
         rel = path.relative_to(ROOT).as_posix()
         url = page_url(path)
         robots = robots_value(parser)
@@ -134,6 +210,10 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
             errors.append(f"{rel}: expected lang=pt-BR, found {parser.html_lang!r}")
         elif rel.startswith("en/") and not parser.html_lang.lower().startswith("en"):
             errors.append(f"{rel}: expected English lang attribute, found {parser.html_lang!r}")
+
+        duplicate_ids = sorted(ident for ident, count in Counter(parser.ids).items() if ident and count > 1)
+        for ident in duplicate_ids:
+            errors.append(f"{rel}: duplicate id {ident!r}")
 
         descriptions = meta_values(parser, "description")
         if rel != "404.html":
@@ -154,16 +234,21 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
                 errors.append(f"{rel}: expected exactly one canonical URL")
             elif parser.canonicals[0] != expected_canonical:
                 errors.append(f"{rel}: canonical {parser.canonicals[0]!r} does not match expected {expected_canonical!r}")
+            else:
+                audit_local_reference(parser.canonicals[0], path, rel, errors, page_cache, label="canonical target")
 
         for href in parser.links:
-            if not target_exists(href, path):
-                errors.append(f"{rel}: broken internal link {href!r}")
+            audit_local_reference(href, path, rel, errors, page_cache)
 
         if rel.startswith("pt/") or rel.startswith("en/"):
-            langs = {lang for lang, _ in parser.alternates}
+            lang_counts = Counter(lang for lang, _ in parser.alternates)
             for expected in {"pt-BR", "en", "x-default"}:
-                if expected not in langs:
+                if lang_counts[expected] == 0:
                     errors.append(f"{rel}: missing hreflang {expected}")
+                elif lang_counts[expected] > 1:
+                    errors.append(f"{rel}: duplicate hreflang {expected}")
+            for lang, href in parser.alternates:
+                audit_local_reference(href, path, rel, errors, page_cache, label=f"hreflang {lang}")
 
         if rel in LAUNCH_INDEXABLE:
             if "noindex" in robots:
