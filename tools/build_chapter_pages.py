@@ -7,6 +7,7 @@ unpublished until their source migration is deliberate.
 
 from __future__ import annotations
 
+import argparse
 import html
 import json
 from pathlib import Path
@@ -200,10 +201,15 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--check", action="store_true", help="Fail if generated Chapter Pages are missing or stale")
+    args = parser.parse_args()
+
     registry = load(REGISTRY)
     taxonomy = load(TAGS)
     profiles = load_profiles()
-    written: list[str] = []
+    changed: list[str] = []
+
     for entry in registry.get("entries", []):
         page = entry.get("chapter_page", {})
         if page.get("status") != "pilot":
@@ -213,15 +219,22 @@ def main() -> int:
         for lang in ("pt", "en"):
             rel = page[f"{lang}_path"]
             path = ROOT / rel
-            path.parent.mkdir(parents=True, exist_ok=True)
             output = render(entry, lang, taxonomy, profiles)
             if not path.exists() or path.read_text(encoding="utf-8") != output:
-                path.write_text(output, encoding="utf-8")
-                written.append(rel)
+                changed.append(rel)
+                if not args.check:
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text(output, encoding="utf-8")
 
-    if written:
+    if args.check and changed:
+        print("Chapter Page generation required:")
+        for rel in changed:
+            print(" -", rel)
+        return 1
+
+    if changed:
         print("Generated Chapter Pages:")
-        for rel in written:
+        for rel in changed:
             print(" -", rel)
     else:
         print("Chapter Pages already up to date.")
