@@ -19,8 +19,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Install audit dependencies
-        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+        run: |
+          python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+          mkdir -p /tmp/reader-ux-smoke
+          npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
       - name: Audit synchronized navigation
         run: python tools/sync_navigation.py --check
       - name: Audit gallery derivatives
@@ -31,10 +38,27 @@ jobs:
         run: python tools/audit_galleries.py
       - name: Audit PT EN editorial parity
         run: python tools/editorial_parity.py --check
+      - name: Audit neutral entry sources
+        run: python tools/sync_entries.py --check
       - name: Audit synchronized Full Biography
         run: python tools/sync_full_biography.py --check
       - name: Audit Full Biography coverage
         run: python tools/audit_full_biography.py
+      - name: Audit Reader disclosure loader
+        run: python tools/sync_reader_disclosure_loader.py --check
+      - name: Audit generated Chapter Pages
+        run: python tools/build_chapter_pages.py --check
+      - name: Audit entry registry and rendering
+        run: python tools/audit_entries.py
+      - name: Check Reader UX JavaScript syntax
+        run: |
+          node --check assets/js/reader-disclosure-loader.js
+          node --check assets/js/reader-disclosure.js
+          node --check tools/smoke_reader_ux.js
+      - name: Smoke-test Reader UX in Chrome
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: node tools/smoke_reader_ux.js
       - name: Report page image weight
         run: python tools/audit_page_weight.py
       - name: Audit HTML, JSON and sitemap
