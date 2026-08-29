@@ -145,7 +145,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     vertical_label = f"Voltar a {domain_label}" if lang == "pt" else f"Back to {domain_label}"
     eyebrow = f"Registro · {domain_label}" if lang == "pt" else f"Entry · {domain_label}"
     period_label = "Período" if lang == "pt" else "Period"
-    topics_label = "Eixos" if lang == "pt" else "Topics"
+    topics_label = "Temas" if lang == "pt" else "Topics"
     og = ""
     if entry["id"] in OG_IMAGE:
         image_url = BASE.rstrip("/") + OG_IMAGE[entry["id"]]
@@ -182,7 +182,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 <div class="eyebrow">{html.escape(eyebrow)}</div>
 <h1>{html.escape(title)}</h1>
 <p class="hero-lead">{html.escape(summary)}</p>
-<div class="fact-strip"><div class="fact"><span>{period_label}</span><strong>{html.escape(date)}</strong></div><div class="fact"><span>{topics_label}</span><strong>{len(entry.get('topic_ids', []))}</strong></div></div>
+<div class="fact-strip"><div class="fact"><span>{period_label}</span><strong>{html.escape(date)}</strong></div></div>
 <div class="entry-topic-row" aria-label="{topics_label}">{chips}</div>
 </div></section>
 <section class="section"><div class="wrap entry-page-shell"><article class="article-body entry-page-body">
