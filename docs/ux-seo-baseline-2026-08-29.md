@@ -19,7 +19,7 @@ Full Biography HTML was approximately 116 KiB / roughly 5.2k words at this stage
 
 The auditor threshold is 4 MiB **warning-only**. It is a review indicator, not a pass/fail performance law.
 
-The updated auditor terminology on the planning branch is:
+The updated auditor terminology is:
 
 - `full-scroll-src` — aggregate local files referenced as `src`;
 - `full-scroll-max` — for each image, the largest local candidate present across `src` / `srcset`;
@@ -54,32 +54,28 @@ Therefore static page weight and Lighthouse/PageSpeed are complementary, not sub
 
 ---
 
-## 3. Browser baseline still required before UX merge
+## 3. Browser baseline — completed after this file was first created
 
-Before merging the progressive-disclosure prototype, capture controlled **mobile and desktop** measurements for:
+The initial version of this document deliberately recorded browser/Lighthouse measurement as pending because no reproducible browser execution path was available in the assistant's immediate repository environment.
+
+That gap was subsequently closed the same night with a **temporary GitHub Actions workflow** running Lighthouse CLI against the public production deployment. The workflow was removed after measurement; only the resulting baseline document is retained.
+
+Canonical browser/lab baseline:
+
+`docs/lighthouse-baseline-2026-08-29.md`
+
+It records controlled **mobile and desktop** measurements for:
 
 1. `/pt/biografia/`;
 2. `/pt/internet/`.
 
-Record at minimum when available:
+The measured production commit was `4647e3e910d7f690950537807866438c4ad1d4f5`. Changes between the original static baseline commit above and this measurement were documentation/audit-language updates, not a redesign of the measured public UX.
 
-- Performance score;
-- LCP;
-- FCP;
-- CLS;
-- TBT / relevant interaction diagnostic;
-- Speed Index;
-- DOM size/complexity warnings;
-- resource/transfer diagnostics;
-- whether CrUX field data exists for the URL/origin.
+The Lighthouse document records Performance score, LCP, FCP, CLS, TBT, Speed Index, TTI, observed transfer/request counts and environment information.
 
 Use Lab data for immediate before/after comparisons. CrUX field data has a historical window and must not be read as an instant reflection of a just-published change.
 
-### Tooling status in this planning session
-
-A reproducible PageSpeed/Lighthouse run was **not recorded from the assistant environment** before this file was created. The environment used for repository work did not expose a reliable browser/PageSpeed execution path. This is deliberately recorded as a pending measurement rather than replaced with an estimated score.
-
-Do not fill this section later from memory. Record actual output from a reproducible run.
+Do not replace these measured values later from memory. A post-UX comparison should be stored in a separate dated document.
 
 ---
 
@@ -100,7 +96,7 @@ The test did **not** establish that chapters are individually over-written or th
 After the disclosure prototype is implemented but before broad rollout:
 
 1. run the same static auditor;
-2. run the same Lighthouse/PageSpeed protocol;
+2. run the same Lighthouse protocol;
 3. repeat navigation tests with Marcelo and, preferably, the same external readers;
 4. test `Ctrl+F` / Find in Page;
 5. test deep links to closed entries;
