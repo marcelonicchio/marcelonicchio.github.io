@@ -24,8 +24,15 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Install dependencies
-        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+        run: |
+          python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+          npm install --no-save playwright-core
 
       - name: Synchronize neutral entry fragments into verticals
         run: python tools/sync_entries.py
@@ -50,7 +57,7 @@ jobs:
           python tools/sync_analytics.py
           python tools/sync_presence.py
 
-      - name: Run existing audits
+      - name: Run existing and entry audits
         run: |
           python tools/sync_navigation.py --check
           python tools/build_gallery_media.py --check
@@ -71,6 +78,105 @@ jobs:
         run: |
           node --check assets/js/reader-disclosure-loader.js
           node --check assets/js/reader-disclosure.js
+
+      - name: Browser smoke test
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 > /tmp/hub-entry-server.log 2>&1 &
+          echo $! > /tmp/hub-entry-server.pid
+          sleep 2
+          node <<'NODE'
+          const { chromium } = require('playwright-core');
+          const assert = (condition, message) => { if (!condition) throw new Error(message); };
+          const base = 'http://127.0.0.1:8000';
+
+          (async () => {
+            const browser = await chromium.launch({
+              executablePath: '/usr/bin/google-chrome',
+              headless: true,
+              args: ['--no-sandbox', '--disable-gpu']
+            });
+            const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
+
+            // Normal Reader Page must remain visually untransformed.
+            await page.goto(`${base}/pt/biografia/`, { waitUntil: 'networkidle' });
+            assert(await page.locator('details.reader-disclosure').count() === 0, 'Normal Full Bio URL was transformed');
+            assert(!(await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active'), 'Normal Full Bio root received pilot class');
+
+            // Full Biography: registry-backed summary/topics and deep-link opening.
+            await page.goto(`${base}/pt/biografia/?ux=disclosure#bio-internet-cookieweb`, { waitUntil: 'networkidle' });
+            assert(await page.locator('details.reader-disclosure').count() >= 30, 'Full Bio produced too few disclosures');
+            const cookieSection = page.locator('#bio-internet-cookieweb');
+            assert(await cookieSection.locator('details.reader-disclosure').getAttribute('open') !== null, 'CookieWEB deep link did not auto-open');
+            assert((await cookieSection.locator('.reader-disclosure__excerpt').innerText()).includes('primeira grande conta de e-commerce'), 'CookieWEB curated summary was not used');
+            assert(await cookieSection.locator('.reader-disclosure__topic').count() >= 4, 'CookieWEB topic chips missing');
+
+            // Internet: all three heavy cases + Goobec/GAP semantic relation + BEST Chapter Page link.
+            await page.goto(`${base}/pt/internet/?ux=disclosure`, { waitUntil: 'networkidle' });
+            assert(await page.locator('details.reader-disclosure').count() >= 10, 'Internet produced too few disclosures');
+            const mirantte = page.locator('#mirantte');
+            assert((await mirantte.locator('.reader-disclosure__excerpt').innerText()).includes('problema de aquisição de tráfego'), 'Mirantte curated summary missing');
+            assert((await mirantte.locator('.reader-disclosure__badge').allInnerTexts()).some(t => t.includes('34 fotos')), 'Mirantte gallery badge incorrect');
+            const sem = page.locator('#sem');
+            assert((await sem.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'Goobec related landmark missing from SEM');
+            const cookieweb = page.locator('#cookieweb');
+            assert((await cookieweb.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'GAP related landmark missing from CookieWEB');
+            const best = page.locator('#best');
+            assert((await best.locator('.reader-disclosure__badge').allInnerTexts()).some(t => t.includes('4 vídeos')), 'BEST video count badge incorrect');
+            await best.locator('summary').click();
+            const bestPageHref = await best.locator('.reader-disclosure__page-link a').getAttribute('href');
+            assert(bestPageHref === '/pt/internet/best-kenshoo/', 'BEST Chapter Page link incorrect');
+
+            // Communication: Folha gets curated summary and standalone-page link.
+            await page.goto(`${base}/pt/comunicacao/?ux=disclosure`, { waitUntil: 'networkidle' });
+            const folha = page.locator('#folha');
+            assert((await folha.locator('.reader-disclosure__excerpt').innerText()).includes('matéria de capa do Folhateen'), 'Folha curated summary missing');
+            await folha.locator('summary').click();
+            assert(await folha.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/comunicacao/folhateen-orfaos-do-rock/', 'Folha Chapter Page link incorrect');
+
+            // Audiovisual: Meia-Noite is registry-backed and counts four videos + 22 photos.
+            await page.goto(`${base}/pt/audiovisual/?ux=disclosure`, { waitUntil: 'networkidle' });
+            const meia = page.locator('#meia-noite');
+            const meiaBadges = await meia.locator('.reader-disclosure__badge').allInnerTexts();
+            assert(meiaBadges.some(t => t.includes('22 fotos')), 'Meia-Noite gallery badge incorrect');
+            assert(meiaBadges.some(t => t.includes('4 vídeos')), 'Meia-Noite video badge incorrect');
+            assert((await meia.locator('.reader-disclosure__excerpt').innerText()).includes('Programa de literatura com linguagem pop'), 'Meia-Noite curated summary missing');
+
+            // Multiple disclosures remain independently open.
+            await page.goto(`${base}/pt/internet/?ux=disclosure`, { waitUntil: 'networkidle' });
+            await page.locator('#mirantte summary').click();
+            await page.locator('#best summary').click();
+            assert(await page.locator('#mirantte details.reader-disclosure').getAttribute('open') !== null, 'Opening BEST closed Mirantte');
+            assert(await page.locator('#best details.reader-disclosure').getAttribute('open') !== null, 'BEST did not remain open');
+
+            // Open all / Collapse all controls work.
+            await page.getByRole('button', { name: 'Abrir todos' }).click();
+            const openCount = await page.locator('details.reader-disclosure[open]').count();
+            const totalCount = await page.locator('details.reader-disclosure').count();
+            assert(openCount === totalCount, 'Open all did not open all disclosures');
+            await page.getByRole('button', { name: 'Recolher todos' }).click();
+            assert(await page.locator('details.reader-disclosure[open]').count() === 0, 'Collapse all did not close all disclosures');
+
+            // Pilot Chapter Pages are browser-readable and cross-link correctly.
+            await page.goto(`${base}/pt/comunicacao/folhateen-orfaos-do-rock/`, { waitUntil: 'networkidle' });
+            assert(await page.locator('main[data-entry-id="communication-folha"]').count() === 1, 'Folha Chapter Page missing stable entry id');
+            assert((await page.locator('meta[name="robots"]').getAttribute('content')) === 'noindex,follow', 'Folha pilot robots incorrect');
+            assert((await page.locator('link[rel="canonical"]').getAttribute('href')).endsWith('/pt/comunicacao/folhateen-orfaos-do-rock/'), 'Folha canonical incorrect');
+
+            await page.goto(`${base}/pt/internet/best-kenshoo/`, { waitUntil: 'networkidle' });
+            assert(await page.locator('main[data-entry-id="internet-best"]').count() === 1, 'BEST Chapter Page missing stable entry id');
+            assert(await page.locator('.evidence').count() === 4, 'BEST Chapter Page did not preserve four workshop parts');
+
+            await browser.close();
+            console.log('Reader/Chapter browser smoke test passed.');
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Stop local server
+        if: always()
+        run: kill $(cat /tmp/hub-entry-server.pid) || true
 
       - name: Commit generated pilot state
         run: |
