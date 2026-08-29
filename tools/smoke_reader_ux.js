@@ -149,7 +149,7 @@ async function runDesktop(browser) {
 
   // EN consumes the same registry with language-specific labels/copy.
   await page.goto(`${BASE}/en/biography/?ux=disclosure#bio-communication-folha`, {waitUntil: 'networkidle'});
-  assert((await page.locator('.reader-disclosure-controls__label').innerText()).includes('Compact reading'), 'English disclosure controls not localized');
+  assert(await page.getByRole('button', {name: 'Open all'}).count() === 1, 'English disclosure controls not localized');
   const folhaEn = page.locator('#bio-communication-folha');
   assert((await folhaEn.locator('.reader-disclosure__excerpt').innerText()).includes('Folhateen cover story'), 'English Folha curated summary missing');
   assert((await folhaEn.locator('.reader-disclosure__topic').allInnerTexts()).includes('Press'), 'English topic labels missing');
