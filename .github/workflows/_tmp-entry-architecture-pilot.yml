@@ -1,0 +1,83 @@
+name: Temporary entry architecture pilot
+
+on:
+  push:
+    branches: [work/entry-architecture-pilot]
+    paths:
+      - '.github/workflows/_tmp-entry-architecture-pilot.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: work/entry-architecture-pilot
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+
+      - name: Synchronize neutral entry fragments into verticals
+        run: python tools/sync_entries.py
+
+      - name: Accept structural parity checkpoint refresh
+        run: |
+          python tools/editorial_parity.py --accept communication-folha
+          python tools/editorial_parity.py --accept internet-best
+
+      - name: Synchronize Full Biography
+        run: python tools/sync_full_biography.py
+
+      - name: Install dormant Reader Page loader
+        run: python tools/sync_reader_disclosure_loader.py
+
+      - name: Generate pilot Chapter Pages
+        run: python tools/build_chapter_pages.py
+
+      - name: Normalize generated/shared infrastructure
+        run: |
+          python tools/sync_navigation.py
+          python tools/sync_analytics.py
+          python tools/sync_presence.py
+
+      - name: Run existing audits
+        run: |
+          python tools/sync_navigation.py --check
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/editorial_parity.py --check
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/sync_reader_disclosure_loader.py --check
+          python tools/audit_entries.py
+          python tools/audit_page_weight.py
+          python tools/audit_site.py
+          python tools/audit_presence.py
+          python tools/audit_analytics.py
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/reader-disclosure-loader.js
+          node --check assets/js/reader-disclosure.js
+
+      - name: Commit generated pilot state
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git reset .github/workflows/_tmp-entry-architecture-pilot.yml
+          git diff --cached --quiet && exit 0
+          git commit -m 'Generate entry architecture pilot state'
+          git push origin HEAD:work/entry-architecture-pilot
