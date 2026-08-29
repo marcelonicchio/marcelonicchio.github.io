@@ -108,7 +108,11 @@
         "status": "pilot",
         "indexing": "noindex,follow",
         "pt_path": "pt/comunicacao/folhateen-orfaos-do-rock/index.html",
-        "en_path": "en/communication/folhateen-orphans-of-rock/index.html"
+        "en_path": "en/communication/folhateen-orphans-of-rock/index.html",
+        "meta_description": {
+          "pt": "Marcelo Nicchio na capa do Folhateen de 23 de abril de 2001, após a morte de Joey Ramone, com falas sobre cultura punk, faça-você-mesmo e permanência do rock.",
+          "en": "Marcelo Nicchio in Folhateen's April 23, 2001 cover story after Joey Ramone's death, discussing punk culture, do-it-yourself practice and the persistence of rock."
+        }
       }
     },
     {
@@ -203,7 +207,11 @@
         "status": "pilot",
         "indexing": "noindex,follow",
         "pt_path": "pt/internet/best-kenshoo/index.html",
-        "en_path": "en/internet/best-kenshoo/index.html"
+        "en_path": "en/internet/best-kenshoo/index.html",
+        "meta_description": {
+          "pt": "Marcelo Nicchio como Gerente de Performance na BEST/Kenshoo em 2014, com onboarding da plataforma, otimização para varejistas e workshop de Search e Social.",
+          "en": "Marcelo Nicchio as Performance Manager at BEST/Kenshoo in 2014, combining platform onboarding, retailer optimization and a Search and Social workshop."
+        }
       }
     }
   ]
