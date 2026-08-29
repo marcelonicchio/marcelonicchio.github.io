@@ -55,6 +55,27 @@ Value: machine-readable, rights-safe and visually consistent evidence for the cu
 - Reconstructed imagery must be explicitly labeled as reconstruction.
 - Never imply that an AI reconstruction is an original historical artifact.
 
+## Archival master versus delivery derivative
+
+The public repository may contain historically important masters when there is a legitimate archival reason to preserve the submitted or restored source. This is separate from normal page delivery.
+
+Operational rule:
+
+- **archival master** — preserves the historically relevant source/treated file when retention is justified;
+- **delivery derivative** — optimized WebP/JPEG used by the page for ordinary rendering;
+- pages should not serve a heavy archival master as the normal `<img src>` when an appropriate derivative can preserve the editorial function;
+- a master linked only for full-size inspection is not counted as normal page-delivery payload;
+- new ordinary photographs should preferably enter the repository as JPEG/WebP when there is no archival reason for a lossless PNG;
+- PNG remains appropriate for transparency, text-heavy screenshots/graphics, or justified archival preservation cases;
+- do not rewrite Git history merely to recover a small amount of space from already committed historical masters.
+
+This distinction prevents two separate concerns from being confused:
+
+1. **repository/archive weight** — what is preserved in Git;
+2. **page-delivery weight** — what the browser may load while a reader navigates the page.
+
+The rule above does not override copyright/privacy restrictions. For example, the Sinal Verde rule above is specifically about whether a third-party scan corpus should be public at all; it is not a general statement that every master must remain outside the repository.
+
 
 ## Placement taxonomy
 
