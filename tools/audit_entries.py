@@ -13,7 +13,11 @@ from bs4 import BeautifulSoup, Tag
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "entries.json"
 TAGS = ROOT / "data" / "tags.json"
+SITEMAP = ROOT / "sitemap.xml"
 BASE_URL = "https://marcelonicchio.github.io/"
+ALLOWED_SOURCE_KINDS = {"reader-section", "fragment", "composite-reader-landmarks"}
+ALLOWED_PAGE_STATUS = {"pilot", "candidate", "none"}
+ALLOWED_INDEXING = {"index,follow", "noindex,follow", "none"}
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -42,6 +46,11 @@ def canonical_for(path: str) -> str:
     return BASE_URL + directory.lstrip("/")
 
 
+def public_path_for(path: str) -> str:
+    directory = path[:-10] if path.endswith("index.html") else path
+    return "/" + directory.lstrip("/")
+
+
 def unique_video_urls(node: Tag) -> set[str]:
     urls: set[str] = set()
     for tag in node.select("a[href], iframe[src]"):
@@ -51,12 +60,31 @@ def unique_video_urls(node: Tag) -> set[str]:
     return urls
 
 
+def has_jsonld_type(soup: BeautifulSoup, schema_type: str) -> bool:
+    for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        raw = script.string or script.get_text()
+        try:
+            data = json.loads(raw)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        nodes: list[Any]
+        if isinstance(data, dict) and isinstance(data.get("@graph"), list):
+            nodes = data["@graph"]
+        else:
+            nodes = [data]
+        for node in nodes:
+            if isinstance(node, dict) and node.get("@type") == schema_type:
+                return True
+    return False
+
+
 def main() -> int:
     registry = load(REGISTRY)
     taxonomy = load(TAGS)
     errors: list[str] = []
     warnings: list[str] = []
     cache: dict[str, BeautifulSoup] = {}
+    sitemap_text = SITEMAP.read_text(encoding="utf-8") if SITEMAP.exists() else ""
 
     tags = taxonomy.get("tags", [])
     tag_ids = [tag.get("id") for tag in tags]
@@ -73,20 +101,40 @@ def main() -> int:
     if len(entry_ids) != len(set(entry_ids)):
         errors.append("data/entries.json contains duplicate entry ids")
 
+    registered_page_paths: list[str] = []
+    for entry in entries:
+        page = entry.get("chapter_page", {})
+        for lang in ("pt", "en"):
+            rel = page.get(f"{lang}_path")
+            if rel:
+                registered_page_paths.append(rel)
+    if len(registered_page_paths) != len(set(registered_page_paths)):
+        errors.append("data/entries.json contains duplicate Chapter Page paths")
+
     for entry in entries:
         entry_id = entry.get("id", "<missing-id>")
         kind = entry.get("kind")
+        source = entry.get("source", {})
+        source_kind = source.get("kind")
+        if source_kind not in ALLOWED_SOURCE_KINDS:
+            errors.append(f"{entry_id}: unsupported source kind {source_kind!r}")
+
         for lang in ("pt", "en"):
             if not entry.get("title", {}).get(lang, "").strip():
                 errors.append(f"{entry_id}: missing {lang} title")
             if not entry.get("summary", {}).get(lang, "").strip():
                 errors.append(f"{entry_id}: missing {lang} summary")
 
-        for topic in entry.get("topic_ids", []):
+        topics = entry.get("topic_ids", [])
+        if len(topics) != len(set(topics)):
+            errors.append(f"{entry_id}: duplicate topic ids")
+        for topic in topics:
             if topic not in known_tags:
                 errors.append(f"{entry_id}: unknown topic id {topic!r}")
 
         if kind == "landmark-set":
+            if source_kind != "composite-reader-landmarks":
+                errors.append(f"{entry_id}: landmark-set must use composite-reader-landmarks source kind")
             for lang in ("pt", "en"):
                 landmarks = entry.get("landmarks", {}).get(lang, [])
                 if not landmarks:
@@ -114,8 +162,7 @@ def main() -> int:
                     except (FileNotFoundError, RuntimeError) as exc:
                         errors.append(f"{entry_id}:{lang}: {exc}")
 
-        source = entry.get("source", {})
-        if source.get("kind") == "fragment":
+        if source_kind == "fragment":
             for lang in ("pt", "en"):
                 src_rel = source.get(f"{lang}_path")
                 src = ROOT / (src_rel or "")
@@ -170,39 +217,89 @@ def main() -> int:
 
         page = entry.get("chapter_page", {})
         status = page.get("status")
-        if status == "pilot":
+        indexing = page.get("indexing")
+        if status not in ALLOWED_PAGE_STATUS:
+            errors.append(f"{entry_id}: unsupported Chapter Page status {status!r}")
+            continue
+        if indexing not in ALLOWED_INDEXING:
+            errors.append(f"{entry_id}: unsupported Chapter Page indexing policy {indexing!r}")
+
+        if status == "none":
+            if indexing != "none":
+                errors.append(f"{entry_id}: Chapter Page status none requires indexing=none")
+            continue
+
+        if status == "candidate":
+            if indexing == "index,follow":
+                errors.append(f"{entry_id}: candidate Chapter Page cannot be index,follow before promotion")
             for lang in ("pt", "en"):
                 rel = page.get(f"{lang}_path")
-                if not rel:
-                    errors.append(f"{entry_id}:{lang}: pilot Chapter Page path missing")
-                    continue
-                path = ROOT / rel
-                if not path.exists():
-                    errors.append(f"{entry_id}:{lang}: pilot Chapter Page not generated: {rel}")
-                    continue
-                soup = soup_for(rel, cache)
-                robots = soup.find("meta", attrs={"name": "robots"})
-                expected_robots = page.get("indexing", "noindex,follow")
-                if robots is None or robots.get("content") != expected_robots:
-                    errors.append(f"{entry_id}:{lang}: Chapter Page robots must be {expected_robots!r}")
-                canonical = soup.find("link", rel="canonical")
-                expected_canonical = canonical_for(rel)
-                if canonical is None or canonical.get("href") != expected_canonical:
-                    errors.append(f"{entry_id}:{lang}: bad self-canonical")
-                if soup.select_one(".entry-breadcrumbs") is None:
-                    errors.append(f"{entry_id}:{lang}: visible breadcrumbs missing")
-                main = soup.select_one(f'main[data-entry-id="{entry_id}"]')
-                if main is None:
-                    errors.append(f"{entry_id}:{lang}: stable data-entry-id missing")
+                if rel and (ROOT / rel).exists():
+                    errors.append(f"{entry_id}:{lang}: candidate Chapter Page exists on disk before promotion: {rel}")
+            continue
 
-                other_lang = "en" if lang == "pt" else "pt"
-                other_rel = page.get(f"{other_lang}_path")
-                expected_alt = canonical_for(other_rel) if other_rel else None
-                hreflang = soup.find("link", rel="alternate", hreflang=("en" if other_lang == "en" else "pt-BR"))
-                if expected_alt and (hreflang is None or hreflang.get("href") != expected_alt):
-                    errors.append(f"{entry_id}:{lang}: reciprocal hreflang missing or incorrect")
-        elif status not in {"candidate", "none"}:
-            errors.append(f"{entry_id}: unsupported Chapter Page status {status!r}")
+        # status == pilot
+        if source_kind != "fragment":
+            errors.append(f"{entry_id}: pilot Chapter Page requires fragment source")
+        for lang in ("pt", "en"):
+            rel = page.get(f"{lang}_path")
+            if not rel:
+                errors.append(f"{entry_id}:{lang}: pilot Chapter Page path missing")
+                continue
+            path = ROOT / rel
+            if not path.exists():
+                errors.append(f"{entry_id}:{lang}: pilot Chapter Page not generated: {rel}")
+                continue
+            soup = soup_for(rel, cache)
+            robots = soup.find("meta", attrs={"name": "robots"})
+            expected_robots = indexing or "noindex,follow"
+            if robots is None or robots.get("content") != expected_robots:
+                errors.append(f"{entry_id}:{lang}: Chapter Page robots must be {expected_robots!r}")
+
+            expected_canonical = canonical_for(rel)
+            canonical = soup.find("link", rel="canonical")
+            if canonical is None or canonical.get("href") != expected_canonical:
+                errors.append(f"{entry_id}:{lang}: bad self-canonical")
+            self_hreflang = "pt-BR" if lang == "pt" else "en"
+            self_alt = soup.find("link", rel="alternate", hreflang=self_hreflang)
+            if self_alt is None or self_alt.get("href") != expected_canonical:
+                errors.append(f"{entry_id}:{lang}: self hreflang missing or incorrect")
+            if soup.select_one(".entry-breadcrumbs") is None:
+                errors.append(f"{entry_id}:{lang}: visible breadcrumbs missing")
+            if not has_jsonld_type(soup, "BreadcrumbList"):
+                errors.append(f"{entry_id}:{lang}: BreadcrumbList JSON-LD missing")
+            main = soup.select_one(f'main[data-entry-id="{entry_id}"]')
+            if main is None:
+                errors.append(f"{entry_id}:{lang}: stable data-entry-id missing")
+
+            other_lang = "en" if lang == "pt" else "pt"
+            other_rel = page.get(f"{other_lang}_path")
+            expected_alt = canonical_for(other_rel) if other_rel else None
+            hreflang = soup.find("link", rel="alternate", hreflang=("en" if other_lang == "en" else "pt-BR"))
+            if expected_alt and (hreflang is None or hreflang.get("href") != expected_alt):
+                errors.append(f"{entry_id}:{lang}: reciprocal hreflang missing or incorrect")
+
+            x_default = soup.find("link", rel="alternate", hreflang="x-default")
+            expected_default = canonical_for(page["pt_path"])
+            if x_default is None or x_default.get("href") != expected_default:
+                errors.append(f"{entry_id}:{lang}: x-default must point to PT Chapter Page")
+
+            in_sitemap = expected_canonical in sitemap_text
+            if expected_robots.startswith("noindex") and in_sitemap:
+                errors.append(f"{entry_id}:{lang}: noindex pilot Chapter Page must not be listed in sitemap")
+
+            # Once a Chapter Page becomes indexable, search/crawlers must have normal static links to it.
+            if expected_robots == "index,follow":
+                expected_href = public_path_for(rel)
+                for target in entry.get("reader_targets", {}).get(lang, []):
+                    try:
+                        node = select_one(target["path"], target["selector"], cache)
+                    except (FileNotFoundError, RuntimeError):
+                        continue
+                    if node.select_one(f'a[href="{expected_href}"]') is None:
+                        errors.append(
+                            f"{entry_id}:{lang}: indexable Chapter Page lacks static link from {target['path']} {target['selector']}"
+                        )
 
     print(f"Entry architecture audit: {len(entries)} registered case(s), {len(tags)} controlled tag(s).")
     for warning in warnings:
