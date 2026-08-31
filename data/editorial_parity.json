@@ -271,10 +271,14 @@
       ]
     },
     "hai-pro1": {
-      "revision": 1,
-      "pt_hash": "87ce767e93349af3f0bf2a6c979754ff92305de6fa56fb2332f8ed01b82ef4bb",
-      "en_hash": "de626b534d77606fe11f81f1407441e3f9cacf66c816417a64f3be1631375b65",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "02c911619482b9eef59c7f86e0fb93ad5cb37f7295c25e383f3499069d84c21e",
+      "en_hash": "9cbeae545235c8168b6082b61683f526c97b6a320955c7906598b53d3c41a167",
+      "accepted_on": "2026-08-31",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "hai-pro2": {
       "revision": 1,
