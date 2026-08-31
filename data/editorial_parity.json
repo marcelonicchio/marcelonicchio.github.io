@@ -261,10 +261,14 @@
       "accepted_on": "2026-08-27"
     },
     "hai-melissa": {
-      "revision": 1,
-      "pt_hash": "c567567871cdf7b6dd4353b12b876007e5fb8c7b7a54110e66e430eac8dd70dd",
-      "en_hash": "da6e8a0c6d3a199245f719b0fa97efdf3ffcb12de4c0600f1f149870a2720190",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "69997820ab3107cbe960107808372452e0b8d1c4fb4694c456b6e1ab104677be",
+      "en_hash": "6816b71aa5669f252b7ba4348f8a812b8e2718021b3ac0bb8ea57c6daa32c29f",
+      "accepted_on": "2026-08-31",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "hai-pro1": {
       "revision": 1,
