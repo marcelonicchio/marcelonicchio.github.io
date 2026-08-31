@@ -2,6 +2,9 @@
 /**
  * Browser-level regression smoke test for Reader Page disclosure + pilot Chapter Pages.
  *
+ * Full Biography and Internet & Performance use disclosure by default. Communication
+ * and Audiovisual remain query-flag pilot surfaces while their UX is still under review.
+ *
  * Requires playwright-core supplied outside the repository. CI sets
  * PLAYWRIGHT_CORE_PATH to an isolated /tmp install so site-wide HTML sync tools never
  * traverse dependency fixtures.
@@ -77,14 +80,15 @@ async function runDesktop(browser) {
   const page = await context.newPage();
   await blockExternal(page);
 
-  // Query flag is opt-in: production-looking URL remains structurally untouched.
+  // Core Reader Pages are disclosure-first on their normal public URLs.
   await page.goto(`${BASE}/pt/biografia/`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() === 0, 'Normal Full Bio URL was transformed');
-  assert(!(await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active'), 'Normal Full Bio root received pilot class');
-  assert((await page.locator('#bio-internet-cookieweb').innerText()).includes('qualidade de vida'), 'Normal Full Bio lost autobiographical text');
+  assert(await page.locator('details.reader-disclosure').count() >= 30, 'Normal Full Bio URL did not initialize disclosure');
+  assert((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active'), 'Normal Full Bio root did not receive Reader UX class');
+  assert((await page.locator('#bio-internet-cookieweb').innerText()).includes('qualidade de vida'), 'Full Bio lost autobiographical text');
+  assert((await page.getByText('Clique para expandir', {exact: false}).count()) > 0, 'Permanent Portuguese CTA missing');
 
-  // Full Biography: deep-link opening + registry-backed metadata.
-  await page.goto(`${BASE}/pt/biografia/?ux=disclosure#bio-internet-cookieweb`, {waitUntil: 'networkidle'});
+  // Full Biography: deep-link opening + registry-backed metadata without query flag.
+  await page.goto(`${BASE}/pt/biografia/#bio-internet-cookieweb`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() >= 30, 'Full Bio produced too few disclosures');
   const cookieBio = page.locator('#bio-internet-cookieweb');
   assert(await cookieBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'CookieWEB deep link did not auto-open');
@@ -92,9 +96,9 @@ async function runDesktop(browser) {
   assert(await cookieBio.locator('.reader-disclosure__topic').count() >= 4, 'CookieWEB topic chips missing');
   assert((await cookieBio.innerText()).includes('qualidade de vida'), 'Disclosure transformation lost CookieWEB body text');
 
-  // Internet stress set: large galleries, composite landmark, video count and Chapter Page link.
-  await page.goto(`${BASE}/pt/internet/?ux=disclosure`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() >= 10, 'Internet produced too few disclosures');
+  // Internet stress set: normal URL + large galleries, composite landmark, video count and Chapter Page link.
+  await page.goto(`${BASE}/pt/internet/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('details.reader-disclosure').count() >= 10, 'Internet normal URL produced too few disclosures');
 
   const mirantte = page.locator('#mirantte');
   assert((await mirantte.locator('.reader-disclosure__excerpt').innerText()).includes('problema de aquisição de tráfego'), 'Mirantte curated summary missing');
@@ -132,14 +136,14 @@ async function runDesktop(browser) {
   await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
   assert(await page.locator('details.reader-disclosure[open]').count() === 0, 'afterprint did not restore disclosure state');
 
-  // Communication: neutral-source pilot + standalone page.
+  // Communication remains an explicit pilot: neutral-source entry + standalone page.
   await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});
   const folha = page.locator('#folha');
   assert((await folha.locator('.reader-disclosure__excerpt').innerText()).includes('matéria de capa do Folhateen'), 'Folha curated summary missing');
   await folha.locator('summary').click();
   assert(await folha.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/comunicacao/folhateen-orfaos-do-rock/', 'Folha Chapter Page link incorrect');
 
-  // Audiovisual: gallery + four videos + curated summary.
+  // Audiovisual remains an explicit pilot: gallery + four videos + curated summary.
   await page.goto(`${BASE}/pt/audiovisual/?ux=disclosure`, {waitUntil: 'networkidle'});
   const meia = page.locator('#meia-noite');
   const meiaBadges = await meia.locator('.reader-disclosure__badge').allInnerTexts();
@@ -147,9 +151,10 @@ async function runDesktop(browser) {
   assert(meiaBadges.some((t) => t.includes('4 vídeos')), 'Meia-Noite video badge incorrect');
   assert((await meia.locator('.reader-disclosure__excerpt').innerText()).includes('Programa de literatura com linguagem pop'), 'Meia-Noite curated summary missing');
 
-  // EN consumes the same registry with language-specific labels/copy.
-  await page.goto(`${BASE}/en/biography/?ux=disclosure#bio-communication-folha`, {waitUntil: 'networkidle'});
+  // EN core page consumes the same registry with language-specific labels/copy by default.
+  await page.goto(`${BASE}/en/biography/#bio-communication-folha`, {waitUntil: 'networkidle'});
   assert(await page.getByRole('button', {name: 'Open all'}).count() === 1, 'English disclosure controls not localized');
+  assert((await page.getByText('Click to expand', {exact: false}).count()) > 0, 'Permanent English CTA missing');
   const folhaEn = page.locator('#bio-communication-folha');
   assert((await folhaEn.locator('.reader-disclosure__excerpt').innerText()).includes('Folhateen cover story'), 'English Folha curated summary missing');
   assert((await folhaEn.locator('.reader-disclosure__topic').allInnerTexts()).includes('Press'), 'English topic labels missing');
@@ -174,8 +179,8 @@ async function runMobile(browser) {
   const context = await browser.newContext({viewport: {width: 390, height: 844}, isMobile: true});
   const page = await context.newPage();
   await blockExternal(page);
-  await page.goto(`${BASE}/pt/biografia/?ux=disclosure`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() >= 30, 'Mobile Full Bio did not initialize disclosure');
+  await page.goto(`${BASE}/pt/biografia/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('details.reader-disclosure').count() >= 30, 'Mobile Full Bio did not initialize disclosure by default');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   assert(overflow <= 2, `Mobile disclosure introduced horizontal overflow: ${overflow}px`);
   assert(await page.getByRole('button', {name: 'Abrir todos'}).isVisible(), 'Mobile Open all control is not visible');
@@ -185,7 +190,7 @@ async function runMobile(browser) {
 async function runNoJs(browser) {
   const context = await browser.newContext({javaScriptEnabled: false, viewport: {width: 1000, height: 800}});
   const page = await context.newPage();
-  await page.goto(`${BASE}/pt/biografia/?ux=disclosure`, {waitUntil: 'domcontentloaded'});
+  await page.goto(`${BASE}/pt/biografia/`, {waitUntil: 'domcontentloaded'});
   assert(await page.locator('details.reader-disclosure').count() === 0, 'No-JS page should retain source HTML rather than depend on disclosure JS');
   assert((await page.locator('#bio-internet-cookieweb').innerText()).includes('qualidade de vida'), 'No-JS Full Bio lost source content');
   await context.close();
