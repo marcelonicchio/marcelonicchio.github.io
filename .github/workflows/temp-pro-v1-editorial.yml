@@ -1,0 +1,93 @@
+name: Temporary PRO v1 editorial entry
+
+on:
+  push:
+    branches:
+      - work/pro-v1-editorial-entry
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/pro-v1-editorial-entry
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Replace PRO v1 editorial entry
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          pt = r'''<section id="pro1" class="chapter"><h2>Punk Rock Orchestra v1</h2><p class="meta"><strong>Maio de 2026 — primeira formulação pública da metodologia</strong></p>
+          <p>O <strong>Punk Rock Orchestra (PRO)</strong> surgiu durante a investigação iniciada com Melissa 1.0. O problema havia mudado: além de observar fenômenos de Human–AI Interaction, Nicchio precisava encontrar uma forma de submeter suas próprias hipóteses a crítica sistemática trabalhando como pesquisador independente, sem laboratório, equipe fixa ou acesso contínuo a pares humanos. O caso motivou o método, mas não é apresentado pelo paper como evidência da metodologia.</p>
+          <p>A primeira versão formalizou uma metodologia <strong>single-operator de triangulação epistêmica adversarial</strong>, na qual diferentes instâncias de modelos de linguagem recebem funções analíticas distintas e são colocadas deliberadamente em tensão. Em vez de tratar consenso entre agentes como sinal de correção, o PRO procura produzir resistência, crítica e rastreabilidade antes que uma conclusão seja considerada plausível.</p>
+          <p>Entre os conceitos apresentados estavam a taxonomia de especialização <strong>N1 / N2 / N3</strong>, a distinção entre <strong>Robotic Class</strong> e <strong>Dialogical Class</strong>, a organização em <strong>Blue Team, Red Team e Forensic Layer</strong>, o <strong>Sterling Protocol</strong>, além da identificação de <strong>context poisoning by provisioning failure</strong> e da resposta arquitetural chamada <strong>Cognitive Jelly Principle</strong>. O paper também propõe o PRO como possível desenho de uma camada deliberativa complementar aos sistemas orientados à execução — uma proposição arquitetural, não uma comparação empírica já demonstrada.</p>
+          <figure class="thread-media pro-v1-architecture"><a href="/assets/media/thread/pro-v1-architecture-figure1.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/media/thread/pro-v1-architecture-figure1.jpg" loading="lazy" decoding="async" alt="Diagrama da arquitetura do Punk Rock Orchestra v1 com Blue Team, Red Team e Forensic Layer"></a><figcaption><strong>Arquitetura do PRO v1</strong><span class="thread-media-note">Blue Team, Red Team e Forensic Layer. Recorte da Figura 1 do paper publicado em maio de 2026.</span></figcaption></figure>
+          <p>A metodologia foi submetida a um primeiro Pilot Study com <strong>54 interações documentadas</strong>, combinando três níveis de especialização, três plataformas — Claude, Gemini e DeepSeek — e uma sequência comum de seis prompts adversariais. O estudo encontrou diferenciação consistente dos N3 sob pressão, com resultados distintos nos níveis inferiores conforme a plataforma.</p>
+          <p>O próprio paper delimita cuidadosamente essa conclusão: o piloto mede <strong>integridade epistêmica e estabilidade sob condições adversariais</strong>; não demonstra que N3 produza análises cognitivamente superiores em problemas abertos e não adversariais. Essa fronteira de validade abriu a próxima etapa da pesquisa.</p>
+          <p>O <strong>PRO v1</strong> tornou pública a primeira arquitetura completa do método. Os conceitos apresentados ali seriam posteriormente revisitados, testados e aprofundados em uma nova etapa, conduzindo ao <strong>Punk Rock Orchestra v2</strong>.</p>
+          <p>O trabalho possui registros e instâncias públicas em diferentes ecossistemas de pesquisa, preservação e acesso.</p><div class="evidence-list">
+          <div class="evidence"><div class="evidence-top"><strong>OSF</strong><span class="status">DOI</span></div><div class="evidence-links"><a href="https://doi.org/10.33767/osf.io/smr6b_v1" target="_blank" rel="noopener noreferrer">10.33767/osf.io/smr6b_v1</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>SSRN</strong><span class="status">preprint</span></div><div class="evidence-links"><a href="http://dx.doi.org/10.2139/ssrn.6914220" target="_blank" rel="noopener noreferrer">10.2139/ssrn.6914220</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>Zenodo</strong><span class="status">DOI</span></div><div class="evidence-links"><a href="https://doi.org/10.5281/zenodo.20349137" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20349137</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>PubPub</strong><span class="status">DOI</span></div><div class="evidence-links"><a href="https://doi.org/10.21428/d7f7ada3.133c1c92" target="_blank" rel="noopener noreferrer">10.21428/d7f7ada3.133c1c92</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>GitHub</strong><span class="status">repositório</span></div><div class="evidence-links"><a href="https://github.com/marcelonicchio/punk-rock-orchestra" target="_blank" rel="noopener noreferrer">punk-rock-orchestra</a></div></div>
+          </div></section>'''
+
+          en = r'''<section id="pro1" class="chapter"><h2>Punk Rock Orchestra v1</h2><p class="meta"><strong>May 2026 — first public formulation of the methodology</strong></p>
+          <p>The <strong>Punk Rock Orchestra (PRO)</strong> emerged during the investigation set in motion by Melissa 1.0. The problem had changed: beyond observing Human–AI Interaction phenomena, Nicchio needed a way to subject his own hypotheses to systematic criticism while working as an independent researcher, without a laboratory, a fixed team, or continuous access to human peers. The case motivated the method, but the paper does not offer it as evidence for the methodology.</p>
+          <p>The first version formalized a <strong>single-operator methodology for adversarial epistemic triangulation</strong>, in which different language-model instances are assigned distinct analytical functions and deliberately placed in tension. Rather than treating agreement among agents as evidence of correctness, PRO seeks resistance, criticism, and traceability before a conclusion is treated as plausible.</p>
+          <p>Concepts introduced in this first formulation included the <strong>N1 / N2 / N3</strong> specialization taxonomy, the distinction between <strong>Robotic Class</strong> and <strong>Dialogical Class</strong>, the <strong>Blue Team, Red Team, and Forensic Layer</strong> architecture, the <strong>Sterling Protocol</strong>, as well as the identification of <strong>context poisoning by provisioning failure</strong> and the architectural response termed the <strong>Cognitive Jelly Principle</strong>. The paper also frames PRO as a possible design for a deliberative layer complementary to execution-oriented systems — an architectural proposition rather than an empirical comparison already demonstrated.</p>
+          <figure class="thread-media pro-v1-architecture"><a href="/assets/media/thread/pro-v1-architecture-figure1.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/media/thread/pro-v1-architecture-figure1.jpg" loading="lazy" decoding="async" alt="Diagram of the Punk Rock Orchestra v1 architecture with Blue Team, Red Team, and Forensic Layer"></a><figcaption><strong>PRO v1 architecture</strong><span class="thread-media-note">Blue Team, Red Team, and Forensic Layer. Crop of Figure 1 from the paper published in May 2026.</span></figcaption></figure>
+          <p>The methodology was subjected to an initial Pilot Study with <strong>54 documented interactions</strong>, combining three specialization levels, three platforms — Claude, Gemini, and DeepSeek — and a common sequence of six adversarial prompts. The study found consistent N3 differentiation under pressure, while lower levels produced different outcomes depending on the platform.</p>
+          <p>The paper carefully limits that conclusion: the pilot measures <strong>epistemic integrity and stability under adversarial conditions</strong>; it does not demonstrate that N3 produces cognitively superior analysis on open-ended, non-adversarial problems. That construct-validity boundary opened the next phase of the research.</p>
+          <p><strong>PRO v1</strong> made the first complete architecture of the method public. The concepts introduced there would later be revisited, tested, and developed in greater depth in a new phase, leading to <strong>Punk Rock Orchestra v2</strong>.</p>
+          <p>The work has public records and instances across different research, preservation, and access ecosystems.</p><div class="evidence-list">
+          <div class="evidence"><div class="evidence-top"><strong>OSF</strong><span class="status">DOI</span></div><div class="evidence-links"><a href="https://doi.org/10.33767/osf.io/smr6b_v1" target="_blank" rel="noopener noreferrer">10.33767/osf.io/smr6b_v1</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>SSRN</strong><span class="status">preprint</span></div><div class="evidence-links"><a href="http://dx.doi.org/10.2139/ssrn.6914220" target="_blank" rel="noopener noreferrer">10.2139/ssrn.6914220</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>Zenodo</strong><span class="status">DOI</span></div><div class="evidence-links"><a href="https://doi.org/10.5281/zenodo.20349137" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20349137</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>PubPub</strong><span class="status">DOI</span></div><div class="evidence-links"><a href="https://doi.org/10.21428/d7f7ada3.133c1c92" target="_blank" rel="noopener noreferrer">10.21428/d7f7ada3.133c1c92</a></div></div>
+          <div class="evidence"><div class="evidence-top"><strong>GitHub</strong><span class="status">repository</span></div><div class="evidence-links"><a href="https://github.com/marcelonicchio/punk-rock-orchestra" target="_blank" rel="noopener noreferrer">punk-rock-orchestra</a></div></div>
+          </div></section>'''
+
+          for filename, block in (("pt/ia-hai/index.html", pt), ("en/ai-hai/index.html", en)):
+              path = Path(filename)
+              text = path.read_text(encoding="utf-8")
+              pattern = r'<section id="pro1" class="chapter">.*?</section>\n<section id="melissa"'
+              repl = block + '\n<section id="melissa"'
+              updated, n = re.subn(pattern, repl, text, count=1, flags=re.S)
+              if n != 1:
+                  raise SystemExit(f"Expected one PRO v1 section in {filename}, replaced {n}")
+              path.write_text(updated, encoding="utf-8")
+
+          css = Path("styles.css")
+          text = css.read_text(encoding="utf-8")
+          marker = "/* PRO v1 architecture figure */"
+          if marker not in text:
+              text += "\n\n" + marker + "\n.pro-v1-architecture{width:85%;margin-left:auto;margin-right:auto}\n@media(max-width:580px){.pro-v1-architecture{width:100%}}\n"
+              css.write_text(text, encoding="utf-8")
+      - name: Accept reviewed PT EN checkpoint
+        run: python tools/editorial_parity.py --accept hai-pro1
+      - name: Generate Full Biography
+        run: python tools/sync_full_biography.py
+      - name: Commit synchronized files
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "PRO v1 editorial entry already synchronized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/ia-hai/index.html en/ai-hai/index.html styles.css data/editorial_parity.json pt/biografia/index.html en/biography/index.html
+          git commit -m "Expand PRO v1 editorial entry"
+          git push origin HEAD:work/pro-v1-editorial-entry
