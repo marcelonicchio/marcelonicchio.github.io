@@ -1,14 +1,19 @@
 (() => {
   const params = new URLSearchParams(window.location.search);
-  if (params.get('ux') !== 'disclosure') return;
+  const pagePath = window.location.pathname;
 
-  const supported = new Set([
+  const defaultSupported = new Set([
     '/pt/biografia/', '/en/biography/',
-    '/pt/internet/', '/en/internet/',
+    '/pt/internet/', '/en/internet/'
+  ]);
+  const pilotSupported = new Set([
+    ...defaultSupported,
     '/pt/comunicacao/', '/en/communication/',
     '/pt/audiovisual/', '/en/audiovisual/'
   ]);
-  if (!supported.has(window.location.pathname)) return;
+
+  const requestedPilot = params.get('ux') === 'disclosure';
+  if (!defaultSupported.has(pagePath) && !(requestedPilot && pilotSupported.has(pagePath))) return;
   if (window.__mnReaderDisclosureRequested) return;
   window.__mnReaderDisclosureRequested = true;
 
