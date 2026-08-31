@@ -18,11 +18,11 @@
   if (!repoPath) return;
 
   const labels = isPortuguese ? {
-    mode: 'Leitura compacta · piloto',
+    mode: 'Leitura compacta',
     openAll: 'Abrir todos',
     closeAll: 'Recolher todos',
-    open: 'Expandir capítulo',
-    close: 'Recolher capítulo',
+    open: 'Clique para expandir',
+    close: 'Clique para recolher',
     page: 'Página própria',
     pageLink: 'Abrir página própria ↗',
     related: 'Relacionado',
@@ -35,11 +35,11 @@
     docOne: '1 documento',
     docMany: (n) => `${n} documentos`
   } : {
-    mode: 'Compact reading · pilot',
+    mode: 'Compact reading',
     openAll: 'Open all',
     closeAll: 'Collapse all',
-    open: 'Expand chapter',
-    close: 'Collapse chapter',
+    open: 'Click to expand',
+    close: 'Click to collapse',
     page: 'Standalone page',
     pageLink: 'Open standalone page ↗',
     related: 'Related',
