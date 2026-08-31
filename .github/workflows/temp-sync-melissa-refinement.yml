@@ -1,0 +1,41 @@
+name: Temporary Melissa refinement sync
+
+on:
+  push:
+    branches:
+      - work/melissa-entry-refinements
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/melissa-entry-refinements
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependency
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Accept reviewed PT EN checkpoint
+        run: python tools/editorial_parity.py --accept hai-melissa
+      - name: Generate Full Biography
+        run: python tools/sync_full_biography.py
+      - name: Commit synchronized files
+        shell: bash
+        run: |
+          if git diff --quiet -- data/editorial_parity.json pt/biografia/index.html en/biography/index.html; then
+            echo "Melissa refinement already synchronized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/editorial_parity.json pt/biografia/index.html en/biography/index.html
+          git commit -m "Sync Full Biography after Melissa refinement"
+          git push origin HEAD:work/melissa-entry-refinements
