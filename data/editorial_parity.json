@@ -261,9 +261,9 @@
       "accepted_on": "2026-08-27"
     },
     "hai-melissa": {
-      "revision": 2,
-      "pt_hash": "69997820ab3107cbe960107808372452e0b8d1c4fb4694c456b6e1ab104677be",
-      "en_hash": "6816b71aa5669f252b7ba4348f8a812b8e2718021b3ac0bb8ea57c6daa32c29f",
+      "revision": 3,
+      "pt_hash": "48ce6b24e9852f6f425a0cd18cc1f7afc62c789642444108f0c867ae39f5b2c4",
+      "en_hash": "8157fcec0f127dad2a723b8853d0d51864b49265ae0adba53edab8b0a37e0279",
       "accepted_on": "2026-08-31",
       "changed_languages": [
         "pt",
