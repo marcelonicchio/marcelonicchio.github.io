@@ -1,4 +1,4 @@
-/* Query-flag Reader Page UX pilot: ?ux=disclosure */
+/* Reader Page progressive-disclosure UX. */
 html.reader-disclosure-active .reader-disclosure-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:22px 0 28px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 html.reader-disclosure-active .reader-disclosure-controls__label{margin-right:auto;color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
 html.reader-disclosure-active .reader-disclosure-controls button{appearance:none;border:1px solid var(--line);border-radius:999px;min-height:38px;padding:8px 13px;background:rgba(255,255,255,.025);color:var(--soft);font:inherit;font-size:.82rem;cursor:pointer}
@@ -23,7 +23,7 @@ html.reader-disclosure-active .reader-disclosure__related{display:flex;flex-wrap
 html.reader-disclosure-active .reader-disclosure__topic{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px solid rgba(255,255,255,.11);border-radius:999px;color:var(--soft);font-size:.69rem;font-weight:730}
 html.reader-disclosure-active .reader-disclosure__badge{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px solid rgba(211,164,160,.35);border-radius:999px;background:rgba(155,47,47,.09);color:#e8bbb7;font-size:.7rem;font-weight:760;letter-spacing:.015em}
 html.reader-disclosure-active .reader-disclosure__related span{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px dashed rgba(211,164,160,.32);border-radius:999px;color:var(--muted);font-size:.68rem;font-weight:700}
-html.reader-disclosure-active .reader-disclosure__toggle{display:inline-block;margin-top:14px;color:#f1c5c1;font-size:.78rem;font-weight:760}
+html.reader-disclosure-active .reader-disclosure__toggle{display:inline-block;margin-top:14px;color:#e0635c;font-size:.8rem;font-weight:800}
 html.reader-disclosure-active .reader-disclosure__toggle-close{display:none}
 html.reader-disclosure-active .reader-disclosure[open] .reader-disclosure__toggle-open{display:none}
 html.reader-disclosure-active .reader-disclosure[open] .reader-disclosure__toggle-close{display:inline}
