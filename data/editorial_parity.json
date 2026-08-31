@@ -271,9 +271,9 @@
       ]
     },
     "hai-pro1": {
-      "revision": 2,
-      "pt_hash": "02c911619482b9eef59c7f86e0fb93ad5cb37f7295c25e383f3499069d84c21e",
-      "en_hash": "9cbeae545235c8168b6082b61683f526c97b6a320955c7906598b53d3c41a167",
+      "revision": 3,
+      "pt_hash": "ed93e48559826843c0b3b2d1ac1c03f0ffec26cc500d5b1a267b9cd8907da4b3",
+      "en_hash": "070649a18db5a91921702fd654893cc9b8fa7ffd60ba2e3a56449a168714e36b",
       "accepted_on": "2026-08-31",
       "changed_languages": [
         "pt",
