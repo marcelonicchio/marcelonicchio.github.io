@@ -87,6 +87,14 @@ async function runDesktop(browser) {
   assert((await page.locator('#bio-internet-cookieweb').innerText()).includes('qualidade de vida'), 'Full Bio lost autobiographical text');
   assert((await page.getByText('Clique para expandir', {exact: false}).count()) > 0, 'Permanent Portuguese CTA missing');
 
+  // Presentation states: Minduim/BBS starts open; dense entries remain closed but featured.
+  const bbsBio = page.locator('#bio-internet-bbs');
+  assert(await bbsBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'Minduim/BBS did not start open in Full Bio');
+  assert(await bbsBio.getAttribute('data-reader-presentation') === 'default-open', 'Minduim/BBS presentation state missing');
+  assert((await page.locator('#bio-internet-mirantte details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte is not featured in Full Bio');
+  assert((await page.locator('#bio-internet-cookieweb details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB is not featured in Full Bio');
+  assert((await page.locator('#bio-audiovisual-meia-noite details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Meia-Noite is not featured in Full Bio');
+
   // Full Biography: deep-link opening + registry-backed metadata without query flag.
   await page.goto(`${BASE}/pt/biografia/#bio-internet-cookieweb`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() >= 30, 'Full Bio produced too few disclosures');
@@ -95,24 +103,33 @@ async function runDesktop(browser) {
   assert((await cookieBio.locator('.reader-disclosure__excerpt').innerText()).includes('primeira grande conta de e-commerce'), 'CookieWEB curated summary was not used');
   assert(await cookieBio.locator('.reader-disclosure__topic').count() >= 4, 'CookieWEB topic chips missing');
   assert((await cookieBio.innerText()).includes('qualidade de vida'), 'Disclosure transformation lost CookieWEB body text');
+  assert(await cookieBio.locator('.reader-disclosure__collapse-button').count() === 1, 'Bottom collapse action missing from CookieWEB');
+  await cookieBio.locator('.reader-disclosure__collapse-button').click();
+  assert(await cookieBio.locator('details.reader-disclosure').getAttribute('open') === null, 'Bottom collapse action did not close CookieWEB');
 
   // Internet stress set: normal URL + large galleries, composite landmark, video count and Chapter Page link.
   await page.goto(`${BASE}/pt/internet/`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() >= 10, 'Internet normal URL produced too few disclosures');
 
+  const bbs = page.locator('#bbs');
+  assert(await bbs.locator('details.reader-disclosure').getAttribute('open') !== null, 'Minduim/BBS did not start open in Internet');
+
   const mirantte = page.locator('#mirantte');
+  assert((await mirantte.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte featured class missing');
   assert((await mirantte.locator('.reader-disclosure__excerpt').innerText()).includes('problema de aquisição de tráfego'), 'Mirantte curated summary missing');
   assert((await mirantte.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('34 fotos')), 'Mirantte gallery badge incorrect');
 
   const sem = page.locator('#sem');
   assert((await sem.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'Goobec landmark missing from SEM');
   const cookieweb = page.locator('#cookieweb');
+  assert((await cookieweb.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB featured class missing');
   assert((await cookieweb.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'GAP landmark missing from CookieWEB');
 
   const best = page.locator('#best');
   assert((await best.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('4 vídeos')), 'BEST video badge incorrect');
   await best.locator('summary').click();
   assert(await best.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/internet/best-kenshoo/', 'BEST Chapter Page link incorrect');
+  assert(await best.locator('.reader-disclosure__collapse-button').count() === 1, 'Bottom collapse action missing from BEST');
 
   // Native keyboard operation and independent-open behavior.
   const mirantteDetails = mirantte.locator('details.reader-disclosure');
@@ -123,7 +140,7 @@ async function runDesktop(browser) {
   assert(await mirantteDetails.getAttribute('open') !== null, 'Enter key did not open Mirantte disclosure');
   assert(await bestDetails.getAttribute('open') !== null, 'Opening Mirantte closed BEST');
 
-  // Global controls.
+  // Global controls override default-open state when the reader explicitly asks.
   await page.getByRole('button', {name: 'Abrir todos'}).click();
   const total = await page.locator('details.reader-disclosure').count();
   assert(await page.locator('details.reader-disclosure[open]').count() === total, 'Open all did not open every disclosure');
@@ -143,10 +160,11 @@ async function runDesktop(browser) {
   await folha.locator('summary').click();
   assert(await folha.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/comunicacao/folhateen-orfaos-do-rock/', 'Folha Chapter Page link incorrect');
 
-  // Audiovisual remains an explicit pilot: gallery + four videos + curated summary.
+  // Audiovisual remains an explicit pilot; its registered featured state is already reusable.
   await page.goto(`${BASE}/pt/audiovisual/?ux=disclosure`, {waitUntil: 'networkidle'});
   const meia = page.locator('#meia-noite');
   const meiaBadges = await meia.locator('.reader-disclosure__badge').allInnerTexts();
+  assert((await meia.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Meia-Noite featured class missing in pilot');
   assert(meiaBadges.some((t) => t.includes('22 fotos')), 'Meia-Noite gallery badge incorrect');
   assert(meiaBadges.some((t) => t.includes('4 vídeos')), 'Meia-Noite video badge incorrect');
   assert((await meia.locator('.reader-disclosure__excerpt').innerText()).includes('Programa de literatura com linguagem pop'), 'Meia-Noite curated summary missing');
@@ -181,6 +199,7 @@ async function runMobile(browser) {
   await blockExternal(page);
   await page.goto(`${BASE}/pt/biografia/`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() >= 30, 'Mobile Full Bio did not initialize disclosure by default');
+  assert(await page.locator('#bio-internet-bbs details.reader-disclosure').getAttribute('open') !== null, 'Mobile Minduim/BBS did not start open');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   assert(overflow <= 2, `Mobile disclosure introduced horizontal overflow: ${overflow}px`);
   assert(await page.getByRole('button', {name: 'Abrir todos'}).isVisible(), 'Mobile Open all control is not visible');
