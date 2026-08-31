@@ -18,6 +18,7 @@ BASE_URL = "https://marcelonicchio.github.io/"
 ALLOWED_SOURCE_KINDS = {"reader-section", "fragment", "composite-reader-landmarks"}
 ALLOWED_PAGE_STATUS = {"pilot", "candidate", "none"}
 ALLOWED_INDEXING = {"index,follow", "noindex,follow", "none"}
+ALLOWED_READER_PRESENTATION = {"normal", "default-open", "featured"}
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -118,6 +119,10 @@ def main() -> int:
         source_kind = source.get("kind")
         if source_kind not in ALLOWED_SOURCE_KINDS:
             errors.append(f"{entry_id}: unsupported source kind {source_kind!r}")
+
+        presentation_state = entry.get("reader_presentation", {}).get("state", "normal")
+        if presentation_state not in ALLOWED_READER_PRESENTATION:
+            errors.append(f"{entry_id}: unsupported Reader presentation state {presentation_state!r}")
 
         for lang in ("pt", "en"):
             if not entry.get("title", {}).get(lang, "").strip():

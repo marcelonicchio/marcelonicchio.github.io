@@ -9,6 +9,35 @@
   },
   "entries": [
     {
+      "id": "internet-bbs",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {"pt": "1992–1996", "en": "1992–1996"},
+      "title": {
+        "pt": "Cultura BBS e Minduim BBS",
+        "en": "BBS culture and Minduim BBS"
+      },
+      "summary": {
+        "pt": "A cultura BBS marcou o primeiro contato prolongado de Marcelo Nicchio com comunidades digitais antes da web comercial; em paralelo, ele criou a Minduim BBS como experiência pessoal com RemoteAccess e duas linhas telefônicas.",
+        "en": "BBS culture marked Marcelo Nicchio's first sustained contact with digital communities before the commercial web; in parallel, he created Minduim BBS as a personal experiment using RemoteAccess and two telephone lines."
+      },
+      "topic_ids": [],
+      "media": {"thread_image": "minduim-bbs-1993-reconstruction"},
+      "reader_presentation": {"state": "default-open"},
+      "source": {"kind": "reader-section"},
+      "reader_targets": {
+        "pt": [
+          {"path": "pt/internet/index.html", "selector": "#bbs"},
+          {"path": "pt/biografia/index.html", "selector": "#bio-internet-bbs"}
+        ],
+        "en": [
+          {"path": "en/internet/index.html", "selector": "#bbs"},
+          {"path": "en/biography/index.html", "selector": "#bio-internet-bbs"}
+        ]
+      },
+      "chapter_page": {"status": "none", "indexing": "none"}
+    },
+    {
       "id": "internet-mirantte",
       "kind": "chapter",
       "domain": "internet",
@@ -23,6 +52,7 @@
       },
       "topic_ids": ["digital-product", "search-marketing", "paid-media", "acquisition"],
       "media": {"galleries": ["mirantte-news"]},
+      "reader_presentation": {"state": "featured"},
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [
@@ -56,6 +86,7 @@
       },
       "topic_ids": ["search-marketing", "sem", "performance-marketing", "team-leadership", "google-ads"],
       "media": {"galleries": ["cookieweb"], "credential_group": "google-gap"},
+      "reader_presentation": {"state": "featured"},
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [
@@ -123,6 +154,7 @@
       },
       "topic_ids": ["television", "art-direction", "executive-production", "literature"],
       "media": {"galleries": ["meia-noite-e-uns"], "known_video_count": 4},
+      "reader_presentation": {"state": "featured"},
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [

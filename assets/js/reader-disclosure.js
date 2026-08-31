@@ -23,6 +23,7 @@
     closeAll: 'Recolher todos',
     open: 'Clique para expandir',
     close: 'Clique para recolher',
+    closeBottom: 'Clique para recolher',
     page: 'Página própria',
     pageLink: 'Abrir página própria ↗',
     related: 'Relacionado',
@@ -40,6 +41,7 @@
     closeAll: 'Collapse all',
     open: 'Click to expand',
     close: 'Click to collapse',
+    closeBottom: 'Click to collapse',
     page: 'Standalone page',
     pageLink: 'Open standalone page ↗',
     related: 'Related',
@@ -160,11 +162,14 @@
       const summaryText = entry?.summary?.[language] || excerptFor(section);
       const contentBadges = contentBadgesFor(section);
       const topicIds = entry?.topic_ids || [];
+      const presentationState = entry?.reader_presentation?.state || 'normal';
 
       if (entry) section.dataset.entryId = entry.id;
+      section.dataset.readerPresentation = presentationState;
 
       const details = document.createElement('details');
-      details.className = 'reader-disclosure';
+      details.className = `reader-disclosure reader-disclosure--${presentationState}`;
+      if (presentationState === 'default-open') details.open = true;
       const summary = document.createElement('summary');
       summary.className = 'reader-disclosure__summary';
 
@@ -238,6 +243,22 @@
           body.insertBefore(pageLink, body.firstChild);
         }
       }
+
+      const collapseRow = document.createElement('div');
+      collapseRow.className = 'reader-disclosure__collapse-row';
+      const collapseButton = document.createElement('button');
+      collapseButton.type = 'button';
+      collapseButton.className = 'reader-disclosure__collapse-button';
+      collapseButton.textContent = `${labels.closeBottom} ↑`;
+      collapseButton.addEventListener('click', () => {
+        details.open = false;
+        requestAnimationFrame(() => {
+          summary.focus({preventScroll: true});
+          section.scrollIntoView({block: 'start'});
+        });
+      });
+      collapseRow.appendChild(collapseButton);
+      body.appendChild(collapseRow);
 
       details.append(summary, body);
       section.appendChild(details);
