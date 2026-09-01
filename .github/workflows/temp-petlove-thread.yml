@@ -1,0 +1,102 @@
+name: Temporary Petlove Thread media
+
+on:
+  push:
+    branches:
+      - work/media-gallery-batch-20260901
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install media dependencies
+        run: python -m pip install pillow beautifulsoup4
+      - name: Materialize Petlove Thread image and insert PT EN
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import re
+
+          source_rel = 'assets/archive/internet/petlove/petlove00thread300kb.jpg'
+          output_rel = 'assets/media/thread/petlove.webp'
+          source = Path(source_rel)
+          output = Path(output_rel)
+          output.parent.mkdir(parents=True, exist_ok=True)
+
+          with Image.open(source) as im:
+              im = ImageOps.exif_transpose(im)
+              if im.mode not in ('RGB', 'RGBA'):
+                  im = im.convert('RGB')
+              if im.mode == 'RGBA':
+                  base = Image.new('RGB', im.size, 'white')
+                  base.paste(im, mask=im.getchannel('A'))
+                  im = base
+              if im.width > 1100:
+                  h = max(1, round(im.height * 1100 / im.width))
+                  im = im.resize((1100, h), Image.Resampling.LANCZOS)
+              quality = 84
+              while True:
+                  im.save(output, 'WEBP', quality=quality, method=6)
+                  if output.stat().st_size <= 250_000 or quality <= 60:
+                      break
+                  quality -= 4
+              width, height = im.size
+
+          def figure(lang):
+              if lang == 'pt':
+                  alt = 'Registro fotográfico do período de Marcelo Nicchio na Petlove.'
+                  caption = 'Registro do período na Petlove, 2012–2013.'
+                  aria = 'Abrir a fotografia original do período na Petlove'
+                  open_label = 'Abrir imagem original ↗'
+              else:
+                  alt = 'Photographic record from Marcelo Nicchio’s period at Petlove.'
+                  caption = 'Record from the Petlove period, 2012–2013.'
+                  aria = 'Open the original photograph from the Petlove period'
+                  open_label = 'Open original image ↗'
+              return f'''<!-- thread-media:petlove:start -->\n<figure class="thread-media thread-media--linked">\n<a aria-label="{aria}" href="/{source_rel}" rel="noopener noreferrer" target="_blank">\n<img alt="{alt}" decoding="async" height="{height}" loading="lazy" src="/{output_rel}" width="{width}"/>\n</a>\n<figcaption><strong>{caption}</strong><a class="thread-media-open" href="/{source_rel}" rel="noopener noreferrer" target="_blank">{open_label}</a></figcaption>\n</figure>\n<!-- thread-media:petlove:end -->'''
+
+          def update(path_rel, lang):
+              path = Path(path_rel)
+              text = path.read_text(encoding='utf-8')
+              if '<!-- thread-media:petlove:start -->' in text:
+                  return
+              pat = re.compile(r'(<section\\b(?=[^>]*\\bid=["\\\']petlove["\\\'])[^>]*>)(.*?)(</section>)', re.S | re.I)
+              matches = list(pat.finditer(text))
+              if len(matches) != 1:
+                  raise SystemExit(f'{path_rel}: expected one #petlove section, got {len(matches)}')
+              m = matches[0]
+              inner = m.group(2)
+              p = re.search(r'</p>', inner, re.I)
+              if not p:
+                  raise SystemExit(f'{path_rel}: no first paragraph')
+              inner = inner[:p.end()] + '\n' + figure(lang) + inner[p.end():]
+              updated = text[:m.start()] + m.group(1) + inner + m.group(3) + text[m.end():]
+              path.write_text(updated, encoding='utf-8')
+
+          update('pt/internet/index.html', 'pt')
+          update('en/internet/index.html', 'en')
+          print(f'Petlove Thread derivative: {width}x{height}, {output.stat().st_size} bytes')
+          PY
+      - name: Sync Full Biography and accept reviewed parity
+        run: |
+          python tools/sync_full_biography.py
+          python tools/sync_full_biography.py --check
+          python tools/editorial_parity.py --accept internet-petlove
+          python tools/editorial_parity.py --check
+      - name: Remove temporary workflow
+        run: rm -f .github/workflows/temp-petlove-thread.yml
+      - name: Commit Petlove Thread integration
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add -A
+          git commit -m "Add Petlove Thread image to media batch"
+          git push
