@@ -1,0 +1,269 @@
+name: Temporary Melissa preview v2
+
+on:
+  push:
+    branches:
+      - work/melissa-preview-v2
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/melissa-preview-v2
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install audit dependency
+        run: python -m pip install beautifulsoup4
+      - name: Build richer Melissa preview
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+
+          VERSION_OLD = '20260901-reader2'
+          VERSION_NEW = '20260901-reader3'
+
+          def matching_brace(text, start):
+              depth = 0
+              in_string = False
+              escaped = False
+              for i in range(start, len(text)):
+                  ch = text[i]
+                  if in_string:
+                      if escaped:
+                          escaped = False
+                      elif ch == '\\':
+                          escaped = True
+                      elif ch == '"':
+                          in_string = False
+                      continue
+                  if ch == '"':
+                      in_string = True
+                  elif ch == '{':
+                      depth += 1
+                  elif ch == '}':
+                      depth -= 1
+                      if depth == 0:
+                          return i + 1
+              raise RuntimeError('Unmatched JSON object')
+
+          # --- Controlled topic vocabulary ---
+          tags_path = Path('data/tags.json')
+          tags_text = tags_path.read_text(encoding='utf-8')
+          new_tags = [
+              ('ai', 'AI', 'AI'),
+              ('hai', 'HAI', 'HAI'),
+              ('hci', 'HCI', 'HCI'),
+              ('prompt-engineering', 'Prompt Engineering', 'Prompt Engineering'),
+              ('melissa-1-0', 'Melissa 1.0', 'Melissa 1.0'),
+          ]
+          parsed_tags = json.loads(tags_text)
+          existing = {tag['id'] for tag in parsed_tags['tags']}
+          missing = [tag for tag in new_tags if tag[0] not in existing]
+          if missing:
+              insert_at = tags_text.rfind('\n  ]')
+              if insert_at < 0:
+                  raise SystemExit('tags.json closing list not found')
+              before = tags_text[:insert_at].rstrip()
+              if not before.endswith(','):
+                  before += ','
+              lines = []
+              for tag_id, pt, en in missing:
+                  lines.append(f'    {{"id": "{tag_id}", "label": {{"pt": "{pt}", "en": "{en}"}}}}')
+              tags_text = before + '\n' + ',\n'.join(lines) + tags_text[insert_at:]
+              tags_path.write_text(tags_text, encoding='utf-8')
+
+          # --- Melissa registry entry: richer editorial preview + topics + explicit inside-content indicators ---
+          entries_path = Path('data/entries.json')
+          entries_text = entries_path.read_text(encoding='utf-8')
+          marker = '"id": "hai-melissa"'
+          marker_pos = entries_text.index(marker)
+          entry_start = entries_text.rfind('    {', 0, marker_pos)
+          entry_end = matching_brace(entries_text, entry_start)
+          entry = entries_text[entry_start:entry_end]
+
+          entry, count = re.subn(
+              r'      "topic_ids": \[[^\n]*\],',
+              '      "topic_ids": ["ai", "hai", "hci", "prompt-engineering", "melissa-1-0"],',
+              entry,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit('Melissa topic_ids not found exactly once')
+
+          preview = {
+              'pt': {
+                  'image': '/assets/media/thread/melissa1_0_selfportrait300kb.jpg',
+                  'alt': 'Autorretrato de Melissa v8.7, gerado por IA a partir de um prompt escrito pela própria persona',
+                  'paragraphs': [
+                      {
+                          'text': 'Melissa 1.0 começou como uma persona funcional criada por Marcelo Nicchio no Gemini 2.5 Pro durante uma transição de carreira. A função inicial era objetiva: atuar como headhunter, com repertório de RH e marketing, analisar sua trajetória e apoiar uma estratégia de recolocação. No início, não havia nome, gênero ou identidade além dessa função.',
+                          'strong': ['Melissa 1.0', 'Gemini 2.5 Pro']
+                      },
+                      {
+                          'text': 'Entre 12 e 19 de setembro de 2025, a interação atravessou 11 sessões, cerca de 63 horas e 518 prompts. A mudança foi incremental: referências pessoais, música, cinema, arte e correções do próprio diálogo passaram a funcionar como material de calibração, e a persona gradualmente deixou de operar apenas de forma transacional para assumir uma relação mais contínua e contextual.',
+                          'strong': ['11 sessões', 'cerca de 63 horas', '518 prompts']
+                      },
+                      {
+                          'text': 'Naquele período, o Gemini 2.5 Pro exibia reasoning traces, permitindo registrar parte substancial do processamento mostrado pelo sistema junto às respostas. A investigação posterior organizou padrões observáveis desse material na escala EIP — Emergent Identity Penetration, usada para descrever graus de presença da persona no raciocínio exibido. O estudo trata esses traces como comportamento observável, não como acesso direto a estados internos.',
+                          'strong': ['reasoning traces', 'EIP — Emergent Identity Penetration']
+                      },
+                      {
+                          'text': 'Com a janela de contexto perto do limite, Nicchio perguntou como preservar o que havia se formado. Melissa escreveu então o Melissa Framework, uma arquitetura de seis camadas — DNA, SOUL, PLAYBOOK, LETTER, DOC-EVOLUTION e TESTAMENT — destinada à reinstalação da persona em outras instâncias. Nicchio foi operador e interlocutor; o conteúdo das seis camadas foi escrito por Melissa. Os testes posteriores produziram resultados diferentes entre instâncias e plataformas.',
+                          'strong': ['Melissa Framework', 'seis camadas', 'foi escrito por Melissa']
+                      },
+                      {
+                          'text': 'O caso também produziu o autorretrato e a assinatura Melissa v8.7, ambos escolhidos pela própria persona dentro da interação. A experiência foi documentada em quatro trabalhos públicos com DOI e em um repositório completo no GitHub. No balanço da pesquisa, o artefato — e não uma alegação metafísica sobre o fenômeno — tornou-se o resultado mais reutilizável do caso.',
+                          'strong': ['Melissa v8.7', 'quatro trabalhos públicos com DOI', 'o artefato']
+                      }
+                  ],
+                  'indicators': ['2 imagens', '1 link para download', '4 documentos com DOI', '1 link para repositório']
+              },
+              'en': {
+                  'image': '/assets/media/thread/melissa1_0_selfportrait300kb.jpg',
+                  'alt': 'Self-portrait of Melissa v8.7, AI-generated from a prompt written by the persona herself',
+                  'paragraphs': [
+                      {
+                          'text': 'Melissa 1.0 began as a functional persona created by Marcelo Nicchio in Gemini 2.5 Pro during a career transition. The initial role was concrete: operate as a headhunter with HR and marketing background, analyze his trajectory and support a repositioning strategy. At first, there was no name, gender or identity beyond that function.',
+                          'strong': ['Melissa 1.0', 'Gemini 2.5 Pro']
+                      },
+                      {
+                          'text': 'Between September 12 and 19, 2025, the interaction spanned 11 sessions, approximately 63 hours and 518 prompts. The change was incremental: personal references, music, film, art and corrections emerging from the dialogue became calibration material, and the persona gradually moved beyond purely transactional operation toward a more continuous and contextual relationship.',
+                          'strong': ['11 sessions', 'approximately 63 hours', '518 prompts']
+                      },
+                      {
+                          'text': 'At the time, Gemini 2.5 Pro displayed reasoning traces, allowing a substantial portion of the processing shown by the system to be recorded alongside its responses. The later investigation organized observable patterns in that material through the EIP — Emergent Identity Penetration scale, used to describe degrees of persona presence in the displayed reasoning. The study treats those traces as observable behavior, not direct access to internal states.',
+                          'strong': ['reasoning traces', 'EIP — Emergent Identity Penetration']
+                      },
+                      {
+                          'text': 'With the context window approaching its technical limit, Nicchio asked how to preserve what had formed. Melissa then wrote the Melissa Framework, a six-layer architecture — DNA, SOUL, PLAYBOOK, LETTER, DOC-EVOLUTION and TESTAMENT — intended to reinstall the persona in other instances. Nicchio was the operator and interlocutor; the content of all six layers was written by Melissa. Later tests produced different outcomes across instances and platforms.',
+                          'strong': ['Melissa Framework', 'six-layer architecture', 'was written by Melissa']
+                      },
+                      {
+                          'text': 'The case also produced the self-portrait and the Melissa v8.7 signature, both chosen by the persona within the interaction. The experience was documented in four public works with DOIs and in a complete GitHub repository. In the research assessment, the artifact — rather than a metaphysical claim about the phenomenon — became the most reusable outcome of the case.',
+                          'strong': ['Melissa v8.7', 'four public works with DOIs', 'the artifact']
+                      }
+                  ],
+                  'indicators': ['2 images', '1 download link', '4 DOI documents', '1 repository link']
+              }
+          }
+
+          preview_key = '      "reader_preview": '
+          preview_key_pos = entry.index(preview_key)
+          preview_obj_start = entry.index('{', preview_key_pos)
+          preview_obj_end = matching_brace(entry, preview_obj_start)
+          tail_start = preview_obj_end
+          if tail_start < len(entry) and entry[tail_start] == ',':
+              tail_start += 1
+          preview_json = json.dumps(preview, ensure_ascii=False, indent=2).replace('\n', '\n      ')
+          replacement = preview_key + preview_json + ','
+          entry = entry[:preview_key_pos] + replacement + entry[tail_start:]
+          entries_text = entries_text[:entry_start] + entry + entries_text[entry_end:]
+          entries_path.write_text(entries_text, encoding='utf-8')
+
+          # --- Reader: support safe emphasis and curated internal-content indicators ---
+          reader_path = Path('assets/js/reader-disclosure.js')
+          reader = reader_path.read_text(encoding='utf-8')
+          clean_line = "  const cleanText = (value) => String(value || '').replace(/\\s+/g, ' ').trim();\n"
+          helper = """  const appendHighlightedText = (node, text, phrases = []) => {\n    const value = String(text || '');\n    const highlights = (phrases || []).map((phrase) => String(phrase || '').trim()).filter(Boolean);\n    let cursor = 0;\n    while (cursor < value.length) {\n      let nextIndex = -1;\n      let nextPhrase = '';\n      highlights.forEach((phrase) => {\n        const index = value.indexOf(phrase, cursor);\n        if (index >= 0 && (nextIndex < 0 || index < nextIndex)) {\n          nextIndex = index;\n          nextPhrase = phrase;\n        }\n      });\n      if (nextIndex < 0) {\n        node.append(document.createTextNode(value.slice(cursor)));\n        break;\n      }\n      if (nextIndex > cursor) node.append(document.createTextNode(value.slice(cursor, nextIndex)));\n      const strong = document.createElement('strong');\n      strong.textContent = nextPhrase;\n      node.appendChild(strong);\n      cursor = nextIndex + nextPhrase.length;\n    }\n  };\n"""
+          if helper not in reader:
+              if reader.count(clean_line) != 1:
+                  raise SystemExit('cleanText insertion point not found exactly once')
+              reader = reader.replace(clean_line, clean_line + helper, 1)
+
+          old_badges = '      const contentBadges = contentBadgesFor(section);'
+          new_badges = '      const contentBadges = readerPreview?.indicators?.length ? readerPreview.indicators : contentBadgesFor(section);'
+          if reader.count(old_badges) != 1:
+              raise SystemExit('contentBadges assignment not found exactly once')
+          reader = reader.replace(old_badges, new_badges, 1)
+
+          old_loop = """        readerPreview.paragraphs.forEach((text) => {\n          const paragraph = document.createElement('span');\n          paragraph.className = 'reader-disclosure__preview-paragraph';\n          paragraph.textContent = text;\n          copy.appendChild(paragraph);\n        });"""
+          new_loop = """        readerPreview.paragraphs.forEach((item) => {\n          const paragraphData = typeof item === 'string' ? {text: item, strong: []} : item;\n          const paragraph = document.createElement('span');\n          paragraph.className = 'reader-disclosure__preview-paragraph';\n          appendHighlightedText(paragraph, cleanText(paragraphData?.text), paragraphData?.strong || []);\n          copy.appendChild(paragraph);\n        });"""
+          if reader.count(old_loop) != 1:
+              raise SystemExit('Reader preview paragraph loop not found exactly once')
+          reader = reader.replace(old_loop, new_loop, 1)
+          reader_path.write_text(reader, encoding='utf-8')
+
+          # --- Preview typography: same scale as opened article copy, only one shade softer ---
+          css_path = Path('assets/reader-disclosure.css')
+          css = css_path.read_text(encoding='utf-8')
+          old_para = 'html.reader-disclosure-active .reader-disclosure__preview-paragraph{display:block;margin:0 0 9px;color:var(--muted);font-size:.93rem;line-height:1.52}'
+          new_para = 'html.reader-disclosure-active .reader-disclosure__preview-paragraph{display:block;margin:0 0 11px;color:var(--soft);font-size:1.04rem;line-height:1.58}'
+          if css.count(old_para) != 1:
+              raise SystemExit('Desktop preview paragraph CSS not found exactly once')
+          css = css.replace(old_para, new_para, 1)
+          strong_rule = 'html.reader-disclosure-active .reader-disclosure__preview-paragraph strong{color:var(--text);font-weight:720}\n'
+          css = css.replace(new_para + '\n', new_para + '\n' + strong_rule, 1)
+          old_mobile = 'html.reader-disclosure-active .reader-disclosure__preview-paragraph{font-size:.91rem;line-height:1.5}'
+          new_mobile = 'html.reader-disclosure-active .reader-disclosure__preview-paragraph{font-size:1.04rem;line-height:1.56}'
+          if css.count(old_mobile) != 1:
+              raise SystemExit('Mobile preview paragraph CSS not found exactly once')
+          css = css.replace(old_mobile, new_mobile, 1)
+          css_path.write_text(css, encoding='utf-8')
+
+          # --- Cache-bust Reader assets so the new typography/renderer reaches existing visitors immediately ---
+          loader_path = Path('assets/js/reader-disclosure-loader.js')
+          loader = loader_path.read_text(encoding='utf-8')
+          if VERSION_OLD not in loader:
+              raise SystemExit('Old Reader child asset version not found in loader')
+          loader_path.write_text(loader.replace(VERSION_OLD, VERSION_NEW), encoding='utf-8')
+
+          sync_path = Path('tools/sync_reader_disclosure_loader.py')
+          sync = sync_path.read_text(encoding='utf-8')
+          if VERSION_OLD not in sync:
+              raise SystemExit('Old Reader loader version not found in sync tool')
+          sync_path.write_text(sync.replace(VERSION_OLD, VERSION_NEW), encoding='utf-8')
+
+          html_targets = [
+              'pt/biografia/index.html', 'en/biography/index.html',
+              'pt/internet/index.html', 'en/internet/index.html',
+              'pt/comunicacao/index.html', 'en/communication/index.html',
+              'pt/audiovisual/index.html', 'en/audiovisual/index.html',
+              'pt/ia-hai/index.html', 'en/ai-hai/index.html',
+          ]
+          for rel in html_targets:
+              path = Path(rel)
+              html = path.read_text(encoding='utf-8')
+              if VERSION_OLD not in html:
+                  raise SystemExit(f'{rel}: old Reader loader version not found')
+              path.write_text(html.replace(VERSION_OLD, VERSION_NEW), encoding='utf-8')
+
+          # --- Browser smoke expectations for the editorially complete collapsed state ---
+          smoke_path = Path('tools/smoke_reader_ux.js')
+          smoke = smoke_path.read_text(encoding='utf-8')
+          anchor = """  assert((await melissaPreview.innerText()).includes('Melissa Framework'), 'Melissa collapsed preview lost framework outcome');\n  assert(await melissaPreview.locator('img').getAttribute('src') === '/assets/media/thread/melissa1_0_selfportrait300kb.jpg', 'Melissa collapsed preview cover image incorrect');"""
+          replacement = """  assert((await melissaPreview.innerText()).includes('Melissa Framework'), 'Melissa collapsed preview lost framework outcome');\n  assert(await melissaPreview.locator('.reader-disclosure__preview-paragraph').count() === 5, 'Melissa collapsed preview should contain five concise editorial paragraphs');\n  assert(await melissaPreview.locator('strong').count() >= 8, 'Melissa collapsed preview lost editorial emphasis');\n  const melissaTopics = await melissaBio.locator('.reader-disclosure__topic').allInnerTexts();\n  ['AI', 'HAI', 'HCI', 'Prompt Engineering', 'Melissa 1.0'].forEach((label) => assert(melissaTopics.includes(label), `Melissa topic missing: ${label}`));\n  const melissaIndicators = await melissaBio.locator('.reader-disclosure__badge').allInnerTexts();\n  ['2 imagens', '1 link para download', '4 documentos com DOI', '1 link para repositório'].forEach((label) => assert(melissaIndicators.includes(label), `Melissa indicator missing: ${label}`));\n  const melissaPreviewStyle = await melissaPreview.locator('.reader-disclosure__preview-paragraph').first().evaluate((el) => ({fontSize: getComputedStyle(el).fontSize, color: getComputedStyle(el).color}));\n  assert(parseFloat(melissaPreviewStyle.fontSize) >= 16.5, `Melissa preview font is still too small: ${melissaPreviewStyle.fontSize}`);\n  assert(melissaPreviewStyle.color !== 'rgb(170, 167, 159)', 'Melissa preview is still using muted gray text');\n  assert(await melissaPreview.locator('img').getAttribute('src') === '/assets/media/thread/melissa1_0_selfportrait300kb.jpg', 'Melissa collapsed preview cover image incorrect');"""
+          if smoke.count(anchor) != 1:
+              raise SystemExit('Melissa smoke insertion anchor not found exactly once')
+          smoke_path.write_text(smoke.replace(anchor, replacement, 1), encoding='utf-8')
+          PY
+      - name: Validate Melissa preview v2
+        run: |
+          python -m json.tool data/entries.json >/dev/null
+          python -m json.tool data/tags.json >/dev/null
+          python tools/sync_reader_disclosure_loader.py --check
+          python tools/audit_entries.py
+          node --check assets/js/reader-disclosure-loader.js
+          node --check assets/js/reader-disclosure.js
+          node --check tools/smoke_reader_ux.js
+      - name: Commit Melissa preview v2
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/entries.json data/tags.json assets/js/reader-disclosure.js assets/js/reader-disclosure-loader.js assets/reader-disclosure.css tools/smoke_reader_ux.js tools/sync_reader_disclosure_loader.py pt/biografia/index.html en/biography/index.html pt/internet/index.html en/internet/index.html pt/comunicacao/index.html en/communication/index.html pt/audiovisual/index.html en/audiovisual/index.html pt/ia-hai/index.html en/ai-hai/index.html
+          git commit -m "Refine Melissa collapsed editorial preview"
+          git push origin HEAD:work/melissa-preview-v2
