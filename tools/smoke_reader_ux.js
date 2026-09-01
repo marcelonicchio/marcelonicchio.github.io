@@ -95,6 +95,20 @@ async function runDesktop(browser) {
   assert((await page.locator('#bio-internet-cookieweb details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB is not featured in Full Bio');
   assert((await page.locator('#bio-audiovisual-meia-noite details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Meia-Noite is not featured in Full Bio');
 
+  // Rich collapsed-summary pilot: Melissa is useful before expansion and returns to the full entry when opened.
+  const melissaBio = page.locator('#bio-hai-melissa');
+  const melissaPreview = melissaBio.locator('.reader-disclosure__preview');
+  assert(await melissaPreview.count() === 1, 'Melissa rich collapsed preview missing');
+  assert((await melissaPreview.innerText()).includes('63 horas e 518 prompts'), 'Melissa collapsed preview lost core case metrics');
+  assert((await melissaPreview.innerText()).includes('Melissa Framework'), 'Melissa collapsed preview lost framework outcome');
+  assert(await melissaPreview.locator('img').getAttribute('src') === '/assets/media/thread/melissa1_0_selfportrait300kb.jpg', 'Melissa collapsed preview cover image incorrect');
+  assert(await melissaBio.locator('details.reader-disclosure').getAttribute('open') === null, 'Melissa preview should start collapsed');
+  await melissaBio.locator('details.reader-disclosure > summary').click();
+  assert(await melissaBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'Melissa summary click did not open full entry');
+  assert(await melissaPreview.isHidden(), 'Melissa compact preview remained visible after expansion');
+  assert((await melissaBio.locator('.reader-disclosure__body').innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa full body was not preserved after expansion');
+  await melissaBio.locator('details.reader-disclosure > summary').click();
+
   // Full Biography: deep-link opening + registry-backed metadata without query flag.
   await page.goto(`${BASE}/pt/biografia/#bio-internet-cookieweb`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() >= 30, 'Full Bio produced too few disclosures');
@@ -200,6 +214,9 @@ async function runMobile(browser) {
   await page.goto(`${BASE}/pt/biografia/`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() >= 30, 'Mobile Full Bio did not initialize disclosure by default');
   assert(await page.locator('#bio-internet-bbs details.reader-disclosure').getAttribute('open') !== null, 'Mobile Minduim/BBS did not start open');
+  const melissaPreview = page.locator('#bio-hai-melissa .reader-disclosure__preview');
+  assert(await melissaPreview.isVisible(), 'Mobile Melissa rich preview is not visible');
+  assert(await melissaPreview.locator('img').isVisible(), 'Mobile Melissa preview cover is not visible');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   assert(overflow <= 2, `Mobile disclosure introduced horizontal overflow: ${overflow}px`);
   assert(await page.getByRole('button', {name: 'Abrir todos'}).isVisible(), 'Mobile Open all control is not visible');
