@@ -103,11 +103,11 @@ async function runDesktop(browser) {
   assert((await melissaPreview.innerText()).includes('Melissa Framework'), 'Melissa collapsed preview lost framework outcome');
   assert(await melissaPreview.locator('img').getAttribute('src') === '/assets/media/thread/melissa1_0_selfportrait300kb.jpg', 'Melissa collapsed preview cover image incorrect');
   assert(await melissaBio.locator('details.reader-disclosure').getAttribute('open') === null, 'Melissa preview should start collapsed');
-  await melissaBio.locator('summary').click();
+  await melissaBio.locator('details.reader-disclosure > summary').click();
   assert(await melissaBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'Melissa summary click did not open full entry');
   assert(await melissaPreview.isHidden(), 'Melissa compact preview remained visible after expansion');
   assert((await melissaBio.locator('.reader-disclosure__body').innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa full body was not preserved after expansion');
-  await melissaBio.locator('summary').click();
+  await melissaBio.locator('details.reader-disclosure > summary').click();
 
   // Full Biography: deep-link opening + registry-backed metadata without query flag.
   await page.goto(`${BASE}/pt/biografia/#bio-internet-cookieweb`, {waitUntil: 'networkidle'});
