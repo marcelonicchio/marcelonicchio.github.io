@@ -1,67 +1,117 @@
-# Site v1 — staged indexation plan
+# Staged indexation plan — current state
 
-The site should not equate page count with authority. A page moves from `noindex,follow` to `index,follow` only when its narrative, metadata, evidence links and PT/EN counterpart are coherent enough to represent the canonical entity publicly.
+**Updated:** 1 Sep 2026 (BRT)
 
-## Stage A — launch foundation
+The HUB does not equate page count with authority. Indexation is staged by editorial maturity and search intent, and experiments should remain attributable rather than changing several URL families at once.
 
-Intended to be indexable at the first public merge:
+## 1. Current indexable core
 
-- `/` — canonical language gateway / entity root
-- `/pt/` — Portuguese hub
-- `/en/` — English hub
+Verified current PT/EN core surfaces include:
 
-These are already listed in `sitemap.xml`.
+- language/entity hub and home surfaces;
+- Full Biography / Biografia Completa;
+- Publications / Publicações;
+- Archive / Arquivo;
+- AI/HAI / IA/HAI.
 
-## Stage B — first authority pages
+The Full Biography is the entity-wide chronological authority surface. Publications carries persistent identifiers and research records. Archive provides historical/documentary navigation. AI/HAI is the mature contemporary research vertical.
 
-The first-release indexation set is now defined as:
+PT/EN counterparts should remain materially aligned when indexation state changes.
 
-1. `/pt/biografia/` + `/en/biography/`
-2. `/pt/publicacoes/` + `/en/publications/`
-3. `/pt/arquivo/` + `/en/archive/`
-4. `/pt/ia-hai/` + `/en/ai-hai/`
+## 2. Current historical verticals still `noindex,follow`
 
-These eight thematic URLs will remain `noindex,follow` during branch development. Their robots directives and `sitemap.xml` entries should be changed together only in the final launch commit, after the remaining rendered visual check and link QA.
+Verified current PT examples:
 
-Why these first:
+- Music / Música;
+- Communication / Comunicação;
+- **Internet & Performance**;
+- Audiovisual;
+- Selected Projects / Projetos.
 
-- the Full Biography provides entity-wide context;
-- Publications has persistent identifiers and clear work/version structure;
-- Archive provides the evidence map and source policy;
-- AI/HAI is the most densely documented contemporary thematic axis.
+The old separate “Internet & Digital Culture” / “Search & Performance” staging model is obsolete. Search is now structurally part of **Internet & Performance**. Legacy Search paths are compatibility/redirect surfaces, not independent authority pages.
 
-Do not release one language of a pair for indexing while leaving the counterpart materially inconsistent.
+These verticals remain publicly readable while editorial/UX differentiation matures. `noindex` is not a statement that autobiographical material is untrustworthy.
 
-## Stage C — historical thematic pages
+## 3. Chapter Page pilots
 
-Keep `noindex,follow` in the first release and revisit progressively after public archive material is added or the final page-level source review is complete:
+Current generated pilot pairs:
 
-- Music
-- Communication & Culture
-- Internet & Digital Culture
-- Audiovisual
-- Search & Performance
+- Folhateen PT/EN;
+- BEST/Kenshoo PT/EN.
 
-These pages already have substantial content, but they contain a higher mix of public evidence, preserved private material and autobiographical history. Keeping them available to readers while temporarily outside indexing lets the hub launch without pretending every historical section has the same documentary density.
+They remain:
 
-## Stage D — synthesis pages
+- `noindex,follow`;
+- self-canonical;
+- reciprocal hreflang;
+- visible breadcrumbs;
+- outside the sitemap while noindex.
 
-Keep `noindex,follow` until they add distinct information architecture value rather than mainly summarizing existing sections:
+Creating an autonomous URL does not automatically authorize indexation.
 
-- Selected Projects
-- future cross-field continuity / methodological-line page, if created
+## 4. Next controlled SEO experiment
 
-## Release procedure for any thematic pair
+An all-noindex Chapter Page set cannot produce meaningful evidence about indexation, canonical selection or query behavior.
 
-1. factual cross-check;
-2. PT/EN parity check;
-3. external-link test;
-4. title/meta/canonical/hreflang review;
-5. rights/privacy check for any visual asset;
-6. change `noindex,follow` to `index,follow`;
-7. add both language URLs to `sitemap.xml` in the same release;
-8. update `llms.txt` and machine-readable records if canonical facts changed.
+Therefore a reasonable future experiment is:
 
-## Principle
+> promote **one** mature Chapter Page pair to `index,follow`, with normal static internal links and sitemap review, then observe Search Console before promoting more.
 
-Authority comes from a coherent entity graph, original source value, stable URLs, useful depth and external corroboration — not from exposing unfinished pages to crawlers early.
+The exact page must be chosen deliberately at experiment time. Older documents suggested Meia-Noite e Uns before the final pilot set changed; that suggestion is historical, not an automatic current choice.
+
+Do **not** combine the first Chapter Page indexation experiment with mass tag-page creation.
+
+## 5. Topic tags are not indexation instructions
+
+`data/tags.json` supports controlled vocabulary, Reader chips, relationships and future planning.
+
+A topic tag does not imply a public URL.
+
+For example, the Melissa rich summary uses:
+
+- AI;
+- HAI;
+- HCI;
+- Prompt Engineering;
+- Melissa 1.0.
+
+These may later help standalone-page metadata/internal linking, but they do not become pages just because they exist as labels.
+
+## 6. Reader summaries and SEO
+
+The rich collapsed summary model is primarily human UX, but its topic labels and concise entry framing are intentionally reusable if/when a thread becomes a standalone URL.
+
+Do not treat the compact preview as hidden SEO copy or stuff it with keywords.
+
+Current rule:
+
+- rich preview ceiling = 1,650 visible-copy characters per language;
+- preferred design center ≈1,300–1,320;
+- summary must remain a useful human-readable concise version of the entry.
+
+See `docs/reader-summary-model.md`.
+
+## 7. Promotion procedure for a thematic pair
+
+Before changing a pair from `noindex,follow` to `index,follow`:
+
+1. confirm factual/editorial PT/EN parity;
+2. confirm the page has distinct reader/search value;
+3. test external/internal links;
+4. review title, meta description, canonical and hreflang;
+5. review rights/privacy for prominent visual material;
+6. ensure normal static navigation can reach the page;
+7. change both language robots states deliberately;
+8. update sitemap treatment in the same release when appropriate;
+9. deploy with normal audit/Pages verification;
+10. observe Search Console rather than inferring success immediately.
+
+## 8. AI/HAI semantic follow-up
+
+AI/HAI is already indexable. When PRO v2 stabilizes, structured data can be revisited so the research works are represented more specifically (for example an `ItemList` containing scholarly works with DOI identifiers where appropriate).
+
+Do not sediment a large schema redesign while the v2 editorial/methodological object is still moving.
+
+## 9. Principle
+
+Authority comes from coherent identity, useful original content, stable URLs, legitimate persistent identifiers/links, strong navigation and external corroboration where it exists — not from exposing the maximum possible number of URLs to crawlers.

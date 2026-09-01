@@ -1,6 +1,6 @@
 # UX + SEO architecture v1 — progressive biography
 
-Status: **adopted implementation plan, not yet implemented on the live site**  
+Status: **historical pre-implementation plan — substantially implemented and evolved; see `docs/CURRENT-HUB-STATE.md` and `docs/reader-summary-model.md` for current behavior**  
 Reference date: 2026-08-29 (BRT)  
 Baseline `main` at planning start: `c959fd2555fca7d39cbca8e8be8e9c9702730713` (PR #29 merged)
 

@@ -1,7 +1,7 @@
 # Full Biography — workflow editorial, sincronização e continuidade
 
 **Status:** arquitetura operacional da Biografia Completa  
-**Atualizado em:** 28 de agosto de 2026  
+**Atualizado em:** 1 de setembro de 2026  
 **Repositório:** `marcelonicchio/marcelonicchio.github.io`
 
 Este documento complementa `docs/hub-continuity-guide.md` e registra especificamente a arquitetura da Biografia Completa, o mecanismo de paridade PT/EN e o procedimento de atualização futura.
@@ -26,9 +26,9 @@ A Biografia é um arquivo vivo: novas informações, fotos, vídeos, áudios e c
 
 ## 2. Fonte editorial única
 
-A fonte autoral de cada episódio é a vertical temática correspondente.
+Por padrão, a fonte autoral de cada episódio é a vertical temática correspondente. Entradas deliberadamente promovidas a Chapter Page podem migrar para um fragmento neutro em `content/entries/<lang>/`, que passa a alimentar a vertical; a Full Biography continua sendo sincronizada a partir da unidade temática resultante. Não fazer migração `.inc` em massa.
 
-Fluxo:
+Fluxo padrão:
 
 ```text
 entrada na vertical PT

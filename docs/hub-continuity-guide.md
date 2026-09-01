@@ -1,7 +1,9 @@
 # HUB Marcelo Nicchio — Guia de continuidade editorial e técnica
 
-**Status deste documento:** referência operacional e editorial do projeto  
+**Status deste documento:** **histórico/fundacional — snapshot de 27 de agosto de 2026**  
 **Atualizado em:** 27 de agosto de 2026  
+
+> Para o estado atual, leia primeiro `docs/README.md` e `docs/CURRENT-HUB-STATE.md`. Este guia preserva a constituição e o contexto do ciclo anterior; detalhes de implementação que mudaram depois de 27/08 não são autoridade de estado.  
 **Site:** https://marcelonicchio.github.io  
 **Repositório:** `marcelonicchio/marcelonicchio.github.io`
 
