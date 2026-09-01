@@ -374,11 +374,12 @@ The eventual public thread title should center **CookieWEB**, not “Beleza na W
 
 ### Featured-card color problems
 
-Still unresolved and intentionally separate from the summary model:
+The state behavior is resolved: **featured color applies only while collapsed**. On expansion, the entry returns to the normal dark Reader treatment; if collapsed again, the featured highlight returns.
+
+Color tuning remains intentionally separate from the summary model:
 
 1. yellow should become a clearer pale yellow rather than beige;
-2. red should become more genuinely red/translucent rather than wine;
-3. colored featured treatment should apply to the collapsed invitation state and revert to the normal dark background after expansion.
+2. red should become more genuinely red/translucent rather than wine.
 
 Button-border removal and further typography changes remain test ideas, not adopted rules.
 

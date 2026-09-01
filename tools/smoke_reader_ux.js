@@ -103,6 +103,22 @@ async function runDesktop(browser) {
   assert((await page.locator('#bio-internet-cookieweb details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB is not featured in Full Bio');
   assert((await page.locator('#bio-audiovisual-meia-noite details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Meia-Noite is not featured in Full Bio');
 
+  // Featured visual treatment exists only while collapsed.
+  const featuredStateProbe = page.locator('#bio-internet-mirantte details.reader-disclosure');
+  const featuredClosedStyle = await featuredStateProbe.evaluate((el) => ({backgroundImage: getComputedStyle(el).backgroundImage, boxShadow: getComputedStyle(el).boxShadow}));
+  assert(featuredClosedStyle.backgroundImage !== 'none', 'Featured entry lost collapsed highlight background');
+  assert(featuredClosedStyle.boxShadow !== 'none', 'Featured entry lost collapsed highlight shadow');
+  await page.locator('#bio-internet-mirantte details.reader-disclosure > summary').click();
+  await page.waitForTimeout(250);
+  const featuredOpenStyle = await featuredStateProbe.evaluate((el) => ({backgroundImage: getComputedStyle(el).backgroundImage, boxShadow: getComputedStyle(el).boxShadow}));
+  assert(featuredOpenStyle.backgroundImage === 'none', `Featured highlight background remained after expansion: ${featuredOpenStyle.backgroundImage}`);
+  assert(featuredOpenStyle.boxShadow === 'none', `Featured highlight shadow remained after expansion: ${featuredOpenStyle.boxShadow}`);
+  await page.locator('#bio-internet-mirantte details.reader-disclosure > summary').click();
+  await page.waitForTimeout(250);
+  const featuredReclosedStyle = await featuredStateProbe.evaluate((el) => ({backgroundImage: getComputedStyle(el).backgroundImage, boxShadow: getComputedStyle(el).boxShadow}));
+  assert(featuredReclosedStyle.backgroundImage !== 'none', 'Featured highlight did not return after collapse');
+  assert(featuredReclosedStyle.boxShadow !== 'none', 'Featured highlight shadow did not return after collapse');
+
   // Rich collapsed-summary pilot: Melissa is useful before expansion and returns to the full entry when opened.
   const melissaBio = page.locator('#bio-hai-melissa');
   const melissaPreview = melissaBio.locator('.reader-disclosure__preview');

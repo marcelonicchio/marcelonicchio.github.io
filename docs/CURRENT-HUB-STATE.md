@@ -168,8 +168,10 @@ No global “Open all / Collapse all” controls appear on AI/HAI while only one
 `reader_presentation.state` currently supports:
 
 - `normal` — ordinary closed entry;
-- `default-open` — entry starts expanded;
+- `always-open` — Type 1 entry remains permanently open and scroll-only;
 - `featured` — dense/editorially important entry starts closed but receives stronger visual treatment.
+
+Featured visual treatment is state-dependent: it exists only while the entry is collapsed. Opening a featured entry restores the normal dark Reader treatment; collapsing it restores the highlight.
 
 Current experimental matrix includes:
 
