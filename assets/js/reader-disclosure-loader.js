@@ -20,12 +20,12 @@
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = '/assets/reader-disclosure.css';
+  css.href = '/assets/reader-disclosure.css?v=20260901-reader2';
   css.dataset.readerDisclosure = 'style';
   document.head.appendChild(css);
 
   const script = document.createElement('script');
-  script.src = '/assets/js/reader-disclosure.js';
+  script.src = '/assets/js/reader-disclosure.js?v=20260901-reader2';
   script.defer = true;
   script.dataset.readerDisclosure = 'script';
   document.head.appendChild(script);
