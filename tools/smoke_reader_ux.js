@@ -102,9 +102,11 @@ async function runDesktop(browser) {
   assert(await melissaPreview.count() === 1, 'Melissa rich collapsed preview missing');
   assert((await melissaPreview.innerText()).includes('63 horas e 518 prompts'), 'Melissa collapsed preview lost core case metrics');
   assert((await melissaPreview.innerText()).includes('Melissa Framework'), 'Melissa collapsed preview lost framework outcome');
-  assert(await melissaPreview.locator('.reader-disclosure__preview-paragraph').count() === 5, 'Melissa collapsed preview should contain five concise editorial paragraphs');
+  assert(await melissaPreview.locator('.reader-disclosure__preview-paragraph').count() === 4, 'Melissa collapsed preview should contain four concise editorial paragraphs');
   assert(await melissaPreview.locator('strong').count() >= 8, 'Melissa collapsed preview lost editorial emphasis');
   const melissaTopics = await melissaBio.locator('.reader-disclosure__topic').allInnerTexts();
+  const melissaTopicBackground = await melissaBio.locator('.reader-disclosure__topic').first().evaluate((el) => getComputedStyle(el).backgroundColor);
+  assert(melissaTopicBackground !== 'rgba(0, 0, 0, 0)', 'Melissa topic chips lost their neutral background surface');
   ['AI', 'HAI', 'HCI', 'Prompt Engineering', 'Melissa 1.0'].forEach((label) => assert(melissaTopics.includes(label), `Melissa topic missing: ${label}`));
   const melissaIndicators = await melissaBio.locator('.reader-disclosure__badge').allInnerTexts();
   ['2 imagens', '1 link para download', '4 documentos com DOI', '1 link para repositório'].forEach((label) => assert(melissaIndicators.includes(label), `Melissa indicator missing: ${label}`));
