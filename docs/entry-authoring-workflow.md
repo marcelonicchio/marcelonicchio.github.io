@@ -1,17 +1,42 @@
 # Entry authoring workflow — Reader Pages, Full Biography and Chapter Pages
 
-Status: **operational workflow**  
-Reference: 2026-08-29 BRT
+**Status:** operational workflow  
+**Reference:** 1 Sep 2026 (BRT)
 
-This document explains how new autobiographical material enters the HUB after the entry-architecture pilot. It exists so future authoring sessions can focus on Marcelo Nicchio's memory and narrative rather than reconstructing the site pipeline.
+This document explains how autobiographical material enters the HUB in the current architecture. Its purpose is to keep future sessions focused on Marcelo Nicchio's memory, narrative and editorial judgment instead of rebuilding the site pipeline from scratch.
 
-## 1. The content model has two valid source states
+For current Reader summary design, also read `docs/reader-summary-model.md`.
 
-There is no requirement to migrate every existing chapter at once.
+---
+
+## 1. Human narrative still comes first
+
+The repository architecture exists to reduce duplicate work, not to make Marcelo write for a data model.
+
+For a new or substantially expanded episode:
+
+1. preserve the raw autobiographical account privately/editorially while shaping it;
+2. write/review the canonical PT thematic entry;
+3. create/review the deliberate EN equivalent;
+4. compare PT↔EN factual/editorial meaning;
+5. accept the parity checkpoint for the affected entry;
+6. regenerate Full Biography;
+7. add/update registry metadata when it is mature enough to be useful;
+8. associate media/resources only after their editorial function is clear;
+9. run the complete audit suite;
+10. branch → PR → green CI → merge → post-merge Site Audit → Pages confirmation.
+
+Do not make Marcelo manually maintain the same complete episode in a vertical, Full Biography and Chapter Page.
+
+---
+
+## 2. Two valid editorial source states
+
+There is no requirement to migrate every existing entry into `.inc` fragments.
 
 ### State A — Reader-section source
 
-Most entries may continue to be authored directly in the thematic vertical.
+Most entries can remain authored directly in the thematic vertical.
 
 ```text
 PT/EN thematic vertical
@@ -19,17 +44,17 @@ PT/EN thematic vertical
         └─ sync_full_biography.py → Full Biography
 ```
 
-Use this state when:
+Use this when:
 
-- the autobiographical chapter is still being written or revised;
-- there is no standalone Chapter Page yet;
-- forcing a neutral fragment would add machinery without reuse.
+- the chapter is still evolving;
+- there is no standalone Chapter Page;
+- forcing a neutral fragment would create machinery without real reuse.
 
-`data/entries.json` may still register a mature Reader-section entry for reusable metadata such as curated summary, topics, media associations and future Chapter Page candidacy.
+The entry may still be registered in `data/entries.json` for summaries, taxonomy, presentation state, media/resource metadata and future Chapter Page candidacy.
 
 ### State B — neutral fragment source
 
-Promote an entry to a neutral source when the same complete body must feed more than one independently generated surface, especially a Chapter Page.
+Promote an entry to a neutral shared source only when the same complete body genuinely needs to feed more than one generated public surface.
 
 ```text
 content/entries/<lang>/<entry>.inc
@@ -41,80 +66,212 @@ content/entries/<lang>/<entry>.inc
         └─ build_chapter_pages.py → selective Chapter Page
 ```
 
-The migration is **per entry**, not a repository-wide rewrite.
+Migration is **per entry**, never a repository-wide architectural purity exercise.
 
-## 2. Authoring a new autobiographical block
+Current examples: Folhateen and BEST/Kenshoo.
 
-Human narrative still comes first.
-
-For a new chapter or expanded period:
-
-1. preserve Marcelo's raw autobiographical account outside the final public prose while shaping it;
-2. edit the canonical PT thematic vertical entry;
-3. create/review the deliberate EN equivalent;
-4. run/accept PT↔EN editorial parity for the affected entry;
-5. synchronize Full Biography;
-6. add or update the `data/entries.json` record **only when the chapter is mature enough for a useful summary/taxonomy**;
-7. associate existing galleries/videos/documents through the registry when useful;
-8. run all site/entry audits.
-
-Do **not** create registry filler merely because an entry exists. A shallow placeholder summary can become accidental interface copy later.
+---
 
 ## 3. Registering an entry
 
-A normal chapter record may contain:
+A normal chapter record may include:
 
-- stable `id` matching the existing Full Biography/editorial identity where possible;
-- `kind: chapter`;
+- stable `id`;
+- `kind`;
 - thematic `domain`;
 - PT/EN date/period;
 - PT/EN title;
-- PT/EN curated summary;
-- controlled `topic_ids` from `data/tags.json`;
-- useful media associations/count invariants;
-- PT/EN Reader Page targets;
+- PT/EN compact `summary`;
+- controlled `topic_ids`;
+- `reader_presentation` state;
+- optional structured `reader_preview` for rich collapsed summaries;
+- media/resource associations;
+- PT/EN Reader targets;
 - source mode;
-- Chapter Page status and future path.
+- Chapter Page status/path/indexing policy.
 
-The curated summary is interface/editorial metadata. It should explain **why the episode matters**, not mechanically clip the first paragraph.
+Do not create registry filler simply because a chapter exists. Weak placeholder metadata eventually becomes weak public interface copy.
 
-## 4. Topic taxonomy
+---
 
-`data/tags.json` is a controlled vocabulary for:
+## 4. `summary` and `reader_preview` are different layers
 
-- compact Reader Page chips;
+### `summary`
+
+The ordinary `summary` field is concise reusable metadata. It is appropriate for standard Reader excerpts, Chapter Page framing and entry-level description.
+
+It should explain why an episode matters rather than mechanically copying the first sentence.
+
+### `reader_preview`
+
+Use a structured `reader_preview` only for dense entries whose collapsed state needs to work as a **short autonomous version of the complete post**.
+
+A rich preview may contain:
+
+- optional cover/editorial image;
+- multiple concise paragraphs;
+- selective strong emphasis;
+- curated internal-content indicators.
+
+Topic labels remain `topic_ids`, outside the preview, because they belong to the entry itself rather than one visual state.
+
+Melissa 1.0 is the accepted pilot/reference implementation.
+
+### Rich-preview text budget
+
+For paragraph text inside `reader_preview`:
+
+- maximum = **1,650 visible-copy characters per language**;
+- normal design target = roughly **1,300–1,320 characters**;
+- shorter is fine;
+- do not pad copy to reach a quota.
+
+The ceiling reflects the calibrated Melissa mobile/desktop result. It is enforced by `tools/audit_entries.py`.
+
+Title/date/tags/indicators/CTA do not count toward the preview-copy ceiling.
+
+See `docs/reader-summary-model.md` for the complete rationale and visual/semantic rules.
+
+---
+
+## 5. Topic labels versus internal-content indicators
+
+These are separate systems.
+
+### Topic labels
+
+Source: `topic_ids` → `data/tags.json`.
+
+Purpose:
+
+- human scanning;
+- vocabulary consistency;
+- future relationships/filtering/internal links;
+- future standalone-page/SEO planning.
+
+They are **not** meta keywords and do not automatically create tag pages.
+
+Current rich-summary styling uses a neutral light/translucent chip surface.
+
+### Internal-content indicators
+
+Purpose: tell the reader what useful material exists inside the expanded entry.
+
+Examples:
+
+- photos/images;
+- videos;
+- audio;
+- download links;
+- DOI documents;
+- repository links.
+
+Prefer machine-derived counts when the DOM/media registry can express the content accurately. Use curated indicators when automatic counting cannot describe the resource meaningfully.
+
+Current rich-summary indicators use the red visual family and must remain visually distinguishable from topic taxonomy.
+
+---
+
+## 6. Reader presentation state
+
+`reader_presentation.state` supports:
+
+- `normal`;
+- `default-open`;
+- `featured`.
+
+The state belongs in data, not in CSS selector hacks.
+
+Current experimental examples:
+
+- Minduim/BBS → `default-open`;
+- Mirantte News → `featured`;
+- CookieWEB → `featured`;
+- Meia-Noite e Uns → `featured`.
+
+Presentation state and rich preview are independent dimensions: a future featured entry may or may not use a rich `reader_preview`.
+
+---
+
+## 7. Which Reader surfaces transform by default
+
+### Default compact/disclosure
+
+- Full Biography PT/EN;
+- Internet & Performance PT/EN.
+
+### Query-flag laboratory
+
+- Communication PT/EN;
+- Audiovisual PT/EN.
+
+### Selective AI/HAI mode
+
+AI/HAI remains openly rendered by editorial rule. Only explicitly selected entries are transformed.
+
+Currently only Melissa 1.0 uses the rich collapsed/expanded model on AI/HAI. PRO v2, PRO v1, the research-cycle opener and research identity remain open.
+
+Do not generalize blanket disclosure to IA/HAI unless Marcelo explicitly changes that rule.
+
+---
+
+## 8. Full Biography synchronization
+
+The Full Biography is totality, not a summary layer.
+
+After any editorial change to a registered biographical entry:
+
+```bash
+python tools/editorial_parity.py --check
+python tools/editorial_parity.py --accept ENTRY_ID   # after actual PT/EN review
+python tools/sync_full_biography.py
+python tools/audit_full_biography.py
+```
+
+Exact command order may vary when other generators are involved, but the invariant does not: Full Bio must end synchronized and parity must be explicitly accepted.
+
+Do not hand-edit its managed chronological region.
+
+---
+
+## 9. Topic taxonomy
+
+`data/tags.json` is controlled vocabulary for:
+
+- Reader chips;
 - semantic relationships;
 - future filtering/internal linking;
-- later thematic analysis.
+- future standalone-page planning.
 
-It is **not**:
+Add a topic only when it is a durable concept. Prefer an existing stable term over near-duplicates.
 
-- `meta keywords`;
-- an instruction to create a tag page;
-- a ranking trick;
-- a substitute for prose.
+Do not create public tag URLs automatically.
 
-Add a new topic only if it is likely to remain meaningful across the HUB. Prefer an existing stable concept over near-duplicate labels.
+Melissa currently establishes/reuses:
 
-## 5. Composite subjects that cross chronology
+- AI;
+- HAI;
+- HCI;
+- Prompt Engineering;
+- Melissa 1.0.
 
-Not every concept deserves a Chapter Page or a new chronological entry.
+---
 
-Use a `landmark-set` when one semantic subject legitimately spans more than one Reader chapter.
+## 10. Composite subjects across chronology
 
-Pilot example:
+Use a `landmark-set` when one semantic subject legitimately spans multiple chronological chapters and does not need to become a new artificial chapter.
 
-- Goobec training belongs chronologically in the Search-professionalization chapter;
-- GAP certifications belong chronologically in the CookieWEB chapter;
-- the registry relates both under `internet-goobec-gap` without moving either piece or inventing a standalone page.
+Canonical example: Goobec/GAP.
 
-This pattern is useful for certifications, recurring tools, collaborations or themes that cross chapter boundaries.
+Training stays in the Search-professionalization portion of the Internet chronology; GAP certifications stay in the CookieWEB period; the registry relates them without moving either event.
 
-## 6. Promoting an entry to a Chapter Page
+This pattern also fits recurring tools, certifications, collaborations or themes.
 
-Promotion is selective.
+---
 
-A Chapter Page should be genuinely autonomous for some combination of:
+## 11. Promoting an entry to a Chapter Page
+
+A Chapter Page is selective and must be genuinely autonomous for some combination of:
 
 - reading;
 - citation;
@@ -122,109 +279,121 @@ A Chapter Page should be genuinely autonomous for some combination of:
 - search intent;
 - social preview;
 - contextual linking;
-- a concentrated archive/record set.
+- concentrated records/archive.
 
-There is no fixed word-count rule.
+There is no automatic word-count rule.
 
 Promotion procedure:
 
-1. extract the existing PT and EN chapter bodies — **not their `<h2>` headings** — into:
-   - `content/entries/pt/<entry>.inc`
-   - `content/entries/en/<entry>.inc`;
-2. change `source.kind` in `data/entries.json` from `reader-section` to `fragment`;
-3. set the exact PT/EN fragment paths;
-4. change `chapter_page.status` to `pilot`;
-5. keep `chapter_page.indexing` as `noindex,follow` during structural validation unless an indexing experiment has been explicitly approved;
-6. run `python tools/sync_entries.py`;
-7. review the verticals for semantic/content identity;
-8. refresh affected parity checkpoints because management comments/serialization may change even when prose does not;
-9. run `python tools/sync_full_biography.py`;
-10. run `python tools/build_chapter_pages.py`;
-11. run the full Site Audit.
+1. extract the existing complete PT/EN bodies (not their `<h2>` headings) into neutral fragments;
+2. change `source.kind` to `fragment`;
+3. register exact PT/EN fragment paths;
+4. set Chapter Page status to `pilot`;
+5. keep `noindex,follow` unless an explicit indexation experiment has been approved;
+6. run `sync_entries.py`;
+7. review the verticals;
+8. refresh affected parity checkpoints;
+9. regenerate Full Biography;
+10. build Chapter Pages;
+11. run all audits/browser tests.
 
-The generator adds page framing from registry metadata while the neutral fragment remains the unique complete editorial body.
+Current generated pilot pairs: Folhateen and BEST/Kenshoo.
 
-## 7. Chapter Page indexing states
+---
+
+## 12. Chapter Page indexing states
 
 ### `candidate`
 
-A future URL/path may be reserved in the registry, but the page must not exist on disk yet. It cannot be `index,follow`.
+Possible future page. It must not already exist as an indexable public destination.
 
 ### `pilot`
 
-The page exists and is generated. Default structural-test policy is `noindex,follow`.
+Generated structural page. Default remains `noindex,follow`.
 
-A noindex pilot must not be inserted into the sitemap.
+### controlled `index,follow`
 
-### future `index,follow` pilot
+Requires explicit SEO/editorial approval, static internal links, sitemap review and later Search Console observation.
 
-An indexable Chapter Page requires an explicit editorial/SEO decision. When enabled:
+One controlled indexation pilot is desirable eventually because an all-noindex experiment cannot produce index/canonical observation data. That is not permission for mass promotion.
 
-- the page keeps a self-canonical;
-- PT/EN hreflang remains reciprocal;
-- the page must have normal static HTML links from its Reader Page occurrences — a query-mode JavaScript link is not enough;
-- sitemap treatment is reviewed deliberately;
-- Search Console observation follows.
+---
 
-No status change authorizes mass indexation of other Chapter Pages.
+## 13. Media authoring rules
 
-## 8. Reader Page disclosure
+Distinguish:
 
-The current implementation is a **query-flag laboratory**:
+1. **editorial thread image** — integrated into narrative flow;
+2. **associated record gallery** — one to many images below a record, using registered gallery infrastructure.
 
-```text
-?ux=disclosure
-```
+Preserve originals/masters where justified and serve appropriate delivery derivatives.
 
-Normal URLs remain visually unchanged.
+AI-assisted historical restoration and AI reconstruction from memory are not the same category:
 
-The lab uses `data/entries.json` for curated summaries/topics and derives media-count badges from rendered content where possible.
+- restoration of a historical photo remains a historical photo;
+- reconstruction from memory is an illustration and must not be described as evidence.
 
-The complete autobiographical body remains in page HTML. Disclosure is presentation, not content retrieval.
+Do not require public evidence-class bureaucracy for ordinary personal/editorial photographs.
 
-The query lab exists to validate:
+---
 
-- information hierarchy;
-- card density;
-- summary quality;
-- topic usefulness;
-- content indicators;
-- deep links;
+## 14. Reader/UX checks
+
+The Reader must continue to protect:
+
+- complete text in delivered HTML;
+- deep-link auto-open;
+- multiple entries open independently;
 - keyboard behavior;
-- mobile behavior;
-- continuous-reading controls;
-- Chapter Page discoverability.
+- print expansion;
+- no-JS fallback;
+- mobile layout/no horizontal overflow;
+- rich preview hidden after expansion;
+- full body preserved;
+- topic/indicator rendering;
+- rich-preview character ceiling.
 
-Do not switch disclosure on by default before human visual/reading validation.
+Do not weaken a meaningful smoke assertion just to make CI green. If a test is brittle, replace it with a better behavioral assertion.
 
-## 9. Required checks
+---
 
-The permanent CI should protect:
+## 15. Known next editorial/UX work
 
-- navigation sync;
-- gallery derivatives/rendering;
-- PT/EN parity;
-- neutral fragment → vertical sync;
-- vertical → Full Biography sync;
-- Full Biography coverage;
-- Reader disclosure loader presence;
-- Chapter Page generation drift;
-- entry registry/taxonomy/path/indexing invariants;
-- browser-level Reader UX behavior;
-- page-weight reporting;
-- HTML/JSON/sitemap validity;
-- presence and analytics.
+### Summary rollout
 
-The purpose is not bureaucracy. It is to make future autobiographical authoring safe: one changed entry should not silently break another surface.
+Use Melissa as the flexible reference for other dense entries. High-value candidates include Mirantte News, CookieWEB and Meia-Noite e Uns.
 
-## 10. Block 4 handoff
+Do not clone the same paragraph count or image composition blindly.
 
-For the upcoming Petlove → Clickland → BEST/Kenshoo → Ad.Dialetto authoring batch:
+### CookieWEB naming
 
-- Petlove, Clickland, BEST and Ad.Dialetto already have chronological entry slots in the current system;
-- BEST is already the compact neutral-source/Chapter Page pilot in this architecture;
-- do not pre-register final summaries for Petlove/Clickland/Dialetto before Marcelo rewrites those chapters;
-- after the PT/EN narrative is mature, register/update each case and let the same pipeline distribute it;
-- sensitive private/reputational material remains an editorial decision, not a technical-source problem.
+The eventual public thread title should center **CookieWEB**, not “Beleza na Web e CookieWEB”. Beleza na Web remains an important internal subphase/subtitle and narrative element.
 
-This keeps the next session focused on the autobiography rather than site plumbing.
+### Featured-card color problems
+
+Still unresolved and intentionally separate from the summary model:
+
+1. yellow should become a clearer pale yellow rather than beige;
+2. red should become more genuinely red/translucent rather than wine;
+3. colored featured treatment should apply to the collapsed invitation state and revert to the normal dark background after expansion.
+
+Button-border removal and further typography changes remain test ideas, not adopted rules.
+
+---
+
+## 16. Required repository discipline
+
+Before writes, refetch current `main` because assets may be uploaded manually between sessions.
+
+Keep the sequence:
+
+1. current main;
+2. branch;
+3. scoped change;
+4. relevant generators/audits;
+5. PR;
+6. green Site Audit;
+7. merge;
+8. post-merge Site Audit;
+9. Pages build/deploy success;
+10. only then call it published.
