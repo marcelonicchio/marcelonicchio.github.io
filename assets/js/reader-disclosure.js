@@ -197,9 +197,13 @@
       if (entry) section.dataset.entryId = entry.id;
       section.dataset.readerPresentation = presentationState;
 
+      if (presentationState === 'always-open') {
+        section.classList.add('reader-always-open');
+        return;
+      }
+
       const details = document.createElement('details');
       details.className = `reader-disclosure reader-disclosure--${presentationState}`;
-      if (presentationState === 'default-open') details.open = true;
       const summary = document.createElement('summary');
       summary.className = 'reader-disclosure__summary';
 

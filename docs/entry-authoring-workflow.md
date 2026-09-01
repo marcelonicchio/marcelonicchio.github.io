@@ -177,14 +177,17 @@ Current rich-summary indicators use the red visual family and must remain visual
 `reader_presentation.state` supports:
 
 - `normal`;
-- `default-open`;
+- `always-open`;
 - `featured`.
 
 The state belongs in data, not in CSS selector hacks.
 
-Current experimental examples:
+`always-open` is **Type 1**: the entry remains ordinary open HTML in the Thread and does not participate in `<details>`, top/bottom expand-collapse CTAs, or global Open all / Collapse all controls. It is scroll-only. Topic taxonomy may remain registered as data without requiring extra visible controls.
 
-- Minduim/BBS → `default-open`;
+Current examples:
+
+- Minduim/BBS → `always-open`;
+- Folha de S.Paulo / “Órfãos do Rock” → `always-open`;
 - Mirantte News → `featured`;
 - CookieWEB → `featured`;
 - Meia-Noite e Uns → `featured`.

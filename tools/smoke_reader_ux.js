@@ -83,15 +83,22 @@ async function runDesktop(browser) {
 
   // Core Reader Pages are disclosure-first on their normal public URLs.
   await page.goto(`${BASE}/pt/biografia/`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() >= 30, 'Normal Full Bio URL did not initialize disclosure');
+  assert(await page.locator('details.reader-disclosure').count() >= 28, 'Normal Full Bio URL did not initialize disclosure');
   assert((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active'), 'Normal Full Bio root did not receive Reader UX class');
   assert((await page.locator('#bio-internet-cookieweb').innerText()).includes('qualidade de vida'), 'Full Bio lost autobiographical text');
   assert((await page.getByText('Clique para expandir', {exact: false}).count()) > 0, 'Permanent Portuguese CTA missing');
 
-  // Presentation states: Minduim/BBS starts open; dense entries remain closed but featured.
+  // Type 1 / always-open entries remain plain open HTML; dense entries can still be featured disclosures.
   const bbsBio = page.locator('#bio-internet-bbs');
-  assert(await bbsBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'Minduim/BBS did not start open in Full Bio');
-  assert(await bbsBio.getAttribute('data-reader-presentation') === 'default-open', 'Minduim/BBS presentation state missing');
+  assert(await bbsBio.getAttribute('data-reader-presentation') === 'always-open', 'Minduim/BBS always-open presentation state missing');
+  assert(await bbsBio.locator('details.reader-disclosure').count() === 0, 'Minduim/BBS must not be wrapped in disclosure');
+  assert(await bbsBio.locator('.reader-disclosure__toggle').count() === 0, 'Minduim/BBS must not expose a top toggle');
+  assert(await bbsBio.locator('.reader-disclosure__collapse-button').count() === 0, 'Minduim/BBS must not expose a bottom collapse action');
+  const folhaBioOpen = page.locator('#bio-communication-folha');
+  assert(await folhaBioOpen.getAttribute('data-reader-presentation') === 'always-open', 'Folhateen always-open presentation state missing');
+  assert(await folhaBioOpen.locator('details.reader-disclosure').count() === 0, 'Folhateen must not be wrapped in disclosure');
+  assert(await folhaBioOpen.locator('.reader-disclosure__toggle').count() === 0, 'Folhateen must not expose a top toggle');
+  assert(await folhaBioOpen.locator('.reader-disclosure__collapse-button').count() === 0, 'Folhateen must not expose a bottom collapse action');
   assert((await page.locator('#bio-internet-mirantte details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte is not featured in Full Bio');
   assert((await page.locator('#bio-internet-cookieweb details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB is not featured in Full Bio');
   assert((await page.locator('#bio-audiovisual-meia-noite details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Meia-Noite is not featured in Full Bio');
@@ -139,7 +146,7 @@ async function runDesktop(browser) {
 
   // Full Biography: deep-link opening + registry-backed metadata without query flag.
   await page.goto(`${BASE}/pt/biografia/#bio-internet-cookieweb`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() >= 30, 'Full Bio produced too few disclosures');
+  assert(await page.locator('details.reader-disclosure').count() >= 28, 'Full Bio produced too few disclosures');
   const cookieBio = page.locator('#bio-internet-cookieweb');
   assert(await cookieBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'CookieWEB deep link did not auto-open');
   assert((await cookieBio.locator('.reader-disclosure__excerpt').innerText()).includes('primeira grande conta de e-commerce'), 'CookieWEB curated summary was not used');
@@ -151,10 +158,12 @@ async function runDesktop(browser) {
 
   // Internet stress set: normal URL + large galleries, composite landmark, video count and Chapter Page link.
   await page.goto(`${BASE}/pt/internet/`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() >= 10, 'Internet normal URL produced too few disclosures');
+  assert(await page.locator('details.reader-disclosure').count() >= 9, 'Internet normal URL produced too few disclosures');
 
   const bbs = page.locator('#bbs');
-  assert(await bbs.locator('details.reader-disclosure').getAttribute('open') !== null, 'Minduim/BBS did not start open in Internet');
+  assert(await bbs.getAttribute('data-reader-presentation') === 'always-open', 'Minduim/BBS always-open state missing in Internet');
+  assert(await bbs.locator('details.reader-disclosure').count() === 0, 'Minduim/BBS must remain plain open HTML in Internet');
+  assert(await bbs.locator('.reader-disclosure__toggle').count() === 0, 'Minduim/BBS unexpectedly exposes Reader toggle in Internet');
 
   const mirantte = page.locator('#mirantte');
   assert((await mirantte.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte featured class missing');
@@ -182,7 +191,7 @@ async function runDesktop(browser) {
   assert(await mirantteDetails.getAttribute('open') !== null, 'Enter key did not open Mirantte disclosure');
   assert(await bestDetails.getAttribute('open') !== null, 'Opening Mirantte closed BEST');
 
-  // Global controls override default-open state when the reader explicitly asks.
+  // Global controls operate only on actual disclosures; always-open entries stay outside them.
   await page.getByRole('button', {name: 'Abrir todos'}).click();
   const total = await page.locator('details.reader-disclosure').count();
   assert(await page.locator('details.reader-disclosure[open]').count() === total, 'Open all did not open every disclosure');
@@ -195,12 +204,13 @@ async function runDesktop(browser) {
   await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
   assert(await page.locator('details.reader-disclosure[open]').count() === 0, 'afterprint did not restore disclosure state');
 
-  // Communication remains an explicit pilot: neutral-source entry + standalone page.
+  // Communication remains an explicit pilot, but Folhateen is Type 1 / always-open.
   await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});
   const folha = page.locator('#folha');
-  assert((await folha.locator('.reader-disclosure__excerpt').innerText()).includes('matéria de capa do Folhateen'), 'Folha curated summary missing');
-  await folha.locator('summary').click();
-  assert(await folha.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/comunicacao/folhateen-orfaos-do-rock/', 'Folha Chapter Page link incorrect');
+  assert(await folha.getAttribute('data-reader-presentation') === 'always-open', 'Folha always-open state missing in Communication');
+  assert(await folha.locator('details.reader-disclosure').count() === 0, 'Folha must remain plain open HTML in Communication');
+  assert(await folha.locator('.reader-disclosure__toggle').count() === 0, 'Folha unexpectedly exposes Reader toggle');
+  assert(await folha.locator('.reader-disclosure__collapse-button').count() === 0, 'Folha unexpectedly exposes bottom collapse action');
 
   // Audiovisual remains an explicit pilot; its registered featured state is already reusable.
   await page.goto(`${BASE}/pt/audiovisual/?ux=disclosure`, {waitUntil: 'networkidle'});
@@ -216,8 +226,9 @@ async function runDesktop(browser) {
   assert(await page.getByRole('button', {name: 'Open all'}).count() === 1, 'English disclosure controls not localized');
   assert((await page.getByText('Click to expand', {exact: false}).count()) > 0, 'Permanent English CTA missing');
   const folhaEn = page.locator('#bio-communication-folha');
-  assert((await folhaEn.locator('.reader-disclosure__excerpt').innerText()).includes('Folhateen cover story'), 'English Folha curated summary missing');
-  assert((await folhaEn.locator('.reader-disclosure__topic').allInnerTexts()).includes('Press'), 'English topic labels missing');
+  assert(await folhaEn.getAttribute('data-reader-presentation') === 'always-open', 'English Folha always-open state missing');
+  assert(await folhaEn.locator('details.reader-disclosure').count() === 0, 'English Folha must not be wrapped in disclosure');
+  assert((await folhaEn.innerText()).includes('Folhateen'), 'English Folha content disappeared');
 
   // Pilot Chapter Pages: browser-readable, noindex, canonical, exact preserved structures.
   await page.goto(`${BASE}/pt/comunicacao/folhateen-orfaos-do-rock/`, {waitUntil: 'networkidle'});
@@ -240,8 +251,9 @@ async function runMobile(browser) {
   const page = await context.newPage();
   await blockExternal(page);
   await page.goto(`${BASE}/pt/biografia/`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() >= 30, 'Mobile Full Bio did not initialize disclosure by default');
-  assert(await page.locator('#bio-internet-bbs details.reader-disclosure').getAttribute('open') !== null, 'Mobile Minduim/BBS did not start open');
+  assert(await page.locator('details.reader-disclosure').count() >= 28, 'Mobile Full Bio did not initialize disclosure by default');
+  assert(await page.locator('#bio-internet-bbs details.reader-disclosure').count() === 0, 'Mobile Minduim/BBS must not become disclosure');
+  assert(await page.locator('#bio-internet-bbs').getAttribute('data-reader-presentation') === 'always-open', 'Mobile Minduim/BBS always-open state missing');
   const melissaPreview = page.locator('#bio-hai-melissa .reader-disclosure__preview');
   assert(await melissaPreview.isVisible(), 'Mobile Melissa rich preview is not visible');
   assert(await melissaPreview.locator('img').isVisible(), 'Mobile Melissa preview cover is not visible');
