@@ -58,6 +58,31 @@
   };
 
   const cleanText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+  const appendHighlightedText = (node, text, phrases = []) => {
+    const value = String(text || '');
+    const highlights = (phrases || []).map((phrase) => String(phrase || '').trim()).filter(Boolean);
+    let cursor = 0;
+    while (cursor < value.length) {
+      let nextIndex = -1;
+      let nextPhrase = '';
+      highlights.forEach((phrase) => {
+        const index = value.indexOf(phrase, cursor);
+        if (index >= 0 && (nextIndex < 0 || index < nextIndex)) {
+          nextIndex = index;
+          nextPhrase = phrase;
+        }
+      });
+      if (nextIndex < 0) {
+        node.append(document.createTextNode(value.slice(cursor)));
+        break;
+      }
+      if (nextIndex > cursor) node.append(document.createTextNode(value.slice(cursor, nextIndex)));
+      const strong = document.createElement('strong');
+      strong.textContent = nextPhrase;
+      node.appendChild(strong);
+      cursor = nextIndex + nextPhrase.length;
+    }
+  };
   const language = isPortuguese ? 'pt' : 'en';
 
   const excerptFor = (section) => {
@@ -165,7 +190,7 @@
       const related = relatedFor(section);
       const summaryText = entry?.summary?.[language] || excerptFor(section);
       const readerPreview = entry?.reader_preview?.[language] || null;
-      const contentBadges = contentBadgesFor(section);
+      const contentBadges = readerPreview?.indicators?.length ? readerPreview.indicators : contentBadgesFor(section);
       const topicIds = entry?.topic_ids || [];
       const presentationState = entry?.reader_presentation?.state || 'normal';
 
@@ -199,10 +224,11 @@
 
         const copy = document.createElement('span');
         copy.className = 'reader-disclosure__preview-copy';
-        readerPreview.paragraphs.forEach((text) => {
+        readerPreview.paragraphs.forEach((item) => {
+          const paragraphData = typeof item === 'string' ? {text: item, strong: []} : item;
           const paragraph = document.createElement('span');
           paragraph.className = 'reader-disclosure__preview-paragraph';
-          paragraph.textContent = text;
+          appendHighlightedText(paragraph, cleanText(paragraphData?.text), paragraphData?.strong || []);
           copy.appendChild(paragraph);
         });
         preview.appendChild(copy);
