@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "updated": "2026-08-28",
+  "updated": "2026-09-01",
   "derivativePolicy": {
     "format": "webp",
     "widths": [
@@ -1732,6 +1732,1284 @@
               "path": "assets/media/galleries/mirantte-news/mirantte-news-34-768.webp",
               "width": 768,
               "height": 512
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best-kenshoo",
+      "sourceRoot": "assets/archive/internet/best-kenshoo",
+      "targets": {
+        "pt": [
+          "content/entries/pt/internet-best.inc"
+        ],
+        "en": [
+          "content/entries/en/internet-best.inc"
+        ]
+      },
+      "title": {
+        "pt": "Fotos e registros",
+        "en": "Photos and records"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "best00_palestra02_tratamento-ia.jpg",
+          "caption": {
+            "pt": "Registro do workshop com tratamento por IA.",
+            "en": "Workshop record with AI treatment."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-01-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-01-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "best00_palestra03_tratamento-_ia.jpg",
+          "caption": {
+            "pt": "Registro do workshop com tratamento por IA.",
+            "en": "Workshop record with AI treatment."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-02-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-02-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "best00_palestra04_tratamento-ia.jpg",
+          "caption": {
+            "pt": "Registro do workshop com tratamento por IA.",
+            "en": "Workshop record with AI treatment."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-03-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-03-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "best00_palestra05_tratamento-ia.jpg",
+          "caption": {
+            "pt": "Registro do workshop com tratamento por IA.",
+            "en": "Workshop record with AI treatment."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-04-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-04-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "best00_palestra06_tratamento-ia_.jpg",
+          "caption": {
+            "pt": "Registro do workshop com tratamento por IA.",
+            "en": "Workshop record with AI treatment."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-05-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-05-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "best01-cartao.jpg",
+          "caption": {
+            "pt": "Cartão profissional do período BEST/Kenshoo.",
+            "en": "Professional card from the BEST/Kenshoo period."
+          },
+          "width": 1659,
+          "height": 948,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-06-480.webp",
+              "width": 480,
+              "height": 274
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-06-768.webp",
+              "width": 768,
+              "height": 439
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "best02-escritorio01.jpg",
+          "caption": {
+            "pt": "Registro do escritório da BEST.",
+            "en": "Record of the BEST office."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-07-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-07-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "best03-escritorio02.jpg",
+          "caption": {
+            "pt": "Registro do escritório da BEST.",
+            "en": "Record of the BEST office."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-08-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-08-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "best04-escritorio03-ia.jpg",
+          "caption": {
+            "pt": "Registro do escritório com tratamento por IA.",
+            "en": "Office record with AI treatment."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-09-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-09-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "best05-clientes.JPG",
+          "caption": {
+            "pt": "Registro visual de clientes da operação.",
+            "en": "Visual record of operation clients."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-10-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-10-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "best06-claudio-coelho_chap-chap_marcelo-nicchio_roger-lopes.JPG",
+          "caption": {
+            "pt": "Claudio Coelho, Chap Chap, Marcelo Nicchio e Roger Lopes.",
+            "en": "Claudio Coelho, Chap Chap, Marcelo Nicchio and Roger Lopes."
+          },
+          "width": 1280,
+          "height": 720,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-11-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-11-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "folha-orfaos-do-rock",
+      "sourceRoot": "assets/archive/communication/folha-orfaos-do-rock",
+      "targets": {
+        "pt": [
+          "content/entries/pt/communication-folha.inc"
+        ],
+        "en": [
+          "content/entries/en/communication-folha.inc"
+        ]
+      },
+      "title": {
+        "pt": "Scans da matéria",
+        "en": "Article scans"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (1-2) - 300dpi.jpg",
+          "caption": {
+            "pt": "Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 1.",
+            "en": "Folhateen — first page of the ‘Órfãos do Rock’ article, scan 1."
+          },
+          "width": 394,
+          "height": 512,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-01-480.webp",
+              "width": 394,
+              "height": 512
+            },
+            "768": {
+              "path": "assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-01-768.webp",
+              "width": 394,
+              "height": 512
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (2-2) - 300dpi.jpg",
+          "caption": {
+            "pt": "Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 2.",
+            "en": "Folhateen — first page of the ‘Órfãos do Rock’ article, scan 2."
+          },
+          "width": 372,
+          "height": 512,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-02-480.webp",
+              "width": 372,
+              "height": 512
+            },
+            "768": {
+              "path": "assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-02-768.webp",
+              "width": 372,
+              "height": 512
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 2de2 - 300dpi.jpg",
+          "caption": {
+            "pt": "Folhateen — segunda página da matéria ‘Órfãos do Rock’.",
+            "en": "Folhateen — second page of the ‘Órfãos do Rock’ article."
+          },
+          "width": 362,
+          "height": 512,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-03-480.webp",
+              "width": 362,
+              "height": 512
+            },
+            "768": {
+              "path": "assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-03-768.webp",
+              "width": 362,
+              "height": 512
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "petlove",
+      "sourceRoot": "assets/archive/internet/petlove",
+      "targets": {
+        "pt": [
+          "pt/internet/index.html"
+        ],
+        "en": [
+          "en/internet/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Fotos",
+        "en": "Photos"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "petlove01.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 1.",
+            "en": "Photographic record from the Petlove period 1."
+          },
+          "width": 533,
+          "height": 467,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-01-480.webp",
+              "width": 480,
+              "height": 421
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-01-768.webp",
+              "width": 533,
+              "height": 467
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "petlove02.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 2.",
+            "en": "Photographic record from the Petlove period 2."
+          },
+          "width": 689,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-02-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-02-768.webp",
+              "width": 689,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "petlove03.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 3.",
+            "en": "Photographic record from the Petlove period 3."
+          },
+          "width": 689,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-03-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-03-768.webp",
+              "width": 689,
+              "height": 919
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "petlove04.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 4.",
+            "en": "Photographic record from the Petlove period 4."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-04-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-04-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "petlove05.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 5.",
+            "en": "Photographic record from the Petlove period 5."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-05-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-05-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "petlove06.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 6.",
+            "en": "Photographic record from the Petlove period 6."
+          },
+          "width": 1225,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-06-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-06-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "petlove07.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 7.",
+            "en": "Photographic record from the Petlove period 7."
+          },
+          "width": 919,
+          "height": 919,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-07-480.webp",
+              "width": 480,
+              "height": 480
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-07-768.webp",
+              "width": 768,
+              "height": 768
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "petlove08.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 8.",
+            "en": "Photographic record from the Petlove period 8."
+          },
+          "width": 612,
+          "height": 612,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-08-480.webp",
+              "width": 480,
+              "height": 480
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-08-768.webp",
+              "width": 612,
+              "height": 612
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "petlove09.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 9.",
+            "en": "Photographic record from the Petlove period 9."
+          },
+          "width": 800,
+          "height": 597,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-09-480.webp",
+              "width": 480,
+              "height": 358
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-09-768.webp",
+              "width": 768,
+              "height": 573
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "petlove10.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 10.",
+            "en": "Photographic record from the Petlove period 10."
+          },
+          "width": 800,
+          "height": 600,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-10-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-10-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "petlove11.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na Petlove 11.",
+            "en": "Photographic record from the Petlove period 11."
+          },
+          "width": 800,
+          "height": 597,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/petlove/petlove-11-480.webp",
+              "width": 480,
+              "height": 358
+            },
+            "768": {
+              "path": "assets/media/galleries/petlove/petlove-11-768.webp",
+              "width": 768,
+              "height": 573
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "psinet",
+      "sourceRoot": "assets/archive/internet/psinet",
+      "targets": {
+        "pt": [
+          "pt/internet/index.html"
+        ],
+        "en": [
+          "en/internet/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Fotos",
+        "en": "Photos"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "PSINet01.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na PSINet 1.",
+            "en": "Photographic record from the PSINet period 1."
+          },
+          "width": 720,
+          "height": 691,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/psinet/psinet-01-480.webp",
+              "width": 480,
+              "height": 461
+            },
+            "768": {
+              "path": "assets/media/galleries/psinet/psinet-01-768.webp",
+              "width": 720,
+              "height": 691
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "PSINet02.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na PSINet 2.",
+            "en": "Photographic record from the PSINet period 2."
+          },
+          "width": 720,
+          "height": 823,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/psinet/psinet-02-480.webp",
+              "width": 480,
+              "height": 549
+            },
+            "768": {
+              "path": "assets/media/galleries/psinet/psinet-02-768.webp",
+              "width": 720,
+              "height": 823
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "PSINet03.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na PSINet 3.",
+            "en": "Photographic record from the PSINet period 3."
+          },
+          "width": 720,
+          "height": 1600,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/psinet/psinet-03-480.webp",
+              "width": 480,
+              "height": 1067
+            },
+            "768": {
+              "path": "assets/media/galleries/psinet/psinet-03-768.webp",
+              "width": 720,
+              "height": 1600
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "PSINet04.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na PSINet 4.",
+            "en": "Photographic record from the PSINet period 4."
+          },
+          "width": 720,
+          "height": 849,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/psinet/psinet-04-480.webp",
+              "width": 480,
+              "height": 566
+            },
+            "768": {
+              "path": "assets/media/galleries/psinet/psinet-04-768.webp",
+              "width": 720,
+              "height": 849
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "PSINet05.jpg",
+          "caption": {
+            "pt": "Registro fotográfico do período na PSINet 5.",
+            "en": "Photographic record from the PSINet period 5."
+          },
+          "width": 1024,
+          "height": 712,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/psinet/psinet-05-480.webp",
+              "width": 480,
+              "height": 334
+            },
+            "768": {
+              "path": "assets/media/galleries/psinet/psinet-05-768.webp",
+              "width": 768,
+              "height": 534
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "prateleira-cultural",
+      "sourceRoot": "assets/archive/communication/prateleira-cultural",
+      "targets": {
+        "pt": [
+          "pt/comunicacao/index.html"
+        ],
+        "en": [
+          "en/communication/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Páginas digitalizadas",
+        "en": "Digitized pages"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "sinalverde01.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 01.",
+            "en": "Prateleira Cultural — column 01."
+          },
+          "width": 453,
+          "height": 604,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-01-480.webp",
+              "width": 453,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-01-768.webp",
+              "width": 453,
+              "height": 604
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "sinalverde02-novo.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 02.",
+            "en": "Prateleira Cultural — column 02."
+          },
+          "width": 1520,
+          "height": 1994,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-02-480.webp",
+              "width": 480,
+              "height": 630
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-02-768.webp",
+              "width": 768,
+              "height": 1007
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "sinalverde03-novo.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 03.",
+            "en": "Prateleira Cultural — column 03."
+          },
+          "width": 1537,
+          "height": 1991,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-03-480.webp",
+              "width": 480,
+              "height": 622
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-03-768.webp",
+              "width": 768,
+              "height": 995
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "sinalverde04.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 04.",
+            "en": "Prateleira Cultural — column 04."
+          },
+          "width": 456,
+          "height": 604,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-04-480.webp",
+              "width": 456,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-04-768.webp",
+              "width": 456,
+              "height": 604
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "sinalverde05.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 05.",
+            "en": "Prateleira Cultural — column 05."
+          },
+          "width": 458,
+          "height": 604,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-05-480.webp",
+              "width": 458,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-05-768.webp",
+              "width": 458,
+              "height": 604
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "sinalverde06.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 06.",
+            "en": "Prateleira Cultural — column 06."
+          },
+          "width": 457,
+          "height": 604,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-06-480.webp",
+              "width": 457,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-06-768.webp",
+              "width": 457,
+              "height": 604
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "sinalverde07.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 07.",
+            "en": "Prateleira Cultural — column 07."
+          },
+          "width": 448,
+          "height": 604,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-07-480.webp",
+              "width": 448,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-07-768.webp",
+              "width": 448,
+              "height": 604
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "sinalverde08-01novo.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 08 — parte 1.",
+            "en": "Prateleira Cultural — column 08 — part 1."
+          },
+          "width": 1225,
+          "height": 1646,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-08-480.webp",
+              "width": 480,
+              "height": 645
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-08-768.webp",
+              "width": 768,
+              "height": 1032
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "sinalverde08-02novo.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 08 — parte 2.",
+            "en": "Prateleira Cultural — column 08 — part 2."
+          },
+          "width": 1524,
+          "height": 2026,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-09-480.webp",
+              "width": 480,
+              "height": 638
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-09-768.webp",
+              "width": 768,
+              "height": 1021
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "sinalverde09.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 09.",
+            "en": "Prateleira Cultural — column 09."
+          },
+          "width": 449,
+          "height": 604,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-10-480.webp",
+              "width": 449,
+              "height": 604
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-10-768.webp",
+              "width": 449,
+              "height": 604
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "sinalverde10.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 10.",
+            "en": "Prateleira Cultural — column 10."
+          },
+          "width": 1232,
+          "height": 1641,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-11-480.webp",
+              "width": 480,
+              "height": 639
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-11-768.webp",
+              "width": 768,
+              "height": 1023
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "sinalverde11.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 11.",
+            "en": "Prateleira Cultural — column 11."
+          },
+          "width": 1522,
+          "height": 1988,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-12-480.webp",
+              "width": 480,
+              "height": 627
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-12-768.webp",
+              "width": 768,
+              "height": 1003
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "sinalverde12.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 12.",
+            "en": "Prateleira Cultural — column 12."
+          },
+          "width": 1548,
+          "height": 2045,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-13-480.webp",
+              "width": 480,
+              "height": 634
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-13-768.webp",
+              "width": 768,
+              "height": 1015
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "sinalverde13.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 13.",
+            "en": "Prateleira Cultural — column 13."
+          },
+          "width": 1594,
+          "height": 2047,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-14-480.webp",
+              "width": 480,
+              "height": 616
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-14-768.webp",
+              "width": 768,
+              "height": 986
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "sinalverde14.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 14.",
+            "en": "Prateleira Cultural — column 14."
+          },
+          "width": 1275,
+          "height": 1658,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-15-480.webp",
+              "width": 480,
+              "height": 624
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-15-768.webp",
+              "width": 768,
+              "height": 999
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "sinalverde15.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 15.",
+            "en": "Prateleira Cultural — column 15."
+          },
+          "width": 1221,
+          "height": 1639,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-16-480.webp",
+              "width": 480,
+              "height": 644
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-16-768.webp",
+              "width": 768,
+              "height": 1031
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "sinalverde16.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 16.",
+            "en": "Prateleira Cultural — column 16."
+          },
+          "width": 1526,
+          "height": 2039,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-17-480.webp",
+              "width": 480,
+              "height": 641
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-17-768.webp",
+              "width": 768,
+              "height": 1026
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "sinalverde17.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 17.",
+            "en": "Prateleira Cultural — column 17."
+          },
+          "width": 1233,
+          "height": 1654,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-18-480.webp",
+              "width": 480,
+              "height": 644
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-18-768.webp",
+              "width": 768,
+              "height": 1030
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "sinalverde18.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 18.",
+            "en": "Prateleira Cultural — column 18."
+          },
+          "width": 1528,
+          "height": 2022,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-19-480.webp",
+              "width": 480,
+              "height": 635
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-19-768.webp",
+              "width": 768,
+              "height": 1016
+            }
+          }
+        },
+        {
+          "id": "20",
+          "source": "sinalverde19.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 19.",
+            "en": "Prateleira Cultural — column 19."
+          },
+          "width": 1275,
+          "height": 1658,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-20-480.webp",
+              "width": 480,
+              "height": 624
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-20-768.webp",
+              "width": 768,
+              "height": 999
+            }
+          }
+        },
+        {
+          "id": "21",
+          "source": "sinalverde20.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 20.",
+            "en": "Prateleira Cultural — column 20."
+          },
+          "width": 1221,
+          "height": 1658,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-21-480.webp",
+              "width": 480,
+              "height": 652
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-21-768.webp",
+              "width": 768,
+              "height": 1043
+            }
+          }
+        },
+        {
+          "id": "22",
+          "source": "sinalverde21.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 21.",
+            "en": "Prateleira Cultural — column 21."
+          },
+          "width": 1552,
+          "height": 1994,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-22-480.webp",
+              "width": 480,
+              "height": 617
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-22-768.webp",
+              "width": 768,
+              "height": 987
+            }
+          }
+        },
+        {
+          "id": "23",
+          "source": "sinalverde22.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 22.",
+            "en": "Prateleira Cultural — column 22."
+          },
+          "width": 1221,
+          "height": 1654,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-23-480.webp",
+              "width": 480,
+              "height": 650
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-23-768.webp",
+              "width": 768,
+              "height": 1040
+            }
+          }
+        },
+        {
+          "id": "24",
+          "source": "sinalverde23.jpg",
+          "caption": {
+            "pt": "Prateleira Cultural — coluna 23.",
+            "en": "Prateleira Cultural — column 23."
+          },
+          "width": 1572,
+          "height": 2045,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-24-480.webp",
+              "width": 480,
+              "height": 624
+            },
+            "768": {
+              "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-24-768.webp",
+              "width": 768,
+              "height": 999
             }
           }
         }
