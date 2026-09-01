@@ -1,0 +1,122 @@
+name: Temporary end-of-day Thread and Clickland adjustments
+
+on:
+  push:
+    branches:
+      - work/end-of-day-thread-clickland
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audit dependencies
+        run: python -m pip install beautifulsoup4
+      - name: Apply desktop sizing and Clickland chronology
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          # Desktop-only Thread media sizing.
+          css_path = Path('styles.css')
+          css = css_path.read_text(encoding='utf-8')
+          marker = '/* Desktop-only Thread media sizing — 2026-09-01 */'
+          block = '''\n\n/* Desktop-only Thread media sizing — 2026-09-01 */\n@media(min-width:901px){\n  .thread-media:has(img[src$="/prateleira-cultural.webp"]){width:50%;margin-left:auto;margin-right:auto}\n  .thread-media:has(img[src$="/psinet-alphaville.webp"]){width:85%;margin-left:auto;margin-right:auto}\n  .thread-media:has(img[src$="/petlove.webp"]){width:90%;margin-left:auto;margin-right:auto}\n}\n'''
+          if marker not in css:
+              css_path.write_text(css.rstrip() + block, encoding='utf-8')
+
+          def section_block(text, section_id):
+              start = text.index(f'<section id="{section_id}"')
+              end = text.index('</section>', start) + len('</section>')
+              return start, end, text[start:end]
+
+          def update_internet(path_rel, lang):
+              path = Path(path_rel)
+              text = path.read_text(encoding='utf-8')
+              pet_start, pet_end, pet = section_block(text, 'petlove')
+              click_start, click_end, click = section_block(text, 'clickland')
+              if not (pet_start < click_start):
+                  raise SystemExit(f'{path_rel}: expected Petlove before Clickland before reorder')
+
+              if lang == 'pt':
+                  click = click.replace('<h2>2012–presente — Clickland Digital</h2>', '<h2>ago. 2012–presente — Clickland Digital</h2>')
+                  click = click.replace('Em setembro de 2012,', 'Em agosto de 2012,')
+                  old_aside = '<a href="#petlove">Petlove</a><a href="#clickland">Clickland</a>'
+                  new_aside = '<a href="#clickland">Clickland</a><a href="#petlove">Petlove</a>'
+              else:
+                  click = click.replace('<h2>2012–present — Clickland Digital</h2>', '<h2>Aug. 2012–present — Clickland Digital</h2>')
+                  click = click.replace('In September 2012,', 'In August 2012,')
+                  old_aside = '<a href="#petlove">Petlove</a><a href="#clickland">Clickland</a>'
+                  new_aside = '<a href="#clickland">Clickland</a><a href="#petlove">Petlove</a>'
+
+              between = text[pet_end:click_start]
+              text = text[:pet_start] + click + between + pet + text[click_end:]
+              if old_aside not in text:
+                  raise SystemExit(f'{path_rel}: sidebar order marker missing')
+              text = text.replace(old_aside, new_aside, 1)
+              path.write_text(text, encoding='utf-8')
+
+          update_internet('pt/internet/index.html', 'pt')
+          update_internet('en/internet/index.html', 'en')
+
+          # Reorder Full Biography source registry and correct Clickland month.
+          fb_path = Path('data/full_biography.json')
+          fb = fb_path.read_text(encoding='utf-8')
+          pair = re.compile(
+              r'(?P<pet>    \{\n      "id": "internet-petlove",.*?\n    \},)\n'
+              r'(?P<click>    \{\n      "id": "internet-clickland",.*?\n    \},)',
+              re.S,
+          )
+          m = pair.search(fb)
+          if not m:
+              raise SystemExit('data/full_biography.json: Petlove/Clickland pair not found')
+          click = m.group('click').replace('"date": "set. 2012–presente"', '"date": "ago. 2012–presente"')
+          click = click.replace('"date_en": "Sep. 2012–present"', '"date_en": "Aug. 2012–present"')
+          fb = fb[:m.start()] + click + '\n' + m.group('pet') + fb[m.end():]
+          fb_path.write_text(fb, encoding='utf-8')
+
+          # Register Clickland as Type 1 / always-open. Topic IDs remain semantic only;
+          # always-open entries do not render disclosure chips or CTAs.
+          entries_path = Path('data/entries.json')
+          entries = entries_path.read_text(encoding='utf-8')
+          if '"id": "internet-clickland"' not in entries:
+              marker = '    {\n      "id": "communication-folha",'
+              if marker not in entries:
+                  raise SystemExit('data/entries.json: insertion marker missing')
+              click_entry = '''    {\n      "id": "internet-clickland",\n      "kind": "chapter",\n      "domain": "internet",\n      "date": {"pt": "ago. 2012–presente", "en": "Aug. 2012–present"},\n      "title": {\n        "pt": "Clickland Digital",\n        "en": "Clickland Digital"\n      },\n      "summary": {\n        "pt": "Fundada em agosto de 2012 por Marcelo Nicchio e Carlos Portela, a Clickland Digital atuou com Search e mídia para pequenas e médias empresas sob o posicionamento Premium Search Agency.",\n        "en": "Founded in August 2012 by Marcelo Nicchio and Carlos Portela, Clickland Digital worked with Search and media for small and medium-sized businesses under the Premium Search Agency positioning."\n      },\n      "topic_ids": ["search-marketing", "paid-media"],\n      "reader_presentation": {"state": "always-open"},\n      "source": {"kind": "reader-section"},\n      "reader_targets": {\n        "pt": [\n          {"path": "pt/internet/index.html", "selector": "#clickland"},\n          {"path": "pt/biografia/index.html", "selector": "#bio-internet-clickland"}\n        ],\n        "en": [\n          {"path": "en/internet/index.html", "selector": "#clickland"},\n          {"path": "en/biography/index.html", "selector": "#bio-internet-clickland"}\n        ]\n      },\n      "chapter_page": {"status": "none", "indexing": "none"}\n    },\n'''
+              entries = entries.replace(marker, click_entry + marker, 1)
+              entries_path.write_text(entries, encoding='utf-8')
+
+          # Cheap structural assertions before generation.
+          for path_rel in ('pt/internet/index.html', 'en/internet/index.html'):
+              text = Path(path_rel).read_text(encoding='utf-8')
+              if text.index('id="clickland"') > text.index('id="petlove"'):
+                  raise SystemExit(f'{path_rel}: Clickland chronology reorder failed')
+          PY
+      - name: Synchronize Full Biography and accept bilateral Clickland edit
+        run: |
+          python tools/sync_full_biography.py
+          python tools/sync_full_biography.py --check
+          python tools/editorial_parity.py --accept internet-clickland
+          python tools/editorial_parity.py --check
+      - name: Run focused audits
+        run: |
+          python tools/audit_entries.py
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+      - name: Remove temporary workflow
+        run: rm -f .github/workflows/temp-end-day-adjustments.yml
+      - name: Commit final adjustments
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add -A
+          git commit -m "Refine Thread media sizing and Clickland chronology"
+          git push
