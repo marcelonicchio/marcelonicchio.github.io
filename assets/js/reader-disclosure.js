@@ -12,7 +12,9 @@
     '/pt/comunicacao/': 'pt/comunicacao/index.html',
     '/en/communication/': 'en/communication/index.html',
     '/pt/audiovisual/': 'pt/audiovisual/index.html',
-    '/en/audiovisual/': 'en/audiovisual/index.html'
+    '/en/audiovisual/': 'en/audiovisual/index.html',
+    '/pt/ia-hai/': 'pt/ia-hai/index.html',
+    '/en/ai-hai/': 'en/ai-hai/index.html'
   };
   const repoPath = repoPathByUrl[pagePath];
   if (!repoPath) return;
@@ -133,6 +135,7 @@
     });
 
     const fullBio = pagePath === '/pt/biografia/' || pagePath === '/en/biography/';
+    const selectivePage = pagePath === '/pt/ia-hai/' || pagePath === '/en/ai-hai/';
     const selector = fullBio ? 'section.chapter.bio-entry' : 'article.article-body > section.chapter';
     const chapters = [...document.querySelectorAll(selector)];
     if (!chapters.length) return;
@@ -158,6 +161,7 @@
       if (!heading) return;
       const meta = [...section.children].find((node) => node.classList?.contains('bio-entry-meta')) || null;
       const entry = metadataFor(section);
+      if (selectivePage && !entry) return;
       const related = relatedFor(section);
       const summaryText = entry?.summary?.[language] || excerptFor(section);
       const readerPreview = entry?.reader_preview?.[language] || null;
@@ -311,16 +315,18 @@
     closeAll.textContent = labels.closeAll;
     controls.append(controlLabel, openAll, closeAll);
 
-    if (fullBio) {
-      const intro = document.querySelector('.bio-chronology-intro');
-      if (intro) intro.insertAdjacentElement('afterend', controls);
-      else chapters[0].insertAdjacentElement('beforebegin', controls);
-    } else {
-      chapters[0].insertAdjacentElement('beforebegin', controls);
-    }
+    if (!selectivePage) {
+      if (fullBio) {
+        const intro = document.querySelector('.bio-chronology-intro');
+        if (intro) intro.insertAdjacentElement('afterend', controls);
+        else chapters[0].insertAdjacentElement('beforebegin', controls);
+      } else {
+        chapters[0].insertAdjacentElement('beforebegin', controls);
+      }
 
-    openAll.addEventListener('click', () => activeDetails.forEach((details) => { details.open = true; }));
-    closeAll.addEventListener('click', () => activeDetails.forEach((details) => { details.open = false; }));
+      openAll.addEventListener('click', () => activeDetails.forEach((details) => { details.open = true; }));
+      closeAll.addEventListener('click', () => activeDetails.forEach((details) => { details.open = false; }));
+    }
 
     const openContainingChapter = (target, scroll = false) => {
       if (!(target instanceof Element)) return false;

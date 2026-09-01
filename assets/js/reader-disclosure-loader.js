@@ -4,7 +4,8 @@
 
   const defaultSupported = new Set([
     '/pt/biografia/', '/en/biography/',
-    '/pt/internet/', '/en/internet/'
+    '/pt/internet/', '/en/internet/',
+    '/pt/ia-hai/', '/en/ai-hai/'
   ]);
   const pilotSupported = new Set([
     ...defaultSupported,
