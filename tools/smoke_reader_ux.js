@@ -109,10 +109,12 @@ async function runDesktop(browser) {
   assert(featuredClosedStyle.backgroundImage !== 'none', 'Featured entry lost collapsed highlight background');
   assert(featuredClosedStyle.boxShadow !== 'none', 'Featured entry lost collapsed highlight shadow');
   await page.locator('#bio-internet-mirantte details.reader-disclosure > summary').click();
+  await page.waitForTimeout(250);
   const featuredOpenStyle = await featuredStateProbe.evaluate((el) => ({backgroundImage: getComputedStyle(el).backgroundImage, boxShadow: getComputedStyle(el).boxShadow}));
   assert(featuredOpenStyle.backgroundImage === 'none', `Featured highlight background remained after expansion: ${featuredOpenStyle.backgroundImage}`);
   assert(featuredOpenStyle.boxShadow === 'none', `Featured highlight shadow remained after expansion: ${featuredOpenStyle.boxShadow}`);
   await page.locator('#bio-internet-mirantte details.reader-disclosure > summary').click();
+  await page.waitForTimeout(250);
   const featuredReclosedStyle = await featuredStateProbe.evaluate((el) => ({backgroundImage: getComputedStyle(el).backgroundImage, boxShadow: getComputedStyle(el).boxShadow}));
   assert(featuredReclosedStyle.backgroundImage !== 'none', 'Featured highlight did not return after collapse');
   assert(featuredReclosedStyle.boxShadow !== 'none', 'Featured highlight shadow did not return after collapse');
