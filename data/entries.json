@@ -106,6 +106,34 @@
       }
     },
     {
+      "id": "internet-clickland",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {"pt": "ago. 2012–presente", "en": "Aug. 2012–present"},
+      "title": {
+        "pt": "Clickland Digital",
+        "en": "Clickland Digital"
+      },
+      "summary": {
+        "pt": "Fundada em agosto de 2012 por Marcelo Nicchio e Carlos Portela, a Clickland Digital atuou com Search e mídia para pequenas e médias empresas sob o posicionamento Premium Search Agency.",
+        "en": "Founded in August 2012 by Marcelo Nicchio and Carlos Portela, Clickland Digital worked with Search and media for small and medium-sized businesses under the Premium Search Agency positioning."
+      },
+      "topic_ids": ["search-marketing", "paid-media"],
+      "reader_presentation": {"state": "always-open"},
+      "source": {"kind": "reader-section"},
+      "reader_targets": {
+        "pt": [
+          {"path": "pt/internet/index.html", "selector": "#clickland"},
+          {"path": "pt/biografia/index.html", "selector": "#bio-internet-clickland"}
+        ],
+        "en": [
+          {"path": "en/internet/index.html", "selector": "#clickland"},
+          {"path": "en/biography/index.html", "selector": "#bio-internet-clickland"}
+        ]
+      },
+      "chapter_page": {"status": "none", "indexing": "none"}
+    },
+    {
       "id": "communication-folha",
       "kind": "chapter",
       "domain": "communication",

@@ -342,3 +342,10 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 /* PRO v1 architecture figure */
 .pro-v1-architecture{width:85%;margin-left:auto;margin-right:auto}
 @media(max-width:580px){.pro-v1-architecture{width:100%}}
+
+/* Desktop-only Thread media sizing — 2026-09-01 */
+@media(min-width:901px){
+  .thread-media:has(img[src$="/prateleira-cultural.webp"]){width:50%;margin-left:auto;margin-right:auto}
+  .thread-media:has(img[src$="/psinet-alphaville.webp"]){width:85%;margin-left:auto;margin-right:auto}
+  .thread-media:has(img[src$="/petlove.webp"]){width:90%;margin-left:auto;margin-right:auto}
+}

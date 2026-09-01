@@ -211,10 +211,14 @@
       ]
     },
     "internet-clickland": {
-      "revision": 1,
-      "pt_hash": "52d682d1a8734e955daf241c3f1df06bce8d7567c0ef67fc013c22069eaf7653",
-      "en_hash": "5395a51737ae1ad8381e2fa35c77c50929e16a5d232b4fe86798c37bae84a102",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "f60713a93d76c0c1b95bf7f73aa1fd558000d2c3bd33d10e4b736fe50de498d9",
+      "en_hash": "d3ee788ab65b95038a9bc13c3d5eabb8ca38a597e852fc78cb6fb87b6b76a28b",
+      "accepted_on": "2026-09-01",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "internet-best": {
       "revision": 3,
