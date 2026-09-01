@@ -1,6 +1,6 @@
 # Entry architecture pilot — six-case stress matrix
 
-Status: **implementation pilot**  
+Status: **historical implementation record — the core entry/Reader architecture became a production baseline and later evolved; see `docs/CURRENT-HUB-STATE.md`**  
 Reference: 2026-08-29 BRT  
 Base: `8ce56f866d2eec058333b2b4e0a8e78f228d110c`
 

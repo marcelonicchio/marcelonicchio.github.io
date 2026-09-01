@@ -1,6 +1,6 @@
 # HUB continuity addendum — 2026-08-29
 
-Status: **current addendum to `docs/hub-continuity-guide.md`**  
+Status: **historical transition addendum — superseded for current-state questions by `docs/CURRENT-HUB-STATE.md`**  
 Planning baseline `main`: `c959fd2555fca7d39cbca8e8be8e9c9702730713`
 
 The original continuity guide remains historically useful, but several sections describe the repository as it existed on 27 August 2026. This addendum records later constitutional and technical decisions without pretending that the older document was written in the current state.

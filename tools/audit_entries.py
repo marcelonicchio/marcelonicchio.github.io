@@ -19,6 +19,7 @@ ALLOWED_SOURCE_KINDS = {"reader-section", "fragment", "composite-reader-landmark
 ALLOWED_PAGE_STATUS = {"pilot", "candidate", "none"}
 ALLOWED_INDEXING = {"index,follow", "noindex,follow", "none"}
 ALLOWED_READER_PRESENTATION = {"normal", "default-open", "featured"}
+MAX_READER_PREVIEW_CHARS = 1650
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -129,6 +130,36 @@ def main() -> int:
                 errors.append(f"{entry_id}: missing {lang} title")
             if not entry.get("summary", {}).get(lang, "").strip():
                 errors.append(f"{entry_id}: missing {lang} summary")
+
+        # Rich collapsed previews are concise autonomous versions of dense entries.
+        # Melissa 1.0 established the accepted upper-density reference; keep future
+        # preview paragraph copy within that mobile-tested ceiling.
+        reader_preview = entry.get("reader_preview", {})
+        if reader_preview is not None and not isinstance(reader_preview, dict):
+            errors.append(f"{entry_id}: reader_preview must be an object when present")
+        elif isinstance(reader_preview, dict):
+            for lang in ("pt", "en"):
+                preview = reader_preview.get(lang)
+                if preview is None:
+                    continue
+                if not isinstance(preview, dict):
+                    errors.append(f"{entry_id}:{lang}: reader_preview must be an object")
+                    continue
+                paragraphs = preview.get("paragraphs", [])
+                if not isinstance(paragraphs, list) or not paragraphs:
+                    errors.append(f"{entry_id}:{lang}: reader_preview requires at least one paragraph")
+                    continue
+                visible_copy = 0
+                for idx, paragraph in enumerate(paragraphs, start=1):
+                    if not isinstance(paragraph, dict) or not isinstance(paragraph.get("text"), str):
+                        errors.append(f"{entry_id}:{lang}: reader_preview paragraph {idx} requires text")
+                        continue
+                    visible_copy += len(paragraph["text"])
+                if visible_copy > MAX_READER_PREVIEW_CHARS:
+                    errors.append(
+                        f"{entry_id}:{lang}: reader_preview copy has {visible_copy} characters; "
+                        f"maximum is {MAX_READER_PREVIEW_CHARS}"
+                    )
 
         topics = entry.get("topic_ids", [])
         if len(topics) != len(set(topics)):
