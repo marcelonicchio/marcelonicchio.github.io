@@ -69,7 +69,6 @@ jobs:
                   else:
                       text = text.replace('</head>', icon + '\n</head>', 1)
 
-              # Normalize any existing archive-lightbox reference to the cache-busted URL.
               text = re.sub(
                   r'/assets/js/archive-lightbox\.js(?:\?v=[^"\']*)?',
                   '/assets/js/archive-lightbox.js?v=20260901-gallery2',
@@ -111,7 +110,7 @@ jobs:
               raise SystemExit('favicon audit guard was not installed')
           audit_path.write_text(audit, encoding='utf-8')
 
-          # 4) Permanent gallery-controller guard.
+          # 4) Permanent gallery-controller guard for actual HTML pages only.
           gallery_audit_path = root / 'tools/audit_galleries.py'
           ga = gallery_audit_path.read_text(encoding='utf-8')
           ga = ga.replace(
@@ -120,7 +119,7 @@ jobs:
           )
           ga = ga.replace(
               '                text = path.read_text(encoding="utf-8")\n                start = f"<!-- gallery:{gid}:start -->"',
-              '                text = path.read_text(encoding="utf-8")\n                if rel not in controller_checked_targets:\n                    controller_checked_targets.add(rel)\n                    if "/assets/js/archive-lightbox.js" not in text:\n                        errors.append(f"{rel}: rendered gallery page does not load archive-lightbox.js")\n                start = f"<!-- gallery:{gid}:start -->"'
+              '                text = path.read_text(encoding="utf-8")\n                if path.suffix.lower() in {".html", ".htm"} and rel not in controller_checked_targets:\n                    controller_checked_targets.add(rel)\n                    if "/assets/js/archive-lightbox.js" not in text:\n                        errors.append(f"{rel}: rendered gallery page does not load archive-lightbox.js")\n                start = f"<!-- gallery:{gid}:start -->"'
           )
           if 'rendered gallery page does not load archive-lightbox.js' not in ga:
               raise SystemExit('gallery controller audit guard was not installed')
