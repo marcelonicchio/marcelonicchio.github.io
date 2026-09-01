@@ -1,0 +1,61 @@
+name: Temporary Reader CTA red density
+
+on:
+  push:
+    branches:
+      - work/reader-cta-red-density
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply CTA red density adjustment
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          css_path = Path('assets/reader-disclosure.css')
+          css = css_path.read_text(encoding='utf-8')
+          css = css.replace('background:rgba(155,47,47,.16);color:#f0c2be;font-size:.76rem', 'background:rgba(170,47,47,.18);color:#f0c2be;font-size:.76rem')
+          css = css.replace('background:rgba(155,47,47,.24);border-color:rgba(224,120,113,.62);color:#f7d4d0', 'background:rgba(170,47,47,.27);border-color:rgba(224,120,113,.62);color:#f7d4d0')
+          css = css.replace('background:rgba(155,47,47,.16);color:#f0c2be;font:inherit;font-size:.76rem', 'background:rgba(170,47,47,.18);color:#f0c2be;font:inherit;font-size:.76rem')
+          css_path.write_text(css, encoding='utf-8')
+
+          loader = Path('assets/js/reader-disclosure-loader.js')
+          text = loader.read_text(encoding='utf-8').replace('20260901-reader8', '20260901-reader9')
+          loader.write_text(text, encoding='utf-8')
+
+          sync = Path('tools/sync_reader_disclosure_loader.py')
+          sync_text = sync.read_text(encoding='utf-8').replace('20260901-reader8', '20260901-reader9')
+          sync.write_text(sync_text, encoding='utf-8')
+
+          targets = [
+              'pt/biografia/index.html','en/biography/index.html',
+              'pt/internet/index.html','en/internet/index.html',
+              'pt/ia-hai/index.html','en/ai-hai/index.html',
+              'pt/comunicacao/index.html','en/communication/index.html',
+              'pt/audiovisual/index.html','en/audiovisual/index.html',
+          ]
+          for target in targets:
+              p = Path(target)
+              t = p.read_text(encoding='utf-8').replace('20260901-reader8', '20260901-reader9')
+              p.write_text(t, encoding='utf-8')
+
+          assert css.count('background:rgba(170,47,47,.18)') == 2
+          assert css.count('background:rgba(170,47,47,.27)') == 2
+          assert 'background:rgba(155,47,47,.16);color:#f0c2be;font-size:.76rem' not in css
+          assert 'background:rgba(155,47,47,.16);color:#f0c2be;font:inherit;font-size:.76rem' not in css
+          PY
+      - name: Validate Reader loader sync
+        run: python tools/sync_reader_disclosure_loader.py --check
+      - name: Commit final diff
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add assets/reader-disclosure.css assets/js/reader-disclosure-loader.js tools/sync_reader_disclosure_loader.py pt en
+          git commit -m "Increase Reader CTA red density slightly"
+          git push
