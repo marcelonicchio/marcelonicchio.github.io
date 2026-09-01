@@ -1,0 +1,140 @@
+name: Temporary Reader always-open migration
+
+on:
+  push:
+    branches:
+      - work/reader-always-open-type1
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/reader-always-open-type1
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audit dependency
+        run: pip install beautifulsoup4
+      - name: Apply always-open Type 1 semantics
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # Registry: migrate BBS and explicitly classify Folhateen as always-open.
+          p = Path('data/entries.json')
+          text = p.read_text(encoding='utf-8')
+          old = '"reader_presentation": {"state": "default-open"}'
+          assert text.count(old) == 1, f'expected one default-open registry state, found {text.count(old)}'
+          text = text.replace(old, '"reader_presentation": {"state": "always-open"}', 1)
+          needle = '"media": {"thread_image": "folhateen-cover-2001"},\n      "source": {'
+          assert text.count(needle) == 1, 'Folhateen registry insertion point changed'
+          text = text.replace(needle, '"media": {"thread_image": "folhateen-cover-2001"},\n      "reader_presentation": {"state": "always-open"},\n      "source": {', 1)
+          p.write_text(text, encoding='utf-8')
+
+          # Reader runtime: always-open is not disclosure at all.
+          p = Path('assets/js/reader-disclosure-loader.js')
+          text = p.read_text(encoding='utf-8')
+          needle = "      if (entry) section.dataset.entryId = entry.id;\n      section.dataset.readerPresentation = presentationState;\n\n      const details = document.createElement('details');"
+          assert text.count(needle) == 1, 'Reader insertion point changed'
+          replacement = "      if (entry) section.dataset.entryId = entry.id;\n      section.dataset.readerPresentation = presentationState;\n\n      if (presentationState === 'always-open') {\n        section.classList.add('reader-always-open');\n        return;\n      }\n\n      const details = document.createElement('details');"
+          text = text.replace(needle, replacement, 1)
+          old_line = "      if (presentationState === 'default-open') details.open = true;\n"
+          assert text.count(old_line) == 1, 'default-open runtime line missing'
+          text = text.replace(old_line, '', 1)
+          p.write_text(text, encoding='utf-8')
+
+          # Registry auditor: rename the state, no legacy alias.
+          p = Path('tools/audit_entries.py')
+          text = p.read_text(encoding='utf-8')
+          old = 'ALLOWED_READER_PRESENTATION = {"normal", "default-open", "featured"}'
+          assert text.count(old) == 1, 'Reader presentation allow-list changed'
+          text = text.replace(old, 'ALLOWED_READER_PRESENTATION = {"normal", "always-open", "featured"}', 1)
+          p.write_text(text, encoding='utf-8')
+
+          # Browser smoke tests: Type 1 remains plain open HTML and is excluded from disclosure controls.
+          p = Path('tools/smoke_reader_ux.js')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace("assert(await page.locator('details.reader-disclosure').count() >= 30, 'Normal Full Bio URL did not initialize disclosure');", "assert(await page.locator('details.reader-disclosure').count() >= 28, 'Normal Full Bio URL did not initialize disclosure');", 1)
+          old = "  // Presentation states: Minduim/BBS starts open; dense entries remain closed but featured.\n  const bbsBio = page.locator('#bio-internet-bbs');\n  assert(await bbsBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'Minduim/BBS did not start open in Full Bio');\n  assert(await bbsBio.getAttribute('data-reader-presentation') === 'default-open', 'Minduim/BBS presentation state missing');\n"
+          assert text.count(old) == 1, 'Full Bio Type 1 smoke block changed'
+          new = "  // Type 1 / always-open entries remain plain open HTML; dense entries can still be featured disclosures.\n  const bbsBio = page.locator('#bio-internet-bbs');\n  assert(await bbsBio.getAttribute('data-reader-presentation') === 'always-open', 'Minduim/BBS always-open presentation state missing');\n  assert(await bbsBio.locator('details.reader-disclosure').count() === 0, 'Minduim/BBS must not be wrapped in disclosure');\n  assert(await bbsBio.locator('.reader-disclosure__toggle').count() === 0, 'Minduim/BBS must not expose a top toggle');\n  assert(await bbsBio.locator('.reader-disclosure__collapse-button').count() === 0, 'Minduim/BBS must not expose a bottom collapse action');\n  const folhaBioOpen = page.locator('#bio-communication-folha');\n  assert(await folhaBioOpen.getAttribute('data-reader-presentation') === 'always-open', 'Folhateen always-open presentation state missing');\n  assert(await folhaBioOpen.locator('details.reader-disclosure').count() === 0, 'Folhateen must not be wrapped in disclosure');\n  assert(await folhaBioOpen.locator('.reader-disclosure__toggle').count() === 0, 'Folhateen must not expose a top toggle');\n  assert(await folhaBioOpen.locator('.reader-disclosure__collapse-button').count() === 0, 'Folhateen must not expose a bottom collapse action');\n"
+          text = text.replace(old, new, 1)
+          text = text.replace("assert(await page.locator('details.reader-disclosure').count() >= 30, 'Full Bio produced too few disclosures');", "assert(await page.locator('details.reader-disclosure').count() >= 28, 'Full Bio produced too few disclosures');", 1)
+          old = "  const bbs = page.locator('#bbs');\n  assert(await bbs.locator('details.reader-disclosure').getAttribute('open') !== null, 'Minduim/BBS did not start open in Internet');\n"
+          assert text.count(old) == 1, 'Internet BBS smoke block changed'
+          new = "  const bbs = page.locator('#bbs');\n  assert(await bbs.getAttribute('data-reader-presentation') === 'always-open', 'Minduim/BBS always-open state missing in Internet');\n  assert(await bbs.locator('details.reader-disclosure').count() === 0, 'Minduim/BBS must remain plain open HTML in Internet');\n  assert(await bbs.locator('.reader-disclosure__toggle').count() === 0, 'Minduim/BBS unexpectedly exposes Reader toggle in Internet');\n"
+          text = text.replace(old, new, 1)
+          text = text.replace('  // Global controls override default-open state when the reader explicitly asks.\n', '  // Global controls operate only on actual disclosures; always-open entries stay outside them.\n', 1)
+          old = "  // Communication remains an explicit pilot: neutral-source entry + standalone page.\n  await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});\n  const folha = page.locator('#folha');\n  assert((await folha.locator('.reader-disclosure__excerpt').innerText()).includes('matéria de capa do Folhateen'), 'Folha curated summary missing');\n  await folha.locator('summary').click();\n  assert(await folha.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/comunicacao/folhateen-orfaos-do-rock/', 'Folha Chapter Page link incorrect');\n"
+          assert text.count(old) == 1, 'Communication Folha smoke block changed'
+          new = "  // Communication remains an explicit pilot, but Folhateen is Type 1 / always-open.\n  await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});\n  const folha = page.locator('#folha');\n  assert(await folha.getAttribute('data-reader-presentation') === 'always-open', 'Folha always-open state missing in Communication');\n  assert(await folha.locator('details.reader-disclosure').count() === 0, 'Folha must remain plain open HTML in Communication');\n  assert(await folha.locator('.reader-disclosure__toggle').count() === 0, 'Folha unexpectedly exposes Reader toggle');\n  assert(await folha.locator('.reader-disclosure__collapse-button').count() === 0, 'Folha unexpectedly exposes bottom collapse action');\n"
+          text = text.replace(old, new, 1)
+          old = "  const folhaEn = page.locator('#bio-communication-folha');\n  assert((await folhaEn.locator('.reader-disclosure__excerpt').innerText()).includes('Folhateen cover story'), 'English Folha curated summary missing');\n  assert((await folhaEn.locator('.reader-disclosure__topic').allInnerTexts()).includes('Press'), 'English topic labels missing');\n"
+          assert text.count(old) == 1, 'English Folha smoke block changed'
+          new = "  const folhaEn = page.locator('#bio-communication-folha');\n  assert(await folhaEn.getAttribute('data-reader-presentation') === 'always-open', 'English Folha always-open state missing');\n  assert(await folhaEn.locator('details.reader-disclosure').count() === 0, 'English Folha must not be wrapped in disclosure');\n  assert((await folhaEn.innerText()).includes('Folhateen'), 'English Folha content disappeared');\n"
+          text = text.replace(old, new, 1)
+          text = text.replace("assert(await page.locator('details.reader-disclosure').count() >= 30, 'Mobile Full Bio did not initialize disclosure by default');", "assert(await page.locator('details.reader-disclosure').count() >= 28, 'Mobile Full Bio did not initialize disclosure by default');", 1)
+          old = "  assert(await page.locator('#bio-internet-bbs details.reader-disclosure').getAttribute('open') !== null, 'Mobile Minduim/BBS did not start open');\n"
+          assert text.count(old) == 1, 'Mobile BBS smoke assertion changed'
+          text = text.replace(old, "  assert(await page.locator('#bio-internet-bbs details.reader-disclosure').count() === 0, 'Mobile Minduim/BBS must not become disclosure');\n  assert(await page.locator('#bio-internet-bbs').getAttribute('data-reader-presentation') === 'always-open', 'Mobile Minduim/BBS always-open state missing');\n", 1)
+          p.write_text(text, encoding='utf-8')
+
+          # Cache bust Reader runtime so production browsers cannot reuse reader4.
+          p = Path('tools/sync_reader_disclosure_loader.py')
+          text = p.read_text(encoding='utf-8')
+          assert text.count('20260901-reader4') == 1, 'Reader loader version changed unexpectedly'
+          text = text.replace('20260901-reader4', '20260901-reader5', 1)
+          p.write_text(text, encoding='utf-8')
+          for rel in [
+              'pt/biografia/index.html','en/biography/index.html','pt/internet/index.html','en/internet/index.html',
+              'pt/comunicacao/index.html','en/communication/index.html','pt/audiovisual/index.html','en/audiovisual/index.html',
+              'pt/ia-hai/index.html','en/ai-hai/index.html']:
+              p = Path(rel)
+              text = p.read_text(encoding='utf-8')
+              assert text.count('20260901-reader4') == 1, f'{rel}: old Reader loader version not found exactly once'
+              p.write_text(text.replace('20260901-reader4', '20260901-reader5', 1), encoding='utf-8')
+
+          # Living documentation: Type 1 semantics are now explicit.
+          p = Path('docs/entry-authoring-workflow.md')
+          text = p.read_text(encoding='utf-8')
+          old = "`reader_presentation.state` supports:\n\n- `normal`;\n- `default-open`;\n- `featured`.\n\nThe state belongs in data, not in CSS selector hacks.\n\nCurrent experimental examples:\n\n- Minduim/BBS → `default-open`;\n- Mirantte News → `featured`;\n- CookieWEB → `featured`;\n- Meia-Noite e Uns → `featured`.\n\nPresentation state and rich preview are independent dimensions: a future featured entry may or may not use a rich `reader_preview`."
+          assert text.count(old) == 1, 'Authoring presentation-state section changed'
+          new = "`reader_presentation.state` supports:\n\n- `normal`;\n- `always-open`;\n- `featured`.\n\nThe state belongs in data, not in CSS selector hacks.\n\n`always-open` is **Type 1**: the entry remains ordinary open HTML in the Thread and does not participate in `<details>`, top/bottom expand-collapse CTAs, or global Open all / Collapse all controls. It is scroll-only. Topic taxonomy may remain registered as data without requiring extra visible controls.\n\nCurrent examples:\n\n- Minduim/BBS → `always-open`;\n- Folha de S.Paulo / “Órfãos do Rock” → `always-open`;\n- Mirantte News → `featured`;\n- CookieWEB → `featured`;\n- Meia-Noite e Uns → `featured`.\n\nPresentation state and rich preview are independent dimensions: a future featured entry may or may not use a rich `reader_preview`."
+          p.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          p = Path('docs/CURRENT-HUB-STATE.md')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('- Minduim/BBS → `default-open`;\n', '- Minduim/BBS → `always-open`;\n- Folha de S.Paulo / “Órfãos do Rock” → `always-open`;\n', 1)
+          marker = 'The CTA text weight is currently normal (`500`), and the red CTA background is a darker translucent red. Those choices are not the final answer for the featured-card color system.\n'
+          assert text.count(marker) == 1, 'Current-state Reader presentation section changed'
+          addition = marker + '\n`always-open` is Type 1: the entry stays as ordinary open HTML, scroll-only, with no top or bottom expand/collapse controls and no participation in global Reader open/collapse actions.\n'
+          text = text.replace(marker, addition, 1)
+          p.write_text(text, encoding='utf-8')
+          PY
+      - name: Validate targeted architecture
+        run: |
+          python tools/audit_entries.py
+          python tools/sync_reader_disclosure_loader.py --check
+          node --check assets/js/reader-disclosure-loader.js
+          node --check tools/smoke_reader_ux.js
+          python tools/sync_full_biography.py --check
+          python tools/editorial_parity.py --check
+          if grep -R --line-number --exclude='DUKE-LEGACY-DOSSIER-2026-09-01.md' --exclude='ux-seo-architecture-v1.md' --exclude='hub-continuity-addendum-2026-08-29.md' 'default-open' data assets/js tools docs/CURRENT-HUB-STATE.md docs/entry-authoring-workflow.md; then
+            echo 'Unexpected active default-open reference remains'
+            exit 1
+          fi
+      - name: Commit migration
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add data/entries.json assets/js/reader-disclosure-loader.js tools/audit_entries.py tools/smoke_reader_ux.js tools/sync_reader_disclosure_loader.py docs/entry-authoring-workflow.md docs/CURRENT-HUB-STATE.md pt/biografia/index.html en/biography/index.html pt/internet/index.html en/internet/index.html pt/comunicacao/index.html en/communication/index.html pt/audiovisual/index.html en/audiovisual/index.html pt/ia-hai/index.html en/ai-hai/index.html
+          git commit -m "Make Type 1 Reader entries always open"
+          git push origin HEAD:work/reader-always-open-type1
