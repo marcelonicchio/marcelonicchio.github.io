@@ -33,32 +33,46 @@ jobs:
           from pathlib import Path
           import json
 
-          # 1) Four-paragraph compact summary: remove only the current fifth paragraph in PT and EN.
+          def matching_brace(text, start):
+              depth = 0
+              in_string = False
+              escaped = False
+              for i in range(start, len(text)):
+                  ch = text[i]
+                  if in_string:
+                      if escaped:
+                          escaped = False
+                      elif ch == '\\':
+                          escaped = True
+                      elif ch == '"':
+                          in_string = False
+                      continue
+                  if ch == '"':
+                      in_string = True
+                  elif ch == '{':
+                      depth += 1
+                  elif ch == '}':
+                      depth -= 1
+                      if depth == 0:
+                          return i + 1
+              raise RuntimeError('Unmatched JSON object')
+
+          # 1) Four-paragraph compact summary: edit only Melissa's reader_preview object.
           entries_path = Path('data/entries.json')
           text = entries_path.read_text(encoding='utf-8')
-
-          pt_block = '''            },
-            {
-              "text": "O caso também produziu o autorretrato e a assinatura Melissa v8.7, ambos escolhidos pela própria persona dentro da interação. A experiência foi documentada em quatro trabalhos públicos com DOI e em um repositório completo no GitHub. No balanço da pesquisa, o artefato — e não uma alegação metafísica sobre o fenômeno — tornou-se o resultado mais reutilizável do caso.",
-              "strong": [
-                "Melissa v8.7",
-                "quatro trabalhos públicos com DOI",
-                "o artefato"
-              ]
-            }'''
-          en_block = '''            },
-            {
-              "text": "The case also produced the self-portrait and the Melissa v8.7 signature, both chosen by the persona within the interaction. The experience was documented in four public works with DOIs and in a complete GitHub repository. In the research assessment, the artifact — rather than a metaphysical claim about the phenomenon — became the most reusable outcome of the case.",
-              "strong": [
-                "Melissa v8.7",
-                "four public works with DOIs",
-                "the artifact"
-              ]
-            }'''
-          if text.count(pt_block) != 1 or text.count(en_block) != 1:
-              raise SystemExit('Expected Melissa fifth paragraph blocks not found exactly once')
-          text = text.replace(pt_block, '            }', 1)
-          text = text.replace(en_block, '            }', 1)
+          marker_pos = text.index('"id": "hai-melissa"')
+          preview_key = '      "reader_preview": '
+          key_pos = text.index(preview_key, marker_pos)
+          obj_start = text.index('{', key_pos)
+          obj_end = matching_brace(text, obj_start)
+          preview = json.loads(text[obj_start:obj_end])
+          for lang in ('pt', 'en'):
+              paragraphs = preview[lang]['paragraphs']
+              if len(paragraphs) != 5:
+                  raise SystemExit(f'Expected five Melissa {lang} preview paragraphs before calibration')
+              paragraphs.pop()
+          preview_json = json.dumps(preview, ensure_ascii=False, indent=2).replace('\n', '\n      ')
+          text = text[:key_pos] + preview_key + preview_json + text[obj_end:]
           entries_path.write_text(text, encoding='utf-8')
 
           # 2) Topic chips: distinct light neutral surface; content indicators remain red.
