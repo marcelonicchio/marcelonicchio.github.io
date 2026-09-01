@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install the dormant query-flag disclosure loader on selected Reader Pages."""
+"""Install the disclosure loader on selected Reader Pages."""
 
 from __future__ import annotations
 
@@ -17,6 +17,8 @@ TARGETS = [
     "en/communication/index.html",
     "pt/audiovisual/index.html",
     "en/audiovisual/index.html",
+    "pt/ia-hai/index.html",
+    "en/ai-hai/index.html",
 ]
 
 

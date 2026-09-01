@@ -2,8 +2,9 @@
 /**
  * Browser-level regression smoke test for Reader Page disclosure + pilot Chapter Pages.
  *
- * Full Biography and Internet & Performance use disclosure by default. Communication
- * and Audiovisual remain query-flag pilot surfaces while their UX is still under review.
+ * Full Biography and Internet & Performance use disclosure by default. IA/HAI uses
+ * selective disclosure for explicitly registered entries. Communication and Audiovisual
+ * remain query-flag pilot surfaces while their UX is still under review.
  *
  * Requires playwright-core supplied outside the repository. CI sets
  * PLAYWRIGHT_CORE_PATH to an isolated /tmp install so site-wide HTML sync tools never
@@ -108,6 +109,22 @@ async function runDesktop(browser) {
   assert(await melissaPreview.isHidden(), 'Melissa compact preview remained visible after expansion');
   assert((await melissaBio.locator('.reader-disclosure__body').innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa full body was not preserved after expansion');
   await melissaBio.locator('details.reader-disclosure > summary').click();
+
+  // IA/HAI selective pilot: Melissa alone gets the compact/full two-state treatment.
+  await page.goto(`${BASE}/pt/ia-hai/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('details.reader-disclosure').count() === 1, 'IA/HAI should expose exactly one selective disclosure');
+  assert(await page.locator('.reader-disclosure-controls').count() === 0, 'IA/HAI selective pilot should not show global disclosure controls');
+  assert(await page.locator('#pro2 details.reader-disclosure').count() === 0, 'PRO v2 was unexpectedly collapsed');
+  assert(await page.locator('#pro1 details.reader-disclosure').count() === 0, 'PRO v1 was unexpectedly collapsed');
+  const melissaHai = page.locator('#melissa');
+  const melissaHaiPreview = melissaHai.locator('.reader-disclosure__preview');
+  assert(await melissaHaiPreview.isVisible(), 'Melissa IA/HAI collapsed preview is not visible');
+  assert((await melissaHaiPreview.innerText()).includes('63 horas e 518 prompts'), 'Melissa IA/HAI preview lost core case metrics');
+  assert(await melissaHaiPreview.locator('img').getAttribute('src') === '/assets/media/thread/melissa1_0_selfportrait300kb.jpg', 'Melissa IA/HAI preview cover image incorrect');
+  await melissaHai.locator('details.reader-disclosure > summary').click();
+  assert(await melissaHai.locator('details.reader-disclosure').getAttribute('open') !== null, 'Melissa IA/HAI did not expand');
+  assert(await melissaHaiPreview.isHidden(), 'Melissa IA/HAI compact preview remained visible after expansion');
+  assert((await melissaHai.locator('.reader-disclosure__body').innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa IA/HAI full body was not preserved');
 
   // Full Biography: deep-link opening + registry-backed metadata without query flag.
   await page.goto(`${BASE}/pt/biografia/#bio-internet-cookieweb`, {waitUntil: 'networkidle'});
