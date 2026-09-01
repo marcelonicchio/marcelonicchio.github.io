@@ -1,0 +1,153 @@
+name: Temporary gallery and favicon fixes
+
+on:
+  push:
+    branches:
+      - work/gallery-favicon-fixes
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/gallery-favicon-fixes
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply gallery controller and favicon fixes
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          root = Path('.')
+
+          # 1) Gallery controller: arrows depend on viewport/overflow, not pointer type,
+          # and must re-evaluate when Reader disclosure changes layout/visibility.
+          js_path = root / 'assets/js/archive-lightbox.js'
+          js = js_path.read_text(encoding='utf-8')
+          js = js.replace(
+              "  const coarsePointer = window.matchMedia('(pointer: coarse)');",
+              "  const mobileViewport = window.matchMedia('(max-width: 580px)');"
+          )
+          js = js.replace(
+              "      const showArrows = overflow && !coarsePointer.matches;",
+              "      const showArrows = overflow && !mobileViewport.matches;"
+          )
+          js = js.replace(
+              "    coarsePointer.addEventListener?.('change', updateControls);\n    requestAnimationFrame(updateControls);",
+              "    mobileViewport.addEventListener?.('change', updateControls);\n    if ('ResizeObserver' in window) {\n      const observer = new ResizeObserver(updateControls);\n      observer.observe(strip);\n      gallery.__mnGalleryResizeObserver = observer;\n    }\n    requestAnimationFrame(updateControls);"
+          )
+          if 'coarsePointer' in js:
+              raise SystemExit('archive-lightbox.js still contains coarsePointer after migration')
+          if 'ResizeObserver' not in js or 'mobileViewport.matches' not in js:
+              raise SystemExit('archive-lightbox.js gallery control migration incomplete')
+          js_path.write_text(js, encoding='utf-8')
+
+          # 2) Favicon normalization + gallery controller inclusion/cache-bust.
+          icon = '<link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">'
+          gallery_script = '<script src="/assets/js/archive-lightbox.js?v=20260901-gallery2" defer></script>'
+          changed_html = 0
+          gallery_pages = 0
+          for path in sorted(root.rglob('*.html')):
+              if '.git' in path.parts:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              original = text
+
+              if '<link rel="icon"' not in text:
+                  stylesheet = '<link rel="stylesheet"'
+                  idx = text.find(stylesheet)
+                  if idx >= 0:
+                      line_start = text.rfind('\n', 0, idx) + 1
+                      indent = text[line_start:idx] if line_start <= idx else ''
+                      text = text[:idx] + icon + ('\n' + indent if '\n' in text[:idx] else '') + text[idx:]
+                  else:
+                      text = text.replace('</head>', icon + '\n</head>', 1)
+
+              # Normalize any existing archive-lightbox reference to the cache-busted URL.
+              text = re.sub(
+                  r'/assets/js/archive-lightbox\.js(?:\?v=[^"\']*)?',
+                  '/assets/js/archive-lightbox.js?v=20260901-gallery2',
+                  text,
+              )
+
+              if 'data-gallery=' in text:
+                  gallery_pages += 1
+                  if '/assets/js/archive-lightbox.js' not in text:
+                      reader_marker = '<script src="/assets/js/reader-disclosure-loader.js'
+                      idx = text.find(reader_marker)
+                      if idx >= 0:
+                          text = text[:idx] + gallery_script + '\n' + text[idx:]
+                      else:
+                          text = text.replace('</body>', gallery_script + '\n</body>', 1)
+
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+                  changed_html += 1
+
+          print(f'Normalized favicon/controller in {changed_html} HTML files; gallery pages={gallery_pages}')
+
+          # 3) Permanent favicon guard in site audit.
+          audit_path = root / 'tools/audit_site.py'
+          audit = audit_path.read_text(encoding='utf-8')
+          audit = audit.replace(
+              '        self.alternates = []\n        self.metas = []',
+              '        self.alternates = []\n        self.icons = []\n        self.metas = []'
+          )
+          audit = audit.replace(
+              '            if rel == "alternate" and attrs.get("hreflang") and attrs.get("href"):\n                self.alternates.append((attrs["hreflang"], attrs["href"]))',
+              '            if rel == "alternate" and attrs.get("hreflang") and attrs.get("href"):\n                self.alternates.append((attrs["hreflang"], attrs["href"]))\n            if "icon" in rel.split() and attrs.get("href"):\n                self.icons.append(attrs["href"])'
+          )
+          audit = audit.replace(
+              '        robots_tags = meta_values(parser, "robots")\n        if rel != "404.html" and len(robots_tags) != 1:',
+              '        if rel != "404.html" and not parser.icons:\n            errors.append(f"{rel}: missing favicon link")\n\n        robots_tags = meta_values(parser, "robots")\n        if rel != "404.html" and len(robots_tags) != 1:'
+          )
+          if 'missing favicon link' not in audit:
+              raise SystemExit('favicon audit guard was not installed')
+          audit_path.write_text(audit, encoding='utf-8')
+
+          # 4) Permanent gallery-controller guard.
+          gallery_audit_path = root / 'tools/audit_galleries.py'
+          ga = gallery_audit_path.read_text(encoding='utf-8')
+          ga = ga.replace(
+              '    target_pairs: set[tuple[str, str]] = set()\n',
+              '    target_pairs: set[tuple[str, str]] = set()\n    controller_checked_targets: set[str] = set()\n'
+          )
+          ga = ga.replace(
+              '                text = path.read_text(encoding="utf-8")\n                start = f"<!-- gallery:{gid}:start -->"',
+              '                text = path.read_text(encoding="utf-8")\n                if rel not in controller_checked_targets:\n                    controller_checked_targets.add(rel)\n                    if "/assets/js/archive-lightbox.js" not in text:\n                        errors.append(f"{rel}: rendered gallery page does not load archive-lightbox.js")\n                start = f"<!-- gallery:{gid}:start -->"'
+          )
+          if 'rendered gallery page does not load archive-lightbox.js' not in ga:
+              raise SystemExit('gallery controller audit guard was not installed')
+          gallery_audit_path.write_text(ga, encoding='utf-8')
+
+          # 5) Durable note for the next structural batch; implementation is deliberately deferred.
+          state_path = root / 'docs/CURRENT-HUB-STATE.md'
+          state = state_path.read_text(encoding='utf-8')
+          marker = '### Livraria Cultura rule\n\nLivraria Cultura belongs to the Full Biography in its chronological position but not to Internet & Performance or another thematic vertical merely because of chronology.\n'
+          note = '''### Next vertical consolidation — Communication + Audiovisual\n\nCommunication & Culture and Audiovisual are now slated for a structural fusion because each vertical carries relatively few top-level threads on its own. The final public name is still open; current working directions include **Culture & Audiovisual** and **Audiovisual & Culture**.\n\nTreat this as the same class of change as the Internet + Search/Performance fusion: one menu item, one coherent thematic chronology, PT/EN parity, internal links adjusted, old URLs retained only for compatibility/redirect behavior, and no competing duplicate verticals. The Full Biography remains the integral chronology and is not merged or shortened by this change.\n\nDo **not** implement the fusion until the public name and ordering are explicitly approved.\n'''
+          if '### Next vertical consolidation — Communication + Audiovisual' not in state:
+              if marker not in state:
+                  raise SystemExit('CURRENT-HUB-STATE insertion marker not found')
+              state = state.replace(marker, marker + '\n' + note, 1)
+              state_path.write_text(state, encoding='utf-8')
+
+      - name: Run focused audits
+        run: |
+          node --check assets/js/archive-lightbox.js
+          python tools/audit_galleries.py
+          python tools/audit_site.py
+      - name: Remove temporary workflow
+        run: rm .github/workflows/temp-gallery-favicon-fixes.yml
+      - name: Commit fixes
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add -A
+          git commit -m "Fix gallery controls and favicon coverage"
+          git push origin HEAD:work/gallery-favicon-fixes
