@@ -1,0 +1,66 @@
+name: Temporary featured yellow palette test
+
+on:
+  push:
+    branches:
+      - work/featured-yellow-test
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/featured-yellow-test
+          fetch-depth: 0
+      - name: Apply yellow palette trial
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new, label):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              count = text.count(old)
+              assert count == 1, f'{label}: expected 1, found {count}'
+              p.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          css = 'assets/reader-disclosure.css'
+          replace_once(css,'html.reader-disclosure-active .reader-disclosure--featured:not([open]){border-color:rgba(229,190,91,.72);background:linear-gradient(135deg,rgba(224,181,72,.24),rgba(148,108,31,.14));box-shadow:inset 0 0 0 1px rgba(255,220,130,.08),0 8px 26px rgba(0,0,0,.14)}','html.reader-disclosure-active .reader-disclosure--featured:not([open]){border-color:rgba(244,218,82,.64);background:linear-gradient(135deg,rgba(246,217,62,.18),rgba(207,188,42,.10));box-shadow:inset 0 0 0 1px rgba(255,232,105,.07),0 8px 26px rgba(0,0,0,.14)}','featured frame palette')
+          replace_once(css,'html.reader-disclosure-active .reader-disclosure--featured:not([open])>summary:hover{background:rgba(255,222,134,.06)}','html.reader-disclosure-active .reader-disclosure--featured:not([open])>summary:hover{background:rgba(250,222,77,.055)}','featured hover palette')
+          replace_once(css,'html.reader-disclosure-active .reader-disclosure--featured:not([open])>summary:after{border-color:rgba(238,202,112,.72);color:#f0cf7a;background:rgba(85,61,14,.24)}','html.reader-disclosure-active .reader-disclosure--featured:not([open])>summary:after{border-color:rgba(246,220,93,.68);color:#f2d85c;background:rgba(110,95,14,.20)}','featured marker palette')
+          replace_once(css,'html.reader-disclosure-active .reader-disclosure--featured:not([open]) .reader-disclosure__excerpt{color:#d7cfb8!important}','html.reader-disclosure-active .reader-disclosure--featured:not([open]) .reader-disclosure__excerpt{color:var(--soft)!important}','featured excerpt neutralization')
+          replace_once(css,'html.reader-disclosure-active .reader-disclosure--featured:not([open]) .reader-disclosure__badge{border-color:rgba(244,210,121,.46);background:rgba(92,66,16,.28);color:#f1d58a}\n','','remove featured beige badge override')
+
+          for rel in ['assets/js/reader-disclosure-loader.js', 'tools/sync_reader_disclosure_loader.py']:
+              p = Path(rel)
+              text = p.read_text(encoding='utf-8')
+              count = text.count('20260901-reader6')
+              assert count >= 1, f'{rel}: reader6 missing'
+              p.write_text(text.replace('20260901-reader6', '20260901-reader7'), encoding='utf-8')
+
+          for rel in ['pt/biografia/index.html','en/biography/index.html','pt/internet/index.html','en/internet/index.html','pt/comunicacao/index.html','en/communication/index.html','pt/audiovisual/index.html','en/audiovisual/index.html','pt/ia-hai/index.html','en/ai-hai/index.html']:
+              p = Path(rel)
+              text = p.read_text(encoding='utf-8')
+              count = text.count('20260901-reader6')
+              assert count == 1, f'{rel}: expected one reader6, found {count}'
+              p.write_text(text.replace('20260901-reader6', '20260901-reader7'), encoding='utf-8')
+          PY
+      - name: Validate
+        run: |
+          node --check assets/js/reader-disclosure-loader.js
+          node --check assets/js/reader-disclosure.js
+          node --check tools/smoke_reader_ux.js
+          python tools/sync_reader_disclosure_loader.py --check
+          python tools/audit_entries.py
+          python tools/sync_full_biography.py --check
+      - name: Commit
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add assets/reader-disclosure.css assets/js/reader-disclosure-loader.js tools/sync_reader_disclosure_loader.py pt/biografia/index.html en/biography/index.html pt/internet/index.html en/internet/index.html pt/comunicacao/index.html en/communication/index.html pt/audiovisual/index.html en/audiovisual/index.html pt/ia-hai/index.html en/ai-hai/index.html
+          git commit -m "Test clearer yellow featured palette"
+          git push origin HEAD:work/featured-yellow-test
