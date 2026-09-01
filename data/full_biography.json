@@ -567,6 +567,25 @@
       }
     },
     {
+      "id": "internet-clickland",
+      "era": "performance-2008-2015",
+      "date": "ago. 2012–presente",
+      "domain": "internet",
+      "source": {
+        "pt": {
+          "path": "pt/internet/index.html",
+          "kind": "section",
+          "selector": "#clickland"
+        },
+        "en": {
+          "path": "en/internet/index.html",
+          "kind": "section",
+          "selector": "#clickland"
+        }
+      },
+      "date_en": "Aug. 2012–present"
+    },
+    {
       "id": "internet-petlove",
       "era": "performance-2008-2015",
       "date": "2012–2013",
@@ -583,25 +602,6 @@
           "selector": "#petlove"
         }
       }
-    },
-    {
-      "id": "internet-clickland",
-      "era": "performance-2008-2015",
-      "date": "set. 2012–presente",
-      "domain": "internet",
-      "source": {
-        "pt": {
-          "path": "pt/internet/index.html",
-          "kind": "section",
-          "selector": "#clickland"
-        },
-        "en": {
-          "path": "en/internet/index.html",
-          "kind": "section",
-          "selector": "#clickland"
-        }
-      },
-      "date_en": "Sep. 2012–present"
     },
     {
       "id": "internet-best",
