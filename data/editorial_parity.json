@@ -201,9 +201,9 @@
       ]
     },
     "internet-petlove": {
-      "revision": 2,
-      "pt_hash": "b0991d2e8d51b0553c5529c0614f230c0fdaecf6244a79c980b83081ef3186e3",
-      "en_hash": "34314c0f57f1e9babfc1a4d761ade011c8a7a4fb7df6f6280b232c78613d7886",
+      "revision": 3,
+      "pt_hash": "deb0d556bf119dee1123462966def3870435d4b497aef9fdef15cff49af9016d",
+      "en_hash": "5605b8ab8a2f244c70caeb92d6616288344a80eaf2bd93f28ce5f09ea3ac12a8",
       "accepted_on": "2026-09-01",
       "changed_languages": [
         "pt",
