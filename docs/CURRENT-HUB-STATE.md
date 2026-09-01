@@ -173,12 +173,15 @@ No global “Open all / Collapse all” controls appear on AI/HAI while only one
 
 Current experimental matrix includes:
 
-- Minduim/BBS → `default-open`;
+- Minduim/BBS → `always-open`;
+- Folha de S.Paulo / “Órfãos do Rock” → `always-open`;
 - Mirantte News → `featured`;
 - CookieWEB → `featured`;
 - Meia-Noite e Uns → `featured`.
 
 The CTA text weight is currently normal (`500`), and the red CTA background is a darker translucent red. Those choices are not the final answer for the featured-card color system.
+
+`always-open` is Type 1: the entry stays as ordinary open HTML, scroll-only, with no top or bottom expand/collapse controls and no participation in global Reader open/collapse actions.
 
 ---
 

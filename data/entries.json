@@ -23,7 +23,7 @@
       },
       "topic_ids": [],
       "media": {"thread_image": "minduim-bbs-1993-reconstruction"},
-      "reader_presentation": {"state": "default-open"},
+      "reader_presentation": {"state": "always-open"},
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [
@@ -120,6 +120,7 @@
       },
       "topic_ids": ["press", "punk-rock", "cultural-criticism"],
       "media": {"thread_image": "folhateen-cover-2001"},
+      "reader_presentation": {"state": "always-open"},
       "source": {
         "kind": "fragment",
         "pt_path": "content/entries/pt/communication-folha.inc",

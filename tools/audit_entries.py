@@ -18,7 +18,7 @@ BASE_URL = "https://marcelonicchio.github.io/"
 ALLOWED_SOURCE_KINDS = {"reader-section", "fragment", "composite-reader-landmarks"}
 ALLOWED_PAGE_STATUS = {"pilot", "candidate", "none"}
 ALLOWED_INDEXING = {"index,follow", "noindex,follow", "none"}
-ALLOWED_READER_PRESENTATION = {"normal", "default-open", "featured"}
+ALLOWED_READER_PRESENTATION = {"normal", "always-open", "featured"}
 MAX_READER_PREVIEW_CHARS = 1650
 
 
