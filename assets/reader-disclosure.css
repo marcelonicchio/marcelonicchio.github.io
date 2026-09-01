@@ -26,7 +26,7 @@ html.reader-disclosure-active .reader-disclosure[open] .reader-disclosure__excer
 html.reader-disclosure-active .reader-disclosure__topics,
 html.reader-disclosure-active .reader-disclosure__badges,
 html.reader-disclosure-active .reader-disclosure__related{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-html.reader-disclosure-active .reader-disclosure__topic{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px solid rgba(255,255,255,.11);border-radius:999px;color:var(--soft);font-size:.69rem;font-weight:730}
+html.reader-disclosure-active .reader-disclosure__topic{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.09);color:#eee9df;font-size:.69rem;font-weight:730}
 html.reader-disclosure-active .reader-disclosure__badge{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px solid rgba(211,164,160,.45);border-radius:999px;background:rgba(155,47,47,.14);color:#f0c2be;font-size:.73rem;font-weight:800;letter-spacing:.015em}
 html.reader-disclosure-active .reader-disclosure--featured .reader-disclosure__badge{border-color:rgba(244,210,121,.46);background:rgba(92,66,16,.28);color:#f1d58a}
 html.reader-disclosure-active .reader-disclosure__related span{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px dashed rgba(211,164,160,.32);border-radius:999px;color:var(--muted);font-size:.68rem;font-weight:700}
