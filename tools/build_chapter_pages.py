@@ -171,6 +171,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
   <meta property="og:description" content="{html.escape(summary, quote=True)}">
   <meta property="og:url" content="{url}">
   <meta property="og:type" content="website">{og}
+  <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/chapter-page.css">
   {crumb_schema}
@@ -195,7 +196,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 {presence}
 <div class="wrap footer-grid"><span><a href="{domain_path}">← {html.escape(domain_label)}</a></span><span><a href="/{other_rel[:-10]}">{'English version' if lang == 'pt' else 'Versão em português'}</a></span></div>
 </footer>
-<script src="/assets/js/archive-lightbox.js" defer></script>
+<script src="/assets/js/archive-lightbox.js?v=20260901-gallery2" defer></script>
 </body></html>
 '''
 
