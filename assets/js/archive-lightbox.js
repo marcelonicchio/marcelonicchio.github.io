@@ -1,7 +1,7 @@
 (() => {
   const isPortuguese = document.documentElement.lang?.startsWith('pt');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const coarsePointer = window.matchMedia('(pointer: coarse)');
+  const mobileViewport = window.matchMedia('(max-width: 580px)');
 
   const isImage = (href) => {
     try {
@@ -21,7 +21,7 @@
 
     const updateControls = () => {
       const overflow = strip.scrollWidth > strip.clientWidth + 2;
-      const showArrows = overflow && !coarsePointer.matches;
+      const showArrows = overflow && !mobileViewport.matches;
       prev.hidden = !showArrows;
       next.hidden = !showArrows;
       if (!showArrows) return;
@@ -40,7 +40,12 @@
     next.addEventListener('click', () => scrollByPage(1));
     strip.addEventListener('scroll', updateControls, {passive: true});
     window.addEventListener('resize', updateControls);
-    coarsePointer.addEventListener?.('change', updateControls);
+    mobileViewport.addEventListener?.('change', updateControls);
+    if ('ResizeObserver' in window) {
+      const observer = new ResizeObserver(updateControls);
+      observer.observe(strip);
+      gallery.__mnGalleryResizeObserver = observer;
+    }
     requestAnimationFrame(updateControls);
   });
 

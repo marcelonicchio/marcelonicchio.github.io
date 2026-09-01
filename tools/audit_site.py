@@ -46,6 +46,7 @@ class PageParser(HTMLParser):
         self.links = []
         self.canonicals = []
         self.alternates = []
+        self.icons = []
         self.metas = []
         self.h1_count = 0
         self.html_lang = ""
@@ -68,6 +69,8 @@ class PageParser(HTMLParser):
                 self.canonicals.append(attrs["href"])
             if rel == "alternate" and attrs.get("hreflang") and attrs.get("href"):
                 self.alternates.append((attrs["hreflang"], attrs["href"]))
+            if "icon" in rel.split() and attrs.get("href"):
+                self.icons.append(attrs["href"])
         elif tag == "meta":
             self.metas.append(attrs)
         elif tag == "h1":
@@ -223,6 +226,9 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
                 warnings.append(f"{rel}: meta description is short ({len(descriptions[0])} chars)")
             elif len(descriptions[0]) > 190:
                 warnings.append(f"{rel}: meta description is long ({len(descriptions[0])} chars)")
+
+        if rel != "404.html" and not parser.icons:
+            errors.append(f"{rel}: missing favicon link")
 
         robots_tags = meta_values(parser, "robots")
         if rel != "404.html" and len(robots_tags) != 1:

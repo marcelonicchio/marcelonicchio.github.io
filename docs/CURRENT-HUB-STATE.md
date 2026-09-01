@@ -59,6 +59,14 @@ Legacy Search URLs exist only for compatibility/redirect behavior. Do not recrea
 
 Livraria Cultura belongs to the Full Biography in its chronological position but not to Internet & Performance or another thematic vertical merely because of chronology.
 
+### Next vertical consolidation — Communication + Audiovisual
+
+Communication & Culture and Audiovisual are now slated for a structural fusion because each vertical carries relatively few top-level threads on its own. The final public name is still open; current working directions include **Culture & Audiovisual** and **Audiovisual & Culture**.
+
+Treat this as the same class of change as the Internet + Search/Performance fusion: one menu item, one coherent thematic chronology, PT/EN parity, internal links adjusted, old URLs retained only for compatibility/redirect behavior, and no competing duplicate verticals. The Full Biography remains the integral chronology and is not merged or shortened by this change.
+
+Do **not** implement the fusion until the public name and ordering are explicitly approved.
+
 ---
 
 ## 3. Full Biography constitution

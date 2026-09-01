@@ -15,6 +15,7 @@ def main() -> int:
     errors: list[str] = []
     gallery_ids: set[str] = set()
     target_pairs: set[tuple[str, str]] = set()
+    controller_checked_targets: set[str] = set()
 
     for gallery in data.get("galleries", []):
         gid = gallery.get("id", "")
@@ -66,6 +67,10 @@ def main() -> int:
                     errors.append(f"{gid}: missing target {rel}")
                     continue
                 text = path.read_text(encoding="utf-8")
+                if path.suffix.lower() in {".html", ".htm"} and rel not in controller_checked_targets:
+                    controller_checked_targets.add(rel)
+                    if "/assets/js/archive-lightbox.js" not in text:
+                        errors.append(f"{rel}: rendered gallery page does not load archive-lightbox.js")
                 start = f"<!-- gallery:{gid}:start -->"
                 end = f"<!-- gallery:{gid}:end -->"
                 if text.count(start) != 1 or text.count(end) != 1:
