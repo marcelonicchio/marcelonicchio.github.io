@@ -1,0 +1,46 @@
+name: Temporary PSINet copy cleanup
+
+on:
+  push:
+    branches:
+      - work/media-gallery-batch-20260901
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install biography sync dependency
+        run: python -m pip install beautifulsoup4
+      - name: Remove obsolete PSINet waiting sentence
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          changes = {
+              'pt/internet/index.html': '<p>Algumas fotografias de equipe desse período estão preservadas e serão incorporadas conforme o acervo for digitalizado.</p>',
+              'en/internet/index.html': '<p>Several team photographs from this period survive and will be incorporated as the archive is digitized.</p>',
+          }
+          for rel, old in changes.items():
+              path = Path(rel)
+              text = path.read_text(encoding='utf-8')
+              if text.count(old) != 1:
+                  raise SystemExit(f'{rel}: expected obsolete paragraph exactly once, got {text.count(old)}')
+              path.write_text(text.replace(old, ''), encoding='utf-8')
+          PY
+          python tools/sync_full_biography.py
+          python tools/sync_full_biography.py --check
+      - name: Remove temporary workflow
+        run: rm -f .github/workflows/temp-psinet-copy-cleanup.yml
+      - name: Commit cleanup
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add -A
+          git commit -m "Remove obsolete PSINet media placeholder copy"
+          git push
