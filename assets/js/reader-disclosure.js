@@ -160,6 +160,7 @@
       const entry = metadataFor(section);
       const related = relatedFor(section);
       const summaryText = entry?.summary?.[language] || excerptFor(section);
+      const readerPreview = entry?.reader_preview?.[language] || null;
       const contentBadges = contentBadgesFor(section);
       const topicIds = entry?.topic_ids || [];
       const presentationState = entry?.reader_presentation?.state || 'normal';
@@ -176,7 +177,33 @@
       if (meta) summary.appendChild(meta);
       summary.appendChild(heading);
 
-      if (summaryText) {
+      if (readerPreview?.paragraphs?.length) {
+        const preview = document.createElement('span');
+        preview.className = 'reader-disclosure__preview';
+
+        if (readerPreview.image) {
+          const media = document.createElement('span');
+          media.className = 'reader-disclosure__preview-media';
+          const image = document.createElement('img');
+          image.src = readerPreview.image;
+          image.alt = readerPreview.alt || '';
+          image.loading = 'lazy';
+          image.decoding = 'async';
+          media.appendChild(image);
+          preview.appendChild(media);
+        }
+
+        const copy = document.createElement('span');
+        copy.className = 'reader-disclosure__preview-copy';
+        readerPreview.paragraphs.forEach((text) => {
+          const paragraph = document.createElement('span');
+          paragraph.className = 'reader-disclosure__preview-paragraph';
+          paragraph.textContent = text;
+          copy.appendChild(paragraph);
+        });
+        preview.appendChild(copy);
+        summary.appendChild(preview);
+      } else if (summaryText) {
         const excerpt = document.createElement('p');
         excerpt.className = 'reader-disclosure__excerpt';
         excerpt.textContent = summaryText;
