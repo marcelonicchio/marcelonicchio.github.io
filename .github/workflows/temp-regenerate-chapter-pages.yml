@@ -1,0 +1,54 @@
+name: Temporary regenerate Chapter Pages
+
+on:
+  push:
+    branches:
+      - work/gallery-favicon-fixes
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/gallery-favicon-fixes
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Update Chapter Page generator
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path('tools/build_chapter_pages.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              '  <meta property="og:type" content="website">{og}\n  <link rel="stylesheet" href="/styles.css">',
+              '  <meta property="og:type" content="website">{og}\n  <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">\n  <link rel="stylesheet" href="/styles.css">'
+          )
+          text = text.replace(
+              '<script src="/assets/js/archive-lightbox.js" defer></script>',
+              '<script src="/assets/js/archive-lightbox.js?v=20260901-gallery2" defer></script>'
+          )
+          if '<link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">' not in text:
+              raise SystemExit('favicon not added to Chapter Page generator')
+          if 'archive-lightbox.js?v=20260901-gallery2' not in text:
+              raise SystemExit('gallery cache-bust not added to Chapter Page generator')
+          path.write_text(text, encoding='utf-8')
+      - name: Regenerate Chapter Pages and validate
+        run: |
+          python tools/build_chapter_pages.py
+          python tools/build_chapter_pages.py --check
+          python tools/audit_galleries.py
+          python tools/audit_site.py
+      - name: Remove temporary workflow
+        run: rm .github/workflows/temp-regenerate-chapter-pages.yml
+      - name: Commit generated sources
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add -A
+          git commit -m "Keep Chapter Pages aligned with favicon and gallery controller"
+          git push origin HEAD:work/gallery-favicon-fixes
