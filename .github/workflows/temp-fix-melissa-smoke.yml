@@ -1,0 +1,40 @@
+name: Temporary fix Melissa smoke selector
+
+on:
+  push:
+    branches:
+      - work/melissa-collapsed-preview
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/melissa-collapsed-preview
+          fetch-depth: 0
+      - name: Fix outer Reader summary selector
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('tools/smoke_reader_ux.js')
+          text = path.read_text(encoding='utf-8')
+          old = "await melissaBio.locator('summary').click();"
+          count = text.count(old)
+          if count != 2:
+              raise SystemExit(f'Expected two Melissa summary clicks, found {count}')
+          text = text.replace(old, "await melissaBio.locator('details.reader-disclosure > summary').click();")
+          path.write_text(text, encoding='utf-8')
+          PY
+          node --check tools/smoke_reader_ux.js
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/smoke_reader_ux.js
+          git commit -m "Target outer Reader summary in Melissa smoke test"
+          git push origin HEAD:work/melissa-collapsed-preview
