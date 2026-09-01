@@ -2,3 +2,23 @@
 <p>Em 23 de abril de 2001, Marcelo Nicchio participou da <strong>matéria de capa do Folhateen</strong>, suplemento da <em>Folha de S.Paulo</em>, publicada após a morte de Joey Ramone. A chamada impressa foi <strong>“Órfãos do Rock”</strong>; a matéria interna, preservada no arquivo digital oficial da Folha, recebeu o título <strong>“Onde estão os ídolos?”</strong>.</p>
 <p>A matéria registra suas falas sobre Joey Ramone, cultura punk, o princípio do “faça você mesmo”, mercado underground brasileiro e permanência do rock.</p>
 <div class="evidence-links inline-links"><a href="https://www1.folha.uol.com.br/fsp/folhatee/fm2304200110.htm" target="_blank" rel="noopener noreferrer">Matéria — Onde estão os ídolos? ↗</a><a href="https://www1.folha.uol.com.br/fsp/folhatee/inde23042001.htm" target="_blank" rel="noopener noreferrer">Índice da edição ↗</a></div>
+<!-- gallery:folha-orfaos-do-rock:start -->
+<div class="record-gallery" data-gallery="folha-orfaos-do-rock" aria-labelledby="folha-orfaos-do-rock-gallery-title">
+  <div class="record-gallery__head"><strong id="folha-orfaos-do-rock-gallery-title">Scans da matéria · 3</strong></div>
+  <div class="record-gallery__rail">
+    <button class="record-gallery__arrow record-gallery__arrow--prev" type="button" data-gallery-prev hidden aria-label="Fotos anteriores">‹</button>
+    <div class="record-gallery__strip" data-gallery-strip tabindex="0">
+      <a class="record-gallery__item" href="/assets/archive/communication/folha-orfaos-do-rock/folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (1-2) - 300dpi.jpg" data-caption="Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 1." aria-label="Ampliar: Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 1.">
+        <img src="/assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-01-480.webp" srcset="/assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-01-480.webp 394w, /assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-01-768.webp 394w" sizes="(max-width: 580px) min(72vw, 330px), 152px" width="394" height="512" loading="lazy" decoding="async" alt="Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 1.">
+      </a>
+      <a class="record-gallery__item" href="/assets/archive/communication/folha-orfaos-do-rock/folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (2-2) - 300dpi.jpg" data-caption="Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 2." aria-label="Ampliar: Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 2.">
+        <img src="/assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-02-480.webp" srcset="/assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-02-480.webp 372w, /assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-02-768.webp 372w" sizes="(max-width: 580px) min(72vw, 330px), 152px" width="372" height="512" loading="lazy" decoding="async" alt="Folhateen — primeira página da matéria ‘Órfãos do Rock’, scan 2.">
+      </a>
+      <a class="record-gallery__item" href="/assets/archive/communication/folha-orfaos-do-rock/folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 2de2 - 300dpi.jpg" data-caption="Folhateen — segunda página da matéria ‘Órfãos do Rock’." aria-label="Ampliar: Folhateen — segunda página da matéria ‘Órfãos do Rock’.">
+        <img src="/assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-03-480.webp" srcset="/assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-03-480.webp 362w, /assets/media/galleries/folha-orfaos-do-rock/folha-orfaos-do-rock-03-768.webp 362w" sizes="(max-width: 580px) min(72vw, 330px), 152px" width="362" height="512" loading="lazy" decoding="async" alt="Folhateen — segunda página da matéria ‘Órfãos do Rock’.">
+      </a>
+    </div>
+    <button class="record-gallery__arrow record-gallery__arrow--next" type="button" data-gallery-next hidden aria-label="Próximas fotos">›</button>
+  </div>
+</div>
+<!-- gallery:folha-orfaos-do-rock:end -->
