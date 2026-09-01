@@ -1,0 +1,80 @@
+name: Temporary Reader cache bust
+
+on:
+  push:
+    branches:
+      - work/reader-cache-bust-ia-preview
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/reader-cache-bust-ia-preview
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audit dependency
+        run: python -m pip install beautifulsoup4
+      - name: Version Reader loader and child assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          VERSION = '20260901-reader2'
+          old_tag = '<script src="/assets/js/reader-disclosure-loader.js" defer></script>'
+          new_tag = f'<script src="/assets/js/reader-disclosure-loader.js?v={VERSION}" defer></script>'
+
+          loader = Path('assets/js/reader-disclosure-loader.js')
+          text = loader.read_text(encoding='utf-8')
+          old_css = "css.href = '/assets/reader-disclosure.css';"
+          new_css = f"css.href = '/assets/reader-disclosure.css?v={VERSION}';"
+          old_js = "script.src = '/assets/js/reader-disclosure.js';"
+          new_js = f"script.src = '/assets/js/reader-disclosure.js?v={VERSION}';"
+          if text.count(old_css) != 1 or text.count(old_js) != 1:
+              raise SystemExit('Reader child asset URLs not found exactly once')
+          loader.write_text(text.replace(old_css, new_css).replace(old_js, new_js), encoding='utf-8')
+
+          sync = Path('tools/sync_reader_disclosure_loader.py')
+          text = sync.read_text(encoding='utf-8')
+          old_const = "SCRIPT = '<script src=\"/assets/js/reader-disclosure-loader.js\" defer></script>'"
+          new_const = f"SCRIPT = '<script src=\"/assets/js/reader-disclosure-loader.js?v={VERSION}\" defer></script>'"
+          if text.count(old_const) != 1:
+              raise SystemExit('Reader loader SCRIPT constant not found exactly once')
+          text = text.replace(old_const, new_const)
+          sync.write_text(text, encoding='utf-8')
+
+          targets = [
+              'pt/biografia/index.html', 'en/biography/index.html',
+              'pt/internet/index.html', 'en/internet/index.html',
+              'pt/comunicacao/index.html', 'en/communication/index.html',
+              'pt/audiovisual/index.html', 'en/audiovisual/index.html',
+              'pt/ia-hai/index.html', 'en/ai-hai/index.html',
+          ]
+          for rel in targets:
+              path = Path(rel)
+              html = path.read_text(encoding='utf-8')
+              if html.count(old_tag) != 1:
+                  raise SystemExit(f'{rel}: expected one unversioned Reader loader tag')
+              path.write_text(html.replace(old_tag, new_tag), encoding='utf-8')
+          PY
+      - name: Validate versioned Reader assets
+        run: |
+          python tools/sync_reader_disclosure_loader.py --check
+          node --check assets/js/reader-disclosure-loader.js
+          node --check assets/js/reader-disclosure.js
+          python tools/audit_entries.py
+      - name: Commit cache bust
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/js/reader-disclosure-loader.js tools/sync_reader_disclosure_loader.py pt/biografia/index.html en/biography/index.html pt/internet/index.html en/internet/index.html pt/comunicacao/index.html en/communication/index.html pt/audiovisual/index.html en/audiovisual/index.html pt/ia-hai/index.html en/ai-hai/index.html
+          git commit -m "Version Reader assets after IA preview rollout"
+          git push origin HEAD:work/reader-cache-bust-ia-preview
