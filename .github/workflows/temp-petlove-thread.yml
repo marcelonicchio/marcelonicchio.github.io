@@ -23,7 +23,6 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from PIL import Image, ImageOps
-          import re
 
           source_rel = 'assets/archive/internet/petlove/petlove00thread300kb.jpg'
           output_rel = 'assets/media/thread/petlove.webp'
@@ -68,18 +67,14 @@ jobs:
               text = path.read_text(encoding='utf-8')
               if '<!-- thread-media:petlove:start -->' in text:
                   return
-              pat = re.compile(r'(<section\\b(?=[^>]*\\bid=["\\\']petlove["\\\'])[^>]*>)(.*?)(</section>)', re.S | re.I)
-              matches = list(pat.finditer(text))
-              if len(matches) != 1:
-                  raise SystemExit(f'{path_rel}: expected one #petlove section, got {len(matches)}')
-              m = matches[0]
-              inner = m.group(2)
-              p = re.search(r'</p>', inner, re.I)
-              if not p:
-                  raise SystemExit(f'{path_rel}: no first paragraph')
-              inner = inner[:p.end()] + '\n' + figure(lang) + inner[p.end():]
-              updated = text[:m.start()] + m.group(1) + inner + m.group(3) + text[m.end():]
-              path.write_text(updated, encoding='utf-8')
+              id_pos = text.index('id="petlove"')
+              section_start = text.rfind('<section', 0, id_pos)
+              section_end = text.index('</section>', id_pos)
+              if section_start < 0:
+                  raise SystemExit(f'{path_rel}: could not find Petlove section start')
+              paragraph_end = text.index('</p>', id_pos, section_end) + len('</p>')
+              text = text[:paragraph_end] + '\n' + figure(lang) + text[paragraph_end:]
+              path.write_text(text, encoding='utf-8')
 
           update('pt/internet/index.html', 'pt')
           update('en/internet/index.html', 'en')
