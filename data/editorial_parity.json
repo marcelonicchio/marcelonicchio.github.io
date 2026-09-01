@@ -281,10 +281,14 @@
       ]
     },
     "hai-pro2": {
-      "revision": 1,
-      "pt_hash": "1334ce92ea0dadb27243dc07d156add01a7ec6faf36e8bec4cf10b1eba5fd4d5",
-      "en_hash": "4f5452e5a34c0b6b6ce3c8e016a4bf8591169449e538a5883c45a5308d2d44c1",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "07043778d30fbd36ac573b307dc7b6ea71c4f41f580e3b61969c2632265b4d7d",
+      "en_hash": "ccaa5a9f4e90e1204347c839413e6498e8ee1db976eb141f6e1b48cabc710a08",
+      "accepted_on": "2026-09-01",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-authorship": {
       "revision": 2,
