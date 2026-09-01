@@ -102,6 +102,15 @@ async function runDesktop(browser) {
   assert(await melissaPreview.count() === 1, 'Melissa rich collapsed preview missing');
   assert((await melissaPreview.innerText()).includes('63 horas e 518 prompts'), 'Melissa collapsed preview lost core case metrics');
   assert((await melissaPreview.innerText()).includes('Melissa Framework'), 'Melissa collapsed preview lost framework outcome');
+  assert(await melissaPreview.locator('.reader-disclosure__preview-paragraph').count() === 5, 'Melissa collapsed preview should contain five concise editorial paragraphs');
+  assert(await melissaPreview.locator('strong').count() >= 8, 'Melissa collapsed preview lost editorial emphasis');
+  const melissaTopics = await melissaBio.locator('.reader-disclosure__topic').allInnerTexts();
+  ['AI', 'HAI', 'HCI', 'Prompt Engineering', 'Melissa 1.0'].forEach((label) => assert(melissaTopics.includes(label), `Melissa topic missing: ${label}`));
+  const melissaIndicators = await melissaBio.locator('.reader-disclosure__badge').allInnerTexts();
+  ['2 imagens', '1 link para download', '4 documentos com DOI', '1 link para repositório'].forEach((label) => assert(melissaIndicators.includes(label), `Melissa indicator missing: ${label}`));
+  const melissaPreviewStyle = await melissaPreview.locator('.reader-disclosure__preview-paragraph').first().evaluate((el) => ({fontSize: getComputedStyle(el).fontSize, color: getComputedStyle(el).color}));
+  assert(parseFloat(melissaPreviewStyle.fontSize) >= 16.5, `Melissa preview font is still too small: ${melissaPreviewStyle.fontSize}`);
+  assert(melissaPreviewStyle.color !== 'rgb(170, 167, 159)', 'Melissa preview is still using muted gray text');
   assert(await melissaPreview.locator('img').getAttribute('src') === '/assets/media/thread/melissa1_0_selfportrait300kb.jpg', 'Melissa collapsed preview cover image incorrect');
   assert(await melissaBio.locator('details.reader-disclosure').getAttribute('open') === null, 'Melissa preview should start collapsed');
   await melissaBio.locator('details.reader-disclosure > summary').click();

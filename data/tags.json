@@ -24,6 +24,11 @@
     {"id": "social-ads", "label": {"pt": "Social Ads", "en": "Social Ads"}},
     {"id": "team-leadership", "label": {"pt": "Liderança de equipe", "en": "Team leadership"}},
     {"id": "television", "label": {"pt": "Televisão", "en": "Television"}},
-    {"id": "training", "label": {"pt": "Formação", "en": "Training"}}
+    {"id": "training", "label": {"pt": "Formação", "en": "Training"}},
+    {"id": "ai", "label": {"pt": "AI", "en": "AI"}},
+    {"id": "hai", "label": {"pt": "HAI", "en": "HAI"}},
+    {"id": "hci", "label": {"pt": "HCI", "en": "HCI"}},
+    {"id": "prompt-engineering", "label": {"pt": "Prompt Engineering", "en": "Prompt Engineering"}},
+    {"id": "melissa-1-0", "label": {"pt": "Melissa 1.0", "en": "Melissa 1.0"}}
   ]
 }
