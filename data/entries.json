@@ -796,7 +796,11 @@
         "melissa-1-0"
       ],
       "reader_presentation": {
-        "state": "normal"
+        "state": "normal",
+        "always_open_paths": [
+          "pt/ia-hai/index.html",
+          "en/ai-hai/index.html"
+        ]
       },
       "reader_preview": {
         "pt": {
@@ -920,6 +924,14 @@
         },
         "pt_path": "pt/ia-hai/melissa-1-0/index.html",
         "en_path": "en/ai-hai/melissa-1-0/index.html"
+      },
+      "reader_preview_paths": {
+        "pt": [
+          "pt/biografia/index.html"
+        ],
+        "en": [
+          "en/biography/index.html"
+        ]
       }
     }
   ]

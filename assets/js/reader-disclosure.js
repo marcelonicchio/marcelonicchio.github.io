@@ -190,7 +190,10 @@
       const readerPreview = previewAllowed ? (entry?.reader_preview?.[language] || null) : null;
       const contentBadges = readerPreview?.indicators?.length ? readerPreview.indicators : contentBadgesFor(section);
       const topicIds = entry?.topic_ids || [];
-      const presentationState = entry?.reader_presentation?.state || 'normal';
+      const alwaysOpenPaths = entry?.reader_presentation?.always_open_paths || [];
+      const presentationState = alwaysOpenPaths.includes(repoPath)
+        ? 'always-open'
+        : (entry?.reader_presentation?.state || 'normal');
 
       if (entry) section.dataset.entryId = entry.id;
       section.dataset.readerPresentation = presentationState;
