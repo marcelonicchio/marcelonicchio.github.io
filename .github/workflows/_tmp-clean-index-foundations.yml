@@ -1,0 +1,77 @@
+name: Temporary cleanup index foundations
+
+on:
+  push:
+    branches: [work/index-foundations-and-measurement]
+    paths:
+      - '.github/workflows/_tmp-clean-index-foundations.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/index-foundations-and-measurement
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore compact registry formatting and remove raw Lighthouse files
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess
+
+          base = '07dd061774bf0ea7990cb7ce81948b9465d91773'
+          subprocess.run(['git','checkout',base,'--','data/entries.json'], check=True)
+          path = Path('data/entries.json')
+          text = path.read_text(encoding='utf-8')
+          descriptions = {
+              'internet-best': {
+                  'pt': 'Marcelo Nicchio na BEST/Kenshoo em 2014: gestão de performance, Search + Social, tecnologia e workshop do E-Commerce Brasil em quatro partes.',
+                  'en': 'Marcelo Nicchio at BEST/Kenshoo in 2014: performance management, Search + Social, technology and a four-part E-Commerce Brasil workshop.',
+              },
+              'communication-folha': {
+                  'pt': 'Marcelo Nicchio na capa do Folhateen de 23/04/2001, discutindo Joey Ramone, cultura punk, faça-você-mesmo e o underground brasileiro.',
+                  'en': 'Marcelo Nicchio in Folhateen’s Apr. 23, 2001 cover story on Joey Ramone, punk culture, DIY ethics and Brazil’s underground rock scene.',
+              },
+          }
+          for eid, desc in descriptions.items():
+              start = text.index(f'"id": "{eid}"')
+              cp = text.index('"chapter_page": {', start)
+              next_entry = text.find('\n    {', cp)
+              if next_entry < 0:
+                  next_entry = len(text)
+              scope = text[cp:next_entry]
+              needle = '        "indexing": "noindex,follow",\n'
+              if needle not in scope:
+                  raise SystemExit(f'{eid}: indexing insertion point not found')
+              block = (
+                  '        "description": {\n'
+                  f'          "pt": "{desc["pt"]}",\n'
+                  f'          "en": "{desc["en"]}"\n'
+                  '        },\n'
+              )
+              absolute = cp + scope.index(needle) + len(needle)
+              text = text[:absolute] + block + text[absolute:]
+          path.write_text(text, encoding='utf-8')
+
+          import shutil
+          shutil.rmtree('.tmp-lighthouse', ignore_errors=True)
+      - name: Regenerate and check
+        run: |
+          python tools/build_chapter_pages.py
+          python tools/build_chapter_pages.py --check
+          python tools/audit_site.py
+      - name: Remove temporary workflow and commit
+        run: |
+          rm .github/workflows/_tmp-clean-index-foundations.yml
+          git config user.name 'Marcelo Nicchio'
+          git config user.email 'marcelonicchio@gmail.com'
+          git add -A
+          git commit -m 'Clean index foundations diff'
+          git push origin HEAD:work/index-foundations-and-measurement
