@@ -1,7 +1,1 @@
-HTML/SEO audit completed: 6 error(s), 0 warning(s).
-ERROR: en/projects/index.html: broken fragment in internal link '/en/audiovisual/#meia-noite' (missing id='meia-noite')
-ERROR: en/projects/index.html: broken fragment in internal link '/en/audiovisual/#architect' (missing id='architect')
-ERROR: en/projects/index.html: broken fragment in internal link '/en/audiovisual/#autopsia' (missing id='autopsia')
-ERROR: pt/projetos/index.html: broken fragment in internal link '/pt/audiovisual/#meia-noite' (missing id='meia-noite')
-ERROR: pt/projetos/index.html: broken fragment in internal link '/pt/audiovisual/#arquiteto' (missing id='arquiteto')
-ERROR: pt/projetos/index.html: broken fragment in internal link '/pt/audiovisual/#autopsia' (missing id='autopsia')
+HTML/SEO audit completed: 0 error(s), 0 warning(s).

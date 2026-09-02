@@ -62,12 +62,12 @@ def normalize_other_links(text: str, lang: str) -> str:
         ('/pt/audiovisual/', '/pt/comunicacao/', 'Mídia & Cultura') if lang == 'pt' else ('/en/audiovisual/', '/en/communication/', 'Media & Culture'),
     ]
     for old, target, label_out in pairs:
-        pattern = rf'<a([^>]*?)href="{re.escape(old)}"([^>]*)>([^<]*)</a>'
+        pattern = rf'<a([^>]*?)href="{re.escape(old)}([^"]*)"([^>]*)>([^<]*)</a>'
         def repl(match):
-            before, after, label = match.groups()
+            before, suffix, after, label = match.groups()
             if label.strip() in {'Search', 'Search & Performance', 'Search &amp; Performance', 'Audiovisual'}:
                 label = label_out
-            return f'<a{before}href="{target}"{after}>{label}</a>'
+            return f'<a{before}href="{target}{suffix}"{after}>{label}</a>'
         text = re.sub(pattern, repl, text)
     return text
 
