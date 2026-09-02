@@ -11,8 +11,6 @@
     '/en/internet/': 'en/internet/index.html',
     '/pt/comunicacao/': 'pt/comunicacao/index.html',
     '/en/communication/': 'en/communication/index.html',
-    '/pt/audiovisual/': 'pt/audiovisual/index.html',
-    '/en/audiovisual/': 'en/audiovisual/index.html',
     '/pt/ia-hai/': 'pt/ia-hai/index.html',
     '/en/ai-hai/': 'en/ai-hai/index.html'
   };

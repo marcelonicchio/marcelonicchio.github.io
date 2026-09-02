@@ -23,16 +23,12 @@ BASE = "https://marcelonicchio.github.io/"
 
 DOMAIN = {
     "communication": {
-        "pt": ("Comunicação & Cultura", "/pt/comunicacao/"),
-        "en": ("Communication & Culture", "/en/communication/"),
+        "pt": ("Cultura & Audiovisual", "/pt/comunicacao/"),
+        "en": ("Culture & Audiovisual", "/en/communication/"),
     },
     "internet": {
         "pt": ("Internet & Performance", "/pt/internet/"),
         "en": ("Internet & Performance", "/en/internet/"),
-    },
-    "audiovisual": {
-        "pt": ("Audiovisual", "/pt/audiovisual/"),
-        "en": ("Audiovisual", "/en/audiovisual/"),
     },
     "music": {
         "pt": ("Música", "/pt/musica/"),
@@ -59,9 +55,8 @@ def nav(lang: str, counterpart: str) -> str:
         links = [
             ("/pt/biografia/", "Biografia"),
             ("/pt/musica/", "Música"),
-            ("/pt/comunicacao/", "Comunicação"),
+            ("/pt/comunicacao/", "Mídia & Cultura"),
             ("/pt/internet/", "Internet & Performance"),
-            ("/pt/audiovisual/", "Audiovisual"),
             ("/pt/ia-hai/", "IA/HAI"),
             ("/pt/arquivo/", "Arquivo"),
             (counterpart, "EN"),
@@ -71,9 +66,8 @@ def nav(lang: str, counterpart: str) -> str:
         links = [
             ("/en/biography/", "Biography"),
             ("/en/music/", "Music"),
-            ("/en/communication/", "Communication"),
+            ("/en/communication/", "Media & Culture"),
             ("/en/internet/", "Internet & Performance"),
-            ("/en/audiovisual/", "Audiovisual"),
             ("/en/ai-hai/", "AI/HAI"),
             ("/en/archive/", "Archive"),
             (counterpart, "PT"),

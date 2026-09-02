@@ -26,16 +26,12 @@
       "en": "Music"
     },
     "communication": {
-      "pt": "Comunicação & Cultura",
-      "en": "Communication & Culture"
+      "pt": "Cultura & Audiovisual",
+      "en": "Culture & Audiovisual"
     },
     "internet": {
       "pt": "Internet & Performance",
       "en": "Internet & Performance"
-    },
-    "audiovisual": {
-      "pt": "Audiovisual",
-      "en": "Audiovisual"
     },
     "hai": {
       "pt": "IA/HAI",
@@ -268,15 +264,15 @@
       "id": "audiovisual-homens",
       "era": "cruzamentos-1992-2000",
       "date": "1998",
-      "domain": "audiovisual",
+      "domain": "communication",
       "source": {
         "pt": {
-          "path": "pt/audiovisual/index.html",
+          "path": "pt/comunicacao/index.html",
           "kind": "section",
           "selector": "#homens"
         },
         "en": {
-          "path": "en/audiovisual/index.html",
+          "path": "en/communication/index.html",
           "kind": "section",
           "selector": "#homens"
         }
@@ -286,15 +282,15 @@
       "id": "audiovisual-film",
       "era": "cruzamentos-1992-2000",
       "date": "1998–2000",
-      "domain": "audiovisual",
+      "domain": "communication",
       "source": {
         "pt": {
-          "path": "pt/audiovisual/index.html",
+          "path": "pt/comunicacao/index.html",
           "kind": "section",
           "selector": "#cinema"
         },
         "en": {
-          "path": "en/audiovisual/index.html",
+          "path": "en/communication/index.html",
           "kind": "section",
           "selector": "#film"
         }
@@ -516,15 +512,15 @@
       "id": "audiovisual-meia-noite",
       "era": "expansao-2001-2008",
       "date": "2006",
-      "domain": "audiovisual",
+      "domain": "communication",
       "source": {
         "pt": {
-          "path": "pt/audiovisual/index.html",
+          "path": "pt/comunicacao/index.html",
           "kind": "section",
           "selector": "#meia-noite"
         },
         "en": {
-          "path": "en/audiovisual/index.html",
+          "path": "en/communication/index.html",
           "kind": "section",
           "selector": "#meia-noite"
         }
@@ -661,15 +657,15 @@
       "id": "audiovisual-arquiteto",
       "era": "continuidade-2016-2024",
       "date": "2019",
-      "domain": "audiovisual",
+      "domain": "communication",
       "source": {
         "pt": {
-          "path": "pt/audiovisual/index.html",
+          "path": "pt/comunicacao/index.html",
           "kind": "section",
           "selector": "#arquiteto"
         },
         "en": {
-          "path": "en/audiovisual/index.html",
+          "path": "en/communication/index.html",
           "kind": "section",
           "selector": "#architect"
         }
@@ -679,15 +675,15 @@
       "id": "audiovisual-autopsia",
       "era": "continuidade-2016-2024",
       "date": "2021",
-      "domain": "audiovisual",
+      "domain": "communication",
       "source": {
         "pt": {
-          "path": "pt/audiovisual/index.html",
+          "path": "pt/comunicacao/index.html",
           "kind": "section",
           "selector": "#autopsia"
         },
         "en": {
-          "path": "en/audiovisual/index.html",
+          "path": "en/communication/index.html",
           "kind": "section",
           "selector": "#autopsia"
         }

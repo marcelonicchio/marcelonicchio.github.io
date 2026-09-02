@@ -34,6 +34,8 @@ LAUNCH_INDEXABLE = {
 LEGACY_CANONICAL = {
     "pt/search-performance/index.html": SITE + "/pt/internet/",
     "en/search-performance/index.html": SITE + "/en/internet/",
+    "pt/audiovisual/index.html": SITE + "/pt/comunicacao/",
+    "en/audiovisual/index.html": SITE + "/en/communication/",
 }
 
 

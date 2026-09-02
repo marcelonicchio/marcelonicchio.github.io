@@ -59,20 +59,20 @@ Legacy Search URLs exist only for compatibility/redirect behavior. Do not recrea
 
 Livraria Cultura belongs to the Full Biography in its chronological position but not to Internet & Performance or another thematic vertical merely because of chronology.
 
-### Next vertical consolidation — Communication + Audiovisual
+### Cultura & Audiovisual is one vertical
 
-Communication & Culture and Audiovisual are approved for structural fusion because the two axes overlap editorially and each carries relatively few top-level threads in isolation.
+The former Communication & Culture and Audiovisual axes are structurally merged into one thematic vertical.
 
-Approved public naming separates navigation economy from editorial precision:
+Public naming separates navigation economy from editorial precision:
 
 - menu PT: **Mídia & Cultura**;
 - menu EN: **Media & Culture**;
 - page H1/title PT: **Cultura & Audiovisual**;
 - page H1/title EN: **Culture & Audiovisual**.
 
-The established canonical vertical paths are deliberately preserved as **`/pt/comunicacao/`** and **`/en/communication/`**. The Folhateen Chapter Page therefore remains at its current Communication path. The old standalone `/pt/audiovisual/` and `/en/audiovisual/` paths become permanent compatibility stubs when the fusion ships.
+Canonical paths remain **`/pt/comunicacao/`** and **`/en/communication/`**. The Folhateen Chapter Page remains at its existing Communication path. The old `/pt/audiovisual/` and `/en/audiovisual/` URLs are permanent `noindex,follow` compatibility stubs canonicalized and redirected to the combined vertical.
 
-Treat the fusion as the same class of change as Internet + Search/Performance: one menu item, one coherent thematic chronology, PT/EN parity, internal links adjusted, and no competing duplicate verticals. The Full Biography remains the integral chronology and is not merged or shortened by this change. See `docs/url-policy.md`.
+The merged page follows one thematic chronology; the Full Biography remains the integral cross-domain chronology and continues to be generated from thematic sources rather than hand-edited. See `docs/url-policy.md`.
 
 ---
 
@@ -153,7 +153,7 @@ Complete autobiographical text remains in delivered HTML. JavaScript progressive
 
 ### Opt-in laboratory surfaces
 
-Communication and Audiovisual remain accessible as disclosure experiments through `?ux=disclosure` rather than being promoted site-wide by default.
+The combined Cultura & Audiovisual vertical remains an opt-in Reader experiment through `?ux=disclosure` on `/pt/comunicacao/` and `/en/communication/`; the legacy Audiovisual stubs do not participate in Reader disclosure.
 
 ### AI/HAI selective mode
 

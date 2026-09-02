@@ -178,7 +178,7 @@
     {
       "id": "audiovisual-meia-noite",
       "kind": "chapter",
-      "domain": "audiovisual",
+      "domain": "communication",
       "date": {"pt": "2006", "en": "2006"},
       "title": {"pt": "Meia-Noite e Uns", "en": "Meia-Noite e Uns"},
       "summary": {
@@ -191,19 +191,19 @@
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [
-          {"path": "pt/audiovisual/index.html", "selector": "#meia-noite"},
+          {"path": "pt/comunicacao/index.html", "selector": "#meia-noite"},
           {"path": "pt/biografia/index.html", "selector": "#bio-audiovisual-meia-noite"}
         ],
         "en": [
-          {"path": "en/audiovisual/index.html", "selector": "#meia-noite"},
+          {"path": "en/communication/index.html", "selector": "#meia-noite"},
           {"path": "en/biography/index.html", "selector": "#bio-audiovisual-meia-noite"}
         ]
       },
       "chapter_page": {
         "status": "candidate",
         "indexing": "noindex,follow",
-        "pt_path": "pt/audiovisual/meia-noite-e-uns/index.html",
-        "en_path": "en/audiovisual/meia-noite-e-uns/index.html"
+        "pt_path": "pt/comunicacao/meia-noite-e-uns/index.html",
+        "en_path": "en/communication/meia-noite-e-uns/index.html"
       }
     },
     {
