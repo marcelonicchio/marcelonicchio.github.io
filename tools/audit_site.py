@@ -29,6 +29,8 @@ LAUNCH_INDEXABLE = {
     "en/archive/index.html",
     "pt/ia-hai/index.html",
     "en/ai-hai/index.html",
+    "pt/internet/best-kenshoo/index.html",
+    "en/internet/best-kenshoo/index.html",
 }
 
 LEGACY_CANONICAL = {
