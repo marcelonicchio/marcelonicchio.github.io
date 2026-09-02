@@ -3,8 +3,8 @@
  * Browser-level regression smoke test for Reader Page disclosure + pilot Chapter Pages.
  *
  * Full Biography and Internet & Performance use disclosure by default. IA/HAI uses
- * selective disclosure for explicitly registered entries. Communication and Audiovisual
- * remain query-flag pilot surfaces while their UX is still under review.
+ * selective disclosure for explicitly registered entries. Culture & Audiovisual remains
+ * a continuous-reading page and never initializes disclosure.
  *
  * Requires playwright-core supplied outside the repository. CI sets
  * PLAYWRIGHT_CORE_PATH to an isolated /tmp install so site-wide HTML sync tools never
@@ -119,6 +119,31 @@ async function runDesktop(browser) {
   assert(featuredReclosedStyle.backgroundImage !== 'none', 'Featured highlight did not return after collapse');
   assert(featuredReclosedStyle.boxShadow !== 'none', 'Featured highlight shadow did not return after collapse');
 
+  // Full Biography rich summaries are path-scoped: dense entries can be compact here without changing thematic vertical UX.
+  const mirantteBioPreview = page.locator('#bio-internet-mirantte .reader-disclosure__preview');
+  assert(await mirantteBioPreview.count() === 1, 'Mirantte Full Bio rich preview missing');
+  assert(await mirantteBioPreview.locator('.reader-disclosure__preview-paragraph').count() === 4, 'Mirantte Full Bio preview paragraph count incorrect');
+  assert((await mirantteBioPreview.innerText()).includes('tráfego orgânico'), 'Mirantte Full Bio preview lost acquisition problem');
+  assert(await mirantteBioPreview.locator('img').getAttribute('src') === '/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp', 'Mirantte Full Bio preview image incorrect');
+  const mirantteIndicators = await page.locator('#bio-internet-mirantte .reader-disclosure__badge').allInnerTexts();
+  ['34 fotos', '1 cartão profissional'].forEach((label) => assert(mirantteIndicators.includes(label), `Mirantte indicator missing: ${label}`));
+
+  const cookieBioPreviewRich = page.locator('#bio-internet-cookieweb .reader-disclosure__preview');
+  assert(await cookieBioPreviewRich.count() === 1, 'CookieWEB Full Bio rich preview missing');
+  assert(await cookieBioPreviewRich.locator('.reader-disclosure__preview-paragraph').count() === 4, 'CookieWEB Full Bio preview paragraph count incorrect');
+  assert((await cookieBioPreviewRich.innerText()).includes('mais de 22 contas simultâneas'), 'CookieWEB Full Bio preview lost operating scale');
+  assert(await cookieBioPreviewRich.locator('img').getAttribute('src') === '/assets/media/galleries/cookieweb/cookieweb-19-480.webp', 'CookieWEB Full Bio preview image incorrect');
+  const cookieIndicators = await page.locator('#bio-internet-cookieweb .reader-disclosure__badge').allInnerTexts();
+  ['20 fotos', '3 certificados GAP', '1 registro contemporâneo'].forEach((label) => assert(cookieIndicators.includes(label), `CookieWEB indicator missing: ${label}`));
+
+  const meiaBioPreview = page.locator('#bio-audiovisual-meia-noite .reader-disclosure__preview');
+  assert(await meiaBioPreview.count() === 1, 'Meia-Noite Full Bio rich preview missing');
+  assert(await meiaBioPreview.locator('.reader-disclosure__preview-paragraph').count() === 3, 'Meia-Noite Full Bio preview paragraph count incorrect');
+  assert((await meiaBioPreview.innerText()).includes('00:01'), 'Meia-Noite Full Bio preview lost title rationale');
+  assert(await meiaBioPreview.locator('img').getAttribute('src') === '/assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-480.webp', 'Meia-Noite Full Bio preview image incorrect');
+  const meiaIndicators = await page.locator('#bio-audiovisual-meia-noite .reader-disclosure__badge').allInnerTexts();
+  ['22 fotos', '4 vídeos'].forEach((label) => assert(meiaIndicators.includes(label), `Meia-Noite indicator missing: ${label}`));
+
   // Rich collapsed-summary pilot: Melissa is useful before expansion and returns to the full entry when opened.
   const melissaBio = page.locator('#bio-hai-melissa');
   const melissaPreview = melissaBio.locator('.reader-disclosure__preview');
@@ -165,7 +190,7 @@ async function runDesktop(browser) {
   assert(await page.locator('details.reader-disclosure').count() >= 28, 'Full Bio produced too few disclosures');
   const cookieBio = page.locator('#bio-internet-cookieweb');
   assert(await cookieBio.locator('details.reader-disclosure').getAttribute('open') !== null, 'CookieWEB deep link did not auto-open');
-  assert((await cookieBio.locator('.reader-disclosure__excerpt').innerText()).includes('primeira grande conta de e-commerce'), 'CookieWEB curated summary was not used');
+  assert(await cookieBio.locator('.reader-disclosure__preview').count() === 1, 'CookieWEB rich summary was not used on Full Bio deep link');
   assert(await cookieBio.locator('.reader-disclosure__topic').count() >= 4, 'CookieWEB topic chips missing');
   assert((await cookieBio.innerText()).includes('qualidade de vida'), 'Disclosure transformation lost CookieWEB body text');
   assert(await cookieBio.locator('.reader-disclosure__collapse-button').count() === 1, 'Bottom collapse action missing from CookieWEB');
@@ -183,6 +208,7 @@ async function runDesktop(browser) {
 
   const mirantte = page.locator('#mirantte');
   assert((await mirantte.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte featured class missing');
+  assert(await mirantte.locator('.reader-disclosure__preview').count() === 0, 'Mirantte rich preview leaked from Full Bio into Internet');
   assert((await mirantte.locator('.reader-disclosure__excerpt').innerText()).includes('problema de aquisição de tráfego'), 'Mirantte curated summary missing');
   assert((await mirantte.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('34 fotos')), 'Mirantte gallery badge incorrect');
 
@@ -190,6 +216,7 @@ async function runDesktop(browser) {
   assert((await sem.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'Goobec landmark missing from SEM');
   const cookieweb = page.locator('#cookieweb');
   assert((await cookieweb.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB featured class missing');
+  assert(await cookieweb.locator('.reader-disclosure__preview').count() === 0, 'CookieWEB rich preview leaked from Full Bio into Internet');
   assert((await cookieweb.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'GAP landmark missing from CookieWEB');
 
   const best = page.locator('#best');
@@ -228,14 +255,13 @@ async function runDesktop(browser) {
   assert(await folha.locator('.reader-disclosure__toggle').count() === 0, 'Folha unexpectedly exposes Reader toggle');
   assert(await folha.locator('.reader-disclosure__collapse-button').count() === 0, 'Folha unexpectedly exposes bottom collapse action');
 
-  // Audiovisual remains an explicit pilot; its registered featured state is already reusable.
-  await page.goto(`${BASE}/pt/audiovisual/?ux=disclosure`, {waitUntil: 'networkidle'});
-  const meia = page.locator('#meia-noite');
-  const meiaBadges = await meia.locator('.reader-disclosure__badge').allInnerTexts();
-  assert((await meia.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Meia-Noite featured class missing in pilot');
-  assert(meiaBadges.some((t) => t.includes('22 fotos')), 'Meia-Noite gallery badge incorrect');
-  assert(meiaBadges.some((t) => t.includes('4 vídeos')), 'Meia-Noite video badge incorrect');
-  assert((await meia.locator('.reader-disclosure__excerpt').innerText()).includes('Programa de literatura com linguagem pop'), 'Meia-Noite curated summary missing');
+  // Culture & Audiovisual is intentionally continuous reading: normal and legacy query-flag URLs remain fully open.
+  await page.goto(`${BASE}/pt/comunicacao/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('details.reader-disclosure').count() === 0, 'Culture & Audiovisual must not initialize disclosure');
+  assert(!((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active')), 'Culture & Audiovisual unexpectedly received Reader UX class');
+  assert(await page.locator('#meia-noite').isVisible(), 'Meia-Noite disappeared from open Culture & Audiovisual page');
+  await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});
+  assert(await page.locator('details.reader-disclosure').count() === 0, 'Legacy disclosure query must not collapse Culture & Audiovisual');
 
   // EN core page consumes the same registry with language-specific labels/copy by default.
   await page.goto(`${BASE}/en/biography/#bio-communication-folha`, {waitUntil: 'networkidle'});

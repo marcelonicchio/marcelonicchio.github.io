@@ -232,13 +232,13 @@ Use them where one or more of these conditions is true:
 - entry is important enough that a one-line excerpt underserves it;
 - a likely future Chapter Page/standalone URL benefits from a stable concise description.
 
-High-value existing candidates include:
+The first rollout after Melissa applies the model to:
 
 - Mirantte News;
 - CookieWEB;
 - Meia-Noite e Uns.
 
-Each must receive its own editorial summary. Do not clone Melissa's structure mechanically.
+These three previews are scoped to **Full Biography / Biografia Completa only**. The thematic verticals keep their own reading behavior; in particular, **Cultura & Audiovisual / Culture & Audiovisual remains fully open and has no disclosure mode**. Each entry receives its own editorial summary rather than cloning Melissa's structure mechanically.
 
 ---
 
@@ -268,6 +268,17 @@ The registry may use:
 ```
 
 Topic labels remain outside `reader_preview` as stable `topic_ids` because they belong to entry taxonomy, not only to this visual component.
+
+A preview can optionally be limited to specific registered Reader targets with `reader_preview_paths`:
+
+```json
+"reader_preview_paths": {
+  "pt": ["pt/biografia/index.html"],
+  "en": ["en/biography/index.html"]
+}
+```
+
+When this field is omitted, the preview keeps the legacy behavior and may render on any Reader target for that entry. This allows Full Biography to use a substantive compact layer without forcing the same summary UX onto a thematic vertical.
 
 The renderer supports structured text + explicit emphasis rather than arbitrary HTML inside registry data.
 

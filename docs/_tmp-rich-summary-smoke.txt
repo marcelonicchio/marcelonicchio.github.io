@@ -1,0 +1,5 @@
+Error: Folha always-open state missing in Communication
+    at assert (/home/runner/work/marcelonicchio.github.io/marcelonicchio.github.io/tools/smoke_reader_ux.js:42:25)
+    at runDesktop (/home/runner/work/marcelonicchio.github.io/marcelonicchio.github.io/tools/smoke_reader_ux.js:253:3)
+    at async main (/home/runner/work/marcelonicchio.github.io/marcelonicchio.github.io/tools/smoke_reader_ux.js:327:5)
+exit_code=1
