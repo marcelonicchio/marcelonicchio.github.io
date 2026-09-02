@@ -1,0 +1,52 @@
+name: Chet C8 one-shot BEST rich summary
+
+on:
+  push:
+    branches: [work/chet-c8-best-rich-summary]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/chet-c8-best-rich-summary
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+          mkdir -p /tmp/reader-ux-smoke
+          npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
+      - name: Apply BEST rich summary
+        run: |
+          python tools/chet_c8_best_rich.py
+          sed -i "s/'Performance Marketing', 'Search Marketing'/'Performance', 'Search Marketing'/" tools/smoke_reader_ux.js
+      - name: Verify registry and browser behavior
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: |
+          python tools/audit_entries.py
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/build_sitemap.py --check
+          node --check tools/smoke_reader_ux.js
+          node --check tools/smoke_reader_en_rich.js
+          node tools/smoke_reader_ux.js
+          node tools/smoke_reader_en_rich.js
+      - name: Commit synchronized C8 state
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/entries.json tools/smoke_reader_ux.js tools/smoke_reader_en_rich.js
+          git commit -m 'C8: add BEST rich summary to Full Biography'
+          git push origin HEAD:work/chet-c8-best-rich-summary
