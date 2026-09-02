@@ -1,0 +1,73 @@
+name: Temporary rich summary smoke fix
+
+on:
+  push:
+    branches: [work/fullbio-rich-summaries-1]
+    paths:
+      - '.github/workflows/_tmp-rich-summary-smoke-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: work/fullbio-rich-summaries-1
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install audit dependencies
+        run: |
+          python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+          mkdir -p /tmp/reader-ux-smoke
+          npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
+      - name: Retire obsolete Communication pilot assertion
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          path = Path('tools/smoke_reader_ux.js')
+          text = path.read_text(encoding='utf-8')
+          obsolete = """  // Communication remains an explicit pilot, but Folhateen is Type 1 / always-open.\n  await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});\n  const folha = page.locator('#folha');\n  assert(await folha.getAttribute('data-reader-presentation') === 'always-open', 'Folha always-open state missing in Communication');\n  assert(await folha.locator('details.reader-disclosure').count() === 0, 'Folha must remain plain open HTML in Communication');\n  assert(await folha.locator('.reader-disclosure__toggle').count() === 0, 'Folha unexpectedly exposes Reader toggle');\n  assert(await folha.locator('.reader-disclosure__collapse-button').count() === 0, 'Folha unexpectedly exposes bottom collapse action');\n\n"""
+          if text.count(obsolete) != 1:
+              raise SystemExit(f'obsolete Communication block: expected 1 match, found {text.count(obsolete)}')
+          text = text.replace(obsolete, '', 1)
+          old = """  assert(!((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active')), 'Culture & Audiovisual unexpectedly received Reader UX class');\n  assert(await page.locator('#meia-noite').isVisible(), 'Meia-Noite disappeared from open Culture & Audiovisual page');\n"""
+          new = """  assert(!((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active')), 'Culture & Audiovisual unexpectedly received Reader UX class');\n  assert(await page.locator('#folha').isVisible(), 'Folhateen disappeared from open Culture & Audiovisual page');\n  assert(await page.locator('#meia-noite').isVisible(), 'Meia-Noite disappeared from open Culture & Audiovisual page');\n"""
+          if text.count(old) != 1:
+              raise SystemExit(f'Culture open block: expected 1 match, found {text.count(old)}')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Check JavaScript syntax
+        run: node --check tools/smoke_reader_ux.js
+      - name: Smoke-test Reader UX in Chrome
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: node tools/smoke_reader_ux.js
+      - name: Run structural audits
+        run: |
+          python tools/sync_reader_disclosure_loader.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_entries.py
+          python tools/audit_media_culture_fusion.py
+          python tools/editorial_parity.py --check
+          python tools/audit_site.py
+      - name: Remove diagnostic and commit fix
+        run: |
+          rm -f docs/_tmp-rich-summary-smoke.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git status --short
+          git commit -m 'Validate Full Biography rich summary rollout'
+          git push origin HEAD:work/fullbio-rich-summaries-1
