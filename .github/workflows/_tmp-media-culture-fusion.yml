@@ -5,13 +5,13 @@ on:
     branches: [work/media-culture-fusion]
     paths:
       - '.github/workflows/_tmp-media-culture-fusion.yml'
-      - '.tmp-media-culture-fusion.py'
+      - '.tmp-media-culture-polish.py'
 
 permissions:
   contents: write
 
 jobs:
-  fuse:
+  polish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,97 +29,34 @@ jobs:
           node-version: '22'
       - name: Install audit dependencies
         run: pip install beautifulsoup4
-      - name: Apply structural fusion
-        run: python .tmp-media-culture-fusion.py
-      - name: Make navigation normalizer preserve deep-link suffixes
+      - name: Apply final nomenclature polish
+        run: python .tmp-media-culture-polish.py
+      - name: Regenerate Full Biography and navigation
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('tools/sync_navigation.py')
-          t = p.read_text(encoding='utf-8')
-          old = '''        pattern = rf'<a([^>]*?)href=\"{re.escape(old)}\"([^>]*)>([^<]*)</a>'
-                  def repl(match):
-                      before, after, label = match.groups()
-                      if label.strip() in {'Search', 'Search & Performance', 'Search &amp; Performance', 'Audiovisual'}:
-                          label = label_out
-                      return f'<a{before}href=\"{target}\"{after}>{label}</a>'
-                  text = re.sub(pattern, repl, text)'''
-          new = '''        pattern = rf'<a([^>]*?)href=\"{re.escape(old)}([^\"]*)\"([^>]*)>([^<]*)</a>'
-                  def repl(match):
-                      before, suffix, after, label = match.groups()
-                      if label.strip() in {'Search', 'Search & Performance', 'Search &amp; Performance', 'Audiovisual'}:
-                          label = label_out
-                      return f'<a{before}href=\"{target}{suffix}\"{after}>{label}</a>'
-                  text = re.sub(pattern, repl, text)'''
-          if old in t:
-              t = t.replace(old, new, 1)
-          elif 'before, suffix, after, label = match.groups()' not in t:
-              raise SystemExit('normalize_other_links block not found')
-          p.write_text(t, encoding='utf-8')
-          PY
-      - name: Register legacy audiovisual canonicals in site audit
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('tools/audit_site.py')
-          t = p.read_text(encoding='utf-8')
-          old = '''LEGACY_CANONICAL = {
-              "pt/search-performance/index.html": SITE + "/pt/internet/",
-              "en/search-performance/index.html": SITE + "/en/internet/",
-          }'''
-          new = '''LEGACY_CANONICAL = {
-              "pt/search-performance/index.html": SITE + "/pt/internet/",
-              "en/search-performance/index.html": SITE + "/en/internet/",
-              "pt/audiovisual/index.html": SITE + "/pt/comunicacao/",
-              "en/audiovisual/index.html": SITE + "/en/communication/",
-          }'''
-          if '"pt/audiovisual/index.html"' not in t:
-              if old not in t:
-                  raise SystemExit('LEGACY_CANONICAL block not found')
-              t = t.replace(old, new, 1)
-          p.write_text(t, encoding='utf-8')
-          PY
-      - name: Regenerate canonical derived surfaces
-        run: |
-          python tools/sync_galleries.py
           python tools/sync_full_biography.py
           python tools/build_chapter_pages.py
           python tools/sync_navigation.py
           python tools/sync_reader_disclosure_loader.py
-      - name: Check media fusion invariant
-        run: python tools/audit_media_culture_fusion.py
-      - name: Check navigation
-        run: python tools/sync_navigation.py --check
-      - name: Check galleries sync
-        run: python tools/sync_galleries.py --check
-      - name: Check Full Biography sync
-        run: python tools/sync_full_biography.py --check
-      - name: Check Chapter Pages
-        run: python tools/build_chapter_pages.py --check
-      - name: Check Reader loader sync
-        run: python tools/sync_reader_disclosure_loader.py --check
-      - name: Check editorial parity
-        run: python tools/editorial_parity.py --check
-      - name: Audit Full Biography
-        run: python tools/audit_full_biography.py
-      - name: Audit galleries
-        run: python tools/audit_galleries.py
-      - name: Audit entries
-        run: python tools/audit_entries.py
-      - name: Capture site audit diagnostic
+      - name: Run focused audits
         run: |
-          python tools/audit_site.py > docs/_tmp-media-fusion-site-audit.txt 2>&1 || true
-          cat docs/_tmp-media-fusion-site-audit.txt
-      - name: Check Reader JavaScript
-        run: |
+          python tools/audit_media_culture_fusion.py
+          python tools/sync_navigation.py --check
+          python tools/sync_galleries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/sync_reader_disclosure_loader.py --check
+          python tools/editorial_parity.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_galleries.py
+          python tools/audit_entries.py
+          python tools/audit_site.py
           node --check assets/js/reader-disclosure.js
           node --check assets/js/reader-disclosure-loader.js
-      - name: Commit diagnostic branch state
+      - name: Commit polished branch state
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git restore .github/workflows/site-audit.yml
           git add -A
           git status --short
-          git commit -m 'Finalize Media and Culture fusion draft'
+          git commit -m 'Polish Culture and Audiovisual nomenclature'
           git push origin HEAD:work/media-culture-fusion
