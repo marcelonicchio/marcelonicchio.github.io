@@ -79,12 +79,21 @@ def render_section(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[s
     section["data-bio-domain"] = entry["domain"]
     heading = section.find("h2", recursive=False)
     if heading is not None:
-        clean = re.sub(r"^\s*\d{4}(?:[–-](?:\d{2,4}|presente|present))?\s+—\s+", "", heading.get_text(" ", strip=True), flags=re.I)
+        original_text = heading.get_text(" ", strip=True)
+        clean = re.sub(r"^\s*\d{4}(?:[–-](?:\d{2,4}|presente|present))?\s+—\s+", "", original_text, flags=re.I)
         if clean and clean[0].islower():
             clean = clean[0].upper() + clean[1:]
-        if clean != heading.get_text(" ", strip=True):
+        if clean != original_text:
+            permalink = heading.find("a", class_="entry-title-permalink", recursive=False)
+            href = permalink.get("href") if permalink is not None else None
             heading.clear()
-            heading.append(clean)
+            if href:
+                link = fragment.new_tag("a", href=href)
+                link["class"] = ["entry-title-permalink"]
+                link.string = clean
+                heading.append(link)
+            else:
+                heading.append(clean)
     meta = BeautifulSoup(meta_html(entry, lang, manifest, context=context), "html.parser").div
     section.insert(0, meta)
     return str(section)

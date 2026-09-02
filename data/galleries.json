@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "updated": "2026-09-01",
+  "updated": "2026-09-02",
   "derivativePolicy": {
     "format": "webp",
     "widths": [
@@ -16,10 +16,10 @@
       "sourceRoot": "assets/archive/audiovisual/meia-noite-e-uns",
       "targets": {
         "pt": [
-          "pt/comunicacao/index.html"
+          "content/entries/pt/communication-meia-noite.inc"
         ],
         "en": [
-          "en/communication/index.html"
+          "content/entries/en/communication-meia-noite.inc"
         ]
       },
       "title": {
@@ -518,10 +518,10 @@
       "sourceRoot": "assets/archive/internet/cookieweb",
       "targets": {
         "pt": [
-          "pt/internet/index.html"
+          "content/entries/pt/internet-cookieweb.inc"
         ],
         "en": [
-          "en/internet/index.html"
+          "content/entries/en/internet-cookieweb.inc"
         ]
       },
       "title": {
@@ -976,10 +976,10 @@
       "sourceRoot": "assets/archive/internet/mirantte-news",
       "targets": {
         "pt": [
-          "pt/internet/index.html"
+          "content/entries/pt/internet-mirantte.inc"
         ],
         "en": [
-          "en/internet/index.html"
+          "content/entries/en/internet-mirantte.inc"
         ]
       },
       "title": {

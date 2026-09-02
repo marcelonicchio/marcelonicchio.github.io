@@ -349,3 +349,8 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
   .thread-media:has(img[src$="/psinet-alphaville.webp"]){width:85%;margin-left:auto;margin-right:auto}
   .thread-media:has(img[src$="/petlove.webp"]){width:90%;margin-left:auto;margin-right:auto}
 }
+
+
+/* entry-title-permalink */
+.entry-title-permalink{color:inherit;text-decoration:none}
+.entry-title-permalink:hover,.entry-title-permalink:focus-visible{text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.14em}

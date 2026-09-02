@@ -60,6 +60,28 @@ def section_pattern(section_id: str) -> re.Pattern[str]:
     )
 
 
+def chapter_page_href(entry: dict[str, Any], lang: str) -> str | None:
+    page = entry.get("chapter_page", {})
+    if page.get("status") != "pilot":
+        return None
+    raw = page.get(f"{lang}_path")
+    if not raw:
+        return None
+    rel = raw[:-10] if raw.endswith("index.html") else raw
+    return "/" + rel.lstrip("/")
+
+
+def render_heading(heading_html: str, entry: dict[str, Any], lang: str) -> str:
+    href = chapter_page_href(entry, lang)
+    if not href or 'class="entry-title-permalink"' in heading_html:
+        return heading_html
+    match = re.fullmatch(r'(<h2\b[^>]*>)(.*)(</h2>)', heading_html, flags=re.S | re.I)
+    if not match:
+        raise RuntimeError(f"{entry['id']}:{lang}: could not render Chapter Page permalink in h2")
+    opening, inner, closing = match.groups()
+    return f'{opening}<a class="entry-title-permalink" href="{href}">{inner}</a>{closing}'
+
+
 def render_managed_section(text: str, entry: dict[str, Any], lang: str) -> str:
     entry_id = entry["id"]
     target = vertical_target(entry, lang)
@@ -79,8 +101,9 @@ def render_managed_section(text: str, entry: dict[str, Any], lang: str) -> str:
         raise RuntimeError(f"{entry_id}:{lang}: target section has no h2")
 
     fragment = fragment_path(entry, lang).read_text(encoding="utf-8").strip()
+    rendered_heading = render_heading(heading.group(0), entry, lang)
     managed = (
-        f"{opening}{heading.group(0)}"
+        f"{opening}{rendered_heading}"
         f"{marker_start(entry_id)}\n{fragment}\n{marker_end(entry_id)}{closing}"
     )
     return text[: match.start()] + managed + text[match.end() :]
