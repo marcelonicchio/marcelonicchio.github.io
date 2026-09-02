@@ -247,18 +247,11 @@ async function runDesktop(browser) {
   await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
   assert(await page.locator('details.reader-disclosure[open]').count() === 0, 'afterprint did not restore disclosure state');
 
-  // Communication remains an explicit pilot, but Folhateen is Type 1 / always-open.
-  await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});
-  const folha = page.locator('#folha');
-  assert(await folha.getAttribute('data-reader-presentation') === 'always-open', 'Folha always-open state missing in Communication');
-  assert(await folha.locator('details.reader-disclosure').count() === 0, 'Folha must remain plain open HTML in Communication');
-  assert(await folha.locator('.reader-disclosure__toggle').count() === 0, 'Folha unexpectedly exposes Reader toggle');
-  assert(await folha.locator('.reader-disclosure__collapse-button').count() === 0, 'Folha unexpectedly exposes bottom collapse action');
-
   // Culture & Audiovisual is intentionally continuous reading: normal and legacy query-flag URLs remain fully open.
   await page.goto(`${BASE}/pt/comunicacao/`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() === 0, 'Culture & Audiovisual must not initialize disclosure');
   assert(!((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active')), 'Culture & Audiovisual unexpectedly received Reader UX class');
+  assert(await page.locator('#folha').isVisible(), 'Folhateen disappeared from open Culture & Audiovisual page');
   assert(await page.locator('#meia-noite').isVisible(), 'Meia-Noite disappeared from open Culture & Audiovisual page');
   await page.goto(`${BASE}/pt/comunicacao/?ux=disclosure`, {waitUntil: 'networkidle'});
   assert(await page.locator('details.reader-disclosure').count() === 0, 'Legacy disclosure query must not collapse Culture & Audiovisual');
