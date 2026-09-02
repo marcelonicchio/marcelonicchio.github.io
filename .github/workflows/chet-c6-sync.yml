@@ -34,3 +34,4 @@ jobs:
             git commit -m 'C6: generate Git-derived sitemap lastmod dates'
             git push origin HEAD:work/chet-c6-sitemap-lastmod
           fi
+# one-shot trigger
