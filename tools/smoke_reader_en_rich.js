@@ -110,7 +110,7 @@ async function main() {
       {
         name: 'Melissa 1.0', selector: '#bio-hai-melissa', paragraphs: 4,
         phrase: '63 hours and 518 prompts', image: '/assets/media/thread/melissa1_0_selfportrait300kb.jpg',
-        badges: ['2 images', '1 download link', '4 DOI documents', '1 repository link']
+        badges: ['2 images', '1 download link', '4 DOI documents', '1 repository link'], permalink: '/en/ai-hai/melissa-1-0/'
       }
     ];
 
