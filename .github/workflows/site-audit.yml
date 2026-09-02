@@ -66,6 +66,8 @@ jobs:
           node tools/smoke_reader_en_rich.js
       - name: Report page image weight
         run: python tools/audit_page_weight.py
+      - name: Audit generated sitemap freshness
+        run: python tools/build_sitemap.py --check
       - name: Audit HTML, JSON and sitemap
         run: python tools/audit_site.py
       - name: Audit site-wide external presence
