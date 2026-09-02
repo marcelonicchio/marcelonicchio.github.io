@@ -38,19 +38,30 @@ jobs:
           python tools/build_chapter_pages.py
           python tools/sync_navigation.py
           python tools/sync_reader_disclosure_loader.py
-      - name: Focused structural checks
+      - name: Check media fusion invariant
+        run: python tools/audit_media_culture_fusion.py
+      - name: Check navigation
+        run: python tools/sync_navigation.py --check
+      - name: Check galleries sync
+        run: python tools/sync_galleries.py --check
+      - name: Check Full Biography sync
+        run: python tools/sync_full_biography.py --check
+      - name: Check Chapter Pages
+        run: python tools/build_chapter_pages.py --check
+      - name: Check Reader loader sync
+        run: python tools/sync_reader_disclosure_loader.py --check
+      - name: Check editorial parity
+        run: python tools/editorial_parity.py --check
+      - name: Audit Full Biography
+        run: python tools/audit_full_biography.py
+      - name: Audit galleries
+        run: python tools/audit_galleries.py
+      - name: Audit entries
+        run: python tools/audit_entries.py
+      - name: Audit site
+        run: python tools/audit_site.py
+      - name: Check Reader JavaScript
         run: |
-          python tools/audit_media_culture_fusion.py
-          python tools/sync_navigation.py --check
-          python tools/sync_galleries.py --check
-          python tools/sync_full_biography.py --check
-          python tools/build_chapter_pages.py --check
-          python tools/sync_reader_disclosure_loader.py --check
-          python tools/editorial_parity.py --check
-          python tools/audit_full_biography.py
-          python tools/audit_galleries.py
-          python tools/audit_entries.py
-          python tools/audit_site.py
           node --check assets/js/reader-disclosure.js
           node --check assets/js/reader-disclosure-loader.js
       - name: Show intentional legacy URL residue
