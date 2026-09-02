@@ -23,7 +23,8 @@ for path, target, title in [
     ('en/audiovisual/index.html','/en/communication/','Culture & Audiovisual'),
 ]:
     t = text(path)
-    for token in ['noindex,follow', f'url={target}', f'https://marcelonicchio.github.io{target}', f"location.replace('{target}')"]:
+    redirect = f"location.replace('{target}' + location.search + location.hash)"
+    for token in ['noindex,follow', f'url={target}', f'https://marcelonicchio.github.io{target}', redirect]:
         if token not in t: errors.append(f'{path}: stub missing {token}')
     if f'<h1>{title}</h1>' not in t: errors.append(f'{path}: stub title missing')
 entries = text('data/entries.json'); full = text('data/full_biography.json'); galleries = text('data/galleries.json')
