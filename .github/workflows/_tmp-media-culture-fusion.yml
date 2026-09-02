@@ -51,9 +51,11 @@ jobs:
                           label = label_out
                       return f'<a{before}href=\"{target}{suffix}\"{after}>{label}</a>'
                   text = re.sub(pattern, repl, text)'''
-          if old not in t:
+          if old in t:
+              t = t.replace(old, new, 1)
+          elif 'before, suffix, after, label = match.groups()' not in t:
               raise SystemExit('normalize_other_links block not found')
-          p.write_text(t.replace(old, new, 1), encoding='utf-8')
+          p.write_text(t, encoding='utf-8')
           PY
       - name: Register legacy audiovisual canonicals in site audit
         run: |
@@ -71,9 +73,11 @@ jobs:
               "pt/audiovisual/index.html": SITE + "/pt/comunicacao/",
               "en/audiovisual/index.html": SITE + "/en/communication/",
           }'''
-          if old not in t:
-              raise SystemExit('LEGACY_CANONICAL block not found')
-          p.write_text(t.replace(old, new, 1), encoding='utf-8')
+          if '"pt/audiovisual/index.html"' not in t:
+              if old not in t:
+                  raise SystemExit('LEGACY_CANONICAL block not found')
+              t = t.replace(old, new, 1)
+          p.write_text(t, encoding='utf-8')
           PY
       - name: Regenerate canonical derived surfaces
         run: |
