@@ -53,6 +53,8 @@ Do not confuse compact-cover sizing with the image treatment inside the complete
 
 Current Mirantte/CookieWEB/Meia-Noite preview image choices are not operator-approved final selections. Do not replace them autonomously before the planned visual review.
 
+BEST/Kenshoo uses the already established workshop thread image in its Full Biography compact summary; C8 did not introduce a new visual choice for that entry.
+
 ## 5. Typography
 
 Compact summary copy is reading content, not secondary metadata.
@@ -102,7 +104,12 @@ Melissa is the canonical example after C2.1:
 - **AI/HAI vertical PT/EN:** Melissa stays completely open; no compact preview/card/disclosure;
 - **Full Biography PT/EN:** Melissa uses its compact summary because the integral chronology is much denser.
 
-This is implemented through path-scoped presentation/preview metadata. Do not infer a universal “oldest entry should be open” rule from this case.
+BEST/Kenshoo is another path-scoped example after C8:
+
+- **Internet & Performance PT/EN:** existing normal Reader treatment remains unchanged;
+- **Full Biography PT/EN:** a three-paragraph rich summary presents the BEST/Kenshoo arc, four workshop videos and 11 visual records before expansion.
+
+This is implemented through path-scoped preview metadata. Do not infer a universal rule from either case.
 
 ## 9. Featured color is a separate unresolved layer
 
@@ -115,6 +122,8 @@ Technical rule is settled:
 
 Aesthetic color selection remains deferred to a joint visual session with Marcelo.
 
+BEST/Kenshoo remains a normal presentation state; C8 added rich summary content without promoting it to the unresolved featured-color treatment.
+
 ## 10. Current rollout
 
 Current Full Biography rich-summary entries:
@@ -122,13 +131,14 @@ Current Full Biography rich-summary entries:
 - Melissa 1.0;
 - Mirantte News;
 - CookieWEB;
-- Meia-Noite e Uns.
+- Meia-Noite e Uns;
+- BEST / Kenshoo.
 
 Current deliberate always-open examples include Minduim/BBS, Clickland and Folhateen where registered.
 
 The rollout is selective. A long entry, a substantial gallery, mixed resource types, strong biographical importance or likely standalone value may justify a rich summary; visual consistency alone does not.
 
-The next candidate should be chosen by those criteria, not by chronology or a quota.
+C8 deliberately stopped after BEST/Kenshoo rather than collapsing the remaining open entries for symmetry. Any next candidate should be chosen by those criteria, not by chronology or a quota.
 
 ## 11. Data model
 
@@ -182,6 +192,7 @@ A rich-preview implementation should verify:
 - no mobile horizontal overflow;
 - typography remains readable;
 - print and no-JS expose complete content;
-- path-scoped behavior does not leak to other Reader surfaces.
+- path-scoped behavior does not leak to other Reader surfaces;
+- standalone Chapter Page robots expectations are checked per entry rather than assuming every Chapter Page is `noindex,follow`.
 
 Extend Chrome smoke coverage when adding a new rich-summary entry; do not weaken existing assertions.
