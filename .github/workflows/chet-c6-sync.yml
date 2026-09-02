@@ -1,0 +1,36 @@
+name: Chet C6 one-shot sitemap sync
+
+on:
+  push:
+    branches: [work/chet-c6-sitemap-lastmod]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/chet-c6-sitemap-lastmod
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate and verify sitemap
+        run: |
+          python tools/build_sitemap.py
+          python tools/build_sitemap.py --check
+      - name: Commit generated sitemap
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sitemap.xml
+          if git diff --cached --quiet; then
+            echo 'No sitemap changes.'
+          else
+            git commit -m 'C6: generate Git-derived sitemap lastmod dates'
+            git push origin HEAD:work/chet-c6-sitemap-lastmod
+          fi
