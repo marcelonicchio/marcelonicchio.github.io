@@ -34,6 +34,18 @@ jobs:
           npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
       - name: Apply rollout
         run: python .tmp-fullbio-rich-summaries.py
+      - name: Align legacy CookieWEB smoke assertion
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          path = Path('tools/smoke_reader_ux.js')
+          text = path.read_text(encoding='utf-8')
+          old = "  assert((await cookieBio.locator('.reader-disclosure__excerpt').innerText()).includes('primeira grande conta de e-commerce'), 'CookieWEB curated summary was not used');"
+          new = "  assert(await cookieBio.locator('.reader-disclosure__preview').count() === 1, 'CookieWEB rich summary was not used on Full Bio deep link');"
+          if text.count(old) != 1:
+              raise SystemExit(f'legacy CookieWEB assertion: expected 1 match, found {text.count(old)}')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
       - name: Audit Reader loader sync
         run: python tools/sync_reader_disclosure_loader.py --check
       - name: Audit Full Biography sync and coverage
