@@ -53,6 +53,94 @@
       "topic_ids": ["digital-product", "search-marketing", "paid-media", "acquisition"],
       "media": {"galleries": ["mirantte-news"]},
       "reader_presentation": {"state": "featured"},
+      "reader_preview_paths": {
+        "pt": [
+          "pt/biografia/index.html"
+        ],
+        "en": [
+          "en/biography/index.html"
+        ]
+      },
+      "reader_preview": {
+        "pt": {
+          "image": "/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp",
+          "alt": "Página inicial histórica do Mirantte News.",
+          "paragraphs": [
+            {
+              "text": "O Mirantte News foi um guia regional de produtos e serviços estruturado em planos anuais para anunciantes, cerca de vinte categorias e hot-sites próprios com fotografias, texto editorial, contatos e recursos de geolocalização e rotas desenvolvidos em parceria com a MapLink/UOL. Marcelo Nicchio conduzia o projeto em sociedade com Luiz Kechichian, proprietário do Grupo Mirantte, em uma operação enxuta.",
+              "strong": [
+                "Mirantte News",
+                "MapLink/UOL",
+                "Luiz Kechichian"
+              ]
+            },
+            {
+              "text": "À medida que os contratos se acumulavam, apareceu o problema que mudaria o rumo do trabalho: o tráfego orgânico não era suficiente para distribuir exposição entre todas as categorias. Um contato da MapLink aproximou Nicchio de Tiago Luz, por Skype, e a solução discutida foi comprar tráfego para as áreas com maior concentração de anunciantes, incorporando esse custo ao modelo comercial.",
+              "strong": [
+                "tráfego orgânico",
+                "Tiago Luz"
+              ]
+            },
+            {
+              "text": "As primeiras campanhas de aquisição funcionaram e foram mantidas por alguns meses. Ainda assim, a economia do portal tornou-se difícil de sustentar. A equipe foi reduzida, a operação migrou para home office e permaneceu com Nicchio e o webmaster Renato Carriel. Mais tarde, o projeto tentou ampliar seu alcance para a cidade de São Paulo sob o nome Procure SP, mas acabou encerrado.",
+              "strong": [
+                "Renato Carriel",
+                "Procure SP"
+              ]
+            },
+            {
+              "text": "O Mirantte News terminou, mas o problema que havia apresentado permaneceu. Search deixou de ser apenas uma solução pontual para aquisição de tráfego e abriu uma nova direção profissional, que seria aprofundada nos anos seguintes.",
+              "strong": [
+                "Search",
+                "nova direção profissional"
+              ]
+            }
+          ],
+          "indicators": [
+            "34 fotos",
+            "1 cartão profissional"
+          ]
+        },
+        "en": {
+          "image": "/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp",
+          "alt": "Historical Mirantte News home page.",
+          "paragraphs": [
+            {
+              "text": "Mirantte News was a regional products-and-services guide structured around annual advertiser plans, roughly twenty categories and dedicated hot-sites with photography, editorial copy, contact information and geolocation and route features developed with MapLink/UOL. Marcelo Nicchio ran the project in partnership with Luiz Kechichian, owner of Grupo Mirantte, through a lean operation.",
+              "strong": [
+                "Mirantte News",
+                "MapLink/UOL",
+                "Luiz Kechichian"
+              ]
+            },
+            {
+              "text": "As contracts accumulated, a problem emerged that would redirect his work: organic traffic was not enough to distribute exposure across all categories. A MapLink contact introduced Nicchio to Tiago Luz over Skype, and the proposed solution was to buy traffic for the areas with the highest concentration of advertisers, incorporating that cost into the commercial model.",
+              "strong": [
+                "organic traffic",
+                "Tiago Luz"
+              ]
+            },
+            {
+              "text": "The first acquisition campaigns worked and were maintained for several months. Even so, the portal’s economics became difficult to sustain. The team was reduced, the operation moved to a home-office model and continued with Nicchio and webmaster Renato Carriel. The project later tried to broaden its reach to the city of São Paulo as Procure SP, but eventually closed.",
+              "strong": [
+                "Renato Carriel",
+                "Procure SP"
+              ]
+            },
+            {
+              "text": "Mirantte News ended, but the problem it had exposed remained. Search stopped being a one-off traffic-acquisition solution and opened a new professional direction that would be deepened over the following years.",
+              "strong": [
+                "Search",
+                "new professional direction"
+              ]
+            }
+          ],
+          "indicators": [
+            "34 photos",
+            "1 business card"
+          ]
+        }
+      },
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [
@@ -87,6 +175,98 @@
       "topic_ids": ["search-marketing", "sem", "performance-marketing", "team-leadership", "google-ads"],
       "media": {"galleries": ["cookieweb"], "credential_group": "google-gap"},
       "reader_presentation": {"state": "featured"},
+      "reader_preview_paths": {
+        "pt": [
+          "pt/biografia/index.html"
+        ],
+        "en": [
+          "en/biography/index.html"
+        ]
+      },
+      "reader_preview": {
+        "pt": {
+          "image": "/assets/media/galleries/cookieweb/cookieweb-19-480.webp",
+          "alt": "Marcelo Nicchio com integrantes da equipe da CookieWEB.",
+          "paragraphs": [
+            {
+              "text": "Em 2010, Herik Mourão convidou Nicchio a assumir a mídia da Beleza na Web, sua primeira conta de grande porte sob responsabilidade direta. A operação, então com cerca de US$ 50 mil mensais em mídia, exigia decisões orientadas a ROI e aprofundou uma metodologia de otimização por categorias, produtos, termos de busca, higienização de palavras-chave e desempenho.",
+              "strong": [
+                "Beleza na Web",
+                "US$ 50 mil mensais",
+                "ROI"
+              ]
+            },
+            {
+              "text": "Pouco depois, a conta passou para a CookieWEB e ajudou a inaugurar a nova área de Mídia Digital da agência. Nicchio obteve as certificações Google Advertising Professional, treinou os primeiros profissionais da equipe e combinou coordenação, operação e formação enquanto a estrutura crescia rapidamente.",
+              "strong": [
+                "CookieWEB",
+                "Google Advertising Professional"
+              ]
+            },
+            {
+              "text": "Após a saída de Herik, Nicchio tornou-se Gerente de SEM. No fim de 2011, a operação administrava mais de 22 contas simultâneas, com seis analistas além de estagiários, apoiada por ferramentas como Acquisio e Asana. A escala ampliou também sua visão de performance: produto, preço, logística, conversão e capacidade empresarial passaram a importar tanto quanto palavras-chave ou anúncios.",
+              "strong": [
+                "Gerente de SEM",
+                "mais de 22 contas simultâneas",
+                "seis analistas"
+              ]
+            },
+            {
+              "text": "O crescimento trouxe ainda uma preocupação com cultura e pertencimento da equipe, visível em iniciativas como o dia coletivo no Hopi Hari. Em 2012, porém, a intensidade do trabalho e a mudança prevista para a Vila Olímpia, após a aquisição de participação na ProfitE, agravariam um desgaste já significativo. Nicchio decidiu sair sem ter outro emprego em vista: qualidade de vida havia se tornado um limite inegociável.",
+              "strong": [
+                "cultura e pertencimento",
+                "qualidade de vida"
+              ]
+            }
+          ],
+          "indicators": [
+            "20 fotos",
+            "3 certificados GAP",
+            "1 registro contemporâneo"
+          ]
+        },
+        "en": {
+          "image": "/assets/media/galleries/cookieweb/cookieweb-19-480.webp",
+          "alt": "Marcelo Nicchio with members of the CookieWEB team.",
+          "paragraphs": [
+            {
+              "text": "In 2010, Herik Mourão invited Nicchio to take over media for Beleza na Web, his first large account under direct responsibility. With roughly US$50,000 in monthly media spend at the time, the operation demanded ROI-driven decisions and deepened a layered optimization method across categories, products, search terms, keyword hygiene and performance.",
+              "strong": [
+                "Beleza na Web",
+                "US$50,000",
+                "ROI"
+              ]
+            },
+            {
+              "text": "Soon afterward, the account moved into CookieWEB and helped launch the agency’s new Digital Media operation. Nicchio earned Google Advertising Professional certifications, trained the first members of the team and combined coordination, hands-on operation and staff development as the structure expanded quickly.",
+              "strong": [
+                "CookieWEB",
+                "Google Advertising Professional"
+              ]
+            },
+            {
+              "text": "After Herik left, Nicchio became SEM Manager. By late 2011, the operation was handling more than 22 accounts at once, with six analysts plus interns, supported by tools such as Acquisio and Asana. The scale also broadened his view of performance: product, price, logistics, conversion and business capacity became as important as keywords or ads.",
+              "strong": [
+                "SEM Manager",
+                "more than 22 accounts",
+                "six analysts"
+              ]
+            },
+            {
+              "text": "The expansion also brought a concern with team culture and belonging, visible in initiatives such as taking the entire company to Hopi Hari for a day. In 2012, however, the intensity of the work and the planned move to Vila Olímpia after the ProfitE investment would worsen an already significant strain. Nicchio chose to leave without another job lined up: quality of life had become a non-negotiable limit.",
+              "strong": [
+                "team culture and belonging",
+                "quality of life"
+              ]
+            }
+          ],
+          "indicators": [
+            "20 photos",
+            "3 GAP certificates",
+            "1 contemporary source"
+          ]
+        }
+      },
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [
@@ -188,6 +368,88 @@
       "topic_ids": ["television", "art-direction", "executive-production", "literature"],
       "media": {"galleries": ["meia-noite-e-uns"], "known_video_count": 4},
       "reader_presentation": {"state": "featured"},
+      "reader_preview_paths": {
+        "pt": [
+          "pt/biografia/index.html"
+        ],
+        "en": [
+          "en/biography/index.html"
+        ]
+      },
+      "reader_preview": {
+        "pt": {
+          "image": "/assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-480.webp",
+          "alt": "Visão geral de Meia-Noite e Uns, programa exibido pela RedeTV! em 2006.",
+          "paragraphs": [
+            {
+              "text": "Meia-Noite e Uns foi um programa de televisão sobre literatura com linguagem pop exibido pela RedeTV! em 2006 e apresentado por Soninha Francine. Marcelo Nicchio assinou a Direção Artística e a Produção Executiva ao lado de Cristiano Gonçalves, pela Dreamsnetwork.tv.",
+              "strong": [
+                "Meia-Noite e Uns",
+                "RedeTV!",
+                "Direção Artística",
+                "Produção Executiva"
+              ]
+            },
+            {
+              "text": "Nicchio criou o conceito artístico e visual e a estrutura narrativa do programa. Paulão de Carvalho participou da redação e também coapresentou o projeto a convite de Nicchio; a trilha foi escrita e produzida em parceria com Fábio “Badi” Crepaldi. A proposta aproximava literatura de uma linguagem televisiva menos solene e mais ligada à cultura pop.",
+              "strong": [
+                "conceito artístico e visual",
+                "Paulão de Carvalho",
+                "Fábio “Badi” Crepaldi"
+              ]
+            },
+            {
+              "text": "O título pretendido era Meia-Noite e Um, ligado à ideia de entrar no ar exatamente às 00:01. Como a grade não podia garantir o minuto exato, o nome passou a ser Meia-Noite e Uns. O arquivo preservado hoje reúne 22 fotografias e quatro vídeos públicos: três blocos do programa e a vinheta completa com créditos.",
+              "strong": [
+                "Meia-Noite e Um",
+                "00:01",
+                "22 fotografias",
+                "quatro vídeos públicos"
+              ]
+            }
+          ],
+          "indicators": [
+            "22 fotos",
+            "4 vídeos"
+          ]
+        },
+        "en": {
+          "image": "/assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-480.webp",
+          "alt": "Overview of Meia-Noite e Uns, aired by RedeTV! in 2006.",
+          "paragraphs": [
+            {
+              "text": "Meia-Noite e Uns was a television program about literature in a pop-language format, aired by RedeTV! in 2006 and hosted by Soninha Francine. Marcelo Nicchio was credited with Artistic Direction and Executive Production alongside Cristiano Gonçalves through Dreamsnetwork.tv.",
+              "strong": [
+                "Meia-Noite e Uns",
+                "RedeTV!",
+                "Artistic Direction",
+                "Executive Production"
+              ]
+            },
+            {
+              "text": "Nicchio created the program’s artistic and visual concept and its narrative structure. Paulão de Carvalho worked on the writing and also co-hosted the project at Nicchio’s invitation; the soundtrack was written and produced with Fábio “Badi” Crepaldi. The proposal brought literature closer to a less formal television language tied to pop culture.",
+              "strong": [
+                "artistic and visual concept",
+                "Paulão de Carvalho",
+                "Fábio “Badi” Crepaldi"
+              ]
+            },
+            {
+              "text": "The intended title was Meia-Noite e Um, tied to the idea of going on air at exactly 00:01. Because the schedule could not guarantee that exact minute, the name became Meia-Noite e Uns. The preserved archive now includes 22 photographs and four public videos: three program blocks and the full opening sequence with credits.",
+              "strong": [
+                "Meia-Noite e Um",
+                "00:01",
+                "22 photographs",
+                "four public videos"
+              ]
+            }
+          ],
+          "indicators": [
+            "22 photos",
+            "4 videos"
+          ]
+        }
+      },
       "source": {"kind": "reader-section"},
       "reader_targets": {
         "pt": [

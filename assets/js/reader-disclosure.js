@@ -9,8 +9,6 @@
     '/en/biography/': 'en/biography/index.html',
     '/pt/internet/': 'pt/internet/index.html',
     '/en/internet/': 'en/internet/index.html',
-    '/pt/comunicacao/': 'pt/comunicacao/index.html',
-    '/en/communication/': 'en/communication/index.html',
     '/pt/ia-hai/': 'pt/ia-hai/index.html',
     '/en/ai-hai/': 'en/ai-hai/index.html'
   };
@@ -187,7 +185,9 @@
       if (selectivePage && !entry) return;
       const related = relatedFor(section);
       const summaryText = entry?.summary?.[language] || excerptFor(section);
-      const readerPreview = entry?.reader_preview?.[language] || null;
+      const previewPaths = entry?.reader_preview_paths?.[language];
+      const previewAllowed = !Array.isArray(previewPaths) || previewPaths.includes(repoPath);
+      const readerPreview = previewAllowed ? (entry?.reader_preview?.[language] || null) : null;
       const contentBadges = readerPreview?.indicators?.length ? readerPreview.indicators : contentBadgesFor(section);
       const topicIds = entry?.topic_ids || [];
       const presentationState = entry?.reader_presentation?.state || 'normal';

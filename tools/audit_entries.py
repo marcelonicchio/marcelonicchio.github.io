@@ -161,6 +161,22 @@ def main() -> int:
                         f"maximum is {MAX_READER_PREVIEW_CHARS}"
                     )
 
+        preview_paths = entry.get("reader_preview_paths", {})
+        if preview_paths is not None and not isinstance(preview_paths, dict):
+            errors.append(f"{entry_id}: reader_preview_paths must be an object when present")
+        elif isinstance(preview_paths, dict):
+            for lang in ("pt", "en"):
+                paths = preview_paths.get(lang)
+                if paths is None:
+                    continue
+                if not isinstance(paths, list) or not paths or not all(isinstance(path, str) and path for path in paths):
+                    errors.append(f"{entry_id}:{lang}: reader_preview_paths must be a non-empty list of paths")
+                    continue
+                targets = {target.get("path") for target in entry.get("reader_targets", {}).get(lang, [])}
+                for path in paths:
+                    if path not in targets:
+                        errors.append(f"{entry_id}:{lang}: preview path {path!r} is not a registered Reader target")
+
         topics = entry.get("topic_ids", [])
         if len(topics) != len(set(topics)):
             errors.append(f"{entry_id}: duplicate topic ids")
