@@ -67,6 +67,11 @@ async function checkPreview(page, spec) {
   assert(await preview.locator('img').getAttribute('src') === spec.image, `${spec.name}: English preview image incorrect`);
   const badges = await section.locator('.reader-disclosure__badge').allInnerTexts();
   spec.badges.forEach((label) => assert(badges.includes(label), `${spec.name}: English indicator missing: ${label}`));
+  if (spec.permalink) {
+    const titleLink = section.locator('h2 a.entry-title-permalink');
+    assert(await titleLink.count() === 1, `${spec.name}: standalone title permalink missing`);
+    assert(await titleLink.getAttribute('href') === spec.permalink, `${spec.name}: standalone title permalink incorrect`);
+  }
   const details = section.locator('details.reader-disclosure');
   assert(await details.getAttribute('open') === null, `${spec.name}: English rich entry should start collapsed`);
   await details.locator(':scope > summary').click();
@@ -90,17 +95,17 @@ async function main() {
       {
         name: 'Mirantte News', selector: '#bio-internet-mirantte', paragraphs: 4,
         phrase: 'organic traffic', image: '/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp',
-        badges: ['34 photos', '1 business card']
+        badges: ['34 photos', '1 business card'], permalink: '/en/internet/mirantte-news/'
       },
       {
         name: 'CookieWEB', selector: '#bio-internet-cookieweb', paragraphs: 4,
         phrase: 'more than 22 accounts', image: '/assets/media/galleries/cookieweb/cookieweb-19-480.webp',
-        badges: ['20 photos', '3 GAP certificates', '1 contemporary source']
+        badges: ['20 photos', '3 GAP certificates', '1 contemporary source'], permalink: '/en/internet/cookieweb/'
       },
       {
         name: 'Meia-Noite e Uns', selector: '#bio-audiovisual-meia-noite', paragraphs: 3,
         phrase: '00:01', image: '/assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-480.webp',
-        badges: ['22 photos', '4 videos']
+        badges: ['22 photos', '4 videos'], permalink: '/en/communication/meia-noite-e-uns/'
       },
       {
         name: 'Melissa 1.0', selector: '#bio-hai-melissa', paragraphs: 4,
@@ -114,6 +119,14 @@ async function main() {
     const melissaTopics = await page.locator('#bio-hai-melissa .reader-disclosure__topic').allInnerTexts();
     ['AI', 'HAI', 'HCI', 'Prompt Engineering', 'Melissa 1.0'].forEach((label) =>
       assert(melissaTopics.includes(label), `Melissa 1.0: English topic missing: ${label}`));
+
+    for (const spec of specs.filter((item) => item.permalink)) {
+      await page.goto(`${BASE}${spec.permalink}`, {waitUntil: 'networkidle'});
+      assert(await page.locator('main[data-entry-id]').count() === 1, `${spec.name}: standalone page did not render`);
+      assert((await page.locator('meta[name="robots"]').getAttribute('content')) === 'noindex,follow',
+        `${spec.name}: standalone pilot unexpectedly changed robots`);
+      await page.goto(`${BASE}/en/biography/`, {waitUntil: 'networkidle'});
+    }
 
     await context.close();
     console.log('English rich Reader summary smoke test passed.');
