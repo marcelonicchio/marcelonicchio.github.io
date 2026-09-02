@@ -86,18 +86,11 @@ jobs:
         run: |
           node --check assets/js/reader-disclosure.js
           node --check assets/js/reader-disclosure-loader.js
-      - name: Show intentional legacy URL residue
+      - name: Commit diagnostic branch state
         run: |
-          grep -RIn --exclude-dir=.git -E '/pt/audiovisual/|/en/audiovisual/' . | head -80 || true
-      - name: Remove temporary workflow inputs and commit diagnostic state
-        run: |
-          rm -f .github/workflows/_tmp-media-fusion-inventory.yml
-          rm -f .github/workflows/_tmp-media-culture-fusion.yml
-          rm -f docs/_tmp-media-fusion-inventory.md
-          rm -f .tmp-media-culture-fusion.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git status --short
-          git commit -m 'Merge Communication and Audiovisual verticals'
+          git commit -m 'Apply Media and Culture fusion draft'
           git push origin HEAD:work/media-culture-fusion
