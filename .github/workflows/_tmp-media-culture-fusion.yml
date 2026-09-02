@@ -78,8 +78,10 @@ jobs:
         run: python tools/audit_galleries.py
       - name: Audit entries
         run: python tools/audit_entries.py
-      - name: Audit site
-        run: python tools/audit_site.py
+      - name: Capture site audit diagnostic
+        run: |
+          python tools/audit_site.py > docs/_tmp-media-fusion-site-audit.txt 2>&1 || true
+          cat docs/_tmp-media-fusion-site-audit.txt
       - name: Check Reader JavaScript
         run: |
           node --check assets/js/reader-disclosure.js
@@ -87,7 +89,7 @@ jobs:
       - name: Show intentional legacy URL residue
         run: |
           grep -RIn --exclude-dir=.git -E '/pt/audiovisual/|/en/audiovisual/' . | head -80 || true
-      - name: Remove temporary files and commit
+      - name: Remove temporary workflow inputs and commit diagnostic state
         run: |
           rm -f .github/workflows/_tmp-media-fusion-inventory.yml
           rm -f .github/workflows/_tmp-media-culture-fusion.yml
