@@ -6,7 +6,7 @@ The `/docs` directory mixes living operational documentation with dated historic
 
 ## Read first
 
-1. **`CURRENT-HUB-STATE.md`** — authoritative current architecture/editorial snapshot after Chet C0–C3.
+1. **`CURRENT-HUB-STATE.md`** — authoritative current architecture/editorial snapshot after Chet C0–C8.
 2. **`reader-summary-model.md`** — selective rich compact-summary model and current rollout state.
 3. **`entry-authoring-workflow.md`** — source, registry, Reader and Chapter Page authoring workflow.
 4. **`full-biography-workflow.md`** — Full Biography chronology/parity/synchronization mechanics.
@@ -15,6 +15,7 @@ The `/docs` directory mixes living operational documentation with dated historic
 
 ## Current supporting references
 
+- `runtime-performance-observability.md` — C7 local-Chrome runtime/media observability, scope and non-field-CWV limitations.
 - `url-policy.md` — permanent URL/stub policy and Culture + Audiovisual name/URL separation.
 - `lighthouse-baseline-2026-08-29.md` — pre-Reader reproducible lab baseline.
 - `lighthouse-remeasurement-2026-09-01.md` — post-Reader/post-media same-protocol comparison.

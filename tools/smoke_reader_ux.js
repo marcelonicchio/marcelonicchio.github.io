@@ -144,6 +144,16 @@ async function runDesktop(browser) {
   const meiaIndicators = await page.locator('#bio-audiovisual-meia-noite .reader-disclosure__badge').allInnerTexts();
   ['22 fotos', '4 vídeos'].forEach((label) => assert(meiaIndicators.includes(label), `Meia-Noite indicator missing: ${label}`));
 
+  const bestBioPreview = page.locator('#bio-internet-best .reader-disclosure__preview');
+  assert(await bestBioPreview.count() === 1, 'BEST Full Bio rich preview missing');
+  assert(await bestBioPreview.locator('.reader-disclosure__preview-paragraph').count() === 3, 'BEST Full Bio preview paragraph count incorrect');
+  assert((await bestBioPreview.innerText()).includes('Segmentação Avançada em Search e Social'), 'BEST Full Bio preview lost workshop context');
+  assert(await bestBioPreview.locator('img').getAttribute('src') === '/assets/media/thread/best-kenshoo-workshop.webp', 'BEST Full Bio preview image incorrect');
+  const bestBioIndicators = await page.locator('#bio-internet-best .reader-disclosure__badge').allInnerTexts();
+  ['4 vídeos', '11 registros visuais'].forEach((label) => assert(bestBioIndicators.includes(label), `BEST Full Bio indicator missing: ${label}`));
+  const bestBioTopics = await page.locator('#bio-internet-best .reader-disclosure__topic').allInnerTexts();
+  ['Performance', 'Search Marketing', 'Social Ads', 'Kenshoo', 'E-commerce'].forEach((label) => assert(bestBioTopics.includes(label), `BEST Full Bio topic missing: ${label}`));
+
   // Rich collapsed-summary pilot: Melissa is useful before expansion and returns to the full entry when opened.
   const melissaBio = page.locator('#bio-hai-melissa');
   const melissaPreview = melissaBio.locator('.reader-disclosure__preview');
@@ -225,6 +235,7 @@ async function runDesktop(browser) {
 
   const best = page.locator('#best');
   assert((await best.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('4 vídeos')), 'BEST video badge incorrect');
+  assert(await best.locator('.reader-disclosure__preview').count() === 0, 'BEST rich preview leaked from Full Bio into Internet');
   await best.locator('summary').click();
   assert(await best.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/internet/best-kenshoo/', 'BEST Chapter Page link incorrect');
   assert(await best.locator('.reader-disclosure__collapse-button').count() === 1, 'Bottom collapse action missing from BEST');

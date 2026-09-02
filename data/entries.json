@@ -770,6 +770,82 @@
         },
         "pt_path": "pt/internet/best-kenshoo/index.html",
         "en_path": "en/internet/best-kenshoo/index.html"
+      },
+      "reader_preview_paths": {
+        "pt": [
+          "pt/biografia/index.html"
+        ],
+        "en": [
+          "en/biography/index.html"
+        ]
+      },
+      "reader_preview": {
+        "pt": {
+          "image": "/assets/media/thread/best-kenshoo-workshop.webp",
+          "alt": "Registro do workshop do E-Commerce Brasil durante o ciclo BEST/Kenshoo, em 2014.",
+          "paragraphs": [
+            {
+              "text": "Em 2014, Marcelo Nicchio atuou como Gerente de Performance na BEST, em uma operação ligada à plataforma Kenshoo no Brasil. O trabalho combinava onboarding da tecnologia com otimização de campanhas de mídia para grandes varejistas, colocando ferramenta e operação de performance no mesmo ciclo profissional.",
+              "strong": [
+                "Gerente de Performance",
+                "BEST",
+                "Kenshoo"
+              ]
+            },
+            {
+              "text": "Na prática, a adoção da Kenshoo acontecia junto ao acompanhamento de Search e Social. Plataforma, mídia e desempenho faziam parte de um único fluxo de trabalho, em uma etapa que aproximou gestão de campanhas e uso cotidiano de tecnologia especializada.",
+              "strong": [
+                "Search e Social",
+                "Plataforma, mídia e desempenho"
+              ]
+            },
+            {
+              "text": "O período também ficou documentado no workshop do E-Commerce Brasil sobre Segmentação Avançada em Search e Social, preservado em quatro partes no YouTube. O acervo do HUB reúne ainda 11 registros visuais, entre fotografias do workshop, cartão profissional, imagens do escritório e outros registros da operação.",
+              "strong": [
+                "E-Commerce Brasil",
+                "quatro partes",
+                "11 registros visuais"
+              ]
+            }
+          ],
+          "indicators": [
+            "4 vídeos",
+            "11 registros visuais"
+          ]
+        },
+        "en": {
+          "image": "/assets/media/thread/best-kenshoo-workshop.webp",
+          "alt": "Record of the E-Commerce Brasil workshop during the BEST/Kenshoo period in 2014.",
+          "paragraphs": [
+            {
+              "text": "In 2014, Marcelo Nicchio worked as Performance Manager at BEST, in an operation connected to the Kenshoo platform in Brazil. The work combined technology onboarding with media-campaign optimization for major retailers, placing the platform and day-to-day performance operation within the same professional cycle.",
+              "strong": [
+                "Performance Manager",
+                "BEST",
+                "Kenshoo"
+              ]
+            },
+            {
+              "text": "In practice, Kenshoo adoption happened alongside Search and Social campaign management. Platform, media and performance were part of a single operating flow, in a period that brought campaign management and the everyday use of specialized technology closer together.",
+              "strong": [
+                "Search and Social",
+                "Platform, media and performance"
+              ]
+            },
+            {
+              "text": "The period is also documented by an E-Commerce Brasil workshop on Advanced Segmentation in Search and Social, preserved in four parts on YouTube. The HUB archive also contains 11 visual records, including workshop photographs, a business card, office images and other records from the operation.",
+              "strong": [
+                "E-Commerce Brasil",
+                "four parts",
+                "11 visual records"
+              ]
+            }
+          ],
+          "indicators": [
+            "4 videos",
+            "11 visual records"
+          ]
+        }
       }
     },
     {
