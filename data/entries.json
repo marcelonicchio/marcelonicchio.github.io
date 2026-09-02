@@ -12,7 +12,10 @@
       "id": "internet-bbs",
       "kind": "chapter",
       "domain": "internet",
-      "date": {"pt": "1992–1996", "en": "1992–1996"},
+      "date": {
+        "pt": "1992–1996",
+        "en": "1992–1996"
+      },
       "title": {
         "pt": "Cultura BBS e Minduim BBS",
         "en": "BBS culture and Minduim BBS"
@@ -22,26 +25,50 @@
         "en": "BBS culture marked Marcelo Nicchio's first sustained contact with digital communities before the commercial web; in parallel, he created Minduim BBS as a personal experiment using RemoteAccess and two telephone lines."
       },
       "topic_ids": [],
-      "media": {"thread_image": "minduim-bbs-1993-reconstruction"},
-      "reader_presentation": {"state": "always-open"},
-      "source": {"kind": "reader-section"},
+      "media": {
+        "thread_image": "minduim-bbs-1993-reconstruction"
+      },
+      "reader_presentation": {
+        "state": "always-open"
+      },
+      "source": {
+        "kind": "reader-section"
+      },
       "reader_targets": {
         "pt": [
-          {"path": "pt/internet/index.html", "selector": "#bbs"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-internet-bbs"}
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#bbs"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-bbs"
+          }
         ],
         "en": [
-          {"path": "en/internet/index.html", "selector": "#bbs"},
-          {"path": "en/biography/index.html", "selector": "#bio-internet-bbs"}
+          {
+            "path": "en/internet/index.html",
+            "selector": "#bbs"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-bbs"
+          }
         ]
       },
-      "chapter_page": {"status": "none", "indexing": "none"}
+      "chapter_page": {
+        "status": "none",
+        "indexing": "none"
+      }
     },
     {
       "id": "internet-mirantte",
       "kind": "chapter",
       "domain": "internet",
-      "date": {"pt": "2004–2008", "en": "2004–2008"},
+      "date": {
+        "pt": "2004–2008",
+        "en": "2004–2008"
+      },
       "title": {
         "pt": "Mirantte News: produto digital, aquisição e a descoberta de Search",
         "en": "Mirantte News: digital product, acquisition and the discovery of Search"
@@ -50,9 +77,20 @@
         "pt": "O Mirantte News levou Marcelo Nicchio do problema de aquisição de tráfego de um produto digital regional à entrada profissional em Search, passando pela parceria MapLink/UOL, pelo contato com Tiago Luz e pela transição posterior para o Procure SP.",
         "en": "Mirantte News took Marcelo Nicchio from the traffic-acquisition problem of a regional digital product into professional Search work, through the MapLink/UOL partnership, contact with Tiago Luz and the later transition to Procure SP."
       },
-      "topic_ids": ["digital-product", "search-marketing", "paid-media", "acquisition"],
-      "media": {"galleries": ["mirantte-news"]},
-      "reader_presentation": {"state": "featured"},
+      "topic_ids": [
+        "digital-product",
+        "search-marketing",
+        "paid-media",
+        "acquisition"
+      ],
+      "media": {
+        "galleries": [
+          "mirantte-news"
+        ]
+      },
+      "reader_presentation": {
+        "state": "featured"
+      },
       "reader_preview_paths": {
         "pt": [
           "pt/biografia/index.html"
@@ -141,29 +179,52 @@
           ]
         }
       },
-      "source": {"kind": "reader-section"},
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/internet-mirantte.inc",
+        "en_path": "content/entries/en/internet-mirantte.inc"
+      },
       "reader_targets": {
         "pt": [
-          {"path": "pt/internet/index.html", "selector": "#mirantte"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-internet-mirantte"}
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#mirantte"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-mirantte"
+          }
         ],
         "en": [
-          {"path": "en/internet/index.html", "selector": "#mirantte"},
-          {"path": "en/biography/index.html", "selector": "#bio-internet-mirantte"}
+          {
+            "path": "en/internet/index.html",
+            "selector": "#mirantte"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-mirantte"
+          }
         ]
       },
       "chapter_page": {
-        "status": "candidate",
+        "status": "pilot",
         "indexing": "noindex,follow",
         "pt_path": "pt/internet/mirantte-news/index.html",
-        "en_path": "en/internet/mirantte-news/index.html"
+        "en_path": "en/internet/mirantte-news/index.html",
+        "description": {
+          "pt": "Mirantte News (2004–2008): produto digital de Marcelo Nicchio, aquisição de tráfego, MapLink/UOL e a transição profissional para Search.",
+          "en": "Mirantte News (2004–2008): Marcelo Nicchio’s digital product, traffic acquisition, MapLink/UOL and his professional transition into Search."
+        }
       }
     },
     {
       "id": "internet-cookieweb",
       "kind": "chapter",
       "domain": "internet",
-      "date": {"pt": "2010–2012", "en": "2010–2012"},
+      "date": {
+        "pt": "2010–2012",
+        "en": "2010–2012"
+      },
       "title": {
         "pt": "Beleza na Web e CookieWEB: Search em escala",
         "en": "Beleza na Web and CookieWEB: Search at scale"
@@ -172,9 +233,22 @@
         "pt": "Da primeira grande conta de e-commerce à construção e liderança da área de SEM da CookieWEB, o ciclo reúne escala operacional, formação de equipe, certificações GAP, mais de 22 contas simultâneas e a decisão de encerrar a fase em 2012 por qualidade de vida.",
         "en": "From a first large e-commerce account to building and leading CookieWEB's SEM operation, this cycle combines operational scale, team development, GAP certifications, more than 22 simultaneous accounts and the decision to leave in 2012 for quality-of-life reasons."
       },
-      "topic_ids": ["search-marketing", "sem", "performance-marketing", "team-leadership", "google-ads"],
-      "media": {"galleries": ["cookieweb"], "credential_group": "google-gap"},
-      "reader_presentation": {"state": "featured"},
+      "topic_ids": [
+        "search-marketing",
+        "sem",
+        "performance-marketing",
+        "team-leadership",
+        "google-ads"
+      ],
+      "media": {
+        "galleries": [
+          "cookieweb"
+        ],
+        "credential_group": "google-gap"
+      },
+      "reader_presentation": {
+        "state": "featured"
+      },
       "reader_preview_paths": {
         "pt": [
           "pt/biografia/index.html"
@@ -267,29 +341,52 @@
           ]
         }
       },
-      "source": {"kind": "reader-section"},
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/internet-cookieweb.inc",
+        "en_path": "content/entries/en/internet-cookieweb.inc"
+      },
       "reader_targets": {
         "pt": [
-          {"path": "pt/internet/index.html", "selector": "#cookieweb"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-internet-cookieweb"}
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#cookieweb"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-cookieweb"
+          }
         ],
         "en": [
-          {"path": "en/internet/index.html", "selector": "#cookieweb"},
-          {"path": "en/biography/index.html", "selector": "#bio-internet-cookieweb"}
+          {
+            "path": "en/internet/index.html",
+            "selector": "#cookieweb"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-cookieweb"
+          }
         ]
       },
       "chapter_page": {
-        "status": "candidate",
+        "status": "pilot",
         "indexing": "noindex,follow",
         "pt_path": "pt/internet/cookieweb/index.html",
-        "en_path": "en/internet/cookieweb/index.html"
+        "en_path": "en/internet/cookieweb/index.html",
+        "description": {
+          "pt": "Marcelo Nicchio na CookieWEB (2010–2012): Beleza na Web, liderança de SEM, certificações Google e operação de mais de 22 contas.",
+          "en": "Marcelo Nicchio at CookieWEB (2010–2012): Beleza na Web, SEM leadership, Google certifications and an operation spanning 22+ accounts."
+        }
       }
     },
     {
       "id": "internet-clickland",
       "kind": "chapter",
       "domain": "internet",
-      "date": {"pt": "ago. 2012–presente", "en": "Aug. 2012–present"},
+      "date": {
+        "pt": "ago. 2012–presente",
+        "en": "Aug. 2012–present"
+      },
       "title": {
         "pt": "Clickland Digital",
         "en": "Clickland Digital"
@@ -298,26 +395,51 @@
         "pt": "Fundada em agosto de 2012 por Marcelo Nicchio e Carlos Portela, a Clickland Digital atuou com Search e mídia para pequenas e médias empresas sob o posicionamento Premium Search Agency.",
         "en": "Founded in August 2012 by Marcelo Nicchio and Carlos Portela, Clickland Digital worked with Search and media for small and medium-sized businesses under the Premium Search Agency positioning."
       },
-      "topic_ids": ["search-marketing", "paid-media"],
-      "reader_presentation": {"state": "always-open"},
-      "source": {"kind": "reader-section"},
+      "topic_ids": [
+        "search-marketing",
+        "paid-media"
+      ],
+      "reader_presentation": {
+        "state": "always-open"
+      },
+      "source": {
+        "kind": "reader-section"
+      },
       "reader_targets": {
         "pt": [
-          {"path": "pt/internet/index.html", "selector": "#clickland"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-internet-clickland"}
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#clickland"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-clickland"
+          }
         ],
         "en": [
-          {"path": "en/internet/index.html", "selector": "#clickland"},
-          {"path": "en/biography/index.html", "selector": "#bio-internet-clickland"}
+          {
+            "path": "en/internet/index.html",
+            "selector": "#clickland"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-clickland"
+          }
         ]
       },
-      "chapter_page": {"status": "none", "indexing": "none"}
+      "chapter_page": {
+        "status": "none",
+        "indexing": "none"
+      }
     },
     {
       "id": "communication-folha",
       "kind": "chapter",
       "domain": "communication",
-      "date": {"pt": "23 abr. 2001", "en": "Apr. 23, 2001"},
+      "date": {
+        "pt": "23 abr. 2001",
+        "en": "Apr. 23, 2001"
+      },
       "title": {
         "pt": "Folha de S.Paulo — “Órfãos do Rock”",
         "en": "Folha de S.Paulo — “Órfãos do Rock”"
@@ -326,9 +448,17 @@
         "pt": "Participação na matéria de capa do Folhateen publicada após a morte de Joey Ramone, com falas de Marcelo Nicchio sobre cultura punk, faça-você-mesmo, mercado underground brasileiro e permanência do rock.",
         "en": "Marcelo Nicchio appeared in a Folhateen cover story published after Joey Ramone's death, discussing punk culture, do-it-yourself practice, Brazil's underground market and the persistence of rock."
       },
-      "topic_ids": ["press", "punk-rock", "cultural-criticism"],
-      "media": {"thread_image": "folhateen-cover-2001"},
-      "reader_presentation": {"state": "always-open"},
+      "topic_ids": [
+        "press",
+        "punk-rock",
+        "cultural-criticism"
+      ],
+      "media": {
+        "thread_image": "folhateen-cover-2001"
+      },
+      "reader_presentation": {
+        "state": "always-open"
+      },
       "source": {
         "kind": "fragment",
         "pt_path": "content/entries/pt/communication-folha.inc",
@@ -336,12 +466,24 @@
       },
       "reader_targets": {
         "pt": [
-          {"path": "pt/comunicacao/index.html", "selector": "#folha"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-communication-folha"}
+          {
+            "path": "pt/comunicacao/index.html",
+            "selector": "#folha"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-communication-folha"
+          }
         ],
         "en": [
-          {"path": "en/communication/index.html", "selector": "#folha"},
-          {"path": "en/biography/index.html", "selector": "#bio-communication-folha"}
+          {
+            "path": "en/communication/index.html",
+            "selector": "#folha"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-communication-folha"
+          }
         ]
       },
       "chapter_page": {
@@ -359,15 +501,33 @@
       "id": "audiovisual-meia-noite",
       "kind": "chapter",
       "domain": "communication",
-      "date": {"pt": "2006", "en": "2006"},
-      "title": {"pt": "Meia-Noite e Uns", "en": "Meia-Noite e Uns"},
+      "date": {
+        "pt": "2006",
+        "en": "2006"
+      },
+      "title": {
+        "pt": "Meia-Noite e Uns",
+        "en": "Meia-Noite e Uns"
+      },
       "summary": {
         "pt": "Programa de literatura com linguagem pop exibido pela RedeTV! em 2006, com Direção Artística e Produção Executiva de Marcelo Nicchio, conceito visual e narrativo autoral, trilha em parceria com Badi e amplo acervo de fotos e vídeos preservados.",
         "en": "A pop-language literature program aired by RedeTV! in 2006, with Marcelo Nicchio as Artistic Director and Executive Producer, an authored visual and narrative concept, music created with Badi and a substantial preserved photo and video archive."
       },
-      "topic_ids": ["television", "art-direction", "executive-production", "literature"],
-      "media": {"galleries": ["meia-noite-e-uns"], "known_video_count": 4},
-      "reader_presentation": {"state": "featured"},
+      "topic_ids": [
+        "television",
+        "art-direction",
+        "executive-production",
+        "literature"
+      ],
+      "media": {
+        "galleries": [
+          "meia-noite-e-uns"
+        ],
+        "known_video_count": 4
+      },
+      "reader_presentation": {
+        "state": "featured"
+      },
       "reader_preview_paths": {
         "pt": [
           "pt/biografia/index.html"
@@ -450,29 +610,52 @@
           ]
         }
       },
-      "source": {"kind": "reader-section"},
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/communication-meia-noite.inc",
+        "en_path": "content/entries/en/communication-meia-noite.inc"
+      },
       "reader_targets": {
         "pt": [
-          {"path": "pt/comunicacao/index.html", "selector": "#meia-noite"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-audiovisual-meia-noite"}
+          {
+            "path": "pt/comunicacao/index.html",
+            "selector": "#meia-noite"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-audiovisual-meia-noite"
+          }
         ],
         "en": [
-          {"path": "en/communication/index.html", "selector": "#meia-noite"},
-          {"path": "en/biography/index.html", "selector": "#bio-audiovisual-meia-noite"}
+          {
+            "path": "en/communication/index.html",
+            "selector": "#meia-noite"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-audiovisual-meia-noite"
+          }
         ]
       },
       "chapter_page": {
-        "status": "candidate",
+        "status": "pilot",
         "indexing": "noindex,follow",
         "pt_path": "pt/comunicacao/meia-noite-e-uns/index.html",
-        "en_path": "en/communication/meia-noite-e-uns/index.html"
+        "en_path": "en/communication/meia-noite-e-uns/index.html",
+        "description": {
+          "pt": "Meia-Noite e Uns (RedeTV!, 2006): direção artística e produção executiva de Marcelo Nicchio, conceito visual, trilha, fotos e vídeos.",
+          "en": "Meia-Noite e Uns (RedeTV!, 2006): Marcelo Nicchio’s artistic direction and executive production, visual concept, music, photos and video."
+        }
       }
     },
     {
       "id": "internet-goobec-gap",
       "kind": "landmark-set",
       "domain": "internet",
-      "date": {"pt": "2009–2010", "en": "2009–2010"},
+      "date": {
+        "pt": "2009–2010",
+        "en": "2009–2010"
+      },
       "title": {
         "pt": "Goobec e certificações Google Advertising Professional",
         "en": "Goobec and Google Advertising Professional certifications"
@@ -481,26 +664,58 @@
         "pt": "A formação em Google AdWords na Goobec em 2009 e as certificações GAP obtidas durante o início do ciclo CookieWEB marcam a passagem do aprendizado autodidata para uma profissionalização formal em Search.",
         "en": "Google AdWords training at Goobec in 2009 and the GAP certifications earned at the beginning of the CookieWEB cycle mark the shift from self-directed learning to formal professionalization in Search."
       },
-      "topic_ids": ["google-ads", "training", "certification", "search-marketing"],
-      "media": {"thread_image": "goobec-class-2009", "credential_group": "google-gap"},
-      "source": {"kind": "composite-reader-landmarks"},
+      "topic_ids": [
+        "google-ads",
+        "training",
+        "certification",
+        "search-marketing"
+      ],
+      "media": {
+        "thread_image": "goobec-class-2009",
+        "credential_group": "google-gap"
+      },
+      "source": {
+        "kind": "composite-reader-landmarks"
+      },
       "landmarks": {
         "pt": [
-          {"path": "pt/internet/index.html", "selector": "#sem", "contains": "Goobec"},
-          {"path": "pt/internet/index.html", "selector": "#cookieweb", "contains": "Google Advertising Professional — GAP"}
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#sem",
+            "contains": "Goobec"
+          },
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#cookieweb",
+            "contains": "Google Advertising Professional — GAP"
+          }
         ],
         "en": [
-          {"path": "en/internet/index.html", "selector": "#sem", "contains": "Goobec"},
-          {"path": "en/internet/index.html", "selector": "#cookieweb", "contains": "Google Advertising Professional"}
+          {
+            "path": "en/internet/index.html",
+            "selector": "#sem",
+            "contains": "Goobec"
+          },
+          {
+            "path": "en/internet/index.html",
+            "selector": "#cookieweb",
+            "contains": "Google Advertising Professional"
+          }
         ]
       },
-      "chapter_page": {"status": "none", "indexing": "none"}
+      "chapter_page": {
+        "status": "none",
+        "indexing": "none"
+      }
     },
     {
       "id": "internet-best",
       "kind": "chapter",
       "domain": "internet",
-      "date": {"pt": "2014", "en": "2014"},
+      "date": {
+        "pt": "2014",
+        "en": "2014"
+      },
       "title": {
         "pt": "BEST / Kenshoo: Search + Social + tecnologia",
         "en": "BEST / Kenshoo: Search + Social + technology"
@@ -509,8 +724,16 @@
         "pt": "Atuação como Gerente de Performance na BEST em uma operação ligada à Kenshoo no Brasil, combinando onboarding de tecnologia, otimização para grandes varejistas e um workshop do E-Commerce Brasil preservado em quatro partes.",
         "en": "Work as Performance Manager at BEST in an operation connected to Kenshoo in Brazil, combining technology onboarding, optimization for major retailers and an E-Commerce Brasil workshop preserved in four parts."
       },
-      "topic_ids": ["performance-marketing", "search-marketing", "social-ads", "kenshoo", "ecommerce"],
-      "media": {"known_video_count": 4},
+      "topic_ids": [
+        "performance-marketing",
+        "search-marketing",
+        "social-ads",
+        "kenshoo",
+        "ecommerce"
+      ],
+      "media": {
+        "known_video_count": 4
+      },
       "source": {
         "kind": "fragment",
         "pt_path": "content/entries/pt/internet-best.inc",
@@ -518,12 +741,24 @@
       },
       "reader_targets": {
         "pt": [
-          {"path": "pt/internet/index.html", "selector": "#best"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-internet-best"}
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#best"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-best"
+          }
         ],
         "en": [
-          {"path": "en/internet/index.html", "selector": "#best"},
-          {"path": "en/biography/index.html", "selector": "#bio-internet-best"}
+          {
+            "path": "en/internet/index.html",
+            "selector": "#best"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-best"
+          }
         ]
       },
       "chapter_page": {
@@ -541,14 +776,28 @@
       "id": "hai-melissa",
       "kind": "chapter",
       "domain": "hai",
-      "date": {"pt": "set. 2025", "en": "Sep. 2025"},
-      "title": {"pt": "Melissa 1.0", "en": "Melissa 1.0"},
+      "date": {
+        "pt": "set. 2025",
+        "en": "Sep. 2025"
+      },
+      "title": {
+        "pt": "Melissa 1.0",
+        "en": "Melissa 1.0"
+      },
       "summary": {
         "pt": "Em sete dias de interação no Gemini 2.5 Pro, uma persona funcional de headhunter evoluiu para o caso Melissa 1.0, documentado por reasoning traces, formalizado no Melissa Framework e desdobrado em quatro trabalhos públicos.",
         "en": "Across seven days of interaction in Gemini 2.5 Pro, a functional headhunter persona developed into the Melissa 1.0 case, documented through reasoning traces, formalized in the Melissa Framework and extended into four public works."
       },
-      "topic_ids": ["ai", "hai", "hci", "prompt-engineering", "melissa-1-0"],
-      "reader_presentation": {"state": "normal"},
+      "topic_ids": [
+        "ai",
+        "hai",
+        "hci",
+        "prompt-engineering",
+        "melissa-1-0"
+      ],
+      "reader_presentation": {
+        "state": "normal"
+      },
       "reader_preview": {
         "pt": {
           "image": "/assets/media/thread/melissa1_0_selfportrait300kb.jpg",
@@ -635,18 +884,35 @@
           ]
         }
       },
-      "source": {"kind": "reader-section"},
+      "source": {
+        "kind": "reader-section"
+      },
       "reader_targets": {
         "pt": [
-          {"path": "pt/ia-hai/index.html", "selector": "#melissa"},
-          {"path": "pt/biografia/index.html", "selector": "#bio-hai-melissa"}
+          {
+            "path": "pt/ia-hai/index.html",
+            "selector": "#melissa"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-hai-melissa"
+          }
         ],
         "en": [
-          {"path": "en/ai-hai/index.html", "selector": "#melissa"},
-          {"path": "en/biography/index.html", "selector": "#bio-hai-melissa"}
+          {
+            "path": "en/ai-hai/index.html",
+            "selector": "#melissa"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-hai-melissa"
+          }
         ]
       },
-      "chapter_page": {"status": "none", "indexing": "none"}
+      "chapter_page": {
+        "status": "none",
+        "indexing": "none"
+      }
     }
   ]
 }

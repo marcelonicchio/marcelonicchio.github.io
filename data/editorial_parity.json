@@ -123,9 +123,9 @@
       "accepted_on": "2026-08-27"
     },
     "communication-folha": {
-      "revision": 6,
-      "pt_hash": "bf4e6b0d787a9a3d76a10cae41d03ea7397b1aa4ba1d8cec6386f76fd23c065a",
-      "en_hash": "1b84560758f3c82788aac54672c299abbb52fc92d4e4adf9a1227a0aa194f2c6",
+      "revision": 7,
+      "pt_hash": "731e5440a5d296739160a252184e0d80a637c66295d2682c35717ad2044105d2",
+      "en_hash": "a0c1df35136ce7a28bbe8e6860233acde6a8011b2914fa24b09c2e26bc9d1b6a",
       "accepted_on": "2026-09-02",
       "changed_languages": [
         "pt",
@@ -165,20 +165,24 @@
       ]
     },
     "internet-mirantte": {
-      "revision": 4,
-      "pt_hash": "ff289365aa8a29b4542548e63f8f98b6da4990bca16f2b6c104936de5b6e0fe4",
-      "en_hash": "63794e0d8a7d566fc130228f7c963049025e5b5fec6ad55e4adab14188d88d86",
-      "accepted_on": "2026-08-28",
+      "revision": 5,
+      "pt_hash": "72d8679777f2d14b23bc2d60f4a14a5f2a2d49025fe0e7132ac578af50542ccf",
+      "en_hash": "4156f29af5bab442819512fbdc7c8f02d4d9aad3158e2c80dbb98af0f19bbd08",
+      "accepted_on": "2026-09-02",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "audiovisual-meia-noite": {
-      "revision": 1,
-      "pt_hash": "762b1dc114e9094ac50ee8438c4592aac9b4404922ad95f550456af3704a3768",
-      "en_hash": "5eb023843d56efd45f639e1647cb16fc34e9bb26f0dd906f0f4489964ae36494",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "605fb08dab4b6f9a8359180f857fdb914bfc64e14c6c641ae8e469860e68b470",
+      "en_hash": "040e04b27a3a45bcb59917a95e40a320ad75c64193a0e94bf2a96e09d6d9b8f7",
+      "accepted_on": "2026-09-02",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "internet-sem": {
       "revision": 3,
@@ -191,10 +195,10 @@
       ]
     },
     "internet-cookieweb": {
-      "revision": 5,
-      "pt_hash": "830a051094a6431fbacb0941e7a0d6eeb810f3830c3181d74d802039a4aff073",
-      "en_hash": "df31cda8dc688853c0db8b21b07d17bb4a25a2de5816dc2c38862b5509062947",
-      "accepted_on": "2026-08-28",
+      "revision": 6,
+      "pt_hash": "f123217dc687d3becc76a651123928f3ca83f004b121b012d2edd3d6fe586118",
+      "en_hash": "1807c31ea363340539b572ab9f94eae98ee0ccef2a02cf9cbe95fddb1f3025b6",
+      "accepted_on": "2026-09-02",
       "changed_languages": [
         "pt",
         "en"
@@ -221,10 +225,10 @@
       ]
     },
     "internet-best": {
-      "revision": 3,
-      "pt_hash": "5909670a81594a3d99f269bca3921854f27730cd56e961882946f96a18adb936",
-      "en_hash": "0fdcc90f3c83ab66e2a4156c8f7ef8160b10131fd78bc2fb20355773db279b51",
-      "accepted_on": "2026-09-01",
+      "revision": 4,
+      "pt_hash": "d340013a6f2f41580fd6e1607dff91e924fa8826494ba806a2d2143b23347acd",
+      "en_hash": "4f3a5be4f3c3bc390056aa7a353fcaa56b4bf8cc628a5cfb1f5fa01bb6757d0b",
+      "accepted_on": "2026-09-02",
       "changed_languages": [
         "pt",
         "en"
