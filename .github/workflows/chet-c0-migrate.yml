@@ -1,0 +1,90 @@
+name: Chet C0 one-shot migration
+
+on:
+  push:
+    branches: [work/chet-c0-sanitize-20260902]
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/chet-c0-sanitize-20260902
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Correct Folhateen date and sitemap hygiene
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          root = Path('.')
+          archive = root / 'assets/archive/communication/folha-orfaos-do-rock'
+          names = [
+              'folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (1-2) - 300dpi.jpg',
+              'folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 1de2 (2-2) - 300dpi.jpg',
+              'folhateen - 23-04-2000 - Reportagem - Órfãos do Rock Pag 2de2 - 300dpi.jpg',
+          ]
+          for old_name in names:
+              old = archive / old_name
+              new = archive / old_name.replace('23-04-2000', '23-04-2001')
+              if old.exists() and not new.exists():
+                  old.rename(new)
+              elif old.exists() and new.exists():
+                  old.unlink()
+              elif not new.exists():
+                  raise SystemExit(f'Missing Folhateen master: {old}')
+
+          gallery_path = root / 'data/galleries.json'
+          gallery_text = gallery_path.read_text(encoding='utf-8')
+          count = gallery_text.count('23-04-2000')
+          if count not in (0, 3):
+              raise SystemExit(f'Unexpected Folhateen registry occurrence count: {count}')
+          gallery_path.write_text(gallery_text.replace('23-04-2000', '23-04-2001'), encoding='utf-8')
+
+          sitemap = root / 'sitemap.xml'
+          lines = sitemap.read_text(encoding='utf-8').splitlines()
+          sitemap.write_text('\n'.join(line for line in lines if '<lastmod>' not in line) + '\n', encoding='utf-8')
+          PY
+      - name: Regenerate managed gallery surfaces
+        run: |
+          python tools/sync_galleries.py
+          python tools/sync_entries.py
+          python tools/editorial_parity.py --accept communication-folha
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+      - name: Verify focused invariants
+        run: |
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/sync_entries.py --check
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/audit_galleries.py
+          python tools/audit_site.py
+          if grep -R --line-number --fixed-strings '23-04-2000' data content pt en assets/archive/communication/folha-orfaos-do-rock; then
+            echo 'Stale Folhateen 2000 reference remains' >&2
+            exit 1
+          fi
+      - name: Commit migrated state
+        shell: bash
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo 'No migration changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'C0: correct Folhateen date and refresh derived surfaces'
+          git push origin HEAD:work/chet-c0-sanitize-20260902
