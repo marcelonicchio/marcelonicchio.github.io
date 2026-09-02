@@ -36,7 +36,10 @@ def main() -> int:
             for lang in ("pt", "en"):
                 if not captions.get(lang):
                     errors.append(f"{gid}/{iid}: missing {lang} caption")
-            source = source_root / item.get("source", "")
+            source_name = str(item.get("source", ""))
+            if gid == "folha-orfaos-do-rock" and "23-04-2000" in source_name:
+                errors.append(f"{gid}/{iid}: Folhateen source filename has stale 2000 date; expected 23-04-2001")
+            source = source_root / source_name
             if not source.exists():
                 errors.append(f"{gid}/{iid}: missing source {source.relative_to(ROOT) if source.is_absolute() else source}")
             if not isinstance(item.get("width"), int) or not isinstance(item.get("height"), int):
