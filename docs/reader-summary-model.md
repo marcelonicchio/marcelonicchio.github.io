@@ -1,250 +1,138 @@
 # Reader thread-summary model
 
-**Status:** accepted baseline after the Melissa 1.0 pilot  
-**Reference:** 1 Sep 2026 (BRT)
+**Status:** accepted selective model  
+**Updated:** 2 Sep 2026 (BRT)
 
-This document defines the editorial and UX model for dense entries that can exist in two reading states.
-
-It is not a universal requirement for every thread. It is a reusable model for entries whose complete version is dense enough that the collapsed state must itself carry meaningful information.
-
----
+This document defines the editorial and UX model for dense entries that benefit from two reading states. It is deliberately **not universal**.
 
 ## 1. Core principle
 
-A collapsed thread is **not a teaser**.
+A collapsed thread is not a teaser.
 
-The design assumption is intentionally conservative:
-
-> **The expansion click rate may be very low. Therefore the collapsed state must be useful even when the reader never opens the full entry.**
+> **The expansion click rate may be low. Therefore the collapsed state must be useful even when the reader never opens the full entry.**
 
 The two states are separate editorial objects:
 
-- **Version A — complete post:** full narrative, media, documents, repositories, links and context;
-- **Version B — concise thread-summary:** an autonomous short version that communicates the principal arc without requiring expansion.
+- **Version A — complete post:** full narrative, media, documents, links and context;
+- **Version B — concise thread-summary:** autonomous short version communicating the principal arc.
 
-Version B is not the first few paragraphs of Version A and should not be generated through mechanical truncation.
+Version B is not mechanical truncation of Version A.
 
----
+## 2. Density rule
 
-## 2. Melissa 1.0 as the calibrated upper reference
+Melissa 1.0 established the upper-density calibration.
 
-Melissa was used because the expanded entry combines long narrative, images, research concepts, links, DOI documents and repository material.
+For structured `reader_preview` copy:
 
-After visual/mobile calibration, the accepted collapsed version contains four short paragraphs.
+- hard ceiling: **1,650 visible-copy characters per language**;
+- preferred design center for most dense entries: around **1,300 characters**;
+- shorter is correct when the subject does not justify more;
+- paragraph count is not an invariant.
 
-Measured visible preview copy:
+The count covers preview paragraph text only. Title, meta/date, topic chips, content indicators, CTA and alt text do not count.
 
-- **PT:** approximately **1,638 characters**;
-- **EN:** approximately **1,616 characters**.
+`tools/audit_entries.py` enforces the 1,650-character maximum.
 
-This is intentionally treated as the current upper-density reference, not the average desired length.
+## 3. What a compact summary should usually cover
 
-### Adopted character rule
+Depending on the entry:
 
-For structured rich previews (`reader_preview`):
-
-- **hard editorial ceiling:** `1,650` visible-copy characters per language;
-- **preferred design center for most entries:** approximately `1,300–1,320` characters, around 20% below the ceiling;
-- entries may be materially shorter when the subject does not justify more copy;
-- do not add filler merely to approach the target.
-
-The count applies to paragraph text only.
-
-It excludes:
-
-- title;
-- date/period metadata;
-- topic labels;
-- internal-content indicators;
-- CTA text;
-- image alt/caption.
-
-`tools/audit_entries.py` enforces the 1,650-character maximum for a structured `reader_preview`.
-
----
-
-## 3. Paragraph count is not the invariant
-
-Melissa currently uses four paragraphs because that density reads well enough on desktop and mobile after removing the fifth paragraph.
-
-Do not turn “four paragraphs” into a universal template.
-
-Reasonable future shapes include:
-
-- two moderately dense paragraphs;
-- three short paragraphs;
-- four short paragraphs for unusually dense entries;
-- a brief intro plus a compact list only when the content genuinely benefits from list structure.
-
-The invariant is **useful concise coverage within the character budget**, not paragraph count.
-
----
-
-## 4. What a useful collapsed summary should cover
-
-A strong compact version usually answers some subset of:
-
-1. what this episode/project was;
-2. what role Marcelo played;
-3. what changed or why the episode mattered;
+1. what the episode/project was;
+2. Marcelo's role;
+3. why it mattered or what changed;
 4. one or two concrete scale/time/result details;
-5. what the episode produced or led to.
+5. what it produced or led to.
 
-Do not force every summary into the same five-sentence order. The content determines emphasis.
+Do not force every entry into the same five-sentence pattern.
 
-For Melissa the accepted arc is:
+## 4. Image rule
 
-- functional origin;
-- 11 sessions / ~63 hours / 518 prompts and relational change;
-- reasoning traces + EIP with epistemic caveat;
-- Melissa Framework and transmission/reinstallation outcome.
+A rich summary may use an editorial cover image when it materially helps recognition or comprehension. It is optional.
 
-The removed fifth paragraph proved useful as a calibration point: it contained valid information, but pushed the collapsed experience beyond the desired mobile density. The DOI/repository outcome remains discoverable through the internal indicators and the complete post.
+Do not confuse compact-cover sizing with the image treatment inside the complete post.
 
----
+Current Mirantte/CookieWEB/Meia-Noite preview image choices are not operator-approved final selections. Do not replace them autonomously before the planned visual review.
 
-## 5. Image rule
+## 5. Typography
 
-A rich collapsed summary may use an editorial cover image when the image materially helps recognition or narrative comprehension.
+Compact summary copy is reading content, not secondary metadata.
 
-The image is **not mandatory**.
+Current direction:
 
-The compact-state image is a cover/summary asset, not necessarily the same presentation size used in the complete post.
+- normal body-like reading size;
+- light neutral text rather than heavily muted gray;
+- selective `<strong>` emphasis only on high-information phrases.
 
-Melissa's compact-state self-portrait size is approved and should be treated as the current visual reference. Do not change it as a side effect of other Reader work.
+## 6. Two distinct label systems
 
-The complete Melissa post has a separate expanded-entry sizing rule (65% desktop / 100% mobile) that must not be confused with the compact preview layout.
+### Topic labels — what the entry is about
 
----
+From `data/tags.json` + `topic_ids`.
 
-## 6. Typographic rule
+They support scanning, controlled vocabulary, future linking/filtering and later standalone-entry planning. They are not meta keywords.
 
-The first Melissa pilot revealed that a summary shown in smaller, muted-gray type looked secondary and discouraged reading.
+Visual treatment: neutral/light translucent chips.
 
-Accepted direction:
+### Internal-content indicators — what exists inside
 
-- compact summary copy uses the same basic reading size as the full post (`1.04rem` in the current Reader implementation);
-- copy uses a light neutral tone (`var(--soft)`) rather than the heavily muted gray;
-- selective `<strong>` emphasis is allowed;
-- bold should identify high-information phrases, not turn whole paragraphs into visual noise.
+Examples: photos, videos, DOI documents, download links, repository links.
 
-A compact post is lower-density, not lower-importance.
+They are UX promises, not taxonomy. Curated indicators are allowed when automatic DOM media counting cannot express the useful resource type.
 
----
+Visual treatment: red.
 
-## 7. Two distinct label systems
+Never merge the two badge families.
 
-### 7.1 Topic labels — “what this is about”
+## 7. Expanded-state behavior
 
-Topic labels come from the controlled taxonomy (`data/tags.json` + `topic_ids`).
+When a rich entry opens:
 
-They serve several functions:
+- compact preview disappears;
+- complete original body appears intact;
+- nothing essential is fetched only after click;
+- deep links, keyboard behavior and print remain valid;
+- compact copy is not duplicated above the full body.
 
-- immediate human scanning;
-- consistent topic vocabulary across the HUB;
-- future internal linking/filtering;
-- future standalone-entry/SEO planning when a post becomes its own URL.
+## 8. Surface-specific behavior is allowed
 
-They are **not** `meta keywords`.
+The same entry may legitimately use different Reader presentation by surface.
 
-Melissa example:
+Melissa is the canonical example after C2.1:
 
-`AI · HAI · HCI · Prompt Engineering · Melissa 1.0`
+- **AI/HAI vertical PT/EN:** Melissa stays completely open; no compact preview/card/disclosure;
+- **Full Biography PT/EN:** Melissa uses its compact summary because the integral chronology is much denser.
 
-Current visual treatment:
+This is implemented through path-scoped presentation/preview metadata. Do not infer a universal “oldest entry should be open” rule from this case.
 
-- neutral light/white translucent background;
-- subtle light border;
-- light text;
-- deliberately different from the red content indicators.
+## 9. Featured color is a separate unresolved layer
 
-### 7.2 Internal-content indicators — “what is inside if I open it”
+Rich-summary acceptance does not mean the featured-card palette is accepted.
 
-These are interaction/UX signals, not taxonomy.
+Technical rule is settled:
 
-Melissa example:
+- collapsed featured entry may carry an attention treatment;
+- expanded entry returns to the normal dark reading surface.
 
-- `2 imagens`;
-- `1 link para download`;
-- `4 documentos com DOI`;
-- `1 link para repositório`.
+Aesthetic color selection remains deferred to a joint visual session with Marcelo.
 
-Current visual treatment remains red.
+## 10. Current rollout
 
-Automatic media counting is useful where it expresses the real content. Curated indicators are also allowed for resources that DOM media counting does not describe well, such as DOI papers, downloads or repositories.
+Current Full Biography rich-summary entries:
 
-Never merge topic labels and internal-content indicators into a single ambiguous badge family.
-
----
-
-## 8. Expanded-state behavior
-
-When the user expands a rich compact entry:
-
-- the compact preview disappears;
-- the complete original body appears intact;
-- no information is fetched only after the click;
-- existing deep links, keyboard behavior and print behavior remain valid.
-
-The compact copy is **not duplicated above the full text** in the expanded state.
-
----
-
-## 9. Featured-card color is a separate unresolved layer
-
-Do not confuse the accepted summary model with the still-unresolved color system.
-
-### Open Problem 1 — collapsed featured colors
-
-Current yellow is too beige; current red still leans too wine-like.
-
-Future tests should explore:
-
-- a clearer pale yellow;
-- a more genuinely red, translucent red;
-- possibly borderless CTA;
-- possibly lighter/non-bold CTA typography.
-
-Those are test hypotheses, not settled specs.
-
-### Open Problem 1.1 — color must be state-dependent
-
-Desired behavior:
-
-- collapsed featured entry → colored frame/background as an attention cue;
-- expanded entry → normal dark/black post background.
-
-The color exists to encourage discovery of dense/high-value content, not to tint the entire reading experience after expansion.
-
-Do not solve 1 or 1.1 accidentally while rolling out the summary model to other entries.
-
----
-
-## 10. Candidate rollout logic
-
-Do not apply rich summaries to every entry simply for consistency.
-
-Use them where one or more of these conditions is true:
-
-- full entry is visually/textually long;
-- entry contains a substantial gallery;
-- entry contains several different resource types;
-- entry is important enough that a one-line excerpt underserves it;
-- a likely future Chapter Page/standalone URL benefits from a stable concise description.
-
-The first rollout after Melissa applies the model to:
-
+- Melissa 1.0;
 - Mirantte News;
 - CookieWEB;
 - Meia-Noite e Uns.
 
-These three previews are scoped to **Full Biography / Biografia Completa only**. The thematic verticals keep their own reading behavior; in particular, **Cultura & Audiovisual / Culture & Audiovisual remains fully open and has no disclosure mode**. Each entry receives its own editorial summary rather than cloning Melissa's structure mechanically.
+Current deliberate always-open examples include Minduim/BBS, Clickland and Folhateen where registered.
 
----
+The rollout is selective. A long entry, a substantial gallery, mixed resource types, strong biographical importance or likely standalone value may justify a rich summary; visual consistency alone does not.
+
+The next candidate should be chosen by those criteria, not by chronology or a quota.
 
 ## 11. Data model
 
-The registry may use:
+Typical registry shape:
 
 ```json
 "reader_preview": {
@@ -267,9 +155,9 @@ The registry may use:
 }
 ```
 
-Topic labels remain outside `reader_preview` as stable `topic_ids` because they belong to entry taxonomy, not only to this visual component.
+Topic labels remain outside `reader_preview` as stable `topic_ids`.
 
-A preview can optionally be limited to specific registered Reader targets with `reader_preview_paths`:
+A preview can be limited to registered Reader targets:
 
 ```json
 "reader_preview_paths": {
@@ -278,27 +166,22 @@ A preview can optionally be limited to specific registered Reader targets with `
 }
 ```
 
-When this field is omitted, the preview keeps the legacy behavior and may render on any Reader target for that entry. This allows Full Biography to use a substantive compact layer without forcing the same summary UX onto a thematic vertical.
-
-The renderer supports structured text + explicit emphasis rather than arbitrary HTML inside registry data.
-
----
+An entry can also remain open only on selected targets through path-scoped presentation metadata.
 
 ## 12. QA requirements
 
 A rich-preview implementation should verify:
 
-- PT/EN preview exists when intended;
-- visible copy stays within 1,650 characters per language;
-- all topic IDs resolve in `data/tags.json`;
+- PT/EN preview exists where intended;
+- copy stays within 1,650 characters;
+- topic IDs resolve;
 - curated indicators render in the intended language;
-- image path exists;
-- preview is visible while collapsed;
-- preview disappears after expansion;
+- image path exists when used;
+- preview is visible while collapsed and absent after expansion;
 - full body remains unchanged;
 - no mobile horizontal overflow;
-- typography is readable on mobile;
-- print still exposes the complete body;
-- no-JS fallback remains readable.
+- typography remains readable;
+- print and no-JS expose complete content;
+- path-scoped behavior does not leak to other Reader surfaces.
 
-The current Chrome smoke test already protects Melissa's core behavior and should be extended rather than weakened when new rich-summary entries are added.
+Extend Chrome smoke coverage when adding a new rich-summary entry; do not weaken existing assertions.
