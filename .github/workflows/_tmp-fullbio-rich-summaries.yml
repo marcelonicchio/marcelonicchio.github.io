@@ -34,21 +34,29 @@ jobs:
           npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
       - name: Apply rollout
         run: python .tmp-fullbio-rich-summaries.py
-      - name: Run focused validation
-        env:
-          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+      - name: Audit Reader loader sync
+        run: python tools/sync_reader_disclosure_loader.py --check
+      - name: Audit Full Biography sync and coverage
         run: |
-          python tools/sync_reader_disclosure_loader.py --check
           python tools/sync_full_biography.py --check
           python tools/audit_full_biography.py
-          python tools/audit_entries.py
-          python tools/audit_media_culture_fusion.py
-          python tools/editorial_parity.py --check
+      - name: Audit entry registry
+        run: python tools/audit_entries.py
+      - name: Audit Media and Culture open-state fusion
+        run: python tools/audit_media_culture_fusion.py
+      - name: Audit PT EN editorial parity
+        run: python tools/editorial_parity.py --check
+      - name: Check Reader JavaScript syntax
+        run: |
           node --check assets/js/reader-disclosure-loader.js
           node --check assets/js/reader-disclosure.js
           node --check tools/smoke_reader_ux.js
-          node tools/smoke_reader_ux.js
-          python tools/audit_site.py
+      - name: Smoke-test Reader UX in Chrome
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: node tools/smoke_reader_ux.js
+      - name: Audit HTML and sitemap
+        run: python tools/audit_site.py
       - name: Commit rollout
         run: |
           git config user.name 'github-actions[bot]'
