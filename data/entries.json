@@ -885,7 +885,9 @@
         }
       },
       "source": {
-        "kind": "reader-section"
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/hai-melissa.inc",
+        "en_path": "content/entries/en/hai-melissa.inc"
       },
       "reader_targets": {
         "pt": [
@@ -910,8 +912,14 @@
         ]
       },
       "chapter_page": {
-        "status": "none",
-        "indexing": "none"
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "description": {
+          "pt": "Melissa 1.0: caso de interação prolongada de Marcelo Nicchio com Gemini 2.5 Pro, reasoning traces, escala EIP, Melissa Framework e quatro trabalhos públicos.",
+          "en": "Melissa 1.0: Marcelo Nicchio’s extended Gemini 2.5 Pro interaction case, reasoning traces, EIP scale, Melissa Framework and four public works."
+        },
+        "pt_path": "pt/ia-hai/melissa-1-0/index.html",
+        "en_path": "en/ai-hai/melissa-1-0/index.html"
       }
     }
   ]
