@@ -167,6 +167,10 @@
       "chapter_page": {
         "status": "pilot",
         "indexing": "noindex,follow",
+        "description": {
+          "pt": "Marcelo Nicchio na capa do Folhateen de 23/04/2001, discutindo Joey Ramone, cultura punk, faça-você-mesmo e o underground brasileiro.",
+          "en": "Marcelo Nicchio in Folhateen’s Apr. 23, 2001 cover story on Joey Ramone, punk culture, DIY ethics and Brazil’s underground rock scene."
+        },
         "pt_path": "pt/comunicacao/folhateen-orfaos-do-rock/index.html",
         "en_path": "en/communication/folhateen-orphans-of-rock/index.html"
       }
@@ -263,6 +267,10 @@
       "chapter_page": {
         "status": "pilot",
         "indexing": "noindex,follow",
+        "description": {
+          "pt": "Marcelo Nicchio na BEST/Kenshoo em 2014: gestão de performance, Search + Social, tecnologia e workshop do E-Commerce Brasil em quatro partes.",
+          "en": "Marcelo Nicchio at BEST/Kenshoo in 2014: performance management, Search + Social, technology and a four-part E-Commerce Brasil workshop."
+        },
         "pt_path": "pt/internet/best-kenshoo/index.html",
         "en_path": "en/internet/best-kenshoo/index.html"
       }

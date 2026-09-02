@@ -124,6 +124,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     other_url = canonical(other_rel)
     title = entry["title"][lang]
     summary = entry["summary"][lang]
+    description = page.get("description", {}).get(lang, summary)
     date = entry["date"][lang]
     source_rel = entry["source"][f"{lang}_path"]
     body = (ROOT / source_rel).read_text(encoding="utf-8").strip()
@@ -161,14 +162,14 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{html.escape(title)} — Marcelo Nicchio</title>
-  <meta name="description" content="{html.escape(summary, quote=True)}">
+  <meta name="description" content="{html.escape(description, quote=True)}">
   <meta name="robots" content="{html.escape(robots, quote=True)}">
   <link rel="canonical" href="{url}">
   <link rel="alternate" hreflang="{hreflang_self}" href="{url}">
   <link rel="alternate" hreflang="{hreflang_other}" href="{other_url}">
   <link rel="alternate" hreflang="x-default" href="{url if lang == 'pt' else other_url}">
   <meta property="og:title" content="{html.escape(title, quote=True)}">
-  <meta property="og:description" content="{html.escape(summary, quote=True)}">
+  <meta property="og:description" content="{html.escape(description, quote=True)}">
   <meta property="og:url" content="{url}">
   <meta property="og:type" content="website">{og}
   <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
