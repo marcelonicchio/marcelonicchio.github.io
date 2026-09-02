@@ -1,0 +1,180 @@
+name: Chet C1 one-shot Chapter Page migration
+
+on:
+  push:
+    branches: [work/chet-c1-chapter-pages-dense]
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/chet-c1-chapter-pages-dense
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install repository dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+      - name: Promote three dense entries to neutral fragments
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          ROOT = Path('.')
+          entries_path = ROOT / 'data/entries.json'
+          galleries_path = ROOT / 'data/galleries.json'
+          entries_data = json.loads(entries_path.read_text(encoding='utf-8'))
+          galleries_data = json.loads(galleries_path.read_text(encoding='utf-8'))
+
+          specs = {
+              'internet-mirantte': {
+                  'pt_fragment': 'content/entries/pt/internet-mirantte.inc',
+                  'en_fragment': 'content/entries/en/internet-mirantte.inc',
+                  'description': {
+                      'pt': 'Mirantte News (2004–2008): produto digital de Marcelo Nicchio, aquisição de tráfego, MapLink/UOL e a transição profissional para Search.',
+                      'en': 'Mirantte News (2004–2008): Marcelo Nicchio’s digital product, traffic acquisition, MapLink/UOL and his professional transition into Search.'
+                  },
+              },
+              'internet-cookieweb': {
+                  'pt_fragment': 'content/entries/pt/internet-cookieweb.inc',
+                  'en_fragment': 'content/entries/en/internet-cookieweb.inc',
+                  'description': {
+                      'pt': 'Marcelo Nicchio na CookieWEB (2010–2012): Beleza na Web, liderança de SEM, certificações Google e operação de mais de 22 contas.',
+                      'en': 'Marcelo Nicchio at CookieWEB (2010–2012): Beleza na Web, SEM leadership, Google certifications and an operation spanning 22+ accounts.'
+                  },
+              },
+              'audiovisual-meia-noite': {
+                  'pt_fragment': 'content/entries/pt/communication-meia-noite.inc',
+                  'en_fragment': 'content/entries/en/communication-meia-noite.inc',
+                  'description': {
+                      'pt': 'Meia-Noite e Uns (RedeTV!, 2006): direção artística e produção executiva de Marcelo Nicchio, conceito visual, trilha, fotos e vídeos.',
+                      'en': 'Meia-Noite e Uns (RedeTV!, 2006): Marcelo Nicchio’s artistic direction and executive production, visual concept, music, photos and video.'
+                  },
+              },
+          }
+
+          def vertical_target(entry, lang):
+              biography_token = '/biografia/' if lang == 'pt' else '/biography/'
+              for target in entry.get('reader_targets', {}).get(lang, []):
+                  normalized = '/' + target['path'].strip('/') + '/'
+                  if biography_token not in normalized:
+                      return target
+              raise RuntimeError(f"{entry['id']}:{lang}: no thematic vertical target")
+
+          def section_body(path, selector):
+              if not selector.startswith('#'):
+                  raise RuntimeError(f'Expected id selector, got {selector}')
+              section_id = re.escape(selector[1:])
+              text = path.read_text(encoding='utf-8')
+              pattern = re.compile(
+                  rf'<section\b(?=[^>]*\bid=["\']{section_id}["\'])[^>]*>(.*?)</section>',
+                  flags=re.S | re.I,
+              )
+              matches = list(pattern.finditer(text))
+              if len(matches) != 1:
+                  raise RuntimeError(f'{path}: selector {selector} matched {len(matches)} sections')
+              inner = matches[0].group(1)
+              heading = re.search(r'<h2\b[^>]*>.*?</h2>', inner, flags=re.S | re.I)
+              if heading is None:
+                  raise RuntimeError(f'{path}: selector {selector} has no h2')
+              return inner[heading.end():].strip()
+
+          entries = {entry['id']: entry for entry in entries_data.get('entries', [])}
+          galleries = {gallery['id']: gallery for gallery in galleries_data.get('galleries', [])}
+
+          for entry_id, spec in specs.items():
+              entry = entries[entry_id]
+              for lang in ('pt', 'en'):
+                  fragment_rel = spec[f'{lang}_fragment']
+                  fragment_path = ROOT / fragment_rel
+                  target = vertical_target(entry, lang)
+                  fragment = section_body(ROOT / target['path'], target['selector'])
+                  fragment_path.parent.mkdir(parents=True, exist_ok=True)
+                  fragment_path.write_text(fragment + '\n', encoding='utf-8')
+
+                  for gallery_id in entry.get('media', {}).get('galleries', []):
+                      gallery = galleries[gallery_id]
+                      target_list = gallery.setdefault('targets', {}).setdefault(lang, [])
+                      target_list[:] = [fragment_rel if rel == target['path'] else rel for rel in target_list]
+                      if fragment_rel not in target_list:
+                          target_list.append(fragment_rel)
+
+              entry['source'] = {
+                  'kind': 'fragment',
+                  'pt_path': spec['pt_fragment'],
+                  'en_path': spec['en_fragment'],
+              }
+              page = entry.setdefault('chapter_page', {})
+              page['status'] = 'pilot'
+              page['indexing'] = 'noindex,follow'
+              page['description'] = spec['description']
+
+          galleries_data['updated'] = '2026-09-02'
+          entries_path.write_text(json.dumps(entries_data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          galleries_path.write_text(json.dumps(galleries_data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          styles = ROOT / 'styles.css'
+          css = styles.read_text(encoding='utf-8')
+          marker = '/* entry-title-permalink */'
+          if marker not in css:
+              css += '''\n\n/* entry-title-permalink */\n.entry-title-permalink{color:inherit;text-decoration:none}\n.entry-title-permalink:hover,.entry-title-permalink:focus-visible{text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.14em}\n'''
+              styles.write_text(css, encoding='utf-8')
+          PY
+      - name: Synchronize promoted sources and generated surfaces
+        run: |
+          python tools/sync_galleries.py
+          python tools/sync_entries.py
+          python tools/editorial_parity.py --accept internet-mirantte
+          python tools/editorial_parity.py --accept internet-cookieweb
+          python tools/editorial_parity.py --accept audiovisual-meia-noite
+          python tools/editorial_parity.py --accept communication-folha
+          python tools/editorial_parity.py --accept internet-best
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+      - name: Verify C1 structural invariants
+        shell: bash
+        run: |
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/sync_entries.py --check
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/audit_galleries.py
+          python tools/audit_entries.py
+          python tools/audit_full_biography.py
+          python tools/audit_site.py
+          for page in \
+            pt/internet/mirantte-news/index.html en/internet/mirantte-news/index.html \
+            pt/internet/cookieweb/index.html en/internet/cookieweb/index.html \
+            pt/comunicacao/meia-noite-e-uns/index.html en/communication/meia-noite-e-uns/index.html; do
+              test -f "$page" || { echo "Missing generated Chapter Page: $page" >&2; exit 1; }
+              grep -q 'name="robots" content="noindex,follow"' "$page" || { echo "Unexpected robots on $page" >&2; exit 1; }
+          done
+          grep -q 'entry-title-permalink' pt/internet/index.html
+          grep -q 'entry-title-permalink' en/internet/index.html
+          grep -q 'entry-title-permalink' pt/comunicacao/index.html
+          grep -q 'entry-title-permalink' en/communication/index.html
+      - name: Commit migrated state
+        shell: bash
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo 'No migration changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'C1: publish dense entry Chapter Page pilots'
+          git push origin HEAD:work/chet-c1-chapter-pages-dense
