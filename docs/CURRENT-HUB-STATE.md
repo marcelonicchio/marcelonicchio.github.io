@@ -1,89 +1,60 @@
 # CURRENT HUB STATE — Marcelo Nicchio
 
-**Read this first in a new editing/architecture session.**  
-**Snapshot:** 1 Sep 2026 (BRT)  
-**Production baseline captured before this documentation batch:** `5f4ce03d6ee1a7b038229c3777d44ec3d2f9c83c` (PR #52 merged)  
-**Current architecture cycle covered here:** PR #24 through PR #52, with PR #23 as the older continuity baseline.
+**Authoritative operational snapshot:** 2 Sep 2026 (BRT)  
+**Baseline:** `main` after PR #68 / C3 (`c3681d3aebb5c137ff0be3546247897e7c1fe39b`)  
+**Precedence:** later explicit instruction from Marcelo → current `main` + green CI → this file → domain-specific current docs → dated historical handoffs/plans.
 
-This is the authoritative current-state handoff. Older planning, continuity and pilot documents remain useful as historical records, but when they describe a pre-implementation state this file wins unless Marcelo gives a later explicit instruction.
+This file is the shortest path into the live architecture. Older dossiers and continuity documents remain historical rationale, not current implementation contracts.
 
 ---
 
-## 1. HUB constitution
+## 1. Constitution
 
 The HUB is Marcelo Nicchio's public, canonical, multidisciplinary autobiography and authority/identity hub.
 
-It is **not** a conventional CV, a proof site, a defensive biography or a forensic archive presented to the reader.
-
-Permanent editorial priority:
+It is not a conventional CV, a proof site or a forensic autobiography. The permanent editorial rule remains:
 
 > **Humans first; semantics second.**
 
-Documentation, sources, schema, SEO/GEO/AEO and archive material support the narrative. They do not become the protagonist of the public experience.
+Autobiographical information may be published as autobiography even when no external corroborating source exists. Sources, archive material, schema, SEO/GEO/AEO and documentation support the narrative; they do not dominate the reader experience.
 
-Canonical identity: **Marcelo Nicchio**. Historical variants may include Marcelo Henrique Nicchio, Marcelo H. Nicchio and Marcelo Minduim.
-
-### Publicability rule
-
-> **Information with a useful source → publish the information and the source.**  
-> **Autobiographical information without an external source → publish it normally, without inventing a disclaimer.**
-
-Absence of external corroboration is not a generic gate. Privacy, copyright, uncertainty in the author's own memory and third-party reputational/legal exposure are separate editorial questions.
+Full Biography is the integral chronology. Thematic verticals are selective cuts through the same life and do not need to contain every professional episode.
 
 ---
 
-## 2. Public information architecture
+## 2. Public architecture
 
-Primary PT/EN surfaces remain:
+Primary PT/EN surfaces:
 
-- Home;
+- Home / entity gateway;
 - Full Biography / Biografia Completa;
 - Music / Música;
-- Cultura & Audiovisual / Culture & Audiovisual;
+- Mídia & Cultura / Media & Culture, with H1 **Cultura & Audiovisual / Culture & Audiovisual**;
 - Internet & Performance;
 - AI/HAI / IA/HAI;
 - Publications / Publicações;
 - Archive / Arquivo;
 - Selected Projects / Projetos.
 
-### Internet & Performance is one vertical
+### Settled structural decisions
 
-The former Internet and Search/Performance axes were structurally merged into **Internet & Performance**.
+- Internet + Search/Performance are one vertical: **Internet & Performance**.
+- Search remains an important specialization inside that continuous digital trajectory, not a separate competing vertical.
+- Communication + Audiovisual are one vertical at canonical paths `/pt/comunicacao/` and `/en/communication/`.
+- Legacy Search and Audiovisual paths are compatibility surfaces only.
+- Livraria Cultura remains in Full Biography only; chronology alone does not place it in a thematic vertical.
 
-The intended narrative is continuous: BBS / pre-Web network culture → commercial internet → infrastructure/hosting and digital products → Search → Social → analytics → media/performance operations.
-
-Legacy Search URLs exist only for compatibility/redirect behavior. Do not recreate Search as a competing vertical.
-
-### Livraria Cultura rule
-
-Livraria Cultura belongs to the Full Biography in its chronological position but not to Internet & Performance or another thematic vertical merely because of chronology.
-
-### Cultura & Audiovisual is one vertical
-
-The former Communication & Culture and Audiovisual axes are structurally merged into one thematic vertical.
-
-Public naming separates navigation economy from editorial precision:
-
-- menu PT: **Mídia & Cultura**;
-- menu EN: **Media & Culture**;
-- page H1/title PT: **Cultura & Audiovisual**;
-- page H1/title EN: **Culture & Audiovisual**.
-
-Canonical paths remain **`/pt/comunicacao/`** and **`/en/communication/`**. The Folhateen Chapter Page remains at its existing Communication path. The old `/pt/audiovisual/` and `/en/audiovisual/` URLs are permanent `noindex,follow` compatibility stubs canonicalized and redirected to the combined vertical.
-
-The merged page follows one thematic chronology; the Full Biography remains the integral cross-domain chronology and continues to be generated from thematic sources rather than hand-edited. See `docs/url-policy.md`.
+Do not reopen these decisions casually.
 
 ---
 
-## 3. Full Biography constitution
+## 3. Full Biography
 
 Permanent rule:
 
-> **Full Biography = totality. Verticals = thematic cuts through the same life.**
+> **Full Biography = totality. Verticals = thematic cuts.**
 
-The Full Biography is a single integrated chronology. It is not a concatenation of verticals and must not be shortened merely because Reader disclosure or Chapter Pages exist.
-
-Canonical infrastructure:
+The managed chronology must not be hand-edited. Core infrastructure:
 
 - `data/full_biography.json`
 - `data/editorial_parity.json`
@@ -93,356 +64,177 @@ Canonical infrastructure:
 - `pt/biografia/index.html`
 - `en/biography/index.html`
 
-Do **not** hand-edit the managed Full Biography region.
+PT/EN parity means factual/editorial equivalence, not literal translation.
 
-### PT/EN workflow
-
-1. edit/review PT editorial source;
-2. create/review the deliberate EN equivalent;
-3. compare meaning, dates, roles and framing;
-4. run parity check;
-5. explicitly accept the affected parity revision;
-6. regenerate Full Biography;
-7. run the complete audits.
-
-Parity means factual/editorial equivalence, not literal translation.
+Full Biography remains `index,follow`. Any future robots change is explicitly operator-gated.
 
 ---
 
-## 4. Entry/source architecture
+## 4. Entry and Chapter Page architecture
 
-`data/entries.json` and `data/tags.json` provide reusable entry metadata and controlled taxonomy without becoming a second autobiography.
+`data/entries.json` is the registry for reusable entry metadata, Reader presentation and selective Chapter Pages. `data/tags.json` is controlled taxonomy; a tag does not imply a public URL.
 
-Three source roles remain valid:
+Valid source roles:
 
-### A. Reader-section source
+1. **reader-section** — thematic vertical remains editorial source;
+2. **fragment** — neutral shared `content/entries/<lang>/*.inc` source used when an entry is deliberately reused in a generated Chapter Page;
+3. **composite-reader-landmarks** — a semantic subject spans multiple chronological locations without physically merging them.
 
-The vertical remains the editorial source. Use this when the same complete body does not yet need to feed an autonomous generated Chapter Page.
+No mass fragment migration and no mass Chapter Page generation are authorized.
 
-### B. Neutral shared fragment
+### Current generated Chapter Page pairs
 
-For deliberately promoted entries only:
+- Folhateen / “Órfãos do Rock”;
+- Mirantte News;
+- CookieWEB;
+- Meia-Noite e Uns;
+- Melissa 1.0;
+- BEST / Kenshoo.
 
-`content/entries/<lang>/<entry>.inc`
+All have self-canonical URLs, reciprocal hreflang, visible breadcrumbs, `BreadcrumbList` and registry-backed source relationships.
 
-The fragment can feed the thematic vertical and a generated Chapter Page; the vertical then feeds Full Biography through the normal sync.
+### Current indexation state
 
-Current fragment-backed pilot entries include Folhateen and BEST/Kenshoo.
+- **BEST/Kenshoo PT/EN:** `index,follow`, in sitemap — first controlled Chapter Page indexation pilot.
+- **Folhateen, Mirantte, CookieWEB, Meia-Noite, Melissa Chapter Pages:** `noindex,follow`, outside sitemap.
 
-**No broad `.inc` migration.** Source migration happens entry by entry only when reuse justifies it.
-
-### C. Landmark/composite subject
-
-A semantic relationship may span multiple chronological entries without physically moving them together. Goobec/GAP is the canonical example.
+Creating a Chapter Page does not automatically authorize indexing it.
 
 ---
 
-## 5. Reader UX — current production state
+## 5. Reader UX
 
-The Reader architecture is no longer merely an opt-in prototype.
+Reader disclosure is progressive enhancement: complete text stays in delivered HTML and no-JS fallback remains readable.
 
 ### Default disclosure surfaces
 
-Normal public URLs use compact/disclosure reading by default on:
+- Full Biography PT/EN;
+- Internet & Performance PT/EN.
 
-- `/pt/biografia/` + `/en/biography/`;
-- `/pt/internet/` + `/en/internet/`.
+### Continuous/open surfaces
 
-Complete autobiographical text remains in delivered HTML. JavaScript progressively constructs the Reader presentation; no-JS fallback remains the original readable page.
+- Mídia & Cultura / Media & Culture remains fully open; no Reader wrapper is applied there.
+- AI/HAI remains an open editorial vertical.
 
-### Opt-in laboratory surfaces
+### Path-scoped Melissa rule
 
-The combined Cultura & Audiovisual vertical remains an opt-in Reader experiment through `?ux=disclosure` on `/pt/comunicacao/` and `/en/communication/`; the legacy Audiovisual stubs do not participate in Reader disclosure.
+Melissa 1.0 is intentionally different by surface:
 
-### AI/HAI selective mode
+- **AI/HAI vertical PT/EN:** full Melissa entry stays completely open — no compact preview, no card, no disclosure;
+- **Full Biography PT/EN:** Melissa may use its rich compact summary to reduce chronological-page density.
 
-AI/HAI is a special case.
+This is implemented through path-scoped `always_open_paths`; it is not a global rule for old/final entries.
 
-The page remains **open by default as an editorial rule**. It does not use blanket chapter disclosure.
+### Reader presentation states
 
-The current exception is **Melissa 1.0**, used as the selective rich-summary pilot. Only Melissa is transformed into a collapsed/expanded two-state entry on `/pt/ia-hai/` and `/en/ai-hai/`. PRO v2, PRO v1, the research-cycle opener and research identity remain openly rendered.
+- `normal`
+- `always-open`
+- `featured`
 
-No global “Open all / Collapse all” controls appear on AI/HAI while only one selective disclosure exists.
+Current explicit open entries include Minduim/BBS, Clickland and Folhateen where registered. Featured entries include Mirantte, CookieWEB and Meia-Noite in their disclosure contexts.
 
-### Reader guarantees
-
-- native `<details>/<summary>` semantics;
-- multiple entries can remain open;
-- deep links auto-open the containing chapter;
-- keyboard operation;
-- print exposes complete content;
-- no-JS fallback remains readable;
-- full body is never fetched only after a click;
-- Chrome smoke tests cover desktop/mobile behavior.
+Featured color treatment is still aesthetically unresolved. Technical behavior is correct: highlight is collapsed-state only and disappears when expanded.
 
 ---
 
-## 6. Reader presentation states
+## 6. Rich compact summaries
 
-`reader_presentation.state` currently supports:
+The compact state is an autonomous concise version of the full entry, not a teaser or mechanical excerpt.
 
-- `normal` — ordinary closed entry;
-- `always-open` — Type 1 entry remains permanently open and scroll-only;
-- `featured` — dense/editorially important entry starts closed but receives stronger visual treatment.
+Hard ceiling for structured `reader_preview` copy: **1,650 visible characters per language**. Preferred design center is roughly 1,300 characters when the subject justifies that density.
 
-Featured visual treatment is state-dependent: it exists only while the entry is collapsed. Opening a featured entry restores the normal dark Reader treatment; collapsing it restores the highlight.
+Current rich-summary set in Full Biography:
 
-Current experimental matrix includes:
+- Melissa 1.0;
+- Mirantte News;
+- CookieWEB;
+- Meia-Noite e Uns.
 
-- Minduim/BBS → `always-open`;
-- Folha de S.Paulo / “Órfãos do Rock” → `always-open`;
-- Mirantte News → `featured`;
-- CookieWEB → `featured`;
-- Meia-Noite e Uns → `featured`.
+Rich summaries are selective. Folhateen and other deliberately open entries should not be collapsed merely for consistency.
 
-The CTA text weight is currently normal (`500`), and the red CTA background is a darker translucent red. Those choices are not the final answer for the featured-card color system.
+Two visible label systems remain distinct:
 
-`always-open` is Type 1: the entry stays as ordinary open HTML, scroll-only, with no top or bottom expand/collapse controls and no participation in global Reader open/collapse actions.
+- neutral topic/taxonomy chips = what the entry is about;
+- red content indicators = what resources exist inside.
 
----
-
-## 7. Rich collapsed thread-summary model — accepted baseline
-
-Melissa 1.0 established the first accepted **page-summary of a thread**.
-
-The compact state is not a teaser and not a clipping of the opening paragraphs. It is a separately written concise version of the complete entry, designed under the assumption that **most visitors may never expand it**.
-
-### Editorial model
-
-- Version A = complete expanded post;
-- Version B = autonomous concise post shown while collapsed.
-
-Version B should communicate the principal arc even if the reader never clicks.
-
-### Density guardrail
-
-Melissa after calibration contains four paragraphs and is the **upper-density reference**:
-
-- PT visible preview copy: about **1,638 characters**;
-- EN visible preview copy: about **1,616 characters**.
-
-Adopted rule for future rich previews:
-
-- **maximum:** 1,650 visible-copy characters per language;
-- **preferred design center:** about 1,300 characters (roughly 20% below the ceiling);
-- shorter is fine when the subject does not justify the target;
-- the number of paragraphs is not a rigid rule, but Melissa's four short paragraphs are the current upper-density visual reference.
-
-Title, date/meta, topic tags, internal-content indicators and CTA do not count toward this text budget.
-
-`tools/audit_entries.py` should enforce the 1,650-character maximum whenever a structured `reader_preview` exists.
-
-### Visual/semantic structure
-
-A rich compact summary may include:
-
-- optional cover/editorial image;
-- concise editorial copy;
-- selective bold emphasis;
-- **topic labels** describing what the entry is about;
-- **internal-content indicators** describing what the reader will find after expansion;
-- expand CTA.
-
-Melissa's image sizing is approved. Do not alter it as part of generic Reader work.
-
-### Two kinds of labels
-
-**Topic labels** are taxonomy and future URL/SEO planning data. Melissa currently uses:
-
-`AI · HAI · HCI · Prompt Engineering · Melissa 1.0`
-
-They use a neutral light/translucent surface so they read distinctly from internal-content indicators.
-
-**Internal-content indicators** are UX promises about what exists inside the full post. Melissa currently uses:
-
-`2 images · 1 download link · 4 DOI documents · 1 repository link`
-
-They retain the red treatment.
-
-Curated indicators are allowed for rich entries when automatic media counting cannot express meaningful resources such as DOI documents, downloads or repositories.
-
-See `docs/reader-summary-model.md` for the dedicated specification.
+Current rich-summary image choices for Mirantte/CookieWEB/Meia-Noite are not operator-approved final selections; do not replace them autonomously before the visual review.
 
 ---
 
-## 8. Three active Reader UX problems
+## 7. Indexation and Home
 
-These were explicitly identified and must remain visible in future work.
+Current indexable core includes root/language surfaces, Full Biography, Publications, Archive, AI/HAI and the BEST/Kenshoo Chapter Page pair.
 
-### Problem 1 — featured-card color language
+Historical thematic verticals Music, Mídia & Cultura, Internet & Performance and Projects remain `noindex,follow` for now.
 
-The current yellow reads too beige and the current red still reads too wine-like. New tests are required.
+Marcelo has already decided the destination state: mature thematic verticals should eventually become `index,follow`. The sequencing remains:
 
-Desired direction:
+1. expand `/` into a substantive human-readable entity page for **Marcelo Nicchio**;
+2. then promote mature PT/EN vertical pairs atomically with robots + sitemap + audit whitelist.
 
-- yellow → clearer/lighter yellow;
-- red → more genuinely red, probably translucent even if this reduces raw emphasis.
-
-Button border removal and lighter text weight are hypotheses, not settled decisions.
-
-### Problem 1.1 — color must describe the collapsed state
-
-Current featured treatment remains colored even after the post opens.
-
-Desired rule:
-
-> **Collapsed:** color may signal “this dense/important entry is worth opening.”  
-> **Expanded:** return to the normal black/dark post background.
-
-The color is an invitation/state cue, not permanent identity for the full expanded entry.
-
-### Problem 2 — collapsed state must carry real content
-
-This problem is now substantially solved by the Melissa model.
-
-The next step is to apply the model selectively to other dense entries, adapting content and image use rather than cloning Melissa mechanically.
-
-Likely high-value candidates include Mirantte News, CookieWEB and Meia-Noite e Uns.
+The root prose is operator-authored and has not yet been supplied. C4/Home is therefore skipped for the current implementation run, not abandoned.
 
 ---
 
-## 9. AI/HAI editorial state
+## 8. Media rules
 
-AI/HAI reads in reverse chronology for the recent research cycle:
+Two image roles remain separate:
 
-1. contextual opener;
-2. Punk Rock Orchestra v2 — in development;
-3. Punk Rock Orchestra v1 — May 2026;
-4. Melissa 1.0 — September 2025 case / January 2026 publication cycle;
-5. research identity.
+1. editorial image inside a thread;
+2. associated record gallery below a record.
 
-### PRO v2
+Gallery UX may use thumbnails, lightbox, manual navigation, accessibility and lazy loading. Ordinary personal images do not require public “evidence classes”. Provenance/credit/date/alt/caption are useful when applicable.
 
-The block currently remains editorially light because the methodology is still being developed. It already uses the approved conceptual 2:1 illustration:
+AI reconstruction from memory is illustration, never historical evidence. Scans, video frames, redacted versions and AI reconstructions should be labeled when materially necessary.
 
-`assets/media/thread/thepunkrockorchestra_V2_1000x500_300kb.jpg`
-
-The image is explicitly an AI-generated conceptual illustration, not research evidence.
-
-### PRO v1
-
-The public entry is intentionally substantive but concise. It is framed as the **first public formulation**, not the final methodology.
-
-It touches N1/N2/N3, Robotic/Dialogical, Blue/Red/Forensic, Sterling, context poisoning and Cognitive Jelly without taking depth away from v2. It records the 54-interaction pilot and the paper's explicit limitation: adversarial epistemic integrity/stability was tested; superior open-ended differentiated cognition was not demonstrated.
-
-Current architecture figure:
-
-`assets/media/thread/pro_v1_diagrama01.jpg`
-
-### Melissa 1.0 complete entry
-
-The full entry remains intentionally dense and includes:
-
-- origin as a functional Gemini 2.5 Pro headhunter persona;
-- Sep 12–19 2025, 11 sessions, ~63 hours, 518 prompts;
-- reasoning traces as observable displayed behavior;
-- EIP taxonomy with explicit epistemic caveat;
-- six-layer Melissa Framework authored by Melissa during the interaction;
-- Melissa v8.7 signature;
-- four public DOI works;
-- full GitHub repository and original Framework directory;
-- self-portrait and dissolution image;
-- original Portuguese image prompt inside a small native disclosure.
-
-The page does not claim metaphysically robust consciousness. It also must not casually erase the reasoning-trace material, because that is core documented evidence in the research narrative.
-
-Current self-portrait CSS remains 65% desktop / 100% mobile for the **expanded** entry. The underlying image was manually replaced with a thinner-frame version while preserving the same filename and layout.
+Coitado do Próximo is a later archive workstream: preserve source frame/timestamp separately from treated derivatives; use AI reconstruction only when appropriate and clearly labeled.
 
 ---
 
-## 10. Media architecture
+## 9. Chet implementation status through C3
 
-Two image roles remain distinct:
+### C0 — sanitation — complete
 
-1. **editorial image inside the thread** — large/in-flow narrative image used to give visual rhythm and break long text;
-2. **associated record gallery** — potentially many images below a record, using reusable thumbnails/lightbox/lazy-loading infrastructure.
+- corrected active Folhateen master filenames to publication date 23 Apr 2001;
+- regenerated managed gallery surfaces;
+- removed fabricated global sitemap `lastmod` values;
+- added regression guard for the Folhateen date;
+- added EN rich-summary browser smoke.
 
-Do not turn ordinary personal photographs into evidence bureaucracy.
+### C1 — dense Chapter Pages — complete
 
-Useful metadata such as provenance, credit, period, alt and caption should be applied when appropriate. Explicit labels remain important for AI reconstructions, scans/captures, video frames and redacted versions.
+- promoted Mirantte, CookieWEB and Meia-Noite to neutral shared fragments;
+- generated PT/EN Chapter Pages;
+- added generic title permalinks;
+- fixed Full Biography generator so title normalization preserves nested permalinks.
 
-AI reconstruction from memory is illustration, never historical evidence. Minduim BBS remains the canonical example.
+### C2 + C2.1 — Melissa — complete
 
----
+- promoted Melissa to fragment-backed PT/EN Chapter Pages;
+- added HAI support to Chapter Page generation;
+- kept Melissa fully open on AI/HAI PT/EN while retaining the compact Full Biography presentation.
 
-## 11. Chapter Pages and indexing
+### C3 — BEST/Kenshoo — complete
 
-Current generated Chapter Page pilots:
-
-- Folhateen PT/EN;
-- BEST/Kenshoo PT/EN.
-
-They remain `noindex,follow` and self-canonical with reciprocal hreflang and breadcrumbs.
-
-No mass Chapter Page generation or tag-page generation is authorized.
-
-A single controlled indexation pilot remains reasonable after deliberate review. Xará specifically identified the current all-`noindex` state as producing no Search observation data. Do not turn that observation into automatic mass indexation.
-
-Current indexable core surfaces include Full Biography, Publications, Archive and AI/HAI in PT/EN. Internet & Performance remains `noindex,follow` while it is still being editorially/UX refined.
-
-See `docs/indexation-plan.md` for the current staged plan.
+- strengthened the entry copy using already documented facts only;
+- promoted BEST PT/EN Chapter Pages to `index,follow`;
+- added the pair to sitemap and the indexable audit set.
 
 ---
 
-## 12. Performance and known technical follow-ups
+## 10. Current implementation queue
 
-A reproducible pre-Reader Lighthouse baseline exists in `docs/lighthouse-baseline-2026-08-29.md`.
-
-Known observation from that baseline: Full Biography mobile LCP was about **4.13 s** in the recorded lab run.
-
-The Full Biography has since crossed static image-weight warnings and carries many images. This does not prove equivalent initial transfer because media is lazy-loaded, but it is enough to justify a same-protocol Lighthouse remeasurement before inventing a thumbnail-materialization redesign.
-
-Other live follow-ups:
-
-- native Ctrl+F can still be awkward in Firefox/Safari when `<details>` is closed; test real-reader behavior before replacing the architecture;
-- AI/HAI schema can later become richer (for example an `ItemList` of scholarly works with DOI identifiers) once PRO v2 stabilizes;
-- one Chapter Page indexing pilot remains available as a controlled SEO experiment;
-- long metadata descriptions are low-priority cleanup, not architecture blockers.
+- **C4 Home:** intentionally skipped in the current run; blocked only by operator prose.
+- **C5 documentation consolidation:** this rewrite.
+- **C6 sitemap freshness policy:** close the stale/fabricated `lastmod` problem with a deterministic policy/tooling decision.
+- **C7 performance/media observability:** add reproducible runtime checks around Reader/media loading rather than inferring performance from static full-scroll bytes alone.
+- **C8 selective rich-summary rollout:** review remaining registered entries and extend only where the compact model improves the Full Biography.
+- later: visual color/image review, Coitado archive, remaining editorial entries, final whole-site audit and eventual vertical indexation after Home.
 
 ---
 
-## 13. Known editorial follow-ups
+## 11. CI invariants
 
-- **CookieWEB title:** do not keep “Beleza na Web e CookieWEB” as the final thread title. CookieWEB is the entry axis; Beleza na Web should retain strong internal subtitle/text treatment.
-- apply rich compact summaries selectively to dense entries after Melissa, using the 1,650/≈1,300 character model;
-- continue PRO v2 only when its deeper research content is ready; do not inflate PRO v1 to compensate;
-- preserve AI/HAI newest→oldest order.
+The Site Audit workflow currently protects navigation, gallery derivatives/sync, editorial parity, neutral entry sources, Full Biography generation/coverage, Reader loader, Chapter Pages, entry registry, Media/Culture fusion, JS syntax, Chrome Reader behavior, page-image weight reporting, HTML/JSON/sitemap, external presence and analytics installation.
 
----
-
-## 14. GitHub working discipline
-
-Before any write, refetch current `main`; Marcelo may upload assets manually between sessions.
-
-Expected sequence:
-
-1. refetch current `main`;
-2. create dedicated branch;
-3. keep diff scoped;
-4. run relevant sync/parity/build/audit steps;
-5. open PR;
-6. require green Site Audit/browser smoke;
-7. merge;
-8. confirm post-merge Site Audit;
-9. confirm GitHub Pages build/deploy;
-10. only then describe the change as published.
-
-Temporary workflows may be used for repository-side transformations when necessary, but must be removed before the PR is finalized.
-
----
-
-## 15. Document precedence
-
-For conflicts, use this order:
-
-1. explicit later instruction from Marcelo;
-2. current `main` implementation + green CI invariants;
-3. this `CURRENT-HUB-STATE.md`;
-4. `docs/reader-summary-model.md` for compact-thread UX;
-5. `docs/entry-authoring-workflow.md` for source/registry/Chapter Page mechanics;
-6. `docs/full-biography-workflow.md` for Full Biography/parity mechanics;
-7. `docs/visual-archive-plan.md` for media/archive mechanics;
-8. `docs/DUKE-LEGACY-DOSSIER-2026-09-01.md` for the implementation-cycle narrative and handoff detail;
-9. dated plans/addenda/continuity documents for historical rationale.
-
-Older documents do not regain authority merely because they are more detailed.
+When CI catches a regression, fix the generator/runtime/source model. Do not weaken assertions merely to make the build green.
