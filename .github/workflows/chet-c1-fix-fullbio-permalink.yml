@@ -1,0 +1,57 @@
+name: Chet C1 one-shot Full Bio permalink fix
+
+on:
+  push:
+    branches: [work/chet-c1-chapter-pages-dense]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/chet-c1-chapter-pages-dense
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Preserve pilot permalink while Full Bio normalizes H2
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('tools/sync_full_biography.py')
+          text = path.read_text(encoding='utf-8')
+          old = '''    heading = section.find("h2", recursive=False)\n    if heading is not None:\n        clean = re.sub(r"^\\s*\\d{4}(?:[–-](?:\\d{2,4}|presente|present))?\\s+—\\s+", "", heading.get_text(" ", strip=True), flags=re.I)\n        if clean and clean[0].islower():\n            clean = clean[0].upper() + clean[1:]\n        if clean != heading.get_text(" ", strip=True):\n            heading.clear()\n            heading.append(clean)\n'''
+          new = '''    heading = section.find("h2", recursive=False)\n    if heading is not None:\n        original_text = heading.get_text(" ", strip=True)\n        clean = re.sub(r"^\\s*\\d{4}(?:[–-](?:\\d{2,4}|presente|present))?\\s+—\\s+", "", original_text, flags=re.I)\n        if clean and clean[0].islower():\n            clean = clean[0].upper() + clean[1:]\n        if clean != original_text:\n            permalink = heading.find("a", class_="entry-title-permalink", recursive=False)\n            href = permalink.get("href") if permalink is not None else None\n            heading.clear()\n            if href:\n                link = fragment.new_tag("a", href=href)\n                link["class"] = ["entry-title-permalink"]\n                link.string = clean\n                heading.append(link)\n            else:\n                heading.append(clean)\n'''
+          if old not in text:
+              raise SystemExit('Expected Full Biography heading normalization block not found')
+          path.write_text(text.replace(old, new), encoding='utf-8')
+          PY
+      - name: Regenerate and verify
+        run: |
+          python tools/sync_full_biography.py
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/editorial_parity.py --check
+          grep -q 'href="/en/internet/mirantte-news/"' en/biography/index.html
+          grep -q 'href="/en/internet/cookieweb/"' en/biography/index.html
+          grep -q 'href="/en/communication/meia-noite-e-uns/"' en/biography/index.html
+          grep -q 'href="/pt/internet/mirantte-news/"' pt/biografia/index.html
+          grep -q 'href="/pt/internet/cookieweb/"' pt/biografia/index.html
+          grep -q 'href="/pt/comunicacao/meia-noite-e-uns/"' pt/biografia/index.html
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/sync_full_biography.py pt/biografia/index.html en/biography/index.html
+          git commit -m 'C1: preserve Chapter Page links in Full Biography headings'
+          git push origin HEAD:work/chet-c1-chapter-pages-dense
