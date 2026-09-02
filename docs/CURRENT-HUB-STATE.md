@@ -39,9 +39,8 @@ Primary PT/EN surfaces remain:
 - Home;
 - Full Biography / Biografia Completa;
 - Music / Música;
-- Communication / Comunicação;
+- Cultura & Audiovisual / Culture & Audiovisual;
 - Internet & Performance;
-- Audiovisual;
 - AI/HAI / IA/HAI;
 - Publications / Publicações;
 - Archive / Arquivo;

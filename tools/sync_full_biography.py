@@ -158,7 +158,7 @@ def render_managed_block(lang: str, manifest: dict[str, Any]) -> str:
         intro = (
             '<div class="bio-chronology-intro" id="cronologia">'
             '<span>1989 → presente</span><strong>Uma única linha do tempo</strong>'
-            '<p>Música, comunicação, internet, performance, audiovisual e IA/HAI aparecem aqui na ordem em que atravessaram a trajetória, inclusive quando ocorreram em paralelo.</p>'
+            '<p>Música, Cultura & Audiovisual, Internet & Performance e IA/HAI aparecem aqui na ordem em que atravessaram a trajetória, inclusive quando ocorreram em paralelo.</p>'
             '</div>'
         )
         context_head = (
@@ -170,7 +170,7 @@ def render_managed_block(lang: str, manifest: dict[str, Any]) -> str:
         intro = (
             '<div class="bio-chronology-intro" id="chronology">'
             '<span>1989 → present</span><strong>One integrated timeline</strong>'
-            '<p>Music, communication, internet, performance, audiovisual work and AI/HAI appear here in the order they crossed the trajectory, including periods in which they happened in parallel.</p>'
+            '<p>Music, Culture & Audiovisual, Internet & Performance and AI/HAI appear here in the order they crossed the trajectory, including periods in which they happened in parallel.</p>'
             '</div>'
         )
         context_head = (
