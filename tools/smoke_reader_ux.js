@@ -169,21 +169,25 @@ async function runDesktop(browser) {
   assert((await melissaBio.locator('.reader-disclosure__body').innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa full body was not preserved after expansion');
   await melissaBio.locator('details.reader-disclosure > summary').click();
 
-  // IA/HAI selective pilot: Melissa alone gets the compact/full two-state treatment.
+  // IA/HAI preserves continuous reading: Melissa is the oldest/final chapter and stays fully open.
   await page.goto(`${BASE}/pt/ia-hai/`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() === 1, 'IA/HAI should expose exactly one selective disclosure');
-  assert(await page.locator('.reader-disclosure-controls').count() === 0, 'IA/HAI selective pilot should not show global disclosure controls');
+  assert(await page.locator('details.reader-disclosure').count() === 0, 'IA/HAI should preserve a fully open continuous-reading surface');
+  assert(await page.locator('.reader-disclosure-controls').count() === 0, 'IA/HAI should not show global disclosure controls');
   assert(await page.locator('#pro2 details.reader-disclosure').count() === 0, 'PRO v2 was unexpectedly collapsed');
   assert(await page.locator('#pro1 details.reader-disclosure').count() === 0, 'PRO v1 was unexpectedly collapsed');
   const melissaHai = page.locator('#melissa');
-  const melissaHaiPreview = melissaHai.locator('.reader-disclosure__preview');
-  assert(await melissaHaiPreview.isVisible(), 'Melissa IA/HAI collapsed preview is not visible');
-  assert((await melissaHaiPreview.innerText()).includes('63 horas e 518 prompts'), 'Melissa IA/HAI preview lost core case metrics');
-  assert(await melissaHaiPreview.locator('img').getAttribute('src') === '/assets/media/thread/melissa1_0_selfportrait300kb.jpg', 'Melissa IA/HAI preview cover image incorrect');
-  await melissaHai.locator('details.reader-disclosure > summary').click();
-  assert(await melissaHai.locator('details.reader-disclosure').getAttribute('open') !== null, 'Melissa IA/HAI did not expand');
-  assert(await melissaHaiPreview.isHidden(), 'Melissa IA/HAI compact preview remained visible after expansion');
-  assert((await melissaHai.locator('.reader-disclosure__body').innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa IA/HAI full body was not preserved');
+  assert(await melissaHai.getAttribute('data-reader-presentation') === 'always-open', 'Melissa IA/HAI path-scoped always-open state missing');
+  assert(await melissaHai.locator('details.reader-disclosure').count() === 0, 'Melissa IA/HAI must not be wrapped in disclosure');
+  assert(await melissaHai.locator('.reader-disclosure__preview').count() === 0, 'Melissa IA/HAI must not render a compact preview');
+  assert((await melissaHai.innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa IA/HAI full body is not visible');
+  assert((await melissaHai.innerText()).includes('Melissa Framework'), 'Melissa IA/HAI lost framework content');
+
+  await page.goto(`${BASE}/en/ai-hai/`, {waitUntil: 'networkidle'});
+  const melissaHaiEn = page.locator('#melissa');
+  assert(await melissaHaiEn.getAttribute('data-reader-presentation') === 'always-open', 'Melissa EN AI/HAI path-scoped always-open state missing');
+  assert(await melissaHaiEn.locator('details.reader-disclosure').count() === 0, 'Melissa EN AI/HAI must not be wrapped in disclosure');
+  assert(await melissaHaiEn.locator('.reader-disclosure__preview').count() === 0, 'Melissa EN AI/HAI must not render a compact preview');
+  assert((await melissaHaiEn.innerText()).includes('What happened afterward was not planned.'), 'Melissa EN AI/HAI full body is not visible');
 
   // Full Biography: deep-link opening + registry-backed metadata without query flag.
   await page.goto(`${BASE}/pt/biografia/#bio-internet-cookieweb`, {waitUntil: 'networkidle'});

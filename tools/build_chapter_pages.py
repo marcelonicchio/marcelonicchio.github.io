@@ -34,6 +34,10 @@ DOMAIN = {
         "pt": ("Música", "/pt/musica/"),
         "en": ("Music", "/en/music/"),
     },
+    "hai": {
+        "pt": ("IA/HAI", "/pt/ia-hai/"),
+        "en": ("AI/HAI", "/en/ai-hai/"),
+    },
 }
 
 OG_IMAGE = {

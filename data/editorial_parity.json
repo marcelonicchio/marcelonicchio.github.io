@@ -277,10 +277,10 @@
       "accepted_on": "2026-08-27"
     },
     "hai-melissa": {
-      "revision": 4,
-      "pt_hash": "3ca9e3fabec46280bcd61b6613179fbe305a6bd7dcb62dfce73de3032c17ef8d",
-      "en_hash": "8334a5b5005e27716986996c8c448cd0e76543d8d66e3045ba18c027bf756373",
-      "accepted_on": "2026-08-31",
+      "revision": 5,
+      "pt_hash": "48f67d4884ebd6b39414ea19e83fc5af29ee12efdc5ec910f9fa2a16c5b28f84",
+      "en_hash": "731e53b2474f557a4396c5fd45e6a053a9755a708974e136528af1fa553d3b9e",
+      "accepted_on": "2026-09-02",
       "changed_languages": [
         "pt",
         "en"
