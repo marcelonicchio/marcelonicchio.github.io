@@ -31,6 +31,30 @@ jobs:
         run: pip install beautifulsoup4
       - name: Apply structural fusion
         run: python .tmp-media-culture-fusion.py
+      - name: Make navigation normalizer preserve deep-link suffixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/sync_navigation.py')
+          t = p.read_text(encoding='utf-8')
+          old = '''        pattern = rf'<a([^>]*?)href=\"{re.escape(old)}\"([^>]*)>([^<]*)</a>'
+                  def repl(match):
+                      before, after, label = match.groups()
+                      if label.strip() in {'Search', 'Search & Performance', 'Search &amp; Performance', 'Audiovisual'}:
+                          label = label_out
+                      return f'<a{before}href=\"{target}\"{after}>{label}</a>'
+                  text = re.sub(pattern, repl, text)'''
+          new = '''        pattern = rf'<a([^>]*?)href=\"{re.escape(old)}([^\"]*)\"([^>]*)>([^<]*)</a>'
+                  def repl(match):
+                      before, suffix, after, label = match.groups()
+                      if label.strip() in {'Search', 'Search & Performance', 'Search &amp; Performance', 'Audiovisual'}:
+                          label = label_out
+                      return f'<a{before}href=\"{target}{suffix}\"{after}>{label}</a>'
+                  text = re.sub(pattern, repl, text)'''
+          if old not in t:
+              raise SystemExit('normalize_other_links block not found')
+          p.write_text(t.replace(old, new, 1), encoding='utf-8')
+          PY
       - name: Register legacy audiovisual canonicals in site audit
         run: |
           python - <<'PY'
@@ -93,5 +117,5 @@ jobs:
           git restore .github/workflows/site-audit.yml
           git add -A
           git status --short
-          git commit -m 'Apply Media and Culture fusion draft'
+          git commit -m 'Finalize Media and Culture fusion draft'
           git push origin HEAD:work/media-culture-fusion
