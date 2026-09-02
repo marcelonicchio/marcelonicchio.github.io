@@ -61,11 +61,18 @@ Livraria Cultura belongs to the Full Biography in its chronological position but
 
 ### Next vertical consolidation — Communication + Audiovisual
 
-Communication & Culture and Audiovisual are now slated for a structural fusion because each vertical carries relatively few top-level threads on its own. The final public name is still open; current working directions include **Culture & Audiovisual** and **Audiovisual & Culture**.
+Communication & Culture and Audiovisual are approved for structural fusion because the two axes overlap editorially and each carries relatively few top-level threads in isolation.
 
-Treat this as the same class of change as the Internet + Search/Performance fusion: one menu item, one coherent thematic chronology, PT/EN parity, internal links adjusted, old URLs retained only for compatibility/redirect behavior, and no competing duplicate verticals. The Full Biography remains the integral chronology and is not merged or shortened by this change.
+Approved public naming separates navigation economy from editorial precision:
 
-Do **not** implement the fusion until the public name and ordering are explicitly approved.
+- menu PT: **Mídia & Cultura**;
+- menu EN: **Media & Culture**;
+- page H1/title PT: **Cultura & Audiovisual**;
+- page H1/title EN: **Culture & Audiovisual**.
+
+The established canonical vertical paths are deliberately preserved as **`/pt/comunicacao/`** and **`/en/communication/`**. The Folhateen Chapter Page therefore remains at its current Communication path. The old standalone `/pt/audiovisual/` and `/en/audiovisual/` paths become permanent compatibility stubs when the fusion ships.
+
+Treat the fusion as the same class of change as Internet + Search/Performance: one menu item, one coherent thematic chronology, PT/EN parity, internal links adjusted, and no competing duplicate verticals. The Full Biography remains the integral chronology and is not merged or shortened by this change. See `docs/url-policy.md`.
 
 ---
 

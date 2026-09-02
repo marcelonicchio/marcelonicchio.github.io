@@ -15,7 +15,9 @@ The `/docs` directory contains both living operational documentation and dated h
 
 ## Current supporting references
 
+- `url-policy.md` — permanent URL/stub policy and approved name/URL separation for the Culture + Audiovisual fusion.
 - `lighthouse-baseline-2026-08-29.md` — reproducible pre-Reader Lighthouse lab baseline; still useful as a comparison point, not field data.
+- `lighthouse-remeasurement-2026-09-01.md` — same-protocol post-Reader/post-media Lighthouse comparison, three runs per case with medians.
 - `block4-readiness-map.md` — preparation notes for Petlove → Clickland → BEST/Kenshoo → Ad.Dialetto; use with the current authoring workflow.
 - `indexation-plan.md` — current staged indexation policy.
 - `parity-status.md` — current PT/EN parity policy/status.

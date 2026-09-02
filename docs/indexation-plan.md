@@ -32,6 +32,13 @@ The old separate “Internet & Digital Culture” / “Search & Performance” s
 
 These verticals remain publicly readable while editorial/UX differentiation matures. `noindex` is not a statement that autobiographical material is untrustworthy.
 
+
+### Entity-page gate before vertical promotion
+
+Before historical/thematic verticals are changed from `noindex,follow` to `index,follow`, the root `/` must first be expanded into a useful human-readable entity page while preserving its canonical `Person` node. The operator will supply that prose separately.
+
+Do not remove the Full Biography from the index in the same step. Any future Full Biography `noindex,follow` decision remains explicitly operator-gated and should occur only after the root and selected verticals have been published and observed.
+
 ## 3. Chapter Page pilots
 
 Current generated pilot pairs:
@@ -57,7 +64,7 @@ Therefore a reasonable future experiment is:
 
 > promote **one** mature Chapter Page pair to `index,follow`, with normal static internal links and sitemap review, then observe Search Console before promoting more.
 
-The exact page must be chosen deliberately at experiment time. Older documents suggested Meia-Noite e Uns before the final pilot set changed; that suggestion is historical, not an automatic current choice.
+**BEST/Kenshoo PT/EN is now the approved first Chapter Page pair for this isolated experiment.** It is mature, already generated from a neutral fragment and unaffected by the Communication + Audiovisual fusion. Execute its robots/sitemap change in a dedicated PR so Search Console effects remain attributable.
 
 Do **not** combine the first Chapter Page indexation experiment with mass tag-page creation.
 
