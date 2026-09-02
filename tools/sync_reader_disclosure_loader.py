@@ -7,7 +7,7 @@ import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = '<script src="/assets/js/reader-disclosure-loader.js?v=20260901-reader9" defer></script>'
+SCRIPT = '<script src="/assets/js/reader-disclosure-loader.js?v=20260901-reader10" defer></script>'
 TARGETS = [
     "pt/biografia/index.html",
     "en/biography/index.html",
@@ -15,8 +15,6 @@ TARGETS = [
     "en/internet/index.html",
     "pt/comunicacao/index.html",
     "en/communication/index.html",
-    "pt/audiovisual/index.html",
-    "en/audiovisual/index.html",
     "pt/ia-hai/index.html",
     "en/ai-hai/index.html",
 ]

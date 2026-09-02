@@ -23,12 +23,11 @@ PT/EN counterparts should remain materially aligned when indexation state change
 Verified current PT examples:
 
 - Music / Música;
-- Communication / Comunicação;
+- **Cultura & Audiovisual / Culture & Audiovisual** (canonical paths remain Communication);
 - **Internet & Performance**;
-- Audiovisual;
 - Selected Projects / Projetos.
 
-The old separate “Internet & Digital Culture” / “Search & Performance” staging model is obsolete. Search is now structurally part of **Internet & Performance**. Legacy Search paths are compatibility/redirect surfaces, not independent authority pages.
+The old separate “Internet & Digital Culture” / “Search & Performance” staging model is obsolete. Search is now structurally part of **Internet & Performance**. Communication & Culture and Audiovisual are likewise one **Cultura & Audiovisual / Culture & Audiovisual** vertical at the established Communication paths. Legacy Search and Audiovisual paths are compatibility/redirect surfaces, not independent authority pages.
 
 These verticals remain publicly readable while editorial/UX differentiation matures. `noindex` is not a statement that autobiographical material is untrustworthy.
 

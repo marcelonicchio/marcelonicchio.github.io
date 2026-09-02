@@ -16,10 +16,10 @@
       "sourceRoot": "assets/archive/audiovisual/meia-noite-e-uns",
       "targets": {
         "pt": [
-          "pt/audiovisual/index.html"
+          "pt/comunicacao/index.html"
         ],
         "en": [
-          "en/audiovisual/index.html"
+          "en/communication/index.html"
         ]
       },
       "title": {

@@ -50,6 +50,8 @@ jobs:
         run: python tools/build_chapter_pages.py --check
       - name: Audit entry registry and rendering
         run: python tools/audit_entries.py
+      - name: Audit Media and Culture fusion
+        run: python tools/audit_media_culture_fusion.py
       - name: Check Reader UX JavaScript syntax
         run: |
           node --check assets/js/reader-disclosure-loader.js

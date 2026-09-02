@@ -9,8 +9,7 @@
   ]);
   const pilotSupported = new Set([
     ...defaultSupported,
-    '/pt/comunicacao/', '/en/communication/',
-    '/pt/audiovisual/', '/en/audiovisual/'
+    '/pt/comunicacao/', '/en/communication/'
   ]);
 
   const requestedPilot = params.get('ux') === 'disclosure';
@@ -20,12 +19,12 @@
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = '/assets/reader-disclosure.css?v=20260901-reader9';
+  css.href = '/assets/reader-disclosure.css?v=20260901-reader10';
   css.dataset.readerDisclosure = 'style';
   document.head.appendChild(css);
 
   const script = document.createElement('script');
-  script.src = '/assets/js/reader-disclosure.js?v=20260901-reader9';
+  script.src = '/assets/js/reader-disclosure.js?v=20260901-reader10';
   script.defer = true;
   script.dataset.readerDisclosure = 'script';
   document.head.appendChild(script);
