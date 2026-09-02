@@ -111,6 +111,11 @@ async function main() {
         name: 'Melissa 1.0', selector: '#bio-hai-melissa', paragraphs: 4,
         phrase: '63 hours and 518 prompts', image: '/assets/media/thread/melissa1_0_selfportrait300kb.jpg',
         badges: ['2 images', '1 download link', '4 DOI documents', '1 repository link'], permalink: '/en/ai-hai/melissa-1-0/'
+      },
+      {
+        name: 'BEST / Kenshoo', selector: '#bio-internet-best', paragraphs: 3,
+        phrase: 'Advanced Segmentation in Search and Social', image: '/assets/media/thread/best-kenshoo-workshop.webp',
+        badges: ['4 videos', '11 visual records'], permalink: '/en/internet/best-kenshoo/', robots: 'index,follow'
       }
     ];
 
@@ -123,8 +128,9 @@ async function main() {
     for (const spec of specs.filter((item) => item.permalink)) {
       await page.goto(`${BASE}${spec.permalink}`, {waitUntil: 'networkidle'});
       assert(await page.locator('main[data-entry-id]').count() === 1, `${spec.name}: standalone page did not render`);
-      assert((await page.locator('meta[name="robots"]').getAttribute('content')) === 'noindex,follow',
-        `${spec.name}: standalone pilot unexpectedly changed robots`);
+      const expectedRobots = spec.robots || 'noindex,follow';
+      assert((await page.locator('meta[name="robots"]').getAttribute('content')) === expectedRobots,
+        `${spec.name}: standalone robots mismatch; expected ${expectedRobots}`);
       await page.goto(`${BASE}/en/biography/`, {waitUntil: 'networkidle'});
     }
 
