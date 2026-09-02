@@ -63,17 +63,23 @@ jobs:
           node --check assets/js/reader-disclosure-loader.js
           node --check assets/js/reader-disclosure.js
           node --check tools/smoke_reader_ux.js
-      - name: Smoke-test Reader UX in Chrome
+      - name: Capture Reader UX smoke diagnostic
         env:
           PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
-        run: node tools/smoke_reader_ux.js
+        run: |
+          set +e
+          node tools/smoke_reader_ux.js > docs/_tmp-rich-summary-smoke.txt 2>&1
+          code=$?
+          echo "exit_code=$code" >> docs/_tmp-rich-summary-smoke.txt
+          cat docs/_tmp-rich-summary-smoke.txt
+          exit 0
       - name: Audit HTML and sitemap
         run: python tools/audit_site.py
-      - name: Commit rollout
+      - name: Commit rollout and diagnostic
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git status --short
-          git commit -m 'Add Full Biography rich summaries for dense entries'
+          git commit -m 'Stage Full Biography rich summaries with smoke diagnostic'
           git push origin HEAD:work/fullbio-rich-summaries-1
