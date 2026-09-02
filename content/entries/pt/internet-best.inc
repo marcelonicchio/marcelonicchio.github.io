@@ -1,4 +1,5 @@
 <p>Em 2014, Nicchio atuou como <strong>Gerente de Performance</strong> na BEST, em uma operação ligada à plataforma Kenshoo no Brasil. O trabalho envolvia onboarding da ferramenta e otimização de campanhas de mídia para grandes varejistas.</p>
+<p>Na prática, esse ciclo aproximava duas frentes que aparecem juntas no trabalho de performance: a adoção da tecnologia e a operação cotidiana das campanhas. O onboarding da Kenshoo fazia parte da mesma rotina em que Search e Social eram acompanhados e otimizados para contas de grande porte, colocando plataforma, mídia e desempenho dentro de um único fluxo de trabalho.</p>
 <!-- thread-media:best-kenshoo:start -->
 <figure class="thread-media thread-media--linked">
 <a aria-label="Abrir a fotografia original do workshop BEST/Kenshoo" href="/assets/archive/internet/best-kenshoo/best00_thread_palestra01.png" rel="noopener noreferrer" target="_blank">
@@ -7,13 +8,14 @@
 <figcaption><strong>Workshop do E-Commerce Brasil durante o ciclo BEST/Kenshoo, 2014.</strong><a class="thread-media-open" href="/assets/archive/internet/best-kenshoo/best00_thread_palestra01.png" rel="noopener noreferrer" target="_blank">Abrir imagem original ↗</a></figcaption>
 </figure>
 <!-- thread-media:best-kenshoo:end -->
-<p>Nesse período ministrou para o E-Commerce Brasil um workshop sobre <strong>Segmentação Avançada em Search e Social</strong>. A gravação preservada está dividida em quatro partes.</p>
+<p>Nesse período ministrou para o E-Commerce Brasil um workshop sobre <strong>Segmentação Avançada em Search e Social</strong>. O registro preserva uma amostra direta do repertório profissional daquele ciclo — segmentação, Search, Social e tecnologia aplicada à operação de mídia — e a gravação está dividida em quatro partes.</p>
 <div class="evidence-list">
 <div class="evidence"><div class="evidence-top"><strong>Workshop — Parte 1/4</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/p-1Uc-zD4TE" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
 <div class="evidence"><div class="evidence-top"><strong>Parte 2/4 — Segmentação Avançada em Search e Social</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/hOKqH6yxQ4g" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
 <div class="evidence"><div class="evidence-top"><strong>Parte 3/4</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/C1Z3wD8t03A" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
 <div class="evidence"><div class="evidence-top"><strong>Parte 4/4</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/3h-z53IN6AI" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
 </div>
+<p>Além dos vídeos, o arquivo visual reúne 11 registros do período, incluindo fotografias do workshop, cartão profissional, imagens do escritório e outros registros da operação. O conjunto ajuda a situar visualmente uma etapa curta, mas representativa, da trajetória em Performance.</p>
 <!-- gallery:best-kenshoo:start -->
 <div class="record-gallery" data-gallery="best-kenshoo" aria-labelledby="best-kenshoo-gallery-title">
   <div class="record-gallery__head"><strong id="best-kenshoo-gallery-title">Fotos e registros · 11</strong></div>

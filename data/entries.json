@@ -763,7 +763,7 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "description": {
           "pt": "Marcelo Nicchio na BEST/Kenshoo em 2014: gestão de performance, Search + Social, tecnologia e workshop do E-Commerce Brasil em quatro partes.",
           "en": "Marcelo Nicchio at BEST/Kenshoo in 2014: performance management, Search + Social, technology and a four-part E-Commerce Brasil workshop."
