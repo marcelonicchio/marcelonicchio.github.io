@@ -31,6 +31,26 @@ jobs:
         run: pip install beautifulsoup4
       - name: Apply structural fusion
         run: python .tmp-media-culture-fusion.py
+      - name: Register legacy audiovisual canonicals in site audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/audit_site.py')
+          t = p.read_text(encoding='utf-8')
+          old = '''LEGACY_CANONICAL = {
+              "pt/search-performance/index.html": SITE + "/pt/internet/",
+              "en/search-performance/index.html": SITE + "/en/internet/",
+          }'''
+          new = '''LEGACY_CANONICAL = {
+              "pt/search-performance/index.html": SITE + "/pt/internet/",
+              "en/search-performance/index.html": SITE + "/en/internet/",
+              "pt/audiovisual/index.html": SITE + "/pt/comunicacao/",
+              "en/audiovisual/index.html": SITE + "/en/communication/",
+          }'''
+          if old not in t:
+              raise SystemExit('LEGACY_CANONICAL block not found')
+          p.write_text(t.replace(old, new, 1), encoding='utf-8')
+          PY
       - name: Regenerate canonical derived surfaces
         run: |
           python tools/sync_galleries.py
