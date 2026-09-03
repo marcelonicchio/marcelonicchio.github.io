@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Install the disclosure loader on selected Reader Pages."""
+"""Install or refresh the disclosure loader on selected Reader Pages."""
 
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = '<script src="/assets/js/reader-disclosure-loader.js?v=20260901-reader11" defer></script>'
+LOADER_RE = re.compile(r'<script src="/assets/js/reader-disclosure-loader\.js\?v=[^"]+" defer></script>')
+SCRIPT = '<script src="/assets/js/reader-disclosure-loader.js?v=20260903-reader12" defer></script>'
 TARGETS = [
     "pt/biografia/index.html",
     "en/biography/index.html",
@@ -22,9 +24,12 @@ def sync(path: Path, *, check: bool) -> bool:
     text = path.read_text(encoding="utf-8")
     if SCRIPT in text:
         return False
-    if "</body>" not in text:
-        raise RuntimeError(f"{path.relative_to(ROOT)} has no </body>")
-    updated = text.replace("</body>", SCRIPT + "\n</body>", 1)
+    if LOADER_RE.search(text):
+        updated = LOADER_RE.sub(SCRIPT, text, count=1)
+    else:
+        if "</body>" not in text:
+            raise RuntimeError(f"{path.relative_to(ROOT)} has no </body>")
+        updated = text.replace("</body>", SCRIPT + "\n</body>", 1)
     if not check:
         path.write_text(updated, encoding="utf-8")
     return True
@@ -42,12 +47,12 @@ def main() -> int:
         if sync(path, check=args.check):
             changed.append(rel)
     if args.check and changed:
-        print("Reader disclosure loader is missing from:")
+        print("Reader disclosure loader is stale or missing from:")
         for rel in changed:
             print(" -", rel)
         return 1
     if changed:
-        print("Installed Reader disclosure loader in:")
+        print("Installed/refreshed Reader disclosure loader in:")
         for rel in changed:
             print(" -", rel)
     else:

@@ -1,6 +1,6 @@
 # Staged indexation plan — current state
 
-**Updated:** 2 Sep 2026 (BRT)
+**Updated:** 3 Sep 2026 (BRT)
 
 The HUB does not equate page count with authority. Indexation is staged by editorial maturity and search intent, and experiments should remain attributable rather than changing several URL families at once.
 
@@ -32,9 +32,20 @@ These verticals are publicly readable. `noindex` is staging, not a statement tha
 
 Before historical/thematic verticals are promoted to `index,follow`, root `/` should first become a useful human-readable entity page while preserving its canonical Person identity. Marcelo will supply that prose separately.
 
-C4/Home may be skipped operationally while unrelated work continues. Skipping it does **not** remove the gate for the later mass vertical promotion.
+C4/Home may be skipped operationally while unrelated work continues. Skipping it does **not** remove the gate for the later thematic vertical promotion.
 
 Full Biography remains `index,follow` unless Marcelo explicitly decides otherwise after later review.
+
+### Post-C8 readiness assessment
+
+The 3 Sep 2026 closeout assessed readiness without changing robots:
+
+- **READY after substantive Home — Mídia & Cultura / Media & Culture.** Fused architecture and continuous-reading presentation are stable.
+- **READY after substantive Home — Internet & Performance.** Reader architecture, entry relationships and Chapter Page infrastructure are stable.
+- **READY after substantive Home — Music / Música.** The vertical is structurally/editorially viable even though the historical archive will continue to expand; archive incompleteness alone should not block future indexation.
+- **HOLD — Selected Projects / Projetos.** It currently works better as a transversal project/card index than as a deep authority surface. Do not include it automatically in the first vertical-promotion batch.
+
+No promotion was performed as part of this assessment.
 
 ## 3. Chapter Page state
 
@@ -60,7 +71,7 @@ The prior “future experiment” has now been executed.
 
 BEST/Kenshoo was chosen because it is fragment-backed, mature enough to stand alone, has a clear Search/Performance topic, has stable internal links and a preserved workshop/media archive, and is isolated from the broader vertical-indexation question.
 
-Do not immediately promote another Chapter Page merely to create symmetry. Observe indexing/canonical/query behavior before expanding the experiment set.
+Do not immediately promote another Chapter Page merely to create symmetry. Observe indexing/canonical/query behavior before expanding the experiment set. Lack of immediate public-search confirmation is not evidence of a technical failure.
 
 Do not combine this pilot with mass tag-page creation.
 
@@ -101,7 +112,9 @@ Before changing a PT/EN pair from `noindex,follow` to `index,follow`:
 
 Marcelo has already chosen the destination state: mature thematic verticals should eventually become `index,follow`.
 
-That rollout should occur only after the substantive root entity page exists, and should be atomic by PT/EN pair: robots + sitemap + audit whitelist + canonical/hreflang/internal-link verification.
+After the substantive root entity page exists, the first candidate batch is Music + Mídia & Cultura + Internet & Performance PT/EN. Projects remains separate until its authority-page role is reconsidered.
+
+Any rollout must be atomic by PT/EN pair: robots + sitemap + audit whitelist + canonical/hreflang/internal-link verification.
 
 ## 9. AI/HAI semantic follow-up
 
