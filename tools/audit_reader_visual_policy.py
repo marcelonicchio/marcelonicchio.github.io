@@ -79,7 +79,7 @@ def main() -> int:
             errors.append(f"Reader theme policy token missing: {token}")
 
     loader = LOADER.read_text(encoding="utf-8")
-    if "reader-yellow-outline-test.css?v=20260903-yellow3" not in loader:
+    if "reader-yellow-outline-test.css?v=20260903-yellow4" not in loader:
         errors.append("Reader theme cache-buster is not synchronized with visual policy revision")
 
     if errors:
