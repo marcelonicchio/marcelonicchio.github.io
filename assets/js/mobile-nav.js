@@ -44,14 +44,16 @@
 
     let toggle = nav.querySelector('.nav-toggle');
     if (!toggle) {
+      const isPortuguese = document.documentElement.lang.toLowerCase().startsWith('pt');
+      const toggleLabel = isPortuguese ? 'Categorias' : 'Categories';
       toggle = document.createElement('button');
       toggle.type = 'button';
       toggle.className = 'nav-toggle';
       toggle.hidden = true;
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-controls', links.id);
-      toggle.setAttribute('aria-label', document.documentElement.lang.toLowerCase().startsWith('pt') ? 'Abrir menu principal' : 'Open main menu');
-      toggle.innerHTML = '<span aria-hidden="true" class="nav-toggle__icon"><i></i><i></i><i></i></span><span>Menu</span>';
+      toggle.setAttribute('aria-label', isPortuguese ? 'Abrir categorias de navegação' : 'Open navigation categories');
+      toggle.innerHTML = `<span aria-hidden="true" class="nav-toggle__icon"><i></i><i></i><i></i></span><span>${toggleLabel}</span>`;
       nav.insertBefore(toggle, links);
     }
 
