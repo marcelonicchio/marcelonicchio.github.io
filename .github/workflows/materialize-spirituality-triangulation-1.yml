@@ -1,0 +1,101 @@
+name: Materialize Spirituality triangulation 1
+
+on:
+  push:
+    branches: [work/spirituality-triangulation-1]
+    paths:
+      - '.github/workflows/materialize-spirituality-triangulation-1.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install generation dependencies
+        run: python -m pip install beautifulsoup4
+      - name: Apply reviewed certainty edits and refresh parity
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+
+          replacements = {
+              Path('content/full-biography/pt/spirituality-seeker.inc'): [
+                  (
+                      'A filosofia de Osho permanece, na memória de Nicchio, como uma das experiências intelectualmente mais libertárias de sua vida.',
+                      'A filosofia de Osho permanece como uma das experiências intelectualmente mais libertárias de sua vida.'
+                  ),
+                  (
+                      'Nos últimos dias, sua percepção corporal e sensorial parecia amplificada a ponto de sentir o ar tocando os poros da pele com uma nitidez incomum.',
+                      'Nos últimos dias, sua percepção corporal e sensorial estava amplificada: sentia o ar tocando os poros da pele com uma nitidez incomum.'
+                  ),
+                  (
+                      'Ao sair, fala, barulho, trânsito e fluxo de informação pareciam agressivos.',
+                      'Ao sair, fala, barulho, trânsito e fluxo de informação eram agressivos.'
+                  ),
+              ],
+              Path('content/full-biography/en/spirituality-seeker.inc'): [
+                  (
+                      "Osho's philosophy remains, in Nicchio's memory, one of the most intellectually liberating experiences of his life.",
+                      "Osho's philosophy remains one of the most intellectually liberating experiences of his life."
+                  ),
+                  (
+                      'During the final days, his bodily and sensory perception seemed amplified to the point that he could feel the air touching the pores of his skin with unusual clarity.',
+                      'During the final days, his bodily and sensory perception was amplified: he could feel the air touching the pores of his skin with unusual clarity.'
+                  ),
+                  (
+                      'Once outside, speech, noise, traffic and the flow of information felt aggressive.',
+                      'Once outside, speech, noise, traffic and the flow of information were aggressive.'
+                  ),
+              ],
+          }
+
+          for path, pairs in replacements.items():
+              text = path.read_text(encoding='utf-8')
+              for old, new in pairs:
+                  count = text.count(old)
+                  if count != 1:
+                      raise SystemExit(f'{path}: expected exactly one match for {old!r}, found {count}')
+                  text = text.replace(old, new, 1)
+              path.write_text(text, encoding='utf-8')
+
+          parity_path = Path('data/editorial_parity.json')
+          parity = json.loads(parity_path.read_text(encoding='utf-8'))
+          entry = parity['entries']['spirituality-seeker']
+          entry['revision'] = int(entry['revision']) + 1
+          entry['pt_hash'] = hashlib.sha256(Path('content/full-biography/pt/spirituality-seeker.inc').read_bytes()).hexdigest()
+          entry['en_hash'] = hashlib.sha256(Path('content/full-biography/en/spirituality-seeker.inc').read_bytes()).hexdigest()
+          entry['accepted_on'] = '2026-09-03'
+          entry['changed_languages'] = ['pt', 'en']
+          parity_path.write_text(json.dumps(parity, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+      - name: Regenerate Full Biography and Chapter Pages
+        run: |
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+      - name: Commit permanent editorial changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/full-biography/pt/spirituality-seeker.inc content/full-biography/en/spirituality-seeker.inc data/editorial_parity.json pt/biografia/index.html en/biography/index.html pt/biografia/espiritualidade-o-buscador/index.html en/biography/spirituality-the-seeker/index.html
+          git commit -m "Tighten first-person certainty in Spirituality chapter"
+          git push
+      - name: Refresh sitemap after generated-page commit
+        run: |
+          python tools/build_sitemap.py
+          if ! git diff --quiet -- sitemap.xml; then
+            git add sitemap.xml
+            git commit -m "Refresh sitemap after Spirituality edit"
+            git push
+          fi
