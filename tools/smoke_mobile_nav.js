@@ -2,7 +2,7 @@
 /**
  * Browser regression smoke for discoverable primary navigation on mobile.
  *
- * Mobile must expose an explicit Menu control; no horizontal-swipe discovery is
+ * Mobile must expose an explicit Categories control; no horizontal-swipe discovery is
  * allowed. Desktop keeps the existing always-visible navigation.
  */
 
@@ -66,7 +66,7 @@ async function blockExternal(page) {
   });
 }
 
-async function assertMobile(browser, pagePath, expectedLanguageLink, expectedLinkCount) {
+async function assertMobile(browser, pagePath, expectedLanguageLink, expectedLinkCount, expectedToggleLabel) {
   const context = await browser.newContext({viewport: {width: 390, height: 844}});
   const page = await context.newPage();
   await blockExternal(page);
@@ -75,22 +75,38 @@ async function assertMobile(browser, pagePath, expectedLanguageLink, expectedLin
   const toggle = page.locator('.site-header .nav-toggle');
   const links = page.locator('.site-header .nav-links');
 
-  assert(await toggle.count() === 1, `${pagePath}: mobile Menu control missing`);
-  assert(await toggle.isVisible(), `${pagePath}: mobile Menu control is not visible`);
-  assert((await toggle.innerText()).trim().toLowerCase().includes('menu'), `${pagePath}: Menu control is not explicitly labeled`);
-  assert(await toggle.getAttribute('aria-expanded') === 'false', `${pagePath}: menu should start collapsed`);
-  assert(await links.isHidden(), `${pagePath}: primary links should start collapsed behind explicit Menu control`);
+  assert(await toggle.count() === 1, `${pagePath}: mobile Categories control missing`);
+  assert(await toggle.isVisible(), `${pagePath}: mobile Categories control is not visible`);
+  assert((await toggle.innerText()).trim().toLowerCase().includes(expectedToggleLabel.toLowerCase()), `${pagePath}: Categories control does not use expected label ${expectedToggleLabel}`);
+  assert(await toggle.getAttribute('aria-expanded') === 'false', `${pagePath}: categories should start collapsed`);
+  assert(await links.isHidden(), `${pagePath}: primary links should start collapsed behind explicit Categories control`);
+
+  const emphasis = await toggle.evaluate((node) => {
+    const style = getComputedStyle(node);
+    return {
+      fontWeight: Number(style.fontWeight),
+      borderTopWidth: parseFloat(style.borderTopWidth),
+      borderTopStyle: style.borderTopStyle,
+      borderTopColor: style.borderTopColor,
+      color: style.color,
+    };
+  });
+  assert(emphasis.fontWeight >= 800, `${pagePath}: Categories label is not bold enough (${emphasis.fontWeight})`);
+  assert(emphasis.borderTopWidth >= 2, `${pagePath}: Categories border is not emphasized (${emphasis.borderTopWidth}px)`);
+  assert(emphasis.borderTopStyle === 'solid', `${pagePath}: Categories border is not solid`);
+  assert(emphasis.borderTopColor === 'rgb(255, 255, 255)', `${pagePath}: Categories border is not white (${emphasis.borderTopColor})`);
+  assert(emphasis.color === 'rgb(255, 255, 255)', `${pagePath}: Categories text is not white (${emphasis.color})`);
 
   const initialOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
-  assert(!initialOverflow, `${pagePath}: horizontal overflow exists before opening mobile menu`);
+  assert(!initialOverflow, `${pagePath}: horizontal overflow exists before opening mobile categories`);
 
   await toggle.click();
-  assert(await toggle.getAttribute('aria-expanded') === 'true', `${pagePath}: Menu control did not enter expanded state`);
+  assert(await toggle.getAttribute('aria-expanded') === 'true', `${pagePath}: Categories control did not enter expanded state`);
   assert(await links.isVisible(), `${pagePath}: primary links did not become visible`);
 
   const linkCount = await links.locator('a').count();
   assert(linkCount === expectedLinkCount, `${pagePath}: expected ${expectedLinkCount} primary navigation links, found ${linkCount}`);
-  assert(await links.getByText(expectedLanguageLink, {exact: true}).count() === 1, `${pagePath}: language switch link missing from opened menu`);
+  assert(await links.getByText(expectedLanguageLink, {exact: true}).count() === 1, `${pagePath}: language switch link missing from opened categories`);
 
   const bounds = await links.locator('a').evaluateAll((nodes) => nodes.map((node) => {
     const r = node.getBoundingClientRect();
@@ -102,10 +118,10 @@ async function assertMobile(browser, pagePath, expectedLanguageLink, expectedLin
   }
 
   const openOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
-  assert(!openOverflow, `${pagePath}: horizontal overflow exists with mobile menu open`);
+  assert(!openOverflow, `${pagePath}: horizontal overflow exists with mobile categories open`);
 
   await page.keyboard.press('Escape');
-  assert(await toggle.getAttribute('aria-expanded') === 'false', `${pagePath}: Escape did not close mobile menu`);
+  assert(await toggle.getAttribute('aria-expanded') === 'false', `${pagePath}: Escape did not close mobile categories`);
   assert(await links.isHidden(), `${pagePath}: links remained visible after Escape`);
 
   await context.close();
@@ -119,8 +135,8 @@ async function assertDesktop(browser) {
 
   const toggle = page.locator('.site-header .nav-toggle');
   const links = page.locator('.site-header .nav-links');
-  assert(await toggle.count() === 1, 'Desktop: injected Menu control node missing');
-  assert(await toggle.isHidden(), 'Desktop: mobile Menu control must stay hidden');
+  assert(await toggle.count() === 1, 'Desktop: injected Categories control node missing');
+  assert(await toggle.isHidden(), 'Desktop: mobile Categories control must stay hidden');
   assert(await links.isVisible(), 'Desktop: primary navigation must remain always visible');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, 'Desktop: navigation introduced horizontal overflow');
@@ -134,9 +150,9 @@ async function main() {
   let browser;
   try {
     browser = await chromium.launch({headless: true, executablePath: CHROME, args: ['--no-sandbox']});
-    await assertMobile(browser, '/pt/', 'EN', 8);
-    await assertMobile(browser, '/en/', 'PT', 8);
-    await assertMobile(browser, '/pt/biografia/', 'EN', 7);
+    await assertMobile(browser, '/pt/', 'EN', 8, 'Categorias');
+    await assertMobile(browser, '/en/', 'PT', 8, 'Categories');
+    await assertMobile(browser, '/pt/biografia/', 'EN', 7, 'Categorias');
     await assertDesktop(browser);
     console.log('Mobile navigation discoverability smoke passed.');
   } finally {

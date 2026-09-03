@@ -9,10 +9,10 @@
   .nav-links::-webkit-scrollbar{display:initial}
   .nav-links a{flex:0 0 auto;white-space:normal;min-height:36px}
 
-  /* Enhanced state: an explicit, labeled control replaces the hidden swipe. */
+  /* Enhanced state: an explicit, high-contrast labeled control replaces the hidden swipe. */
   .nav.mobile-nav-enhanced{flex-wrap:nowrap;align-items:center}
-  .nav-toggle:not([hidden]){display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 12px;border:1px solid #4a4a4f;border-radius:999px;background:rgba(255,255,255,.055);color:var(--text);font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-  .nav-toggle:hover{background:rgba(255,255,255,.09);border-color:#64646a}
+  .nav-toggle:not([hidden]){display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 12px;border:2px solid #fff;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .nav-toggle:hover{background:rgba(255,255,255,.13);border-color:#fff}
   .nav-toggle:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
   .nav-toggle__icon{display:grid;gap:3px;width:14px}
   .nav-toggle__icon i{display:block;width:14px;height:1.5px;border-radius:999px;background:currentColor;transition:transform .16s ease,opacity .16s ease}
