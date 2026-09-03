@@ -21,14 +21,16 @@ jobs:
         with:
           node-version: '24'
       - run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4 requests
-      - name: Intrinsic image inventory
+      - name: Intrinsic image inventory and source occurrences
         run: |
           python - <<'PY'
           from pathlib import Path
           from bs4 import BeautifulSoup
           from PIL import Image
+          import json
           root=Path('.')
           targets=[Path('pt/biografia/index.html'),Path('en/biography/index.html'),Path('pt/internet/index.html'),Path('en/internet/index.html')]
+          missing_srcs=set()
           for p in targets:
             soup=BeautifulSoup(p.read_text(encoding='utf-8'),'html.parser')
             print(f'== {p} ==')
@@ -43,11 +45,23 @@ jobs:
                   try:
                     with Image.open(asset) as im: dims=f'{im.width}x{im.height}'
                   except Exception as e: dims=f'error:{e}'
-              missing.append((src,dims))
+              missing.append((src,dims)); missing_srcs.add(src)
             print('static missing:',len(missing))
             for src,dims in missing: print('  ',dims,src)
+          print('== source occurrences (excluding generated pt/en HTML) ==')
+          skip_roots={'.git','pt','en','assets'}
+          text_files=[]
+          for p in root.rglob('*'):
+            if not p.is_file(): continue
+            if p.parts and p.parts[0] in skip_roots: continue
+            if p.suffix.lower() not in {'.html','.inc','.json','.py','.js','.md'}: continue
+            try: text=p.read_text(encoding='utf-8')
+            except Exception: continue
+            text_files.append((p,text))
+          for src in sorted(missing_srcs):
+            hits=[str(p) for p,text in text_files if src in text]
+            print(src, '=>', ', '.join(hits) if hits else '(no non-generated source hit)')
           print('== reader preview dimensions ==')
-          import json
           data=json.loads(Path('data/entries.json').read_text(encoding='utf-8'))
           seen=set()
           for entry in data['entries']:
