@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from sync_analytics import load_measurement_id, render_block as analytics_block
+from sync_navigation import MOBILE_NAV_CSS, MOBILE_NAV_JS
 from sync_presence import load_profiles, render_block as presence_block
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -66,6 +67,7 @@ def nav(lang: str, counterpart: str) -> str:
             (counterpart, "EN"),
         ]
         aria = "Voltar à página inicial e seleção de idioma"
+        nav_aria = "Navegação principal"
     else:
         links = [
             ("/en/biography/", "Biography"),
@@ -77,11 +79,12 @@ def nav(lang: str, counterpart: str) -> str:
             (counterpart, "PT"),
         ]
         aria = "Back to home and language selection"
+        nav_aria = "Primary navigation"
     joined = "".join(f'<a href="{href}">{label}</a>' for href, label in links)
     return (
         f'<header class="site-header"><div class="wrap nav">'
         f'<a class="brand" href="/" aria-label="{aria}">Marcelo Nicchio</a>'
-        f'<nav class="nav-links">{joined}</nav></div></header>'
+        f'<nav class="nav-links" aria-label="{nav_aria}">{joined}</nav></div></header>'
     )
 
 
@@ -173,6 +176,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
   <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/chapter-page.css">
+  {MOBILE_NAV_CSS}
   {crumb_schema}
 </head>
 <body>
@@ -196,6 +200,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 <div class="wrap footer-grid"><span><a href="{domain_path}">← {html.escape(domain_label)}</a></span><span><a href="/{other_rel[:-10]}">{'English version' if lang == 'pt' else 'Versão em português'}</a></span></div>
 </footer>
 <script src="/assets/js/archive-lightbox.js?v=20260901-gallery2" defer></script>
+{MOBILE_NAV_JS}
 </body></html>
 '''
 

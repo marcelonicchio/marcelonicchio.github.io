@@ -56,14 +56,20 @@ jobs:
         run: python tools/audit_entries.py
       - name: Audit Media and Culture fusion
         run: python tools/audit_media_culture_fusion.py
-      - name: Check Reader/runtime JavaScript syntax
+      - name: Check navigation/Reader/runtime JavaScript syntax
         run: |
+          node --check assets/js/mobile-nav.js
           node --check assets/js/archive-lightbox.js
           node --check assets/js/reader-disclosure-loader.js
           node --check assets/js/reader-disclosure.js
+          node --check tools/smoke_mobile_nav.js
           node --check tools/smoke_reader_ux.js
           node --check tools/smoke_reader_en_rich.js
           node --check tools/smoke_runtime_performance.js
+      - name: Smoke-test mobile navigation in Chrome
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: node tools/smoke_mobile_nav.js
       - name: Smoke-test Reader UX in Chrome
         env:
           PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
