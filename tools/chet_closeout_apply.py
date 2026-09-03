@@ -11,6 +11,10 @@ IMG_RE = re.compile(r'<img\b[^>]*>', re.IGNORECASE)
 SRC_RE = re.compile(r'\bsrc=["\']([^"\']+)["\']', re.IGNORECASE)
 ATTR_RE = lambda name: re.compile(rf'\b{name}=["\']([^"\']+)["\']', re.IGNORECASE)
 RASTER = {'.jpg', '.jpeg', '.png', '.webp', '.gif'}
+READER_OLD = '20260901-reader11'
+READER_NEW = '20260903-reader12'
+GALLERY_OLD = '20260901-gallery2'
+GALLERY_NEW = '20260903-gallery3'
 
 
 def dims_for(src: str) -> tuple[int, int] | None:
@@ -51,6 +55,8 @@ def patch_img_tag(tag: str) -> str:
 def patch_markup(path: Path) -> bool:
     text = path.read_text(encoding='utf-8')
     new = IMG_RE.sub(lambda m: patch_img_tag(m.group(0)), text)
+    new = new.replace(f'?v={GALLERY_OLD}', f'?v={GALLERY_NEW}')
+    new = new.replace(f'?v={READER_OLD}', f'?v={READER_NEW}')
     if new == text:
         return False
     path.write_text(new, encoding='utf-8')
@@ -111,6 +117,51 @@ def patch_reader_js() -> bool:
     if old not in text:
         raise RuntimeError('Reader preview image block not found')
     p.write_text(text.replace(old,new,1),encoding='utf-8')
+    return True
+
+
+def patch_reader_loader() -> bool:
+    p=ROOT/'assets/js/reader-disclosure-loader.js'
+    text=p.read_text(encoding='utf-8')
+    new=text.replace(f'?v={READER_OLD}', f'?v={READER_NEW}')
+    if new == text:
+        return False
+    p.write_text(new,encoding='utf-8')
+    return True
+
+
+def patch_reader_loader_sync() -> bool:
+    p=ROOT/'tools/sync_reader_disclosure_loader.py'
+    text=p.read_text(encoding='utf-8')
+    text=text.replace(f'v={READER_OLD}', f'v={READER_NEW}')
+    if 'LOADER_RE' not in text:
+        text=text.replace(
+            'ROOT = Path(__file__).resolve().parents[1]\nSCRIPT =',
+            'ROOT = Path(__file__).resolve().parents[1]\nLOADER_RE = re.compile(r\'<script src="/assets/js/reader-disclosure-loader\\.js\\?v=[^"]+" defer></script>\')\nSCRIPT ='
+        )
+        text=text.replace('import argparse\nfrom pathlib import Path', 'import argparse\nimport re\nfrom pathlib import Path')
+        old="""    if SCRIPT in text:
+        return False
+    if "</body>" not in text:
+        raise RuntimeError(f"{path.relative_to(ROOT)} has no </body>")
+    updated = text.replace("</body>", SCRIPT + "\n</body>", 1)
+"""
+        new="""    if SCRIPT in text:
+        return False
+    if LOADER_RE.search(text):
+        updated = LOADER_RE.sub(SCRIPT, text, count=1)
+    else:
+        if "</body>" not in text:
+            raise RuntimeError(f"{path.relative_to(ROOT)} has no </body>")
+        updated = text.replace("</body>", SCRIPT + "\n</body>", 1)
+"""
+        if old not in text:
+            raise RuntimeError('Reader loader sync block not found')
+        text=text.replace(old,new,1)
+    original=p.read_text(encoding='utf-8')
+    if text == original:
+        return False
+    p.write_text(text,encoding='utf-8')
     return True
 
 
@@ -264,6 +315,8 @@ def main() -> int:
     changed=patch_all_markup()
     if patch_reader_registry(): changed.append('data/entries.json')
     if patch_reader_js(): changed.append('assets/js/reader-disclosure.js')
+    if patch_reader_loader(): changed.append('assets/js/reader-disclosure-loader.js')
+    if patch_reader_loader_sync(): changed.append('tools/sync_reader_disclosure_loader.py')
     if patch_lightbox_js(): changed.append('assets/js/archive-lightbox.js')
     if patch_runtime_gate(): changed.append('tools/smoke_runtime_performance.js')
     if patch_gallery_palette(): changed.append('tools/build_gallery_media.py')
