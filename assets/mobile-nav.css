@@ -22,9 +22,9 @@
 
   .mobile-nav-enhanced .nav-links[hidden]{display:none!important}
   .mobile-nav-enhanced .nav-links:not([hidden]){position:absolute;top:calc(100% + 1px);left:0;right:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:100%;padding:10px;border:1px solid #3a3a3e;border-top-color:rgba(255,255,255,.09);border-radius:0 0 16px 16px;background:rgba(17,18,20,.985);box-shadow:0 18px 38px rgba(0,0,0,.42);backdrop-filter:blur(18px);overflow:visible;mask-image:none;-webkit-mask-image:none}
-  .mobile-nav-enhanced .nav-links a{display:flex;align-items:center;justify-content:flex-start;min-width:0;min-height:46px;padding:9px 11px;border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.025);color:var(--soft);font-size:.84rem;line-height:1.25;white-space:normal}
-  .mobile-nav-enhanced .nav-links a:hover{background:rgba(255,255,255,.065);opacity:1}
-  .mobile-nav-enhanced .nav-links a:last-child{justify-content:center;border-color:rgba(211,164,160,.38);border-radius:10px;color:var(--text)}
+  .mobile-nav-enhanced .nav-links a{display:flex;align-items:center;justify-content:flex-start;min-width:0;min-height:46px;padding:9px 11px;border:1px solid rgba(255,255,255,.10);border-radius:10px;background:rgba(255,255,255,.035);color:#fff;font-size:.84rem;font-weight:700;line-height:1.25;white-space:normal;opacity:1}
+  .mobile-nav-enhanced .nav-links a:hover{background:rgba(255,255,255,.085);color:#fff;opacity:1}
+  .mobile-nav-enhanced .nav-links a:last-child{justify-content:center;border-color:rgba(211,164,160,.48);border-radius:10px;color:#fff}
 }
 
 @media(max-width:380px){
