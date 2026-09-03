@@ -17,11 +17,11 @@ jobs:
             exit 1
           fi
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.ref_name }}
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Install media dependency
@@ -35,6 +35,7 @@ jobs:
           python tools/build_gallery_media.py --check
           python tools/sync_galleries.py --check
           python tools/audit_galleries.py
+          python tools/audit_image_dimensions.py
       - name: Commit generated media
         run: |
           git config user.name "github-actions[bot]"
