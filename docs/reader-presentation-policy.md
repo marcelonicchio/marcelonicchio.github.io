@@ -35,13 +35,28 @@ The Full Biography rule does not decide thematic-vertical layout. Verticals keep
 
 A Full Biography rich preview must not force a vertical to become collapsed or visually featured.
 
-## 4. Scroll principle
+## 4. Biography-only chapters
+
+A Full Biography entry may become a registered `biography-only` chapter when it is editorially substantial enough to deserve controlled tags and/or a standalone Chapter Page but does not belong to a thematic vertical.
+
+For these entries:
+
+- Full Biography remains the canonical Reader surface;
+- no synthetic thematic vertical is created merely to host the chapter;
+- `reader_scope: biography-only` explicitly relaxes the normal vertical + Full Biography target requirement;
+- an `always-open` biography-only chapter remains plain open HTML, with no expand/collapse controls;
+- controlled topic chips remain visible even when the chapter is always open;
+- standalone-page indexation remains an independent decision. Creating a URL does not automatically promote it to `index,follow`.
+
+**Espiritualidade — “O Buscador”** is the reference implementation of this pattern.
+
+## 5. Scroll principle
 
 Full Biography is the dense chronology. Rich previews are selective compression devices, not a default for every entry. Use them when they materially reduce scroll cost while preserving enough context to decide whether to expand.
 
 The default remains: ordinary entries use ordinary compact Reader treatment; only editorially substantial records receive a rich preview.
 
-## 5. Regression gate
+## 6. Regression gate
 
 `tools/audit_reader_visual_policy.py` verifies that:
 

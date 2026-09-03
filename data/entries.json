@@ -661,6 +661,64 @@
       }
     },
     {
+      "id": "spirituality-seeker",
+      "kind": "chapter",
+      "domain": "context",
+      "reader_scope": "biography-only",
+      "date": {
+        "pt": "2006–jan. 2007",
+        "en": "2006–Jan. 2007"
+      },
+      "title": {
+        "pt": "Espiritualidade — “O Buscador”",
+        "en": "Spirituality — “The Seeker”"
+      },
+      "summary": {
+        "pt": "Entre 2004 e janeiro de 2007, Marcelo Nicchio atravessou uma fase intensa de busca espiritual: Osho, estudo do Buddhismo Theravada e da tradição tibetana, tomada de refúgio como Dhanadhammo e um retiro Vipassana de dez dias no Dhamma Santi, em Miguel Pereira (RJ).",
+        "en": "Between 2004 and January 2007, Marcelo Nicchio went through an intense period of spiritual searching: Osho, study of Theravada Buddhism and the Tibetan tradition, taking refuge as Dhanadhammo, and a ten-day Vipassana retreat at Dhamma Santi in Miguel Pereira, Rio de Janeiro."
+      },
+      "topic_ids": [
+        "meditation",
+        "vipassana",
+        "buddhism",
+        "buddhismo",
+        "osho",
+        "mindfulness"
+      ],
+      "reader_presentation": {
+        "state": "always-open"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/full-biography/pt/spirituality-seeker.inc",
+        "en_path": "content/full-biography/en/spirituality-seeker.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-spirituality-seeker"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-spirituality-seeker"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/biografia/espiritualidade-o-buscador/index.html",
+        "en_path": "en/biography/spirituality-the-seeker/index.html",
+        "description": {
+          "pt": "Espiritualidade — “O Buscador”: Osho, Buddhismo Theravada, Dhanadhammo e o retiro Vipassana de Marcelo Nicchio no Dhamma Santi em 2007.",
+          "en": "Spirituality — “The Seeker”: Osho, Theravada Buddhism, Dhanadhammo and Marcelo Nicchio’s 2007 Vipassana retreat at Dhamma Santi."
+        }
+      }
+    },
+    {
       "id": "internet-goobec-gap",
       "kind": "landmark-set",
       "domain": "internet",
