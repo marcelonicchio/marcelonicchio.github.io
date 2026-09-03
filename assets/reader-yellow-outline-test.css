@@ -1,25 +1,34 @@
-/* Visual trial B: softer baby-yellow outline + near-white Reader controls. */
-html.reader-disclosure-active .reader-disclosure--featured{
+/* Reader visual palette.
+   Full Biography policy: any collapsed entry with an active rich preview receives
+   the same editorial outline as an explicitly featured entry. Vertical behavior
+   remains controlled independently by reader_presentation / always_open_paths. */
+
+html.reader-disclosure-active .reader-disclosure--featured,
+html.reader-disclosure-active section.bio-entry .reader-disclosure:has(.reader-disclosure__preview){
   border:1.5px solid rgba(255,239,153,.78);
 }
 
-html.reader-disclosure-active .reader-disclosure--featured:not([open]){
+html.reader-disclosure-active .reader-disclosure--featured:not([open]),
+html.reader-disclosure-active section.bio-entry .reader-disclosure:has(.reader-disclosure__preview):not([open]){
   border-color:rgba(255,239,153,.78);
   background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.014));
   box-shadow:0 8px 26px rgba(0,0,0,.14);
 }
 
-html.reader-disclosure-active .reader-disclosure--featured[open]{
+html.reader-disclosure-active .reader-disclosure--featured[open],
+html.reader-disclosure-active section.bio-entry .reader-disclosure:has(.reader-disclosure__preview)[open]{
   border-color:rgba(255,239,153,.78);
   background:rgba(255,255,255,.018);
 }
 
-html.reader-disclosure-active .reader-disclosure--featured:not([open])>summary:hover{
+html.reader-disclosure-active .reader-disclosure--featured:not([open])>summary:hover,
+html.reader-disclosure-active section.bio-entry .reader-disclosure:has(.reader-disclosure__preview):not([open])>summary:hover{
   background:rgba(255,255,255,.022);
   border-color:rgba(255,244,184,.92);
 }
 
-html.reader-disclosure-active .reader-disclosure--featured>summary:after{
+html.reader-disclosure-active .reader-disclosure--featured>summary:after,
+html.reader-disclosure-active section.bio-entry .reader-disclosure:has(.reader-disclosure__preview)>summary:after{
   border-color:rgba(255,239,153,.82);
   color:rgba(255,244,184,.96);
   background:transparent;
@@ -41,7 +50,8 @@ html.reader-disclosure-active .reader-disclosure__collapse-button:hover{
 }
 
 @media print{
-  html.reader-disclosure-active .reader-disclosure--featured{
+  html.reader-disclosure-active .reader-disclosure--featured,
+  html.reader-disclosure-active section.bio-entry .reader-disclosure:has(.reader-disclosure__preview){
     border:0;
     background:none;
     box-shadow:none;
