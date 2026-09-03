@@ -1,3 +1,4 @@
+/* Mobile-only primary-navigation layer; desktop navigation remains owned by styles.css. */
 .nav-toggle{font:inherit}
 
 @media(max-width:820px){
