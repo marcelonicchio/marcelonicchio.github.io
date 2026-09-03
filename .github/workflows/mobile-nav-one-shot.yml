@@ -1,0 +1,48 @@
+name: Mobile nav one-shot
+
+on:
+  push:
+    branches: [work/mobile-nav-operational]
+
+permissions:
+  contents: write
+
+jobs:
+  build-test:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: work/mobile-nav-operational
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Install browser smoke dependency
+        run: |
+          mkdir -p /tmp/reader-ux-smoke
+          npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
+      - name: Synchronize mobile navigation assets
+        run: |
+          python tools/sync_navigation.py
+          python tools/sync_navigation.py --check
+      - name: Validate mobile navigation
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: |
+          node --check assets/js/mobile-nav.js
+          node --check tools/smoke_mobile_nav.js
+          node tools/smoke_mobile_nav.js
+          python tools/audit_site.py
+      - name: Commit synchronized pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add pt en
+          if git diff --cached --quiet; then
+            echo 'No navigation page changes generated.'
+          else
+            git commit -m 'Synchronize discoverable mobile navigation'
+            git push origin HEAD:work/mobile-nav-operational
+          fi
