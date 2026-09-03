@@ -7,7 +7,7 @@ on:
     branches: [main, site-v1]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   audit:
@@ -17,7 +17,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          ref: work/vipassana-thread-media
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -31,57 +30,6 @@ jobs:
           python -m pip install --disable-pip-version-check Pillow beautifulsoup4
           mkdir -p /tmp/reader-ux-smoke
           npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
-      - name: Materialize Vipassana thread media
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          from PIL import Image
-
-          src = Path('assets/media/thread/vipassana02.png')
-          dst = Path('assets/media/thread/vipassana02.webp')
-          img = Image.open(src).convert('RGB')
-          if img.width > 1600:
-              h = round(img.height * 1600 / img.width)
-              img = img.resize((1600, h), Image.Resampling.LANCZOS)
-
-          target = 299000
-          qualities = [88, 84, 80, 76, 72, 68, 64, 60, 56, 52, 48]
-          while True:
-              success = False
-              for quality in qualities:
-                  img.save(dst, 'WEBP', quality=quality, method=6)
-                  if dst.stat().st_size <= target:
-                      success = True
-                      break
-              if success:
-                  break
-              new_w = max(900, round(img.width * 0.9))
-              if new_w == img.width:
-                  raise SystemExit('Could not compress vipassana02.webp under 299 KB')
-              new_h = round(img.height * new_w / img.width)
-              img = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-
-          w, h = img.size
-          print(f'vipassana02.webp: {w}x{h}, {dst.stat().st_size} bytes')
-          for path in [
-              Path('content/full-biography/pt/spirituality-seeker.inc'),
-              Path('content/full-biography/en/spirituality-seeker.inc'),
-          ]:
-              text = path.read_text(encoding='utf-8')
-              text = text.replace('__VIP2_WIDTH__', str(w)).replace('__VIP2_HEIGHT__', str(h))
-              path.write_text(text, encoding='utf-8')
-          PY
-          python tools/editorial_parity.py --accept spirituality-seeker
-          python tools/sync_full_biography.py
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/media/thread/vipassana02.webp content/full-biography/pt/spirituality-seeker.inc content/full-biography/en/spirituality-seeker.inc data/editorial_parity.json pt/biografia/index.html en/biography/index.html
-          if git diff --cached --quiet; then
-            echo "Vipassana thread media already materialized."
-          else
-            git commit -m "Materialize Vipassana thread media"
-            git push origin HEAD:work/vipassana-thread-media
-          fi
       - name: Audit synchronized navigation
         run: python tools/sync_navigation.py --check
       - name: Audit gallery derivatives
