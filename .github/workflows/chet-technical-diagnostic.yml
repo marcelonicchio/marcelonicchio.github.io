@@ -32,6 +32,7 @@ jobs:
           python tools/sync_entries.py
           python tools/sync_full_biography.py
           python tools/build_chapter_pages.py
+          python tools/build_sitemap.py
           for entry in audiovisual-autopsia audiovisual-film audiovisual-meia-noite communication-folha hai-melissa hai-pro1 hai-pro2 internet-clickland internet-cookieweb internet-dialetto internet-mirantte livraria-cultura; do
             python tools/editorial_parity.py --accept "$entry"
           done
@@ -49,6 +50,7 @@ jobs:
           python tools/audit_full_biography.py
           python tools/build_chapter_pages.py --check
           python tools/audit_entries.py
+          node --check assets/js/archive-lightbox.js
           node --check assets/js/reader-disclosure.js
           node --check tools/smoke_runtime_performance.js
           node tools/smoke_reader_ux.js
