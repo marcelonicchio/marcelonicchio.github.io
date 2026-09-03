@@ -1,0 +1,47 @@
+/* Visual trial: featured Reader entries use bright-yellow outline without yellow fill. */
+html.reader-disclosure-active .reader-disclosure--featured{
+  border:2px solid #ffe100;
+}
+
+html.reader-disclosure-active .reader-disclosure--featured:not([open]){
+  border-color:#ffe100;
+  background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.014));
+  box-shadow:0 8px 26px rgba(0,0,0,.14);
+}
+
+html.reader-disclosure-active .reader-disclosure--featured[open]{
+  border-color:#ffe100;
+  background:rgba(255,255,255,.018);
+}
+
+html.reader-disclosure-active .reader-disclosure--featured:not([open])>summary:hover{
+  background:rgba(255,255,255,.022);
+}
+
+html.reader-disclosure-active .reader-disclosure--featured>summary:after{
+  border-color:#ffe100;
+  color:#ffe100;
+  background:transparent;
+}
+
+html.reader-disclosure-active .reader-disclosure__toggle,
+html.reader-disclosure-active .reader-disclosure__collapse-button{
+  border-color:#ffe100;
+  background:#ffe100;
+  color:#171300;
+}
+
+html.reader-disclosure-active .reader-disclosure>summary:hover .reader-disclosure__toggle,
+html.reader-disclosure-active .reader-disclosure__collapse-button:hover{
+  border-color:#ffea47;
+  background:#ffea47;
+  color:#171300;
+}
+
+@media print{
+  html.reader-disclosure-active .reader-disclosure--featured{
+    border:0;
+    background:none;
+    box-shadow:none;
+  }
+}
