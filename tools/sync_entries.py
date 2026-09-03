@@ -132,6 +132,8 @@ def main() -> int:
     for entry in registry.get("entries", []):
         if entry.get("source", {}).get("kind") != "fragment":
             continue
+        if entry.get("reader_scope") == "biography-only":
+            continue
         for lang in ("pt", "en"):
             if sync_file(entry, lang, check=args.check):
                 changed.append(f"{entry['id']}:{lang}")

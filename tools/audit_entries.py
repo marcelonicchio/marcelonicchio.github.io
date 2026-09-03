@@ -19,6 +19,7 @@ ALLOWED_SOURCE_KINDS = {"reader-section", "fragment", "composite-reader-landmark
 ALLOWED_PAGE_STATUS = {"pilot", "candidate", "none"}
 ALLOWED_INDEXING = {"index,follow", "noindex,follow", "none"}
 ALLOWED_READER_PRESENTATION = {"normal", "always-open", "featured"}
+ALLOWED_READER_SCOPES = {"vertical", "biography-only"}
 MAX_READER_PREVIEW_CHARS = 1650
 
 
@@ -124,6 +125,9 @@ def main() -> int:
         presentation_state = entry.get("reader_presentation", {}).get("state", "normal")
         if presentation_state not in ALLOWED_READER_PRESENTATION:
             errors.append(f"{entry_id}: unsupported Reader presentation state {presentation_state!r}")
+        reader_scope = entry.get("reader_scope", "vertical")
+        if reader_scope not in ALLOWED_READER_SCOPES:
+            errors.append(f"{entry_id}: unsupported Reader scope {reader_scope!r}")
 
         for lang in ("pt", "en"):
             if not entry.get("title", {}).get(lang, "").strip():
@@ -206,7 +210,13 @@ def main() -> int:
             targets = entry.get("reader_targets", {})
             for lang in ("pt", "en"):
                 lang_targets = targets.get(lang, [])
-                if len(lang_targets) < 2:
+                biography_token = "/biografia/" if lang == "pt" else "/biography/"
+                if reader_scope == "biography-only":
+                    if len(lang_targets) != 1:
+                        errors.append(f"{entry_id}:{lang}: biography-only entries require exactly one Full Biography reader target")
+                    elif biography_token not in ("/" + lang_targets[0]["path"].strip("/") + "/"):
+                        errors.append(f"{entry_id}:{lang}: biography-only target must be Full Biography")
+                elif len(lang_targets) < 2:
                     errors.append(f"{entry_id}:{lang}: expected vertical + Full Biography reader targets")
                 for target in lang_targets:
                     try:
@@ -220,6 +230,11 @@ def main() -> int:
                 src = ROOT / (src_rel or "")
                 if not src_rel or not src.exists():
                     errors.append(f"{entry_id}:{lang}: missing fragment source {src_rel!r}")
+                    continue
+                if reader_scope == "biography-only":
+                    source_doc = BeautifulSoup(src.read_text(encoding="utf-8"), "html.parser")
+                    if source_doc.find("section") is None:
+                        errors.append(f"{entry_id}:{lang}: biography-only fragment must contain a section")
                     continue
                 verticals = [
                     t for t in entry.get("reader_targets", {}).get(lang, [])

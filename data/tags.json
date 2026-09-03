@@ -5,30 +5,222 @@
     "purpose": "Controlled vocabulary for entry chips, relationships and future filtering. Tags are not meta keywords and do not imply indexable landing pages."
   },
   "tags": [
-    {"id": "acquisition", "label": {"pt": "Aquisição", "en": "Acquisition"}},
-    {"id": "art-direction", "label": {"pt": "Direção artística", "en": "Art direction"}},
-    {"id": "certification", "label": {"pt": "Certificação", "en": "Certification"}},
-    {"id": "cultural-criticism", "label": {"pt": "Crítica cultural", "en": "Cultural criticism"}},
-    {"id": "digital-product", "label": {"pt": "Produto digital", "en": "Digital product"}},
-    {"id": "ecommerce", "label": {"pt": "E-commerce", "en": "E-commerce"}},
-    {"id": "executive-production", "label": {"pt": "Produção executiva", "en": "Executive production"}},
-    {"id": "google-ads", "label": {"pt": "Google Ads / AdWords", "en": "Google Ads / AdWords"}},
-    {"id": "kenshoo", "label": {"pt": "Kenshoo", "en": "Kenshoo"}},
-    {"id": "literature", "label": {"pt": "Literatura", "en": "Literature"}},
-    {"id": "paid-media", "label": {"pt": "Mídia paga", "en": "Paid media"}},
-    {"id": "performance-marketing", "label": {"pt": "Performance", "en": "Performance"}},
-    {"id": "press", "label": {"pt": "Imprensa", "en": "Press"}},
-    {"id": "punk-rock", "label": {"pt": "Punk / rock", "en": "Punk / rock"}},
-    {"id": "search-marketing", "label": {"pt": "Search Marketing", "en": "Search Marketing"}},
-    {"id": "sem", "label": {"pt": "SEM", "en": "SEM"}},
-    {"id": "social-ads", "label": {"pt": "Social Ads", "en": "Social Ads"}},
-    {"id": "team-leadership", "label": {"pt": "Liderança de equipe", "en": "Team leadership"}},
-    {"id": "television", "label": {"pt": "Televisão", "en": "Television"}},
-    {"id": "training", "label": {"pt": "Formação", "en": "Training"}},
-    {"id": "ai", "label": {"pt": "AI", "en": "AI"}},
-    {"id": "hai", "label": {"pt": "HAI", "en": "HAI"}},
-    {"id": "hci", "label": {"pt": "HCI", "en": "HCI"}},
-    {"id": "prompt-engineering", "label": {"pt": "Prompt Engineering", "en": "Prompt Engineering"}},
-    {"id": "melissa-1-0", "label": {"pt": "Melissa 1.0", "en": "Melissa 1.0"}}
+    {
+      "id": "acquisition",
+      "label": {
+        "pt": "Aquisição",
+        "en": "Acquisition"
+      }
+    },
+    {
+      "id": "art-direction",
+      "label": {
+        "pt": "Direção artística",
+        "en": "Art direction"
+      }
+    },
+    {
+      "id": "certification",
+      "label": {
+        "pt": "Certificação",
+        "en": "Certification"
+      }
+    },
+    {
+      "id": "cultural-criticism",
+      "label": {
+        "pt": "Crítica cultural",
+        "en": "Cultural criticism"
+      }
+    },
+    {
+      "id": "digital-product",
+      "label": {
+        "pt": "Produto digital",
+        "en": "Digital product"
+      }
+    },
+    {
+      "id": "ecommerce",
+      "label": {
+        "pt": "E-commerce",
+        "en": "E-commerce"
+      }
+    },
+    {
+      "id": "executive-production",
+      "label": {
+        "pt": "Produção executiva",
+        "en": "Executive production"
+      }
+    },
+    {
+      "id": "google-ads",
+      "label": {
+        "pt": "Google Ads / AdWords",
+        "en": "Google Ads / AdWords"
+      }
+    },
+    {
+      "id": "kenshoo",
+      "label": {
+        "pt": "Kenshoo",
+        "en": "Kenshoo"
+      }
+    },
+    {
+      "id": "literature",
+      "label": {
+        "pt": "Literatura",
+        "en": "Literature"
+      }
+    },
+    {
+      "id": "paid-media",
+      "label": {
+        "pt": "Mídia paga",
+        "en": "Paid media"
+      }
+    },
+    {
+      "id": "performance-marketing",
+      "label": {
+        "pt": "Performance",
+        "en": "Performance"
+      }
+    },
+    {
+      "id": "press",
+      "label": {
+        "pt": "Imprensa",
+        "en": "Press"
+      }
+    },
+    {
+      "id": "punk-rock",
+      "label": {
+        "pt": "Punk / rock",
+        "en": "Punk / rock"
+      }
+    },
+    {
+      "id": "search-marketing",
+      "label": {
+        "pt": "Search Marketing",
+        "en": "Search Marketing"
+      }
+    },
+    {
+      "id": "sem",
+      "label": {
+        "pt": "SEM",
+        "en": "SEM"
+      }
+    },
+    {
+      "id": "social-ads",
+      "label": {
+        "pt": "Social Ads",
+        "en": "Social Ads"
+      }
+    },
+    {
+      "id": "team-leadership",
+      "label": {
+        "pt": "Liderança de equipe",
+        "en": "Team leadership"
+      }
+    },
+    {
+      "id": "television",
+      "label": {
+        "pt": "Televisão",
+        "en": "Television"
+      }
+    },
+    {
+      "id": "training",
+      "label": {
+        "pt": "Formação",
+        "en": "Training"
+      }
+    },
+    {
+      "id": "ai",
+      "label": {
+        "pt": "AI",
+        "en": "AI"
+      }
+    },
+    {
+      "id": "hai",
+      "label": {
+        "pt": "HAI",
+        "en": "HAI"
+      }
+    },
+    {
+      "id": "hci",
+      "label": {
+        "pt": "HCI",
+        "en": "HCI"
+      }
+    },
+    {
+      "id": "prompt-engineering",
+      "label": {
+        "pt": "Prompt Engineering",
+        "en": "Prompt Engineering"
+      }
+    },
+    {
+      "id": "melissa-1-0",
+      "label": {
+        "pt": "Melissa 1.0",
+        "en": "Melissa 1.0"
+      }
+    },
+    {
+      "id": "meditation",
+      "label": {
+        "pt": "Meditação",
+        "en": "Meditation"
+      }
+    },
+    {
+      "id": "vipassana",
+      "label": {
+        "pt": "Vipassana",
+        "en": "Vipassana"
+      }
+    },
+    {
+      "id": "buddhism",
+      "label": {
+        "pt": "Budismo",
+        "en": "Buddhism"
+      }
+    },
+    {
+      "id": "buddhismo",
+      "label": {
+        "pt": "Buddhismo",
+        "en": "Buddhismo"
+      }
+    },
+    {
+      "id": "osho",
+      "label": {
+        "pt": "Osho",
+        "en": "Osho"
+      }
+    },
+    {
+      "id": "mindfulness",
+      "label": {
+        "pt": "Mindfulness",
+        "en": "Mindfulness"
+      }
+    }
   ]
 }

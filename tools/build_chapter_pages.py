@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from bs4 import BeautifulSoup
+
 from sync_analytics import load_measurement_id, render_block as analytics_block
 from sync_navigation import MOBILE_NAV_CSS, MOBILE_NAV_JS
 from sync_presence import load_profiles, render_block as presence_block
@@ -38,6 +40,10 @@ DOMAIN = {
     "hai": {
         "pt": ("IA/HAI", "/pt/ia-hai/"),
         "en": ("AI/HAI", "/en/ai-hai/"),
+    },
+    "context": {
+        "pt": ("Biografia Completa", "/pt/biografia/"),
+        "en": ("Full Biography", "/en/biography/"),
     },
 }
 
@@ -92,6 +98,21 @@ def tag_labels(taxonomy: dict[str, Any]) -> dict[str, dict[str, str]]:
     return {tag["id"]: tag["label"] for tag in taxonomy["tags"]}
 
 
+def chapter_body(entry: dict[str, Any], lang: str) -> str:
+    source_rel = entry["source"][f"{lang}_path"]
+    raw = (ROOT / source_rel).read_text(encoding="utf-8").strip()
+    if entry.get("reader_scope") != "biography-only":
+        return raw
+    soup = BeautifulSoup(raw, "html.parser")
+    section = soup.find("section")
+    if section is None:
+        raise RuntimeError(f"{entry['id']}:{lang}: biography-only source has no section")
+    heading = section.find("h2", recursive=False)
+    if heading is not None:
+        heading.decompose()
+    return section.decode_contents().strip()
+
+
 def breadcrumbs(entry: dict[str, Any], lang: str, current_url: str) -> tuple[str, str]:
     domain_label, domain_path = DOMAIN[entry["domain"]][lang]
     home_label = "Início" if lang == "pt" else "Home"
@@ -127,8 +148,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     summary = entry["summary"][lang]
     description = page.get("description", {}).get(lang, summary)
     date = entry["date"][lang]
-    source_rel = entry["source"][f"{lang}_path"]
-    body = (ROOT / source_rel).read_text(encoding="utf-8").strip()
+    body = chapter_body(entry, lang)
     domain_label, domain_path = DOMAIN[entry["domain"]][lang]
     labels = tag_labels(taxonomy)
     chips = "".join(
@@ -149,6 +169,14 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     eyebrow = f"Registro · {domain_label}" if lang == "pt" else f"Entry · {domain_label}"
     period_label = "Período" if lang == "pt" else "Period"
     topics_label = "Temas" if lang == "pt" else "Topics"
+    if entry.get("reader_scope") == "biography-only":
+        return_label = "Voltar à Biografia Completa" if lang == "pt" else "Back to Full Biography"
+        page_tools = f'<div class="page-tools"><a href="{back_bio}{bio_anchor}">{html.escape(return_label)}</a></div>'
+    else:
+        page_tools = (
+            f'<div class="page-tools"><a href="{domain_path}">{html.escape(vertical_label)}</a>'
+            f'<a href="{back_bio}{bio_anchor}">{html.escape(full_bio_label)}</a></div>'
+        )
     og = ""
     if entry["id"] in OG_IMAGE:
         image_url = BASE.rstrip("/") + OG_IMAGE[entry["id"]]
@@ -192,7 +220,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 </div></section>
 <section class="section"><div class="wrap entry-page-shell"><article class="article-body entry-page-body">
 {body}
-<div class="page-tools"><a href="{domain_path}">{html.escape(vertical_label)}</a><a href="{back_bio}{bio_anchor}">{html.escape(full_bio_label)}</a></div>
+{page_tools}
 </article></div></section>
 </main>
 <footer>

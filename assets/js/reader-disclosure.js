@@ -176,6 +176,20 @@
 
     document.documentElement.classList.add('reader-disclosure-active');
     const detailsForSection = new Map();
+    const topicRowFor = (topicIds) => {
+      if (!topicIds.length) return null;
+      const row = document.createElement('div');
+      row.className = 'reader-disclosure__topics';
+      topicIds.forEach((id) => {
+        const label = tags.get(id)?.[language];
+        if (!label) return;
+        const chip = document.createElement('span');
+        chip.className = 'reader-disclosure__topic';
+        chip.textContent = label;
+        row.appendChild(chip);
+      });
+      return row.children.length ? row : null;
+    };
 
     chapters.forEach((section) => {
       const heading = [...section.children].find((node) => node.tagName === 'H2');
@@ -190,6 +204,7 @@
       const readerPreview = previewAllowed ? (entry?.reader_preview?.[language] || null) : null;
       const contentBadges = readerPreview?.indicators?.length ? readerPreview.indicators : contentBadgesFor(section);
       const topicIds = entry?.topic_ids || [];
+      const topicRow = topicRowFor(topicIds);
       const alwaysOpenPaths = entry?.reader_presentation?.always_open_paths || [];
       const presentationState = alwaysOpenPaths.includes(repoPath)
         ? 'always-open'
@@ -200,6 +215,9 @@
 
       if (presentationState === 'always-open') {
         section.classList.add('reader-always-open');
+        if (entry?.reader_scope === 'biography-only' && topicRow) {
+          heading.insertAdjacentElement('afterend', topicRow);
+        }
         return;
       }
 
@@ -247,19 +265,7 @@
         summary.appendChild(excerpt);
       }
 
-      if (topicIds.length) {
-        const row = document.createElement('div');
-        row.className = 'reader-disclosure__topics';
-        topicIds.forEach((id) => {
-          const label = tags.get(id)?.[language];
-          if (!label) return;
-          const chip = document.createElement('span');
-          chip.className = 'reader-disclosure__topic';
-          chip.textContent = label;
-          row.appendChild(chip);
-        });
-        if (row.children.length) summary.appendChild(row);
-      }
+      if (topicRow) summary.appendChild(topicRow);
 
       const badges = [...contentBadges];
       if (entry?.chapter_page?.status === 'pilot') badges.push(labels.page);

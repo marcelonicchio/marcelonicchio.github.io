@@ -99,6 +99,15 @@ async function runDesktop(browser) {
   assert(await folhaBioOpen.locator('details.reader-disclosure').count() === 0, 'Folhateen must not be wrapped in disclosure');
   assert(await folhaBioOpen.locator('.reader-disclosure__toggle').count() === 0, 'Folhateen must not expose a top toggle');
   assert(await folhaBioOpen.locator('.reader-disclosure__collapse-button').count() === 0, 'Folhateen must not expose a bottom collapse action');
+  const spiritualityBio = page.locator('#bio-spirituality-seeker');
+  assert(await spiritualityBio.getAttribute('data-reader-presentation') === 'always-open', 'Spirituality biography-only always-open state missing');
+  assert(await spiritualityBio.locator('details.reader-disclosure').count() === 0, 'Spirituality must not be wrapped in disclosure');
+  assert(await spiritualityBio.locator('.reader-disclosure__toggle').count() === 0, 'Spirituality must not expose a top toggle');
+  assert(await spiritualityBio.locator('.reader-disclosure__collapse-button').count() === 0, 'Spirituality must not expose a bottom collapse action');
+  assert(await spiritualityBio.locator('h2 > a.entry-title-permalink').getAttribute('href') === '/pt/biografia/espiritualidade-o-buscador/', 'Spirituality standalone permalink missing from Full Bio heading');
+  const spiritualityTopics = await spiritualityBio.locator('.reader-disclosure__topic').allInnerTexts();
+  ['Meditação', 'Vipassana', 'Budismo', 'Buddhismo', 'Osho', 'Mindfulness'].forEach((label) => assert(spiritualityTopics.includes(label), `Spirituality topic missing: ${label}`));
+  assert(await spiritualityBio.locator('img[src="/assets/media/thread/vipassana03.jpg"]').count() === 1, 'Spirituality cropped Vipassana reconstruction missing from always-open body');
   assert((await page.locator('#bio-internet-mirantte details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte is not featured in Full Bio');
   assert((await page.locator('#bio-internet-cookieweb details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB is not featured in Full Bio');
   assert((await page.locator('#bio-audiovisual-meia-noite details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Meia-Noite is not featured in Full Bio');
@@ -178,6 +187,16 @@ async function runDesktop(browser) {
   assert(await melissaPreview.isHidden(), 'Melissa compact preview remained visible after expansion');
   assert((await melissaBio.locator('.reader-disclosure__body').innerText()).includes('O que aconteceu depois não foi planejado.'), 'Melissa full body was not preserved after expansion');
   await melissaBio.locator('details.reader-disclosure > summary').click();
+
+  // Biography-only Chapter Page stays fully readable and carries the same controlled topics.
+  await page.goto(`${BASE}/pt/biografia/espiritualidade-o-buscador/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('h1').innerText() === 'Espiritualidade — “O Buscador”', 'Spirituality standalone H1 incorrect');
+  assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'noindex,follow', 'Spirituality standalone indexing changed without review');
+  const standaloneSpiritualityTopics = await page.locator('.entry-topic').allInnerTexts();
+  ['Meditação', 'Vipassana', 'Budismo', 'Buddhismo', 'Osho', 'Mindfulness'].forEach((label) => assert(standaloneSpiritualityTopics.includes(label), `Standalone spirituality topic missing: ${label}`));
+  assert((await page.locator('article.entry-page-body').innerText()).includes('Dhanadhammo'), 'Spirituality standalone page lost Dhanadhammo');
+  assert(await page.locator('img[src="/assets/media/thread/vipassana03.jpg"]').count() === 1, 'Spirituality standalone page lost cropped reconstruction');
+  assert(await page.locator('details.reader-disclosure').count() === 0, 'Standalone spirituality page must not initialize Reader disclosure');
 
   // IA/HAI preserves continuous reading: Melissa is the oldest/final chapter and stays fully open.
   await page.goto(`${BASE}/pt/ia-hai/`, {waitUntil: 'networkidle'});
