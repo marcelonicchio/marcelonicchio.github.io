@@ -32,6 +32,9 @@ jobs:
           python tools/sync_entries.py
           python tools/sync_full_biography.py
           python tools/build_chapter_pages.py
+          for entry in audiovisual-autopsia audiovisual-film audiovisual-meia-noite communication-folha hai-melissa hai-pro1 hai-pro2 internet-clickland internet-cookieweb internet-dialetto internet-mirantte livraria-cultura; do
+            python tools/editorial_parity.py --accept "$entry"
+          done
       - name: Verify closeout invariants
         env:
           PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
