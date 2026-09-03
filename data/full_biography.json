@@ -527,6 +527,23 @@
       }
     },
     {
+      "id": "spirituality-seeker",
+      "era": "expansao-2001-2008",
+      "date": "2006–jan. 2007",
+      "domain": "context",
+      "source": {
+        "pt": {
+          "path": "content/full-biography/pt/spirituality-seeker.inc",
+          "kind": "fragment"
+        },
+        "en": {
+          "path": "content/full-biography/en/spirituality-seeker.inc",
+          "kind": "fragment"
+        }
+      },
+      "date_en": "2006–Jan. 2007"
+    },
+    {
       "id": "internet-sem",
       "era": "performance-2008-2015",
       "date": "2008–2009",

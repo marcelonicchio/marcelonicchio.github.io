@@ -359,6 +359,12 @@
         "pt",
         "en"
       ]
+    },
+    "spirituality-seeker": {
+      "revision": 1,
+      "pt_hash": "914e526a709a325381917bba2829670ccfd6b04d43696cb1c4ef7eaa65976fcd",
+      "en_hash": "305917f2c08b52f983bb75674224950eadeb8571d76bbecc22dc2f5a8eaa1078",
+      "accepted_on": "2026-09-03"
     }
   }
 }
