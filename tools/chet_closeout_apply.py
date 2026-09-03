@@ -75,7 +75,7 @@ def patch_reader_registry() -> bool:
     data=json.loads(p.read_text(encoding='utf-8'))
     changed=False
     for entry in data.get('entries',[]):
-        for lang, preview in (entry.get('reader_preview') or {}).items():
+        for preview in (entry.get('reader_preview') or {}).values():
             if not isinstance(preview, dict) or not preview.get('image'):
                 continue
             dims=dims_for(preview['image'])
@@ -106,10 +106,10 @@ def patch_reader_js() -> bool:
           image.loading = 'lazy';
           image.decoding = 'async';
 """
-    if old not in text:
-        raise RuntimeError('Reader preview image block not found')
     if new in text:
         return False
+    if old not in text:
+        raise RuntimeError('Reader preview image block not found')
     p.write_text(text.replace(old,new,1),encoding='utf-8')
     return True
 
@@ -125,9 +125,10 @@ def patch_runtime_gate() -> bool:
 
   await expandAndScroll(page);
 """
-    if old not in text:
+    if old in text:
+        text=text.replace(old,new,1)
+    elif new not in text:
         raise RuntimeError('Runtime intrinsic warning block not found')
-    text=text.replace(old,new,1)
     old2="""  assert(afterScroll.images.loaded >= initial.images.loaded, `${config.label}: loaded image count regressed after scroll`);
   assert(afterDecode.failures === 0, `${config.label}: ${afterDecode.failures} local image decode failure(s) after scroll`);
 """
@@ -135,9 +136,10 @@ def patch_runtime_gate() -> bool:
   assert(afterScroll.images.missingIntrinsic === 0, `${config.label}: ${afterScroll.images.missingIntrinsic} image(s) lack explicit width/height attributes after full expansion/scroll`);
   assert(afterDecode.failures === 0, `${config.label}: ${afterDecode.failures} local image decode failure(s) after scroll`);
 """
-    if old2 not in text:
+    if old2 in text:
+        text=text.replace(old2,new2,1)
+    elif new2 not in text:
         raise RuntimeError('Runtime post-scroll assertion block not found')
-    text=text.replace(old2,new2,1)
     p.write_text(text,encoding='utf-8')
     return True
 
@@ -158,10 +160,10 @@ def patch_gallery_palette() -> bool:
                     image = image.convert("RGBA")
                 working = image.convert("RGB")
 """
-    if old not in text:
-        raise RuntimeError('Gallery conversion block not found')
     if new in text:
         return False
+    if old not in text:
+        raise RuntimeError('Gallery conversion block not found')
     p.write_text(text.replace(old,new,1),encoding='utf-8')
     return True
 
@@ -178,6 +180,23 @@ def patch_workflow(path: str, replacements: list[tuple[str,str]]) -> bool:
     return True
 
 
+def ensure_dimension_audit_step() -> bool:
+    p=ROOT/'.github/workflows/site-audit.yml'
+    text=p.read_text(encoding='utf-8')
+    marker="""      - name: Audit gallery registry and rendering
+        run: python tools/audit_galleries.py
+"""
+    block=marker+"""      - name: Audit intrinsic image dimensions
+        run: python tools/audit_image_dimensions.py
+"""
+    if 'Audit intrinsic image dimensions' in text:
+        return False
+    if marker not in text:
+        raise RuntimeError('Gallery audit workflow anchor not found')
+    p.write_text(text.replace(marker,block,1),encoding='utf-8')
+    return True
+
+
 def main() -> int:
     changed=patch_all_markup()
     if patch_reader_registry(): changed.append('data/entries.json')
@@ -190,6 +209,7 @@ def main() -> int:
         ('actions/setup-node@v4','actions/setup-node@v7'),
         ("node-version: '22'","node-version: '24'"),
     ]): changed.append('.github/workflows/site-audit.yml')
+    if ensure_dimension_audit_step(): changed.append('.github/workflows/site-audit.yml')
     if patch_workflow('.github/workflows/media-build.yml', [
         ('actions/checkout@v4','actions/checkout@v7'),
         ('actions/setup-python@v5','actions/setup-python@v7'),
