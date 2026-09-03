@@ -52,6 +52,13 @@
   const links = [...document.querySelectorAll('a.inline-record, a.record-gallery__item')].filter((link) => isImage(link.href));
   if (!links.length) return;
 
+  // The hidden lightbox image exists from initial page load. Seed it with a
+  // valid intrinsic ratio from the first thumbnail, then update that ratio for
+  // each opened item. This keeps every runtime image dimensionally explicit.
+  const initialThumb = links[0].querySelector('img');
+  const initialWidth = Number(initialThumb?.getAttribute('width')) || 1;
+  const initialHeight = Number(initialThumb?.getAttribute('height')) || 1;
+
   const lightbox = document.createElement('div');
   lightbox.className = 'archive-lightbox';
   lightbox.hidden = true;
@@ -60,7 +67,7 @@
     <div class="archive-lightbox__panel" role="dialog" aria-modal="true" aria-label="${isPortuguese ? 'Visualização ampliada' : 'Enlarged view'}">
       <button class="archive-lightbox__close" type="button" aria-label="${isPortuguese ? 'Fechar' : 'Close'}">×</button>
       <button class="archive-lightbox__nav archive-lightbox__nav--prev" type="button" aria-label="${isPortuguese ? 'Imagem anterior' : 'Previous image'}" hidden>‹</button>
-      <img class="archive-lightbox__image" alt="">
+      <img class="archive-lightbox__image" alt="" width="${initialWidth}" height="${initialHeight}">
       <button class="archive-lightbox__nav archive-lightbox__nav--next" type="button" aria-label="${isPortuguese ? 'Próxima imagem' : 'Next image'}" hidden>›</button>
       <div class="archive-lightbox__meta">
         <div class="archive-lightbox__caption"></div>
@@ -88,6 +95,10 @@
     const link = activeItems[activeIndex];
     if (!link) return;
     const thumb = link.querySelector('img');
+    const thumbWidth = Number(thumb?.getAttribute('width')) || thumb?.naturalWidth || 1;
+    const thumbHeight = Number(thumb?.getAttribute('height')) || thumb?.naturalHeight || 1;
+    image.width = thumbWidth;
+    image.height = thumbHeight;
     image.src = link.href;
     image.alt = thumb?.alt || '';
     caption.textContent = getCaption(link);

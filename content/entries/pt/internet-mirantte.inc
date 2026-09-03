@@ -110,4 +110,4 @@
     <button class="record-gallery__arrow record-gallery__arrow--next" type="button" data-gallery-next hidden aria-label="Próximas fotos">›</button>
   </div>
 </div>
-<!-- gallery:mirantte-news:end --><div class="inline-records"><a class="inline-record" href="/assets/archive/mirantte-news-card.webp" target="_blank" rel="noopener noreferrer"><img src="/assets/archive/mirantte-news-card.webp" loading="lazy" decoding="async" alt="Cartão profissional do Mirantte News com marca, slogan e nome Marcelo Nicchio."><span><strong>Mirantte News · cartão profissional</strong><small>Abrir registro ↗</small></span></a></div>
+<!-- gallery:mirantte-news:end --><div class="inline-records"><a class="inline-record" href="/assets/archive/mirantte-news-card.webp" target="_blank" rel="noopener noreferrer"><img src="/assets/archive/mirantte-news-card.webp" loading="lazy" decoding="async" alt="Cartão profissional do Mirantte News com marca, slogan e nome Marcelo Nicchio." width="868" height="671"><span><strong>Mirantte News · cartão profissional</strong><small>Abrir registro ↗</small></span></a></div>
