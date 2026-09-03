@@ -114,6 +114,56 @@ def patch_reader_js() -> bool:
     return True
 
 
+def patch_lightbox_js() -> bool:
+    p=ROOT/'assets/js/archive-lightbox.js'
+    text=p.read_text(encoding='utf-8')
+    old_links="""  const links = [...document.querySelectorAll('a.inline-record, a.record-gallery__item')].filter((link) => isImage(link.href));
+  if (!links.length) return;
+
+  const lightbox = document.createElement('div');
+"""
+    new_links="""  const links = [...document.querySelectorAll('a.inline-record, a.record-gallery__item')].filter((link) => isImage(link.href));
+  if (!links.length) return;
+
+  // The hidden lightbox image exists from initial page load. Seed it with a
+  // valid intrinsic ratio from the first thumbnail, then update that ratio for
+  // each opened item. This keeps every runtime image dimensionally explicit.
+  const initialThumb = links[0].querySelector('img');
+  const initialWidth = Number(initialThumb?.getAttribute('width')) || 1;
+  const initialHeight = Number(initialThumb?.getAttribute('height')) || 1;
+
+  const lightbox = document.createElement('div');
+"""
+    if new_links not in text:
+        if old_links not in text:
+            raise RuntimeError('Lightbox links block not found')
+        text=text.replace(old_links,new_links,1)
+    old_img='''      <img class="archive-lightbox__image" alt="">'''
+    new_img='''      <img class="archive-lightbox__image" alt="" width="${initialWidth}" height="${initialHeight}">'''
+    if new_img not in text:
+        if old_img not in text:
+            raise RuntimeError('Lightbox image template not found')
+        text=text.replace(old_img,new_img,1)
+    old_render="""    const thumb = link.querySelector('img');
+    image.src = link.href;
+    image.alt = thumb?.alt || '';
+"""
+    new_render="""    const thumb = link.querySelector('img');
+    const thumbWidth = Number(thumb?.getAttribute('width')) || thumb?.naturalWidth || 1;
+    const thumbHeight = Number(thumb?.getAttribute('height')) || thumb?.naturalHeight || 1;
+    image.width = thumbWidth;
+    image.height = thumbHeight;
+    image.src = link.href;
+    image.alt = thumb?.alt || '';
+"""
+    if new_render not in text:
+        if old_render not in text:
+            raise RuntimeError('Lightbox render block not found')
+        text=text.replace(old_render,new_render,1)
+    p.write_text(text,encoding='utf-8')
+    return True
+
+
 def patch_runtime_gate() -> bool:
     p=ROOT/'tools/smoke_runtime_performance.js'
     text=p.read_text(encoding='utf-8')
@@ -197,10 +247,24 @@ def ensure_dimension_audit_step() -> bool:
     return True
 
 
+def ensure_lightbox_syntax_check() -> bool:
+    p=ROOT/'.github/workflows/site-audit.yml'
+    text=p.read_text(encoding='utf-8')
+    marker='''          node --check assets/js/reader-disclosure-loader.js\n'''
+    new='''          node --check assets/js/archive-lightbox.js\n          node --check assets/js/reader-disclosure-loader.js\n'''
+    if 'node --check assets/js/archive-lightbox.js' in text:
+        return False
+    if marker not in text:
+        raise RuntimeError('JS syntax workflow anchor not found')
+    p.write_text(text.replace(marker,new,1),encoding='utf-8')
+    return True
+
+
 def main() -> int:
     changed=patch_all_markup()
     if patch_reader_registry(): changed.append('data/entries.json')
     if patch_reader_js(): changed.append('assets/js/reader-disclosure.js')
+    if patch_lightbox_js(): changed.append('assets/js/archive-lightbox.js')
     if patch_runtime_gate(): changed.append('tools/smoke_runtime_performance.js')
     if patch_gallery_palette(): changed.append('tools/build_gallery_media.py')
     if patch_workflow('.github/workflows/site-audit.yml', [
@@ -210,6 +274,7 @@ def main() -> int:
         ("node-version: '22'","node-version: '24'"),
     ]): changed.append('.github/workflows/site-audit.yml')
     if ensure_dimension_audit_step(): changed.append('.github/workflows/site-audit.yml')
+    if ensure_lightbox_syntax_check(): changed.append('.github/workflows/site-audit.yml')
     if patch_workflow('.github/workflows/media-build.yml', [
         ('actions/checkout@v4','actions/checkout@v7'),
         ('actions/setup-python@v5','actions/setup-python@v7'),
