@@ -108,6 +108,16 @@ async function assertMobile(browser, pagePath, expectedLanguageLink, expectedLin
   assert(linkCount === expectedLinkCount, `${pagePath}: expected ${expectedLinkCount} primary navigation links, found ${linkCount}`);
   assert(await links.getByText(expectedLanguageLink, {exact: true}).count() === 1, `${pagePath}: language switch link missing from opened categories`);
 
+  const panelStyles = await links.locator('a').evaluateAll((nodes) => nodes.map((node) => {
+    const style = getComputedStyle(node);
+    return {color: style.color, fontWeight: Number(style.fontWeight), opacity: Number(style.opacity)};
+  }));
+  for (const [index, style] of panelStyles.entries()) {
+    assert(style.color === 'rgb(255, 255, 255)', `${pagePath}: nav link ${index + 1} is not white (${style.color})`);
+    assert(style.fontWeight >= 600, `${pagePath}: nav link ${index + 1} is not bold enough (${style.fontWeight})`);
+    assert(style.opacity === 1, `${pagePath}: nav link ${index + 1} is visually faded (${style.opacity})`);
+  }
+
   const bounds = await links.locator('a').evaluateAll((nodes) => nodes.map((node) => {
     const r = node.getBoundingClientRect();
     return {left: r.left, right: r.right, top: r.top, bottom: r.bottom, width: r.width, height: r.height};
