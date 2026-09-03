@@ -17,6 +17,12 @@
   css.dataset.readerDisclosure = 'style';
   document.head.appendChild(css);
 
+  const theme = document.createElement('link');
+  theme.rel = 'stylesheet';
+  theme.href = '/assets/reader-yellow-outline-test.css?v=20260903-yellow1';
+  theme.dataset.readerDisclosure = 'theme';
+  document.head.appendChild(theme);
+
   const script = document.createElement('script');
   script.src = '/assets/js/reader-disclosure.js?v=20260903-reader12';
   script.defer = true;
