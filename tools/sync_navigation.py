@@ -3,7 +3,14 @@ from __future__ import annotations
 import argparse
 import re
 from pathlib import Path
+
 ROOT = Path(__file__).resolve().parents[1]
+MOBILE_NAV_VERSION = '20260903-mobile1'
+MOBILE_NAV_CSS = f'<link rel="stylesheet" href="/assets/mobile-nav.css?v={MOBILE_NAV_VERSION}">'
+MOBILE_NAV_JS = f'<script src="/assets/js/mobile-nav.js?v={MOBILE_NAV_VERSION}" defer></script>'
+MOBILE_NAV_CSS_RE = re.compile(r'<link rel="stylesheet" href="/assets/mobile-nav\.css\?v=[^"]+">')
+MOBILE_NAV_JS_RE = re.compile(r'<script src="/assets/js/mobile-nav\.js\?v=[^"]+" defer></script>')
+
 
 def normalize_nav_block(block: str, lang: str) -> str:
     if lang == "pt":
@@ -56,6 +63,7 @@ def normalize_nav_block(block: str, lang: str) -> str:
         block = re.sub(av_pattern, '', block)
     return block
 
+
 def normalize_other_links(text: str, lang: str) -> str:
     pairs = [
         ('/pt/search-performance/', '/pt/internet/', 'Internet & Performance') if lang == 'pt' else ('/en/search-performance/', '/en/internet/', 'Internet & Performance'),
@@ -71,6 +79,24 @@ def normalize_other_links(text: str, lang: str) -> str:
         text = re.sub(pattern, repl, text)
     return text
 
+
+def install_mobile_nav_assets(text: str) -> str:
+    if MOBILE_NAV_CSS_RE.search(text):
+        text = MOBILE_NAV_CSS_RE.sub(MOBILE_NAV_CSS, text, count=1)
+    elif '</head>' in text:
+        text = text.replace('</head>', f'  {MOBILE_NAV_CSS}\n</head>', 1)
+    else:
+        raise RuntimeError('Page has no </head> for mobile navigation stylesheet')
+
+    if MOBILE_NAV_JS_RE.search(text):
+        text = MOBILE_NAV_JS_RE.sub(MOBILE_NAV_JS, text, count=1)
+    elif '</body>' in text:
+        text = text.replace('</body>', f'{MOBILE_NAV_JS}\n</body>', 1)
+    else:
+        raise RuntimeError('Page has no </body> for mobile navigation script')
+    return text
+
+
 def normalize(path: Path) -> bool:
     text = path.read_text(encoding='utf-8')
     original = text
@@ -80,10 +106,13 @@ def normalize(path: Path) -> bool:
         return False
     text = re.sub(r'<nav class="nav-links"[^>]*>.*?</nav>', lambda m: normalize_nav_block(m.group(0), lang), text, flags=re.S)
     text = normalize_other_links(text, lang)
+    if '<header class="site-header">' in text and '<nav class="nav-links"' in text:
+        text = install_mobile_nav_assets(text)
     if text == original:
         return False
     path.write_text(text, encoding='utf-8')
     return True
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -106,6 +135,7 @@ def main() -> int:
     else:
         print('Navigation already synchronized.')
     return 0
+
 
 if __name__ == '__main__':
     raise SystemExit(main())
