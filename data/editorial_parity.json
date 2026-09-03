@@ -361,9 +361,9 @@
       ]
     },
     "spirituality-seeker": {
-      "revision": 3,
-      "pt_hash": "de2bee1ccb874f25f6dd0ee79de4d4dc25bea1fe89bd46407117250a3e206055",
-      "en_hash": "7d0972339174adff5ce75f39346ad6d4d64eb5c3fcf25eb45f10561bc3359848",
+      "revision": 4,
+      "pt_hash": "1b76ca9addb9fedcaea9de647fe3ddf47120474aa01dfb8d0a97318bcb6f881d",
+      "en_hash": "575361b4286e68fb587d6c7609fcdbfaaa77cecf62870cf4cc909f5e2078dc0a",
       "accepted_on": "2026-09-03",
       "changed_languages": [
         "pt",
