@@ -1,4 +1,4 @@
-name: Chet closeout push
+name: Chet closeout clean-copy
 
 on:
   push:
@@ -8,66 +8,36 @@ permissions:
   contents: write
 
 jobs:
-  push-closeout:
+  copy:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: work/chet-post-c8-closeout
+          ref: work/chet-post-c8-closeout-clean
           fetch-depth: 0
-      - uses: actions/setup-python@v7
-        with:
-          python-version: '3.12'
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-      - run: |
-          python -m pip install --disable-pip-version-check Pillow beautifulsoup4
-          mkdir -p /tmp/reader-ux-smoke
-          npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
-      - name: Apply closeout
+      - name: Copy validated permanent files
         run: |
-          python tools/chet_closeout_apply.py
-          python tools/sync_entries.py
-          python tools/sync_full_biography.py
-          python tools/build_chapter_pages.py
-          python tools/sync_reader_disclosure_loader.py
-          python tools/build_sitemap.py
-          for entry in audiovisual-autopsia audiovisual-film audiovisual-meia-noite communication-folha hai-melissa hai-pro1 hai-pro2 internet-clickland internet-cookieweb internet-dialetto internet-mirantte livraria-cultura; do
-            python tools/editorial_parity.py --accept "$entry"
-          done
-      - name: Verify closeout
-        env:
-          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
-        run: |
-          python tools/build_gallery_media.py --check
-          python tools/sync_galleries.py --check
-          python tools/audit_galleries.py
-          python tools/audit_image_dimensions.py
-          python tools/editorial_parity.py --check
-          python tools/sync_entries.py --check
-          python tools/sync_full_biography.py --check
-          python tools/audit_full_biography.py
-          python tools/build_chapter_pages.py --check
-          python tools/sync_reader_disclosure_loader.py --check
-          python tools/audit_entries.py
-          node --check assets/js/archive-lightbox.js
-          node --check assets/js/reader-disclosure.js
-          node --check assets/js/reader-disclosure-loader.js
-          node tools/smoke_reader_ux.js
-          node tools/smoke_reader_en_rich.js
-          node tools/smoke_runtime_performance.js
-          python tools/build_sitemap.py --check
-          python tools/audit_site.py
-      - name: Commit normal repository files
+          git fetch origin work/chet-post-c8-closeout
+          git checkout origin/work/chet-post-c8-closeout -- \
+            assets \
+            content \
+            data \
+            docs \
+            en \
+            pt \
+            sitemap.xml \
+            tools/audit_image_dimensions.py \
+            tools/build_gallery_media.py \
+            tools/smoke_runtime_performance.js \
+            tools/sync_reader_disclosure_loader.py
+      - name: Commit clean closeout state
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets content data en pt sitemap.xml tools/audit_image_dimensions.py tools/build_gallery_media.py tools/smoke_runtime_performance.js tools/sync_reader_disclosure_loader.py
           if git diff --cached --quiet; then
-            echo 'No normal closeout changes generated.'
+            echo 'Clean branch already contains validated permanent state.'
           else
             git commit -m 'Close post-C8 technical gaps'
-            git push origin HEAD:work/chet-post-c8-closeout
+            git push origin HEAD:work/chet-post-c8-closeout-clean
           fi
