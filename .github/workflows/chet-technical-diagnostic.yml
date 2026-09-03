@@ -32,6 +32,7 @@ jobs:
           python tools/sync_entries.py
           python tools/sync_full_biography.py
           python tools/build_chapter_pages.py
+          python tools/sync_reader_disclosure_loader.py
           python tools/build_sitemap.py
           for entry in audiovisual-autopsia audiovisual-film audiovisual-meia-noite communication-folha hai-melissa hai-pro1 hai-pro2 internet-clickland internet-cookieweb internet-dialetto internet-mirantte livraria-cultura; do
             python tools/editorial_parity.py --accept "$entry"
@@ -49,10 +50,20 @@ jobs:
           python tools/sync_full_biography.py --check
           python tools/audit_full_biography.py
           python tools/build_chapter_pages.py --check
+          python tools/sync_reader_disclosure_loader.py --check
           python tools/audit_entries.py
           node --check assets/js/archive-lightbox.js
           node --check assets/js/reader-disclosure.js
           node --check tools/smoke_runtime_performance.js
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tools/smoke_reader_ux.js')
+          text=p.read_text(encoding='utf-8')
+          old="  const page = await context.newPage();\n  await blockExternal(page);"
+          new="  const page = await context.newPage();\n  page.on('pageerror', (error) => console.error('PAGEERROR:', error.stack || error.message || String(error)));\n  await blockExternal(page);"
+          if old in text:
+              p.write_text(text.replace(old,new,1),encoding='utf-8')
+          PY
           node tools/smoke_reader_ux.js
           node tools/smoke_reader_en_rich.js
           node tools/smoke_runtime_performance.js
@@ -65,26 +76,18 @@ jobs:
           from bs4 import BeautifulSoup
           base='https://marcelonicchio.github.io'
           checks={
-            '/': ['Marcelo','PT / EN'],
-            '/pt/': ['Mídia & Cultura','Cultura & Audiovisual'],
-            '/en/': ['Media & Culture','Culture & Audiovisual'],
-            '/pt/biografia/': ['Biografia','BEST'],
-            '/en/biography/': ['Biography','BEST'],
-            '/pt/internet/': ['Internet & Performance','BEST'],
-            '/en/internet/': ['Internet & Performance','BEST'],
-            '/pt/internet/best-kenshoo/': ['BEST','Kenshoo'],
-            '/en/internet/best-kenshoo/': ['BEST','Kenshoo'],
-            '/pt/comunicacao/': ['Cultura & Audiovisual'],
-            '/en/communication/': ['Culture & Audiovisual'],
-            '/pt/ia-hai/': ['Melissa'],
-            '/en/ai-hai/': ['Melissa'],
+            '/': ['Marcelo','PT / EN'], '/pt/': ['Mídia & Cultura','Cultura & Audiovisual'], '/en/': ['Media & Culture','Culture & Audiovisual'],
+            '/pt/biografia/': ['Biografia','BEST'], '/en/biography/': ['Biography','BEST'],
+            '/pt/internet/': ['Internet & Performance','BEST'], '/en/internet/': ['Internet & Performance','BEST'],
+            '/pt/internet/best-kenshoo/': ['BEST','Kenshoo'], '/en/internet/best-kenshoo/': ['BEST','Kenshoo'],
+            '/pt/comunicacao/': ['Cultura & Audiovisual'], '/en/communication/': ['Culture & Audiovisual'],
+            '/pt/ia-hai/': ['Melissa'], '/en/ai-hai/': ['Melissa'],
             '/robots.txt': [], '/sitemap.xml': [], '/llms.txt': [], '/data/person.json': []
           }
           s=requests.Session(); s.headers['User-Agent']='Chet-HUB-Live-Audit/1.0'
           failures=[]
           for path,phrases in checks.items():
-            r=s.get(base+path,timeout=20)
-            print(r.status_code,path)
+            r=s.get(base+path,timeout=20); print(r.status_code,path)
             if r.status_code != 200: failures.append(f'{path}: HTTP {r.status_code}'); continue
             for phrase in phrases:
               if phrase not in r.text: failures.append(f'{path}: missing {phrase!r}')
@@ -93,15 +96,14 @@ jobs:
               for node in soup.find_all('script',attrs={'type':'application/ld+json'}):
                 try: json.loads(node.string or node.get_text())
                 except Exception as e: failures.append(f'{path}: invalid JSON-LD {e}')
-          if failures:
-            print('\n'.join(failures)); raise SystemExit(1)
+          if failures: print('\n'.join(failures)); raise SystemExit(1)
           print('Live deployment baseline recheck passed.')
           PY
       - name: Commit technical closeout
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add . ':!.github/workflows/chet-technical-diagnostic.yml' ':!tools/chet_closeout_apply.py'
+          git add . ':!.github/workflows/chet-technical-diagnostic.yml' ':!tools/chet_closeout_apply.py' ':!tools/smoke_reader_ux.js'
           if git diff --cached --quiet; then
             echo 'No permanent closeout changes generated.'
           else
