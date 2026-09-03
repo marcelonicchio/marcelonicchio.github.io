@@ -16,14 +16,25 @@ jobs:
         with:
           ref: work/mobile-nav-discoverability
           fetch-depth: 0
-      - name: Copy validated permanent files
+      - name: Copy validated permanent sources
         run: |
-          git checkout origin/work/mobile-nav-operational -- assets/mobile-nav.css assets/js/mobile-nav.js tools/sync_navigation.py tools/smoke_mobile_nav.js pt en
+          git checkout origin/work/mobile-nav-operational -- assets/mobile-nav.css assets/js/mobile-nav.js tools/sync_navigation.py tools/smoke_mobile_nav.js tools/build_chapter_pages.py
+          python tools/build_chapter_pages.py
+          python tools/sync_navigation.py
           python tools/build_sitemap.py
+      - name: Verify generated navigation state
+        run: |
+          python tools/build_chapter_pages.py --check
+          python tools/sync_navigation.py --check
+          python tools/build_sitemap.py --check
       - name: Commit clean mobile nav state
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/mobile-nav.css assets/js/mobile-nav.js tools/sync_navigation.py tools/smoke_mobile_nav.js pt en sitemap.xml
-          git commit -m 'Replace hidden mobile nav scroll with explicit menu'
-          git push origin HEAD:work/mobile-nav-discoverability
+          git add assets/mobile-nav.css assets/js/mobile-nav.js tools/sync_navigation.py tools/smoke_mobile_nav.js tools/build_chapter_pages.py pt en sitemap.xml
+          if git diff --cached --quiet; then
+            echo 'Clean mobile navigation branch already synchronized.'
+          else
+            git commit -m 'Keep generated Chapter Pages on mobile nav shell'
+            git push origin HEAD:work/mobile-nav-discoverability
+          fi
