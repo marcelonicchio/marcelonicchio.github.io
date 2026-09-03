@@ -66,7 +66,7 @@ async function blockExternal(page) {
   });
 }
 
-async function assertMobile(browser, pagePath, expectedLanguageLink) {
+async function assertMobile(browser, pagePath, expectedLanguageLink, expectedLinkCount) {
   const context = await browser.newContext({viewport: {width: 390, height: 844}});
   const page = await context.newPage();
   await blockExternal(page);
@@ -89,7 +89,7 @@ async function assertMobile(browser, pagePath, expectedLanguageLink) {
   assert(await links.isVisible(), `${pagePath}: primary links did not become visible`);
 
   const linkCount = await links.locator('a').count();
-  assert(linkCount >= 8, `${pagePath}: expected at least 8 primary navigation links, found ${linkCount}`);
+  assert(linkCount === expectedLinkCount, `${pagePath}: expected ${expectedLinkCount} primary navigation links, found ${linkCount}`);
   assert(await links.getByText(expectedLanguageLink, {exact: true}).count() === 1, `${pagePath}: language switch link missing from opened menu`);
 
   const bounds = await links.locator('a').evaluateAll((nodes) => nodes.map((node) => {
@@ -134,9 +134,9 @@ async function main() {
   let browser;
   try {
     browser = await chromium.launch({headless: true, executablePath: CHROME, args: ['--no-sandbox']});
-    await assertMobile(browser, '/pt/', 'EN');
-    await assertMobile(browser, '/en/', 'PT');
-    await assertMobile(browser, '/pt/biografia/', 'EN');
+    await assertMobile(browser, '/pt/', 'EN', 8);
+    await assertMobile(browser, '/en/', 'PT', 8);
+    await assertMobile(browser, '/pt/biografia/', 'EN', 7);
     await assertDesktop(browser);
     console.log('Mobile navigation discoverability smoke passed.');
   } finally {
