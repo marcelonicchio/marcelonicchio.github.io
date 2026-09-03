@@ -19,7 +19,7 @@
 
   const theme = document.createElement('link');
   theme.rel = 'stylesheet';
-  theme.href = '/assets/reader-yellow-outline-test.css?v=20260903-yellow2';
+  theme.href = '/assets/reader-yellow-outline-test.css?v=20260903-yellow3';
   theme.dataset.readerDisclosure = 'theme';
   document.head.appendChild(theme);
 

@@ -48,6 +48,8 @@ jobs:
         run: python tools/sync_full_biography.py --check
       - name: Audit Full Biography coverage
         run: python tools/audit_full_biography.py
+      - name: Audit Reader rich-preview visual policy
+        run: python tools/audit_reader_visual_policy.py
       - name: Audit Reader disclosure loader
         run: python tools/sync_reader_disclosure_loader.py --check
       - name: Audit generated Chapter Pages
