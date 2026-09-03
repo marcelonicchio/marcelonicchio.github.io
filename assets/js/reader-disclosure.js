@@ -221,6 +221,8 @@
           const image = document.createElement('img');
           image.src = readerPreview.image;
           image.alt = readerPreview.alt || '';
+          if (readerPreview.width) image.width = readerPreview.width;
+          if (readerPreview.height) image.height = readerPreview.height;
           image.loading = 'lazy';
           image.decoding = 'async';
           media.appendChild(image);

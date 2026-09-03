@@ -224,7 +224,7 @@ async function probe(browser, config) {
   if (initial.cls > 0.1) warn(config.label, `initial local CLS ${initial.cls.toFixed(4)} > 0.10; inspect before treating as field CLS.`);
   if (initial.lcp > 2500) warn(config.label, `local LCP ${initial.lcp.toFixed(1)} ms > 2500 ms; external network is blocked, so compare only against this probe over time.`);
   if (initial.longTasks.max > 200) warn(config.label, `max local long task ${initial.longTasks.max.toFixed(1)} ms > 200 ms.`);
-  if (initial.images.missingIntrinsic > 0) warn(config.label, `${initial.images.missingIntrinsic} image(s) lack explicit width/height attributes.`);
+  assert(initial.images.missingIntrinsic === 0, `${config.label}: ${initial.images.missingIntrinsic} image(s) lack explicit width/height attributes on initial render`);
 
   await expandAndScroll(page);
   const afterScroll = await snapshot(page);
@@ -232,6 +232,7 @@ async function probe(browser, config) {
 
   assert(!afterScroll.layout.horizontalOverflow, `${config.label}: horizontal overflow after full Reader expansion/scroll`);
   assert(afterScroll.images.loaded >= initial.images.loaded, `${config.label}: loaded image count regressed after scroll`);
+  assert(afterScroll.images.missingIntrinsic === 0, `${config.label}: ${afterScroll.images.missingIntrinsic} image(s) lack explicit width/height attributes after full expansion/scroll`);
   assert(afterDecode.failures === 0, `${config.label}: ${afterDecode.failures} local image decode failure(s) after scroll`);
 
   const heapDelta = initial.heap && afterScroll.heap ? afterScroll.heap.used - initial.heap.used : null;

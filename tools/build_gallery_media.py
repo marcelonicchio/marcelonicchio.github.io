@@ -59,6 +59,11 @@ def build(check: bool) -> int:
             with Image.open(source) as opened:
                 image = ImageOps.exif_transpose(opened)
                 source_w, source_h = image.size
+                # Pillow warns when palette transparency stored as bytes is converted
+                # directly to RGB. Normalize through RGBA first so transparent palette
+                # sources are handled deterministically before WebP conversion.
+                if image.mode == "P" and "transparency" in image.info:
+                    image = image.convert("RGBA")
                 working = image.convert("RGB")
 
             expected_meta = {"width": source_w, "height": source_h}

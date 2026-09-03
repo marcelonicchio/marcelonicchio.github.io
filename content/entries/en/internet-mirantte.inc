@@ -110,4 +110,4 @@
     <button class="record-gallery__arrow record-gallery__arrow--next" type="button" data-gallery-next hidden aria-label="Next photos">›</button>
   </div>
 </div>
-<!-- gallery:mirantte-news:end --><div class="inline-records"><a class="inline-record" href="/assets/archive/mirantte-news-card.webp" target="_blank" rel="noopener noreferrer"><img src="/assets/archive/mirantte-news-card.webp" loading="lazy" decoding="async" alt="Mirantte News professional card with brand, tagline and the name Marcelo Nicchio."><span><strong>Mirantte News · professional card</strong><small>Open record ↗</small></span></a></div>
+<!-- gallery:mirantte-news:end --><div class="inline-records"><a class="inline-record" href="/assets/archive/mirantte-news-card.webp" target="_blank" rel="noopener noreferrer"><img src="/assets/archive/mirantte-news-card.webp" loading="lazy" decoding="async" alt="Mirantte News professional card with brand, tagline and the name Marcelo Nicchio." width="868" height="671"><span><strong>Mirantte News · professional card</strong><small>Open record ↗</small></span></a></div>
