@@ -9,10 +9,11 @@ The `/docs` directory mixes living operational documentation with dated historic
 1. **`CURRENT-HUB-STATE.md`** — authoritative C0–C8 architecture/editorial snapshot.
 2. **`CHET-CLOSEOUT-2026-09-03.md`** — post-C8 engineering closeout, live-audit results, thematic readiness and remaining operator-gated work.
 3. **`reader-summary-model.md`** — selective rich compact-summary model and current rollout state.
-4. **`entry-authoring-workflow.md`** — source, registry, Reader and Chapter Page authoring workflow.
-5. **`full-biography-workflow.md`** — Full Biography chronology/parity/synchronization mechanics.
-6. **`visual-archive-plan.md`** — media preservation/delivery policy.
-7. **`indexation-plan.md`** — staged indexing policy, including the live BEST/Kenshoo pilot.
+4. **`reader-presentation-policy.md`** — path-specific Reader behavior, Full Biography rich-preview emphasis and the approved visual palette rule.
+5. **`entry-authoring-workflow.md`** — source, registry, Reader and Chapter Page authoring workflow.
+6. **`full-biography-workflow.md`** — Full Biography chronology/parity/synchronization mechanics.
+7. **`visual-archive-plan.md`** — media preservation/delivery policy.
+8. **`indexation-plan.md`** — staged indexing policy, including the live BEST/Kenshoo pilot.
 
 ## Current supporting references
 
