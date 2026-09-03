@@ -1,18 +1,20 @@
-name: Chet technical diagnostic
+name: Chet closeout one-shot
 
 on:
   push:
     branches: [work/chet-post-c8-closeout]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  diagnose:
+  closeout:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: work/chet-post-c8-closeout
           fetch-depth: 0
       - uses: actions/setup-python@v7
         with:
@@ -20,60 +22,38 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
-      - run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4 requests
-      - name: Intrinsic image inventory and source occurrences
+      - run: |
+          python -m pip install --disable-pip-version-check Pillow beautifulsoup4 requests
+          mkdir -p /tmp/reader-ux-smoke
+          npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
+      - name: Apply technical closeout
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          from bs4 import BeautifulSoup
-          from PIL import Image
-          import json
-          root=Path('.')
-          targets=[Path('pt/biografia/index.html'),Path('en/biography/index.html'),Path('pt/internet/index.html'),Path('en/internet/index.html')]
-          missing_srcs=set()
-          for p in targets:
-            soup=BeautifulSoup(p.read_text(encoding='utf-8'),'html.parser')
-            print(f'== {p} ==')
-            missing=[]
-            for img in soup.find_all('img'):
-              if img.get('width') and img.get('height'): continue
-              src=img.get('src','')
-              dims='remote/data'
-              if src.startswith('/'):
-                asset=root/src.lstrip('/')
-                if asset.exists():
-                  try:
-                    with Image.open(asset) as im: dims=f'{im.width}x{im.height}'
-                  except Exception as e: dims=f'error:{e}'
-              missing.append((src,dims)); missing_srcs.add(src)
-            print('static missing:',len(missing))
-            for src,dims in missing: print('  ',dims,src)
-          print('== source occurrences (excluding generated pt/en HTML) ==')
-          skip_roots={'.git','pt','en','assets'}
-          text_files=[]
-          for p in root.rglob('*'):
-            if not p.is_file(): continue
-            if p.parts and p.parts[0] in skip_roots: continue
-            if p.suffix.lower() not in {'.html','.inc','.json','.py','.js','.md'}: continue
-            try: text=p.read_text(encoding='utf-8')
-            except Exception: continue
-            text_files.append((p,text))
-          for src in sorted(missing_srcs):
-            hits=[str(p) for p,text in text_files if src in text]
-            print(src, '=>', ', '.join(hits) if hits else '(no non-generated source hit)')
-          print('== reader preview dimensions ==')
-          data=json.loads(Path('data/entries.json').read_text(encoding='utf-8'))
-          seen=set()
-          for entry in data['entries']:
-            for lang,prev in (entry.get('reader_preview') or {}).items():
-              src=prev.get('image') if isinstance(prev,dict) else None
-              if not src or src in seen: continue
-              seen.add(src)
-              asset=root/src.lstrip('/')
-              if asset.exists():
-                with Image.open(asset) as im: print(entry['id'],src,im.width,im.height)
-          PY
-      - name: Live deployment audit
+          python tools/chet_closeout_apply.py
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+      - name: Verify closeout invariants
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: |
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/audit_image_dimensions.py
+          python tools/editorial_parity.py --check
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/build_chapter_pages.py --check
+          python tools/audit_entries.py
+          node --check assets/js/reader-disclosure.js
+          node --check tools/smoke_runtime_performance.js
+          node tools/smoke_reader_ux.js
+          node tools/smoke_reader_en_rich.js
+          node tools/smoke_runtime_performance.js
+          python tools/build_sitemap.py --check
+          python tools/audit_site.py
+      - name: Live deployment baseline recheck
         run: |
           python - <<'PY'
           import requests,json
@@ -95,25 +75,31 @@ jobs:
             '/en/ai-hai/': ['Melissa'],
             '/robots.txt': [], '/sitemap.xml': [], '/llms.txt': [], '/data/person.json': []
           }
-          sess=requests.Session(); sess.headers['User-Agent']='Chet-HUB-Live-Audit/1.0'
+          s=requests.Session(); s.headers['User-Agent']='Chet-HUB-Live-Audit/1.0'
           failures=[]
           for path,phrases in checks.items():
-            r=sess.get(base+path,timeout=20)
-            print(r.status_code, len(r.content), path, r.headers.get('last-modified',''))
-            if r.status_code!=200: failures.append(f'{path}: HTTP {r.status_code}'); continue
+            r=s.get(base+path,timeout=20)
+            print(r.status_code,path)
+            if r.status_code != 200: failures.append(f'{path}: HTTP {r.status_code}'); continue
             for phrase in phrases:
               if phrase not in r.text: failures.append(f'{path}: missing {phrase!r}')
-            if path.endswith('/') and path not in ['/']:
+            if path.endswith('/') and path != '/':
               soup=BeautifulSoup(r.text,'html.parser')
-              can=soup.find('link',rel='canonical')
-              rob=soup.find('meta',attrs={'name':'robots'})
-              print('  canonical=', can.get('href') if can else None, 'robots=', rob.get('content') if rob else None)
-              for s in soup.find_all('script',attrs={'type':'application/ld+json'}):
-                try: json.loads(s.string or s.get_text())
+              for node in soup.find_all('script',attrs={'type':'application/ld+json'}):
+                try: json.loads(node.string or node.get_text())
                 except Exception as e: failures.append(f'{path}: invalid JSON-LD {e}')
           if failures:
-            print('FAILURES:')
-            for f in failures: print(' -',f)
-            raise SystemExit(1)
-          print('Live deployment audit passed.')
+            print('\n'.join(failures)); raise SystemExit(1)
+          print('Live deployment baseline recheck passed.')
           PY
+      - name: Commit technical closeout
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add . ':!.github/workflows/chet-technical-diagnostic.yml' ':!tools/chet_closeout_apply.py'
+          if git diff --cached --quiet; then
+            echo 'No permanent closeout changes generated.'
+          else
+            git commit -m 'Close post-C8 technical gaps'
+            git push origin HEAD:work/chet-post-c8-closeout
+          fi
