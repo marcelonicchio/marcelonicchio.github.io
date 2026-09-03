@@ -49,6 +49,13 @@ html.reader-disclosure-active .reader-disclosure__collapse-button:hover{
   color:#080808;
 }
 
+/* Full Biography only: keep the Vipassana reconstruction subordinate to the text.
+   The standalone Spirituality chapter keeps the full-width image. */
+section.bio-entry .thread-media:has(img[src$="/vipassana03.jpg"]){
+  width:80%;
+  margin-inline:auto;
+}
+
 @media print{
   html.reader-disclosure-active .reader-disclosure--featured,
   html.reader-disclosure-active section.bio-entry .reader-disclosure:has(.reader-disclosure__preview){
