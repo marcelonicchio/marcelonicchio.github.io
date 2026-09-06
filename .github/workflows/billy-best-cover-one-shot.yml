@@ -1,0 +1,70 @@
+name: Billy BEST cover one-shot
+
+on:
+  push:
+    branches:
+      - billy/best-pdf-cover-fix-2026-09-06
+    paths:
+      - .github/workflows/billy-best-cover-one-shot.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install dependency
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Replace PDF card thumbnail in PT and EN sources
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          new_src = '/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014-cover.webp'
+          specs = {
+              Path('content/entries/pt/internet-best.inc'): (
+                  'BEST Blog anunciando o workshop Facebook Ads: Melhores Práticas, Melhor Conversão.',
+                  'Capa original da apresentação BEST/Kenshoo — Marketing de Performance, Search e Social.'
+              ),
+              Path('content/entries/en/internet-best.inc'): (
+                  'BEST Blog announcing the Facebook Ads: Best Practices, Better Conversion workshop.',
+                  'Original BEST/Kenshoo presentation cover — Performance Marketing, Search and Social.'
+              ),
+          }
+          old_src = '/assets/archive/internet/best-kenshoo/best07_postblog-facebook-ads-2014.jpg'
+          for path, (old_alt, new_alt) in specs.items():
+              text = path.read_text(encoding='utf-8')
+              old = f'<img alt="{old_alt}" decoding="async" loading="lazy" src="{old_src}" width="1029" height="867"/>'
+              new = f'<img alt="{new_alt}" decoding="async" loading="lazy" src="{new_src}" width="480" height="360"/>'
+              if old not in text:
+                  raise SystemExit(f'expected PDF thumbnail markup not found in {path}')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Synchronize derived surfaces
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+          python tools/editorial_parity.py --accept internet-best
+          python tools/build_sitemap.py
+      - name: Validate generated state
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/editorial_parity.py --check
+      - name: Remove one-shot machinery and commit generated result
+        run: |
+          rm .github/workflows/billy-best-cover-one-shot.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix: use original BEST Kenshoo slide as PDF cover'
+          git push
