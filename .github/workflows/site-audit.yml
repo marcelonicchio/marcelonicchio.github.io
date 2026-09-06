@@ -74,10 +74,16 @@ jobs:
           node --check assets/js/archive-lightbox.js
           node --check assets/js/reader-disclosure-loader.js
           node --check assets/js/reader-disclosure.js
+          node --check assets/js/root-language.js
           node --check tools/smoke_mobile_nav.js
           node --check tools/smoke_reader_ux.js
           node --check tools/smoke_reader_en_rich.js
           node --check tools/smoke_runtime_performance.js
+          node --check tools/smoke_root_language.js
+      - name: Smoke-test canonical root language UX in Chrome
+        env:
+          PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
+        run: node tools/smoke_root_language.js
       - name: Smoke-test mobile navigation in Chrome
         env:
           PLAYWRIGHT_CORE_PATH: /tmp/reader-ux-smoke/node_modules/playwright-core
