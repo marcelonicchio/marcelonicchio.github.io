@@ -8,9 +8,12 @@ The `/docs` directory mixes living operational documentation with dated historic
 
 1. **`CURRENT-HUB-STATE.md`** — authoritative current architecture + implementation/destination-state distinction.
 2. **`BILLY-BASELINE-2026-09-05.md`** — fifth-steward baseline, Marcelo's current directives, B0–B6 roadmap and invariants.
-3. **`SEO-GEO-AEO-TRIAGE-2026-09-05.md`** — critical triage of the externally prepared search/AI optimization plan: adopt / adapt / defer / reject.
-4. **`indexation-plan.md`** — staged indexation plan updated for the new destination: public verticals/autonomous URLs indexable, Full Biography eventually `noindex,follow`.
-5. **`external-profile-alignment.md`** — external authority/profile reconciliation workflow.
+3. **`BILLY-SPRINT-95-2026-09-10.md`** — compressed execution plan from 5–10 Sep to leave the HUB approximately 95% ready.
+4. **`BILLY-URL-INDEXATION-MATRIX-2026-09-05.md`** — complete physical URL inventory and deployed-vs-destination indexation matrix.
+5. **`SEO-GEO-AEO-TRIAGE-2026-09-05.md`** — critical triage of the externally prepared search/AI optimization plan: adopt / adapt / defer / reject.
+6. **`indexation-plan.md`** — staged indexation plan updated for the new destination: public verticals/autonomous URLs indexable, Full Biography eventually `noindex,follow`.
+7. **`external-profile-alignment.md`** — external authority/profile reconciliation workflow.
+8. **`HOME-ENTITY-COPY-DRAFT-BILLY-2026-09-05.md`** — working editorial draft/architecture for the substantive root entity page; not production-approved prose.
 
 ## Current supporting references
 
