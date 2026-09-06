@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      - name: Install sync dependency
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
       - name: Remove visual thumbnail from BEST PDF card
         run: |
           python - <<'PY'
