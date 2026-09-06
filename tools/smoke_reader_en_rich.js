@@ -95,22 +95,22 @@ async function main() {
       {
         name: 'Mirantte News', selector: '#bio-internet-mirantte', paragraphs: 4,
         phrase: 'organic traffic', image: '/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp',
-        badges: ['34 photos', '1 business card'], permalink: '/en/internet/mirantte-news/'
+        badges: ['34 photos', '1 business card'], permalink: '/en/internet/mirantte-news/', robots: 'index,follow'
       },
       {
         name: 'CookieWEB', selector: '#bio-internet-cookieweb', paragraphs: 4,
         phrase: 'more than 22 accounts', image: '/assets/media/galleries/cookieweb/cookieweb-19-480.webp',
-        badges: ['20 photos', '3 GAP certificates', '1 contemporary source'], permalink: '/en/internet/cookieweb/'
+        badges: ['20 photos', '3 GAP certificates', '1 contemporary source'], permalink: '/en/internet/cookieweb/', robots: 'index,follow'
       },
       {
         name: 'Meia-Noite e Uns', selector: '#bio-audiovisual-meia-noite', paragraphs: 3,
         phrase: '00:01', image: '/assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-480.webp',
-        badges: ['22 photos', '4 videos'], permalink: '/en/communication/meia-noite-e-uns/'
+        badges: ['22 photos', '4 videos'], permalink: '/en/communication/meia-noite-e-uns/', robots: 'index,follow'
       },
       {
         name: 'Melissa 1.0', selector: '#bio-hai-melissa', paragraphs: 4,
         phrase: '63 hours and 518 prompts', image: '/assets/media/thread/melissa1_0_selfportrait300kb.jpg',
-        badges: ['2 images', '1 download link', '4 DOI documents', '1 repository link'], permalink: '/en/ai-hai/melissa-1-0/'
+        badges: ['2 images', '1 download link', '4 DOI documents', '1 repository link'], permalink: '/en/ai-hai/melissa-1-0/', robots: 'index,follow'
       },
       {
         name: 'BEST / Kenshoo', selector: '#bio-internet-best', paragraphs: 3,

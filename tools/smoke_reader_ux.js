@@ -299,10 +299,10 @@ async function runDesktop(browser) {
   assert(await folhaEn.locator('details.reader-disclosure').count() === 0, 'English Folha must not be wrapped in disclosure');
   assert((await folhaEn.innerText()).includes('Folhateen'), 'English Folha content disappeared');
 
-  // Pilot Chapter Pages: browser-readable, noindex, canonical, exact preserved structures.
+  // Chapter Pages: browser-readable, indexing policy, canonical, exact preserved structures.
   await page.goto(`${BASE}/pt/comunicacao/folhateen-orfaos-do-rock/`, {waitUntil: 'networkidle'});
   assert(await page.locator('main[data-entry-id="communication-folha"]').count() === 1, 'Folha Chapter Page stable id missing');
-  assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'noindex,follow', 'Folha pilot robots incorrect');
+  assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'index,follow', 'Folha Chapter Page robots incorrect');
   assert((await page.locator('link[rel="canonical"]').getAttribute('href')).endsWith('/pt/comunicacao/folhateen-orfaos-do-rock/'), 'Folha canonical incorrect');
   assert(await page.locator('.fact-strip .fact').count() === 1, 'Folha hero exposes taxonomy as a KPI');
   assert(await page.locator('.entry-breadcrumbs').count() === 1, 'Folha visible breadcrumbs missing');
