@@ -68,4 +68,4 @@
   </div>
 </div>
 <!-- gallery:best-kenshoo:end -->
-<div class="inline-records"><a class="inline-record" href="/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014.pdf" rel="noopener noreferrer" target="_blank" type="application/pdf"><img alt="Capa original da apresentação BEST/Kenshoo — Marketing de Performance, Search e Social." decoding="async" loading="lazy" src="/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014-cover.webp" width="480" height="360"/><span><strong>Facebook Ads: Melhores Práticas, Melhor Conversão</strong><small>Apresentação original do workshop · PDF · 46 páginas ↗</small></span></a></div>
+<div class="inline-records"><a class="inline-record" href="/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014.pdf" rel="noopener noreferrer" target="_blank" type="application/pdf"><span><strong>Facebook Ads: Melhores Práticas, Melhor Conversão</strong><small>Apresentação original do workshop · PDF · 46 páginas ↗</small></span></a></div>
