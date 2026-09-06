@@ -233,9 +233,9 @@
       ]
     },
     "internet-best": {
-      "revision": 6,
-      "pt_hash": "e067391a021747beb2dc1d91475347a2a07a3e2140a5ffd8a5e315f9378f49e2",
-      "en_hash": "32bf9ea797d65039db4101c5efbc726628caf4cca1d790e00c6507f35e91dc4a",
+      "revision": 7,
+      "pt_hash": "405ddbf75fca00e9c55314695de1f3e7e3c799ce80bb7d6e067cb87ffc7dd802",
+      "en_hash": "e81139cbf17e9bf27dc04d630eacdd4684038d440e253efeb820546b7eb1bddb",
       "accepted_on": "2026-09-06",
       "changed_languages": [
         "pt",
