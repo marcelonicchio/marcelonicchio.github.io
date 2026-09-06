@@ -41,6 +41,8 @@ LAUNCH_INDEXABLE = {
     "en/communication/meia-noite-e-uns/index.html",
     "pt/ia-hai/melissa-1-0/index.html",
     "en/ai-hai/melissa-1-0/index.html",
+    "pt/biografia/espiritualidade-o-buscador/index.html",
+    "en/biography/spirituality-the-seeker/index.html",
 }
 
 LEGACY_CANONICAL = {
