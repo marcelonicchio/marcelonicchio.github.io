@@ -1,0 +1,63 @@
+name: Billy Communication promotion
+
+on:
+  push:
+    branches:
+      - billy/promote-communication-2026-09-06
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: billy/promote-communication-2026-09-06
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Promote Culture & Audiovisual PT/EN
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          pages = [
+              Path('pt/comunicacao/index.html'),
+              Path('en/communication/index.html'),
+          ]
+          old = '<meta name="robots" content="noindex,follow">'
+          new = '<meta name="robots" content="index,follow,max-image-preview:large">'
+          for path in pages:
+              text = path.read_text(encoding='utf-8')
+              if old not in text:
+                  raise SystemExit(f'{path}: expected noindex robots marker not found')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          audit_path = Path('tools/audit_site.py')
+          text = audit_path.read_text(encoding='utf-8')
+          marker = '}\n\nLEGACY_CANONICAL = {'
+          paths = [
+              'pt/comunicacao/index.html',
+              'en/communication/index.html',
+          ]
+          additions = ''.join(f'    "{rel}",\n' for rel in paths if f'    "{rel}",' not in text)
+          if additions:
+              if marker not in text:
+                  raise SystemExit('LAUNCH_INDEXABLE closing marker not found')
+              text = text.replace(marker, additions + marker, 1)
+              audit_path.write_text(text, encoding='utf-8')
+          PY
+      - name: Regenerate sitemap
+        run: python tools/build_sitemap.py
+      - name: Commit promotion
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/comunicacao/index.html en/communication/index.html tools/audit_site.py sitemap.xml
+          git commit -m "feat: promote Culture and Audiovisual authority vertical"
+          git push origin HEAD:billy/promote-communication-2026-09-06
