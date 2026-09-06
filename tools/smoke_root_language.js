@@ -53,12 +53,21 @@ async function assertLanguage(browser, locale, expected) {
   assert(await page.locator(`[data-root-lang-choice="${expected}"]`).getAttribute('aria-pressed') === 'true', `${locale}: selected language button state wrong`);
   assert(await page.locator('.root-portrait img').isVisible(), `${locale}: portrait missing on mobile`);
   assert(await page.locator(`.root-milestone-grid[data-root-lang="${expected}"] .root-milestone`).count() === 9, `${locale}: expected 9 milestones`);
+  assert(await page.locator(`.root-hero-actions[data-root-lang="${expected}"] a`).count() === 5, `${locale}: expected 5 balanced hero shortcuts`);
+  assert(await page.getByText(expected === 'pt' ? 'Abrir HUB em português' : 'Open English HUB', {exact:true}).count() === 0, `${locale}: redundant language HUB CTA still present`);
   const axisHref = expected === 'pt' ? '/pt/musica/' : '/en/music/';
   assert(await page.locator(`.root-axis[href="${axisHref}"]`).count() === 1, `${locale}: localized Music axis link missing`);
+  assert(await page.locator('a.root-email-link[href="mailto:marcelonicchio@gmail.com"]').count() === 1, `${locale}: canonical e-mail link missing`);
+  const order = await page.evaluate(() => {
+    const milestones = document.querySelector('.root-milestones');
+    const explore = document.querySelector('.root-explore');
+    return Boolean(milestones && explore && (milestones.compareDocumentPosition(explore) & Node.DOCUMENT_POSITION_FOLLOWING));
+  });
+  assert(order, `${locale}: selected milestones must appear before vertical-axis cards`);
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, `${locale}: root has horizontal overflow on mobile`);
   const toggleBox = await page.locator('.root-lang-toggle').boundingBox();
-  assert(toggleBox && toggleBox.x >= -1 && toggleBox.y >= -1 && toggleBox.x + toggleBox.width <= 391 && toggleBox.y + toggleBox.height <= 845, `${locale}: language toggle escapes mobile viewport`);
+  assert(toggleBox && toggleBox.x >= -1 && toggleBox.y >= -1 && toggleBox.y <= 20 && toggleBox.x + toggleBox.width <= 391 && toggleBox.y + toggleBox.height <= 845, `${locale}: language toggle is not contained at top of mobile viewport`);
   await context.close();
 }
 async function assertSwitchPersistence(browser) {
@@ -72,6 +81,17 @@ async function assertSwitchPersistence(browser) {
   await page.reload({waitUntil:'networkidle'});
   assert(await page.locator('html').getAttribute('data-root-language') === 'pt', 'Persisted PT choice did not survive reload');
   assert(await page.locator('.root-milestone-grid[data-root-lang="pt"] .root-milestone').count() === 9, 'PT milestones changed after reload');
+  const overlap = await page.evaluate(() => {
+    const head = document.querySelector('.root-presence-section .root-section-head[data-root-lang="pt"]');
+    const groups = document.querySelector('.root-presence-groups');
+    if (!head || !groups) return true;
+    const h = head.getBoundingClientRect();
+    const g = groups.getBoundingClientRect();
+    return g.top < h.bottom - 1;
+  });
+  assert(!overlap, 'Presence groups overlap the left editorial heading');
+  const panelDisplay = await page.locator('.root-presence-section .presence-panel').evaluate((node) => getComputedStyle(node).display);
+  assert(panelDisplay === 'block', `Presence panel should be block on root, got ${panelDisplay}`);
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, 'Desktop root has horizontal overflow');
   await context.close();
