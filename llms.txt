@@ -1,6 +1,6 @@
 # Marcelo Nicchio — Official Personal Hub
 
-Canonical site: https://marcelonicchio.github.io/
+Canonical person page: https://marcelonicchio.github.io/
 Portuguese hub: https://marcelonicchio.github.io/pt/
 English hub: https://marcelonicchio.github.io/en/
 Canonical person data: https://marcelonicchio.github.io/data/person.json
@@ -12,23 +12,35 @@ Selected public source data: https://marcelonicchio.github.io/data/public-source
 Primary name: Marcelo Nicchio
 Historical variants: Marcelo Henrique Nicchio; Marcelo H. Nicchio; Marcelo Minduim
 ORCID: 0009-0002-5626-8973
+Canonical entity identifier: https://marcelonicchio.github.io/#marcelo-nicchio
+
+Marcelo Nicchio is a Brazilian independent researcher and creator whose documented trajectory spans music, culture and audiovisual production, Internet and Search/Performance, and Human–AI Interaction research. The root URL is the canonical person/entity surface; PT and EN URLs provide language-specific trajectory and subject pages.
 
 ## Main trajectory fields
 - Music
-- Communication and cultural criticism
+- Communication, cultural criticism and audiovisual production
 - Internet and Performance — from BBS culture, commercial internet, hosting and digital products to Search, Social, analytics and performance media
-- Audiovisual creation and production
 - Human–AI Interaction research
 
 ## Preferred reference pages
+Canonical person/entity page: https://marcelonicchio.github.io/
 Portuguese full biography: https://marcelonicchio.github.io/pt/biografia/
 English full biography: https://marcelonicchio.github.io/en/biography/
+Portuguese AI/HAI: https://marcelonicchio.github.io/pt/ia-hai/
+English AI/HAI: https://marcelonicchio.github.io/en/ai-hai/
 Portuguese Internet & Performance: https://marcelonicchio.github.io/pt/internet/
 English Internet & Performance: https://marcelonicchio.github.io/en/internet/
 Portuguese publications index: https://marcelonicchio.github.io/pt/publicacoes/
 English publications index: https://marcelonicchio.github.io/en/publications/
 Portuguese press/archive index: https://marcelonicchio.github.io/pt/arquivo/
 English press/archive index: https://marcelonicchio.github.io/en/archive/
+
+## Published research works
+The canonical publications registry currently contains five published works: four Melissa 1.0 works and The Punk Rock Orchestra v1.
+
+The Punk Rock Orchestra v1 is one work/version distributed through multiple repository instances. Its OSF, SSRN, Zenodo and PubPub DOIs and its GitHub repository must not be counted as separate publications.
+
+The Punk Rock Orchestra v2 is explicitly work in progress and must not be represented as a published work until a public version and identifiers actually exist.
 
 ## Research identity
 ORCID: https://orcid.org/0009-0002-5626-8973
