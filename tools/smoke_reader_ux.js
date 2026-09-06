@@ -191,7 +191,7 @@ async function runDesktop(browser) {
   // Biography-only Chapter Page stays fully readable and carries the same controlled topics.
   await page.goto(`${BASE}/pt/biografia/espiritualidade-o-buscador/`, {waitUntil: 'networkidle'});
   assert(await page.locator('h1').innerText() === 'Espiritualidade — “O Buscador”', 'Spirituality standalone H1 incorrect');
-  assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'noindex,follow', 'Spirituality standalone indexing changed without review');
+  assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'index,follow', 'Spirituality standalone robots incorrect');
   const standaloneSpiritualityTopics = await page.locator('.entry-topic').allInnerTexts();
   ['Meditação', 'Vipassana', 'Budismo', 'Buddhismo', 'Osho', 'Mindfulness'].forEach((label) => assert(standaloneSpiritualityTopics.includes(label), `Standalone spirituality topic missing: ${label}`));
   assert((await page.locator('article.entry-page-body').innerText()).includes('Dhanadhammo'), 'Spirituality standalone page lost Dhanadhammo');

@@ -709,7 +709,7 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "pt_path": "pt/biografia/espiritualidade-o-buscador/index.html",
         "en_path": "en/biography/spirituality-the-seeker/index.html",
         "description": {
