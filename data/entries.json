@@ -212,7 +212,7 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "pt_path": "pt/internet/mirantte-news/index.html",
         "en_path": "en/internet/mirantte-news/index.html",
         "description": {
@@ -378,7 +378,7 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "pt_path": "pt/internet/cookieweb/index.html",
         "en_path": "en/internet/cookieweb/index.html",
         "description": {
@@ -496,7 +496,7 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "description": {
           "pt": "Marcelo Nicchio na capa do Folhateen de 23/04/2001, discutindo Joey Ramone, cultura punk, faça-você-mesmo e o underground brasileiro.",
           "en": "Marcelo Nicchio in Folhateen’s Apr. 23, 2001 cover story on Joey Ramone, punk culture, DIY ethics and Brazil’s underground rock scene."
@@ -651,7 +651,7 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "pt_path": "pt/comunicacao/meia-noite-e-uns/index.html",
         "en_path": "en/communication/meia-noite-e-uns/index.html",
         "description": {
@@ -1071,7 +1071,7 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "description": {
           "pt": "Melissa 1.0: caso de interação prolongada de Marcelo Nicchio com Gemini 2.5 Pro, reasoning traces, escala EIP, Melissa Framework e quatro trabalhos públicos.",
           "en": "Melissa 1.0: Marcelo Nicchio’s extended Gemini 2.5 Pro interaction case, reasoning traces, EIP scale, Melissa Framework and four public works."

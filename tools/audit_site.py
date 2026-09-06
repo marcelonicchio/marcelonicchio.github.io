@@ -31,6 +31,16 @@ LAUNCH_INDEXABLE = {
     "en/ai-hai/index.html",
     "pt/internet/best-kenshoo/index.html",
     "en/internet/best-kenshoo/index.html",
+    "pt/internet/mirantte-news/index.html",
+    "en/internet/mirantte-news/index.html",
+    "pt/internet/cookieweb/index.html",
+    "en/internet/cookieweb/index.html",
+    "pt/comunicacao/folhateen-orfaos-do-rock/index.html",
+    "en/communication/folhateen-orphans-of-rock/index.html",
+    "pt/comunicacao/meia-noite-e-uns/index.html",
+    "en/communication/meia-noite-e-uns/index.html",
+    "pt/ia-hai/melissa-1-0/index.html",
+    "en/ai-hai/melissa-1-0/index.html",
 }
 
 LEGACY_CANONICAL = {
