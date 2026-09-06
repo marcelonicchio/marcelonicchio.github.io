@@ -42,6 +42,8 @@ jobs:
         run: python tools/audit_image_dimensions.py
       - name: Audit PT EN editorial parity
         run: python tools/editorial_parity.py --check
+      - name: Audit PT EN main-surface indexation parity
+        run: python tools/audit_language_pair_indexation.py
       - name: Audit neutral entry sources
         run: python tools/sync_entries.py --check
       - name: Audit synchronized Full Biography
