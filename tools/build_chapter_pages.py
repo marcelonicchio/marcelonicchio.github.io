@@ -23,6 +23,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "entries.json"
 TAGS = ROOT / "data" / "tags.json"
 BASE = "https://marcelonicchio.github.io/"
+PERSON_ID = BASE + "#marcelo-nicchio"
+WEBSITE_ID = BASE + "#website"
 
 DOMAIN = {
     "communication": {
@@ -47,8 +49,15 @@ DOMAIN = {
     },
 }
 
+# Social preview assets are existing public archive/thread derivatives, not new claims.
 OG_IMAGE = {
     "communication-folha": "/assets/media/thread/folhateen-cover-2001.webp",
+    "internet-mirantte": "/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp",
+    "internet-cookieweb": "/assets/media/galleries/cookieweb/cookieweb-19-480.webp",
+    "audiovisual-meia-noite": "/assets/media/galleries/meia-noite-e-uns/meia-noite-e-uns-01-480.webp",
+    "hai-melissa": "/assets/media/thread/melissa1_0_selfportrait300kb.jpg",
+    "internet-best": "/assets/media/thread/best-kenshoo-workshop.webp",
+    "spirituality-seeker": "/assets/media/thread/vipassana01.jpg",
 }
 
 
@@ -113,28 +122,64 @@ def chapter_body(entry: dict[str, Any], lang: str) -> str:
     return section.decode_contents().strip()
 
 
-def breadcrumbs(entry: dict[str, Any], lang: str, current_url: str) -> tuple[str, str]:
+def breadcrumbs(entry: dict[str, Any], lang: str) -> str:
     domain_label, domain_path = DOMAIN[entry["domain"]][lang]
     home_label = "Início" if lang == "pt" else "Home"
     current = entry["title"][lang]
     home_path = "/pt/" if lang == "pt" else "/en/"
-    visible = (
+    return (
         '<nav class="entry-breadcrumbs" aria-label="Breadcrumb">'
         f'<a href="{home_path}">{html.escape(home_label)}</a><span>›</span>'
         f'<a href="{domain_path}">{html.escape(domain_label)}</a><span>›</span>'
         f'<span aria-current="page">{html.escape(current)}</span></nav>'
     )
-    data = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": home_label, "item": BASE + home_path.lstrip("/")},
-            {"@type": "ListItem", "position": 2, "name": domain_label, "item": BASE + domain_path.lstrip("/")},
-            {"@type": "ListItem", "position": 3, "name": current, "item": current_url},
-        ],
-    }
-    schema = '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + '</script>'
-    return visible, schema
+
+
+def structured_data(
+    entry: dict[str, Any],
+    lang: str,
+    current_url: str,
+    description: str,
+    taxonomy: dict[str, Any],
+) -> str:
+    domain_label, domain_path = DOMAIN[entry["domain"]][lang]
+    home_label = "Início" if lang == "pt" else "Home"
+    home_path = "/pt/" if lang == "pt" else "/en/"
+    html_lang = "pt-BR" if lang == "pt" else "en"
+    labels = tag_labels(taxonomy)
+    topics = [labels[tag_id][lang] for tag_id in entry.get("topic_ids", []) if tag_id in labels]
+    breadcrumb_id = current_url + "#breadcrumb"
+    page_id = current_url + "#page"
+    graph: list[dict[str, Any]] = [
+        {
+            "@type": "WebPage",
+            "@id": page_id,
+            "url": current_url,
+            "name": f"{entry['title'][lang]} — Marcelo Nicchio",
+            "description": description,
+            "inLanguage": html_lang,
+            "isPartOf": {"@id": WEBSITE_ID},
+            "about": {"@id": PERSON_ID},
+            "breadcrumb": {"@id": breadcrumb_id},
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": breadcrumb_id,
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": home_label, "item": BASE + home_path.lstrip("/")},
+                {"@type": "ListItem", "position": 2, "name": domain_label, "item": BASE + domain_path.lstrip("/")},
+                {"@type": "ListItem", "position": 3, "name": entry["title"][lang], "item": current_url},
+            ],
+        },
+    ]
+    if topics:
+        graph[0]["keywords"] = topics
+    data = {"@context": "https://schema.org", "@graph": graph}
+    return (
+        '<script type="application/ld+json" data-chapter-page-schema>'
+        + json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+        + "</script>"
+    )
 
 
 def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles: list[dict[str, Any]]) -> str:
@@ -155,7 +200,8 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
         f'<span class="entry-topic">{html.escape(labels[tag_id][lang])}</span>'
         for tag_id in entry.get("topic_ids", [])
     )
-    crumb, crumb_schema = breadcrumbs(entry, lang, url)
+    crumb = breadcrumbs(entry, lang)
+    schema = structured_data(entry, lang, url, description, taxonomy)
     ga = analytics_block(load_measurement_id())
     presence = presence_block(profiles, lang == "pt")
     robots = page.get("indexing", "noindex,follow")
@@ -177,12 +223,20 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
             f'<div class="page-tools"><a href="{domain_path}">{html.escape(vertical_label)}</a>'
             f'<a href="{back_bio}{bio_anchor}">{html.escape(full_bio_label)}</a></div>'
         )
-    og = ""
+    locale = "pt_BR" if lang == "pt" else "en_US"
+    alt_locale = "en_US" if lang == "pt" else "pt_BR"
+    social_image = ""
+    card = "summary"
     if entry["id"] in OG_IMAGE:
         image_url = BASE.rstrip("/") + OG_IMAGE[entry["id"]]
-        og = f'\n  <meta property="og:image" content="{image_url}">\n  <meta name="twitter:card" content="summary_large_image">'
-    else:
-        og = '\n  <meta name="twitter:card" content="summary">'
+        image_alt = html.escape(title, quote=True)
+        social_image = (
+            f'\n  <meta property="og:image" content="{image_url}">'
+            f'\n  <meta property="og:image:alt" content="{image_alt}">'
+            f'\n  <meta name="twitter:image" content="{image_url}">'
+            f'\n  <meta name="twitter:image:alt" content="{image_alt}">'
+        )
+        card = "summary_large_image"
 
     return f'''<!doctype html>
 <html lang="{html_lang}">
@@ -200,12 +254,18 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
   <meta property="og:title" content="{html.escape(title, quote=True)}">
   <meta property="og:description" content="{html.escape(description, quote=True)}">
   <meta property="og:url" content="{url}">
-  <meta property="og:type" content="website">{og}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Marcelo Nicchio — Official Hub">
+  <meta property="og:locale" content="{locale}">
+  <meta property="og:locale:alternate" content="{alt_locale}">{social_image}
+  <meta name="twitter:card" content="{card}">
+  <meta name="twitter:title" content="{html.escape(title, quote=True)}">
+  <meta name="twitter:description" content="{html.escape(description, quote=True)}">
   <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/chapter-page.css">
   {MOBILE_NAV_CSS}
-  {crumb_schema}
+  {schema}
 </head>
 <body>
 {nav(lang, '/' + other_rel[:-10])}
@@ -225,8 +285,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 </main>
 <footer>
 {presence}
-<div class="wrap footer-grid"><span><a href="{domain_path}">← {html.escape(domain_label)}</a></span><span><a href="/{other_rel[:-10]}">{'English version' if lang == 'pt' else 'Versão em português'}</a></span></div>
-</footer>
+<div class="wrap footer-grid"><span><a href="{domain_path}">← {html.escape(domain_label)}</a></span><span><a href="/{other_rel[:-10]}">{'English version' if lang == 'pt' else 'Versão em português'}</a></span></div></footer>
 <script src="/assets/js/archive-lightbox.js?v=20260901-gallery2" defer></script>
 {MOBILE_NAV_JS}
 </body></html>
