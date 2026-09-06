@@ -22,6 +22,18 @@
 .root-canonical .root-presence-section .presence-link span{overflow-wrap:anywhere}
 .root-canonical .root-email-link svg{fill:currentColor}
 
+/* Author review: stronger hierarchy and easier reading without changing layout. */
+.root-canonical{--root-accent-readable:#e6a19c}
+.root-canonical .root-hero-actions .button{border-color:#f3efe7;color:#f3efe7;font-weight:800}
+.root-canonical .root-hero-actions .button:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.07)}
+.root-canonical .root-bio-copy strong{font-family:inherit;font-weight:700;letter-spacing:inherit;color:#f3efe7}
+.root-canonical .eyebrow{color:var(--root-accent-readable);font-size:.8rem;font-weight:800}
+.root-canonical .root-section-kicker{color:var(--root-accent-readable);font-size:.9rem;font-weight:800;line-height:1.3;letter-spacing:.1em}
+.root-canonical .root-text-link{color:var(--root-accent-readable);font-size:1.03rem;font-weight:800}
+.root-canonical .root-milestone .year{color:var(--root-accent-readable);font-size:.84rem;font-weight:800;letter-spacing:.07em}
+.root-canonical .root-axis>span{color:var(--root-accent-readable);font-size:.82rem;font-weight:800}
+.root-canonical .root-milestone em{color:var(--root-accent-readable)}
+
 @media(max-width:900px){
   .root-canonical .root-lang-toggle{top:12px;right:12px;bottom:auto}
   .root-canonical .root-hero{padding-top:76px}
@@ -33,4 +45,6 @@
   .root-canonical .root-hero-actions{display:flex;flex-wrap:wrap}
   .root-canonical .root-hero-actions .button{width:auto;min-height:42px;display:inline-flex;align-items:center;justify-content:center;text-align:center}
   .root-canonical .root-axis{min-height:0;padding:20px 17px}
+  .root-canonical .root-section-kicker{font-size:.86rem}
+  .root-canonical .root-milestone .year,.root-canonical .root-axis>span{font-size:.8rem}
 }
