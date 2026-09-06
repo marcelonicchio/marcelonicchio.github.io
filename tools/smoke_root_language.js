@@ -92,6 +92,41 @@ async function assertSwitchPersistence(browser) {
   assert(!overlap, 'Presence groups overlap the left editorial heading');
   const panelDisplay = await page.locator('.root-presence-section .presence-panel').evaluate((node) => getComputedStyle(node).display);
   assert(panelDisplay === 'block', `Presence panel should be block on root, got ${panelDisplay}`);
+  const typography = await page.evaluate(() => {
+    const button = document.querySelector('.root-hero-actions[data-root-lang="pt"] .button');
+    const strong = document.querySelector('.root-bio-copy strong');
+    const strongParent = strong && strong.parentElement;
+    const kicker = document.querySelector('.root-milestones .root-section-kicker');
+    const year = document.querySelector('.root-milestone-grid[data-root-lang="pt"] .year');
+    const axisNo = document.querySelector('.root-axis-grid[data-root-lang="pt"] .root-axis > span');
+    if (!button || !strong || !strongParent || !kicker || !year || !axisNo) return null;
+    const b = getComputedStyle(button);
+    const s = getComputedStyle(strong);
+    const p = getComputedStyle(strongParent);
+    const k = getComputedStyle(kicker);
+    const y = getComputedStyle(year);
+    const a = getComputedStyle(axisNo);
+    return {
+      buttonWeight: Number(b.fontWeight),
+      buttonBorder: b.borderTopColor,
+      strongWeight: Number(s.fontWeight),
+      strongFamily: s.fontFamily,
+      parentFamily: p.fontFamily,
+      kickerSize: parseFloat(k.fontSize),
+      kickerColor: k.color,
+      yearSize: parseFloat(y.fontSize),
+      axisSize: parseFloat(a.fontSize)
+    };
+  });
+  assert(typography, 'Root hierarchy typography could not be measured');
+  assert(typography.buttonWeight >= 700, `Hero shortcut names should be bold, got ${typography.buttonWeight}`);
+  assert(typography.buttonBorder === 'rgb(243, 239, 231)', `Hero shortcut border should be site white, got ${typography.buttonBorder}`);
+  assert(typography.strongWeight === 700, `Biography emphasis should use readable 700 weight, got ${typography.strongWeight}`);
+  assert(typography.strongFamily === typography.parentFamily, 'Biography emphasis must inherit the body typeface');
+  assert(typography.kickerSize >= 14, `Section kicker should be at least 14px, got ${typography.kickerSize}`);
+  assert(typography.kickerColor === 'rgb(230, 161, 156)', `Section kicker accent changed unexpectedly: ${typography.kickerColor}`);
+  assert(typography.yearSize >= 13, `Milestone year should be at least 13px, got ${typography.yearSize}`);
+  assert(typography.axisSize >= 13, `Vertical number should be at least 13px, got ${typography.axisSize}`);
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, 'Desktop root has horizontal overflow');
   await context.close();
