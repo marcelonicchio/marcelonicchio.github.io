@@ -1,10 +1,10 @@
-# Staged indexation plan — current state
+# Staged indexation plan — current state and Billy destination
 
-**Updated:** 3 Sep 2026 (BRT)
+**Updated:** 5 Sep 2026 (BRT)
 
-The HUB does not equate page count with authority. Indexation is staged by editorial maturity and search intent, and experiments should remain attributable rather than changing several URL families at once.
+The HUB does not equate page count with authority. Indexation follows reader value, content maturity, stable architecture and deliberate rollout.
 
-## 1. Current indexable core
+## 1. Current implementation on `main`
 
 Current indexable PT/EN surfaces include:
 
@@ -13,115 +13,113 @@ Current indexable PT/EN surfaces include:
 - Publications / Publicações;
 - Archive / Arquivo;
 - AI/HAI / IA/HAI;
-- **BEST/Kenshoo Chapter Page pair** — first controlled standalone-entry indexing pilot.
+- BEST/Kenshoo Chapter Page pair.
 
-PT/EN counterparts must remain materially aligned when indexing state changes.
-
-## 2. Historical verticals still `noindex,follow`
+Current staged `noindex,follow` surfaces still include:
 
 - Music / Música;
-- Mídia & Cultura / Media & Culture at canonical Communication paths;
+- Mídia & Cultura / Media & Culture;
 - Internet & Performance;
-- Selected Projects / Projetos.
+- Selected Projects / Projetos;
+- most autonomous Chapter Pages, including Espiritualidade — “O Buscador” / Spirituality — “The Seeker”.
 
-Legacy Search and Audiovisual URLs are compatibility surfaces, not independent authority pages.
+This section describes implementation, not the newly decided destination policy.
 
-These verticals are publicly readable. `noindex` is staging, not a statement that autobiographical material is unreliable.
+## 2. Marcelo's destination policy — 5 Sep 2026
 
-### Entity-page gate before vertical promotion
+The intended end state is now:
 
-Before historical/thematic verticals are promoted to `index,follow`, root `/` should first become a useful human-readable entity page while preserving its canonical Person identity. Marcelo will supply that prose separately.
+| Surface | Destination |
+|---|---|
+| Home `/` | `index,follow` |
+| `/pt/`, `/en/` | `index,follow` |
+| Thematic verticals | `index,follow` |
+| Legitimate autonomous Chapter Pages / biography-only URLs | `index,follow` |
+| Publications / Archive | `index,follow` |
+| Full Biography / Biografia Completa | **`noindex,follow`** |
 
-C4/Home may be skipped operationally while unrelated work continues. Skipping it does **not** remove the gate for the later thematic vertical promotion.
+The Full Biography pages must remain crawlable. Do not block them in `robots.txt`, because search crawlers need access to read the `noindex` directive.
 
-Full Biography remains `index,follow` unless Marcelo explicitly decides otherwise after later review.
+## 3. Staging still matters
 
-### Post-C8 readiness assessment
+The broader destination does **not** authorize mass robots flipping.
 
-The 3 Sep 2026 closeout assessed readiness without changing robots:
+Before a PT/EN pair or autonomous URL becomes indexable:
 
-- **READY after substantive Home — Mídia & Cultura / Media & Culture.** Fused architecture and continuous-reading presentation are stable.
-- **READY after substantive Home — Internet & Performance.** Reader architecture, entry relationships and Chapter Page infrastructure are stable.
-- **READY after substantive Home — Music / Música.** The vertical is structurally/editorially viable even though the historical archive will continue to expand; archive incompleteness alone should not block future indexation.
-- **HOLD — Selected Projects / Projetos.** It currently works better as a transversal project/card index than as a deep authority surface. Do not include it automatically in the first vertical-promotion batch.
+1. confirm it has distinct human reader value;
+2. finish material content gaps relevant to the page;
+3. confirm factual/editorial parity where there is a PT/EN pair;
+4. review title/description/canonical/hreflang;
+5. confirm ordinary static human-visible internal inlinks;
+6. review schema where useful;
+7. change robots state deliberately;
+8. update sitemap membership in the same release;
+9. update audit indexable sets/allowlists in the same release;
+10. deploy and measure rather than assuming immediate Search behavior.
 
-No promotion was performed as part of this assessment.
+## 4. Full Biography migration gate
 
-## 3. Chapter Page state
+Full Biography PT/EN should move to `noindex,follow` **after**, not before, the intended standalone discovery graph is safe.
 
-Generated Chapter Page pairs now include:
+A future indexable Chapter Page must not depend exclusively on Full Biography for its only meaningful internal link.
 
-- Folhateen;
-- Mirantte News;
-- CookieWEB;
-- Meia-Noite e Uns;
-- Melissa 1.0;
-- BEST/Kenshoo.
+Acceptable discovery paths include:
 
-Current robots/sitemap policy:
+- Home trajectory highlights;
+- `/pt/` or `/en/` language hubs;
+- a relevant thematic vertical;
+- Archive/Publications where contextually appropriate;
+- a human-useful chapter/index surface if one is later justified.
 
-- **BEST/Kenshoo:** `index,follow`, self-canonical, reciprocal hreflang, visible breadcrumbs, in sitemap;
-- **all other current Chapter Page pairs:** `noindex,follow`, self-canonical, reciprocal hreflang, visible breadcrumbs, outside sitemap.
+Do not create a fake vertical only to satisfy crawler architecture.
 
-Creating an autonomous URL does not automatically authorize indexation.
+## 5. Biography-only example — O Buscador
 
-## 4. BEST/Kenshoo is the active controlled experiment
+Espiritualidade — “O Buscador” / Spirituality — “The Seeker” established the biography-only model.
 
-The prior “future experiment” has now been executed.
+Rules:
 
-BEST/Kenshoo was chosen because it is fragment-backed, mature enough to stand alone, has a clear Search/Performance topic, has stable internal links and a preserved workshop/media archive, and is isolated from the broader vertical-indexation question.
+- it does not create a Spirituality vertical;
+- current implementation is `noindex,follow`;
+- Marcelo has explicitly included its autonomous PT/EN URLs in the future indexable set;
+- Home already provides one human-visible internal path;
+- before promotion, verify PT/EN parity, canonical/hreflang, sitemap/audit treatment and page-level schema.
 
-Do not immediately promote another Chapter Page merely to create symmetry. Observe indexing/canonical/query behavior before expanding the experiment set. Lack of immediate public-search confirmation is not evidence of a technical failure.
+## 6. Content maturity before promotion
 
-Do not combine this pilot with mass tag-page creation.
+Current priority editorial work includes:
 
-## 5. Topic tags are not indexation instructions
+1. Music / Música — Coitado do Próximo and its archive;
+2. Internet & Performance — incomplete/refinable passages;
+3. Mídia & Cultura / Media & Culture — selected entry adjustments;
+4. substantive root entity prose.
 
-`data/tags.json` supports controlled vocabulary, Reader chips, relationships and future planning.
+A prior “structurally ready” assessment does not mean a vertical is content-complete. Marcelo's later content direction overrides old sequencing assumptions.
 
-A topic tag does not imply a public URL. It is not a `meta keywords` system.
+## 7. BEST/Kenshoo pilot
 
-## 6. Reader summaries and SEO
+BEST/Kenshoo remains useful as the first controlled autonomous indexation pilot and as evidence that the Chapter Page pipeline can support indexed URLs.
 
-Rich compact summaries are human UX first. Their concise framing can later support standalone-page metadata/internal linking, but they must not become hidden keyword copy.
+It is no longer the permanent ceiling on standalone indexation. Do not preserve old pilot scarcity merely for symmetry once the new destination policy is implemented deliberately.
 
-Current rule:
+## 8. Topic tags and page generation
 
-- hard preview ceiling = 1,650 visible-copy characters per language;
-- preferred design center ≈1,300 characters when justified;
-- preview must remain a useful human-readable concise version of the entry.
+`data/tags.json` remains controlled vocabulary, not a `meta keywords` system and not automatic URL generation.
 
-See `docs/reader-summary-model.md`.
+Broader indexation of legitimate autonomous pages does **not** imply mass tag pages, mass fragments or mass Chapter Page generation.
 
-## 7. Promotion procedure for a pair
+## 9. Sitemap / hreflang
 
-Before changing a PT/EN pair from `noindex,follow` to `index,follow`:
+`tools/build_sitemap.py` remains the canonical sitemap generator and each `<lastmod>` remains derived from real Git history.
 
-1. confirm factual/editorial parity;
-2. confirm distinct reader/search value;
-3. test external/internal links;
-4. review title, description, canonical and hreflang;
-5. review rights/privacy for prominent visual material;
-6. ensure normal static internal links can reach it;
-7. change both robots states deliberately;
-8. update sitemap treatment in the same release;
-9. update the site audit indexable set in the same release;
-10. deploy and observe Search Console rather than inferring success immediately.
+Current pages already carry HTML hreflang. Do not add a second sitemap hreflang implementation merely for duplication; Google treats HTML and sitemap hreflang methods as equivalent. Revisit only if there is a concrete maintenance/coverage reason.
 
-## 8. Future thematic vertical promotion
+## 10. Root entity gate
 
-Marcelo has already chosen the destination state: mature thematic verticals should eventually become `index,follow`.
+Root `/` should become a substantive canonical entity page before broad promotion.
 
-After the substantive root entity page exists, the first candidate batch is Music + Mídia & Cultura + Internet & Performance PT/EN. Projects remains separate until its authority-page role is reconsidered.
+Current root already has embedded `WebSite` + `ProfilePage` + `Person` JSON-LD and the 15-profile `sameAs` set. The remaining work is primarily substantive entity content, semantic enrichment and language/hreflang review after the new page is written.
 
-Any rollout must be atomic by PT/EN pair: robots + sitemap + audit whitelist + canonical/hreflang/internal-link verification.
+## 11. Principle
 
-## 9. AI/HAI semantic follow-up
-
-AI/HAI is already indexable. When PRO v2 stabilizes, structured data can be revisited for richer representation of scholarly works/DOIs where useful.
-
-Do not sediment a large schema redesign while the v2 editorial/methodological object is still moving.
-
-## 10. Principle
-
-Authority comes from coherent identity, useful original content, stable URLs, legitimate persistent identifiers/links, strong navigation and external corroboration where it exists — not from exposing the maximum possible number of URLs to crawlers.
+Authority comes from coherent identity, useful original content, stable URLs, legitimate identifiers/links, strong internal discovery and external corroboration where it exists — not from exposing the maximum possible number of crawler URLs or deploying search-only pages.
