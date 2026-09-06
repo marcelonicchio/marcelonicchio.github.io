@@ -1,0 +1,88 @@
+name: Billy BEST PDF thumbnail v2 one-shot
+
+on:
+  push:
+    branches:
+      - billy/best-pdf-thumb-fix-2026-09-06
+    paths:
+      - .github/workflows/billy-best-pdf-thumb-v2-one-shot.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Install sync dependency
+        run: python -m pip install beautifulsoup4
+      - name: Restore visible BEST deck thumbnail
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          pdf = '/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014.pdf'
+          thumb = '/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014-thumb-v2.webp'
+          specs = {
+              Path('content/entries/pt/internet-best.inc'): 'Primeiro slide da apresentação BEST/Kenshoo — Marketing de Performance, Search e Social.',
+              Path('content/entries/en/internet-best.inc'): 'First slide of the BEST/Kenshoo presentation — Performance Marketing, Search and Social.',
+          }
+          for path, alt in specs.items():
+              text = path.read_text(encoding='utf-8')
+              pattern = re.compile(
+                  r'(<a class="inline-record" href="' + re.escape(pdf) + r'"[^>]*>)(.*?)(<span>.*?</span></a>)',
+                  re.S,
+              )
+              match = pattern.search(text)
+              if not match:
+                  raise SystemExit(f'PDF inline-record not found in {path}')
+              middle = re.sub(r'<img\b[^>]*?/?>', '', match.group(2), flags=re.S)
+              img = f'<img alt="{alt}" decoding="async" src="{thumb}" width="480" height="360"/>'
+              updated = text[:match.start()] + match.group(1) + img + middle + match.group(3) + text[match.end():]
+              path.write_text(updated, encoding='utf-8')
+          PY
+      - name: Synchronize derived surfaces
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+          python tools/editorial_parity.py --accept internet-best
+          python tools/build_sitemap.py
+      - name: Validate generated state
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/editorial_parity.py --check
+          python - <<'PY'
+          from pathlib import Path
+          thumb = '/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014-thumb-v2.webp'
+          paths = [
+              Path('content/entries/pt/internet-best.inc'),
+              Path('content/entries/en/internet-best.inc'),
+              Path('pt/internet/index.html'),
+              Path('en/internet/index.html'),
+              Path('pt/internet/best-kenshoo/index.html'),
+              Path('en/internet/best-kenshoo/index.html'),
+              Path('pt/biografia/index.html'),
+              Path('en/biography/index.html'),
+          ]
+          for path in paths:
+              text = path.read_text(encoding='utf-8')
+              if thumb not in text:
+                  raise SystemExit(f'missing BEST deck thumbnail in {path}')
+          if not Path('assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014-thumb-v2.webp').exists():
+              raise SystemExit('thumbnail asset missing')
+          PY
+      - name: Remove one-shot machinery and commit result
+        run: |
+          rm .github/workflows/billy-best-pdf-thumb-v2-one-shot.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix: restore visible first-slide preview for BEST workshop PDF'
+          git push
