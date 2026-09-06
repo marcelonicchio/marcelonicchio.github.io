@@ -92,6 +92,18 @@ async function assertSwitchPersistence(browser) {
   assert(!overlap, 'Presence groups overlap the left editorial heading');
   const panelDisplay = await page.locator('.root-presence-section .presence-panel').evaluate((node) => getComputedStyle(node).display);
   assert(panelDisplay === 'block', `Presence panel should be block on root, got ${panelDisplay}`);
+
+  const researchPresence = await page.locator('.root-presence-groups > .root-presence-group:first-child .presence-link').evaluateAll((nodes) => nodes.map((node) => ({
+    label: (node.textContent || '').trim(),
+    href: node.href,
+    rel: node.getAttribute('rel') || ''
+  })));
+  const expectedResearchLabels = ['ORCID','SSRN','OSF','Zenodo','Academia.edu','HAL','PubPub'];
+  assert(researchPresence.map((item) => item.label).join('|') === expectedResearchLabels.join('|'), `Research presence order mismatch: ${researchPresence.map((item) => item.label).join(' | ')}`);
+  const zenodo = researchPresence.find((item) => item.label === 'Zenodo');
+  assert(zenodo && zenodo.href.startsWith('https://zenodo.org/search?') && zenodo.href.includes('Nicchio'), 'Zenodo author-search link missing from root research presence');
+  assert(!zenodo.rel.split(/\s+/).includes('me'), 'Zenodo author-search URL must not be declared rel=me');
+
   const typography = await page.evaluate(() => {
     const button = document.querySelector('.root-hero-actions[data-root-lang="pt"] .button');
     const strong = document.querySelector('.root-bio-copy strong');
