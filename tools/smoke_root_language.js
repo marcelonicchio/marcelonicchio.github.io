@@ -58,7 +58,7 @@ async function assertLanguage(browser, locale, expected) {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, `${locale}: root has horizontal overflow on mobile`);
   const toggleBox = await page.locator('.root-lang-toggle').boundingBox();
-  assert(toggleBox && toggleBox.right <= 391 && toggleBox.bottom <= 845, `${locale}: language toggle escapes mobile viewport`);
+  assert(toggleBox && toggleBox.x >= -1 && toggleBox.y >= -1 && toggleBox.x + toggleBox.width <= 391 && toggleBox.y + toggleBox.height <= 845, `${locale}: language toggle escapes mobile viewport`);
   await context.close();
 }
 async function assertSwitchPersistence(browser) {
