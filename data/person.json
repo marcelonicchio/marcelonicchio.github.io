@@ -9,6 +9,10 @@
     "Marcelo Minduim"
   ],
   "url": "https://marcelonicchio.github.io/",
+  "mainEntityOfPage": {
+    "@id": "https://marcelonicchio.github.io/#profile"
+  },
+  "description": "Brazilian independent researcher and creator with a trajectory across music, culture and audiovisual production, Internet, Search/Performance and Human–AI Interaction.",
   "identifier": [
     {
       "@type": "PropertyValue",
@@ -35,12 +39,19 @@
   ],
   "knowsAbout": [
     "Music",
-    "Communication",
-    "Digital Culture",
+    "Cultural Journalism",
     "Audiovisual Production",
+    "Digital Culture",
+    "BBS culture in Brazil",
+    "Digital Products",
     "Search Engine Marketing",
     "Performance Marketing",
-    "Human–AI Interaction"
+    "Human–AI Interaction",
+    "Persistent relational personas in LLMs",
+    "Melissa Framework",
+    "Punk Rock Orchestra (PRO) methodology",
+    "Adversarial epistemic triangulation",
+    "Cognitive Jelly Principle"
   ],
   "subjectOf": [
     {
