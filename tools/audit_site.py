@@ -43,6 +43,8 @@ LAUNCH_INDEXABLE = {
     "en/ai-hai/melissa-1-0/index.html",
     "pt/biografia/espiritualidade-o-buscador/index.html",
     "en/biography/spirituality-the-seeker/index.html",
+    "pt/comunicacao/index.html",
+    "en/communication/index.html",
 }
 
 LEGACY_CANONICAL = {
