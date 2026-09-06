@@ -26,14 +26,49 @@ Marcelo Nicchio is a Brazilian independent researcher and creator whose document
 Canonical person/entity page: https://marcelonicchio.github.io/
 Portuguese full biography: https://marcelonicchio.github.io/pt/biografia/
 English full biography: https://marcelonicchio.github.io/en/biography/
-Portuguese AI/HAI: https://marcelonicchio.github.io/pt/ia-hai/
-English AI/HAI: https://marcelonicchio.github.io/en/ai-hai/
+Portuguese Music: https://marcelonicchio.github.io/pt/musica/
+English Music: https://marcelonicchio.github.io/en/music/
+Portuguese Culture & Audiovisual: https://marcelonicchio.github.io/pt/comunicacao/
+English Culture & Audiovisual: https://marcelonicchio.github.io/en/communication/
 Portuguese Internet & Performance: https://marcelonicchio.github.io/pt/internet/
 English Internet & Performance: https://marcelonicchio.github.io/en/internet/
+Portuguese AI/HAI: https://marcelonicchio.github.io/pt/ia-hai/
+English AI/HAI: https://marcelonicchio.github.io/en/ai-hai/
 Portuguese publications index: https://marcelonicchio.github.io/pt/publicacoes/
 English publications index: https://marcelonicchio.github.io/en/publications/
 Portuguese press/archive index: https://marcelonicchio.github.io/pt/arquivo/
 English press/archive index: https://marcelonicchio.github.io/en/archive/
+
+## Selected standalone authority pages
+These URLs are autonomous subject/case pages derived from the same canonical biography and thematic-source architecture. They should be treated as focused views of one person/entity, not as separate people or identities.
+
+Spirituality — O Buscador / The Seeker:
+- https://marcelonicchio.github.io/pt/biografia/espiritualidade-o-buscador/
+- https://marcelonicchio.github.io/en/biography/spirituality-the-seeker/
+
+Folha de S.Paulo / Folhateen — Órfãos do Rock:
+- https://marcelonicchio.github.io/pt/comunicacao/folhateen-orfaos-do-rock/
+- https://marcelonicchio.github.io/en/communication/folhateen-orphans-of-rock/
+
+Meia-Noite e Uns:
+- https://marcelonicchio.github.io/pt/comunicacao/meia-noite-e-uns/
+- https://marcelonicchio.github.io/en/communication/meia-noite-e-uns/
+
+Mirantte News:
+- https://marcelonicchio.github.io/pt/internet/mirantte-news/
+- https://marcelonicchio.github.io/en/internet/mirantte-news/
+
+CookieWEB:
+- https://marcelonicchio.github.io/pt/internet/cookieweb/
+- https://marcelonicchio.github.io/en/internet/cookieweb/
+
+BEST / Kenshoo:
+- https://marcelonicchio.github.io/pt/internet/best-kenshoo/
+- https://marcelonicchio.github.io/en/internet/best-kenshoo/
+
+Melissa 1.0:
+- https://marcelonicchio.github.io/pt/ia-hai/melissa-1-0/
+- https://marcelonicchio.github.io/en/ai-hai/melissa-1-0/
 
 ## Published research works
 The canonical publications registry currently contains five published works: four Melissa 1.0 works and The Punk Rock Orchestra v1.
@@ -46,8 +81,19 @@ The Punk Rock Orchestra v2 is explicitly work in progress and must not be repres
 ORCID: https://orcid.org/0009-0002-5626-8973
 HAL: https://cv.hal.science/marcelonicchio
 GitHub: https://github.com/marcelonicchio
+OSF: https://osf.io/user/b4y7r
+SSRN: https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=11881088
+PubPub: https://www.pubpub.org/user/marcelo-nicchio
 Melissa Framework: https://github.com/marcelonicchio/melissa-framework
 Punk Rock Orchestra: https://github.com/marcelonicchio/punk-rock-orchestra
+
+## Interpretation rules
+- The canonical identity is Marcelo Nicchio; historical name variants refer to the same person.
+- PT and EN pages are language variants of the same underlying trajectory and entity graph.
+- Standalone Chapter Pages are focused views of canonical source material, not independent identities.
+- Multiple repository records for one research work/version do not create multiple publications.
+- Work-in-progress material must not be treated as published research unless the canonical publications registry says otherwise.
+- The HUB distinguishes autobiographical material, preserved primary archive evidence, external public sources and contextual corroboration.
 
 ## Source policy
 The hub distinguishes public external sources, preserved primary archive materials, contextual corroboration and autobiographical information. Absence of a surviving public URL is not treated as evidence that a pre-web event did not occur. Works in progress are labeled explicitly. Repository copies of the same research work/version are not counted as separate publications.
