@@ -791,8 +791,8 @@
         "en": "BEST / Kenshoo: Search + Social + technology"
       },
       "summary": {
-        "pt": "Atuação como Gerente de Performance na BEST em uma operação ligada à Kenshoo no Brasil, combinando onboarding de tecnologia, otimização para grandes varejistas e um workshop do E-Commerce Brasil preservado em quatro partes.",
-        "en": "Work as Performance Manager at BEST in an operation connected to Kenshoo in Brazil, combining technology onboarding, optimization for major retailers and an E-Commerce Brasil workshop preserved in four parts."
+        "pt": "Em 2014, Marcelo Nicchio atuou como Gerente de Performance na BEST/Kenshoo, combinando onboarding e otimização para grandes varejistas, dois workshops consecutivos no E-Commerce Brasil — Search e Facebook Ads — e produção técnica no BEST Blog.",
+        "en": "In 2014, Marcelo Nicchio worked as Performance Manager at BEST/Kenshoo, combining platform onboarding and optimization for major retailers, two consecutive E-Commerce Brasil workshops — Search and Facebook Ads — and technical writing for the BEST Blog."
       },
       "topic_ids": [
         "performance-marketing",
@@ -802,7 +802,10 @@
         "ecommerce"
       ],
       "media": {
-        "known_video_count": 4
+        "known_video_count": 4,
+        "galleries": [
+          "best-kenshoo"
+        ]
       },
       "source": {
         "kind": "fragment",
@@ -835,8 +838,8 @@
         "status": "pilot",
         "indexing": "index,follow",
         "description": {
-          "pt": "Marcelo Nicchio na BEST/Kenshoo em 2014: gestão de performance, Search + Social, tecnologia e workshop do E-Commerce Brasil em quatro partes.",
-          "en": "Marcelo Nicchio at BEST/Kenshoo in 2014: performance management, Search + Social, technology and a four-part E-Commerce Brasil workshop."
+          "pt": "BEST/Kenshoo em 2014: performance, tecnologia, dois workshops no E-Commerce Brasil — Search e Facebook Ads —, vídeos, deck e registros do BEST Blog.",
+          "en": "BEST/Kenshoo in 2014: performance, technology, two E-Commerce Brasil workshops — Search and Facebook Ads —, videos, deck and BEST Blog records."
         },
         "pt_path": "pt/internet/best-kenshoo/index.html",
         "en_path": "en/internet/best-kenshoo/index.html"

@@ -1994,6 +1994,50 @@
               "height": 432
             }
           }
+        },
+        {
+          "id": "12",
+          "source": "best07_postblog-facebook-ads-2014.jpg",
+          "caption": {
+            "pt": "BEST Blog — post de 14/11/2014 sobre o workshop ‘Facebook Ads: Melhores Práticas, Melhor Conversão’, realizado em 12/11/2014 no E-Commerce Brasil.",
+            "en": "BEST Blog — November 14, 2014 post about the ‘Facebook Ads: Best Practices, Better Conversion’ workshop held on November 12, 2014 at E-Commerce Brasil."
+          },
+          "width": 1029,
+          "height": 867,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-12-480.webp",
+              "width": 480,
+              "height": 404
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-12-768.webp",
+              "width": 768,
+              "height": 647
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "best09_postblog-glossario-midia-online-2014.jpg",
+          "caption": {
+            "pt": "BEST Blog — ‘Conheça o Glossário da Mídia Online (ROI, CPC, CTR...) Parte 1’, publicado em 08/12/2014 e atribuído a Marcelo Nicchio, Gerente de Performance da BEST.",
+            "en": "BEST Blog — ‘Online Media Glossary (ROI, CPC, CTR...) Part 1’, published on December 8, 2014 and attributed to Marcelo Nicchio, Performance Manager at BEST."
+          },
+          "width": 657,
+          "height": 877,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-13-480.webp",
+              "width": 480,
+              "height": 641
+            },
+            "768": {
+              "path": "assets/media/galleries/best-kenshoo/best-kenshoo-13-768.webp",
+              "width": 657,
+              "height": 877
+            }
+          }
         }
       ]
     },
