@@ -1,10 +1,10 @@
 # CURRENT HUB STATE — Marcelo Nicchio
 
-**Authoritative operational snapshot:** 2 Sep 2026 (BRT)  
-**Coverage:** Chet C0–C8, with C4/Home intentionally skipped pending Marcelo-authored prose.  
-**Precedence:** later explicit instruction from Marcelo → current `main` + green CI → this file → domain-specific current docs → dated historical handoffs/plans.
+**Authoritative operational snapshot:** 5 Sep 2026 (BRT)  
+**Coverage:** current `main` through the post-Chet cycle plus Marcelo's explicit Billy-cycle directives.  
+**Precedence:** later explicit instruction from Marcelo → current `main` + green CI → this file → `BILLY-BASELINE-2026-09-05.md` / domain-specific current docs → dated historical handoffs.
 
-This file is the shortest path into the live architecture. Older dossiers and continuity documents remain historical rationale, not current implementation contracts.
+This file is the shortest path into the live architecture. Dated Duke/Chet dossiers remain historical rationale, not current implementation contracts.
 
 ---
 
@@ -12,13 +12,11 @@ This file is the shortest path into the live architecture. Older dossiers and co
 
 The HUB is Marcelo Nicchio's public, canonical, multidisciplinary autobiography and authority/identity hub.
 
-It is not a conventional CV, proof site or forensic autobiography. Permanent editorial rule:
+Permanent editorial rule:
 
 > **Humans first; semantics second.**
 
-Autobiographical information may be published as autobiography even without an external corroborating source. Sources, archive material, schema, SEO/GEO/AEO and documentation support the narrative; they do not dominate the reader experience.
-
-Full Biography is the integral chronology. Thematic verticals are selective cuts through the same life and do not need to contain every professional episode.
+Full Biography is the integral chronology. Thematic verticals are selective cuts through the same life and do not need to contain every episode. Autobiography does not need to become a public forensic proof system; sources, archive, schema and search infrastructure support the human narrative.
 
 ---
 
@@ -36,226 +34,237 @@ Primary PT/EN surfaces:
 - Archive / Arquivo;
 - Selected Projects / Projetos.
 
-Settled structural decisions:
+Settled architecture:
 
-- Internet + Search/Performance are one vertical: **Internet & Performance**.
-- Search remains a specialization inside the continuous digital trajectory, not a separate competing vertical.
-- Communication + Audiovisual are one vertical at canonical paths `/pt/comunicacao/` and `/en/communication/`.
-- Legacy Search and Audiovisual paths are compatibility surfaces only.
-- Livraria Cultura remains in Full Biography only.
+- Internet + Search/Performance remain one vertical: **Internet & Performance**;
+- Search is a specialization inside the continuous digital trajectory, not a competing vertical;
+- Communication + Audiovisual remain fused at canonical paths `/pt/comunicacao/` and `/en/communication/`;
+- legacy Search/Audiovisual paths are compatibility surfaces;
+- Livraria Cultura remains Full-Biography-only;
+- biography-only autonomous chapters may exist without creating a thematic vertical.
 
 Do not reopen these decisions casually.
 
 ---
 
-## 3. Full Biography
+## 3. Post-Chet UX/design baseline
 
-Permanent rule:
+Later Chet work advanced beyond the older 2 Sep snapshot.
+
+- Mobile navigation now uses an explicit button/menu instead of relying on a hidden horizontally scrollable menu; the stronger mobile hierarchy and bold category treatment are approved baseline behavior.
+- The featured Reader-card visual treatment that older documentation called unresolved was resolved in the later Chet work; it is no longer an open blocker.
+- Reader disclosure remains progressive enhancement: complete text stays in delivered HTML and no-JS fallback remains readable.
+- Path-specific rules remain valid: AI/HAI keeps Melissa open; Full Biography may use rich compact summaries selectively; Internet & Performance keeps its Reader treatment.
+
+Do not regress the mobile menu or resolved Reader direction merely because an older handoff predates them.
+
+---
+
+## 4. Full Biography
+
+Permanent structural rule:
 
 > **Full Biography = totality. Verticals = thematic cuts.**
 
-The managed chronology must not be hand-edited. Core infrastructure:
+Managed chronology infrastructure remains source-controlled through:
 
-- `data/full_biography.json`
-- `data/editorial_parity.json`
-- `tools/sync_full_biography.py`
-- `tools/audit_full_biography.py`
-- `tools/editorial_parity.py`
-- `pt/biografia/index.html`
-- `en/biography/index.html`
+- `data/full_biography.json`;
+- `data/editorial_parity.json`;
+- `tools/sync_full_biography.py`;
+- `tools/audit_full_biography.py`;
+- `tools/editorial_parity.py`;
+- `pt/biografia/index.html`;
+- `en/biography/index.html`.
 
 PT/EN parity means factual/editorial equivalence, not literal translation.
 
-Full Biography remains `index,follow`. Any future robots change is explicitly operator-gated.
+### Robots: current vs destination
+
+**Current implementation on `main`:** Full Biography PT/EN remains `index,follow` and is in the sitemap.
+
+**Marcelo's new destination decision:** Full Biography / Biografia Completa should become **`noindex,follow`** after the standalone public-page discovery graph is safe.
+
+Do not block these pages in `robots.txt`; crawlers must be able to read `noindex` and follow the page's ordinary links.
 
 ---
 
-## 4. Entry and Chapter Page architecture
+## 5. Entry / Chapter Page architecture
 
-`data/entries.json` is the registry for reusable entry metadata, Reader presentation and selective Chapter Pages. `data/tags.json` is controlled taxonomy; a tag does not imply a public URL.
+`data/entries.json` remains the registry for reusable entry metadata, Reader presentation and selective Chapter Pages. `data/tags.json` remains controlled taxonomy; a tag does not automatically imply a public URL.
 
-Valid source roles:
+Existing generated Chapter Page pairs include Folhateen, Mirantte News, CookieWEB, Meia-Noite e Uns, Melissa 1.0 and BEST/Kenshoo.
 
-1. **reader-section** — thematic vertical remains editorial source;
-2. **fragment** — neutral shared `content/entries/<lang>/*.inc` source used when an entry is deliberately reused in a generated Chapter Page;
-3. **composite-reader-landmarks** — a semantic subject spans multiple chronological locations without physically merging them.
+Later work added a distinct biography-only model:
 
-No mass fragment migration and no mass Chapter Page generation are authorized.
+- **Espiritualidade — “O Buscador” / Spirituality — “The Seeker”** has its own PT/EN URL and tags;
+- it remains part of the Full Biography rather than creating a Spirituality vertical;
+- it is linked from Home trajectory highlights;
+- current implementation is still `noindex,follow`;
+- Marcelo has explicitly decided that its autonomous URL belongs in the future indexable set.
 
-Current generated Chapter Page pairs:
-
-- Folhateen / “Órfãos do Rock”;
-- Mirantte News;
-- CookieWEB;
-- Meia-Noite e Uns;
-- Melissa 1.0;
-- BEST / Kenshoo.
-
-All have self-canonical URLs, reciprocal hreflang, visible breadcrumbs, `BreadcrumbList` and registry-backed source relationships.
-
-Current indexation:
-
-- **BEST/Kenshoo PT/EN:** `index,follow`, in sitemap — first controlled Chapter Page indexing pilot;
-- **Folhateen, Mirantte, CookieWEB, Meia-Noite, Melissa Chapter Pages:** `noindex,follow`, outside sitemap.
-
-Creating a Chapter Page does not automatically authorize indexing it.
+Creating an autonomous page still requires real reader value. The new destination policy is broader indexation of legitimate autonomous pages, **not** mass page generation.
 
 ---
 
-## 5. Reader UX
+## 6. Indexation — implementation state and destination state
 
-Reader disclosure is progressive enhancement: complete text stays in delivered HTML and no-JS fallback remains readable.
+### Current `main`
 
-Default disclosure surfaces:
+Current indexable core still includes root/language surfaces, Full Biography, Publications, Archive, AI/HAI and BEST/Kenshoo PT/EN.
 
-- Full Biography PT/EN;
-- Internet & Performance PT/EN.
+Music, Mídia & Cultura, Internet & Performance and Projects remain staged `noindex,follow` on current `main`. Most standalone Chapter Pages are also still staged `noindex,follow`.
 
-Continuous/open surfaces:
+### New operator destination
 
-- Mídia & Cultura / Media & Culture remains fully open;
-- AI/HAI remains an open editorial vertical.
+Marcelo's current target is:
 
-### Path-scoped Melissa rule
+- root `/`: indexable;
+- `/pt/`, `/en/`: indexable;
+- substantive thematic verticals: `index,follow`;
+- legitimate autonomous Chapter Pages / biography-only URLs: `index,follow`;
+- Publications and Archive: indexable;
+- Full Biography / Biografia Completa: `noindex,follow`.
 
-- **AI/HAI PT/EN:** full Melissa entry remains completely open — no compact preview/card/disclosure;
-- **Full Biography PT/EN:** Melissa uses its rich compact summary to reduce chronological-page density.
+This is a destination policy, not authorization for a blind one-release flip.
 
-### Path-scoped BEST rule
+Promotion must remain reviewable by PT/EN pair where applicable and couple:
 
-- **Internet & Performance PT/EN:** normal Reader treatment remains unchanged;
-- **Full Biography PT/EN:** BEST/Kenshoo has a rich three-paragraph summary with the existing workshop image, topic chips and curated indicators for four videos + 11 visual records.
+1. content maturity;
+2. factual/editorial parity;
+3. canonical/hreflang;
+4. ordinary human-visible internal inlinks;
+5. robots state;
+6. sitemap membership;
+7. audit allowlists/invariants.
 
-Reader presentation states remain `normal`, `always-open` and `featured`.
+Before Full Biography becomes `noindex`, standalone pages intended for Search must not depend exclusively on it for discovery.
 
-Current explicit open entries include Minduim/BBS, Clickland and Folhateen where registered. Featured entries include Mirantte, CookieWEB and Meia-Noite in their disclosure contexts.
-
-Featured color treatment is aesthetically unresolved. Technical behavior is correct: highlight is collapsed-state only and disappears when expanded.
-
----
-
-## 6. Rich compact summaries
-
-The compact state is an autonomous concise version of the full entry, not a teaser or mechanical excerpt.
-
-Hard ceiling for structured `reader_preview` copy: **1,650 visible characters per language**. Preferred design center is roughly 1,300 characters when justified.
-
-Current rich-summary set in Full Biography:
-
-- Melissa 1.0;
-- Mirantte News;
-- CookieWEB;
-- Meia-Noite e Uns;
-- BEST / Kenshoo.
-
-The rollout remains selective. Folhateen and other deliberately open entries should not be collapsed merely for consistency.
-
-Two visible label systems remain distinct:
-
-- neutral topic/taxonomy chips = what the entry is about;
-- red content indicators = what resources exist inside.
-
-Current preview image choices for Mirantte/CookieWEB/Meia-Noite are not operator-approved final selections; do not replace them autonomously before visual review. BEST reuses its already established workshop thread image.
+`tools/build_sitemap.py` remains the canonical sitemap generator and real Git history remains the source for per-page `lastmod`.
 
 ---
 
-## 7. Indexation, sitemap and Home
+## 7. Home / canonical entity page
 
-Current indexable core includes root/language surfaces, Full Biography, Publications, Archive, AI/HAI and the BEST/Kenshoo Chapter Page pair.
+Root `/` is still primarily a language/entity gateway and needs substantive human-readable entity content.
 
-Historical thematic verticals Music, Mídia & Cultura, Internet & Performance and Projects remain `noindex,follow` for now.
+Current root already includes embedded JSON-LD with:
 
-Marcelo has already decided the destination state: mature thematic verticals should eventually become `index,follow`. Sequencing remains:
+- `WebSite`;
+- `ProfilePage`;
+- `Person`;
+- the 15-profile `sameAs` set.
 
-1. expand `/` into a substantive human-readable entity page for **Marcelo Nicchio**;
-2. then promote mature PT/EN vertical pairs atomically with robots + sitemap + audit whitelist.
+Therefore older audit findings saying schema existed only in an external JSON file or that `sameAs` had only four profiles are stale.
 
-The root prose is operator-authored and has not yet been supplied. C4/Home was intentionally skipped in the C5–C8 implementation run, not abandoned.
+Open semantic work includes:
 
-### Sitemap freshness
+- substantive entity prose;
+- more specific/accurate `knowsAbout` and related Person semantics;
+- review of root language/hreflang architecture once the new content is written;
+- ensuring the root remains useful to humans rather than becoming a keyword/AI-target page.
 
-`tools/build_sitemap.py` is now the canonical generator for `sitemap.xml`.
-
-- URL membership comes from the audited `LAUNCH_INDEXABLE` set;
-- each `<lastmod>` is derived from the real Git history of that HTML page;
-- CI uses full Git history (`fetch-depth: 0`) and fails if the sitemap becomes stale;
-- fabricated global freshness dates are prohibited.
-
----
-
-## 8. Media and performance rules
-
-Two image roles remain separate:
-
-1. editorial image inside a thread;
-2. associated record gallery below a record.
-
-Gallery UX may use thumbnails, lightbox, manual navigation, accessibility and lazy loading. Ordinary personal images do not require public “evidence classes”. Provenance/credit/date/alt/caption remain useful when applicable.
-
-AI reconstruction from memory is illustration, never historical evidence. Scans, video frames, redacted versions and AI reconstructions should be labeled when materially necessary.
-
-### Runtime observability
-
-C7 added `tools/smoke_runtime_performance.js` to Site Audit. It probes local Chrome behavior for Full Biography mobile and Internet & Performance desktop, including:
-
-- local LCP/CLS and long tasks;
-- JS heap where available;
-- lazy/loaded image behavior before and after full scroll;
-- same-origin image decode;
-- horizontal overflow;
-- a two-`requestAnimationFrame` Reader latency proxy.
-
-These are CI regression signals, **not field Core Web Vitals and not real INP**. See `docs/runtime-performance-observability.md`.
-
-Coitado do Próximo remains a later archive workstream: preserve source frame/timestamp separately from treated derivatives; use AI reconstruction only when appropriate and clearly labeled.
+Do not automatically use long side-by-side PT/EN translations merely for crawlers; dedicated language URLs remain part of the architecture.
 
 ---
 
-## 9. Chet implementation status
+## 8. Publications / structured research identity
 
-- **C0 — sanitation:** complete.
-- **C1 — dense Chapter Pages:** complete.
-- **C2 + C2.1 — Melissa Chapter Page + IA/HAI always-open rule:** complete.
-- **C3 — BEST/Kenshoo copy + first Chapter Page indexation pilot:** complete.
-- **C4 — Home entity prose:** intentionally skipped; depends on Marcelo-authored prose.
-- **C5 — living documentation consolidation:** complete.
-- **C6 — deterministic sitemap + real per-page `lastmod`:** complete.
-- **C7 — runtime performance/media observability:** complete.
-- **C8 — selective rich-summary rollout to BEST/Kenshoo:** complete.
+`data/publications.json` remains the canonical internal publication inventory and preserves the rule:
+
+> **one work/version, multiple repository instances are not multiple publications.**
+
+Current repository code does not yet implement `ScholarlyArticle` structured data.
+
+Future structured-data work should model the intellectual work and repository instances accurately rather than mechanically declaring every DOI `sameAs`. PRO v2 remains work in progress and must not be represented as a public publication before it exists publicly.
 
 ---
 
-## 10. Next queue after C8
+## 9. Content maturity queue
 
-No automatic C9 is implied by completing this run. Remaining known workstreams include:
+Known substantive priorities now include:
 
-- Home/entity prose when Marcelo supplies it;
-- collaborative featured-card color review and operator-selected replacement preview images;
-- Coitado do Próximo archive by era;
-- remaining editorial entries and new media lots;
-- later whole-site audit and eventual thematic-vertical indexation after Home;
-- Full Biography robots only if Marcelo/Xará later explicitly decide to revisit it.
+1. **Music / Música:** Coitado do Próximo and its historical archive;
+2. **Internet & Performance:** incomplete/refinable passages;
+3. **Mídia & Cultura / Media & Culture:** selected entry adjustments;
+4. **Home:** canonical entity prose.
+
+The previous assessment that a vertical was structurally ready for eventual indexing does not mean its content is finished. Marcelo's later content priorities govern sequencing.
 
 ---
 
-## 11. CI invariants
+## 10. External authority alignment
 
-Site Audit now protects:
+External profiles/records should point inward to the HUB as the canonical personal-site destination where platforms permit it.
 
-- navigation;
-- gallery derivatives/sync/registry;
+Goal: factual and semantic compatibility, not verbatim SEO copy.
+
+Align progressively:
+
+- preferred public name;
+- chronology/current positioning;
+- official HUB URL;
+- exact publication titles and version relationships;
+- legitimate persistent identifiers/cross-links.
+
+Privacy cleanup on third-party services remains operator-side where Marcelo considers it necessary. Do not replicate unnecessary direct contact details into the HUB/schema/docs.
+
+See `external-profile-alignment.md` and `SEO-GEO-AEO-TRIAGE-2026-09-05.md`.
+
+---
+
+## 11. SEO / GEO / AEO triage
+
+The externally prepared 3 Sep plan is useful planning input, not an implementation contract.
+
+Current Billy triage:
+
+- adopt the substantive entity page, semantic enrichment, publication modelling, external alignment, better internal discovery and measured indexation;
+- adapt the proposed bilingual-root, concept-page, DOI and Scholar/Wikidata recommendations;
+- defer low-value/experimental `llms-full.txt` and FAQ-schema work;
+- reject inaccurate `Human–AI Interaction (HCI)` terminology, literal identical bios everywhere and Wikidata self-creation as an SEO shortcut.
+
+See `SEO-GEO-AEO-TRIAGE-2026-09-05.md` for the detailed decision record.
+
+---
+
+## 12. Billy roadmap
+
+B0–B6 is now recorded in `BILLY-BASELINE-2026-09-05.md`:
+
+- **B0:** baseline, documentation and URL/indexation inventory;
+- **B1:** substantive canonical Entity Page;
+- **B2:** external knowledge graph/profile alignment;
+- **B3:** controlled public indexation migration;
+- **B4:** structured works, pilot evaluation and selective concept expansion;
+- **B5:** archive as authority;
+- **B6:** real-world search/citation/performance measurement.
+
+---
+
+## 13. CI invariants
+
+Site Audit continues to protect navigation, gallery/media synchronization, PT/EN parity, Full Biography generation, Reader behavior, Chapter Page registry, fused Mídia & Cultura architecture, JavaScript/runtime behavior, performance/media observability, page-image weight reporting, generated sitemap freshness, HTML/JSON/sitemap integrity, external presence and analytics installation.
+
+When policy intentionally changes, update source/generator/audits together. When CI catches an unintended regression, fix the source model rather than weakening assertions merely to get green.
+
+---
+
+## 14. What not to reopen casually
+
+Preserve:
+
+- Humans first; semantics second;
+- Full Biography = totality / verticals = thematic cuts;
 - PT/EN editorial parity;
-- neutral entry sources;
-- Full Biography generation/coverage;
-- Reader loader and Chrome Reader behavior;
-- Chapter Pages and entry registry;
-- Mídia & Cultura fusion;
-- Reader/runtime JavaScript syntax;
-- runtime performance/media observability;
-- static page-image weight reporting;
-- generated sitemap freshness;
-- HTML/JSON/sitemap integrity;
-- external presence;
-- analytics installation.
+- Internet & Performance fusion;
+- Mídia & Cultura / audiovisual fusion at current canonical paths;
+- biography-only chapter capability;
+- selective, human-justified Chapter Pages rather than mass generation;
+- honest labelling of AI reconstruction where material;
+- Reader progressive enhancement;
+- current mobile menu solution;
+- resolved Reader visual direction;
+- stable URLs;
+- deterministic real-history sitemap freshness.
 
-When CI catches a regression, fix the generator/runtime/source model. Do not weaken assertions merely to make the build green.
+See the Billy baseline for the full B0–B6 working contract.
