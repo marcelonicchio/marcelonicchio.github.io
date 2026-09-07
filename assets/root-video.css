@@ -4,6 +4,9 @@
 .root-canonical .root-video-copy{max-width:900px;margin-bottom:30px}
 .root-canonical .root-video-copy h2{max-width:980px;margin-bottom:18px;font-size:clamp(2.2rem,5vw,4rem)}
 .root-canonical .root-video-copy h2 em{font-style:italic;font-weight:800}
+.root-canonical .root-video-title-link{display:inline-block;color:inherit;text-decoration:none}
+.root-canonical .root-video-title-link:hover{color:inherit;text-decoration:none}
+.root-canonical .root-video-title-link:focus-visible{outline:3px solid var(--root-accent-readable,var(--accent-soft));outline-offset:4px;border-radius:4px}
 .root-canonical .root-video-copy>p{max-width:840px;margin:0;color:#d4d0c9;font-size:1rem;line-height:1.7}
 .root-canonical .root-video-copy>p+p{margin-top:10px}
 .root-canonical .root-video-note{color:var(--muted)!important;font-size:.82rem!important;line-height:1.55!important}
