@@ -29,7 +29,8 @@
   .root-canonical .root-video-copy{margin-bottom:22px}
   .root-canonical .root-video-copy>p{font-size:.96rem;line-height:1.65}
   .root-canonical .root-video-note{font-size:.78rem!important}
-  .root-canonical .root-video-frame{border-radius:14px}
+  /* The source material is close to 4:3. A 3:2 mobile stage makes the actual footage about 20% larger without cropping controls or forcing fullscreen. */
+  .root-canonical .root-video-frame{aspect-ratio:3/2;border-radius:14px}
   .root-canonical .root-video-play-icon{width:64px;height:64px}
   .root-canonical .root-video-play-icon:before{border-top-width:10px;border-bottom-width:10px;border-left-width:16px}
 }
