@@ -108,6 +108,7 @@ async function runDesktop(browser) {
   const spiritualityTopics = await spiritualityBio.locator('.reader-disclosure__topic').allInnerTexts();
   ['Meditação', 'Vipassana', 'Budismo', 'Osho', 'Mindfulness'].forEach((label) => assert(spiritualityTopics.includes(label), `Spirituality topic missing: ${label}`));
   assert(!spiritualityTopics.includes('Buddhismo'), 'Legacy Buddhismo topic must not reappear');
+  assert(!/buddhista/i.test(await spiritualityBio.innerText()), 'Legacy Portuguese buddhista spelling must not reappear');
   assert(await spiritualityBio.locator('img[src="/assets/media/thread/vipassana03.jpg"]').count() === 1, 'Spirituality cropped Vipassana reconstruction missing from always-open body');
   assert((await page.locator('#bio-internet-mirantte details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte is not featured in Full Bio');
   assert((await page.locator('#bio-internet-cookieweb details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB is not featured in Full Bio');
@@ -196,9 +197,16 @@ async function runDesktop(browser) {
   const standaloneSpiritualityTopics = await page.locator('.entry-topic').allInnerTexts();
   ['Meditação', 'Vipassana', 'Budismo', 'Osho', 'Mindfulness'].forEach((label) => assert(standaloneSpiritualityTopics.includes(label), `Standalone spirituality topic missing: ${label}`));
   assert(!standaloneSpiritualityTopics.includes('Buddhismo'), 'Legacy standalone Buddhismo topic must not reappear');
+  assert(!/buddhista/i.test(await page.locator('article.entry-page-body').innerText()), 'Standalone Portuguese buddhista spelling must not reappear');
   assert((await page.locator('article.entry-page-body').innerText()).includes('Dhanadhammo'), 'Spirituality standalone page lost Dhanadhammo');
   assert(await page.locator('img[src="/assets/media/thread/vipassana03.jpg"]').count() === 1, 'Spirituality standalone page lost cropped reconstruction');
   assert(await page.locator('details.reader-disclosure').count() === 0, 'Standalone spirituality page must not initialize Reader disclosure');
+
+  await page.goto(`${BASE}/en/biography/spirituality-the-seeker/`, {waitUntil: 'networkidle'});
+  const seekerEnglishText = await page.locator('article.entry-page-body').innerText();
+  assert(/\bBuddhism\b/.test(seekerEnglishText), 'English Seeker page lost conventional Buddhism spelling');
+  assert(/\bBuddhist\b/.test(seekerEnglishText), 'English Seeker page lost conventional Buddhist spelling');
+  assert(!/\bBudism\b|\bBudist\b|\bBuddhismo\b|\bbuddhista\b/i.test(seekerEnglishText), 'English Seeker page contains a non-conventional Buddhism/Buddhist spelling');
 
   // IA/HAI preserves continuous reading: Melissa is the oldest/final chapter and stays fully open.
   await page.goto(`${BASE}/pt/ia-hai/`, {waitUntil: 'networkidle'});
