@@ -1,0 +1,127 @@
+name: Billy Buscador Budista normalization one-shot
+
+on:
+  push:
+    branches:
+      - billy/buscador-budista-buddhist-2026-09-06
+    paths:
+      - .github/workflows/billy-buscador-budista-normalization-one-shot.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Normalize Portuguese terminology and guard English conventional spelling
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          pt = Path('content/full-biography/pt/spirituality-seeker.inc')
+          en = Path('content/full-biography/en/spirituality-seeker.inc')
+
+          pt_text = pt.read_text(encoding='utf-8')
+          pt_text = re.sub(r'\bbuddhista\b', 'budista', pt_text, flags=re.I)
+          pt_text = re.sub(r'\bbuddhistas\b', 'budistas', pt_text, flags=re.I)
+          pt_text = re.sub(r'\bbuddhismo\b', 'Budismo', pt_text, flags=re.I)
+          pt.write_text(pt_text, encoding='utf-8')
+
+          en_text = en.read_text(encoding='utf-8')
+          # English already uses the conventional spellings. Preserve them explicitly.
+          required = ['Buddhism', 'Buddhist']
+          for term in required:
+              if term not in en_text:
+                  raise SystemExit(f'English source missing conventional term: {term}')
+          for bad in ['Budism', 'Budist', 'Buddhismo', 'buddhista']:
+              if re.search(rf'\b{bad}\b', en_text, flags=re.I):
+                  raise SystemExit(f'Non-conventional English form found: {bad}')
+
+          if re.search(r'\bbuddhist(?:a|as|o|os)\b', pt_text, flags=re.I):
+              raise SystemExit('Portuguese source still contains buddhist- hybrid spelling')
+          if re.search(r'\bbuddhismo\b', pt_text, flags=re.I):
+              raise SystemExit('Portuguese source still contains Buddhismo')
+          PY
+      - name: Add permanent Reader terminology regression checks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('tools/smoke_reader_ux.js')
+          text = path.read_text(encoding='utf-8')
+
+          needle = "  assert(!spiritualityTopics.includes('Buddhismo'), 'Legacy Buddhismo topic must not reappear');\n"
+          insert = needle + "  assert(!/buddhista/i.test(await spiritualityBio.innerText()), 'Legacy Portuguese buddhista spelling must not reappear');\n"
+          if insert not in text:
+              if needle not in text:
+                  raise SystemExit('PT spirituality smoke anchor not found')
+              text = text.replace(needle, insert, 1)
+
+          standalone = "  assert(!standaloneSpiritualityTopics.includes('Buddhismo'), 'Legacy standalone Buddhismo topic must not reappear');\n"
+          standalone_insert = standalone + "  assert(!/buddhista/i.test(await page.locator('article.entry-page-body').innerText()), 'Standalone Portuguese buddhista spelling must not reappear');\n"
+          if standalone_insert not in text:
+              if standalone in text:
+                  text = text.replace(standalone, standalone_insert, 1)
+
+          # Add an English standalone semantic spelling check near the end of the spirituality block.
+          en_anchor = "  assert(await page.locator('details.reader-disclosure').count() === 0, 'Standalone spirituality page must not initialize Reader disclosure');\n"
+          en_check = en_anchor + "\n  await page.goto(`${BASE}/en/biography/spirituality-the-seeker/`, {waitUntil: 'networkidle'});\n  const seekerEnglishText = await page.locator('article.entry-page-body').innerText();\n  assert(/\\bBuddhism\\b/.test(seekerEnglishText), 'English Seeker page lost conventional Buddhism spelling');\n  assert(/\\bBuddhist\\b/.test(seekerEnglishText), 'English Seeker page lost conventional Buddhist spelling');\n  assert(!/\\bBudism\\b|\\bBudist\\b|\\bBuddhismo\\b|\\bbuddhista\\b/i.test(seekerEnglishText), 'English Seeker page contains a non-conventional Buddhism/Buddhist spelling');\n"
+          if 'English Seeker page lost conventional Buddhism spelling' not in text:
+              if en_anchor not in text:
+                  raise SystemExit('EN spirituality smoke anchor not found')
+              text = text.replace(en_anchor, en_check, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Synchronize derived surfaces
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+          python tools/editorial_parity.py --accept spirituality-seeker
+          python tools/build_sitemap.py
+      - name: Validate terminology and generated state
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/editorial_parity.py --check
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          pt_paths = [
+              Path('content/full-biography/pt/spirituality-seeker.inc'),
+              Path('pt/biografia/index.html'),
+              Path('pt/biografia/espiritualidade-o-buscador/index.html'),
+          ]
+          for path in pt_paths:
+              text = path.read_text(encoding='utf-8')
+              if re.search(r'\bbuddhismo\b|\bbuddhista(?:s)?\b', text, flags=re.I):
+                  raise SystemExit(f'legacy Portuguese Buddhist spelling remains in {path}')
+              if 'Budismo' not in text or 'budista' not in text:
+                  raise SystemExit(f'canonical Portuguese Budismo/budista terms missing in {path}')
+
+          en_paths = [
+              Path('content/full-biography/en/spirituality-seeker.inc'),
+              Path('en/biography/index.html'),
+              Path('en/biography/spirituality-the-seeker/index.html'),
+          ]
+          for path in en_paths:
+              text = path.read_text(encoding='utf-8')
+              if 'Buddhism' not in text or 'Buddhist' not in text:
+                  raise SystemExit(f'conventional English Buddhism/Buddhist terms missing in {path}')
+          PY
+      - name: Remove one-shot machinery and commit result
+        run: |
+          rm .github/workflows/billy-buscador-budista-normalization-one-shot.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix: normalize Budista terminology in O Buscador'
+          git push
