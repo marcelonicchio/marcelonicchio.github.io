@@ -1,0 +1,104 @@
+name: Billy Meia-Noite featured photo one-shot
+
+on:
+  push:
+    branches:
+      - billy/meia-noite-featured-photo-2026-09-07
+    paths:
+      - .github/workflows/billy-meia-noite-featured-photo-one-shot.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Install sync dependency
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
+
+      - name: Normalize uploaded image extension
+        run: |
+          src='assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns_00_fotothread_destaque.jpg'
+          dst='assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns_00_fotothread_destaque.png'
+          test -f "$src"
+          file "$src" | grep -q 'PNG image data'
+          mv "$src" "$dst"
+
+      - name: Replace featured figure in PT and EN sources
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          new_path = '/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns_00_fotothread_destaque.png'
+
+          specs = {
+              Path('content/entries/pt/communication-meia-noite.inc'): (
+                  '<figure class="thread-media thread-media--linked"><a aria-label="Abrir a colagem visual de Meia-Noite e Uns em tamanho maior" href="/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns-thread.jpg" rel="noopener noreferrer" target="_blank"><img alt="Colagem de fotografias e ilustrações do programa Meia-Noite e Uns, exibido pela RedeTV! em 2006." decoding="async" loading="lazy" src="/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns-thread.jpg" width="932" height="919"/></a><figcaption><strong>Meia-Noite e Uns · 2006.</strong><span class="thread-media-note">Colagem visual reunindo fotografias e ilustrações do programa.</span><a class="thread-media-open" href="/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns-thread.jpg" rel="noopener noreferrer" target="_blank">Abrir imagem em tamanho maior ↗</a></figcaption></figure>',
+                  f'<figure class="thread-media thread-media--linked"><a aria-label="Abrir a foto de destaque de Meia-Noite e Uns em tamanho maior" href="{new_path}" rel="noopener noreferrer" target="_blank"><img alt="Foto de destaque de Meia-Noite e Uns, programa exibido pela RedeTV! em 2006." decoding="async" loading="lazy" src="{new_path}" width="740" height="521"/></a><figcaption><strong>Meia-Noite e Uns · 2006.</strong><span class="thread-media-note">Registro visual do programa.</span><a class="thread-media-open" href="{new_path}" rel="noopener noreferrer" target="_blank">Abrir imagem em tamanho maior ↗</a></figcaption></figure>'
+              ),
+              Path('content/entries/en/communication-meia-noite.inc'): (
+                  '<figure class="thread-media thread-media--linked"><a aria-label="Open the Meia-Noite e Uns visual collage at full size" href="/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns-thread.jpg" rel="noopener noreferrer" target="_blank"><img alt="Collage of photographs and illustrations from the television program Meia-Noite e Uns, broadcast by RedeTV! in 2006." decoding="async" loading="lazy" src="/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns-thread.jpg" width="932" height="919"/></a><figcaption><strong>Meia-Noite e Uns · 2006.</strong><span class="thread-media-note">Visual collage combining photographs and illustrations from the program.</span><a class="thread-media-open" href="/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns-thread.jpg" rel="noopener noreferrer" target="_blank">Open full-size image ↗</a></figcaption></figure>',
+                  f'<figure class="thread-media thread-media--linked"><a aria-label="Open the featured Meia-Noite e Uns photograph at full size" href="{new_path}" rel="noopener noreferrer" target="_blank"><img alt="Featured photograph from Meia-Noite e Uns, a television program broadcast by RedeTV! in 2006." decoding="async" loading="lazy" src="{new_path}" width="740" height="521"/></a><figcaption><strong>Meia-Noite e Uns · 2006.</strong><span class="thread-media-note">Visual record from the program.</span><a class="thread-media-open" href="{new_path}" rel="noopener noreferrer" target="_blank">Open full-size image ↗</a></figcaption></figure>'
+              ),
+          }
+
+          for path, (old, new) in specs.items():
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected exactly one featured figure, found {count}')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
+      - name: Synchronize derived surfaces
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+          python tools/editorial_parity.py --accept audiovisual-meia-noite
+          python tools/build_sitemap.py
+
+      - name: Validate surgical replacement
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/editorial_parity.py --check
+          python tools/build_sitemap.py --check
+          file assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns_00_fotothread_destaque.png | grep -q 'PNG image data, 740 x 521'
+          test ! -e assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns_00_fotothread_destaque.jpg
+          python - <<'PY'
+          from pathlib import Path
+          new = '/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns_00_fotothread_destaque.png'
+          old = '/assets/archive/audiovisual/meia-noite-e-uns/meianoiteeuns-thread.jpg'
+          paths = [
+              Path('content/entries/pt/communication-meia-noite.inc'),
+              Path('content/entries/en/communication-meia-noite.inc'),
+              Path('pt/comunicacao/index.html'),
+              Path('en/communication/index.html'),
+              Path('pt/biografia/index.html'),
+              Path('en/biography/index.html'),
+              Path('pt/comunicacao/meia-noite-e-uns/index.html'),
+              Path('en/communication/meia-noite-e-uns/index.html'),
+          ]
+          for path in paths:
+              text = path.read_text(encoding='utf-8')
+              if new not in text:
+                  raise SystemExit(f'new featured image missing in {path}')
+              if old in text:
+                  raise SystemExit(f'old featured collage still referenced in {path}')
+          PY
+
+      - name: Remove one-shot machinery and commit result
+        run: |
+          rm .github/workflows/billy-meia-noite-featured-photo-one-shot.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'media: replace Meia-Noite e Uns featured image'
+          git push
