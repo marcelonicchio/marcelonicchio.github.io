@@ -58,12 +58,30 @@ async function assertLanguage(browser, locale, expected) {
   const axisHref = expected === 'pt' ? '/pt/musica/' : '/en/music/';
   assert(await page.locator(`.root-axis[href="${axisHref}"]`).count() === 1, `${locale}: localized Music axis link missing`);
   assert(await page.locator('a.root-email-link[href="mailto:marcelonicchio@gmail.com"]').count() === 1, `${locale}: canonical e-mail link missing`);
+
   const order = await page.evaluate(() => {
+    const biography = document.querySelector('.root-biography');
+    const video = document.querySelector('.root-video-memorial');
     const milestones = document.querySelector('.root-milestones');
     const explore = document.querySelector('.root-explore');
-    return Boolean(milestones && explore && (milestones.compareDocumentPosition(explore) & Node.DOCUMENT_POSITION_FOLLOWING));
+    return Boolean(
+      biography && video && milestones && explore &&
+      (biography.compareDocumentPosition(video) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      (video.compareDocumentPosition(milestones) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      (milestones.compareDocumentPosition(explore) & Node.DOCUMENT_POSITION_FOLLOWING)
+    );
   });
-  assert(order, `${locale}: selected milestones must appear before vertical-axis cards`);
+  assert(order, `${locale}: root order must be biography → video memorial → milestones → vertical-axis cards`);
+
+  assert(await page.locator('.root-video-frame img').isVisible(), `${locale}: video memorial poster missing`);
+  assert(await page.locator('.root-video-frame iframe').count() === 0, `${locale}: YouTube iframe must not load before play`);
+  const play = page.locator(`.root-video-play[data-root-lang="${expected}"]`);
+  assert(await play.isVisible(), `${locale}: localized video play control missing`);
+  await play.click();
+  assert(await page.locator('.root-video-frame iframe').count() === 1, `${locale}: video player iframe was not created after play`);
+  const playerSrc = await page.locator('.root-video-frame iframe').getAttribute('src');
+  assert(playerSrc && playerSrc.includes('youtube-nocookie.com/embed/t_WCRoHBOHk'), `${locale}: unexpected video player source ${playerSrc}`);
+
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, `${locale}: root has horizontal overflow on mobile`);
   const toggleBox = await page.locator('.root-lang-toggle').boundingBox();
