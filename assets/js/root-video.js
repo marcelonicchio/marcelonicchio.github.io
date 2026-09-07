@@ -7,16 +7,34 @@
   if (!frame || !videoId) return;
 
   if (window.location.pathname === '/') {
+    const storyTargets = {
+      pt: '/pt/biografia/the-more-you-change-the-less-you-feel/',
+      en: '/en/biography/the-more-you-change-the-less-you-feel/'
+    };
+
+    section.querySelectorAll('.root-video-copy[data-root-lang]').forEach((copy) => {
+      const lang = copy.dataset.rootLang;
+      const heading = copy.querySelector('h2');
+      const href = storyTargets[lang];
+      if (!heading || !href || heading.querySelector('a')) return;
+
+      const link = document.createElement('a');
+      link.className = 'root-video-title-link';
+      link.href = href;
+      while (heading.firstChild) link.appendChild(heading.firstChild);
+      heading.appendChild(link);
+    });
+
     const actions = section.querySelector('.root-video-actions');
     if (actions && !actions.querySelector('[data-root-video-story-link]')) {
       const storyPt = document.createElement('a');
-      storyPt.href = '/pt/biografia/the-more-you-change-the-less-you-feel/';
+      storyPt.href = storyTargets.pt;
       storyPt.dataset.rootLang = 'pt';
       storyPt.dataset.rootVideoStoryLink = '';
       storyPt.textContent = 'Conhecer a história deste vídeo →';
 
       const storyEn = document.createElement('a');
-      storyEn.href = '/en/biography/the-more-you-change-the-less-you-feel/';
+      storyEn.href = storyTargets.en;
       storyEn.dataset.rootLang = 'en';
       storyEn.dataset.rootVideoStoryLink = '';
       storyEn.textContent = 'About this video →';
