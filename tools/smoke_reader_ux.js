@@ -106,7 +106,8 @@ async function runDesktop(browser) {
   assert(await spiritualityBio.locator('.reader-disclosure__collapse-button').count() === 0, 'Spirituality must not expose a bottom collapse action');
   assert(await spiritualityBio.locator('h2 > a.entry-title-permalink').getAttribute('href') === '/pt/biografia/espiritualidade-o-buscador/', 'Spirituality standalone permalink missing from Full Bio heading');
   const spiritualityTopics = await spiritualityBio.locator('.reader-disclosure__topic').allInnerTexts();
-  ['Meditação', 'Vipassana', 'Budismo', 'Buddhismo', 'Osho', 'Mindfulness'].forEach((label) => assert(spiritualityTopics.includes(label), `Spirituality topic missing: ${label}`));
+  ['Meditação', 'Vipassana', 'Budismo', 'Osho', 'Mindfulness'].forEach((label) => assert(spiritualityTopics.includes(label), `Spirituality topic missing: ${label}`));
+  assert(!spiritualityTopics.includes('Buddhismo'), 'Legacy Buddhismo topic must not reappear');
   assert(await spiritualityBio.locator('img[src="/assets/media/thread/vipassana03.jpg"]').count() === 1, 'Spirituality cropped Vipassana reconstruction missing from always-open body');
   assert((await page.locator('#bio-internet-mirantte details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte is not featured in Full Bio');
   assert((await page.locator('#bio-internet-cookieweb details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB is not featured in Full Bio');
