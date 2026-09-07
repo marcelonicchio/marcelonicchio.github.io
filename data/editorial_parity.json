@@ -193,10 +193,10 @@
       ]
     },
     "internet-sem": {
-      "revision": 3,
-      "pt_hash": "f2ff4274b54e5ec61621d31d3e6bec8fa12ef7fe3f9db4ba9cc725a05a52c73b",
-      "en_hash": "85e18456bec19065c110b900938d8dc609ec49b18e1bdb1506ab6941b70d5424",
-      "accepted_on": "2026-08-28",
+      "revision": 4,
+      "pt_hash": "41c0798446d27d430a2038763514b4fc3eca5c115f3c6a284ded777e4260a429",
+      "en_hash": "c445d7397822aa1c025b846fc22d9ac3550af4fa070b6447724bb31f1d88c467",
+      "accepted_on": "2026-09-07",
       "changed_languages": [
         "pt",
         "en"
