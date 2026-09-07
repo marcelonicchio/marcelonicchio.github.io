@@ -23,6 +23,8 @@ LAUNCH_INDEXABLE = {
     "en/index.html",
     "pt/biografia/index.html",
     "en/biography/index.html",
+    "pt/biografia/the-more-you-change-the-less-you-feel/index.html",
+    "en/biography/the-more-you-change-the-less-you-feel/index.html",
     "pt/publicacoes/index.html",
     "en/publications/index.html",
     "pt/arquivo/index.html",
