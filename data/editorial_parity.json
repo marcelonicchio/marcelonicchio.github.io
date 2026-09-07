@@ -183,10 +183,10 @@
       ]
     },
     "audiovisual-meia-noite": {
-      "revision": 3,
-      "pt_hash": "be6fa6daf794b4da3ecb20b5046e334e53250a8ea6dfef65d5f8f24bdb96e4f0",
-      "en_hash": "e766f2b574d513dd5862edb46b5dd502f30e63321e4d0ad67ffb3c7afc59d4d2",
-      "accepted_on": "2026-09-03",
+      "revision": 4,
+      "pt_hash": "428de1ca21b69a8b7b0037f4414420fb811adc5907081105312607ba821e73ad",
+      "en_hash": "1256a2797ab4b4fd8eb7b8bfb5edf2d8ae787208955b7124dafe826c44614e8c",
+      "accepted_on": "2026-09-07",
       "changed_languages": [
         "pt",
         "en"
