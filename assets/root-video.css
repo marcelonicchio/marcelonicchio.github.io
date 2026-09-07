@@ -1,0 +1,39 @@
+/* Canonical root video memorial — Benny, 2026-09-07 */
+.root-canonical .root-video-memorial{background:#09090a!important}
+.root-canonical .root-video-shell{max-width:1100px}
+.root-canonical .root-video-copy{max-width:900px;margin-bottom:30px}
+.root-canonical .root-video-copy h2{max-width:980px;margin-bottom:18px;font-size:clamp(2.2rem,5vw,4rem)}
+.root-canonical .root-video-copy h2 em{font-style:italic;font-weight:800}
+.root-canonical .root-video-copy>p{max-width:840px;margin:0;color:#d4d0c9;font-size:1rem;line-height:1.7}
+.root-canonical .root-video-copy>p+p{margin-top:10px}
+.root-canonical .root-video-note{color:var(--muted)!important;font-size:.82rem!important;line-height:1.55!important}
+.root-canonical .root-video-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:#050506;box-shadow:0 24px 64px rgba(0,0,0,.28)}
+.root-canonical .root-video-frame img{display:block;width:100%;height:100%;object-fit:cover}
+.root-canonical .root-video-frame iframe{display:block;width:100%;height:100%;border:0;background:#000}
+.root-canonical .root-video-play{position:absolute;inset:0;display:grid;place-items:center;width:100%;height:100%;padding:0;border:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.22));color:#fff;cursor:pointer}
+.root-canonical .root-video-play:hover{background:linear-gradient(180deg,rgba(0,0,0,.01),rgba(0,0,0,.13))}
+.root-canonical .root-video-play:focus-visible{outline:3px solid var(--root-accent-readable,var(--accent-soft));outline-offset:-5px}
+.root-canonical .root-video-play-icon{display:grid;place-items:center;width:78px;height:78px;border:2px solid rgba(255,255,255,.92);border-radius:50%;background:rgba(9,9,10,.72);box-shadow:0 10px 32px rgba(0,0,0,.38);transition:transform .18s ease,background .18s ease}
+.root-canonical .root-video-play:hover .root-video-play-icon{transform:scale(1.05);background:rgba(9,9,10,.88)}
+.root-canonical .root-video-play-icon:before{content:"";display:block;margin-left:5px;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #fff}
+.root-canonical .root-video-actions{display:flex;justify-content:flex-end;margin-top:12px}
+.root-canonical .root-video-actions a{color:var(--root-accent-readable,var(--accent-soft));font-size:.76rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.root-canonical .root-video-actions a:hover{color:#fff;opacity:1}
+
+/* Inserting this section must not shift the established alternating rhythm below it. */
+.root-canonical .root-milestones{background:transparent!important}
+.root-canonical .root-explore{background:linear-gradient(180deg,rgba(255,255,255,.011),rgba(255,255,255,.003))!important}
+.root-canonical .root-presence-section{background:transparent!important}
+
+@media(max-width:620px){
+  .root-canonical .root-video-copy{margin-bottom:22px}
+  .root-canonical .root-video-copy>p{font-size:.96rem;line-height:1.65}
+  .root-canonical .root-video-note{font-size:.78rem!important}
+  .root-canonical .root-video-frame{border-radius:14px}
+  .root-canonical .root-video-play-icon{width:64px;height:64px}
+  .root-canonical .root-video-play-icon:before{border-top-width:10px;border-bottom-width:10px;border-left-width:16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .root-canonical .root-video-play-icon{transition:none}
+}
