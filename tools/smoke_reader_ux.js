@@ -194,7 +194,8 @@ async function runDesktop(browser) {
   assert(await page.locator('h1').innerText() === 'Espiritualidade — “O Buscador”', 'Spirituality standalone H1 incorrect');
   assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'index,follow', 'Spirituality standalone robots incorrect');
   const standaloneSpiritualityTopics = await page.locator('.entry-topic').allInnerTexts();
-  ['Meditação', 'Vipassana', 'Budismo', 'Buddhismo', 'Osho', 'Mindfulness'].forEach((label) => assert(standaloneSpiritualityTopics.includes(label), `Standalone spirituality topic missing: ${label}`));
+  ['Meditação', 'Vipassana', 'Budismo', 'Osho', 'Mindfulness'].forEach((label) => assert(standaloneSpiritualityTopics.includes(label), `Standalone spirituality topic missing: ${label}`));
+  assert(!standaloneSpiritualityTopics.includes('Buddhismo'), 'Legacy standalone Buddhismo topic must not reappear');
   assert((await page.locator('article.entry-page-body').innerText()).includes('Dhanadhammo'), 'Spirituality standalone page lost Dhanadhammo');
   assert(await page.locator('img[src="/assets/media/thread/vipassana03.jpg"]').count() === 1, 'Spirituality standalone page lost cropped reconstruction');
   assert(await page.locator('details.reader-disclosure').count() === 0, 'Standalone spirituality page must not initialize Reader disclosure');
