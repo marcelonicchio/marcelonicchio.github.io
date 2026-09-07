@@ -6,6 +6,26 @@
   const videoId = section.getAttribute('data-youtube-id');
   if (!frame || !videoId) return;
 
+  if (window.location.pathname === '/') {
+    const actions = section.querySelector('.root-video-actions');
+    if (actions && !actions.querySelector('[data-root-video-story-link]')) {
+      const storyPt = document.createElement('a');
+      storyPt.href = '/pt/biografia/the-more-you-change-the-less-you-feel/';
+      storyPt.dataset.rootLang = 'pt';
+      storyPt.dataset.rootVideoStoryLink = '';
+      storyPt.textContent = 'Conhecer a história deste vídeo →';
+
+      const storyEn = document.createElement('a');
+      storyEn.href = '/en/biography/the-more-you-change-the-less-you-feel/';
+      storyEn.dataset.rootLang = 'en';
+      storyEn.dataset.rootVideoStoryLink = '';
+      storyEn.textContent = 'About this video →';
+
+      actions.prepend(storyEn);
+      actions.prepend(storyPt);
+    }
+  }
+
   const loadPlayer = () => {
     if (frame.dataset.loaded === 'true') return;
     frame.dataset.loaded = 'true';
