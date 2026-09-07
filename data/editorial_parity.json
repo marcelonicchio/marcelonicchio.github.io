@@ -193,9 +193,9 @@
       ]
     },
     "internet-sem": {
-      "revision": 4,
-      "pt_hash": "41c0798446d27d430a2038763514b4fc3eca5c115f3c6a284ded777e4260a429",
-      "en_hash": "c445d7397822aa1c025b846fc22d9ac3550af4fa070b6447724bb31f1d88c467",
+      "revision": 5,
+      "pt_hash": "02e0c30280042ec5669d61db557ccee7084eb26768996c64fdd4105adf75c692",
+      "en_hash": "fad547ac37639929f4204d8487d898b1f1424f4baa516c7b760af1f2d255b275",
       "accepted_on": "2026-09-07",
       "changed_languages": [
         "pt",
