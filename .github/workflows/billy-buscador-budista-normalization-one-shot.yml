@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      - name: Install sync dependency
+        run: python -m pip install beautifulsoup4
       - name: Normalize Portuguese terminology and guard English conventional spelling
         run: |
           python - <<'PY'
@@ -33,7 +35,6 @@ jobs:
           pt.write_text(pt_text, encoding='utf-8')
 
           en_text = en.read_text(encoding='utf-8')
-          # English already uses the conventional spellings. Preserve them explicitly.
           required = ['Buddhism', 'Buddhist']
           for term in required:
               if term not in en_text:
@@ -64,11 +65,9 @@ jobs:
 
           standalone = "  assert(!standaloneSpiritualityTopics.includes('Buddhismo'), 'Legacy standalone Buddhismo topic must not reappear');\n"
           standalone_insert = standalone + "  assert(!/buddhista/i.test(await page.locator('article.entry-page-body').innerText()), 'Standalone Portuguese buddhista spelling must not reappear');\n"
-          if standalone_insert not in text:
-              if standalone in text:
-                  text = text.replace(standalone, standalone_insert, 1)
+          if standalone_insert not in text and standalone in text:
+              text = text.replace(standalone, standalone_insert, 1)
 
-          # Add an English standalone semantic spelling check near the end of the spirituality block.
           en_anchor = "  assert(await page.locator('details.reader-disclosure').count() === 0, 'Standalone spirituality page must not initialize Reader disclosure');\n"
           en_check = en_anchor + "\n  await page.goto(`${BASE}/en/biography/spirituality-the-seeker/`, {waitUntil: 'networkidle'});\n  const seekerEnglishText = await page.locator('article.entry-page-body').innerText();\n  assert(/\\bBuddhism\\b/.test(seekerEnglishText), 'English Seeker page lost conventional Buddhism spelling');\n  assert(/\\bBuddhist\\b/.test(seekerEnglishText), 'English Seeker page lost conventional Buddhist spelling');\n  assert(!/\\bBudism\\b|\\bBudist\\b|\\bBuddhismo\\b|\\bbuddhista\\b/i.test(seekerEnglishText), 'English Seeker page contains a non-conventional Buddhism/Buddhist spelling');\n"
           if 'English Seeker page lost conventional Buddhism spelling' not in text:
