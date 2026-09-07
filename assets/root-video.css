@@ -16,7 +16,7 @@
 .root-canonical .root-video-play-icon{display:grid;place-items:center;width:78px;height:78px;border:2px solid rgba(255,255,255,.92);border-radius:50%;background:rgba(9,9,10,.72);box-shadow:0 10px 32px rgba(0,0,0,.38);transition:transform .18s ease,background .18s ease}
 .root-canonical .root-video-play:hover .root-video-play-icon{transform:scale(1.05);background:rgba(9,9,10,.88)}
 .root-canonical .root-video-play-icon:before{content:"";display:block;margin-left:5px;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #fff}
-.root-canonical .root-video-actions{display:flex;justify-content:flex-end;margin-top:12px}
+.root-canonical .root-video-actions{display:flex;justify-content:flex-end;gap:18px;flex-wrap:wrap;margin-top:12px}
 .root-canonical .root-video-actions a{color:var(--root-accent-readable,var(--accent-soft));font-size:.76rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
 .root-canonical .root-video-actions a:hover{color:#fff;opacity:1}
 
