@@ -390,6 +390,16 @@
         "pt",
         "en"
       ]
+    },
+    "music-etesp-fatec-2000": {
+      "revision": 1,
+      "pt_hash": "331db2165b0e5b07a546cf5d95e47fc390728d774a8e0357ef88aa64ba78dbed",
+      "en_hash": "ac1f0f10e44984b81934e318444ef05451bf14999a99cd7af084e1289cd3bca5",
+      "accepted_on": "2026-09-10",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     }
   }
 }

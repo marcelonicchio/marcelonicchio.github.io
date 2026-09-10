@@ -376,6 +376,27 @@
       }
     },
     {
+      "id": "music-etesp-fatec-2000",
+      "era": "cruzamentos-1992-2000",
+      "date": "jun. / 28 out. 2000",
+      "domain": "music",
+      "source": {
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-etesp-fatec-2000']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-etesp-fatec-2000']",
+          "parent_selector": "#stages"
+        }
+      },
+      "date_en": "Jun. / Oct. 28, 2000"
+    },
+    {
       "id": "music-olympia",
       "era": "cruzamentos-1992-2000",
       "date": "25 jun. 2000",
