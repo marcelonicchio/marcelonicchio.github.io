@@ -91,9 +91,9 @@
       "accepted_on": "2026-08-27"
     },
     "music-album-1999-2000": {
-      "revision": 3,
-      "pt_hash": "a4e457bec3768dfffb5decee46c8e16342aa83aa4ace9815ca825462ab80ae16",
-      "en_hash": "9d02a3dbfcf884070e4341988022569ed1ce6d38d54c4778974d4b23786fdfaa",
+      "revision": 4,
+      "pt_hash": "f6069426310c718674f5679eb9f5b32b6e066d0f92a87d13c4c85e7a95ad44e6",
+      "en_hash": "1c49da78e11c366c1ebb2dfa55911224f51bb0cb04b184be9dc657d0482c5518",
       "accepted_on": "2026-09-10",
       "changed_languages": [
         "pt",
