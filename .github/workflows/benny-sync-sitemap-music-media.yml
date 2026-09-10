@@ -1,0 +1,31 @@
+name: Benny sync sitemap music media
+
+on:
+  push:
+    branches:
+      - benny/music-eu-nao-to-nem-ai-gallery
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: benny/music-eu-nao-to-nem-ai-gallery
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Synchronize sitemap from Git history
+        run: python tools/build_sitemap.py
+      - name: Commit synchronized sitemap
+        run: |
+          rm .github/workflows/benny-sync-sitemap-music-media.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml .github/workflows/benny-sync-sitemap-music-media.yml
+          git commit -m "chore: sync sitemap after Eu Nao To Nem Ai media"
+          git push
