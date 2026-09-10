@@ -366,3 +366,11 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 .thread-media--linked > a[href$="/search_louisemartins_01.jpg"] > img {
   width: 100%;
 }
+
+
+/* Paired Thread media — Demo Tape 1994 */
+.thread-media--pair .thread-media-pair__images{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+.thread-media--pair .thread-media-pair__images>a{display:block;min-width:0;background:#050506}
+.thread-media--pair .thread-media-pair__images img{display:block;width:100%;height:auto}
+.thread-media-pair__open{display:flex;flex-wrap:wrap;gap:8px 16px}
+@media(max-width:580px){.thread-media--pair .thread-media-pair__images{grid-template-columns:1fr}}

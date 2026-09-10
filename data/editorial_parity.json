@@ -45,10 +45,10 @@
       ]
     },
     "music-coitado-1994": {
-      "revision": 2,
-      "pt_hash": "587e9a7965d43c367f001fa1824d20a7d7053b114edfac74412e416e2164d7df",
-      "en_hash": "4c6bfc7a0ca304650229cb51c88285eef967a308c21eb01be0e2250af2c0f9af",
-      "accepted_on": "2026-08-27",
+      "revision": 3,
+      "pt_hash": "7e8bf1f38df139585cb8073b3d7221f2bb524ab30c3cad52305abd1a37690c34",
+      "en_hash": "fdb694393b2c31d0ffb0c653635069e0d8fe080500c37d43e5cc65c875d6c985",
+      "accepted_on": "2026-09-10",
       "changed_languages": [
         "pt",
         "en"
@@ -379,6 +379,16 @@
       "accepted_on": "2026-09-07",
       "changed_languages": [
         "pt"
+      ]
+    },
+    "music-demo-tape-1994": {
+      "revision": 1,
+      "pt_hash": "60edc7c35390f502142d21068266bf85c9730f9f14aab242b23c613db26b073c",
+      "en_hash": "831447ddd1f618390e9e5c14032da1a30516afb8334598224e76590671ee6ec8",
+      "accepted_on": "2026-09-10",
+      "changed_languages": [
+        "pt",
+        "en"
       ]
     }
   }

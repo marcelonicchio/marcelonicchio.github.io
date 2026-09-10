@@ -161,6 +161,27 @@
       }
     },
     {
+      "id": "music-demo-tape-1994",
+      "era": "cruzamentos-1992-2000",
+      "date": "abr.–mai. 1994",
+      "domain": "music",
+      "source": {
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-demo-tape-1994']",
+          "parent_selector": "#palcos"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "phase",
+          "selector": "[data-bio-key='music-demo-tape-1994']",
+          "parent_selector": "#stages"
+        }
+      },
+      "date_en": "Apr.–May 1994"
+    },
+    {
       "id": "music-circuit",
       "era": "cruzamentos-1992-2000",
       "date": "1993–1995",
@@ -186,8 +207,8 @@
       "domain": "music",
       "date": "1994",
       "title": {
-        "pt": "Demo-tape e Kid Vinil",
-        "en": "Demo tape and Kid Vinil"
+        "pt": "Kid Vinil na 97FM Rock",
+        "en": "Kid Vinil on 97FM Rock"
       },
       "source": {
         "pt": {
