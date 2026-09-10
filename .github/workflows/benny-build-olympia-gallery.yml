@@ -89,7 +89,6 @@ jobs:
               end = text.index(next_phase_key, start)
               segment = text[start:end]
 
-              # PT has preserved-video links inside the Olympia block; EN currently does not.
               insert_at = segment.find(evidence)
               if insert_at < 0:
                   insert_at = segment.rfind('</div></div>')
@@ -104,7 +103,7 @@ jobs:
           python tools/build_gallery_media.py
           python tools/sync_galleries.py
           python tools/sync_full_biography.py
-          python tools/editorial_parity.py --accept music-olympia-2000
+          python tools/editorial_parity.py --accept music-olympia
           python tools/build_sitemap.py
       - name: Commit gallery
         run: |
