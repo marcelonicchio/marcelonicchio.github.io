@@ -1,0 +1,23 @@
+name: Accept Jô editorial parity checkpoint
+on:
+  push:
+    branches: [fix/jo-8-videos]
+permissions:
+  contents: write
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - run: python tools/editorial_parity.py --accept music-programa-jo
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/editorial_parity.json
+          git rm .github/workflows/temp-jo-parity.yml
+          git commit -m "chore: accept Programa do Jô editorial parity checkpoint"
+          git push
