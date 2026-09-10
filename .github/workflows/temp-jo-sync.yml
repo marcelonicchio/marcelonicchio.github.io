@@ -1,0 +1,25 @@
+name: Regenerate Full Biography for Jô update
+on:
+  push:
+    branches: [fix/jo-8-videos]
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - run: python tools/sync_full_biography.py
+      - run: python tools/sync_full_biography.py --check
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/biografia/index.html en/biography/index.html
+          git rm -f .github/workflows/temp-jo-sync.yml
+          if git diff --cached --quiet; then echo 'No generated Full Biography changes'; exit 0; fi
+          git commit -m "fix: synchronize Full Biography with Jô video update"
+          git push
