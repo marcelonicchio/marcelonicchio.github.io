@@ -1,0 +1,32 @@
+name: Benny sync Full Biography music media
+
+on:
+  push:
+    branches:
+      - benny/music-eu-nao-to-nem-ai-gallery
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: benny/music-eu-nao-to-nem-ai-gallery
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install sync dependency
+        run: python -m pip install beautifulsoup4
+      - name: Synchronize Full Biography
+        run: python tools/sync_full_biography.py
+      - name: Commit synchronized biographies
+        run: |
+          rm .github/workflows/benny-sync-full-bio-music-media.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/biografia/index.html en/biography/index.html .github/workflows/benny-sync-full-bio-music-media.yml
+          git commit -m "chore: sync Full Biography with Eu Nao To Nem Ai media"
+          git push
