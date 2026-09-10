@@ -39,7 +39,6 @@ jobs:
               'coitadodoproximo_00_olympia05.jpg',
           ]
 
-          # Verify the user's uploaded batch is present before touching registries.
           missing = [name for name in sources if not (ROOT / source_root / name).exists()]
           if missing:
               raise SystemExit(f'Missing Olympia source files: {missing}')
@@ -76,7 +75,6 @@ jobs:
           data['updated'] = '2026-09-10'
           reg_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
-          # Put the gallery after the Olympia description and before the preserved video links.
           placeholder = '<!-- gallery:olympia-2000 -->'
           phase_key = '<div class="phase" data-bio-key="music-olympia-2000">'
           next_phase_key = '<div class="phase" data-bio-key="music-jo-2001">'
@@ -90,10 +88,15 @@ jobs:
               start = text.index(phase_key)
               end = text.index(next_phase_key, start)
               segment = text[start:end]
-              evidence_pos = segment.find(evidence)
-              if evidence_pos < 0:
-                  raise SystemExit(f'{rel}: Olympia evidence links not found')
-              segment = segment[:evidence_pos] + placeholder + '\n' + segment[evidence_pos:]
+
+              # PT has preserved-video links inside the Olympia block; EN currently does not.
+              insert_at = segment.find(evidence)
+              if insert_at < 0:
+                  insert_at = segment.rfind('</div></div>')
+              if insert_at < 0:
+                  raise SystemExit(f'{rel}: could not locate Olympia gallery insertion point')
+
+              segment = segment[:insert_at] + placeholder + '\n' + segment[insert_at:]
               path.write_text(text[:start] + segment + text[end:], encoding='utf-8')
           PY
       - name: Build and synchronize gallery
