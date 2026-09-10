@@ -59,7 +59,7 @@ jobs:
           PY
       - name: Accept editorial parity and synchronize Full Biography
         run: |
-          python tools/editorial_parity.py --accept music-jo-2001
+          python tools/editorial_parity.py --accept music-programa-jo
           python tools/sync_full_biography.py
       - name: Verify
         run: |
