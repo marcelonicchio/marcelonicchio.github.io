@@ -1,0 +1,30 @@
+name: Benny accept reviewed music parity
+
+on:
+  push:
+    branches:
+      - benny/music-eu-nao-to-nem-ai-gallery
+
+permissions:
+  contents: write
+
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: benny/music-eu-nao-to-nem-ai-gallery
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Accept reviewed PT EN checkpoint
+        run: python tools/editorial_parity.py --accept music-album-1999-2000
+      - name: Commit parity checkpoint
+        run: |
+          rm .github/workflows/benny-accept-music-parity.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/editorial_parity.json .github/workflows/benny-accept-music-parity.yml
+          git commit -m "chore: accept Eu Nao To Nem Ai PT EN media parity"
+          git push
