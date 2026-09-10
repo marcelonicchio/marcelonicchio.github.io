@@ -1,0 +1,288 @@
+name: Benny add first demo tape 1994
+
+on:
+  push:
+    branches:
+      - benny/music-demo-tape-1994
+
+permissions:
+  contents: write
+
+jobs:
+  build-media:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+      - name: Prepare Demo Tape entry, paired Thread and gallery registry
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import json, shutil
+
+          root = Path('assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato')
+          gallery_dir = root / 'galeria'
+
+          thread_sources = [
+              root / 'anonimato_01_thread_AI.jpg',
+              root / 'anonimato_03_thread_AI.jpg',
+          ]
+          for p in thread_sources:
+              if not p.exists():
+                  raise SystemExit(f'Missing Thread source: {p}')
+
+          ai_gallery = [gallery_dir / f'anonimato00_AI_{i:02d}.jpg' for i in range(1, 6)]
+          original_gallery = []
+          for i in range(1, 23):
+              name = 'anonimato14original.jpg' if i == 14 else f'anonimato{i:02d}_original.jpg'
+              original_gallery.append(gallery_dir / name)
+          gallery_sources = ai_gallery + original_gallery
+          if len(gallery_sources) != 27:
+              raise SystemExit(f'Expected 27 gallery items, got {len(gallery_sources)}')
+          missing = [str(p) for p in gallery_sources if not p.exists()]
+          if missing:
+              raise SystemExit('Missing gallery files: ' + ', '.join(missing))
+
+          def save_under_limit(src: Path, dst: Path, limit=300_000):
+              if src.stat().st_size <= limit:
+                  shutil.copy2(src, dst)
+                  with Image.open(dst) as im:
+                      return im.size
+              img = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
+              work = img
+              while True:
+                  for quality in range(92, 34, -3):
+                      work.save(dst, 'JPEG', quality=quality, optimize=True, progressive=True)
+                      if dst.stat().st_size <= limit:
+                          return work.size
+                  nw = max(640, int(work.width * 0.92))
+                  nh = max(480, int(work.height * 0.92))
+                  if (nw, nh) == work.size:
+                      raise SystemExit(f'Could not compress {src} below {limit} bytes')
+                  work = work.resize((nw, nh), Image.Resampling.LANCZOS)
+
+          thread_derivatives = [
+              root / 'anonimato_01_thread_AI_300kb.jpg',
+              root / 'anonimato_03_thread_AI_300kb.jpg',
+          ]
+          dims = [save_under_limit(s, d) for s, d in zip(thread_sources, thread_derivatives)]
+          for d, wh in zip(thread_derivatives, dims):
+              print(f'Thread derivative: {d.name} {wh[0]}x{wh[1]} {d.stat().st_size} bytes')
+
+          registry_path = Path('data/galleries.json')
+          data = json.loads(registry_path.read_text(encoding='utf-8'))
+          gid = 'primeira-demo-tape-anonimato-1994'
+          if any(g.get('id') == gid for g in data['galleries']):
+              raise SystemExit(f'Gallery already exists: {gid}')
+          gallery = {
+              'id': gid,
+              'sourceRoot': str(gallery_dir).replace('\\', '/'),
+              'targets': {
+                  'pt': ['pt/musica/index.html'],
+                  'en': ['en/music/index.html']
+              },
+              'title': {
+                  'pt': 'Registros da gravação',
+                  'en': 'Recording archive'
+              },
+              'items': []
+          }
+          for idx, path in enumerate(gallery_sources, 1):
+              with Image.open(path) as im:
+                  w, h = im.size
+              if idx <= 5:
+                  pt_cap = f'Estúdio Anonimato · 1994 — reconstrução/restauração por IA {idx}, feita a partir de imagem do vídeo original de baixa qualidade.'
+                  en_cap = f'Estúdio Anonimato · 1994 — AI reconstruction/restoration {idx}, made from the low-quality original video footage.'
+              else:
+                  n = idx - 5
+                  pt_cap = f'Estúdio Anonimato · 1994 — print original da filmagem {n}, preservado em baixa qualidade.'
+                  en_cap = f'Estúdio Anonimato · 1994 — original video frame capture {n}, preserved in low quality.'
+              gallery['items'].append({
+                  'id': f'{idx:02d}',
+                  'source': path.name,
+                  'caption': {'pt': pt_cap, 'en': en_cap},
+                  'width': w,
+                  'height': h
+              })
+          data['galleries'].append(gallery)
+          data['updated'] = '2026-09-10'
+          registry_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          pt_path = Path('pt/musica/index.html')
+          en_path = Path('en/music/index.html')
+          pt = pt_path.read_text(encoding='utf-8')
+          en = en_path.read_text(encoding='utf-8')
+
+          pt_old = '<div data-bio-key="music-coitado-1994"><p>Em 1994, foi gravada a primeira demo-tape, no <strong>Estúdio Anonimato</strong>, em São Paulo, com duas músicas de autoria de Marcelo Nicchio: <em>Pegue o seu Celular</em> e <em>Mulher SP</em>. O áudio final e vídeos das sessões de gravação sobreviveram e aguardam publicação.</p><p>No mesmo ano, Nicchio foi entrevistado por <strong>Kid Vinil</strong> na 97FM Rock. O áudio dessa entrevista foi preservado diretamente da transmissão de rádio e também deverá integrar o arquivo público.</p></div>'
+          pt_new = '<div data-bio-key="music-coitado-1994"><p>Em 1994, Nicchio foi entrevistado por <strong>Kid Vinil</strong> na 97FM Rock. O áudio dessa entrevista foi preservado diretamente da transmissão de rádio e também deverá integrar o arquivo público.</p></div>'
+          en_old = '<div data-bio-key="music-coitado-1994"><p>In 1994, the band recorded its first demo tape at <strong>Estúdio Anonimato</strong> in São Paulo, featuring two songs written by Marcelo Nicchio: <em>Pegue o seu Celular</em> and <em>Mulher SP</em>. The final audio and footage from the recording sessions survive and await publication.</p><p>That same year Nicchio was interviewed by <strong>Kid Vinil</strong> on 97FM Rock. A direct recording of the radio broadcast has been preserved and is also expected to become part of the public archive.</p></div>'
+          en_new = '<div data-bio-key="music-coitado-1994"><p>In 1994, Nicchio was interviewed by <strong>Kid Vinil</strong> on 97FM Rock. A direct recording of the radio broadcast has been preserved and is also expected to become part of the public archive.</p></div>'
+          if pt.count(pt_old) != 1 or en.count(en_old) != 1:
+              raise SystemExit(f'Old 1994 summary blocks not found exactly: PT={pt.count(pt_old)} EN={en.count(en_old)}')
+          pt = pt.replace(pt_old, pt_new, 1)
+          en = en.replace(en_old, en_new, 1)
+
+          img1 = '/assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato/anonimato_01_thread_AI_300kb.jpg'
+          img2 = '/assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato/anonimato_03_thread_AI_300kb.jpg'
+          w1,h1 = dims[0]
+          w2,h2 = dims[1]
+          video = 'https://youtu.be/He7KvTtB-lg?si=8EAdyPQRLOETE_y6'
+
+          pt_phase = f'''<div class="phase" data-bio-key="music-demo-tape-1994"><div class="phase-year">Abril/Maio 1994</div><div><h3>Gravação Primeira Demo-Tape</h3><p>Em abril e maio de 1994, duas novas músicas autorais escritas por <strong>Marcelo Nicchio</strong> foram levadas ao <strong>Estúdio Anonimato</strong>, em São Paulo, para a gravação do que viria a ser a primeira demo-tape do Coitado do Próximo, depois replicada em centenas de cópias para distribuição promocional.</p><p>Cada lado da fita trazia uma música: <strong>Lado A:</strong> <em>Mulher SP</em>; <strong>Lado B:</strong> <em>Pegue o Seu Celular</em>.</p><p><strong>Integrantes:</strong> Mario Joe (vocal), Ricá (guitarra e backing vocal), Henrique (baixo), Marcelo Minduim (bateria) e Adriano (gaita).</p><figure class="thread-media thread-media--pair"><div class="thread-media-pair__images"><a aria-label="Abrir reconstrução por IA 1 das gravações da primeira demo-tape em tamanho maior" href="{img1}" rel="noopener noreferrer" target="_blank"><img alt="Reconstrução por IA das gravações da primeira demo-tape do Coitado do Próximo no Estúdio Anonimato, em 1994." decoding="async" loading="lazy" src="{img1}" width="{w1}" height="{h1}"/></a><a aria-label="Abrir reconstrução por IA 2 das gravações da primeira demo-tape em tamanho maior" href="{img2}" rel="noopener noreferrer" target="_blank"><img alt="Reconstrução por IA das gravações da primeira demo-tape do Coitado do Próximo no Estúdio Anonimato, em 1994." decoding="async" loading="lazy" src="{img2}" width="{w2}" height="{h2}"/></a></div><figcaption><strong>Estúdio Anonimato · primeira demo-tape · abr./mai. 1994.</strong><span class="thread-media-note">Duas reconstruções/restaurações ilustrativas feitas por IA a partir de imagens da filmagem original, preservada em baixa qualidade.</span><span class="thread-media-pair__open"><a class="thread-media-open" href="{img1}" rel="noopener noreferrer" target="_blank">Abrir imagem 1 ↗</a><a class="thread-media-open" href="{img2}" rel="noopener noreferrer" target="_blank">Abrir imagem 2 ↗</a></span></figcaption></figure><!-- gallery:{gid}:start -->\n<!-- gallery:{gid}:end -->\n<p>Parte da filmagem dessas sessões sobreviveu. O vídeo atualmente publicado traz <strong>1993</strong> no título, mas o registro correto é de <strong>1994</strong>.</p><div class="evidence-links inline-links"><a href="{video}" target="_blank" rel="noopener noreferrer">Filmagem remanescente das gravações · 1994 ↗</a></div></div></div>'''
+
+          en_phase = f'''<div class="phase" data-bio-key="music-demo-tape-1994"><div class="phase-year">April/May 1994</div><div><h3>Recording the First Demo Tape</h3><p>In April and May 1994, two new original songs written by <strong>Marcelo Nicchio</strong> were taken into <strong>Estúdio Anonimato</strong> in São Paulo to record what became Coitado do Próximo’s first demo tape, later duplicated in hundreds of copies for promotional distribution.</p><p>Each side of the tape carried one song: <strong>Side A:</strong> <em>Mulher SP</em>; <strong>Side B:</strong> <em>Pegue o Seu Celular</em>.</p><p><strong>Lineup:</strong> Mario Joe (vocals), Ricá (guitar and backing vocals), Henrique (bass), Marcelo Minduim (drums) and Adriano (harmonica).</p><figure class="thread-media thread-media--pair"><div class="thread-media-pair__images"><a aria-label="Open AI reconstruction 1 from the first demo-tape sessions at full size" href="{img1}" rel="noopener noreferrer" target="_blank"><img alt="AI reconstruction from Coitado do Próximo’s first demo-tape sessions at Estúdio Anonimato in 1994." decoding="async" loading="lazy" src="{img1}" width="{w1}" height="{h1}"/></a><a aria-label="Open AI reconstruction 2 from the first demo-tape sessions at full size" href="{img2}" rel="noopener noreferrer" target="_blank"><img alt="AI reconstruction from Coitado do Próximo’s first demo-tape sessions at Estúdio Anonimato in 1994." decoding="async" loading="lazy" src="{img2}" width="{w2}" height="{h2}"/></a></div><figcaption><strong>Estúdio Anonimato · first demo tape · Apr./May 1994.</strong><span class="thread-media-note">Two illustrative AI reconstructions/restorations made from images in the original footage, which survives in low quality.</span><span class="thread-media-pair__open"><a class="thread-media-open" href="{img1}" rel="noopener noreferrer" target="_blank">Open image 1 ↗</a><a class="thread-media-open" href="{img2}" rel="noopener noreferrer" target="_blank">Open image 2 ↗</a></span></figcaption></figure><!-- gallery:{gid}:start -->\n<!-- gallery:{gid}:end -->\n<p>Part of the footage from these sessions survives. The currently published video is titled as <strong>1993</strong>, but the correct year of the recording is <strong>1994</strong>.</p><div class="evidence-links inline-links"><a href="{video}" target="_blank" rel="noopener noreferrer">Surviving footage from the recording sessions · 1994 ↗</a></div></div></div>'''
+
+          pt_anchor = '<div class="phase" data-bio-key="music-circuit-1993-1995">'
+          en_anchor = '<div class="phase" data-bio-key="music-circuit-1993-1995">'
+          if pt.count(pt_anchor) != 1 or en.count(en_anchor) != 1:
+              raise SystemExit(f'Circuit anchors not unique: PT={pt.count(pt_anchor)} EN={en.count(en_anchor)}')
+          pt = pt.replace(pt_anchor, pt_phase + '\n' + pt_anchor, 1)
+          en = en.replace(en_anchor, en_phase + '\n' + en_anchor, 1)
+          pt_path.write_text(pt, encoding='utf-8')
+          en_path.write_text(en, encoding='utf-8')
+
+          manifest_path = Path('data/full_biography.json')
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          new_id = 'music-demo-tape-1994'
+          if any(e['id'] == new_id for e in manifest['entries']):
+              raise SystemExit(f'Full Biography entry already exists: {new_id}')
+          new_entry = {
+              'id': new_id,
+              'era': 'cruzamentos-1992-2000',
+              'date': 'abr.–mai. 1994',
+              'domain': 'music',
+              'source': {
+                  'pt': {
+                      'path': 'pt/musica/index.html',
+                      'kind': 'phase',
+                      'selector': "[data-bio-key='music-demo-tape-1994']",
+                      'parent_selector': '#palcos'
+                  },
+                  'en': {
+                      'path': 'en/music/index.html',
+                      'kind': 'phase',
+                      'selector': "[data-bio-key='music-demo-tape-1994']",
+                      'parent_selector': '#stages'
+                  }
+              },
+              'date_en': 'Apr.–May 1994'
+          }
+          idx = next(i for i,e in enumerate(manifest['entries']) if e['id'] == 'music-circuit')
+          manifest['entries'].insert(idx, new_entry)
+          old = next(e for e in manifest['entries'] if e['id'] == 'music-coitado-1994')
+          old['title'] = {'pt': 'Kid Vinil na 97FM Rock', 'en': 'Kid Vinil on 97FM Rock'}
+          manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          styles_path = Path('styles.css')
+          styles = styles_path.read_text(encoding='utf-8')
+          css_marker = '/* Paired Thread media — Demo Tape 1994 */'
+          if css_marker not in styles:
+              styles += '''\n\n/* Paired Thread media — Demo Tape 1994 */\n.thread-media--pair .thread-media-pair__images{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}\n.thread-media--pair .thread-media-pair__images>a{display:block;min-width:0;background:#050506}\n.thread-media--pair .thread-media-pair__images img{display:block;width:100%;height:auto}\n.thread-media-pair__open{display:flex;flex-wrap:wrap;gap:8px 16px}\n@media(max-width:580px){.thread-media--pair .thread-media-pair__images{grid-template-columns:1fr}}\n'''
+              styles_path.write_text(styles, encoding='utf-8')
+          PY
+      - name: Build responsive gallery and synchronize Full Biography
+        run: |
+          python tools/build_gallery_media.py
+          python tools/sync_galleries.py
+          python tools/sync_full_biography.py
+          python tools/editorial_parity.py --accept music-coitado-1994
+          python - <<'PY'
+          from datetime import date
+          import json
+          from pathlib import Path
+          import tools.editorial_parity as ep
+
+          entry_id = 'music-demo-tape-1994'
+          manifest = ep.load_manifest()
+          entry = next(e for e in ep.all_entries(manifest) if e['id'] == entry_id)
+          hashes = ep.current_hashes(entry)
+          registry_path = Path('data/editorial_parity.json')
+          reg = json.loads(registry_path.read_text(encoding='utf-8'))
+          if entry_id in reg['entries']:
+              raise SystemExit(f'Parity entry already exists: {entry_id}')
+          reg['entries'][entry_id] = {
+              'revision': 1,
+              'pt_hash': hashes['pt'],
+              'en_hash': hashes['en'],
+              'accepted_on': date.today().isoformat(),
+              'changed_languages': ['pt', 'en']
+          }
+          registry_path.write_text(json.dumps(reg, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(f'Added parity checkpoint for {entry_id}')
+          PY
+          python tools/build_sitemap.py
+      - name: Verify Demo Tape integration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          gid = 'primeira-demo-tape-anonimato-1994'
+          sources = [
+              Path('pt/musica/index.html'),
+              Path('en/music/index.html'),
+              Path('pt/biografia/index.html'),
+              Path('en/biography/index.html'),
+          ]
+          for p in sources:
+              t = p.read_text(encoding='utf-8')
+              for needle in ['music-demo-tape-1994', f'data-gallery="{gid}"', 'He7KvTtB-lg', 'anonimato_01_thread_AI_300kb.jpg', 'anonimato_03_thread_AI_300kb.jpg']:
+                  if needle not in t:
+                      raise SystemExit(f'{needle} missing from {p}')
+          pt = sources[0].read_text(encoding='utf-8')
+          en = sources[1].read_text(encoding='utf-8')
+          if pt.find('music-demo-tape-1994') > pt.find('music-circuit-1993-1995'):
+              raise SystemExit('PT Demo Tape entry is not before Circuito paulistano')
+          if en.find('music-demo-tape-1994') > en.find('music-circuit-1993-1995'):
+              raise SystemExit('EN Demo Tape entry is not before São Paulo circuit')
+          for needle in ['Abril/Maio 1994', 'Gravação Primeira Demo-Tape', 'Mulher SP', 'Pegue o Seu Celular', 'Mario Joe', 'Ricá', 'Henrique', 'Marcelo Minduim', 'Adriano', '1993', '1994']:
+              if needle not in pt:
+                  raise SystemExit(f'PT copy missing: {needle}')
+          if 'Duas reconstruções/restaurações ilustrativas feitas por IA' not in pt:
+              raise SystemExit('PT Thread AI disclosure missing')
+          if 'Two illustrative AI reconstructions/restorations' not in en:
+              raise SystemExit('EN Thread AI disclosure missing')
+
+          reg = json.loads(Path('data/galleries.json').read_text(encoding='utf-8'))
+          g = next((x for x in reg['galleries'] if x['id'] == gid), None)
+          if not g or len(g['items']) != 27:
+              raise SystemExit('Gallery registry does not contain exactly 27 items')
+          for i,item in enumerate(g['items'],1):
+              ptcap = item['caption']['pt']
+              encap = item['caption']['en']
+              if i <= 5:
+                  if 'IA' not in ptcap or 'AI' not in encap:
+                      raise SystemExit(f'AI disclosure missing in gallery item {i}')
+              else:
+                  if 'print original' not in ptcap or 'original video frame capture' not in encap:
+                      raise SystemExit(f'Original-frame disclosure missing in gallery item {i}')
+
+          for name in ['anonimato_01_thread_AI_300kb.jpg','anonimato_03_thread_AI_300kb.jpg']:
+              p = Path('assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato') / name
+              if p.stat().st_size > 300_000:
+                  raise SystemExit(f'{name} exceeds 300 KB: {p.stat().st_size}')
+
+          styles = Path('styles.css').read_text(encoding='utf-8')
+          if '.thread-media--pair .thread-media-pair__images' not in styles:
+              raise SystemExit('Paired Thread CSS missing')
+          parity = json.loads(Path('data/editorial_parity.json').read_text(encoding='utf-8'))
+          if 'music-demo-tape-1994' not in parity['entries']:
+              raise SystemExit('New parity checkpoint missing')
+          print('Demo Tape 1994 entry + paired AI Thread + 27-image mixed gallery verified.')
+          PY
+      - name: Commit generated integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato/anonimato_01_thread_AI_300kb.jpg assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato/anonimato_03_thread_AI_300kb.jpg assets/media/galleries/primeira-demo-tape-anonimato-1994 data/galleries.json data/full_biography.json data/editorial_parity.json pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html styles.css sitemap.xml
+          git commit -m "feat: add first demo tape 1994 entry and media"
+          git push origin HEAD:benny/music-demo-tape-1994
