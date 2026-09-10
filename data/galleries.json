@@ -3274,6 +3274,156 @@
           }
         }
       ]
+    },
+    {
+      "id": "olympia-2000",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/2000-olympia",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Fotos",
+        "en": "Photos"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "coitadodoproximo_00_olympia00.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Olympia, São Paulo, 25 jun. 2000 — foto 1.",
+            "en": "Coitado do Próximo at Olympia, São Paulo, 25 Jun. 2000 — photo 1."
+          },
+          "width": 1254,
+          "height": 1254,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-01-480.webp",
+              "width": 480,
+              "height": 480
+            },
+            "768": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-01-768.webp",
+              "width": 768,
+              "height": 768
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "coitadodoproximo_00_olympia01.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Olympia, São Paulo, 25 jun. 2000 — foto 2.",
+            "en": "Coitado do Próximo at Olympia, São Paulo, 25 Jun. 2000 — photo 2."
+          },
+          "width": 1086,
+          "height": 1448,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-02-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-02-768.webp",
+              "width": 768,
+              "height": 1024
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "coitadodoproximo_00_olympia02.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Olympia, São Paulo, 25 jun. 2000 — foto 3.",
+            "en": "Coitado do Próximo at Olympia, São Paulo, 25 Jun. 2000 — photo 3."
+          },
+          "width": 1086,
+          "height": 1448,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-03-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-03-768.webp",
+              "width": 768,
+              "height": 1024
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "coitadodoproximo_00_olympia03.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Olympia, São Paulo, 25 jun. 2000 — foto 4.",
+            "en": "Coitado do Próximo at Olympia, São Paulo, 25 Jun. 2000 — photo 4."
+          },
+          "width": 1086,
+          "height": 1448,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-04-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-04-768.webp",
+              "width": 768,
+              "height": 1024
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "coitadodoproximo_00_olympia04.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Olympia, São Paulo, 25 jun. 2000 — foto 5.",
+            "en": "Coitado do Próximo at Olympia, São Paulo, 25 Jun. 2000 — photo 5."
+          },
+          "width": 1086,
+          "height": 1448,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-05-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-05-768.webp",
+              "width": 768,
+              "height": 1024
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "coitadodoproximo_00_olympia05.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Olympia, São Paulo, 25 jun. 2000 — foto 6.",
+            "en": "Coitado do Próximo at Olympia, São Paulo, 25 Jun. 2000 — photo 6."
+          },
+          "width": 1086,
+          "height": 1448,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-06-480.webp",
+              "width": 480,
+              "height": 640
+            },
+            "768": {
+              "path": "assets/media/galleries/olympia-2000/olympia-2000-06-768.webp",
+              "width": 768,
+              "height": 1024
+            }
+          }
+        }
+      ]
     }
   ]
 }
