@@ -3276,6 +3276,376 @@
       ]
     },
     {
+      "id": "etesp-fatec-2000",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/2000-etesp-fatec/galeria",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Registros de junho de 2000",
+        "en": "June 2000 records"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "2000_etesp_fatec_01_AI.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — reconstituição por IA 1, feita a partir de imagem do vídeo original de baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — AI reconstruction 1, made from the low-quality original video footage."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-01-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-01-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "2000_etesp_fatec_02_AI.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — reconstituição por IA 2, feita a partir de imagem do vídeo original de baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — AI reconstruction 2, made from the low-quality original video footage."
+          },
+          "width": 1450,
+          "height": 1085,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-02-480.webp",
+              "width": 480,
+              "height": 359
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-02-768.webp",
+              "width": 768,
+              "height": 575
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "2000_etesp_fatec_03.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 1, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 1, preserved in low quality."
+          },
+          "width": 969,
+          "height": 725,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-03-480.webp",
+              "width": 480,
+              "height": 359
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-03-768.webp",
+              "width": 768,
+              "height": 575
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "2000_etesp_fatec_04.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 2, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 2, preserved in low quality."
+          },
+          "width": 974,
+          "height": 741,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-04-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-04-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "2000_etesp_fatec_05.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 3, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 3, preserved in low quality."
+          },
+          "width": 970,
+          "height": 730,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-05-480.webp",
+              "width": 480,
+              "height": 361
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-05-768.webp",
+              "width": 768,
+              "height": 578
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "2000_etesp_fatec_06.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 4, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 4, preserved in low quality."
+          },
+          "width": 978,
+          "height": 738,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-06-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-06-768.webp",
+              "width": 768,
+              "height": 580
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "2000_etesp_fatec_07.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 5, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 5, preserved in low quality."
+          },
+          "width": 969,
+          "height": 731,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-07-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-07-768.webp",
+              "width": 768,
+              "height": 579
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "2000_etesp_fatec_08.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 6, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 6, preserved in low quality."
+          },
+          "width": 976,
+          "height": 737,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-08-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-08-768.webp",
+              "width": 768,
+              "height": 580
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "2000_etesp_fatec_09.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 7, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 7, preserved in low quality."
+          },
+          "width": 976,
+          "height": 736,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-09-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-09-768.webp",
+              "width": 768,
+              "height": 579
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "2000_etesp_fatec_10.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 8, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 8, preserved in low quality."
+          },
+          "width": 976,
+          "height": 739,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-10-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-10-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "2000_etesp_fatec_11.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 9, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 9, preserved in low quality."
+          },
+          "width": 970,
+          "height": 725,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-11-480.webp",
+              "width": 480,
+              "height": 359
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-11-768.webp",
+              "width": 768,
+              "height": 574
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "2000_etesp_fatec_12.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 10, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 10, preserved in low quality."
+          },
+          "width": 974,
+          "height": 733,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-12-480.webp",
+              "width": 480,
+              "height": 361
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-12-768.webp",
+              "width": 768,
+              "height": 578
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "2000_etesp_fatec_13.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 11, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 11, preserved in low quality."
+          },
+          "width": 975,
+          "height": 726,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-13-480.webp",
+              "width": 480,
+              "height": 357
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-13-768.webp",
+              "width": 768,
+              "height": 572
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "2000_etesp_fatec_14.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 12, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 12, preserved in low quality."
+          },
+          "width": 939,
+          "height": 727,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-14-480.webp",
+              "width": 480,
+              "height": 372
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-14-768.webp",
+              "width": 768,
+              "height": 595
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "2000_etesp_fatec_15.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 13, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 13, preserved in low quality."
+          },
+          "width": 977,
+          "height": 699,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-15-480.webp",
+              "width": 480,
+              "height": 343
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-15-768.webp",
+              "width": 768,
+              "height": 549
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "2000_etesp_fatec_16.jpg",
+          "caption": {
+            "pt": "ETESP/FATEC · junho de 2000 — print original da filmagem 14, preservado em baixa qualidade.",
+            "en": "ETESP/FATEC · June 2000 — original video frame capture 14, preserved in low quality."
+          },
+          "width": 968,
+          "height": 730,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-16-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/etesp-fatec-2000/etesp-fatec-2000-16-768.webp",
+              "width": 768,
+              "height": 579
+            }
+          }
+        }
+      ]
+    },
+    {
       "id": "olympia-2000",
       "sourceRoot": "assets/archive/music/coitado-do-proximo/2000-olympia",
       "targets": {
