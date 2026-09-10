@@ -4208,6 +4208,618 @@
           }
         }
       ]
+    },
+    {
+      "id": "primeira-demo-tape-anonimato-1994",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato/galeria",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Registros da gravação",
+        "en": "Recording archive"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "anonimato00_AI_01.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — reconstrução/restauração por IA 1, feita a partir de imagem do vídeo original de baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — AI reconstruction/restoration 1, made from the low-quality original video footage."
+          },
+          "width": 1441,
+          "height": 1092,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-01-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-01-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "anonimato00_AI_02.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — reconstrução/restauração por IA 2, feita a partir de imagem do vídeo original de baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — AI reconstruction/restoration 2, made from the low-quality original video footage."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-02-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-02-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "anonimato00_AI_03.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — reconstrução/restauração por IA 3, feita a partir de imagem do vídeo original de baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — AI reconstruction/restoration 3, made from the low-quality original video footage."
+          },
+          "width": 1447,
+          "height": 1087,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-03-480.webp",
+              "width": 480,
+              "height": 361
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-03-768.webp",
+              "width": 768,
+              "height": 577
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "anonimato00_AI_04.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — reconstrução/restauração por IA 4, feita a partir de imagem do vídeo original de baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — AI reconstruction/restoration 4, made from the low-quality original video footage."
+          },
+          "width": 1439,
+          "height": 1093,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-04-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-04-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "anonimato00_AI_05.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — reconstrução/restauração por IA 5, feita a partir de imagem do vídeo original de baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — AI reconstruction/restoration 5, made from the low-quality original video footage."
+          },
+          "width": 1445,
+          "height": 1088,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-05-480.webp",
+              "width": 480,
+              "height": 361
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-05-768.webp",
+              "width": 768,
+              "height": 578
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "anonimato01_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 1, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 1, preserved in low quality."
+          },
+          "width": 965,
+          "height": 735,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-06-480.webp",
+              "width": 480,
+              "height": 366
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-06-768.webp",
+              "width": 768,
+              "height": 585
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "anonimato02_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 2, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 2, preserved in low quality."
+          },
+          "width": 972,
+          "height": 746,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-07-480.webp",
+              "width": 480,
+              "height": 368
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-07-768.webp",
+              "width": 768,
+              "height": 589
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "anonimato03_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 3, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 3, preserved in low quality."
+          },
+          "width": 973,
+          "height": 739,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-08-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-08-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "anonimato04_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 4, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 4, preserved in low quality."
+          },
+          "width": 983,
+          "height": 745,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-09-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-09-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "anonimato05_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 5, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 5, preserved in low quality."
+          },
+          "width": 979,
+          "height": 744,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-10-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-10-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "anonimato06_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 6, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 6, preserved in low quality."
+          },
+          "width": 977,
+          "height": 736,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-11-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-11-768.webp",
+              "width": 768,
+              "height": 579
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "anonimato07_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 7, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 7, preserved in low quality."
+          },
+          "width": 979,
+          "height": 738,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-12-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-12-768.webp",
+              "width": 768,
+              "height": 579
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "anonimato08_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 8, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 8, preserved in low quality."
+          },
+          "width": 978,
+          "height": 740,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-13-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-13-768.webp",
+              "width": 768,
+              "height": 581
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "anonimato09_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 9, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 9, preserved in low quality."
+          },
+          "width": 978,
+          "height": 740,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-14-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-14-768.webp",
+              "width": 768,
+              "height": 581
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "anonimato10_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 10, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 10, preserved in low quality."
+          },
+          "width": 977,
+          "height": 743,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-15-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-15-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "anonimato11_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 11, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 11, preserved in low quality."
+          },
+          "width": 980,
+          "height": 743,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-16-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-16-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "anonimato12_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 12, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 12, preserved in low quality."
+          },
+          "width": 984,
+          "height": 743,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-17-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-17-768.webp",
+              "width": 768,
+              "height": 580
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "anonimato13_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 13, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 13, preserved in low quality."
+          },
+          "width": 981,
+          "height": 743,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-18-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-18-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "anonimato14original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 14, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 14, preserved in low quality."
+          },
+          "width": 977,
+          "height": 742,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-19-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-19-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        },
+        {
+          "id": "20",
+          "source": "anonimato15_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 15, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 15, preserved in low quality."
+          },
+          "width": 973,
+          "height": 740,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-20-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-20-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "21",
+          "source": "anonimato16_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 16, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 16, preserved in low quality."
+          },
+          "width": 981,
+          "height": 747,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-21-480.webp",
+              "width": 480,
+              "height": 366
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-21-768.webp",
+              "width": 768,
+              "height": 585
+            }
+          }
+        },
+        {
+          "id": "22",
+          "source": "anonimato17_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 17, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 17, preserved in low quality."
+          },
+          "width": 984,
+          "height": 745,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-22-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-22-768.webp",
+              "width": 768,
+              "height": 581
+            }
+          }
+        },
+        {
+          "id": "23",
+          "source": "anonimato18_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 18, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 18, preserved in low quality."
+          },
+          "width": 988,
+          "height": 746,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-23-480.webp",
+              "width": 480,
+              "height": 362
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-23-768.webp",
+              "width": 768,
+              "height": 580
+            }
+          }
+        },
+        {
+          "id": "24",
+          "source": "anonimato19_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 19, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 19, preserved in low quality."
+          },
+          "width": 979,
+          "height": 744,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-24-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-24-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "25",
+          "source": "anonimato20_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 20, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 20, preserved in low quality."
+          },
+          "width": 982,
+          "height": 745,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-25-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-25-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        },
+        {
+          "id": "26",
+          "source": "anonimato21_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 21, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 21, preserved in low quality."
+          },
+          "width": 975,
+          "height": 741,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-26-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-26-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "27",
+          "source": "anonimato22_original.jpg",
+          "caption": {
+            "pt": "Estúdio Anonimato · 1994 — print original da filmagem 22, preservado em baixa qualidade.",
+            "en": "Estúdio Anonimato · 1994 — original video frame capture 22, preserved in low quality."
+          },
+          "width": 970,
+          "height": 736,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-27-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-27-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        }
+      ]
     }
   ]
 }
