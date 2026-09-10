@@ -374,3 +374,43 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 .thread-media--pair .thread-media-pair__images img{display:block;width:100%;height:auto}
 .thread-media-pair__open{display:flex;flex-wrap:wrap;gap:8px 16px}
 @media(max-width:580px){.thread-media--pair .thread-media-pair__images{grid-template-columns:1fr}}
+
+
+/* High-contrast video action buttons */
+.evidence-links a[href*="youtube.com"],
+.evidence-links a[href*="youtu.be"],
+.page-tools a[href*="youtube.com"],
+.page-tools a[href*="youtu.be"],
+a.button[href*="youtube.com"],
+a.button[href*="youtu.be"]{
+  background:var(--text);
+  color:var(--bg);
+  border-color:var(--text);
+  font-weight:800;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08);
+  transition:background .16s ease,color .16s ease,border-color .16s ease,transform .16s ease,box-shadow .16s ease;
+}
+.evidence-links a[href*="youtube.com"]::before,
+.evidence-links a[href*="youtu.be"]::before,
+.page-tools a[href*="youtube.com"]::before,
+.page-tools a[href*="youtu.be"]::before,
+a.button[href*="youtube.com"]::before,
+a.button[href*="youtu.be"]::before{
+  content:"▶";
+  color:var(--accent);
+  font-size:.76em;
+  line-height:1;
+}
+.evidence-links a[href*="youtube.com"]:hover,
+.evidence-links a[href*="youtu.be"]:hover,
+.page-tools a[href*="youtube.com"]:hover,
+.page-tools a[href*="youtu.be"]:hover,
+a.button[href*="youtube.com"]:hover,
+a.button[href*="youtu.be"]:hover{
+  opacity:1;
+  background:#fff;
+  color:#0a0a0b;
+  border-color:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 4px 14px rgba(255,255,255,.12);
+}
