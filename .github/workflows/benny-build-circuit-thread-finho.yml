@@ -1,0 +1,72 @@
+name: Benny build Circuito paulistano Thread image
+
+on:
+  push:
+    branches:
+      - benny/music-circuit-thread-finho
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 pillow
+      - name: Insert Thread image in PT and EN
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          image = '/assets/archive/music/coitado-do-proximo/1993-1995-circuito-paulistano/365.jpg'
+          local = Path(image.lstrip('/'))
+          with Image.open(local) as im:
+              width, height = im.size
+          print(f'365.jpg dimensions: {width}x{height}')
+
+          figures = {
+            'pt/musica/index.html': (
+              '<figure class="thread-media thread-media--linked"><a aria-label="Abrir foto de Finho, vocalista do 365, em tamanho maior" href="'+image+'" rel="noopener noreferrer" target="_blank"><img alt="Finho, vocalista da banda 365, em registro do circuito paulistano." decoding="async" loading="lazy" src="'+image+'" width="'+str(width)+'" height="'+str(height)+'"/></a><figcaption><strong>365 · Finho no vocal.</strong><span class="thread-media-note">Registro de Finho, vocalista do 365. Nesse período, o Coitado do Próximo abriu diversos shows da banda em casas como Aeroanta e Garage Rock, em Pinheiros.</span><a class="thread-media-open" href="'+image+'" rel="noopener noreferrer" target="_blank">Abrir imagem em tamanho maior ↗</a></figcaption></figure>'
+            ),
+            'en/music/index.html': (
+              '<figure class="thread-media thread-media--linked"><a aria-label="Open photo of Finho, vocalist of 365, at full size" href="'+image+'" rel="noopener noreferrer" target="_blank"><img alt="Finho, vocalist of the band 365, in a record from the São Paulo club circuit." decoding="async" loading="lazy" src="'+image+'" width="'+str(width)+'" height="'+str(height)+'"/></a><figcaption><strong>365 · Finho on vocals.</strong><span class="thread-media-note">A record of Finho, vocalist of 365. During this period, Coitado do Próximo opened several shows for the band at venues such as Aeroanta and Garage Rock, in Pinheiros.</span><a class="thread-media-open" href="'+image+'" rel="noopener noreferrer" target="_blank">Open image at full size ↗</a></figcaption></figure>'
+            )
+          }
+          start_marker = '<div class="phase" data-bio-key="music-circuit-1993-1995">'
+          next_marker = '<div class="phase" data-bio-key="music-album-1997">'
+          for rel, figure in figures.items():
+              path = Path(rel)
+              text = path.read_text(encoding='utf-8')
+              start = text.index(start_marker)
+              end = text.index(next_marker, start)
+              segment = text[start:end]
+              if image in segment:
+                  raise SystemExit(f'{rel}: Thread image already present')
+              pos = segment.rfind('</div></div>')
+              if pos < 0:
+                  raise SystemExit(f'{rel}: phase closing not found')
+              segment = segment[:pos] + figure + segment[pos:]
+              path.write_text(text[:start] + segment + text[end:], encoding='utf-8')
+          PY
+      - name: Regenerate Full Biography and parity
+        run: |
+          python tools/sync_full_biography.py
+          python tools/editorial_parity.py --accept music-circuit
+          python tools/build_sitemap.py
+      - name: Remove one-shot workflow and commit
+        run: |
+          rm .github/workflows/benny-build-circuit-thread-finho.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: add Finho 365 photo to Circuito paulistano Thread"
+          git push origin HEAD:benny/music-circuit-thread-finho
