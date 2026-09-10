@@ -59,10 +59,10 @@
       "accepted_on": "2026-08-27"
     },
     "music-album-1997": {
-      "revision": 2,
-      "pt_hash": "fb270b1da9194d6645dd5fd0d3e158aa141a825db4f140b067e7628f6ddf0224",
-      "en_hash": "dba4bc8a004bd6faa169f5cfb8c39056c64f341b583b460f1f8517c196c20d34",
-      "accepted_on": "2026-08-27",
+      "revision": 4,
+      "pt_hash": "1aba74411b81107b6d8417b513ec1883865fdb3ba5fccf75df8ab08d586edcd3",
+      "en_hash": "178d75d6c6cb9d31ac2dbab76a31e64018c9c61c2bdadde8a9b8eee6800a0d72",
+      "accepted_on": "2026-09-10",
       "changed_languages": [
         "pt",
         "en"
