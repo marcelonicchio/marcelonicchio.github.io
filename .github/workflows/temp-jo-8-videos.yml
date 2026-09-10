@@ -1,0 +1,74 @@
+name: Temporary Jô 8-video update
+
+on:
+  push:
+    branches: [fix/jo-8-videos]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace Jô evidence links in PT and EN sources
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          videos = [
+              ("https://youtu.be/c4VAEll1mM4?si=nKFKGSkl5gwMzboP", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores 1/8", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes 1/8"),
+              ("https://youtu.be/h0GPkE5SBxM?si=HGG6GSlFBA1kJsOI", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores 2/8", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes 2/8"),
+              ("https://youtu.be/ThxZrYgh1eY?si=SfmwuFaemfmYM5BY", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores 3/8", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes 3/8"),
+              ("https://youtu.be/_7zttgW8qV8?si=H1gNfNWjGHKXrtH8", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores 4/8", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes 4/8"),
+              ("https://youtu.be/cJYbbmOtRyI?si=8zNN0TjqPQbShaoI", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores 5/8", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes 5/8"),
+              ("https://youtu.be/MCjI0bA7CCc?si=k2paUz0x3WFi4rwm", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores - Passagem de Som - “A Enchente”", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes - Soundcheck - “A Enchente”"),
+              ("https://youtu.be/zrXzdmsIMjg?si=si9xEgOO_oQGIT-B", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores - Passagem de Som - “Um Anjo do Céu”", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes - Soundcheck - “Um Anjo do Céu”"),
+              ("https://youtu.be/Nu8R3TlK8Kc?si=qbhQKx1QmCqfoZf3", "Coitado do Próximo - Programa do Jô - 27/06/2001 · Bastidores - Passagem de Som - “Mulher SP”", "Coitado do Próximo - Programa do Jô - Jun. 27, 2001 · Behind the scenes - Soundcheck - “Mulher SP”"),
+          ]
+
+          for path, lang_index in [(Path('pt/musica/index.html'), 1), (Path('en/music/index.html'), 2)]:
+              text = path.read_text(encoding='utf-8')
+              phase = re.search(r'<div class="phase" data-bio-key="music-jo-2001">.*?<!-- gallery:programa-do-jo-2001:end -->\n', text, re.S)
+              if not phase:
+                  raise SystemExit(f'Jô phase/gallery not found in {path}')
+              start = phase.end()
+              tail = text[start:]
+              match = re.match(r'<div class="evidence-links inline-links">.*?</div>', tail, re.S)
+              if not match:
+                  raise SystemExit(f'Jô evidence-links block not found in {path}')
+              links = ''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer">{label} ↗</a>' for url, _, _ in videos for label in [(_[lang_index-1])])
+              text = text[:start] + '<div class="evidence-links inline-links">' + links + '</div>' + tail[match.end():]
+              path.write_text(text, encoding='utf-8')
+
+          print('Updated PT and EN Jô evidence links to exactly 8 videos.')
+      - name: Sync Full Biography
+        run: python3 tools/sync_full_biography.py
+      - name: Validate exact 8 Jô videos and clean diff
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          urls = [
+            'c4VAEll1mM4','h0GPkE5SBxM','ThxZrYgh1eY','_7zttgW8qV8','cJYbbmOtRyI','MCjI0bA7CCc','zrXzdmsIMjg','Nu8R3TlK8Kc'
+          ]
+          for p in ['pt/musica/index.html','en/music/index.html','pt/biografia/index.html','en/biography/index.html']:
+            t=Path(p).read_text(encoding='utf-8')
+            phase=re.search(r'<div class="phase" data-bio-key="music-jo-2001">.*?(?=<div class="phase" data-bio-key="music-active-2001-2003">)',t,re.S)
+            if not phase: raise SystemExit(f'phase missing: {p}')
+            found=re.findall(r'https://youtu\.be/([^?"&]+)',phase.group())
+            for u in urls:
+              if u not in found: raise SystemExit(f'{u} missing in {p}')
+            if len([u for u in found if u in urls]) != 8: raise SystemExit(f'not exactly 8 requested videos in {p}')
+          print('Validation OK: all four Jô surfaces contain the 8 requested video IDs.')
+          PY
+      - name: Commit changes and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html
+          git rm .github/workflows/temp-jo-8-videos.yml
+          git commit -m "fix: add all 8 Programa do Jô backstage videos"
+          git push
