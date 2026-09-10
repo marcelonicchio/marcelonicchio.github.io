@@ -3250,6 +3250,28 @@
               "height": 432
             }
           }
+        },
+        {
+          "id": "09",
+          "source": "eunaotonemaicapa04.jpg",
+          "caption": {
+            "pt": "Imagem de capa de Eu Não Tô Nem Aí.",
+            "en": "Eu Não Tô Nem Aí cover image."
+          },
+          "width": 504,
+          "height": 500,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-09-480.webp",
+              "width": 480,
+              "height": 476
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-09-768.webp",
+              "width": 504,
+              "height": 500
+            }
+          }
         }
       ]
     }
