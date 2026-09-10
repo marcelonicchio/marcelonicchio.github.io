@@ -13,10 +13,14 @@
       ]
     },
     "music-coitado-1992": {
-      "revision": 1,
-      "pt_hash": "5d67dea7b4f40578754c5401eb31000b6eaff027dd2ac865e4a6c13760944c6d",
-      "en_hash": "804a52bee896ecdd0dcc262b81876b49434c4d5d119e83611b85cc3c0d34c183",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "f8e3ff301901e0a4182992f125e26c77b9a3e3eb04430529df0f4e3eaae7b529",
+      "en_hash": "fb354c7665a6c7ea916d2969b06bd812f88646d2c6063565cfc2b21504c0c2ca",
+      "accepted_on": "2026-09-10",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "internet-bbs": {
       "revision": 1,
