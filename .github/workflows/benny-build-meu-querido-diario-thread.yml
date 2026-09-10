@@ -1,0 +1,98 @@
+name: Benny build Meu Querido Diario thread
+
+on:
+  push:
+    branches:
+      - benny/music-meu-querido-diario-thread
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+      - name: Add Meu Querido Diario thread image
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          from bs4 import BeautifulSoup
+
+          root = Path('.')
+          relimg = 'assets/archive/music/coitado-do-proximo/1997-1998-meu-querido-diario/coitadodoproximo_00_estudioasas1997_300kb.jpg'
+          imgpath = root / relimg
+          if not imgpath.exists():
+              raise SystemExit(f'Missing image: {relimg}')
+          with Image.open(imgpath) as im:
+              w, h = im.size
+
+          specs = {
+              'pt/musica/index.html': {
+                  'alt': 'Registro das gravações de Meu Querido Diário no Estúdio Asas, em 1997.',
+                  'aria': 'Abrir registro das gravações de Meu Querido Diário no Estúdio Asas em tamanho maior',
+                  'strong': 'Meu Querido Diário · Estúdio Asas · 1997.',
+                  'note': 'Registro das sessões de gravação do primeiro álbum do Coitado do Próximo no Estúdio Asas, em São Paulo.',
+                  'open': 'Abrir imagem em tamanho maior ↗',
+              },
+              'en/music/index.html': {
+                  'alt': 'Record of the Meu Querido Diário recording sessions at Estúdio Asas in 1997.',
+                  'aria': 'Open the Meu Querido Diário recording-session image from Estúdio Asas at full size',
+                  'strong': 'Meu Querido Diário · Estúdio Asas · 1997.',
+                  'note': 'Record of the recording sessions for Coitado do Próximo’s first album at Estúdio Asas in São Paulo.',
+                  'open': 'Open image at full size ↗',
+              },
+          }
+
+          src = '/' + relimg
+          for rel, s in specs.items():
+              path = root / rel
+              text = path.read_text(encoding='utf-8')
+              soup = BeautifulSoup(text, 'html.parser')
+              phase = soup.select_one("[data-bio-key='music-album-1997']")
+              if phase is None:
+                  raise SystemExit(f'{rel}: music-album-1997 not found')
+              if phase.find('img', src=src):
+                  raise SystemExit(f'{rel}: image already present')
+              inner = phase.find('div', recursive=False)
+              if inner is None:
+                  raise SystemExit(f'{rel}: phase inner div not found')
+              frag = BeautifulSoup(
+                  '<figure class="thread-media thread-media--linked">'
+                  f'<a aria-label="{s["aria"]}" href="{src}" rel="noopener noreferrer" target="_blank">'
+                  f'<img alt="{s["alt"]}" decoding="async" loading="lazy" src="{src}" width="{w}" height="{h}"/></a>'
+                  f'<figcaption><strong>{s["strong"]}</strong>'
+                  f'<span class="thread-media-note">{s["note"]}</span>'
+                  f'<a class="thread-media-open" href="{src}" rel="noopener noreferrer" target="_blank">{s["open"]}</a>'
+                  '</figcaption></figure>',
+                  'html.parser'
+              )
+              inner.append(frag.figure)
+              path.write_text(str(soup), encoding='utf-8')
+          print(f'Image dimensions: {w}x{h}')
+          PY
+      - name: Synchronize Full Biography and parity
+        run: |
+          python tools/sync_full_biography.py
+          python tools/editorial_parity.py --accept music-album-1997
+          python tools/build_sitemap.py
+      - name: Commit generated changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html data/editorial_parity.json sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "feat: add Meu Querido Diario studio photo to thread"
+          git push origin HEAD:benny/music-meu-querido-diario-thread
