@@ -31,10 +31,14 @@
       "accepted_on": "2026-08-27"
     },
     "music-circuit": {
-      "revision": 1,
-      "pt_hash": "ce73fa504c718b4c52b35813d93fa4ec692f1ecbd1333507483a2352c259ddc0",
-      "en_hash": "acd5c3b2e4a1d60b6867d912105efa51cb51d5dd2a468b023dd1504bd95ea607",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "231c10cde117699b3ec9ae55715868a8b6826b7ca82e7bf482df0c155823a94f",
+      "en_hash": "c4a4b3a3ee04d9746a8c923852c10a394a6a52f13bdd475e4dfda85b4f1ba954",
+      "accepted_on": "2026-09-10",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-coitado-1994": {
       "revision": 2,
