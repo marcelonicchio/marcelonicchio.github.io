@@ -1,0 +1,41 @@
+name: Benny canonicalize Meu Querido Diario thread
+
+on:
+  push:
+    branches:
+      - benny/music-meu-querido-diario-thread
+
+permissions:
+  contents: write
+
+jobs:
+  canonicalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Restore generated surfaces
+        run: |
+          python tools/sync_navigation.py
+          python tools/sync_galleries.py
+          python tools/sync_full_biography.py
+          python tools/editorial_parity.py --accept music-album-1997
+          python tools/build_sitemap.py
+      - name: Commit canonicalized surfaces
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html data/editorial_parity.json sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: canonicalize generated surfaces after Thread update"
+          git push origin HEAD:benny/music-meu-querido-diario-thread
