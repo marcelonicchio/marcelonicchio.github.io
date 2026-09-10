@@ -85,10 +85,14 @@
       ]
     },
     "music-festival-1998-1999": {
-      "revision": 1,
-      "pt_hash": "e8ac7010327669dabd1862cc1a4e9e5a16b48b1afe8ec5107a31b668a254f2e8",
-      "en_hash": "3ba447071fb7ec420479a70961b0f58e8e47b63945c725d8f0990351a8699728",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "449df433972d50356cd7798f8e8f7076796ee6257f988fcc054895ba3fec8ca4",
+      "en_hash": "278c2c8f751c7663726e5afbd9133594b86fcc3634d8c6251c9780296596bd1c",
+      "accepted_on": "2026-09-10",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-album-1999-2000": {
       "revision": 4,
