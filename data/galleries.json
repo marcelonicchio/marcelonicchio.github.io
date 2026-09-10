@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "updated": "2026-09-02",
+  "updated": "2026-09-10",
   "derivativePolicy": {
     "format": "webp",
     "widths": [
@@ -3054,6 +3054,200 @@
               "path": "assets/media/galleries/prateleira-cultural/prateleira-cultural-24-768.webp",
               "width": 768,
               "height": 999
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "eu-nao-to-nem-ai-2000",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/2000-eu-nao-to-nem-ai",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Fotos e encarte",
+        "en": "Photos and booklet"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_01_capa.jpg",
+          "caption": {
+            "pt": "Capa do álbum Eu Não Tô Nem Aí.",
+            "en": "Eu Não Tô Nem Aí album cover."
+          },
+          "width": 1254,
+          "height": 1254,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-01-480.webp",
+              "width": 480,
+              "height": 480
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-01-768.webp",
+              "width": 768,
+              "height": 768
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_01_capa02.jpg",
+          "caption": {
+            "pt": "Capa de Eu Não Tô Nem Aí — imagem 2.",
+            "en": "Eu Não Tô Nem Aí cover — image 2."
+          },
+          "width": 1774,
+          "height": 887,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-02-480.webp",
+              "width": 480,
+              "height": 240
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-02-768.webp",
+              "width": 768,
+              "height": 384
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_02_contracapa.jpg",
+          "caption": {
+            "pt": "Contracapa do álbum Eu Não Tô Nem Aí.",
+            "en": "Eu Não Tô Nem Aí album back cover."
+          },
+          "width": 1254,
+          "height": 1254,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-03-480.webp",
+              "width": 480,
+              "height": 480
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-03-768.webp",
+              "width": 768,
+              "height": 768
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_03_letras01.jpg",
+          "caption": {
+            "pt": "Página do encarte de Eu Não Tô Nem Aí com letras.",
+            "en": "Eu Não Tô Nem Aí booklet page with lyrics."
+          },
+          "width": 1774,
+          "height": 887,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-04-480.webp",
+              "width": 480,
+              "height": 240
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-04-768.webp",
+              "width": 768,
+              "height": 384
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_04_letras02.jpg",
+          "caption": {
+            "pt": "Página do encarte de Eu Não Tô Nem Aí com letras.",
+            "en": "Eu Não Tô Nem Aí booklet page with lyrics."
+          },
+          "width": 1754,
+          "height": 896,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-05-480.webp",
+              "width": 480,
+              "height": 245
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-05-768.webp",
+              "width": 768,
+              "height": 392
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_04_letras03.jpg",
+          "caption": {
+            "pt": "Página do encarte de Eu Não Tô Nem Aí com letras.",
+            "en": "Eu Não Tô Nem Aí booklet page with lyrics."
+          },
+          "width": 1261,
+          "height": 1247,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-06-480.webp",
+              "width": 480,
+              "height": 475
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-06-768.webp",
+              "width": 768,
+              "height": 759
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_05_letras03.jpg",
+          "caption": {
+            "pt": "Página do encarte de Eu Não Tô Nem Aí com letras.",
+            "en": "Eu Não Tô Nem Aí booklet page with lyrics."
+          },
+          "width": 1271,
+          "height": 1238,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-07-480.webp",
+              "width": 480,
+              "height": 468
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-07-768.webp",
+              "width": 768,
+              "height": 748
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "coitadodoproximo_00_eunaotonemai_2000_06_encarte.jpg",
+          "caption": {
+            "pt": "Encarte do álbum Eu Não Tô Nem Aí.",
+            "en": "Eu Não Tô Nem Aí album booklet."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-08-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/eu-nao-to-nem-ai-2000/eu-nao-to-nem-ai-2000-08-768.webp",
+              "width": 768,
+              "height": 432
             }
           }
         }
