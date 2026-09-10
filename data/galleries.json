@@ -4080,6 +4080,134 @@
           }
         }
       ]
+    },
+    {
+      "id": "primeiro-show-barao-1992",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/1992-primeiro-show-barao-homem-de-mello/galeria",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Prints originais do vídeo",
+        "en": "Original video frame captures"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "1992_showbarao_original_01.jpg",
+          "caption": {
+            "pt": "Primeiro show do Coitado do Próximo · 5 jul. 1992 — print original 1.",
+            "en": "Coitado do Próximo’s first show · Jul. 5, 1992 — original frame capture 1."
+          },
+          "width": 972,
+          "height": 735,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-01-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-01-768.webp",
+              "width": 768,
+              "height": 581
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "1992_showbarao_original_02.jpg",
+          "caption": {
+            "pt": "Primeiro show do Coitado do Próximo · 5 jul. 1992 — print original 2.",
+            "en": "Coitado do Próximo’s first show · Jul. 5, 1992 — original frame capture 2."
+          },
+          "width": 989,
+          "height": 740,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-02-480.webp",
+              "width": 480,
+              "height": 359
+            },
+            "768": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-02-768.webp",
+              "width": 768,
+              "height": 575
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "1992_showbarao_original_03.jpg",
+          "caption": {
+            "pt": "Primeiro show do Coitado do Próximo · 5 jul. 1992 — print original 3.",
+            "en": "Coitado do Próximo’s first show · Jul. 5, 1992 — original frame capture 3."
+          },
+          "width": 986,
+          "height": 746,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-03-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-03-768.webp",
+              "width": 768,
+              "height": 581
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "1992_showbarao_original_04.jpg",
+          "caption": {
+            "pt": "Primeiro show do Coitado do Próximo · 5 jul. 1992 — print original 4.",
+            "en": "Coitado do Próximo’s first show · Jul. 5, 1992 — original frame capture 4."
+          },
+          "width": 981,
+          "height": 738,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-04-480.webp",
+              "width": 480,
+              "height": 361
+            },
+            "768": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-04-768.webp",
+              "width": 768,
+              "height": 578
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "1992_showbarao_original_05.jpg",
+          "caption": {
+            "pt": "Primeiro show do Coitado do Próximo · 5 jul. 1992 — print original 5.",
+            "en": "Coitado do Próximo’s first show · Jul. 5, 1992 — original frame capture 5."
+          },
+          "width": 977,
+          "height": 740,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-05-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/primeiro-show-barao-1992/primeiro-show-barao-1992-05-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        }
+      ]
     }
   ]
 }
