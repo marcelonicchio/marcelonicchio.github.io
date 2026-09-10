@@ -3424,6 +3424,662 @@
           }
         }
       ]
+    },
+    {
+      "id": "programa-do-jo-2001",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/2001-programa-do-jo/galeria",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Fotos",
+        "en": "Photos"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "coitadodoproximo_00_jo02.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 2.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 2."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-01-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-01-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "coitadodoproximo_00_jo03.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 3.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 3."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-02-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-02-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "coitadodoproximo_00_jo04.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 4.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 4."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-03-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-03-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "coitadodoproximo_00_jo05.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 5.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 5."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-04-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-04-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "coitadodoproximo_00_jo06.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 6.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 6."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-05-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-05-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "coitadodoproximo_00_jo07.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 7.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 7."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-06-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-06-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "coitadodoproximo_00_jo08.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 8.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 8."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-07-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-07-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "coitadodoproximo_00_jo09.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 9.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 9."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-08-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-08-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "coitadodoproximo_00_jo10.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 10.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 10."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-09-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-09-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "coitadodoproximo_00_jo11.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 11.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 11."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-10-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-10-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "coitadodoproximo_00_jo12.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 12.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 12."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-11-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-11-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "coitadodoproximo_00_jo13.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 13.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 13."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-12-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-12-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "coitadodoproximo_00_jo14.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 14.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 14."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-13-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-13-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "coitadodoproximo_00_jo15.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 15.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 15."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-14-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-14-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "coitadodoproximo_00_jo16.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 16.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 16."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-15-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-15-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "coitadodoproximo_00_jo17.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 17.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 17."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-16-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-16-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "coitadodoproximo_00_jo18.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 18.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 18."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-17-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-17-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "coitadodoproximo_00_jo19.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 19.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 19."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-18-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-18-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "coitadodoproximo_00_jo20.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 20.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 20."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-19-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-19-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "20",
+          "source": "coitadodoproximo_00_jo21.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 21.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 21."
+          },
+          "width": 1190,
+          "height": 1322,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-20-480.webp",
+              "width": 480,
+              "height": 533
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-20-768.webp",
+              "width": 768,
+              "height": 853
+            }
+          }
+        },
+        {
+          "id": "21",
+          "source": "coitadodoproximo_00_jo22.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 22.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 22."
+          },
+          "width": 980,
+          "height": 1604,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-21-480.webp",
+              "width": 480,
+              "height": 786
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-21-768.webp",
+              "width": 768,
+              "height": 1257
+            }
+          }
+        },
+        {
+          "id": "22",
+          "source": "coitadodoproximo_00_jo23.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 23.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 23."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-22-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-22-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "23",
+          "source": "coitadodoproximo_00_jo24.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 24.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 24."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-23-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-23-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "24",
+          "source": "coitadodoproximo_00_jo25.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 25.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 25."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-24-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-24-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "25",
+          "source": "coitadodoproximo_00_jo26.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 26.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 26."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-25-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-25-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "26",
+          "source": "coitadodoproximo_00_jo27.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 27.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 27."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-26-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-26-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "27",
+          "source": "coitadodoproximo_00_jo28.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 28.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 28."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-27-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-27-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "28",
+          "source": "coitadodoproximo_00_jo29.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 29.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 29."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-28-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-28-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "29",
+          "source": "coitadodoproximo_00_jo30.jpg",
+          "caption": {
+            "pt": "Coitado do Próximo no Programa do Jô, Rede Globo, 21 jun. 2001 — foto 30.",
+            "en": "Coitado do Próximo on Programa do Jô, Rede Globo, 21 Jun. 2001 — photo 30."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-29-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/programa-do-jo-2001/programa-do-jo-2001-29-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        }
+      ]
     }
   ]
 }
