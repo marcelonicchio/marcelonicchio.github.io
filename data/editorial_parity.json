@@ -400,6 +400,16 @@
         "pt",
         "en"
       ]
+    },
+    "music-limonada-1992": {
+      "revision": 1,
+      "pt_hash": "a4aee602f2afa266a3ea9faf088efc64c6b271f4070233ddd4796e547308285b",
+      "en_hash": "9ed0d9fe87dcdb00ba13b13ad33a14c2f3dfe7876582e72c1435127801c185e5",
+      "accepted_on": "2026-09-11",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     }
   }
 }
