@@ -8,9 +8,10 @@ https://marcelonicchio.github.io
 
 ## Current development workflow
 
-- `main` — public, stable site
-- `site-v1` — active development branch
-- Pull Request #1 — review surface before publication
+- `main` — public, stable site and current source of truth
+- short-lived `feat/*`, `fix/*`, `chore/*` branches — active development work
+- pull requests target `main` for review before publication
+- `site-v1` — historical pre-launch branch retained for reference; it is no longer the active development branch
 
 ## Site architecture
 
@@ -27,7 +28,7 @@ https://marcelonicchio.github.io
 - `/data/publications.json` — canonical research/publication record with work/version distinction
 - `/data/public-sources.json` — selected public external/source records
 - `/llms.txt` — experimental machine-readable navigation guide; not treated as a search-ranking mechanism or replacement for HTML/Schema.org
-- `/sitemap.xml` — currently exposes only pages intended to be indexable at launch
+- `/sitemap.xml` — exposes pages intended to be indexable
 
 ## Search and editorial rules
 
@@ -50,13 +51,14 @@ https://marcelonicchio.github.io
 
 ## Internal review notes
 
-- `docs/launch-checklist.md` — pre-publication checklist
+- `docs/launch-checklist.md` — historical pre-launch checklist; some workflow references are retained as launch history rather than current process
 - `docs/editorial-fact-audit.md` — factual precision rules and cross-language checks
 - `docs/visual-archive-plan.md` — first-wave archive-image curation and rights strategy
 - `docs/indexation-plan.md` — staged plan for moving thematic PT/EN pairs from `noindex` to public indexing
 - `docs/parity-status.md` — current PT/EN factual-parity status by section
 - `docs/external-profile-alignment.md` — post-launch reconciliation plan for HAL, ORCID, GitHub and other authority nodes
+- `docs/current-status.md` — dated operational checkpoint for the current repository state and workflow
 
-The remaining pre-merge work is concentrated in rendered visual QA, metadata/link verification, first-wave rights-safe archive assets and the final decision about which thematic PT/EN pairs should be indexable at launch.
+The hub is now in continuous post-launch development. Work is concentrated in expanding and verifying the historical archive, preserving PT/EN parity, improving visual/media coverage, maintaining metadata and authority signals, and keeping the public `main` branch structurally clean.
 
 `index.html` is the website entry point. `README.md` documents the repository and development process.
