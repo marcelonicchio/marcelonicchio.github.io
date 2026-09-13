@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "updated": "2026-09-10",
+  "updated": "2026-09-13",
   "derivativePolicy": {
     "format": "webp",
     "widths": [
@@ -5186,6 +5186,442 @@
               "path": "assets/media/galleries/primeira-demo-tape-anonimato-1994/primeira-demo-tape-anonimato-1994-27-768.webp",
               "width": 768,
               "height": 583
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "destemidos-limonadas-1992",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/1992-destemidos-limonadas-roberto-limonada/galeria",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Arquivo visual — Jô Soares e TV Cultura",
+        "en": "Visual archive — Jô Soares and TV Cultura"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "destemidoslimonadas01_IA_300Kb.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · restauração por IA a partir de registro original em vídeo · imagem 1.",
+            "en": "Destemidos Limonadas & Punkecas · AI restoration from an original video record · image 1."
+          },
+          "width": 1442,
+          "height": 1091,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-01-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-01-768.webp",
+              "width": 768,
+              "height": 581
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "destemidoslimonadas02_IA_300Kb.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · restauração por IA a partir de registro original em vídeo · imagem 2.",
+            "en": "Destemidos Limonadas & Punkecas · AI restoration from an original video record · image 2."
+          },
+          "width": 1438,
+          "height": 1094,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-02-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-02-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "destemidoslimonadas03_IA_300Kb.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · restauração por IA a partir de registro original em vídeo · imagem 3.",
+            "en": "Destemidos Limonadas & Punkecas · AI restoration from an original video record · image 3."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-03-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-03-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "destemidoslimonadas04_IA_300Kb.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · restauração por IA a partir de registro original em vídeo · imagem 4.",
+            "en": "Destemidos Limonadas & Punkecas · AI restoration from an original video record · image 4."
+          },
+          "width": 1429,
+          "height": 1101,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-04-480.webp",
+              "width": 480,
+              "height": 370
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-04-768.webp",
+              "width": 768,
+              "height": 592
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "destemidoslimonadas05_IA_300Kb.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · restauração por IA a partir de registro original em vídeo · imagem 5.",
+            "en": "Destemidos Limonadas & Punkecas · AI restoration from an original video record · image 5."
+          },
+          "width": 1440,
+          "height": 1092,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-05-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-05-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "destemidoslimonadasok_01.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 1.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 1."
+          },
+          "width": 1029,
+          "height": 783,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-06-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-06-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "destemidoslimonadasok_02.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 2.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 2."
+          },
+          "width": 1017,
+          "height": 772,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-07-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-07-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "destemidoslimonadasok_03.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 3.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 3."
+          },
+          "width": 1029,
+          "height": 778,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-08-480.webp",
+              "width": 480,
+              "height": 363
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-08-768.webp",
+              "width": 768,
+              "height": 581
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "destemidoslimonadasok_04.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 4.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 4."
+          },
+          "width": 1024,
+          "height": 779,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-09-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-09-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "destemidoslimonadasok_05.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 5.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 5."
+          },
+          "width": 1028,
+          "height": 779,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-10-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-10-768.webp",
+              "width": 768,
+              "height": 582
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "destemidoslimonadasok_06.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 6.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 6."
+          },
+          "width": 1018,
+          "height": 790,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-11-480.webp",
+              "width": 480,
+              "height": 372
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-11-768.webp",
+              "width": 768,
+              "height": 596
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "destemidoslimonadasok_07.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 7.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 7."
+          },
+          "width": 1033,
+          "height": 790,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-12-480.webp",
+              "width": 480,
+              "height": 367
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-12-768.webp",
+              "width": 768,
+              "height": 587
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "destemidoslimonadasok_08.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 8.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 8."
+          },
+          "width": 1015,
+          "height": 785,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-13-480.webp",
+              "width": 480,
+              "height": 371
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-13-768.webp",
+              "width": 768,
+              "height": 594
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "destemidoslimonadasok_09.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 9.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 9."
+          },
+          "width": 1040,
+          "height": 793,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-14-480.webp",
+              "width": 480,
+              "height": 366
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-14-768.webp",
+              "width": 768,
+              "height": 586
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "destemidoslimonadasok_10.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 10.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 10."
+          },
+          "width": 1014,
+          "height": 770,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-15-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-15-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "destemidoslimonadasok_11.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 11.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 11."
+          },
+          "width": 1004,
+          "height": 786,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-16-480.webp",
+              "width": 480,
+              "height": 376
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-16-768.webp",
+              "width": 768,
+              "height": 601
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "destemidoslimonadasok_12.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 12.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 12."
+          },
+          "width": 1018,
+          "height": 773,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-17-480.webp",
+              "width": 480,
+              "height": 364
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-17-768.webp",
+              "width": 768,
+              "height": 583
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "destemidoslimonadasok_13.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 13.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 13."
+          },
+          "width": 1043,
+          "height": 782,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-18-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-18-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "destemidoslimonadasok_14.jpg",
+          "caption": {
+            "pt": "Destemidos Limonadas & Punkecas · frame original do conjunto de registros do Jô Soares Onze e Meia e da TV Cultura · imagem 14.",
+            "en": "Destemidos Limonadas & Punkecas · original frame from the Jô Soares Onze e Meia and TV Cultura video records · image 14."
+          },
+          "width": 1043,
+          "height": 781,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-19-480.webp",
+              "width": 480,
+              "height": 359
+            },
+            "768": {
+              "path": "assets/media/galleries/destemidos-limonadas-1992/destemidos-limonadas-1992-19-768.webp",
+              "width": 768,
+              "height": 575
             }
           }
         }

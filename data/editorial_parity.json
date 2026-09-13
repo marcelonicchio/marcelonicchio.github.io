@@ -402,9 +402,9 @@
       ]
     },
     "music-limonada-1992": {
-      "revision": 5,
-      "pt_hash": "98f07dcef2943293099c9b1da1f551062419050f87910e191f160d7ff79561a6",
-      "en_hash": "a61bec59cd13aebce2fd1ad71db16664e88af23c01c3ffc7c422ddb84dd1bad8",
+      "revision": 6,
+      "pt_hash": "432aded25420e30f330b3cf3b5ff14acbc31906b3373a279f45e9e64971aad44",
+      "en_hash": "d4c5033e7217fc1e5a02f644ccf94e93f12d3fa24a061ddb8a750dff258c5c6d",
       "accepted_on": "2026-09-13",
       "changed_languages": [
         "pt",
