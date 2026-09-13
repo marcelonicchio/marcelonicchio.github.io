@@ -23,6 +23,18 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Fix bilingual anchor in patcher
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/_krist_close_limonada_kid_texts.py')
+          s = p.read_text(encoding='utf-8')
+          old = '(?=<div class="phase" id="estudios-shows-1993">)'
+          new = '(?=<div class="phase" id="(?:estudios|studios)-shows-1993">)'
+          if old not in s:
+              raise SystemExit('expected anchor pattern not found')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
       - name: Apply final narrative patch
         run: python tools/_krist_close_limonada_kid_texts.py
       - name: Commit changes
