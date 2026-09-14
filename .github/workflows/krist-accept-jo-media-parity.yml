@@ -1,0 +1,30 @@
+name: Krist accept Jô media parity
+on:
+  push:
+    branches: [feat/video-media-component-jo]
+    paths:
+      - .github/workflows/krist-accept-jo-media-parity.yml
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: feat/video-media-component-jo
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install beautifulsoup4
+      - name: Accept reviewed bilingual checkpoint
+        run: python tools/editorial_parity.py --accept music-programa-jo
+      - name: Remove temporary workflow and commit
+        run: |
+          rm .github/workflows/krist-accept-jo-media-parity.yml
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add -A
+          git commit -m "chore: accept Jô media editorial parity"
+          git push origin HEAD:feat/video-media-component-jo
