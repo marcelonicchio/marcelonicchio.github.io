@@ -1,0 +1,28 @@
+name: Krist refresh sitemap for Full Biography fix
+on:
+  push:
+    branches: [fix/bio-promoted-entry-layout]
+    paths: ['.github/workflows/krist-refresh-sitemap-bio-fix.yml']
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: fix/bio-promoted-entry-layout
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Regenerate sitemap
+        run: python tools/build_sitemap.py
+      - name: Commit refreshed sitemap and clean workflow
+        run: |
+          rm .github/workflows/krist-refresh-sitemap-bio-fix.yml
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add sitemap.xml .github/workflows/krist-refresh-sitemap-bio-fix.yml
+          git commit -m "chore: refresh sitemap after Full Biography layout fix"
+          git push origin HEAD:fix/bio-promoted-entry-layout
