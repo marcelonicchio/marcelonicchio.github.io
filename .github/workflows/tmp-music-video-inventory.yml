@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install parser
+        run: python -m pip install --quiet beautifulsoup4
       - name: Inventory PT and EN Music video links
         run: |
           python - <<'PY'
@@ -26,10 +28,8 @@ jobs:
                   href = a.get('href','')
                   if not re.search(r'(youtube\.com|youtu\.be)', href, re.I):
                       continue
-                  # Exclude presence/footer/navigation links.
                   if a.find_parent(class_='presence-panel') or a.find_parent('header') or a.find_parent('footer'):
                       continue
-                  section = a.find_parent(['section','div'])
                   parent_section = a.find_parent('section')
                   heading = ''
                   if parent_section:
@@ -37,11 +37,11 @@ jobs:
                       heading = ' '.join(h.stripped_strings) if h else ''
                   label = ' '.join(a.stripped_strings)
                   prev_text = ''
-                  prev = a.find_parent(class_='evidence-links') or a.parent
-                  if prev:
-                      node = prev.find_previous(['p','figcaption','h3','h2'])
+                  container = a.find_parent(class_='evidence-links') or a.parent
+                  if container:
+                      node = container.find_previous(['p','figcaption','h3','h2'])
                       if node:
-                          prev_text = ' '.join(node.stripped_strings)[:260]
+                          prev_text = ' '.join(node.stripped_strings)[:320]
                   classes = ' '.join(a.get('class', []))
                   print(f'[{i}] SECTION: {heading}')
                   print(f'    LABEL: {label}')
