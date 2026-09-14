@@ -1,5 +1,6 @@
 name: TEMP Music video inventory
 
+# trigger: run Wave 1 after Olympia EN parity prep
 on:
   push:
     branches:
