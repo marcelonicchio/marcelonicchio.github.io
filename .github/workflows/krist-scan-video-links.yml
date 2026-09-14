@@ -1,0 +1,62 @@
+name: Krist scan video links
+on:
+  push:
+    branches: [feat/global-video-media-standard]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Scan YouTube links and containers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          import re, json, collections
+
+          files=[]
+          total=0
+          rows=[]
+          container_counts=collections.Counter()
+          class_counts=collections.Counter()
+          multi=[]
+          for p in Path('.').rglob('*'):
+              if p.suffix.lower() not in {'.html','.inc'}: continue
+              if any(x in p.parts for x in {'.git','node_modules'}): continue
+              txt=p.read_text('utf-8',errors='ignore')
+              if 'youtube.com' not in txt and 'youtu.be' not in txt: continue
+              soup=BeautifulSoup(txt,'html.parser')
+              links=[]
+              for a in soup.find_all('a', href=True):
+                  href=a['href']
+                  if 'youtube.com' not in href and 'youtu.be' not in href: continue
+                  total+=1
+                  links.append(a)
+                  classes=' '.join(a.get('class',[])) or '(none)'
+                  class_counts[classes]+=1
+                  parent=a.parent
+                  pclasses=' '.join(parent.get('class',[])) if parent and hasattr(parent,'get') else ''
+                  pname=parent.name if parent else ''
+                  container_counts[f'{pname}.{pclasses}' if pclasses else pname]+=1
+                  rows.append((str(p), a.get_text(' ',strip=True), href, classes, pname, pclasses))
+              if links:
+                  files.append(str(p))
+                  # Containers with multiple video anchors, useful for possible grouping.
+                  for tag in soup.find_all(['div','section','p','aside','nav']):
+                      vids=[a for a in tag.find_all('a',href=True,recursive=False) if ('youtube.com' in a['href'] or 'youtu.be' in a['href'])]
+                      if len(vids)>=2:
+                          multi.append((str(p), tag.name, ' '.join(tag.get('class',[])), len(vids), [a.get_text(' ',strip=True) for a in vids]))
+          print('VIDEO_SCAN_SUMMARY', json.dumps({'files':len(files),'links':total,'multi_direct_containers':len(multi)},ensure_ascii=False))
+          print('\nFILES')
+          for f in files: print(f)
+          print('\nANCHOR_CLASS_COUNTS')
+          for k,v in class_counts.most_common(): print(v, k)
+          print('\nPARENT_CONTAINER_COUNTS')
+          for k,v in container_counts.most_common(): print(v, k)
+          print('\nMULTI_DIRECT_CONTAINERS')
+          for x in multi: print(json.dumps(x,ensure_ascii=False))
+          print('\nALL_LINKS')
+          for x in rows: print(json.dumps(x,ensure_ascii=False))
+          PY
