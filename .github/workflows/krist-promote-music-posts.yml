@@ -1,44 +1,10 @@
 name: Krist promote music posts
 
-on:
-  push:
-    branches:
-      - "feat/music-promote-three-posts"
-
-permissions:
-  contents: write
+on: [push]
 
 jobs:
   promote:
-    if: ${{ github.event.head_commit.message == 'chore: stage music promotion workflow' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          ref: "feat/music-promote-three-posts"
-          fetch-depth: 0
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: python -m pip install --disable-pip-version-check beautifulsoup4
-      - name: Promote three Music posts
-        run: |
-          python tools/_krist_promote_music_posts.py
-          python tools/sync_entries.py
-          python tools/sync_full_biography.py
-          python tools/build_chapter_pages.py
-          python tools/editorial_parity.py --accept music-limonada-1992
-          python tools/editorial_parity.py --accept music-kid-vinil-1993
-          python tools/editorial_parity.py --accept music-coitado-1994
-          python tools/editorial_parity.py --check
-          python tools/build_sitemap.py
-      - name: Commit structural promotion
-        run: |
-          git config user.name "Marcelo Nicchio"
-          git config user.email "marcelonicchio@gmail.com"
-          git add -A
-          git commit -m "feat: promote three music posts to standalone entries"
-          git push origin HEAD:feat/music-promote-three-posts
+      - name: Test
+        run: echo ok
