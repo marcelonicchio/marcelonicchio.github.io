@@ -382,9 +382,9 @@
       ]
     },
     "music-demo-tape-1994": {
-      "revision": 3,
-      "pt_hash": "447358d607f22f0f91151dd78138b0d310357ed086f81865012ad8726cbf5278",
-      "en_hash": "f260e670a51bd6fcbdcfc4887ae4b2cd1253a5cad597fa1458e72c5f8e0fa32b",
+      "revision": 4,
+      "pt_hash": "de55a02de015a3cff63351a872606dc8243d8dcada7b943a5c559983013a13ec",
+      "en_hash": "9012e92024daed71df0c526b801070784375fe889bea7e5e4a2f1fae3ee079d1",
       "accepted_on": "2026-09-14",
       "changed_languages": [
         "pt",
