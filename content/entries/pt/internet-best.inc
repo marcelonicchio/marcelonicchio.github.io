@@ -9,11 +9,18 @@
 </figure>
 <!-- thread-media:best-kenshoo:end -->
 <p>Em <strong>11 de novembro de 2014, das 9h às 12h</strong>, ministrou no E-Commerce Brasil o workshop <strong>“Segmentações Avançadas em Search”</strong>. A gravação preservada está dividida em quatro partes e documenta diretamente o repertório profissional daquele ciclo em segmentação, Search, tecnologia e operação de mídia.</p>
-<div class="evidence-list">
-<div class="evidence"><div class="evidence-top"><strong>Workshop Search · 11/11/2014 — Parte 1/4</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/p-1Uc-zD4TE" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
-<div class="evidence"><div class="evidence-top"><strong>Parte 2/4 — Segmentações Avançadas em Search</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/hOKqH6yxQ4g" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
-<div class="evidence"><div class="evidence-top"><strong>Parte 3/4</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/C1Z3wD8t03A" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
-<div class="evidence"><div class="evidence-top"><strong>Parte 4/4</strong><span class="status">vídeo</span></div><div class="evidence-links"><a href="https://youtu.be/3h-z53IN6AI" target="_blank" rel="noopener noreferrer">YouTube</a></div></div>
+<div class="video-library" aria-label="Vídeos e mídia" aria-labelledby="best-workshop-video-title">
+  <div class="video-library__head">
+    <strong id="best-workshop-video-title">Vídeos &amp; Mídia · 4</strong>
+    <span>E-Commerce Brasil · 11 nov. 2014</span>
+  </div>
+  <div class="video-library__group">
+    <div class="video-library__label"><strong>Segmentações Avançadas em Search</strong></div>
+    <p class="video-library__description">Gravação integral do workshop preservada em quatro partes.</p>
+    <div class="video-library__actions">
+      <a class="video-pill" href="https://youtu.be/p-1Uc-zD4TE" target="_blank" rel="noopener noreferrer">Parte 1</a><a class="video-pill" href="https://youtu.be/hOKqH6yxQ4g" target="_blank" rel="noopener noreferrer">Parte 2</a><a class="video-pill" href="https://youtu.be/C1Z3wD8t03A" target="_blank" rel="noopener noreferrer">Parte 3</a><a class="video-pill" href="https://youtu.be/3h-z53IN6AI" target="_blank" rel="noopener noreferrer">Parte 4</a>
+    </div>
+  </div>
 </div>
 <p>No dia seguinte, <strong>12 de novembro de 2014, também das 9h às 12h</strong>, Nicchio ministrou no E-Commerce Brasil um segundo workshop, <strong>“Facebook Ads: Melhores Práticas, Melhor Conversão”</strong>. Um post contemporâneo recuperado do BEST Blog, publicado em 14/11/2014, registra o evento e o identifica como Gerente de Performance da BEST. A apresentação original preservada cobre objetivos de campanha, métricas, segmentação, Custom Audiences, Lookalike Audiences, Website Custom Audiences e pixel de conversão.</p>
 <p>O arquivo do BEST Blog preserva ainda <strong>“Conheça o Glossário da Mídia Online (ROI, CPC, CTR...) Parte 1”</strong>, publicado em 08/12/2014 e atribuído a Marcelo Nicchio. O registro acrescenta uma frente editorial/técnica ao período, documentando conteúdo sobre métricas, conversão e conceitos de mídia online.</p>
