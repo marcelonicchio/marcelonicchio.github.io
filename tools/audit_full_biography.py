@@ -44,6 +44,7 @@ def main() -> int:
 
     for lang in ("pt", "en"):
         covered_sections: dict[str, set[str]] = defaultdict(set)
+        direct_section_keys: dict[str, set[str]] = defaultdict(set)
         registered_unit_keys: dict[str, set[str]] = defaultdict(set)
         keyed_parents: dict[str, set[str]] = defaultdict(set)
         source_paths: set[str] = set()
@@ -69,6 +70,10 @@ def main() -> int:
                 sid = selector_id(spec["selector"])
                 if sid:
                     covered_sections[path].add(sid)
+                if len(matches) == 1:
+                    direct_key = matches[0].get("data-bio-key")
+                    if direct_key:
+                        direct_section_keys[path].add(str(direct_key))
             elif spec["kind"] in {"phase", "subunit"}:
                 parent = selector_id(spec.get("parent_selector"))
                 if not parent:
@@ -84,6 +89,7 @@ def main() -> int:
                 fail(errors, f"{entry['id']}:{lang}: unsupported kind {spec['kind']!r}")
 
         # Every public vertical chapter must be represented either directly or by registered phases.
+        # Promoted entries may also be registered as nested section-backed units inside a chapter.
         for path in sorted(source_paths):
             soup = BeautifulSoup((ROOT / path).read_text(encoding="utf-8"), "html.parser")
             body = soup.select_one("article.article-body")
@@ -97,20 +103,33 @@ def main() -> int:
                     fail(errors, f"{lang}: chapter without id in {path}")
                     continue
                 actual_ids.add(sid)
+            all_section_ids = {
+                str(section.get("id"))
+                for section in body.select("section[id]")
+                if section.get("id")
+            }
             covered = covered_sections[path] | keyed_parents[path]
             missing = sorted(actual_ids - covered)
-            stale = sorted(covered - actual_ids)
+            stale = sorted(
+                (covered_sections[path] - all_section_ids)
+                | (keyed_parents[path] - actual_ids)
+            )
             if missing:
                 fail(errors, f"{lang}: chapters not registered for Full Biography in {path}: {missing}")
             if stale:
-                fail(errors, f"{lang}: manifest references missing chapters in {path}: {stale}")
+                fail(errors, f"{lang}: manifest references missing chapters/sections in {path}: {stale}")
 
             for parent_id in keyed_parents[path]:
                 parent = body.select_one(f"#{parent_id}")
                 if parent is None:
                     continue
                 keyed = parent.select("[data-bio-key]")
-                actual_keys = {node.get("data-bio-key") for node in keyed}
+                actual_keys = {str(node.get("data-bio-key")) for node in keyed if node.get("data-bio-key")}
+                directly_registered_here = {
+                    key for key in direct_section_keys[path]
+                    if parent.select_one(f'[data-bio-key="{key}"]') is not None
+                }
+                actual_keys -= directly_registered_here
                 expected_keys = registered_unit_keys[path]
                 missing_keys = sorted(actual_keys - expected_keys)
                 if missing_keys:
