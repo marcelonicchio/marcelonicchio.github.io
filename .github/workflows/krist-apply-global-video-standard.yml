@@ -1,0 +1,68 @@
+name: Krist apply global video standard
+on:
+  push:
+    branches: [feat/global-video-media-standard]
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
+      - name: Apply global video component
+        run: python tools/_krist_global_video_standard.py
+      - name: Rebuild synchronized surfaces
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+      - name: Accept only symmetric PT/EN editorial drift
+        run: |
+          python - <<'PY'
+          import tools.editorial_parity as ep
+          manifest = ep.load_manifest()
+          registry = ep.load_registry()
+          accepted=[]
+          for entry in ep.all_entries(manifest):
+              eid=entry['id']
+              if eid not in registry.get('entries',{}):
+                  continue
+              current=ep.current_hashes(entry)
+              state=registry['entries'][eid]
+              changed=[lang for lang in ('pt','en') if current[lang] != state.get(f'{lang}_hash')]
+              if not changed:
+                  continue
+              if set(changed) != {'pt','en'}:
+                  raise SystemExit(f'Asymmetric editorial drift after video migration: {eid}: {changed}')
+              ep.accept(manifest, registry, eid)
+              accepted.append(eid)
+          print('Accepted symmetric media-only parity checkpoints:', ', '.join(accepted) if accepted else '(none)')
+          PY
+      - name: Verify migration and generators
+        run: |
+          python tools/_krist_global_video_standard.py --check
+          python tools/editorial_parity.py --check
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+      - name: Commit clean migration result
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          rm -f tools/_krist_global_video_standard.py
+          rm -f .github/workflows/krist-scan-video-links.yml
+          rm -f .github/workflows/krist-apply-global-video-standard.yml
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "feat: standardize video media controls across HUB"
+            git push origin HEAD:feat/global-video-media-standard
+          fi
