@@ -442,3 +442,10 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
   .video-pill{min-height:40px;padding:8px 11px;font-size:.84rem}
 }
 @media(prefers-reduced-motion:reduce){.video-pill{transition:none}.video-pill:hover,.video-pill:focus-visible{transform:none}}
+
+
+/* Audio archive — native player inside media library */
+.audio-library__player{display:block;width:100%;max-width:640px;height:42px;margin-top:9px;accent-color:var(--accent-soft)}
+.audio-library .audio-library__note{margin:14px 0 0!important;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);color:var(--muted)!important;font-size:.78rem!important;line-height:1.5!important}
+.audio-library__note strong{color:var(--soft)}
+@media(max-width:580px){.audio-library__player{max-width:none;height:44px}}
