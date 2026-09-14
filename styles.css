@@ -424,6 +424,8 @@ a.button[href*="youtu.be"]:hover{
 #stages .phase:last-child{border-bottom:1px solid var(--line)}
 #palcos .phase-year,
 #stages .phase-year{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent-soft);font-size:.76rem;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;font-weight:800;margin:0 0 .55rem}
+#palcos .phase h2,
+#stages .phase h2,
 #palcos .phase h3,
 #stages .phase h3{margin:0 0 .72rem;font-size:clamp(1.55rem,3vw,2.05rem);line-height:1.12;letter-spacing:-.035em;color:var(--text)}
 #palcos .phase p,
@@ -433,6 +435,12 @@ a.button[href*="youtu.be"]:hover{
 @media(max-width:580px){
   #palcos .phase,#stages .phase{padding:28px 0 32px}
   #palcos .phase-year,#stages .phase-year{font-size:.72rem}
-  #palcos .phase h3,#stages .phase h3{font-size:clamp(1.45rem,7vw,1.8rem)}
+  #palcos .phase h2,#stages .phase h2,#palcos .phase h3,#stages .phase h3{font-size:clamp(1.45rem,7vw,1.8rem)}
 }
 
+
+/* Music promoted-entry permalinks — 2026-09-13 */
+#palcos .music-entry h2 a.entry-title-permalink,
+#stages .music-entry h2 a.entry-title-permalink{color:inherit;text-decoration:none}
+#palcos .music-entry h2 a.entry-title-permalink:hover,
+#stages .music-entry h2 a.entry-title-permalink:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}

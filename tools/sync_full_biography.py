@@ -77,6 +77,9 @@ def render_section(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[s
     section["class"] = classes
     section["data-bio-entry"] = entry["id"]
     section["data-bio-domain"] = entry["domain"]
+    phase_year = section.find(class_="phase-year", recursive=False)
+    if phase_year is not None:
+        phase_year.decompose()
     heading = section.find("h2", recursive=False)
     if heading is not None:
         original_text = heading.get_text(" ", strip=True)
