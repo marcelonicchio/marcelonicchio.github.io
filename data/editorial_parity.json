@@ -45,10 +45,10 @@
       ]
     },
     "music-coitado-1994": {
-      "revision": 5,
-      "pt_hash": "10a1d005d8c535e4924bbf7413c0922c0e40f3df25accbebf10183af76c22283",
-      "en_hash": "31c6f6695e39007b0b5b870c052b1848abfeb1d101c9172fd1ee07b3a720ae4e",
-      "accepted_on": "2026-09-13",
+      "revision": 6,
+      "pt_hash": "160a5cb5b7db0cd3b246d18332f63f1f6698189a29f96825e80175f5daf13c3c",
+      "en_hash": "6899c46f28893538d4733527090a865d91f534db311698c7875ed1451c6b4cc7",
+      "accepted_on": "2026-09-14",
       "changed_languages": [
         "pt",
         "en"
@@ -402,20 +402,20 @@
       ]
     },
     "music-limonada-1992": {
-      "revision": 6,
-      "pt_hash": "432aded25420e30f330b3cf3b5ff14acbc31906b3373a279f45e9e64971aad44",
-      "en_hash": "d4c5033e7217fc1e5a02f644ccf94e93f12d3fa24a061ddb8a750dff258c5c6d",
-      "accepted_on": "2026-09-13",
+      "revision": 7,
+      "pt_hash": "24c44eb6cd5b5598443ca9ea0cd9d971dd2e394fb2e8035cb5c25a7dcf2fe79a",
+      "en_hash": "8ac447a3ca411e9ddbfc71b28a710978f60377015b21a0e8ff72b6640e0de094",
+      "accepted_on": "2026-09-14",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "music-kid-vinil-1993": {
-      "revision": 1,
-      "pt_hash": "a8289a6f335e204cddffbe35d4c1e681a5656a471aad2a7b9c0ecaf289ff91fb",
-      "en_hash": "d73125d09253ae1b763eb1b9c0302fd67b7c2d45a842b7d9bfebbb5e73718646",
-      "accepted_on": "2026-09-13",
+      "revision": 2,
+      "pt_hash": "62cc0c00ebd7c46e6dbd1b0219660e09126249a573099debd9517cc6d6c3d34f",
+      "en_hash": "ea3929acd12d694a4b6a17e46c111f55d773b5be4cafcbca52b8ae485352c1c8",
+      "accepted_on": "2026-09-14",
       "changed_languages": [
         "pt",
         "en"

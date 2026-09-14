@@ -1112,15 +1112,20 @@
           "destemidos-limonadas-1992"
         ]
       },
-      "reader_scope": "biography-only",
       "reader_presentation": {
         "state": "always-open"
       },
       "source": {
-        "kind": "reader-section"
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-limonada-1992.inc",
+        "en_path": "content/entries/en/music-limonada-1992.inc"
       },
       "reader_targets": {
         "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#destemidos-limonadas-punkecas-1992"
+          },
           {
             "path": "pt/biografia/index.html",
             "selector": "#bio-music-limonada-1992"
@@ -1128,14 +1133,24 @@
         ],
         "en": [
           {
+            "path": "en/music/index.html",
+            "selector": "#destemidos-limonadas-punkecas-1992"
+          },
+          {
             "path": "en/biography/index.html",
             "selector": "#bio-music-limonada-1992"
           }
         ]
       },
       "chapter_page": {
-        "status": "none",
-        "indexing": "none"
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/destemidos-limonadas-punkecas/index.html",
+        "en_path": "en/music/destemidos-limonadas-punkecas/index.html",
+        "description": {
+          "pt": "Destemidos Limonadas & Punkecas e Roberto Limonada: punk rock, Jô Soares, TV Cultura, Kid Vinil e a formação musical de Marcelo Nicchio a partir de 1992.",
+          "en": "Destemidos Limonadas & Punkecas and Roberto Limonada: punk rock, Jô Soares, TV Cultura, Kid Vinil and Marcelo Nicchio's musical formation from 1992 onward."
+        }
       }
     },
     {
@@ -1155,15 +1170,20 @@
         "en": "In 1993, the Café Piu Piu episode and contact with Kid Vinil and Verminose marked a rite of passage for Coitado do Próximo in São Paulo's circuit, connecting stage, backstage, repertoire and the circulation of that scene through television and records."
       },
       "topic_ids": [],
-      "reader_scope": "biography-only",
       "reader_presentation": {
         "state": "always-open"
       },
       "source": {
-        "kind": "reader-section"
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-kid-vinil-1993.inc",
+        "en_path": "content/entries/en/music-kid-vinil-1993.inc"
       },
       "reader_targets": {
         "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#kid-vinil-verminose-cafe-piu-piu-1993"
+          },
           {
             "path": "pt/biografia/index.html",
             "selector": "#bio-music-kid-vinil-1993"
@@ -1171,14 +1191,24 @@
         ],
         "en": [
           {
+            "path": "en/music/index.html",
+            "selector": "#kid-vinil-verminose-cafe-piu-piu-1993"
+          },
+          {
             "path": "en/biography/index.html",
             "selector": "#bio-music-kid-vinil-1993"
           }
         ]
       },
       "chapter_page": {
-        "status": "none",
-        "indexing": "none"
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/kid-vinil-verminose-cafe-piu-piu/index.html",
+        "en_path": "en/music/kid-vinil-verminose-cafe-piu-piu/index.html",
+        "description": {
+          "pt": "Kid Vinil & Verminose no Café Piu Piu em 1993: a noite que marcou a entrada de Marcelo Nicchio no circuito punk rock paulistano.",
+          "en": "Kid Vinil & Verminose at Café Piu Piu in 1993: the night that marked Marcelo Nicchio's entry into São Paulo's punk rock circuit."
+        }
       }
     },
     {
@@ -1198,15 +1228,20 @@
         "en": "In 1994, Roberto Limonada took Marcelo Nicchio to 97FM Rock and introduced him to Kid Vinil. Coitado do Próximo brought its first demo, heard “Mulher SP” played on the radio and would later make a second appearance, uninvited, with Mirão/365 and an acoustic version of “Pegue o Seu Celular”."
       },
       "topic_ids": [],
-      "reader_scope": "biography-only",
       "reader_presentation": {
         "state": "always-open"
       },
       "source": {
-        "kind": "reader-section"
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-coitado-1994.inc",
+        "en_path": "content/entries/en/music-coitado-1994.inc"
       },
       "reader_targets": {
         "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#kid-vinil-97fm-rock-1994"
+          },
           {
             "path": "pt/biografia/index.html",
             "selector": "#bio-music-coitado-1994"
@@ -1214,14 +1249,24 @@
         ],
         "en": [
           {
+            "path": "en/music/index.html",
+            "selector": "#kid-vinil-97fm-rock-1994"
+          },
+          {
             "path": "en/biography/index.html",
             "selector": "#bio-music-coitado-1994"
           }
         ]
       },
       "chapter_page": {
-        "status": "none",
-        "indexing": "none"
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/kid-vinil-97fm-rock/index.html",
+        "en_path": "en/music/kid-vinil-97fm-rock/index.html",
+        "description": {
+          "pt": "Coitado do Próximo e Kid Vinil na 97FM Rock: a primeira demo, “Mulher SP” no rádio e uma segunda passagem improvisada com Mirão/365.",
+          "en": "Coitado do Próximo and Kid Vinil on 97FM Rock: the first demo, “Mulher SP” on air and a second improvised appearance with Mirão/365."
+        }
       }
     }
   ]

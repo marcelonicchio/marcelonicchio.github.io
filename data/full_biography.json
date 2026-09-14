@@ -136,15 +136,13 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-limonada-1992']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#destemidos-limonadas-punkecas-1992"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-limonada-1992']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#destemidos-limonadas-punkecas-1992"
         }
       }
     },
@@ -160,15 +158,13 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-kid-vinil-1993']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#kid-vinil-verminose-cafe-piu-piu-1993"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-kid-vinil-1993']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#kid-vinil-verminose-cafe-piu-piu-1993"
         }
       }
     },
@@ -261,15 +257,13 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "subunit",
-          "selector": "[data-bio-key='music-coitado-1994']",
-          "parent_selector": "#coitado"
+          "kind": "section",
+          "selector": "#kid-vinil-97fm-rock-1994"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "subunit",
-          "selector": "[data-bio-key='music-coitado-1994']",
-          "parent_selector": "#coitado"
+          "kind": "section",
+          "selector": "#kid-vinil-97fm-rock-1994"
         }
       }
     },
