@@ -1,0 +1,110 @@
+name: Temporary apply safe video standard
+
+on:
+  push:
+    branches: [feat/video-media-standard-safe]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.head_commit.message == 'chore: run conservative video standard migration'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
+      - name: Patch preflight discoveries in temporary migrator
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/_tmp_apply_video_standard.py')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('"Broadcast performance": "Main record', '"Broadcast performance on Globo": "Main record')
+          s = s.replace('"Behind the scenes": "Five preserved', '"Backstage": "Five preserved')
+          old = '''for href, pt_block, en_block, label in music_replacements:\n    replace_evidence_div(pt_music, href, pt_block, f"Music PT {label}")\n    # Olympia never had the second link in EN before; match only if the first link exists.\n    replace_evidence_div(en_music, href, en_block, f"Music EN {label}")'''
+          new = '''for href, pt_block, en_block, label in music_replacements:\n    replace_evidence_div(pt_music, href, pt_block, f"Music PT {label}")\n    if label == "Olympia":\n        text = read(en_music)\n        marker = '<!-- gallery:olympia-2000:end -->'\n        if text.count(marker) != 1:\n            raise RuntimeError(f"{en_music}: Olympia end marker count != 1")\n        write(en_music, text.replace(marker, marker + "\\n" + en_block, 1))\n    else:\n        replace_evidence_div(en_music, href, en_block, f"Music EN {label}")'''
+          if old not in s:
+              raise SystemExit('Expected music replacement loop not found in temporary migrator')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Apply curated audiovisual migration
+        run: python tools/_tmp_apply_video_standard.py
+      - name: Synchronize fragment-backed verticals
+        run: python tools/sync_entries.py
+      - name: Generate standalone chapter pages
+        run: python tools/build_chapter_pages.py
+      - name: Synchronize Full Biography
+        run: python tools/sync_full_biography.py
+      - name: Accept jointly reviewed PT EN checkpoints
+        run: |
+          for id in \
+            music-origins \
+            music-coitado-1992 \
+            music-limonada-1992 \
+            music-demo-tape-1994 \
+            music-etesp-fatec-2000 \
+            music-olympia \
+            music-programa-jo \
+            audiovisual-meia-noite \
+            internet-best
+          do
+            python tools/editorial_parity.py --accept "$id"
+          done
+      - name: Refresh sitemap
+        run: python tools/build_sitemap.py
+      - name: Structural regression guard
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for path in ('pt/biografia/index.html','en/biography/index.html'):
+              text = Path(path).read_text(encoding='utf-8')
+              bad = [
+                  'class="phase music-entry chapter bio-entry"',
+                  'class="music-entry phase chapter bio-entry"',
+              ]
+              for token in bad:
+                  if token in text:
+                      raise SystemExit(f'{path}: vertical-only Music layout leaked into Full Biography: {token}')
+              for entry in ('music-limonada-1992','music-kid-vinil-1993','music-coitado-1994'):
+                  marker = f'data-bio-entry="{entry}"'
+                  pos = text.find(marker)
+                  if pos < 0:
+                      raise SystemExit(f'{path}: missing promoted entry {entry}')
+                  opening = text.rfind('<section', 0, pos)
+                  closing = text.find('>', pos)
+                  tag = text[opening:closing+1]
+                  if 'class="chapter bio-entry"' not in tag:
+                      raise SystemExit(f'{path}: promoted entry {entry} lost safe Bio class: {tag}')
+          print('Full Biography promoted-entry layout guard OK.')
+          PY
+      - name: Synchronization checks
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/editorial_parity.py --check
+          python tools/build_sitemap.py --check
+      - name: Focused audits
+        run: |
+          python tools/audit_full_biography.py
+          python tools/audit_entries.py
+          python tools/audit_site.py
+      - name: Commit migrated site state
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add styles.css content/entries pt en data/editorial_parity.json sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No site changes to commit"
+            exit 1
+          fi
+          git commit -m "feat: apply safe audiovisual library standard"
+          git push origin HEAD:feat/video-media-standard-safe
