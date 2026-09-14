@@ -1,0 +1,105 @@
+name: TEMP Apply Music video standard v2
+
+on:
+  push:
+    branches:
+      - feat/video-media-wave1-music-20260914
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install parser helpers
+        run: python -m pip install --quiet beautifulsoup4 pyyaml
+      - name: Reuse validated transformation and regeneration steps
+        run: |
+          python - <<'PY'
+          import subprocess, yaml
+          from pathlib import Path
+          workflow = yaml.safe_load(Path('.github/workflows/tmp-apply-music-video-standard.yml').read_text(encoding='utf-8'))
+          wanted = {
+              'Apply conservative Music-only video component migration',
+              'Regenerate managed surfaces',
+          }
+          found = set()
+          for step in workflow['jobs']['apply']['steps']:
+              name = step.get('name')
+              if name not in wanted:
+                  continue
+              found.add(name)
+              print(f'Executing validated step: {name}')
+              subprocess.run(step['run'], shell=True, executable='/bin/bash', check=True)
+          if found != wanted:
+              raise RuntimeError(f'Missing validated workflow steps: {wanted - found}')
+          PY
+      - name: Conservative structural and media guard
+        run: |
+          python - <<'PY'
+          from bs4 import BeautifulSoup
+          from pathlib import Path
+          import re
+
+          def content_videos(soup):
+              return [a for a in soup.find_all('a', href=True)
+                      if re.search(r'(youtube\.com|youtu\.be)', a.get('href',''), re.I)
+                      and not a.find_parent(class_='presence-panel')
+                      and not a.find_parent('header')
+                      and not a.find_parent('footer')]
+
+          for path in [Path('pt/musica/index.html'), Path('en/music/index.html')]:
+              soup = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
+              vids = content_videos(soup)
+              assert len(vids) == 20, f'{path}: expected 20 content video links, got {len(vids)}'
+              assert all(a.find_parent(class_='video-library') is not None for a in vids), f'{path}: content video outside video-library'
+              assert all(' '.join(a.stripped_strings).strip() for a in vids), f'{path}: blank video button label'
+              libs = soup.find_all('div', class_='video-library')
+              assert len(libs) == 9, f'{path}: expected 9 video libraries, got {len(libs)}'
+              for lib in libs:
+                  head = lib.find('div', class_='video-library__head', recursive=False)
+                  assert head and head.find('strong'), f'{path}: missing media header'
+                  groups = lib.find_all('div', class_='video-library__group', recursive=False)
+                  assert groups, f'{path}: media library without groups'
+                  for group in groups:
+                      label = group.find('div', class_='video-library__label', recursive=False)
+                      desc = group.find('div', class_='video-library__description', recursive=False)
+                      actions = group.find('div', class_='video-library__actions', recursive=False)
+                      assert label and label.find('strong'), f'{path}: missing red group title'
+                      assert desc and desc.get_text(' ', strip=True), f'{path}: missing group description'
+                      assert actions and actions.find('a', class_='video-pill'), f'{path}: missing video buttons'
+              print(path, 'OK: 20 video links / 9 libraries / titles + descriptions + buttons')
+
+          for path in [Path('pt/biografia/index.html'), Path('en/biography/index.html')]:
+              soup = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
+              for entry_id in ['bio-music-limonada-1992','bio-music-kid-vinil-1993','bio-music-coitado-1994']:
+                  section = soup.find('section', id=entry_id)
+                  assert section is not None, f'{path}: missing {entry_id}'
+                  classes = set(section.get('class', []))
+                  assert 'phase' not in classes and 'music-entry' not in classes, f'{path}: vertical layout leaked into {entry_id}'
+              print(path, 'OK: promoted entries remain normal one-column Biography sections')
+
+          for path in [Path('pt/musica/destemidos-limonadas-punkecas/index.html'), Path('en/music/destemidos-limonadas-punkecas/index.html')]:
+              soup = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
+              vids = content_videos(soup)
+              assert len(vids) == 5, f'{path}: expected 5 post videos, got {len(vids)}'
+              assert all(a.find_parent(class_='video-library') is not None for a in vids), f'{path}: standalone video outside library'
+              print(path, 'OK: 5 Destemidos content videos synchronized')
+          PY
+      - name: Commit only real site files
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add styles.css pt/musica/index.html en/music/index.html content/entries/pt/music-limonada-1992.inc content/entries/en/music-limonada-1992.inc pt/biografia/index.html en/biography/index.html pt/musica/destemidos-limonadas-punkecas/index.html en/music/destemidos-limonadas-punkecas/index.html sitemap.xml
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No real site changes to commit."
+          else
+            git commit -m "feat: standardize Music audiovisual controls safely"
+            git push origin HEAD:feat/video-media-wave1-music-20260914
+          fi
