@@ -9,12 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
       - name: Scan YouTube links and containers
         run: |
           python - <<'PY'
           from pathlib import Path
           from bs4 import BeautifulSoup
-          import re, json, collections
+          import json, collections
 
           files=[]
           total=0
@@ -43,7 +45,6 @@ jobs:
                   rows.append((str(p), a.get_text(' ',strip=True), href, classes, pname, pclasses))
               if links:
                   files.append(str(p))
-                  # Containers with multiple video anchors, useful for possible grouping.
                   for tag in soup.find_all(['div','section','p','aside','nav']):
                       vids=[a for a in tag.find_all('a',href=True,recursive=False) if ('youtube.com' in a['href'] or 'youtu.be' in a['href'])]
                       if len(vids)>=2:
