@@ -153,10 +153,10 @@
       ]
     },
     "music-programa-jo": {
-      "revision": 6,
-      "pt_hash": "66c2f7ead9018cc6b415cf69dabaed9fb67e57c884442ff03c3145b8b041e736",
-      "en_hash": "8ee3f214226afb37a4d33200472c4a012817df8b801017086a86dc00226ffa17",
-      "accepted_on": "2026-09-10",
+      "revision": 7,
+      "pt_hash": "7e465af2341807892b552ac203186c964c4ae9544121c5840ed30404afd7fbfa",
+      "en_hash": "f032351b83ddde22cf317440ea829ad2d9e43b081e5b4c094a1b72b3d9b79793",
+      "accepted_on": "2026-09-14",
       "changed_languages": [
         "pt",
         "en"
