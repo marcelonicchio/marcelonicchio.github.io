@@ -16,6 +16,28 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
+      - name: Repair Olympia EN audiovisual parity
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('en/music/index.html')
+          text=p.read_text(encoding='utf-8')
+          start='<div class="phase" data-bio-key="music-olympia-2000">'
+          end='<div class="phase" data-bio-key="music-jo-2001">'
+          i=text.index(start)
+          j=text.index(end, i)
+          chunk=text[i:j]
+          url='https://www.youtube.com/watch?v=V624sY_rl8I'
+          if url not in chunk:
+              links='<div class="evidence-links inline-links"><a href="https://www.youtube.com/watch?v=V624sY_rl8I" target="_blank" rel="noopener noreferrer">Estava Comigo ↗</a><a href="https://youtu.be/0-RXucDYMfk" target="_blank" rel="noopener noreferrer">Ciúmes ↗</a></div>'
+              head, tail=chunk.rsplit('</div></div>',1)
+              chunk=head+links+'</div></div>'+tail
+              text=text[:i]+chunk+text[j:]
+              p.write_text(text,encoding='utf-8')
+              print('Added the two Olympia public audiovisual records to EN, matching PT evidence.')
+          else:
+              print('Olympia EN audiovisual evidence already present.')
+          PY
       - name: Apply global video component
         run: python tools/_krist_global_video_standard.py
       - name: Rebuild synchronized surfaces
@@ -23,13 +45,14 @@ jobs:
           python tools/sync_entries.py
           python tools/sync_full_biography.py
           python tools/build_chapter_pages.py
-      - name: Accept only symmetric PT/EN editorial drift
+      - name: Preflight and accept reviewed PT/EN media drift
         run: |
           python - <<'PY'
           import tools.editorial_parity as ep
           manifest = ep.load_manifest()
           registry = ep.load_registry()
-          accepted=[]
+          drifts=[]
+          asymmetric=[]
           for entry in ep.all_entries(manifest):
               eid=entry['id']
               if eid not in registry.get('entries',{}):
@@ -39,11 +62,19 @@ jobs:
               changed=[lang for lang in ('pt','en') if current[lang] != state.get(f'{lang}_hash')]
               if not changed:
                   continue
+              drifts.append((eid,changed))
               if set(changed) != {'pt','en'}:
-                  raise SystemExit(f'Asymmetric editorial drift after video migration: {eid}: {changed}')
+                  asymmetric.append((eid,changed))
+          if asymmetric:
+              print('Asymmetric editorial drift after global video migration:')
+              for eid,changed in asymmetric:
+                  print(f' - {eid}: {changed}')
+              raise SystemExit(1)
+          accepted=[]
+          for eid,changed in drifts:
               ep.accept(manifest, registry, eid)
               accepted.append(eid)
-          print('Accepted symmetric media-only parity checkpoints:', ', '.join(accepted) if accepted else '(none)')
+          print('Accepted reviewed symmetric media checkpoints:', ', '.join(accepted) if accepted else '(none)')
           PY
       - name: Verify migration and generators
         run: |
