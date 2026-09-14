@@ -444,3 +444,9 @@ a.button[href*="youtu.be"]:hover{
 #stages .music-entry h2 a.entry-title-permalink{color:inherit;text-decoration:none}
 #palcos .music-entry h2 a.entry-title-permalink:hover,
 #stages .music-entry h2 a.entry-title-permalink:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}
+
+/* Destemidos Limonadas: desktop selfie sizing — 2026-09-14 */
+@media(min-width:901px){
+  .thread-media--destemidos-selfie{width:50%;margin-left:auto;margin-right:auto}
+}
+
