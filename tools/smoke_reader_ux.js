@@ -319,7 +319,9 @@ async function runDesktop(browser) {
 
   await page.goto(`${BASE}/pt/internet/best-kenshoo/`, {waitUntil: 'networkidle'});
   assert(await page.locator('main[data-entry-id="internet-best"]').count() === 1, 'BEST Chapter Page stable id missing');
-  assert(await page.locator('.evidence').count() === 4, 'BEST Chapter Page did not preserve four workshop parts');
+  const bestWorkshopVideoLibrary = page.locator('.video-library').filter({has: page.locator('#best-workshop-video-title')});
+  assert(await bestWorkshopVideoLibrary.count() === 1, 'BEST Chapter Page audiovisual library missing');
+  assert(await bestWorkshopVideoLibrary.locator('.video-pill').count() === 4, 'BEST Chapter Page did not preserve four workshop video parts');
   assert(await page.locator('.fact-strip .fact').count() === 1, 'BEST hero exposes taxonomy as a KPI');
 
   await context.close();
