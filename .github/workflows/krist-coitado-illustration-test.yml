@@ -1,0 +1,71 @@
+name: Krist Coitado illustration test
+
+on:
+  push:
+    branches:
+      - test/music-coitado-totti-illustration
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: test/music-coitado-totti-illustration
+      - name: Insert illustration in Music vertical only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          image = "/assets/archive/music/coitado-do-proximo/coitadoilustracao01.jpg"
+
+          specs = {
+              Path("pt/musica/index.html"): {
+                  "needle": '<section id="coitado" class="chapter"><h2>Coitado do Próximo</h2><div data-bio-key="music-coitado-1992">',
+                  "figure": '<figure class="thread-media thread-media--linked"><a aria-label="Abrir ilustração do Coitado do Próximo em tamanho maior" href="' + image + '" rel="noopener noreferrer" target="_blank"><img alt="Ilustração criada com IA do Coitado do Próximo, com integrantes da banda, logotipo oficial e referências urbanas da Zona Norte de São Paulo." decoding="async" loading="lazy" src="' + image + '" width="1536" height="1024"/></a><figcaption><strong>Coitado do Próximo · Zona Norte de São Paulo.</strong><span class="thread-media-note">Ilustração criada com IA por Alexandre Totti, tecladista do Coitado do Próximo, a partir de fotografias da banda e referências visuais da Zona Norte de São Paulo.</span><a class="thread-media-open" href="' + image + '" rel="noopener noreferrer" target="_blank">Abrir imagem em tamanho maior ↗</a></figcaption></figure>',
+              },
+              Path("en/music/index.html"): {
+                  "needle": '<section id="coitado" class="chapter"><h2>Coitado do Próximo</h2><div data-bio-key="music-coitado-1992">',
+                  "figure": '<figure class="thread-media thread-media--linked"><a aria-label="Open the Coitado do Próximo illustration at full size" href="' + image + '" rel="noopener noreferrer" target="_blank"><img alt="AI-created illustration of Coitado do Próximo featuring band members, the official logo and urban references from São Paulo’s North Zone." decoding="async" loading="lazy" src="' + image + '" width="1536" height="1024"/></a><figcaption><strong>Coitado do Próximo · North Zone of São Paulo.</strong><span class="thread-media-note">AI-created illustration by Alexandre Totti, keyboardist of Coitado do Próximo, based on photographs of the band and visual references from São Paulo’s North Zone.</span><a class="thread-media-open" href="' + image + '" rel="noopener noreferrer" target="_blank">Open image at full size ↗</a></figcaption></figure>',
+              },
+          }
+
+          for path, spec in specs.items():
+              text = path.read_text(encoding="utf-8")
+              if image in text:
+                  raise SystemExit(f"{path}: illustration already present; refusing duplicate insertion")
+              count = text.count(spec["needle"])
+              if count != 1:
+                  raise SystemExit(f"{path}: expected exactly one insertion point, found {count}")
+              replacement = spec["needle"].replace('<div data-bio-key="music-coitado-1992">', spec["figure"] + '<div data-bio-key="music-coitado-1992">')
+              text = text.replace(spec["needle"], replacement, 1)
+              path.write_text(text, encoding="utf-8")
+
+          # Critical containment guard: the illustration must be before data-bio-key,
+          # never inside the fragment that feeds Full Biography.
+          for path in specs:
+              text = path.read_text(encoding="utf-8")
+              start = text.index('<section id="coitado" class="chapter">')
+              bio = text.index('<div data-bio-key="music-coitado-1992">', start)
+              img = text.index(image, start)
+              if not (start < img < bio):
+                  raise SystemExit(f"{path}: illustration escaped vertical-only zone")
+
+          print("Illustration inserted safely in PT/EN Music verticals only.")
+          PY
+      - name: Commit test markup
+        shell: bash
+        run: |
+          if git diff --quiet -- pt/musica/index.html en/music/index.html; then
+            echo "No content diff produced"
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt/musica/index.html en/music/index.html
+          git commit -m "test: place Totti illustration at Coitado opening"
+          git push origin HEAD:test/music-coitado-totti-illustration
