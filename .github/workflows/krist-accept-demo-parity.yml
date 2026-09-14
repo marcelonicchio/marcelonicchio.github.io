@@ -16,6 +16,7 @@ jobs:
         with:
           ref: feat/music-demo-1994-audio
           fetch-depth: 0
+      - run: python -m pip install beautifulsoup4
       - run: python tools/editorial_parity.py --accept music-demo-tape-1994
       - name: Commit parity checkpoint
         run: |
