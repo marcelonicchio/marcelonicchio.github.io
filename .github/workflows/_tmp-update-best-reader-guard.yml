@@ -1,0 +1,38 @@
+name: Temporary update BEST Reader guard
+
+on:
+  push:
+    branches: [feat/video-media-standard-safe]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: "github.event.head_commit.message == 'chore: update BEST Reader guard'"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Update BEST Chapter Page Reader guard
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/smoke_reader_ux.js')
+          s = p.read_text(encoding='utf-8')
+          old = '''  assert(await page.locator('.evidence').count() === 4, 'BEST Chapter Page did not preserve four workshop parts');'''
+          new = '''  const bestWorkshopVideoLibrary = page.locator('.video-library').filter({has: page.locator('#best-workshop-video-title')});\n  assert(await bestWorkshopVideoLibrary.count() === 1, 'BEST Chapter Page audiovisual library missing');\n  assert(await bestWorkshopVideoLibrary.locator('.video-pill').count() === 4, 'BEST Chapter Page did not preserve four workshop video parts');'''
+          if s.count(old) != 1:
+              raise SystemExit(f'Expected one legacy BEST assertion, found {s.count(old)}')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Check JavaScript syntax
+        run: node --check tools/smoke_reader_ux.js
+      - name: Commit guard update
+        run: |
+          git config user.name "Marcelo Nicchio"
+          git config user.email "marcelonicchio@gmail.com"
+          git add tools/smoke_reader_ux.js
+          git commit -m "test: align BEST Reader smoke with audiovisual library"
+          git push origin HEAD:feat/video-media-standard-safe
