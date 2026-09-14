@@ -1,0 +1,46 @@
+name: TEMP Music video inventory
+
+on:
+  push:
+    branches:
+      - feat/video-media-wave1-music-20260914
+  workflow_dispatch:
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install parser
+        run: python -m pip install --quiet beautifulsoup4
+      - name: Inventory PT and EN Music video links
+        run: |
+          python - <<'PY'
+          from bs4 import BeautifulSoup
+          from pathlib import Path
+          import re
+          for path in [Path('pt/musica/index.html'), Path('en/music/index.html')]:
+              print(f'\n===== {path} =====')
+              soup = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
+              for i, a in enumerate(soup.find_all('a', href=True), 1):
+                  href = a.get('href','')
+                  if not re.search(r'(youtube\.com|youtu\.be)', href, re.I):
+                      continue
+                  if a.find_parent(class_='presence-panel') or a.find_parent('header') or a.find_parent('footer'):
+                      continue
+                  parent_section = a.find_parent('section')
+                  heading = ''
+                  if parent_section:
+                      h = parent_section.find(['h1','h2','h3'])
+                      heading = ' '.join(h.stripped_strings) if h else ''
+                  container = a.find_parent(class_='evidence-links') or a.parent
+                  prev_text = ''
+                  if container:
+                      node = container.find_previous(['p','figcaption','h3','h2'])
+                      if node: prev_text = ' '.join(node.stripped_strings)[:320]
+                  print(f'[{i}] SECTION: {heading}')
+                  print(f'    LABEL: {" ".join(a.stripped_strings)}')
+                  print(f'    URL: {href}')
+                  print(f'    CLASS: {" ".join(a.get("class", []))}')
+                  print(f'    CONTEXT: {prev_text}')
+          PY
