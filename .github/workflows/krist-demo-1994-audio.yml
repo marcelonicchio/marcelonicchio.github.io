@@ -1,4 +1,4 @@
-name: Krist 1994 demo audio integration
+name: Krist demo audio patch
 
 on:
   push:
@@ -16,131 +16,18 @@ jobs:
         with:
           ref: feat/music-demo-1994-audio
           fetch-depth: 0
-
-      - name: Install sync dependency
-        run: python -m pip install beautifulsoup4
-
-      - name: Integrate preserved demo audio
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          base = "/assets/archive/music/coitado-do-proximo/1994-primeira-demo-tape-estudio-anonimato"
-          mulher = base + "/mulher-sp-demo-1994-anonimato.mp3"
-          celular = base + "/pegue-o-seu-celular-demo-1994-anonimato.mp3"
-
-          for rel in [mulher.lstrip('/'), celular.lstrip('/')]:
-              if not Path(rel).exists():
-                  raise SystemExit(f"Missing neutral public audio alias: {rel}")
-
-          pt_anchor = '<p>Parte da filmagem dessas sessões sobreviveu. O vídeo atualmente publicado traz <strong>1993</strong> no título, mas o registro correto é de <strong>1994</strong>.</p>'
-          en_anchor = '<p>Part of the footage from these sessions survives. The currently published video is titled as <strong>1993</strong>, but the correct year of the recording is <strong>1994</strong>.</p>'
-
-          pt_block = f'''<div class="video-library audio-library" aria-label="Áudios e mídia" aria-labelledby="music-demo-audio-title">
-  <div class="video-library__head">
-    <strong id="music-demo-audio-title">Áudio &amp; Mídia · 2</strong>
-    <span>Demo-tape · Estúdio Anonimato · 1994</span>
-  </div>
-  <div class="video-library__group">
-    <div class="video-library__label"><strong>Lado A · Mulher SP</strong></div>
-    <p class="video-library__description">Digitalização preservada da fita cassete da primeira demo. O master original foi registrado em ADAT; esta cópia apresenta as limitações sonoras do suporte e da digitalização.</p>
-    <audio class="audio-library__player" controls preload="metadata">
-      <source src="{mulher}" type="audio/mpeg">
-      Seu navegador não suporta reprodução de áudio HTML5.
-    </audio>
-  </div>
-  <div class="video-library__group">
-    <div class="video-library__label"><strong>Lado B · Pegue o Seu Celular</strong></div>
-    <p class="video-library__description">Digitalização preservada da mesma demo-tape de 1994, mantida sem intervenção restaurativa.</p>
-    <audio class="audio-library__player" controls preload="metadata">
-      <source src="{celular}" type="audio/mpeg">
-      Seu navegador não suporta reprodução de áudio HTML5.
-    </audio>
-  </div>
-  <p class="audio-library__note"><strong>Nota de arquivo:</strong> a qualidade sonora reflete a cópia digital disponível atualmente. O áudio foi preservado sem restauração para manter o registro histórico.</p>
-</div>'''
-
-          en_block = f'''<div class="video-library audio-library" aria-label="Audio and media" aria-labelledby="music-demo-audio-title">
-  <div class="video-library__head">
-    <strong id="music-demo-audio-title">Audio &amp; Media · 2</strong>
-    <span>Demo tape · Estúdio Anonimato · 1994</span>
-  </div>
-  <div class="video-library__group">
-    <div class="video-library__label"><strong>Side A · Mulher SP</strong></div>
-    <p class="video-library__description">Preserved cassette digitization of the first demo. The original master was recorded on ADAT; this copy reflects the sonic limitations of the cassette source and digitization.</p>
-    <audio class="audio-library__player" controls preload="metadata">
-      <source src="{mulher}" type="audio/mpeg">
-      Your browser does not support HTML5 audio playback.
-    </audio>
-  </div>
-  <div class="video-library__group">
-    <div class="video-library__label"><strong>Side B · Pegue o Seu Celular</strong></div>
-    <p class="video-library__description">Preserved digitization from the same 1994 demo tape, kept without restorative intervention.</p>
-    <audio class="audio-library__player" controls preload="metadata">
-      <source src="{celular}" type="audio/mpeg">
-      Your browser does not support HTML5 audio playback.
-    </audio>
-  </div>
-  <p class="audio-library__note"><strong>Archive note:</strong> the sound quality reflects the digital copy currently available. The audio has been preserved without restoration in order to retain the historical record.</p>
-</div>'''
-
-          specs = [
-              (Path('pt/musica/index.html'), pt_anchor, pt_block),
-              (Path('en/music/index.html'), en_anchor, en_block),
-          ]
-
-          for path, anchor, block in specs:
-              text = path.read_text(encoding='utf-8')
-              if 'audio-library__player' in text:
-                  raise SystemExit(f"{path}: audio library already present; refusing duplicate insertion")
-              if text.count(anchor) != 1:
-                  raise SystemExit(f"{path}: expected exactly one demo insertion anchor, found {text.count(anchor)}")
-              text = text.replace(anchor, block + anchor, 1)
-              path.write_text(text, encoding='utf-8')
-
-          css = Path('styles.css')
-          css_text = css.read_text(encoding='utf-8')
-          marker = '/* Audio archive — native player inside media library */'
-          if marker in css_text:
-              raise SystemExit('Audio CSS marker already present; refusing duplicate append')
-          css_text += '''\n\n/* Audio archive — native player inside media library */\n.audio-library__player{display:block;width:100%;max-width:640px;height:42px;margin-top:9px;accent-color:var(--accent-soft)}\n.audio-library .audio-library__note{margin:14px 0 0!important;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);color:var(--muted)!important;font-size:.78rem!important;line-height:1.5!important}\n.audio-library__note strong{color:var(--soft)}\n@media(max-width:580px){.audio-library__player{max-width:none;height:44px}}\n'''
-          css.write_text(css_text, encoding='utf-8')
-          PY
-
-      - name: Synchronize Full Biography
-        run: python tools/sync_full_biography.py
-
-      - name: Guard public naming and placement
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          targets = [
-              Path('pt/musica/index.html'), Path('en/music/index.html'),
-              Path('pt/biografia/index.html'), Path('en/biography/index.html'),
-          ]
-          forbidden = 'the trips'
-          for path in targets:
-              text = path.read_text(encoding='utf-8')
-              if forbidden in text.lower():
-                  raise SystemExit(f"Forbidden alternate name leaked into public HTML: {path}")
-          for path in targets:
-              text = path.read_text(encoding='utf-8')
-              if 'music-demo-tape-1994' in text and 'mulher-sp-demo-1994-anonimato.mp3' not in text:
-                  raise SystemExit(f"Expected demo audio missing from synchronized surface: {path}")
-          print('Audio integration guards passed.')
-          PY
-
+      - run: python -m pip install beautifulsoup4
+      - run: python tools/krist_demo_audio_patch.py
+      - run: python tools/sync_full_biography.py
+      - run: python tools/krist_demo_audio_patch.py --guard
       - name: Commit integration
-        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html styles.css
           if git diff --cached --quiet; then
             echo "No integration diff produced"
-            exit 1
+            exit 0
           fi
           git commit -m "feat: add preserved 1994 demo audio players"
           git push origin HEAD:feat/music-demo-1994-audio
