@@ -54,7 +54,7 @@ jobs:
         run: |
           python tools/sync_entries.py
           python tools/sync_full_biography.py
-          python tools/editorial_parity.py --accept
+          python tools/editorial_parity.py --accept music-limonada-1992
       - name: Remove temporary workflow and commit
         run: |
           rm .github/workflows/krist-destemidos-thread-layout.yml
