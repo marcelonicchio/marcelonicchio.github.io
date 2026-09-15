@@ -45,10 +45,10 @@
       ]
     },
     "music-coitado-1994": {
-      "revision": 6,
-      "pt_hash": "160a5cb5b7db0cd3b246d18332f63f1f6698189a29f96825e80175f5daf13c3c",
-      "en_hash": "6899c46f28893538d4733527090a865d91f534db311698c7875ed1451c6b4cc7",
-      "accepted_on": "2026-09-14",
+      "revision": 7,
+      "pt_hash": "78758880bc5920581c96bf476fd3c59b2118ad0e996b71eeb09e6313fb931b4f",
+      "en_hash": "444a5f65b9e74da7b751cf2ace62909356ed8d24ea0b94e885fbdc7ed568990f",
+      "accepted_on": "2026-09-15",
       "changed_languages": [
         "pt",
         "en"
