@@ -1,0 +1,30 @@
+name: Krist refresh sitemap 97FM
+
+on:
+  push:
+    branches:
+      - feat/music-kid-vinil-97fm-audio
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/music-kid-vinil-97fm-audio
+          fetch-depth: 0
+      - run: python tools/build_sitemap.py
+      - name: Commit sitemap refresh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No sitemap change produced"
+            exit 1
+          fi
+          git commit -m "chore: refresh sitemap after 97FM audio sync"
+          git push origin HEAD:feat/music-kid-vinil-97fm-audio
