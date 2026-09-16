@@ -1,0 +1,100 @@
+name: Dave Music hierarchy migration
+
+on:
+  push:
+    branches:
+      - dave/music-flat-hierarchy-2026-09-16
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: dave/music-flat-hierarchy-2026-09-16
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
+      - name: Flatten Music hierarchy and apply titles
+        run: python tools/dave_music_flatten.py
+      - name: Resync fragment-backed promoted entries
+        run: python tools/sync_entries.py
+      - name: Accept intentional PT EN Music parity revision
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from datetime import date
+          from pathlib import Path
+
+          ROOT = Path.cwd()
+          sys.path.insert(0, str(ROOT / 'tools'))
+          import editorial_parity as ep
+
+          manifest = ep.load_manifest()
+          registry = ep.load_registry()
+          states = registry.setdefault('entries', {})
+          today = date.today().isoformat()
+          accepted = []
+          for entry in ep.all_entries(manifest):
+              if entry.get('domain') != 'music':
+                  continue
+              current = ep.current_hashes(entry)
+              state = states.get(entry['id'])
+              if state is None:
+                  states[entry['id']] = {
+                      'revision': 1,
+                      'pt_hash': current['pt'],
+                      'en_hash': current['en'],
+                      'accepted_on': today,
+                      'changed_languages': ['pt', 'en'],
+                  }
+                  accepted.append(f"{entry['id']}: new")
+                  continue
+              changed = [lang for lang in ('pt', 'en') if current[lang] != state.get(f'{lang}_hash')]
+              if not changed:
+                  continue
+              state['revision'] = int(state.get('revision', 0)) + 1
+              state['pt_hash'] = current['pt']
+              state['en_hash'] = current['en']
+              state['accepted_on'] = today
+              state['changed_languages'] = changed
+              accepted.append(f"{entry['id']}: {','.join(changed)}")
+          (ROOT / 'data/editorial_parity.json').write_text(
+              json.dumps(registry, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          print('Accepted Music parity checkpoints:')
+          for item in accepted:
+              print(' -', item)
+          PY
+      - name: Synchronize Full Biography
+        run: python tools/sync_full_biography.py
+      - name: Rebuild standalone Chapter Pages
+        run: python tools/build_chapter_pages.py
+      - name: Validate targeted invariants
+        run: |
+          python tools/sync_entries.py --check
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/build_chapter_pages.py --check
+          python tools/audit_entries.py
+          python tools/audit_site.py
+      - name: Commit migration result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pt en data styles.css
+          git diff --cached --stat
+          git diff --cached --quiet && { echo "No migration changes produced"; exit 1; }
+          git commit -m "refactor: flatten Music thread hierarchy"
+          git push origin HEAD:dave/music-flat-hierarchy-2026-09-16
