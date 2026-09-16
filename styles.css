@@ -426,6 +426,9 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 .video-library .video-library__description{margin:6px 0 9px!important;max-width:72ch;color:var(--muted)!important;font-size:.84rem!important;line-height:1.48!important}
 .evidence-list>.video-library{margin:0}
 .video-library__actions{display:flex;flex-wrap:wrap;gap:8px}
+.video-library__song-list{display:grid;gap:8px}
+.video-library__song-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.video-library__note{color:var(--muted);font-size:.8rem;line-height:1.35}
 .video-pill{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:7px 12px;border:1px solid rgba(243,239,231,.48);border-radius:999px;background:rgba(243,239,231,.065);color:rgba(243,239,231,.96)!important;font-size:.82rem;font-weight:760;text-decoration:none!important;line-height:1.1;box-shadow:inset 0 1px 0 rgba(255,255,255,.055);transition:background .16s ease,color .16s ease,border-color .16s ease,transform .16s ease,box-shadow .16s ease}
 .video-pill::before{content:"▶";font-size:.66em;line-height:1;color:var(--accent-soft)}
 .video-pill--primary{background:rgba(241,223,163,.09);border-color:rgba(241,223,163,.58);padding-inline:14px}
