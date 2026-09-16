@@ -1,0 +1,127 @@
+name: Dave Kid Vinil 97FM sync
+
+on:
+  push:
+    branches:
+      - dave/kid-vinil-97fm-reconstruction
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: dave/kid-vinil-97fm-reconstruction
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install image dependency
+        run: python -m pip install --disable-pip-version-check Pillow
+
+      - name: Update source of truth
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+          from PIL import Image
+
+          root = Path('.')
+          asset = '/assets/archive/music/coitado-do-proximo/1994-kid-vinil-97fm-rock/kidvinilradio_97fm_IA.jpg'
+          image_path = root / asset.lstrip('/')
+          width, height = Image.open(image_path).size
+
+          registry_path = root / 'data/entries.json'
+          registry = json.loads(registry_path.read_text(encoding='utf-8'))
+          entry = next(item for item in registry['entries'] if item['id'] == 'music-coitado-1994')
+          entry['title']['pt'] = 'Entrevista para Kid Vinil na 97FM Rock'
+          entry['title']['en'] = 'Interview with Kid Vinil on 97FM Rock'
+          registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          pt_figure = (
+              f'<figure class="thread-media thread-media--linked"><a aria-label="Abrir reconstrução por IA da entrevista do Coitado do Próximo com Kid Vinil na 97FM Rock em tamanho maior" href="{asset}" rel="noopener noreferrer" target="_blank">'
+              f'<img alt="Reconstrução por IA da entrevista do Coitado do Próximo com Kid Vinil na 97FM Rock, em 1994." decoding="async" loading="lazy" src="{asset}" width="{width}" height="{height}"/></a>'
+              f'<figcaption><strong>Entrevista para Kid Vinil · 97FM Rock · 1994.</strong><span class="thread-media-note">Reconstrução visual gerada por IA a partir do relato autobiográfico. Não é um registro fotográfico da ocasião.</span>'
+              f'<a class="thread-media-open" href="{asset}" rel="noopener noreferrer" target="_blank">Abrir imagem em tamanho maior ↗</a></figcaption></figure>'
+          )
+          en_figure = (
+              f'<figure class="thread-media thread-media--linked"><a aria-label="Open the AI reconstruction of Coitado do Próximo’s interview with Kid Vinil on 97FM Rock at a larger size" href="{asset}" rel="noopener noreferrer" target="_blank">'
+              f'<img alt="AI reconstruction of Coitado do Próximo’s interview with Kid Vinil on 97FM Rock in 1994." decoding="async" loading="lazy" src="{asset}" width="{width}" height="{height}"/></a>'
+              f'<figcaption><strong>Interview with Kid Vinil · 97FM Rock · 1994.</strong><span class="thread-media-note">AI-generated visual reconstruction based on the autobiographical account. It is not a photograph of the event.</span>'
+              f'<a class="thread-media-open" href="{asset}" rel="noopener noreferrer" target="_blank">Open larger image ↗</a></figcaption></figure>'
+          )
+
+          def insert_after_first_paragraph(path: Path, figure: str) -> None:
+              text = path.read_text(encoding='utf-8')
+              if asset in text:
+                  return
+              marker = '</p>'
+              pos = text.find(marker)
+              if pos < 0:
+                  raise RuntimeError(f'No opening paragraph found in {path}')
+              pos += len(marker)
+              path.write_text(text[:pos] + figure + text[pos:], encoding='utf-8')
+
+          insert_after_first_paragraph(root / 'content/entries/pt/music-coitado-1994.inc', pt_figure)
+          insert_after_first_paragraph(root / 'content/entries/en/music-coitado-1994.inc', en_figure)
+
+          def set_vertical_heading(path: Path, section_id: str, title: str, href: str) -> None:
+              text = path.read_text(encoding='utf-8')
+              pattern = re.compile(
+                  rf'(<section\b(?=[^>]*\bid=["\']{re.escape(section_id)}["\'])[^>]*>.*?<h2\b[^>]*>)(.*?)(</h2>)',
+                  flags=re.S | re.I,
+              )
+              replacement_inner = f'<a class="entry-title-permalink" href="{href}">{title}</a>'
+              updated, count = pattern.subn(lambda m: m.group(1) + replacement_inner + m.group(3), text, count=1)
+              if count != 1:
+                  raise RuntimeError(f'Could not update heading in {path}: {count} matches')
+              path.write_text(updated, encoding='utf-8')
+
+          set_vertical_heading(
+              root / 'pt/musica/index.html',
+              'kid-vinil-97fm-rock-1994',
+              'Entrevista para Kid Vinil na 97FM Rock',
+              '/pt/musica/kid-vinil-97fm-rock/',
+          )
+          set_vertical_heading(
+              root / 'en/music/index.html',
+              'kid-vinil-97fm-rock-1994',
+              'Interview with Kid Vinil on 97FM Rock',
+              '/en/music/kid-vinil-97fm-rock/',
+          )
+          PY
+
+      - name: Synchronize generated surfaces
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+
+      - name: Validate focused invariants
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/audit_entries.py
+          python tools/audit_image_dimensions.py
+          python tools/editorial_parity.py --check
+
+      - name: Commit synchronized result
+        run: |
+          if git diff --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: add Kid Vinil 97FM reconstruction'
+          git push origin HEAD:dave/kid-vinil-97fm-reconstruction
