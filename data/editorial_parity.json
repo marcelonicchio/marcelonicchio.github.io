@@ -67,10 +67,10 @@
       "accepted_on": "2026-08-27"
     },
     "music-album-1997": {
-      "revision": 4,
-      "pt_hash": "1aba74411b81107b6d8417b513ec1883865fdb3ba5fccf75df8ab08d586edcd3",
-      "en_hash": "178d75d6c6cb9d31ac2dbab76a31e64018c9c61c2bdadde8a9b8eee6800a0d72",
-      "accepted_on": "2026-09-10",
+      "revision": 5,
+      "pt_hash": "90a2a9f6eea4396c5671bae1035ceddd785ad52b61d75899bc482ce412b1c005",
+      "en_hash": "72a91db67344548abc24d79db896b74d35a63124e87413ab912529956a6827a1",
+      "accepted_on": "2026-09-16",
       "changed_languages": [
         "pt",
         "en"
@@ -93,10 +93,10 @@
       ]
     },
     "music-festival-1998-1999": {
-      "revision": 2,
-      "pt_hash": "449df433972d50356cd7798f8e8f7076796ee6257f988fcc054895ba3fec8ca4",
-      "en_hash": "278c2c8f751c7663726e5afbd9133594b86fcc3634d8c6251c9780296596bd1c",
-      "accepted_on": "2026-09-10",
+      "revision": 3,
+      "pt_hash": "e422d4056cafc90f98cbac50d0231b7e082a5a6b12ff7755ca77d90f9eebdc3c",
+      "en_hash": "7c38dbce1ce6ffd37d1544a13ab6def8078d1175626f21440637e09a3cb003d6",
+      "accepted_on": "2026-09-16",
       "changed_languages": [
         "pt",
         "en"
@@ -293,10 +293,14 @@
       "accepted_on": "2026-08-27"
     },
     "music-reunion-2023": {
-      "revision": 1,
-      "pt_hash": "b49dba7016e56fdc1aa0d893f65a95ce75ddfa7a25f6956232b53ddcf20383a6",
-      "en_hash": "91bb305cafb8a0bdea77bef3f0ed2958ae5995acc48df56967dea73c5e889d7d",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "49f98e2616a6c58307395038e122948cfba1534cd48fbf083477f728975d2437",
+      "en_hash": "4918939459c7b08ae92f9b88a384a80c2e9a488caacb81712693ca6f74594013",
+      "accepted_on": "2026-09-16",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "hai-cycle": {
       "revision": 1,
@@ -412,10 +416,10 @@
       ]
     },
     "music-kid-vinil-1993": {
-      "revision": 2,
-      "pt_hash": "62cc0c00ebd7c46e6dbd1b0219660e09126249a573099debd9517cc6d6c3d34f",
-      "en_hash": "ea3929acd12d694a4b6a17e46c111f55d773b5be4cafcbca52b8ae485352c1c8",
-      "accepted_on": "2026-09-14",
+      "revision": 3,
+      "pt_hash": "1ff05d31a8292d715c952d76b4d53d98c707c9a6c0842cfbd373c34930d93935",
+      "en_hash": "0b85845b7ba2a46c8e7eaad50c3c2efa768a79151b20502d1b02b7405d46423a",
+      "accepted_on": "2026-09-16",
       "changed_languages": [
         "pt",
         "en"
