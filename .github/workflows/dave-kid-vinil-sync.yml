@@ -23,8 +23,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install image dependency
-        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Install sync dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
 
       - name: Update source of truth
         run: |
