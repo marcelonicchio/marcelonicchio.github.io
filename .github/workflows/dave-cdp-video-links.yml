@@ -1,0 +1,164 @@
+name: Dave CDP video links
+
+on:
+  push:
+    branches:
+      - dave/cdp-video-links-2026-09-16
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: dave/cdp-video-links-2026-09-16
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install generator dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
+      - name: Add CDP video libraries
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          ROOT = Path('.')
+
+          def read(path):
+              return (ROOT / path).read_text(encoding='utf-8')
+
+          def write(path, text):
+              (ROOT / path).write_text(text, encoding='utf-8')
+
+          def insert_after_paragraph_containing(text, phrase, block, label):
+              if block.strip() in text:
+                  return text
+              idx = text.find(phrase)
+              if idx < 0:
+                  raise RuntimeError(f'{label}: phrase not found: {phrase}')
+              end = text.find('</p>', idx)
+              if end < 0:
+                  raise RuntimeError(f'{label}: paragraph end not found')
+              end += len('</p>')
+              return text[:end] + block + text[end:]
+
+          def phase_span(text, key):
+              marker = f'data-bio-key="{key}"'
+              marker_idx = text.find(marker)
+              if marker_idx < 0:
+                  raise RuntimeError(f'phase not found: {key}')
+              start = text.rfind('<div', 0, marker_idx)
+              if start < 0:
+                  raise RuntimeError(f'phase root not found: {key}')
+              token_re = re.compile(r'<div\b[^>]*>|</div>', flags=re.I)
+              depth = 0
+              for m in token_re.finditer(text, start):
+                  tok = m.group(0).lower()
+                  if tok.startswith('<div'):
+                      depth += 1
+                  else:
+                      depth -= 1
+                      if depth == 0:
+                          return start, m.end()
+              raise RuntimeError(f'unbalanced phase: {key}')
+
+          def append_to_phase(text, key, block, marker):
+              if marker in text:
+                  return text
+              start, end = phase_span(text, key)
+              phase = text[start:end]
+              closing = '</div></div>'
+              if not phase.endswith(closing):
+                  raise RuntimeError(f'{key}: unexpected phase ending')
+              phase = phase[:-len(closing)] + block + closing
+              return text[:start] + phase + text[end:]
+
+          def replace_phase_paragraph(text, key, old, new):
+              start, end = phase_span(text, key)
+              phase = text[start:end]
+              if old not in phase:
+                  raise RuntimeError(f'{key}: expected paragraph not found')
+              phase = phase.replace(old, new, 1)
+              return text[:start] + phase + text[end:]
+
+          kid_pt = '''<div class="video-library" aria-label="Vídeos e mídia" aria-labelledby="music-kid-vinil-1993-video-title"><div class="video-library__head"><strong id="music-kid-vinil-1993-video-title">Vídeos &amp; Mídia · 2</strong><span>Programa Livre · SBT · 1993</span></div><div class="video-library__group"><div class="video-library__label"><strong>Kid Vinil e Verminose</strong></div><p class="video-library__description">Registros da apresentação de Kid Vinil e Verminose no Programa Livre, de Serginho Groisman, no SBT, em 1993.</p><div class="video-library__actions"><a class="video-pill" href="https://www.youtube.com/watch?v=sft44esAp-M" target="_blank" rel="noopener noreferrer">Ela Só Gosta de Pizza</a><a class="video-pill" href="https://www.youtube.com/watch?v=F5ZZ18qsdvg" target="_blank" rel="noopener noreferrer">Tô Sabendo + entrevista</a></div></div></div>'''
+          kid_en = '''<div class="video-library" aria-label="Videos and media" aria-labelledby="music-kid-vinil-1993-video-title"><div class="video-library__head"><strong id="music-kid-vinil-1993-video-title">Videos &amp; Media · 2</strong><span>Programa Livre · SBT · 1993</span></div><div class="video-library__group"><div class="video-library__label"><strong>Kid Vinil e Verminose</strong></div><p class="video-library__description">Video records from Kid Vinil e Verminose's appearance on Programa Livre, hosted by Serginho Groisman on SBT, in 1993.</p><div class="video-library__actions"><a class="video-pill" href="https://www.youtube.com/watch?v=sft44esAp-M" target="_blank" rel="noopener noreferrer">Ela Só Gosta de Pizza</a><a class="video-pill" href="https://www.youtube.com/watch?v=F5ZZ18qsdvg" target="_blank" rel="noopener noreferrer">Tô Sabendo + interview</a></div></div></div>'''
+
+          path = 'content/entries/pt/music-kid-vinil-1993.inc'
+          text = read(path)
+          text = insert_after_paragraph_containing(text, 'Meses depois daquele show', kid_pt, path)
+          write(path, text)
+
+          path = 'content/entries/en/music-kid-vinil-1993.inc'
+          text = read(path)
+          text = insert_after_paragraph_containing(text, 'Months after that show', kid_en, path)
+          write(path, text)
+
+          album_pt = '''<div class="video-library" aria-label="Vídeos e mídia" aria-labelledby="music-album-1997-video-title"><div class="video-library__head"><strong id="music-album-1997-video-title">Vídeos &amp; Mídia · 1</strong><span>Estúdio Asas · 1997</span></div><div class="video-library__group"><div class="video-library__label"><strong>Gravação de Meu Querido Diário</strong></div><p class="video-library__description">Playlist com registros preservados das sessões de gravação do primeiro álbum do Coitado do Próximo no Estúdio Asas, em 1997.</p><div class="video-library__actions"><a class="video-pill" href="https://youtube.com/playlist?list=PLEPyDyWt1dXI&amp;si=1K4RUsYEvLbVaALq" target="_blank" rel="noopener noreferrer">Abrir playlist</a></div></div></div>'''
+          album_en = '''<div class="video-library" aria-label="Videos and media" aria-labelledby="music-album-1997-video-title"><div class="video-library__head"><strong id="music-album-1997-video-title">Videos &amp; Media · 1</strong><span>Estúdio Asas · 1997</span></div><div class="video-library__group"><div class="video-library__label"><strong>Recording Meu Querido Diário</strong></div><p class="video-library__description">Playlist with preserved video records from the recording sessions for Coitado do Próximo's first album at Estúdio Asas in 1997.</p><div class="video-library__actions"><a class="video-pill" href="https://youtube.com/playlist?list=PLEPyDyWt1dXI&amp;si=1K4RUsYEvLbVaALq" target="_blank" rel="noopener noreferrer">Open playlist</a></div></div></div>'''
+
+          show_pt = '''<div class="video-library" aria-label="Vídeos e mídia" aria-labelledby="music-cafe-piu-piu-1998-video-title"><div class="video-library__head"><strong id="music-cafe-piu-piu-1998-video-title">Vídeos &amp; Mídia · 7</strong><span>Café Piu-Piu · 27 out. 1998</span></div><div class="video-library__group"><div class="video-library__label"><strong>Show · Bexiga · São Paulo/SP</strong></div><p class="video-library__description">Apresentação do Coitado do Próximo no Café Piu-Piu, com participações de Paulão de Carvalho, das Velhas Virgens, e Mario Joe.</p><div class="video-library__song-list"><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=ATQo5o8ilFE" target="_blank" rel="noopener noreferrer">Sangue Ruim</a><span class="video-library__note">cover Inocentes</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=CZhQztQij4w" target="_blank" rel="noopener noreferrer">Ali-Babão</a><span class="video-library__note">versão Destemidos Limonadas</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=vJetP8hWJG0" target="_blank" rel="noopener noreferrer">Só Pra Te Comer</a><span class="video-library__note">participação Paulão de Carvalho</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=EKEglxFI6Qs" target="_blank" rel="noopener noreferrer">Eu Não Tô Nem Aí</a></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=hKR6Xv8TB4Y" target="_blank" rel="noopener noreferrer">Você Merece</a></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=STKh-cb1Yhg" target="_blank" rel="noopener noreferrer">Filhinho Coronel</a><span class="video-library__note">participação Mario Joe</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=DO0TkVcQMYc" target="_blank" rel="noopener noreferrer">Mulher SP</a><span class="video-library__note">participação Mario Joe</span></div></div></div></div>'''
+          show_en = '''<div class="video-library" aria-label="Videos and media" aria-labelledby="music-cafe-piu-piu-1998-video-title"><div class="video-library__head"><strong id="music-cafe-piu-piu-1998-video-title">Videos &amp; Media · 7</strong><span>Café Piu-Piu · Oct. 27, 1998</span></div><div class="video-library__group"><div class="video-library__label"><strong>Show · Bexiga · São Paulo/SP</strong></div><p class="video-library__description">Coitado do Próximo performance at Café Piu-Piu, with guest appearances by Paulão de Carvalho of Velhas Virgens and Mario Joe.</p><div class="video-library__song-list"><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=ATQo5o8ilFE" target="_blank" rel="noopener noreferrer">Sangue Ruim</a><span class="video-library__note">Inocentes cover</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=CZhQztQij4w" target="_blank" rel="noopener noreferrer">Ali-Babão</a><span class="video-library__note">Destemidos Limonadas version</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=vJetP8hWJG0" target="_blank" rel="noopener noreferrer">Só Pra Te Comer</a><span class="video-library__note">guest: Paulão de Carvalho</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=EKEglxFI6Qs" target="_blank" rel="noopener noreferrer">Eu Não Tô Nem Aí</a></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=hKR6Xv8TB4Y" target="_blank" rel="noopener noreferrer">Você Merece</a></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=STKh-cb1Yhg" target="_blank" rel="noopener noreferrer">Filhinho Coronel</a><span class="video-library__note">guest: Mario Joe</span></div><div class="video-library__song-row"><a class="video-pill" href="https://www.youtube.com/watch?v=DO0TkVcQMYc" target="_blank" rel="noopener noreferrer">Mulher SP</a><span class="video-library__note">guest: Mario Joe</span></div></div></div></div>'''
+
+          reunion_pt = '''<div class="video-library" aria-label="Vídeos e mídia" aria-labelledby="music-reunion-2023-video-title"><div class="video-library__head"><strong id="music-reunion-2023-video-title">Vídeos &amp; Mídia · 4</strong><span>Clube Cassasp · 21 dez. 2023</span></div><div class="video-library__group"><div class="video-library__label"><strong>Reencontro · 20 anos depois</strong></div><p class="video-library__description">Registros da apresentação em uma festa fechada da produtora Oitava Produções, no Clube Cassasp, em São Paulo.</p><div class="video-library__actions"><a class="video-pill" href="https://www.youtube.com/watch?v=two369xGdKo" target="_blank" rel="noopener noreferrer">Secret Agent Man</a><a class="video-pill" href="https://www.youtube.com/watch?v=jaMvSEhzuZA" target="_blank" rel="noopener noreferrer">Até Quando Esperar</a><a class="video-pill" href="https://www.youtube.com/watch?v=5xQTs69L3MY" target="_blank" rel="noopener noreferrer">Mulher SP</a><a class="video-pill" href="https://www.youtube.com/watch?v=wFVXPZVSIdQ" target="_blank" rel="noopener noreferrer">Um Anjo do Céu</a></div></div></div>'''
+          reunion_en = '''<div class="video-library" aria-label="Videos and media" aria-labelledby="music-reunion-2023-video-title"><div class="video-library__head"><strong id="music-reunion-2023-video-title">Videos &amp; Media · 4</strong><span>Clube Cassasp · Dec. 21, 2023</span></div><div class="video-library__group"><div class="video-library__label"><strong>Reunion · 20 years later</strong></div><p class="video-library__description">Video records from a closed event by Oitava Produções at Clube Cassasp in São Paulo.</p><div class="video-library__actions"><a class="video-pill" href="https://www.youtube.com/watch?v=two369xGdKo" target="_blank" rel="noopener noreferrer">Secret Agent Man</a><a class="video-pill" href="https://www.youtube.com/watch?v=jaMvSEhzuZA" target="_blank" rel="noopener noreferrer">Até Quando Esperar</a><a class="video-pill" href="https://www.youtube.com/watch?v=5xQTs69L3MY" target="_blank" rel="noopener noreferrer">Mulher SP</a><a class="video-pill" href="https://www.youtube.com/watch?v=wFVXPZVSIdQ" target="_blank" rel="noopener noreferrer">Um Anjo do Céu</a></div></div></div>'''
+
+          path = 'pt/musica/index.html'
+          text = read(path)
+          text = append_to_phase(text, 'music-album-1997', album_pt, 'music-album-1997-video-title')
+          text = append_to_phase(text, 'music-festival-1998-1999', show_pt, 'music-cafe-piu-piu-1998-video-title')
+          text = replace_phase_paragraph(text, 'music-reunion-2023', 'O grupo voltou a se reunir para uma apresentação surpresa no Clube Cassasp, em São Paulo. Há registros em vídeo.', 'Em <strong>21 de dezembro de 2023</strong>, após 20 anos sem se apresentar em público, o Coitado do Próximo voltou ao palco em uma festa fechada da produtora <strong>Oitava Produções</strong>, no <strong>Clube Cassasp</strong>, em São Paulo.')
+          text = append_to_phase(text, 'music-reunion-2023', reunion_pt, 'music-reunion-2023-video-title')
+          write(path, text)
+
+          path = 'en/music/index.html'
+          text = read(path)
+          text = append_to_phase(text, 'music-album-1997', album_en, 'music-album-1997-video-title')
+          text = append_to_phase(text, 'music-festival-1998-1999', show_en, 'music-cafe-piu-piu-1998-video-title')
+          text = replace_phase_paragraph(text, 'music-reunion-2023', 'The band reunited for a surprise performance at Clube Cassasp in São Paulo. Video records survive.', 'On <strong>December 21, 2023</strong>, after 20 years without a public performance, Coitado do Próximo returned to the stage at a closed event by <strong>Oitava Produções</strong> at <strong>Clube Cassasp</strong> in São Paulo.')
+          text = append_to_phase(text, 'music-reunion-2023', reunion_en, 'music-reunion-2023-video-title')
+          write(path, text)
+
+          css_path = 'styles.css'
+          css = read(css_path)
+          marker = '.video-library__song-list{display:grid;gap:8px}'
+          if marker not in css:
+              needle = '.video-library__actions{display:flex;flex-wrap:wrap;gap:8px}'
+              if needle not in css:
+                  raise RuntimeError('video library action CSS anchor not found')
+              addition = needle + '\n.video-library__song-list{display:grid;gap:8px}\n.video-library__song-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px}\n.video-library__note{color:var(--muted);font-size:.8rem;line-height:1.35}'
+              css = css.replace(needle, addition, 1)
+              write(css_path, css)
+          PY
+
+      - name: Synchronize generated surfaces
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+          python tools/build_sitemap.py
+      - name: Verify synchronized state
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/editorial_parity.py --check
+          python tools/audit_full_biography.py
+          python tools/audit_entries.py
+          python tools/audit_site.py
+      - name: Commit generated changes and remove one-shot workflow
+        run: |
+          git config user.name "Dave HUB Agent"
+          git config user.email "actions@users.noreply.github.com"
+          git rm .github/workflows/dave-cdp-video-links.yml
+          git add content/entries/pt/music-kid-vinil-1993.inc content/entries/en/music-kid-vinil-1993.inc pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html pt/musica/kid-vinil-verminose-cafe-piu-piu/index.html en/music/kid-vinil-verminose-cafe-piu-piu/index.html styles.css sitemap.xml
+          git commit -m "feat: add CDP video libraries"
+          git push origin HEAD:dave/cdp-video-links-2026-09-16
