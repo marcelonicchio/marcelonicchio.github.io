@@ -104,6 +104,7 @@ jobs:
           python tools/sync_entries.py
           python tools/sync_full_biography.py
           python tools/build_chapter_pages.py
+          python tools/editorial_parity.py --accept music-coitado-1994
 
       - name: Validate focused invariants
         run: |
