@@ -84,6 +84,8 @@ jobs:
           def replace_phase_paragraph(text, key, old, new):
               start, end = phase_span(text, key)
               phase = text[start:end]
+              if new in phase:
+                  return text
               if old not in phase:
                   raise RuntimeError(f'{key}: expected paragraph not found')
               phase = phase.replace(old, new, 1)
@@ -145,6 +147,10 @@ jobs:
           python tools/sync_full_biography.py
           python tools/build_chapter_pages.py
           python tools/build_sitemap.py
+          python tools/editorial_parity.py --accept music-kid-vinil-1993
+          python tools/editorial_parity.py --accept music-album-1997
+          python tools/editorial_parity.py --accept music-festival-1998-1999
+          python tools/editorial_parity.py --accept music-reunion-2023
       - name: Verify synchronized state
         run: |
           python tools/sync_entries.py --check
@@ -159,6 +165,6 @@ jobs:
           git config user.name "Dave HUB Agent"
           git config user.email "actions@users.noreply.github.com"
           git rm .github/workflows/dave-cdp-video-links.yml
-          git add content/entries/pt/music-kid-vinil-1993.inc content/entries/en/music-kid-vinil-1993.inc pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html pt/musica/kid-vinil-verminose-cafe-piu-piu/index.html en/music/kid-vinil-verminose-cafe-piu-piu/index.html styles.css sitemap.xml
+          git add content/entries/pt/music-kid-vinil-1993.inc content/entries/en/music-kid-vinil-1993.inc pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html pt/musica/kid-vinil-verminose-cafe-piu-piu/index.html en/music/kid-vinil-verminose-cafe-piu-piu/index.html styles.css sitemap.xml data/editorial_parity.json
           git commit -m "feat: add CDP video libraries"
           git push origin HEAD:dave/cdp-video-links-2026-09-16
