@@ -2,6 +2,7 @@
 """Audit the Music-style editorial hierarchy on Internet & Performance.
 
 The date/title split is a paired PT/EN structural contract and must remain synchronized.
+The undated closing synthesis remains outside the dated entry sequence.
 """
 
 from pathlib import Path
@@ -23,6 +24,7 @@ EXPECTED_IDS = {
         "clickland", "petlove", "best", "dialetto", "independent", "driven",
     ],
 }
+CLOSING_ID = {"pt": "continuidade", "en": "continuity"}
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 
 
@@ -70,6 +72,18 @@ def audit(lang: str, path: Path):
         raise AssertionError(
             f"{path.relative_to(ROOT)}: Internet entry order mismatch; expected={expected}, found={entries}"
         )
+
+    closing = article.select_one(f"#{CLOSING_ID[lang]}")
+    if closing is None:
+        raise AssertionError(f"{path.relative_to(ROOT)}: closing synthesis #{CLOSING_ID[lang]} missing")
+    if "internet-entry" in (closing.get("class") or []):
+        raise AssertionError(
+            f"{path.relative_to(ROOT)}#{CLOSING_ID[lang]}: closing synthesis must not become a dated Internet entry"
+        )
+    if direct_child(closing, cls="phase-year") is not None:
+        raise AssertionError(
+            f"{path.relative_to(ROOT)}#{CLOSING_ID[lang]}: closing synthesis must remain undated"
+        )
     return entries
 
 
@@ -80,7 +94,7 @@ def main() -> int:
         raise AssertionError(
             f"PT/EN Internet entry order differs: pt={results['pt']}, en={results['en']}"
         )
-    print(f"Internet editorial structure OK: {len(results['pt'])} dated entries in PT/EN.")
+    print(f"Internet editorial structure OK: {len(results['pt'])} dated entries in PT/EN; closing synthesis remains undated.")
     return 0
 
 
