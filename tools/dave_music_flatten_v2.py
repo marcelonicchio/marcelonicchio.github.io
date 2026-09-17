@@ -2,8 +2,8 @@
 """Safe wrapper for the temporary Music hierarchy migration.
 
 Preserves root attributes while promoting legacy phases, repairs the inherited
-1993 studios entry that never received a biography key, and gives every promoted
-chapter a stable id so Full Biography coverage can register it as a true chapter.
+1993 studios entry that never received a biography key, gives every promoted
+chapter a stable id, and removes legacy parent anchors after flattening.
 """
 
 from __future__ import annotations
@@ -37,8 +37,6 @@ def safe_promote(fragment: str) -> str:
     class_value = " ".join(classes)
     attrs = attrs[:class_match.start(2)] + class_value + attrs[class_match.end(2):]
 
-    # Historical exception: the 1993 studios/shows block has an id but never
-    # received data-bio-key, which also kept it outside Full Biography sync.
     if "data-bio-key=" not in attrs:
         title = migration.heading_text(fragment)
         root_id = re.search(r'\bid=["\']([^"\']+)["\']', attrs)
@@ -58,9 +56,6 @@ def safe_promote(fragment: str) -> str:
         raise RuntimeError("promoted Music entry still lacks data-bio-key")
     key = key_match.group(1)
 
-    # Legacy phases had no anchors because they were never chapters. Once promoted,
-    # every chapter must have a stable id. Preserve existing ids on already-promoted
-    # entries; use the biography key only where no id existed before.
     if not re.search(r'\bid=["\'][^"\']+["\']', attrs):
         attrs += f' id="{key}"'
 
@@ -105,6 +100,33 @@ def safe_mp3_section(lang: str) -> str:
     )
 
 
+_original_rewrite_music_page = migration.rewrite_music_page
+
+
+def safe_rewrite_music_page(path, lang, label_to_key=None):
+    meta, labels = _original_rewrite_music_page(path, lang, label_to_key)
+    first_id = meta[labels["destemidos"]]["id"]
+    if not first_id:
+        raise RuntimeError("Destemidos entry unexpectedly has no id")
+    text = path.read_text(encoding="utf-8")
+    if lang == "pt":
+        text = re.sub(
+            r'<a\s+href=["\']#palcos["\'][^>]*>.*?</a>',
+            f'<a href="#{first_id}">Cronologia do Coitado</a>',
+            text,
+            flags=re.I | re.S,
+        )
+    else:
+        text = re.sub(
+            r'<a\s+href=["\']#stages["\'][^>]*>.*?</a>',
+            f'<a href="#{first_id}">Coitado chronology</a>',
+            text,
+            flags=re.I | re.S,
+        )
+    path.write_text(text, encoding="utf-8")
+    return meta, labels
+
+
 _original_update_manifest = migration.update_manifest
 
 
@@ -112,9 +134,6 @@ def update_manifest_with_studios(pt_meta, en_meta) -> None:
     _original_update_manifest(pt_meta, en_meta)
     manifest = json.loads(migration.MANIFEST_PATH.read_text(encoding="utf-8"))
 
-    # Section-backed chapters must be registered by their public chapter id for
-    # coverage auditing. Existing promoted entries already use #id selectors;
-    # converted legacy phases still carry data-bio-key selectors at this point.
     def promote_selector(spec: dict, meta: dict) -> None:
         selector = spec.get("selector", "")
         km = re.search(r"data-bio-key=['\"]([^'\"]+)['\"]", selector)
@@ -163,8 +182,6 @@ def update_manifest_with_studios(pt_meta, en_meta) -> None:
             raise RuntimeError("music-limonada-1992 not found in Full Biography manifest")
         manifest["entries"].insert(insert_at, studios_entry)
 
-    # The MP3 entry was inserted by the base migration before this wrapper gets
-    # control; make its selector chapter-id based as well.
     for entry in manifest["entries"]:
         if entry.get("id") == migration.MP3_KEY:
             entry["source"]["pt"]["selector"] = f"#{pt_meta[migration.MP3_KEY]['id']}"
@@ -178,6 +195,7 @@ def update_manifest_with_studios(pt_meta, en_meta) -> None:
 
 migration.promote = safe_promote
 migration.mp3_section = safe_mp3_section
+migration.rewrite_music_page = safe_rewrite_music_page
 migration.update_manifest = update_manifest_with_studios
 
 if __name__ == "__main__":
