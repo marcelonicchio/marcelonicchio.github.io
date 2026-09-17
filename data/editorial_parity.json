@@ -23,10 +23,14 @@
       ]
     },
     "internet-bbs": {
-      "revision": 1,
-      "pt_hash": "6936888707afe6abdd4941e33161bc3f4502dc49293775e462281baee5d003d5",
-      "en_hash": "c25eb15228ea8e5cda35d1498f367549dcbac19baa4fad5773c23ae3d8ba2d8b",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "102588ff444a3ae316da124403f3799b76ee37b15be78e02da65083c27982a67",
+      "en_hash": "fa063deac458cabfc4f1cf28e317570372c0643a6a9080b6128675827ea4b0ff",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "communication-tremonte": {
       "revision": 1,
@@ -61,10 +65,14 @@
       "accepted_on": "2026-08-27"
     },
     "internet-commercial": {
-      "revision": 1,
-      "pt_hash": "0cecaafdc055194fff12a392a05e1e9de30098aa3e747c55bcefb6cdd2b42fe8",
-      "en_hash": "6f4a388f5c07c336e55c6332ac7427691f3f893a1483159540c3f5b70b426690",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "74a7da60d687bb1c5fedc078109c75bda5bed8e6cef5dc291904d25291f35d75",
+      "en_hash": "4450bbf3add7bbaabf92367d94cdebdaf48bb5053f2ce3f26d9a78d06ae070d8",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-album-1997": {
       "revision": 6,
@@ -113,10 +121,10 @@
       ]
     },
     "internet-psinet": {
-      "revision": 2,
-      "pt_hash": "dfe6f8fd663f01eabc3e42357f7bef5532ac217372f1893e5bcac104f4f8455c",
-      "en_hash": "9295fb84ff9f416e565f54d33173c7af7402a570b1ccfcc40dfaa56a87e46857",
-      "accepted_on": "2026-09-01",
+      "revision": 3,
+      "pt_hash": "0ed72b768a16bd0fc2490bee7978254f0f17bbd0a37c663410424e59644eb5a3",
+      "en_hash": "296cba7daa53a20e00a20f078c19632e6c35339110ef7c14499166ac782e6110",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
@@ -193,10 +201,10 @@
       ]
     },
     "internet-mirantte": {
-      "revision": 6,
-      "pt_hash": "5c33fd6f51f413a4b3fee930bdb4c3ad8712b4c90c8ab811fb20abb32f96af52",
-      "en_hash": "b05aec0122099acd36dc9b39ab13d59ca4a0ea1de09f608e6ce94b0053ceadb8",
-      "accepted_on": "2026-09-03",
+      "revision": 7,
+      "pt_hash": "89db0e370bd4d698ef34b07bdb977019f2b64d9041441b4f6f9a1cc503bd6373",
+      "en_hash": "aa659803e3544d6b90c344c30e0bebfe0ed119badf5dd7cc5157b99f8838c38c",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
@@ -213,49 +221,49 @@
       ]
     },
     "internet-sem": {
-      "revision": 5,
-      "pt_hash": "02e0c30280042ec5669d61db557ccee7084eb26768996c64fdd4105adf75c692",
-      "en_hash": "fad547ac37639929f4204d8487d898b1f1424f4baa516c7b760af1f2d255b275",
-      "accepted_on": "2026-09-07",
+      "revision": 6,
+      "pt_hash": "75d821890ed8ff041b953f604dfadf22328498b4c877f606c0265613eb56a32f",
+      "en_hash": "543c6122ee80f135d0aca3850094f8c732220dc391649e33376424a5d423a392",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "internet-cookieweb": {
-      "revision": 7,
-      "pt_hash": "cfbfcb85a41500dbe99cc4af20030ca8716fd98e29c5837235401b1dc0a6dc91",
-      "en_hash": "eb13cd26c5a4ed617a675bf9e73b6f001f4fea2cd32f1a60a9e3cbaa640a4ccb",
-      "accepted_on": "2026-09-03",
+      "revision": 8,
+      "pt_hash": "fd2111e6489418f3e324daa3a51f8d43451d0db06fb60f7e0ee963d8f40a7a06",
+      "en_hash": "19c744422dbb6a834f925808ebfdcb7385a0411e7700030d6b485bb8bce04c38",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "internet-petlove": {
-      "revision": 3,
-      "pt_hash": "deb0d556bf119dee1123462966def3870435d4b497aef9fdef15cff49af9016d",
-      "en_hash": "5605b8ab8a2f244c70caeb92d6616288344a80eaf2bd93f28ce5f09ea3ac12a8",
-      "accepted_on": "2026-09-01",
+      "revision": 4,
+      "pt_hash": "6d666d79612d6b43cc4da0804dbd046f58cccdd0300701c323e19521ac4aa16f",
+      "en_hash": "7e016f4a4c8bb2035062b74105aea29293e6abdf062199e05fbc359986a22214",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "internet-clickland": {
-      "revision": 3,
-      "pt_hash": "38bb624c1999a4f601b3354f433739b2c4cd153c89c9c7a0faf2a42ec73820e0",
-      "en_hash": "0b0474fc790a5a6e17d4659b926d90177d27a28913f64696476d165e988fdf88",
-      "accepted_on": "2026-09-03",
+      "revision": 4,
+      "pt_hash": "ea8758fed40a4089cb7b93e199893da62d5946a129880e7c2d6c09fc4e4be2a0",
+      "en_hash": "2ed003dd742eadd928249b0cdb67432b2499a5014f14bdfdbd216d31190dfe23",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "internet-best": {
-      "revision": 12,
-      "pt_hash": "3354a4eaf00936d81b1f84b0ba4b286f6d0fb2a3e825f25fb2da639f33e0cb43",
-      "en_hash": "a0728e310003c9a1b76f1e102fa530394dec1db6e8ec2fc8512ae7236b980475",
+      "revision": 13,
+      "pt_hash": "9ff50b8445620dd356888ebd289d40de8eafb4f97b027886eb183c37d23205c3",
+      "en_hash": "e829c2b92342722ffd96528987670d67accc9b1397ddbd87c7690e0c7ea0cce0",
       "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
@@ -263,20 +271,24 @@
       ]
     },
     "internet-dialetto": {
-      "revision": 2,
-      "pt_hash": "a6a919683635548ff61e1cde2fdec8c944f4da838bcb26aee0c4acec42156299",
-      "en_hash": "2aa21c0484541809bc99a92f4222242c5db7a810b4f0d55d87980984fc4e6c63",
-      "accepted_on": "2026-09-03",
+      "revision": 3,
+      "pt_hash": "e5258db46c0cf43b51907cdcb6a7ce49cae7f4c43d09a732346c4e208f829339",
+      "en_hash": "0e39fd84c7d488feb49b795abde59130de0a4fd4d91fddb238d1ecfd6271989c",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "internet-independent": {
-      "revision": 1,
-      "pt_hash": "a84a9d1b764cfd5f6222beb008d523c99c5735da2e09d895d71dc0667e983a25",
-      "en_hash": "5457b4aff1b4e44466314d3d58cd93c5eb64d41de5f2db591afe4778af9b0a96",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "15e9fcdb52eba2954c18c412dc5375347fe7adacc7d02f3a25cab12498f507e6",
+      "en_hash": "a5e6f8e3a7f6a55a4ed6166b11d785ba562a7aee0b65de5abd4817212850b2bd",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "audiovisual-arquiteto": {
       "revision": 1,
@@ -295,10 +307,14 @@
       ]
     },
     "internet-driven": {
-      "revision": 1,
-      "pt_hash": "b1902e9e4abcc67c4fbec8da39752b0b292f96ea8769c5bb0f65c70d9dd19a6e",
-      "en_hash": "5c6bcc77fb6eaba36e082e3e45bb9ea1571a8b45f3e12852925f82c84239bdc4",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "c9b7d033845136ee61492a928cf66a6fb5bf3025468b04f712baf26cdb6faac6",
+      "en_hash": "122346425012e046b49020a55c6a0f70a80d3a9fe5898e31f286e89200297307",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-reunion-2023": {
       "revision": 3,

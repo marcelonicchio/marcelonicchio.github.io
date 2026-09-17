@@ -13,7 +13,7 @@
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = '/assets/reader-disclosure.css?v=20260903-reader12';
+  css.href = '/assets/reader-disclosure.css?v=20260917-reader13';
   css.dataset.readerDisclosure = 'style';
   document.head.appendChild(css);
 
@@ -24,7 +24,7 @@
   document.head.appendChild(theme);
 
   const script = document.createElement('script');
-  script.src = '/assets/js/reader-disclosure.js?v=20260916-reader13';
+  script.src = '/assets/js/reader-disclosure.js?v=20260917-reader15';
   script.defer = true;
   script.dataset.readerDisclosure = 'script';
   document.head.appendChild(script);

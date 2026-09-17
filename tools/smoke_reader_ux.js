@@ -246,11 +246,15 @@ async function runDesktop(browser) {
   const internetDisclosureCount = await page.locator('details.reader-disclosure').count();
   assert(internetDisclosureCount >= 9, 'Internet normal URL produced too few disclosures');
   assert(await page.locator('details.reader-disclosure[open]').count() === internetDisclosureCount, 'Internet disclosures must start open by default');
+  assert((await page.locator('html').getAttribute('class') || '').includes('reader-internet-open-default'), 'Internet root lost open-editorial Reader class');
+  assert((await page.getByText('Controles de leitura', {exact: true}).count()) === 1, 'Internet reading-controls label missing');
 
   const bbs = page.locator('#bbs');
   assert(await bbs.getAttribute('data-reader-presentation') === 'always-open', 'Minduim/BBS always-open state missing in Internet');
   assert(await bbs.locator('details.reader-disclosure').count() === 0, 'Minduim/BBS must remain plain open HTML in Internet');
   assert(await bbs.locator('.reader-disclosure__toggle').count() === 0, 'Minduim/BBS unexpectedly exposes Reader toggle in Internet');
+  assert(await bbs.locator(':scope > .phase-year').innerText() === '1992–1996', 'BBS date was not separated from its title');
+  assert(await bbs.locator(':scope > h2').innerText() === 'Cultura BBS', 'BBS title still carries its date');
 
   const mirantte = page.locator('#mirantte');
   assert((await mirantte.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte featured class missing');
@@ -264,6 +268,12 @@ async function runDesktop(browser) {
   assert((await cookieweb.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB featured class missing');
   assert(await cookieweb.locator('.reader-disclosure__preview').count() === 0, 'CookieWEB rich preview leaked from Full Bio into Internet');
   assert((await cookieweb.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'GAP landmark missing from CookieWEB');
+  assert(await cookieweb.locator('summary > .phase-year').innerText() === '2010–2012', 'CookieWEB date was not separated from its title');
+  assert(await cookieweb.locator('summary h2').innerText() === 'Beleza na Web e CookieWEB: Search em escala', 'CookieWEB title still carries its date');
+  const cookieOpenStyle = await cookieweb.locator('details.reader-disclosure').evaluate((el) => ({borderTopWidth: getComputedStyle(el).borderTopWidth, backgroundImage: getComputedStyle(el).backgroundImage, borderRadius: getComputedStyle(el).borderRadius}));
+  assert(cookieOpenStyle.borderTopWidth === '0px', `Open CookieWEB still looks boxed: ${cookieOpenStyle.borderTopWidth}`);
+  assert(cookieOpenStyle.backgroundImage === 'none', `Open CookieWEB still has card background: ${cookieOpenStyle.backgroundImage}`);
+  assert(await cookieweb.locator('.reader-disclosure__toggle').isHidden(), 'Open CookieWEB still exposes accordion CTA');
 
   const best = page.locator('#best');
   assert((await best.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('4 vídeos')), 'BEST video badge incorrect');
@@ -275,7 +285,13 @@ async function runDesktop(browser) {
   // Native keyboard operation and independent-open behavior.
   const mirantteDetails = mirantte.locator('details.reader-disclosure');
   const bestDetails = best.locator('details.reader-disclosure');
-  if (await mirantteDetails.getAttribute('open') !== null) await mirantte.locator('summary').click();
+  if (await mirantteDetails.getAttribute('open') !== null) {
+    await mirantte.locator('summary').evaluate((el) => el.click());
+    assert(await mirantteDetails.getAttribute('open') !== null, 'Open Internet summary unexpectedly collapsed the editorial entry');
+    await mirantte.locator('.reader-disclosure__collapse-button').click();
+  }
+  const mirantteClosedBorder = await mirantteDetails.evaluate((el) => getComputedStyle(el).borderTopWidth);
+  assert(mirantteClosedBorder !== '0px', 'Collapsed Mirantte did not return to compact card presentation');
   await mirantte.locator('summary').focus();
   await page.keyboard.press('Enter');
   assert(await mirantteDetails.getAttribute('open') !== null, 'Enter key did not open Mirantte disclosure');
@@ -299,6 +315,9 @@ async function runDesktop(browser) {
   const internetDisclosureCountEn = await page.locator('details.reader-disclosure').count();
   assert(internetDisclosureCountEn >= 9, 'English Internet normal URL produced too few disclosures');
   assert(await page.locator('details.reader-disclosure[open]').count() === internetDisclosureCountEn, 'English Internet disclosures must start open by default');
+  assert((await page.locator('html').getAttribute('class') || '').includes('reader-internet-open-default'), 'English Internet root lost open-editorial Reader class');
+  assert((await page.getByText('Reading controls', {exact: true}).count()) === 1, 'English Internet reading-controls label missing');
+  assert(await page.locator('#cookieweb summary > .phase-year').innerText() === '2010–2012', 'English CookieWEB date was not separated from its title');
 
   // Culture & Audiovisual is intentionally continuous reading: normal and legacy query-flag URLs remain fully open.
   await page.goto(`${BASE}/pt/comunicacao/`, {waitUntil: 'networkidle'});

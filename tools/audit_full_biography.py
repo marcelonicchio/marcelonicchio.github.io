@@ -150,7 +150,10 @@ def main() -> int:
         if "<!-- full-biography:start -->" not in target_text or "<!-- full-biography:end -->" not in target_text:
             fail(errors, f"{lang}: Full Biography managed markers are missing")
         target_soup = BeautifulSoup(target_text, "html.parser")
-        leaked_layout = [node.get("data-bio-entry") for node in target_soup.select(".bio-entry.phase, .bio-entry.music-entry")]
+        leaked_layout = [
+            node.get("data-bio-entry")
+            for node in target_soup.select(".bio-entry.phase, .bio-entry.music-entry, .bio-entry.internet-entry")
+        ]
         if leaked_layout:
             fail(errors, f"{lang}: vertical-only layout classes leaked into Full Biography: {sorted(set(leaked_layout))}")
         rendered = [node.get("data-bio-entry") for node in target_soup.select("[data-bio-entry]")]

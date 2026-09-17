@@ -17,6 +17,7 @@
 
   const labels = isPortuguese ? {
     mode: 'Leitura compacta',
+    controls: 'Controles de leitura',
     openAll: 'Abrir todos',
     closeAll: 'Recolher todos',
     open: 'Clique para expandir',
@@ -35,6 +36,7 @@
     docMany: (n) => `${n} documentos`
   } : {
     mode: 'Compact reading',
+    controls: 'Reading controls',
     openAll: 'Open all',
     closeAll: 'Collapse all',
     open: 'Click to expand',
@@ -176,6 +178,7 @@
       .map(({entry}) => entry);
 
     document.documentElement.classList.add('reader-disclosure-active');
+    if (internetOpenByDefault) document.documentElement.classList.add('reader-internet-open-default');
     const detailsForSection = new Map();
     const topicRowFor = (topicIds) => {
       if (!topicIds.length) return null;
@@ -196,6 +199,7 @@
       const heading = [...section.children].find((node) => node.tagName === 'H2');
       if (!heading) return;
       const meta = [...section.children].find((node) => node.classList?.contains('bio-entry-meta')) || null;
+      const phaseYear = [...section.children].find((node) => node.classList?.contains('phase-year')) || null;
       const entry = metadataFor(section);
       if (selectivePage && !entry) return;
       const related = relatedFor(section);
@@ -228,6 +232,7 @@
       summary.className = 'reader-disclosure__summary';
 
       if (meta) summary.appendChild(meta);
+      if (phaseYear) summary.appendChild(phaseYear);
       summary.appendChild(heading);
 
       if (readerPreview?.paragraphs?.length) {
@@ -311,7 +316,8 @@
           anchor.href = `/${rawPath.replace(/index\.html$/, '')}`;
           anchor.textContent = labels.pageLink;
           pageLink.appendChild(anchor);
-          body.insertBefore(pageLink, body.firstChild);
+          if (internetOpenByDefault) body.appendChild(pageLink);
+          else body.insertBefore(pageLink, body.firstChild);
         }
       }
 
@@ -332,7 +338,12 @@
       body.appendChild(collapseRow);
 
       details.append(summary, body);
-      if (internetOpenByDefault) details.open = true;
+      if (internetOpenByDefault) {
+        summary.addEventListener('click', (event) => {
+          if (details.open && !event.target.closest('a')) event.preventDefault();
+        });
+        details.open = true;
+      }
       section.appendChild(details);
       section.classList.add('reader-disclosure-chapter');
       detailsForSection.set(section, details);
@@ -347,7 +358,7 @@
     controls.setAttribute('aria-label', labels.mode);
     const controlLabel = document.createElement('span');
     controlLabel.className = 'reader-disclosure-controls__label';
-    controlLabel.textContent = labels.mode;
+    controlLabel.textContent = internetOpenByDefault ? labels.controls : labels.mode;
     const openAll = document.createElement('button');
     openAll.type = 'button';
     openAll.textContent = labels.openAll;

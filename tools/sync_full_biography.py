@@ -70,7 +70,7 @@ def render_section(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[s
         raise RuntimeError(f"{entry['id']}: registered section source is not a section")
     section["id"] = f"bio-{entry['id']}"
     # Vertical-only layout classes must never leak into the Full Biography.
-    classes = [cls for cls in section.get("class", []) if cls not in {"phase", "music-entry"}]
+    classes = [cls for cls in section.get("class", []) if cls not in {"phase", "music-entry", "internet-entry"}]
     if "chapter" not in classes:
         classes.append("chapter")
     if "bio-entry" not in classes:
