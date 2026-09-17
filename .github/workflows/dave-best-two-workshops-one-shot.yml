@@ -1,0 +1,149 @@
+name: Dave BEST two workshops one-shot
+
+on:
+  push:
+    branches:
+      - dave/best-two-workshops-2026-09-16
+    paths:
+      - .github/workflows/dave-best-two-workshops-one-shot.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install PDF and sync dependencies
+        run: python -m pip install --disable-pip-version-check PyMuPDF Pillow beautifulsoup4
+      - name: Render verified workshop previews and update canonical fragments
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import fitz
+          from PIL import Image, ImageStat
+
+          root = Path('assets/archive/internet/best-kenshoo')
+          day1_pdf = root / 'best_workshop01_segmentacaoemgoogleadwords_e_facebookads_melhorespraticas-melhorroi.pdf'
+          day2_pdf = root / 'best08_workshop-facebook-ads-2014.pdf'
+          day1_preview = root / 'best-workshop01-slide04-preview.webp'
+          day2_preview = root / 'best-workshop02-slide03-preview.webp'
+
+          specs = [
+              (day1_pdf, 4, day1_preview),
+              (day2_pdf, 3, day2_preview),
+          ]
+
+          dims = {}
+          for pdf_path, slide_no, out_path in specs:
+              if not pdf_path.exists():
+                  raise SystemExit(f'missing PDF: {pdf_path}')
+              doc = fitz.open(pdf_path)
+              if len(doc) < slide_no:
+                  raise SystemExit(f'{pdf_path} has only {len(doc)} pages; slide {slide_no} requested')
+              page = doc[slide_no - 1]
+              print(f'{pdf_path.name}: pages={len(doc)}; preview=slide {slide_no}')
+              extracted = ' '.join(page.get_text('text').split())
+              print(f'slide {slide_no} text: {extracted[:500]}')
+              pix = page.get_pixmap(matrix=fitz.Matrix(2.2, 2.2), alpha=False)
+              png_path = out_path.with_suffix('.png')
+              pix.save(png_path)
+              with Image.open(png_path) as im:
+                  im = im.convert('RGB')
+                  im.thumbnail((960, 720), Image.Resampling.LANCZOS)
+                  extrema = im.convert('L').getextrema()
+                  stat = ImageStat.Stat(im.convert('L'))
+                  if extrema[1] - extrema[0] < 20 or stat.var[0] < 20:
+                      raise SystemExit(f'preview appears visually empty/flat: {pdf_path} slide {slide_no}; extrema={extrema}, variance={stat.var[0]:.2f}')
+                  im.save(out_path, 'WEBP', quality=90, method=6)
+                  dims[out_path] = im.size
+              png_path.unlink()
+              if out_path.stat().st_size < 8000:
+                  raise SystemExit(f'preview unexpectedly small: {out_path} ({out_path.stat().st_size} bytes)')
+              print(f'preview {out_path.name}: {dims[out_path][0]}x{dims[out_path][1]}, {out_path.stat().st_size} bytes')
+
+          title1 = 'Segmentação em Google Adwords e Facebook Ads - Melhores Práticas, Melhor ROI'
+          title2 = 'Facebook Ads: Melhores Práticas, Melhor Conversão'
+          p1 = '/' + str(day1_pdf).replace('\\', '/')
+          p2 = '/' + str(day2_pdf).replace('\\', '/')
+          i1 = '/' + str(day1_preview).replace('\\', '/')
+          i2 = '/' + str(day2_preview).replace('\\', '/')
+          w1, h1 = dims[day1_preview]
+          w2, h2 = dims[day2_preview]
+
+          pt = Path('content/entries/pt/internet-best.inc')
+          en = Path('content/entries/en/internet-best.inc')
+
+          pt_text = pt.read_text(encoding='utf-8')
+          pt_text = pt_text.replace('Segmentações Avançadas em Search', title1)
+          marker = '<!-- gallery:best-kenshoo:end -->'
+          if p1 in pt_text or p2 in pt_text:
+              raise SystemExit('workshop document cards already present in PT source')
+          cards_pt = f'''\n<div class="inline-records"><a class="inline-record" href="{p1}" rel="noopener noreferrer" target="_blank" type="application/pdf"><img alt="Slide 4 da apresentação do workshop {title1}." decoding="async" loading="lazy" src="{i1}" width="{w1}" height="{h1}"/><span><strong>{title1}</strong><small>11 de novembro de 2014 · 9h–12h · E-Commerce Brasil · PDF ↗</small></span></a></div>\n<div class="inline-records"><a class="inline-record" href="{p2}" rel="noopener noreferrer" target="_blank" type="application/pdf"><img alt="Slide 3 da apresentação do workshop {title2}." decoding="async" loading="lazy" src="{i2}" width="{w2}" height="{h2}"/><span><strong>{title2}</strong><small>12 de novembro de 2014 · 9h–12h · E-Commerce Brasil · PDF ↗</small></span></a></div>'''
+          pt_text = pt_text.replace(marker, marker + cards_pt, 1)
+          pt.write_text(pt_text, encoding='utf-8')
+
+          en_text = en.read_text(encoding='utf-8')
+          en_text = en_text.replace('Advanced Segmentation in Search', title1)
+          en_text = en_text.replace('Facebook Ads: Best Practices, Better Conversion', title2)
+          if p1 in en_text or p2 in en_text:
+              raise SystemExit('workshop document cards already present in EN source')
+          cards_en = f'''\n<div class="inline-records"><a class="inline-record" href="{p1}" rel="noopener noreferrer" target="_blank" type="application/pdf"><img alt="Slide 4 from the presentation for the workshop {title1}." decoding="async" loading="lazy" src="{i1}" width="{w1}" height="{h1}"/><span><strong>{title1}</strong><small>November 11, 2014 · 9 a.m.–noon · E-Commerce Brasil · PDF ↗</small></span></a></div>\n<div class="inline-records"><a class="inline-record" href="{p2}" rel="noopener noreferrer" target="_blank" type="application/pdf"><img alt="Slide 3 from the presentation for the workshop {title2}." decoding="async" loading="lazy" src="{i2}" width="{w2}" height="{h2}"/><span><strong>{title2}</strong><small>November 12, 2014 · 9 a.m.–noon · E-Commerce Brasil · PDF ↗</small></span></a></div>'''
+          en_text = en_text.replace(marker, marker + cards_en, 1)
+          en.write_text(en_text, encoding='utf-8')
+          PY
+      - name: Synchronize derived surfaces and sitemap
+        run: |
+          python tools/sync_entries.py
+          python tools/sync_full_biography.py
+          python tools/build_chapter_pages.py
+          python tools/editorial_parity.py --accept internet-best
+          python tools/build_sitemap.py
+      - name: Validate two-workshop rebuild
+        run: |
+          python tools/sync_entries.py --check
+          python tools/sync_full_biography.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/editorial_parity.py --check
+          python tools/build_sitemap.py --check
+          python tools/audit_image_dimensions.py
+          python - <<'PY'
+          from pathlib import Path
+          needles = [
+              'Segmentação em Google Adwords e Facebook Ads - Melhores Práticas, Melhor ROI',
+              'Facebook Ads: Melhores Práticas, Melhor Conversão',
+              '/assets/archive/internet/best-kenshoo/best-workshop01-slide04-preview.webp',
+              '/assets/archive/internet/best-kenshoo/best-workshop02-slide03-preview.webp',
+          ]
+          targets = [
+              Path('content/entries/pt/internet-best.inc'),
+              Path('content/entries/en/internet-best.inc'),
+              Path('pt/internet/index.html'),
+              Path('en/internet/index.html'),
+              Path('pt/internet/best-kenshoo/index.html'),
+              Path('en/internet/best-kenshoo/index.html'),
+              Path('pt/biografia/index.html'),
+              Path('en/biography/index.html'),
+          ]
+          for path in targets:
+              text = path.read_text(encoding='utf-8')
+              for needle in needles:
+                  if needle not in text:
+                      raise SystemExit(f'{needle!r} missing from {path}')
+              if 'Segmentações Avançadas em Search' in text or 'Advanced Segmentation in Search' in text or 'Facebook Ads: Best Practices, Better Conversion' in text:
+                  raise SystemExit(f'old workshop title remains in {path}')
+          PY
+      - name: Remove one-shot machinery and commit result
+        run: |
+          rm .github/workflows/dave-best-two-workshops-one-shot.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: publish both BEST workshop decks with verified previews'
+          git push
