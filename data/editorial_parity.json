@@ -35,20 +35,20 @@
       "accepted_on": "2026-08-27"
     },
     "music-circuit": {
-      "revision": 2,
-      "pt_hash": "231c10cde117699b3ec9ae55715868a8b6826b7ca82e7bf482df0c155823a94f",
-      "en_hash": "c4a4b3a3ee04d9746a8c923852c10a394a6a52f13bdd475e4dfda85b4f1ba954",
-      "accepted_on": "2026-09-10",
+      "revision": 3,
+      "pt_hash": "496ebe4ec9c8f5e977483e1ba7605b5dbc22cd0d7773ecf84975100619771062",
+      "en_hash": "2a385e0f0b65cf6f39ffe8efe913c68054f83508091befe9542bbe8bce28b2c2",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "music-coitado-1994": {
-      "revision": 8,
-      "pt_hash": "36f3e8b52ecc388d69f8a9e686471b3afccbfddaf89ae253562f44ba1a12667e",
-      "en_hash": "37b51d383f2708b6cd60ce17916e03c1b328387959444820c250ccaaf5349e19",
-      "accepted_on": "2026-09-16",
+      "revision": 9,
+      "pt_hash": "c7ccd035f327ec6aa24fafd8f33603ab42679ec9e315e8a324b895e22b474f14",
+      "en_hash": "6e8e07cfb400a639153b9cd8d9f2bc1e455260f31add670815bd5dfd9f19c352",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
@@ -67,10 +67,10 @@
       "accepted_on": "2026-08-27"
     },
     "music-album-1997": {
-      "revision": 5,
-      "pt_hash": "90a2a9f6eea4396c5671bae1035ceddd785ad52b61d75899bc482ce412b1c005",
-      "en_hash": "72a91db67344548abc24d79db896b74d35a63124e87413ab912529956a6827a1",
-      "accepted_on": "2026-09-16",
+      "revision": 6,
+      "pt_hash": "86402a9f3dd28966c4a6ab90050180328c42a0afe9a4cfd3c45529987676e7ae",
+      "en_hash": "18da1d78084c227567a443356790f06a6f18f5493481029e4768a0c97379085d",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
@@ -93,20 +93,20 @@
       ]
     },
     "music-festival-1998-1999": {
-      "revision": 3,
-      "pt_hash": "e422d4056cafc90f98cbac50d0231b7e082a5a6b12ff7755ca77d90f9eebdc3c",
-      "en_hash": "7c38dbce1ce6ffd37d1544a13ab6def8078d1175626f21440637e09a3cb003d6",
-      "accepted_on": "2026-09-16",
+      "revision": 4,
+      "pt_hash": "467acbeae10cc50333ae8d6b524b69b3043b05be7a40538bc5565caf7cc231f3",
+      "en_hash": "ad41123d043842e69638ebc46d64344e196c15c21334ab6a18abbb73c7effe4d",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "music-album-1999-2000": {
-      "revision": 4,
-      "pt_hash": "f6069426310c718674f5679eb9f5b32b6e066d0f92a87d13c4c85e7a95ad44e6",
-      "en_hash": "1c49da78e11c366c1ebb2dfa55911224f51bb0cb04b184be9dc657d0482c5518",
-      "accepted_on": "2026-09-10",
+      "revision": 5,
+      "pt_hash": "254cce83e439374422459e8522491234a7d1b2d8b89b128cbe61b940af2701e8",
+      "en_hash": "e26de337904a42f9b28483ea92ffae25fed33bc01eb29b5d3381b2347592d7dd",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
@@ -123,10 +123,10 @@
       ]
     },
     "music-olympia": {
-      "revision": 4,
-      "pt_hash": "74e4e65fcc581d9d5358365ba9b7ad0877a54af00264d4ddeff0d9130a3b8cff",
-      "en_hash": "023d64c16062637b0c76eb4a820bdee8f9ee165a9033a3fc8ec6d005e428406b",
-      "accepted_on": "2026-09-14",
+      "revision": 5,
+      "pt_hash": "cbcab5c7d5b0a3321c56f7c0651afd1d2a5bb6c506f884cea5fa211a5fdbf6f9",
+      "en_hash": "74557b940a5e6dfe5472d627bbb785ff61951bfb6297c97515412fd08a20bf84",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
@@ -153,26 +153,34 @@
       ]
     },
     "music-programa-jo": {
-      "revision": 8,
-      "pt_hash": "13381df3303aa160cf302ed1dbdfd8a431a4b261cd9e439f13ede61b62b8573b",
-      "en_hash": "5f48c8ef91d9f73b8635a1ab11b9aaac64e76aabdf9d38e849fe14ca0431f787",
-      "accepted_on": "2026-09-14",
+      "revision": 9,
+      "pt_hash": "18a4738aa2c086a8af4f3d2e5c952f9639cf67ecc4c3e46e323dd7fcb297a617",
+      "en_hash": "e040ef0594fca1edd8975ed9dcd9a55774240bd27cd726d3e085d9782b636080",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "music-active-2001-2003": {
-      "revision": 1,
-      "pt_hash": "6594aeb6f7a5d0627f312cf3c358b2426dd5a5339ef35561b6c75e09e1eb2db2",
-      "en_hash": "a4eaf0f3371f78f0cf038956272698ee735c0d187f1fcf6a17a6a70ebeff89e3",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "c6321f7c9c4bd8569d225a1d291773f82713c2f8a092bb7974afffd9890e4ab6",
+      "en_hash": "da806ccc1b83ee70ffa1694119467cc8ec45d6dc440cfb520b563b9e09b218a8",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-end-2003": {
-      "revision": 1,
-      "pt_hash": "fc4b27af18b60e42700c42b8da0e391f6527486c5d1b9393ac7cb3c51334b432",
-      "en_hash": "dfb959cffc58bcce0a4da75a3b9405720cf65efc135c311d0a21a25a9b6d54aa",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "b45f1e9fb01394c873f4972e9a29b410699268bc27f7cf6d345ab69f8a701163",
+      "en_hash": "6bd4002e8a9e927e752fe96a3507cd955a0d96cf73e85d5f24188adc3c70fd39",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "communication-sinal-verde": {
       "revision": 3,
@@ -293,10 +301,10 @@
       "accepted_on": "2026-08-27"
     },
     "music-reunion-2023": {
-      "revision": 2,
-      "pt_hash": "49f98e2616a6c58307395038e122948cfba1534cd48fbf083477f728975d2437",
-      "en_hash": "4918939459c7b08ae92f9b88a384a80c2e9a488caacb81712693ca6f74594013",
-      "accepted_on": "2026-09-16",
+      "revision": 3,
+      "pt_hash": "bab812b63390c7e64d0b0063b1c9f27469ffaa2d931488263e31c1eb7e829d92",
+      "en_hash": "e4428bc9ef17b5dda8a53b3d3ea0ca105ce2a6d598393bf06f4d534be447b9f0",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
@@ -386,40 +394,60 @@
       ]
     },
     "music-demo-tape-1994": {
-      "revision": 4,
-      "pt_hash": "de55a02de015a3cff63351a872606dc8243d8dcada7b943a5c559983013a13ec",
-      "en_hash": "9012e92024daed71df0c526b801070784375fe889bea7e5e4a2f1fae3ee079d1",
-      "accepted_on": "2026-09-14",
+      "revision": 5,
+      "pt_hash": "604a49eb7638565c1ff5d6b59cb2874dae7987741f3edf72d722371742b6e747",
+      "en_hash": "88ba2b3bc0a3588a19324f002e7016cb829f66551e4088037f896e36a6c831ed",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "music-etesp-fatec-2000": {
-      "revision": 2,
-      "pt_hash": "20ac7eee367cef502c546a70a2e27109affbd30227dc9da21b80ce2ab4f67b74",
-      "en_hash": "2ef1b9de04a694b6b3c339ad4ed082391e7e2f9f329019c3b8ad42f6236df327",
-      "accepted_on": "2026-09-14",
+      "revision": 3,
+      "pt_hash": "dc54002734a2d925fa89af24a1019fd5105aa2c7e2e2136c65f9117a2b07af48",
+      "en_hash": "a63f7022e71c4b791c16cd954b6c0d6e0f1bde5e59e433447cd3502333dd9f03",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "music-limonada-1992": {
-      "revision": 9,
-      "pt_hash": "877cb0c01b408ce2e623af239d76b7fe735baebac7cffaac4fb783ad9d5a58aa",
-      "en_hash": "3d07b20d6b79c9904b59fa2a857fbcf0dc527be7882524b3ccf2b9dd8e9057d8",
-      "accepted_on": "2026-09-14",
+      "revision": 10,
+      "pt_hash": "2229f65fc50eaeb3ff4bf85216ac56202499adc8bd8cdb518ccf4920c6da02a8",
+      "en_hash": "e0d78467988c9aa6bfe5b953151718f4701a969a6b85b75fdb601fe3df967e98",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "music-kid-vinil-1993": {
-      "revision": 3,
-      "pt_hash": "1ff05d31a8292d715c952d76b4d53d98c707c9a6c0842cfbd373c34930d93935",
-      "en_hash": "0b85845b7ba2a46c8e7eaad50c3c2efa768a79151b20502d1b02b7405d46423a",
-      "accepted_on": "2026-09-16",
+      "revision": 4,
+      "pt_hash": "1bc4a785bdf6c048ca720910a31e63b663f20854d8abb0c9638fbde4dc5ebc2d",
+      "en_hash": "4665f667f0eca3ef0d72adea0a5275b149cdf4c49f2826b77a6605a130c732b3",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
+    },
+    "music-studios-1993": {
+      "revision": 1,
+      "pt_hash": "d30079f972d0cdff4eb0cd06d195762c91906c71dfc7044328d233e05c1a9f6f",
+      "en_hash": "050668ce9cb430e7b4b2b7f6b06de0103dccbd916b5aa49fce9840bb85219876",
+      "accepted_on": "2026-09-17",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
+    },
+    "music-mp3-era-2000": {
+      "revision": 1,
+      "pt_hash": "fbe417e31f36deba6f1d40f4fe5620a5f096fb9df25e93f68285b62f814eaefb",
+      "en_hash": "2ddfce6cf374c19f00aa94a3663f4debe553a112bad0b4b46da08e257952834c",
+      "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
         "en"
