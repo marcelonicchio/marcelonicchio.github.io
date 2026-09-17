@@ -21,6 +21,18 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+      - name: Normalize localized section ids
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('tools/_dave_refactor_internet_music_style.py')
+          text = path.read_text(encoding='utf-8')
+          old = "    if found != EXPECTED_IDS:\n        raise RuntimeError(f'{rel}: expected {sorted(EXPECTED_IDS)}, got {sorted(found)}')"
+          new = "    expected_ids = EXPECTED_IDS if rel.startswith('pt/') else ((EXPECTED_IDS - {'independente'}) | {'independent'})\n    if found != expected_ids:\n        raise RuntimeError(f'{rel}: expected {sorted(expected_ids)}, got {sorted(found)}')"
+          if old not in text:
+              raise RuntimeError('Localized-id migration anchor missing')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
       - name: Run structural migration
         run: python tools/_dave_refactor_internet_music_style.py
       - name: Refresh Reader loader references and sitemap
