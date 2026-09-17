@@ -321,9 +321,9 @@
       ]
     },
     "music-reunion-2023": {
-      "revision": 3,
-      "pt_hash": "bab812b63390c7e64d0b0063b1c9f27469ffaa2d931488263e31c1eb7e829d92",
-      "en_hash": "e4428bc9ef17b5dda8a53b3d3ea0ca105ce2a6d598393bf06f4d534be447b9f0",
+      "revision": 4,
+      "pt_hash": "89ab4af1ece2d60921198068c16853c1799689d821f09ea791982f95a6ad3414",
+      "en_hash": "cc65b238826075a45cc4e9c8302a523acaa5783d71bd5098759b43c3568213eb",
       "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",

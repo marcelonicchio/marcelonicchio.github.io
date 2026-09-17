@@ -5626,6 +5626,574 @@
           }
         }
       ]
+    },
+    {
+      "id": "reencontro-cassasp-2023",
+      "sourceRoot": "assets/archive/music/coitado-do-proximo/2023-reencontro-20-anos/galeria",
+      "targets": {
+        "pt": [
+          "pt/musica/index.html"
+        ],
+        "en": [
+          "en/music/index.html"
+        ]
+      },
+      "title": {
+        "pt": "Arquivo visual — reencontro no Clube Cassasp",
+        "en": "Visual archive — reunion at Clube Cassasp"
+      },
+      "items": [
+        {
+          "id": "01",
+          "source": "coitado_cassasp_2023_IA-01.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — imagem tratada por IA 1.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — AI-treated image 1."
+          },
+          "width": 1602,
+          "height": 982,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-01-480.webp",
+              "width": 480,
+              "height": 294
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-01-768.webp",
+              "width": 768,
+              "height": 471
+            }
+          }
+        },
+        {
+          "id": "02",
+          "source": "coitado_cassasp_2023_IA-02.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — imagem tratada por IA 2.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — AI-treated image 2."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-02-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-02-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        },
+        {
+          "id": "03",
+          "source": "coitado_cassasp_2023_IA-03.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — imagem tratada por IA 3.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — AI-treated image 3."
+          },
+          "width": 1672,
+          "height": 941,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-03-480.webp",
+              "width": 480,
+              "height": 270
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-03-768.webp",
+              "width": 768,
+              "height": 432
+            }
+          }
+        },
+        {
+          "id": "04",
+          "source": "coitado_cassasp_2023_IA-04.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — imagem tratada por IA 4.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — AI-treated image 4."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-04-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-04-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "05",
+          "source": "coitado_cassasp_2023_IA-05.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — imagem tratada por IA 5.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — AI-treated image 5."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-05-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-05-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "06",
+          "source": "coitado_cassasp_2023_IA-06.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — imagem tratada por IA 6.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — AI-treated image 6."
+          },
+          "width": 1448,
+          "height": 1086,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-06-480.webp",
+              "width": 480,
+              "height": 360
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-06-768.webp",
+              "width": 768,
+              "height": 576
+            }
+          }
+        },
+        {
+          "id": "07",
+          "source": "coitadodoproximo_cassasp01.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 1.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 1."
+          },
+          "width": 927,
+          "height": 605,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-07-480.webp",
+              "width": 480,
+              "height": 313
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-07-768.webp",
+              "width": 768,
+              "height": 501
+            }
+          }
+        },
+        {
+          "id": "08",
+          "source": "coitadodoproximo_cassasp02.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 2.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 2."
+          },
+          "width": 922,
+          "height": 711,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-08-480.webp",
+              "width": 480,
+              "height": 370
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-08-768.webp",
+              "width": 768,
+              "height": 592
+            }
+          }
+        },
+        {
+          "id": "09",
+          "source": "coitadodoproximo_cassasp03.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 3.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 3."
+          },
+          "width": 981,
+          "height": 714,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-09-480.webp",
+              "width": 480,
+              "height": 349
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-09-768.webp",
+              "width": 768,
+              "height": 559
+            }
+          }
+        },
+        {
+          "id": "10",
+          "source": "coitadodoproximo_cassasp04.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 4.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 4."
+          },
+          "width": 990,
+          "height": 677,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-10-480.webp",
+              "width": 480,
+              "height": 328
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-10-768.webp",
+              "width": 768,
+              "height": 525
+            }
+          }
+        },
+        {
+          "id": "11",
+          "source": "coitadodoproximo_cassasp05.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 5.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 5."
+          },
+          "width": 990,
+          "height": 726,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-11-480.webp",
+              "width": 480,
+              "height": 352
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-11-768.webp",
+              "width": 768,
+              "height": 563
+            }
+          }
+        },
+        {
+          "id": "12",
+          "source": "coitadodoproximo_cassasp06.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 6.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 6."
+          },
+          "width": 933,
+          "height": 666,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-12-480.webp",
+              "width": 480,
+              "height": 343
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-12-768.webp",
+              "width": 768,
+              "height": 548
+            }
+          }
+        },
+        {
+          "id": "13",
+          "source": "coitadodoproximo_cassasp07.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 7.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 7."
+          },
+          "width": 916,
+          "height": 697,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-13-480.webp",
+              "width": 480,
+              "height": 365
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-13-768.webp",
+              "width": 768,
+              "height": 584
+            }
+          }
+        },
+        {
+          "id": "14",
+          "source": "coitadodoproximo_cassasp08.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 8.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 8."
+          },
+          "width": 890,
+          "height": 659,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-14-480.webp",
+              "width": 480,
+              "height": 355
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-14-768.webp",
+              "width": 768,
+              "height": 569
+            }
+          }
+        },
+        {
+          "id": "15",
+          "source": "coitadodoproximo_cassasp09.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 9.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 9."
+          },
+          "width": 1029,
+          "height": 677,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-15-480.webp",
+              "width": 480,
+              "height": 316
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-15-768.webp",
+              "width": 768,
+              "height": 505
+            }
+          }
+        },
+        {
+          "id": "16",
+          "source": "coitadodoproximo_cassasp10.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 10.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 10."
+          },
+          "width": 1038,
+          "height": 705,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-16-480.webp",
+              "width": 480,
+              "height": 326
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-16-768.webp",
+              "width": 768,
+              "height": 522
+            }
+          }
+        },
+        {
+          "id": "17",
+          "source": "coitadodoproximo_cassasp11.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 11.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 11."
+          },
+          "width": 1029,
+          "height": 699,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-17-480.webp",
+              "width": 480,
+              "height": 326
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-17-768.webp",
+              "width": 768,
+              "height": 522
+            }
+          }
+        },
+        {
+          "id": "18",
+          "source": "coitadodoproximo_cassasp12.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 12.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 12."
+          },
+          "width": 1020,
+          "height": 698,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-18-480.webp",
+              "width": 480,
+              "height": 328
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-18-768.webp",
+              "width": 768,
+              "height": 526
+            }
+          }
+        },
+        {
+          "id": "19",
+          "source": "coitadodoproximo_cassasp13.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 13.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 13."
+          },
+          "width": 996,
+          "height": 668,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-19-480.webp",
+              "width": 480,
+              "height": 322
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-19-768.webp",
+              "width": 768,
+              "height": 515
+            }
+          }
+        },
+        {
+          "id": "20",
+          "source": "coitadodoproximo_cassasp14.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 14.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 14."
+          },
+          "width": 1210,
+          "height": 642,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-20-480.webp",
+              "width": 480,
+              "height": 255
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-20-768.webp",
+              "width": 768,
+              "height": 407
+            }
+          }
+        },
+        {
+          "id": "21",
+          "source": "coitadodoproximo_cassasp15.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 15.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 15."
+          },
+          "width": 1284,
+          "height": 735,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-21-480.webp",
+              "width": 480,
+              "height": 275
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-21-768.webp",
+              "width": 768,
+              "height": 440
+            }
+          }
+        },
+        {
+          "id": "22",
+          "source": "coitadodoproximo_cassasp16.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 16.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 16."
+          },
+          "width": 1201,
+          "height": 713,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-22-480.webp",
+              "width": 480,
+              "height": 285
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-22-768.webp",
+              "width": 768,
+              "height": 456
+            }
+          }
+        },
+        {
+          "id": "23",
+          "source": "coitadodoproximo_cassasp17.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 17.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 17."
+          },
+          "width": 1176,
+          "height": 724,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-23-480.webp",
+              "width": 480,
+              "height": 296
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-23-768.webp",
+              "width": 768,
+              "height": 473
+            }
+          }
+        },
+        {
+          "id": "24",
+          "source": "coitadodoproximo_cassasp18.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 18.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 18."
+          },
+          "width": 1184,
+          "height": 725,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-24-480.webp",
+              "width": 480,
+              "height": 294
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-24-768.webp",
+              "width": 768,
+              "height": 470
+            }
+          }
+        },
+        {
+          "id": "25",
+          "source": "coitadodoproximo_cassasp19.jpg",
+          "caption": {
+            "pt": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico 19.",
+            "en": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record 19."
+          },
+          "width": 1222,
+          "height": 726,
+          "derivatives": {
+            "480": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-25-480.webp",
+              "width": 480,
+              "height": 285
+            },
+            "768": {
+              "path": "assets/media/galleries/reencontro-cassasp-2023/reencontro-cassasp-2023-25-768.webp",
+              "width": 768,
+              "height": 456
+            }
+          }
+        }
+      ]
     }
   ]
 }
