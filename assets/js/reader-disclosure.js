@@ -156,6 +156,7 @@
     });
 
     const fullBio = pagePath === '/pt/biografia/' || pagePath === '/en/biography/';
+    const internetOpenByDefault = pagePath === '/pt/internet/' || pagePath === '/en/internet/';
     const selectivePage = pagePath === '/pt/ia-hai/' || pagePath === '/en/ai-hai/';
     const selector = fullBio ? 'section.chapter.bio-entry' : 'article.article-body > section.chapter';
     const chapters = [...document.querySelectorAll(selector)];
@@ -331,6 +332,7 @@
       body.appendChild(collapseRow);
 
       details.append(summary, body);
+      if (internetOpenByDefault) details.open = true;
       section.appendChild(details);
       section.classList.add('reader-disclosure-chapter');
       detailsForSection.set(section, details);
