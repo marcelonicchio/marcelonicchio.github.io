@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
       - name: Flatten Music hierarchy and apply titles
-        run: python tools/dave_music_flatten.py
+        run: python tools/dave_music_flatten_v2.py
       - name: Resync fragment-backed promoted entries
         run: python tools/sync_entries.py
       - name: Accept intentional PT EN Music parity revision
