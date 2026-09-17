@@ -338,7 +338,12 @@
       body.appendChild(collapseRow);
 
       details.append(summary, body);
-      if (internetOpenByDefault) details.open = true;
+      if (internetOpenByDefault) {
+        summary.addEventListener('click', (event) => {
+          if (details.open && !event.target.closest('a')) event.preventDefault();
+        });
+        details.open = true;
+      }
       section.appendChild(details);
       section.classList.add('reader-disclosure-chapter');
       detailsForSection.set(section, details);

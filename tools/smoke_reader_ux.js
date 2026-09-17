@@ -285,7 +285,11 @@ async function runDesktop(browser) {
   // Native keyboard operation and independent-open behavior.
   const mirantteDetails = mirantte.locator('details.reader-disclosure');
   const bestDetails = best.locator('details.reader-disclosure');
-  if (await mirantteDetails.getAttribute('open') !== null) await mirantte.locator('summary').click();
+  if (await mirantteDetails.getAttribute('open') !== null) {
+    await mirantte.locator('summary').evaluate((el) => el.click());
+    assert(await mirantteDetails.getAttribute('open') !== null, 'Open Internet summary unexpectedly collapsed the editorial entry');
+    await mirantte.locator('.reader-disclosure__collapse-button').click();
+  }
   const mirantteClosedBorder = await mirantteDetails.evaluate((el) => getComputedStyle(el).borderTopWidth);
   assert(mirantteClosedBorder !== '0px', 'Collapsed Mirantte did not return to compact card presentation');
   await mirantte.locator('summary').focus();
