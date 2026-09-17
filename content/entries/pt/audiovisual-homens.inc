@@ -1,0 +1,1 @@
+<p>Em 1998, Nicchio atuou na produção executiva do programa de televisão <strong>Homens na Cozinha</strong>, criado e apresentado por Fábio Ávila e exibido pela Band. Seu trabalho esteve concentrado em captação de recursos.</p><p>Há programas do projeto preservados no YouTube; eles serão incorporados aqui conforme a catalogação audiovisual avançar.</p>
