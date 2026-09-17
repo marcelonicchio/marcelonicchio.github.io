@@ -12,7 +12,7 @@
   "mainEntityOfPage": {
     "@id": "https://marcelonicchio.github.io/#profile"
   },
-  "description": "Brazilian independent researcher and creator with a trajectory across music, culture and audiovisual production, Internet, Search/Performance and Human–AI Interaction.",
+  "description": "Brazilian independent researcher and creator with a trajectory across music, culture and audiovisual production, Internet, Search/Performance, Human-Computer Interaction (HCI) and Human–AI Interaction (HAI).",
   "identifier": [
     {
       "@type": "PropertyValue",
@@ -46,6 +46,7 @@
     "Digital Products",
     "Search Engine Marketing",
     "Performance Marketing",
+    "Human-Computer Interaction",
     "Human–AI Interaction",
     "Persistent relational personas in LLMs",
     "Melissa Framework",
