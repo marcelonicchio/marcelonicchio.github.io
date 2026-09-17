@@ -24,7 +24,7 @@
   document.head.appendChild(theme);
 
   const script = document.createElement('script');
-  script.src = '/assets/js/reader-disclosure.js?v=20260903-reader12';
+  script.src = '/assets/js/reader-disclosure.js?v=20260916-reader13';
   script.defer = true;
   script.dataset.readerDisclosure = 'script';
   document.head.appendChild(script);

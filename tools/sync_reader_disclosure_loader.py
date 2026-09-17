@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LOADER_RE = re.compile(r'<script src="/assets/js/reader-disclosure-loader\.js\?v=[^"]+" defer></script>')
-SCRIPT = '<script src="/assets/js/reader-disclosure-loader.js?v=20260903-reader12" defer></script>'
+SCRIPT = '<script src="/assets/js/reader-disclosure-loader.js?v=20260916-reader13" defer></script>'
 TARGETS = [
     "pt/biografia/index.html",
     "en/biography/index.html",

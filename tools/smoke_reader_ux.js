@@ -2,8 +2,9 @@
 /**
  * Browser-level regression smoke test for Reader Page disclosure + pilot Chapter Pages.
  *
- * Full Biography and Internet & Performance use disclosure by default. IA/HAI uses
- * selective disclosure for explicitly registered entries. Culture & Audiovisual remains
+ * Full Biography uses compact disclosure by default. Internet & Performance keeps
+ * disclosure controls but starts every disclosure open. IA/HAI uses selective disclosure
+ * for explicitly registered entries. Culture & Audiovisual remains
  * a continuous-reading page and never initializes disclosure.
  *
  * Requires playwright-core supplied outside the repository. CI sets
@@ -242,7 +243,9 @@ async function runDesktop(browser) {
 
   // Internet stress set: normal URL + large galleries, composite landmark, video count and Chapter Page link.
   await page.goto(`${BASE}/pt/internet/`, {waitUntil: 'networkidle'});
-  assert(await page.locator('details.reader-disclosure').count() >= 9, 'Internet normal URL produced too few disclosures');
+  const internetDisclosureCount = await page.locator('details.reader-disclosure').count();
+  assert(internetDisclosureCount >= 9, 'Internet normal URL produced too few disclosures');
+  assert(await page.locator('details.reader-disclosure[open]').count() === internetDisclosureCount, 'Internet disclosures must start open by default');
 
   const bbs = page.locator('#bbs');
   assert(await bbs.getAttribute('data-reader-presentation') === 'always-open', 'Minduim/BBS always-open state missing in Internet');
@@ -265,7 +268,7 @@ async function runDesktop(browser) {
   const best = page.locator('#best');
   assert((await best.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('4 vídeos')), 'BEST video badge incorrect');
   assert(await best.locator('.reader-disclosure__preview').count() === 0, 'BEST rich preview leaked from Full Bio into Internet');
-  await best.locator('summary').click();
+  assert(await best.locator('details.reader-disclosure').getAttribute('open') !== null, 'BEST must start open in Internet');
   assert(await best.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/internet/best-kenshoo/', 'BEST Chapter Page link incorrect');
   assert(await best.locator('.reader-disclosure__collapse-button').count() === 1, 'Bottom collapse action missing from BEST');
 
@@ -290,6 +293,12 @@ async function runDesktop(browser) {
   assert(await page.locator('details.reader-disclosure[open]').count() === total, 'beforeprint did not expose all chapters');
   await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
   assert(await page.locator('details.reader-disclosure[open]').count() === 0, 'afterprint did not restore disclosure state');
+
+  // English Internet follows the same open-by-default rule.
+  await page.goto(`${BASE}/en/internet/`, {waitUntil: 'networkidle'});
+  const internetDisclosureCountEn = await page.locator('details.reader-disclosure').count();
+  assert(internetDisclosureCountEn >= 9, 'English Internet normal URL produced too few disclosures');
+  assert(await page.locator('details.reader-disclosure[open]').count() === internetDisclosureCountEn, 'English Internet disclosures must start open by default');
 
   // Culture & Audiovisual is intentionally continuous reading: normal and legacy query-flag URLs remain fully open.
   await page.goto(`${BASE}/pt/comunicacao/`, {waitUntil: 'networkidle'});
