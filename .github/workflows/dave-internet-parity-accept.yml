@@ -1,0 +1,50 @@
+name: Dave Internet Parity Accept
+
+on:
+  push:
+    branches:
+      - dave/internet-music-structure-2026-09-17
+
+permissions:
+  contents: write
+
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: dave/internet-music-structure-2026-09-17
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Accept jointly reviewed Internet PT EN checkpoints
+        run: |
+          for entry in \
+            internet-bbs \
+            internet-best \
+            internet-clickland \
+            internet-commercial \
+            internet-cookieweb \
+            internet-dialetto \
+            internet-driven \
+            internet-independent \
+            internet-mirantte \
+            internet-petlove \
+            internet-psinet \
+            internet-sem
+          do
+            python tools/editorial_parity.py --accept "$entry"
+          done
+          python tools/editorial_parity.py --check
+      - name: Commit checkpoints and remove temporary runner
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/dave-internet-parity-accept.yml
+          git add -A
+          git commit -m "chore: accept Internet structural parity checkpoints"
+          git push origin HEAD:dave/internet-music-structure-2026-09-17
