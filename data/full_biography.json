@@ -130,8 +130,8 @@
       "date": "1992",
       "domain": "music",
       "title": {
-        "pt": "Destemidos Limonadas & Punkecas",
-        "en": "Destemidos Limonadas & Punkecas"
+        "pt": "Destemidos Limonadas & Punkecas (Roberto Limonada)",
+        "en": "Destemidos Limonadas & Punkecas (Roberto Limonada)"
       },
       "source": {
         "pt": {
@@ -147,13 +147,35 @@
       }
     },
     {
+      "id": "music-studios-1993",
+      "era": "cruzamentos-1992-2000",
+      "date": "1993",
+      "domain": "music",
+      "title": {
+        "pt": "Ensaios em Estúdios e Primeiros Shows",
+        "en": "Studio Rehearsals and First Shows"
+      },
+      "source": {
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "section",
+          "selector": "#estudios-shows-1993"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "section",
+          "selector": "#studios-shows-1993"
+        }
+      }
+    },
+    {
       "id": "music-kid-vinil-1993",
       "era": "cruzamentos-1992-2000",
       "date": "1993",
       "domain": "music",
       "title": {
-        "pt": "Kid Vinil & Verminose — Café Piu Piu",
-        "en": "Kid Vinil & Verminose — Café Piu Piu"
+        "pt": "Show Kid Vinil & Verminose - Café Piu Piu",
+        "en": "Kid Vinil & Verminose Show - Café Piu Piu"
       },
       "source": {
         "pt": {
@@ -212,18 +234,20 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-demo-tape-1994']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-demo-tape-1994"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-demo-tape-1994']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-demo-tape-1994"
         }
       },
-      "date_en": "Apr.–May 1994"
+      "date_en": "Apr.–May 1994",
+      "title": {
+        "pt": "Gravação Primeira Demo-Tape - Estúdio Anonimato",
+        "en": "First Demo Tape Recording - Estúdio Anonimato"
+      }
     },
     {
       "id": "music-circuit",
@@ -233,16 +257,18 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-circuit-1993-1995']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-circuit-1993-1995"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-circuit-1993-1995']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-circuit-1993-1995"
         }
+      },
+      "title": {
+        "pt": "Circuito paulistano - Shows e Aberturas para banda 365",
+        "en": "São Paulo Circuit - Shows and Opening Sets for 365"
       }
     },
     {
@@ -251,8 +277,8 @@
       "domain": "music",
       "date": "1994",
       "title": {
-        "pt": "Kid Vinil na 97FM Rock",
-        "en": "Kid Vinil on 97FM Rock"
+        "pt": "Entrevistas para Kid Vinil na 97FM Rock",
+        "en": "Interviews with Kid Vinil on 97FM Rock"
       },
       "source": {
         "pt": {
@@ -311,16 +337,18 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-album-1997']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-album-1997"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-album-1997']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-album-1997"
         }
+      },
+      "title": {
+        "pt": "Primeiro Álbum: Meu Querido Diário",
+        "en": "First Album: Meu Querido Diário"
       }
     },
     {
@@ -367,16 +395,18 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-festival-1998-1999']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-festival-1998-1999"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-festival-1998-1999']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-festival-1998-1999"
         }
+      },
+      "title": {
+        "pt": "Show Café Piu Piu (1998) e outros",
+        "en": "Café Piu Piu Show (1998) and others"
       }
     },
     {
@@ -387,16 +417,18 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-album-1999-2000']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-album-1999-2000"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-album-1999-2000']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-album-1999-2000"
         }
+      },
+      "title": {
+        "pt": "Segundo Álbum: Eu Não Tô Nem Aí",
+        "en": "Second Album: Eu Não Tô Nem Aí"
       }
     },
     {
@@ -425,18 +457,42 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-etesp-fatec-2000']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-etesp-fatec-2000"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-etesp-fatec-2000']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-etesp-fatec-2000"
         }
       },
-      "date_en": "Jun. / Oct. 28, 2000"
+      "date_en": "Jun. / Oct. 28, 2000",
+      "title": {
+        "pt": "Shows ETESP / FATEC - Av. Tiradentes",
+        "en": "ETESP / FATEC Shows - Avenida Tiradentes"
+      }
+    },
+    {
+      "id": "music-mp3-era-2000",
+      "era": "cruzamentos-1992-2000",
+      "date": "2000",
+      "domain": "music",
+      "title": {
+        "pt": "A Era do MP3",
+        "en": "The MP3 Era"
+      },
+      "source": {
+        "pt": {
+          "path": "pt/musica/index.html",
+          "kind": "section",
+          "selector": "#music-mp3-era-2000"
+        },
+        "en": {
+          "path": "en/music/index.html",
+          "kind": "section",
+          "selector": "#music-mp3-era-2000"
+        }
+      }
     },
     {
       "id": "music-olympia",
@@ -446,18 +502,20 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-olympia-2000']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-olympia-2000"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-olympia-2000']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-olympia-2000"
         }
       },
-      "date_en": "Jun. 25, 2000"
+      "date_en": "Jun. 25, 2000",
+      "title": {
+        "pt": "Show no Olympia",
+        "en": "Show at Olympia"
+      }
     },
     {
       "id": "livraria-cultura",
@@ -503,18 +561,20 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-jo-2001']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-jo-2001"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-jo-2001']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-jo-2001"
         }
       },
-      "date_en": "Jun. 27, 2001"
+      "date_en": "Jun. 27, 2001",
+      "title": {
+        "pt": "Programa do Jô",
+        "en": "Programa do Jô"
+      }
     },
     {
       "id": "music-active-2001-2003",
@@ -524,16 +584,18 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-active-2001-2003']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-active-2001-2003"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-active-2001-2003']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-active-2001-2003"
         }
+      },
+      "title": {
+        "pt": "Atividade contínua",
+        "en": "Continuous activity"
       }
     },
     {
@@ -544,16 +606,18 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-end-2003']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-end-2003"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-end-2003']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-end-2003"
         }
+      },
+      "title": {
+        "pt": "Encerramento",
+        "en": "End of the project"
       }
     },
     {
@@ -816,18 +880,20 @@
       "source": {
         "pt": {
           "path": "pt/musica/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-reunion-2023']",
-          "parent_selector": "#palcos"
+          "kind": "section",
+          "selector": "#music-reunion-2023"
         },
         "en": {
           "path": "en/music/index.html",
-          "kind": "phase",
-          "selector": "[data-bio-key='music-reunion-2023']",
-          "parent_selector": "#stages"
+          "kind": "section",
+          "selector": "#music-reunion-2023"
         }
       },
-      "date_en": "Dec. 2023"
+      "date_en": "Dec. 2023",
+      "title": {
+        "pt": "Reencontro - 20 anos depois",
+        "en": "Reunion - 20 years later"
+      }
     },
     {
       "id": "hai-cycle",

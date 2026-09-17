@@ -377,35 +377,15 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 
 
 
-/* Music / Coitado do Próximo: major-entry hierarchy — 2026-09-11 */
-#palcos .phase-list,
-#stages .phase-list{display:grid;gap:0;margin:34px 0}
-#palcos .phase,
-#stages .phase{display:block;padding:34px 0 38px;border-top:1px solid var(--line)}
-#palcos .phase:last-child,
-#stages .phase:last-child{border-bottom:1px solid var(--line)}
-#palcos .phase-year,
-#stages .phase-year{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent-soft);font-size:.76rem;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;font-weight:800;margin:0 0 .55rem}
-#palcos .phase h2,
-#stages .phase h2,
-#palcos .phase h3,
-#stages .phase h3{margin:0 0 .72rem;font-size:clamp(1.55rem,3vw,2.05rem);line-height:1.12;letter-spacing:-.035em;color:var(--text)}
-#palcos .phase p,
-#stages .phase p{margin:.72rem 0 0;font-size:1.02rem;line-height:1.68;color:#ddd8ce}
-#palcos .phase q,
-#stages .phase q{color:var(--text);font-style:italic}
-@media(max-width:580px){
-  #palcos .phase,#stages .phase{padding:28px 0 32px}
-  #palcos .phase-year,#stages .phase-year{font-size:.72rem}
-  #palcos .phase h2,#stages .phase h2,#palcos .phase h3,#stages .phase h3{font-size:clamp(1.45rem,7vw,1.8rem)}
-}
-
+/* Music / Coitado do Próximo: flat top-level entry hierarchy — 2026-09-16 */
+.article-body > .music-entry{padding-top:1px;border-top:1px solid var(--line);scroll-margin-top:100px}
+.article-body > .music-entry > .phase-year{margin:46px 0 .55rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent-soft);font-size:.76rem;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
+.article-body > .music-entry > .phase-year + h2{margin-top:0}
+@media(max-width:580px){.article-body > .music-entry > .phase-year{margin-top:38px;font-size:.72rem}}
 
 /* Music promoted-entry permalinks — 2026-09-13 */
-#palcos .music-entry h2 a.entry-title-permalink,
-#stages .music-entry h2 a.entry-title-permalink{color:inherit;text-decoration:none}
-#palcos .music-entry h2 a.entry-title-permalink:hover,
-#stages .music-entry h2 a.entry-title-permalink:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}
+.article-body > .music-entry h2 a.entry-title-permalink{color:inherit;text-decoration:none}
+.article-body > .music-entry h2 a.entry-title-permalink:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}
 
 /* Destemidos Limonadas: desktop selfie sizing — 2026-09-14 */
 @media(min-width:901px){
