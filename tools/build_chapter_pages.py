@@ -38,8 +38,8 @@ DOMAIN = {
         "en": ("Music", "/en/music/"),
     },
     "hai": {
-        "pt": ("IA/HAI", "/pt/ia-hai/"),
-        "en": ("AI/HAI", "/en/ai-hai/"),
+        "pt": ("IA / HCI / HAI", "/pt/ia-hai/"),
+        "en": ("AI / HCI / HAI", "/en/ai-hai/"),
     },
     "context": {
         "pt": ("Biografia Completa", "/pt/biografia/"),
@@ -68,7 +68,7 @@ def nav(lang: str, counterpart: str) -> str:
             ("/pt/musica/", "Música"),
             ("/pt/comunicacao/", "Mídia & Cultura"),
             ("/pt/internet/", "Internet & Performance"),
-            ("/pt/ia-hai/", "IA/HAI"),
+            ("/pt/ia-hai/", "IA/HCI/HAI"),
             ("/pt/arquivo/", "Arquivo"),
             (counterpart, "EN"),
         ]
@@ -80,7 +80,7 @@ def nav(lang: str, counterpart: str) -> str:
             ("/en/music/", "Music"),
             ("/en/communication/", "Media & Culture"),
             ("/en/internet/", "Internet & Performance"),
-            ("/en/ai-hai/", "AI/HAI"),
+            ("/en/ai-hai/", "AI/HCI/HAI"),
             ("/en/archive/", "Archive"),
             (counterpart, "PT"),
         ]

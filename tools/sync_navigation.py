@@ -61,6 +61,10 @@ def normalize_nav_block(block: str, lang: str) -> str:
         block = re.sub(av_pattern, media_anchor, block, count=1)
     elif had_av:
         block = re.sub(av_pattern, '', block)
+    if lang == "pt":
+        block = re.sub(r'<a href="/pt/ia-hai/">[^<]*</a>', '<a href="/pt/ia-hai/">IA/HCI/HAI</a>', block)
+    else:
+        block = re.sub(r'<a href="/en/ai-hai/">[^<]*</a>', '<a href="/en/ai-hai/">AI/HCI/HAI</a>', block)
     return block
 
 
