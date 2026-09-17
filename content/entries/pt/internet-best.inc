@@ -5,17 +5,17 @@
 <a aria-label="Abrir a fotografia original do workshop BEST/Kenshoo" href="/assets/archive/internet/best-kenshoo/best00_thread_palestra01.png" rel="noopener noreferrer" target="_blank">
 <img alt="Registro do workshop do E-Commerce Brasil durante o ciclo BEST/Kenshoo." decoding="async" height="619" loading="lazy" src="/assets/media/thread/best-kenshoo-workshop.webp" width="1100"/>
 </a>
-<figcaption><strong>“Segmentações Avançadas em Search” — E-Commerce Brasil, 11 nov. 2014.</strong><a class="thread-media-open" href="/assets/archive/internet/best-kenshoo/best00_thread_palestra01.png" rel="noopener noreferrer" target="_blank">Abrir imagem original ↗</a></figcaption>
+<figcaption><strong>“Segmentação em Google Adwords e Facebook Ads - Melhores Práticas, Melhor ROI” — E-Commerce Brasil, 11 nov. 2014.</strong><a class="thread-media-open" href="/assets/archive/internet/best-kenshoo/best00_thread_palestra01.png" rel="noopener noreferrer" target="_blank">Abrir imagem original ↗</a></figcaption>
 </figure>
 <!-- thread-media:best-kenshoo:end -->
-<p>Em <strong>11 de novembro de 2014, das 9h às 12h</strong>, ministrou no E-Commerce Brasil o workshop <strong>“Segmentações Avançadas em Search”</strong>. A gravação preservada está dividida em quatro partes e documenta diretamente o repertório profissional daquele ciclo em segmentação, Search, tecnologia e operação de mídia.</p>
+<p>Em <strong>11 de novembro de 2014, das 9h às 12h</strong>, ministrou no E-Commerce Brasil o workshop <strong>“Segmentação em Google Adwords e Facebook Ads - Melhores Práticas, Melhor ROI”</strong>. A gravação preservada está dividida em quatro partes e documenta diretamente o repertório profissional daquele ciclo em segmentação, Search, tecnologia e operação de mídia.</p>
 <div class="video-library" aria-label="Vídeos e mídia" aria-labelledby="best-workshop-video-title">
   <div class="video-library__head">
     <strong id="best-workshop-video-title">Vídeos &amp; Mídia · 4</strong>
     <span>E-Commerce Brasil · 11 nov. 2014</span>
   </div>
   <div class="video-library__group">
-    <div class="video-library__label"><strong>Segmentações Avançadas em Search</strong></div>
+    <div class="video-library__label"><strong>Segmentação em Google Adwords e Facebook Ads - Melhores Práticas, Melhor ROI</strong></div>
     <p class="video-library__description">Gravação integral do workshop preservada em quatro partes.</p>
     <div class="video-library__actions">
       <a class="video-pill" href="https://youtu.be/p-1Uc-zD4TE" target="_blank" rel="noopener noreferrer">Parte 1</a><a class="video-pill" href="https://youtu.be/hOKqH6yxQ4g" target="_blank" rel="noopener noreferrer">Parte 2</a><a class="video-pill" href="https://youtu.be/C1Z3wD8t03A" target="_blank" rel="noopener noreferrer">Parte 3</a><a class="video-pill" href="https://youtu.be/3h-z53IN6AI" target="_blank" rel="noopener noreferrer">Parte 4</a>
@@ -75,3 +75,5 @@
   </div>
 </div>
 <!-- gallery:best-kenshoo:end -->
+<div class="inline-records"><a class="inline-record" href="/assets/archive/internet/best-kenshoo/best_workshop01_segmentacaoemgoogleadwords_e_facebookads_melhorespraticas-melhorroi.pdf" rel="noopener noreferrer" target="_blank" type="application/pdf"><img alt="Slide 4 da apresentação do workshop Segmentação em Google Adwords e Facebook Ads - Melhores Práticas, Melhor ROI." decoding="async" loading="lazy" src="/assets/archive/internet/best-kenshoo/best-workshop01-slide04-preview.webp" width="960" height="720"/><span><strong>Segmentação em Google Adwords e Facebook Ads - Melhores Práticas, Melhor ROI</strong><small>11 de novembro de 2014 · 9h–12h · E-Commerce Brasil · PDF ↗</small></span></a></div>
+<div class="inline-records"><a class="inline-record" href="/assets/archive/internet/best-kenshoo/best08_workshop-facebook-ads-2014.pdf" rel="noopener noreferrer" target="_blank" type="application/pdf"><img alt="Slide 3 da apresentação do workshop Facebook Ads: Melhores Práticas, Melhor Conversão." decoding="async" loading="lazy" src="/assets/archive/internet/best-kenshoo/best-workshop02-slide03-preview.webp" width="960" height="720"/><span><strong>Facebook Ads: Melhores Práticas, Melhor Conversão</strong><small>12 de novembro de 2014 · 9h–12h · E-Commerce Brasil · PDF ↗</small></span></a></div>
