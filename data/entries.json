@@ -1831,7 +1831,11 @@
       },
       "topic_ids": [],
       "reader_presentation": {
-        "state": "normal"
+        "state": "normal",
+        "always_open_paths": [
+          "pt/ia-hai/index.html",
+          "en/ai-hai/index.html"
+        ]
       },
       "source": {
         "kind": "fragment",
@@ -1885,7 +1889,11 @@
       },
       "topic_ids": [],
       "reader_presentation": {
-        "state": "normal"
+        "state": "normal",
+        "always_open_paths": [
+          "pt/ia-hai/index.html",
+          "en/ai-hai/index.html"
+        ]
       },
       "source": {
         "kind": "fragment",
