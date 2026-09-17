@@ -1,0 +1,178 @@
+name: Dave Reunion Cassasp Media
+
+on:
+  push:
+    branches:
+      - dave/reunion-cassasp-media-2026-09-17
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dave/reunion-cassasp-media-2026-09-17
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+
+      - name: Register reunion gallery and insert thread media
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import json, re
+
+          root = Path(".")
+          gallery_id = "reencontro-cassasp-2023"
+          source_root = "assets/archive/music/coitado-do-proximo/2023-reencontro-20-anos/galeria"
+          thread_rel = "assets/archive/music/coitado-do-proximo/2023-reencontro-20-anos/coitado_cassasp_00_2023_IA-thread.jpg"
+
+          ai_files = [f"coitado_cassasp_2023_IA-{i:02d}.jpg" for i in range(1, 7)]
+          photo_files = [f"coitadodoproximo_cassasp{i:02d}.jpg" for i in range(1, 20)]
+          files = ai_files + photo_files
+
+          registry_path = root / "data/galleries.json"
+          registry = json.loads(registry_path.read_text(encoding="utf-8"))
+
+          items = []
+          for idx, filename in enumerate(files, 1):
+              if filename in ai_files:
+                  ai_num = ai_files.index(filename) + 1
+                  pt = f"Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — imagem tratada por IA {ai_num}."
+                  en = f"Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — AI-treated image {ai_num}."
+              else:
+                  photo_num = photo_files.index(filename) + 1
+                  pt = f"Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023 — registro fotográfico {photo_num}."
+                  en = f"Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023 — photographic record {photo_num}."
+              items.append({
+                  "id": f"{idx:02d}",
+                  "source": filename,
+                  "caption": {"pt": pt, "en": en},
+              })
+
+          gallery = {
+              "id": gallery_id,
+              "sourceRoot": source_root,
+              "targets": {
+                  "pt": ["pt/musica/index.html"],
+                  "en": ["en/music/index.html"],
+              },
+              "title": {
+                  "pt": "Arquivo visual — reencontro no Clube Cassasp",
+                  "en": "Visual archive — reunion at Clube Cassasp",
+              },
+              "items": items,
+          }
+
+          existing = [g for g in registry.get("galleries", []) if g.get("id") == gallery_id]
+          if existing:
+              pos = registry["galleries"].index(existing[0])
+              registry["galleries"][pos] = gallery
+          else:
+              registry.setdefault("galleries", []).append(gallery)
+          registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          thread_path = root / thread_rel
+          with Image.open(thread_path) as opened:
+              image = ImageOps.exif_transpose(opened)
+              tw, th = image.size
+
+          specs = {
+              "pt/musica/index.html": {
+                  "label": "Reencontro do Coitado do Próximo · Clube Cassasp · 21 dez. 2023.",
+                  "note": "Imagem tratada por IA.",
+                  "open": "Abrir imagem em tamanho maior ↗",
+                  "aria": "Abrir imagem do reencontro do Coitado do Próximo no Clube Cassasp em tamanho maior",
+                  "alt": "Coitado do Próximo no reencontro de 2023 no Clube Cassasp, em São Paulo.",
+              },
+              "en/music/index.html": {
+                  "label": "Coitado do Próximo reunion · Clube Cassasp · Dec. 21, 2023.",
+                  "note": "AI-treated image.",
+                  "open": "Open larger image ↗",
+                  "aria": "Open image of Coitado do Próximo's reunion at Clube Cassasp in a larger size",
+                  "alt": "Coitado do Próximo at the 2023 reunion at Clube Cassasp in São Paulo.",
+              },
+          }
+
+          placeholder = f"<!-- gallery:{gallery_id} -->"
+          for rel, spec in specs.items():
+              path = root / rel
+              text = path.read_text(encoding="utf-8")
+              if placeholder in text or f"<!-- gallery:{gallery_id}:start -->" in text:
+                  continue
+              section_match = re.search(
+                  r'(<section class="chapter music-entry" data-bio-key="music-reunion-2023" id="music-reunion-2023">)(.*?)(</section>)',
+                  text,
+                  flags=re.S,
+              )
+              if not section_match:
+                  raise SystemExit(f"music-reunion-2023 section not found in {rel}")
+              body = section_match.group(2)
+              first_p_end = body.find("</p>")
+              if first_p_end < 0:
+                  raise SystemExit(f"first paragraph not found in {rel}")
+              first_p_end += len("</p>")
+              figure = (
+                  f'<figure class="thread-media thread-media--linked">'
+                  f'<a aria-label="{spec["aria"]}" href="/{thread_rel}" rel="noopener noreferrer" target="_blank">'
+                  f'<img alt="{spec["alt"]}" decoding="async" loading="lazy" src="/{thread_rel}" width="{tw}" height="{th}"/></a>'
+                  f'<figcaption><strong>{spec["label"]}</strong>'
+                  f'<span class="thread-media-note">{spec["note"]}</span>'
+                  f'<a class="thread-media-open" href="/{thread_rel}" rel="noopener noreferrer" target="_blank">{spec["open"]}</a>'
+                  f'</figcaption></figure>'
+              )
+              new_body = body[:first_p_end] + figure + placeholder + body[first_p_end:]
+              replacement = section_match.group(1) + new_body + section_match.group(3)
+              text = text[:section_match.start()] + replacement + text[section_match.end():]
+              path.write_text(text, encoding="utf-8")
+
+          print(f"Registered {len(items)} gallery images; thread image dimensions: {tw}x{th}")
+          PY
+
+      - name: Build responsive gallery derivatives
+        run: python tools/build_gallery_media.py
+
+      - name: Synchronize gallery markup
+        run: python tools/sync_galleries.py
+
+      - name: Accept PT EN editorial checkpoint
+        run: python tools/editorial_parity.py --accept music-reunion-2023
+
+      - name: Synchronize Full Biography
+        run: python tools/sync_full_biography.py
+
+      - name: Refresh sitemap
+        run: python tools/build_sitemap.py
+
+      - name: Targeted validation
+        run: |
+          python tools/build_gallery_media.py --check
+          python tools/sync_galleries.py --check
+          python tools/audit_galleries.py
+          python tools/audit_image_dimensions.py
+          python tools/editorial_parity.py --check
+          python tools/sync_full_biography.py --check
+          python tools/audit_full_biography.py
+          python tools/build_sitemap.py --check
+          python tools/audit_site.py
+
+      - name: Commit integration
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/dave-reunion-cassasp.yml
+          git add data/galleries.json data/editorial_parity.json pt/musica/index.html en/music/index.html pt/biografia/index.html en/biography/index.html sitemap.xml assets/media/galleries/reencontro-cassasp-2023
+          git commit -m "feat: add 2023 reunion thread image and gallery"
+          git push origin HEAD:dave/reunion-cassasp-media-2026-09-17
