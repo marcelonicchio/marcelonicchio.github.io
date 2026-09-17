@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Safe wrapper for the temporary Music hierarchy migration.
 
-Preserves root attributes while promoting legacy phases and repairs the one
-inherited Music entry (1993 studios/shows) that never received a biography key.
+Preserves root attributes while promoting legacy phases, repairs the inherited
+1993 studios entry that never received a biography key, and gives every promoted
+chapter a stable id so Full Biography coverage can register it as a true chapter.
 """
 
 from __future__ import annotations
 
+import html
 import json
 import re
 
@@ -51,6 +53,17 @@ def safe_promote(fragment: str) -> str:
             raise RuntimeError(f"Music entry lacks data-bio-key and is not the known studios exception: {title}")
         attrs += f' data-bio-key="{STUDIOS_KEY}"'
 
+    key_match = re.search(r'data-bio-key=["\']([^"\']+)["\']', attrs)
+    if not key_match:
+        raise RuntimeError("promoted Music entry still lacks data-bio-key")
+    key = key_match.group(1)
+
+    # Legacy phases had no anchors because they were never chapters. Once promoted,
+    # every chapter must have a stable id. Preserve existing ids on already-promoted
+    # entries; use the biography key only where no id existed before.
+    if not re.search(r'\bid=["\'][^"\']+["\']', attrs):
+        attrs += f' id="{key}"'
+
     if tag == "div":
         outer_end = migration.find_balanced_tag_end(fragment, root.start(2) - 1, "div")
         close_start = fragment.rfind("</div>", root.end(), outer_end)
@@ -73,9 +86,23 @@ def safe_promote(fragment: str) -> str:
     fragment = re.sub(r"<h3\b([^>]*)>", r"<h2\1>", fragment, count=1, flags=re.I)
     fragment = re.sub(r"</h3>", "</h2>", fragment, count=1, flags=re.I)
 
-    # Guard: every promoted entry must leave this routine with a biography key.
     migration.key_of(fragment)
+    if not migration.id_of(fragment):
+        raise RuntimeError(f"promoted Music chapter {key} has no id")
     return fragment
+
+
+def safe_mp3_section(lang: str) -> str:
+    if lang == "pt":
+        title, body = migration.MP3_PT_TITLE, migration.MP3_PT
+    else:
+        title, body = migration.MP3_EN_TITLE, migration.MP3_EN
+    return (
+        f'<section class="chapter music-entry" id="{migration.MP3_KEY}" '
+        f'data-bio-key="{migration.MP3_KEY}">'
+        f'<div class="phase-year">2000</div><h2>{html.escape(title, quote=False)}</h2>'
+        f'<p>{html.escape(body, quote=False)}</p></section>'
+    )
 
 
 _original_update_manifest = migration.update_manifest
@@ -84,48 +111,73 @@ _original_update_manifest = migration.update_manifest
 def update_manifest_with_studios(pt_meta, en_meta) -> None:
     _original_update_manifest(pt_meta, en_meta)
     manifest = json.loads(migration.MANIFEST_PATH.read_text(encoding="utf-8"))
-    if any(entry.get("id") == STUDIOS_KEY for entry in manifest.get("entries", [])):
-        return
 
-    studios_entry = {
-        "id": STUDIOS_KEY,
-        "era": "cruzamentos-1992-2000",
-        "date": "1993",
-        "domain": "music",
-        "title": {
-            "pt": str(pt_meta[STUDIOS_KEY]["title"]),
-            "en": str(en_meta[STUDIOS_KEY]["title"]),
-        },
-        "source": {
-            "pt": {
-                "path": "pt/musica/index.html",
-                "kind": "section",
-                "selector": f"[data-bio-key='{STUDIOS_KEY}']",
-            },
-            "en": {
-                "path": "en/music/index.html",
-                "kind": "section",
-                "selector": f"[data-bio-key='{STUDIOS_KEY}']",
-            },
-        },
-    }
+    # Section-backed chapters must be registered by their public chapter id for
+    # coverage auditing. Existing promoted entries already use #id selectors;
+    # converted legacy phases still carry data-bio-key selectors at this point.
+    def promote_selector(spec: dict, meta: dict) -> None:
+        selector = spec.get("selector", "")
+        km = re.search(r"data-bio-key=['\"]([^'\"]+)['\"]", selector)
+        if not km:
+            return
+        key = km.group(1)
+        target = meta.get(key)
+        if not target or not target.get("id"):
+            raise RuntimeError(f"cannot resolve chapter id for manifest key {key}")
+        spec["selector"] = f"#{target['id']}"
 
-    # Place it directly after Destemidos and before Kid Vinil/Café Piu Piu,
-    # matching Marcelo's requested Music-thread order.
-    insert_at = None
-    for i, entry in enumerate(manifest["entries"]):
-        if entry.get("id") == "music-limonada-1992":
-            insert_at = i + 1
+    for entry in manifest.get("entries", []):
+        for lang, target_path, meta in (
+            ("pt", "pt/musica/index.html", pt_meta),
+            ("en", "en/music/index.html", en_meta),
+        ):
+            spec = entry.get("source", {}).get(lang)
+            if spec and spec.get("path") == target_path and spec.get("kind") == "section":
+                promote_selector(spec, meta)
+
+    if not any(entry.get("id") == STUDIOS_KEY for entry in manifest.get("entries", [])):
+        pt_id = pt_meta[STUDIOS_KEY].get("id")
+        en_id = en_meta[STUDIOS_KEY].get("id")
+        if not pt_id or not en_id:
+            raise RuntimeError("Studios entry lacks PT/EN chapter id")
+        studios_entry = {
+            "id": STUDIOS_KEY,
+            "era": "cruzamentos-1992-2000",
+            "date": "1993",
+            "domain": "music",
+            "title": {
+                "pt": str(pt_meta[STUDIOS_KEY]["title"]),
+                "en": str(en_meta[STUDIOS_KEY]["title"]),
+            },
+            "source": {
+                "pt": {"path": "pt/musica/index.html", "kind": "section", "selector": f"#{pt_id}"},
+                "en": {"path": "en/music/index.html", "kind": "section", "selector": f"#{en_id}"},
+            },
+        }
+        insert_at = None
+        for i, entry in enumerate(manifest["entries"]):
+            if entry.get("id") == "music-limonada-1992":
+                insert_at = i + 1
+                break
+        if insert_at is None:
+            raise RuntimeError("music-limonada-1992 not found in Full Biography manifest")
+        manifest["entries"].insert(insert_at, studios_entry)
+
+    # The MP3 entry was inserted by the base migration before this wrapper gets
+    # control; make its selector chapter-id based as well.
+    for entry in manifest["entries"]:
+        if entry.get("id") == migration.MP3_KEY:
+            entry["source"]["pt"]["selector"] = f"#{pt_meta[migration.MP3_KEY]['id']}"
+            entry["source"]["en"]["selector"] = f"#{en_meta[migration.MP3_KEY]['id']}"
             break
-    if insert_at is None:
-        raise RuntimeError("music-limonada-1992 not found in Full Biography manifest")
-    manifest["entries"].insert(insert_at, studios_entry)
+
     migration.MANIFEST_PATH.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
 
 
 migration.promote = safe_promote
+migration.mp3_section = safe_mp3_section
 migration.update_manifest = update_manifest_with_studios
 
 if __name__ == "__main__":
