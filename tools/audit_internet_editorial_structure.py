@@ -11,8 +11,14 @@ TARGETS = {
     "en": ROOT / "en/internet/index.html",
 }
 EXPECTED_IDS = {
-    "bbs", "internet", "psinet", "mirantte", "sem", "cookieweb",
-    "clickland", "petlove", "best", "dialetto", "independente", "driven",
+    "pt": [
+        "bbs", "internet", "psinet", "mirantte", "sem", "cookieweb",
+        "clickland", "petlove", "best", "dialetto", "independente", "driven",
+    ],
+    "en": [
+        "bbs", "internet", "psinet", "mirantte", "sem", "cookieweb",
+        "clickland", "petlove", "best", "dialetto", "independent", "driven",
+    ],
 }
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 
@@ -29,7 +35,7 @@ def direct_child(section, tag=None, cls=None):
     return None
 
 
-def audit(path: Path):
+def audit(lang: str, path: Path):
     soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
     article = soup.select_one("article.article-body")
     if article is None:
@@ -56,21 +62,18 @@ def audit(path: Path):
             raise AssertionError(f"{path.relative_to(ROOT)}#{sid}: date leaked back into h2: {heading_text!r}")
         entries.append(sid)
 
-    found = set(entries)
-    if found != EXPECTED_IDS:
-        missing = sorted(EXPECTED_IDS - found)
-        extra = sorted(found - EXPECTED_IDS)
+    expected = EXPECTED_IDS[lang]
+    if entries != expected:
         raise AssertionError(
-            f"{path.relative_to(ROOT)}: Internet entry set mismatch; missing={missing}, extra={extra}"
+            f"{path.relative_to(ROOT)}: Internet entry order mismatch; expected={expected}, found={entries}"
         )
-    if len(entries) != len(EXPECTED_IDS):
-        raise AssertionError(f"{path.relative_to(ROOT)}: duplicate Internet entry ids")
     return entries
 
 
 def main() -> int:
-    results = {lang: audit(path) for lang, path in TARGETS.items()}
-    if results["pt"] != results["en"]:
+    results = {lang: audit(lang, path) for lang, path in TARGETS.items()}
+    canonical_en = ["independente" if item == "independent" else item for item in results["en"]]
+    if results["pt"] != canonical_en:
         raise AssertionError(
             f"PT/EN Internet entry order differs: pt={results['pt']}, en={results['en']}"
         )
