@@ -396,8 +396,8 @@
         "en": "Aug. 2012–present"
       },
       "title": {
-        "pt": "Clickland Digital",
-        "en": "Clickland Digital"
+        "pt": "Agência Clickland Digital",
+        "en": "Clickland Digital Agency"
       },
       "summary": {
         "pt": "Fundada em agosto de 2012 por Marcelo Nicchio e Carlos Portela, a Clickland Digital atuou com Search e mídia para pequenas e médias empresas sob o posicionamento Premium Search Agency.",
@@ -411,7 +411,9 @@
         "state": "always-open"
       },
       "source": {
-        "kind": "reader-section"
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/internet-clickland.inc",
+        "en_path": "content/entries/en/internet-clickland.inc"
       },
       "reader_targets": {
         "pt": [
@@ -436,8 +438,10 @@
         ]
       },
       "chapter_page": {
-        "status": "none",
-        "indexing": "none"
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/internet/agencia-clickland-digital/index.html",
+        "en_path": "en/internet/clickland-digital-agency/index.html"
       }
     },
     {
@@ -1267,6 +1271,662 @@
           "pt": "Coitado do Próximo e Kid Vinil na 97FM Rock: a primeira demo, “Mulher SP” no rádio e uma segunda passagem improvisada com Mirão/365.",
           "en": "Coitado do Próximo and Kid Vinil on 97FM Rock: the first demo, “Mulher SP” on air and a second improvised appearance with Mirão/365."
         }
+      }
+    },
+    {
+      "id": "music-demo-tape-1994",
+      "kind": "chapter",
+      "domain": "music",
+      "date": {
+        "pt": "abr.–mai. 1994",
+        "en": "Apr.–May 1994"
+      },
+      "title": {
+        "pt": "Gravação Primeira Demo-Tape - Estúdio Anonimato",
+        "en": "First Demo Tape Recording - Estúdio Anonimato"
+      },
+      "summary": {
+        "pt": "Em abril e maio de 1994, duas novas músicas autorais escritas por Marcelo Nicchio foram levadas ao Estúdio Anonimato, em São Paulo, para a gravação do que viria a ser a primeira demo-tape do Coitado do Próximo, depois replicada em centenas de cópias para distribuição promocional.",
+        "en": "In April and May 1994, two new original songs written by Marcelo Nicchio were taken into Estúdio Anonimato in São Paulo to record what became Coitado do Próximo’s first demo tape, later duplicated in hundreds of copies for promotional distribution."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-demo-tape-1994.inc",
+        "en_path": "content/entries/en/music-demo-tape-1994.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#music-demo-tape-1994"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-music-demo-tape-1994"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/music/index.html",
+            "selector": "#music-demo-tape-1994"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-music-demo-tape-1994"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/primeira-demo-tape-estudio-anonimato/index.html",
+        "en_path": "en/music/first-demo-tape-estudio-anonimato/index.html"
+      }
+    },
+    {
+      "id": "music-album-1997",
+      "kind": "chapter",
+      "domain": "music",
+      "date": {
+        "pt": "1997–1998",
+        "en": "1997–1998"
+      },
+      "title": {
+        "pt": "Primeiro Álbum: Meu Querido Diário",
+        "en": "First Album: Meu Querido Diário"
+      },
+      "summary": {
+        "pt": "Primeiro álbum autoral, gravado no Estúdio Asas, em São Paulo, com produção de Edson X. Marcelo Nicchio participou da idealização, das composições e gravou bateria.",
+        "en": "First original album, recorded at Estúdio Asas in São Paulo and produced by Edson X. Marcelo Nicchio contributed to the concept and songwriting and recorded drums."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-album-1997.inc",
+        "en_path": "content/entries/en/music-album-1997.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#music-album-1997"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-music-album-1997"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/music/index.html",
+            "selector": "#music-album-1997"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-music-album-1997"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/meu-querido-diario/index.html",
+        "en_path": "en/music/meu-querido-diario/index.html"
+      }
+    },
+    {
+      "id": "audiovisual-homens",
+      "kind": "chapter",
+      "domain": "communication",
+      "date": {
+        "pt": "1998",
+        "en": "1998"
+      },
+      "title": {
+        "pt": "Programa \"Homens na Cozinha\"",
+        "en": "TV Program \"Homens na Cozinha\""
+      },
+      "summary": {
+        "pt": "Em 1998, Nicchio atuou na produção executiva do programa de televisão Homens na Cozinha, criado e apresentado por Fábio Ávila e exibido pela Band. Seu trabalho esteve concentrado em captação de recursos.",
+        "en": "In 1998, Nicchio worked in executive production for Homens na Cozinha, a television program created and hosted by Fábio Ávila and broadcast by Band. His work focused on fundraising."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/audiovisual-homens.inc",
+        "en_path": "content/entries/en/audiovisual-homens.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/comunicacao/index.html",
+            "selector": "#homens"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-audiovisual-homens"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/communication/index.html",
+            "selector": "#homens"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-audiovisual-homens"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/comunicacao/homens-na-cozinha/index.html",
+        "en_path": "en/communication/homens-na-cozinha/index.html"
+      }
+    },
+    {
+      "id": "music-festival-1998-1999",
+      "kind": "chapter",
+      "domain": "music",
+      "date": {
+        "pt": "1998–1999",
+        "en": "1998–1999"
+      },
+      "title": {
+        "pt": "Show Café Piu Piu (1998) e outros",
+        "en": "Café Piu Piu Show (1998) and others"
+      },
+      "summary": {
+        "pt": "Shows de divulgação em São Paulo e participação em festival de música independente no Cine Jóia, no Rio de Janeiro. Não há registro audiovisual sobrevivente conhecido do Cine Jóia.",
+        "en": "Live promotion in São Paulo and participation in an independent music festival at Cine Jóia in Rio de Janeiro. No surviving audiovisual record of the Cine Jóia appearance is currently known."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-festival-1998-1999.inc",
+        "en_path": "content/entries/en/music-festival-1998-1999.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#music-festival-1998-1999"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-music-festival-1998-1999"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/music/index.html",
+            "selector": "#music-festival-1998-1999"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-music-festival-1998-1999"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/cafe-piu-piu-1998/index.html",
+        "en_path": "en/music/cafe-piu-piu-1998/index.html"
+      }
+    },
+    {
+      "id": "music-album-1999-2000",
+      "kind": "chapter",
+      "domain": "music",
+      "date": {
+        "pt": "1999–2000",
+        "en": "1999–2000"
+      },
+      "title": {
+        "pt": "Segundo Álbum: Eu Não Tô Nem Aí",
+        "en": "Second Album: Eu Não Tô Nem Aí"
+      },
+      "summary": {
+        "pt": "Segundo álbum do ciclo autoral, com produção de Fábio “Badi” Crepaldi e Marcelo Nicchio, que também gravou bateria.",
+        "en": "Second album in the original cycle, produced by Fábio “Badi” Crepaldi and Marcelo Nicchio, who also recorded drums."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-album-1999-2000.inc",
+        "en_path": "content/entries/en/music-album-1999-2000.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#music-album-1999-2000"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-music-album-1999-2000"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/music/index.html",
+            "selector": "#music-album-1999-2000"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-music-album-1999-2000"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/eu-nao-to-nem-ai/index.html",
+        "en_path": "en/music/eu-nao-to-nem-ai/index.html"
+      }
+    },
+    {
+      "id": "internet-psinet",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {
+        "pt": "2000",
+        "en": "2000"
+      },
+      "title": {
+        "pt": "PSINet e hosting corporativo",
+        "en": "PSINet and corporate hosting"
+      },
+      "summary": {
+        "pt": "Em 2000, Nicchio trabalhou na PSINet, empresa internacional de infraestrutura de internet e hosting, atuando comercialmente com Hosting Corporativo. Foi a passagem da internet como ambiente de exploração pessoal para a internet também como mercado profissional.",
+        "en": "In 2000, Nicchio worked at PSINet, an international internet infrastructure and hosting company, in commercial work related to Corporate Hosting. It marked a shift from the internet as a field of personal exploration to the internet as a professional market as well."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/internet-psinet.inc",
+        "en_path": "content/entries/en/internet-psinet.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#psinet"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-psinet"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/internet/index.html",
+            "selector": "#psinet"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-psinet"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/internet/psinet-hosting-corporativo/index.html",
+        "en_path": "en/internet/psinet-corporate-hosting/index.html"
+      }
+    },
+    {
+      "id": "music-programa-jo",
+      "kind": "chapter",
+      "domain": "music",
+      "date": {
+        "pt": "27 jun. 2001",
+        "en": "Jun. 27, 2001"
+      },
+      "title": {
+        "pt": "Programa do Jô",
+        "en": "Programa do Jô"
+      },
+      "summary": {
+        "pt": "Apresentação no Programa do Jô, gravada e exibida no mesmo dia, 27 de junho de 2001, pela Rede Globo, com transmissão pela Rede Globo Internacional. O Coitado do Próximo tocou Estava Comigo, composição de Marcelo Nicchio.",
+        "en": "Appearance on Programa do Jô, recorded and broadcast on the same day, June 27, 2001, by Rede Globo, with transmission through Rede Globo Internacional. Coitado do Próximo performed Estava Comigo, written by Marcelo Nicchio."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/music-programa-jo.inc",
+        "en_path": "content/entries/en/music-programa-jo.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/musica/index.html",
+            "selector": "#music-jo-2001"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-music-programa-jo"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/music/index.html",
+            "selector": "#music-jo-2001"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-music-programa-jo"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/musica/programa-do-jo/index.html",
+        "en_path": "en/music/programa-do-jo/index.html"
+      }
+    },
+    {
+      "id": "communication-sinal-verde",
+      "kind": "chapter",
+      "domain": "communication",
+      "date": {
+        "pt": "2003–2006",
+        "en": "2003–2006"
+      },
+      "title": {
+        "pt": "Coluna \"Prateleira Cultural\" - Revista Sinal Verde",
+        "en": "Column \"Prateleira Cultural\" - Sinal Verde Magazine"
+      },
+      "summary": {
+        "pt": "Entre 2003 e 2006, Nicchio assinou regularmente a coluna Prateleira Cultural na revista Sinal Verde, além de publicar textos em outras seções. Ao todo, há aproximadamente vinte peças editoriais únicas desse período.",
+        "en": "Between 2003 and 2006, Nicchio regularly wrote the Prateleira Cultural column for Sinal Verde magazine, while also publishing pieces in other sections. Altogether, the period comprises roughly twenty unique editorial pieces."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/communication-sinal-verde.inc",
+        "en_path": "content/entries/en/communication-sinal-verde.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/comunicacao/index.html",
+            "selector": "#sinal-verde"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-communication-sinal-verde"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/communication/index.html",
+            "selector": "#sinal-verde"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-communication-sinal-verde"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/comunicacao/prateleira-cultural-revista-sinal-verde/index.html",
+        "en_path": "en/communication/prateleira-cultural-sinal-verde/index.html"
+      }
+    },
+    {
+      "id": "internet-sem",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {
+        "pt": "2008–2009",
+        "en": "2008–2009"
+      },
+      "title": {
+        "pt": "Profissionalização em Search Marketing (2008)",
+        "en": "Professionalization in Search Marketing (2008)"
+      },
+      "summary": {
+        "pt": "Em 2008, Nicchio começou a administrar de maneira intuitiva e autodidata contas de pequeno porte de Google AdWords, entre elas um restaurante típico na Marginal do Tietê, um estúdio de yoga, um serviço de buffet, um ateliê de pintura e uma corretora de seguros. Eram operações pequenas, mas permitiram experimentar diretamente estrutura de campanhas, palavras-chave, segmentação, custos e retorno.",
+        "en": "In 2008, Nicchio began managing small Google AdWords accounts intuitively and through self-directed learning, including a traditional restaurant on Marginal Tietê, a yoga studio, a buffet service, a painting atelier and an insurance brokerage. These were small operations, but they allowed him to work directly with campaign structure, keywords, segmentation, costs and return."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/internet-sem.inc",
+        "en_path": "content/entries/en/internet-sem.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#sem"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-sem"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/internet/index.html",
+            "selector": "#sem"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-sem"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/internet/search-marketing-2008/index.html",
+        "en_path": "en/internet/search-marketing-2008/index.html"
+      }
+    },
+    {
+      "id": "internet-petlove",
+      "kind": "chapter",
+      "domain": "internet",
+      "date": {
+        "pt": "2012–2013",
+        "en": "2012–2013"
+      },
+      "title": {
+        "pt": "Petlove: internalização de mídia (em escala)",
+        "en": "Petlove: media internalization (at scale)"
+      },
+      "summary": {
+        "pt": "Na Petlove, Nicchio foi contratado para internalizar a operação de mídia digital. Montou estrutura, equipe e processos e ampliou a escala operacional de aproximadamente 150 mil para 3 milhões de palavras-chave distribuídas em três contas.",
+        "en": "At Petlove, Nicchio was hired to internalize the digital media operation. He built the structure, team and processes and expanded operational scale from roughly 150,000 to 3 million keywords across three accounts."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal"
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/internet-petlove.inc",
+        "en_path": "content/entries/en/internet-petlove.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/internet/index.html",
+            "selector": "#petlove"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-internet-petlove"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/internet/index.html",
+            "selector": "#petlove"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-internet-petlove"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/internet/petlove-internalizacao-de-midia/index.html",
+        "en_path": "en/internet/petlove-media-internalization/index.html"
+      }
+    },
+    {
+      "id": "hai-pro1",
+      "kind": "chapter",
+      "domain": "hai",
+      "date": {
+        "pt": "maio 2026",
+        "en": "May 2026"
+      },
+      "title": {
+        "pt": "Metodologia \"Punk Rock Orchestra (PRO)\" v1",
+        "en": "Methodology \"Punk Rock Orchestra (PRO)\" v1"
+      },
+      "summary": {
+        "pt": "Maio de 2026 — primeira formulação pública da metodologia",
+        "en": "May 2026 — first public formulation of the methodology"
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal",
+        "always_open_paths": [
+          "pt/ia-hai/index.html",
+          "en/ai-hai/index.html"
+        ]
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/hai-pro1.inc",
+        "en_path": "content/entries/en/hai-pro1.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/ia-hai/index.html",
+            "selector": "#pro1"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-hai-pro1"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/ai-hai/index.html",
+            "selector": "#pro1"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-hai-pro1"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/ia-hai/punk-rock-orchestra-pro-v1/index.html",
+        "en_path": "en/ai-hai/punk-rock-orchestra-pro-v1/index.html"
+      }
+    },
+    {
+      "id": "hai-pro2",
+      "kind": "chapter",
+      "domain": "hai",
+      "date": {
+        "pt": "em desenvolvimento",
+        "en": "in development"
+      },
+      "title": {
+        "pt": "Metodologia \"Punk Rock Orchestra (PRO)\" 2.0",
+        "en": "Methodology \"Punk Rock Orchestra (PRO)\" 2.0"
+      },
+      "summary": {
+        "pt": "O PRO v2 está em desenvolvimento e é tratado por Nicchio como a versão definitiva dessa pesquisa específica e o fechamento do ciclo iniciado com Melissa 1.0.",
+        "en": "PRO v2 is currently in development and is treated by Nicchio as the definitive version of this specific research and the closing work of the cycle begun with Melissa 1.0."
+      },
+      "topic_ids": [],
+      "reader_presentation": {
+        "state": "normal",
+        "always_open_paths": [
+          "pt/ia-hai/index.html",
+          "en/ai-hai/index.html"
+        ]
+      },
+      "source": {
+        "kind": "fragment",
+        "pt_path": "content/entries/pt/hai-pro2.inc",
+        "en_path": "content/entries/en/hai-pro2.inc"
+      },
+      "reader_targets": {
+        "pt": [
+          {
+            "path": "pt/ia-hai/index.html",
+            "selector": "#pro2"
+          },
+          {
+            "path": "pt/biografia/index.html",
+            "selector": "#bio-hai-pro2"
+          }
+        ],
+        "en": [
+          {
+            "path": "en/ai-hai/index.html",
+            "selector": "#pro2"
+          },
+          {
+            "path": "en/biography/index.html",
+            "selector": "#bio-hai-pro2"
+          }
+        ]
+      },
+      "chapter_page": {
+        "status": "pilot",
+        "indexing": "noindex,follow",
+        "pt_path": "pt/ia-hai/punk-rock-orchestra-pro-2-0/index.html",
+        "en_path": "en/ai-hai/punk-rock-orchestra-pro-2-0/index.html"
       }
     }
   ]

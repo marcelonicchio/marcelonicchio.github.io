@@ -1,0 +1,1 @@
+<p>In 1998, Nicchio worked in executive production for <strong>Homens na Cozinha</strong>, a television program created and hosted by Fábio Ávila and broadcast by Band. His work focused on fundraising.</p><p>Episodes survive on YouTube and will be incorporated here as the audiovisual catalogue develops.</p>
