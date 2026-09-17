@@ -1,0 +1,65 @@
+name: Dave Internet Polish
+
+on:
+  push:
+    branches:
+      - dave/internet-music-structure-2026-09-17
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: dave/internet-music-structure-2026-09-17
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Normalize promoted-entry title casing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          changes = {
+              'pt/internet/index.html': [
+                  ('<h2>cultura BBS</h2>', '<h2>Cultura BBS</h2>'),
+                  ('<h2>transição para a internet comercial</h2>', '<h2>Transição para a internet comercial</h2>'),
+                  ('<h2>operações independentes</h2>', '<h2>Operações independentes</h2>'),
+              ],
+              'en/internet/index.html': [
+                  ('<h2>transition to the commercial internet</h2>', '<h2>Transition to the commercial internet</h2>'),
+                  ('<h2>independent operations</h2>', '<h2>Independent operations</h2>'),
+              ],
+              'tools/smoke_reader_ux.js': [
+                  ("innerText() === 'cultura BBS'", "innerText() === 'Cultura BBS'"),
+              ],
+          }
+          for rel, replacements in changes.items():
+              path = Path(rel)
+              text = path.read_text(encoding='utf-8')
+              for old, new in replacements:
+                  if old not in text:
+                      raise RuntimeError(f'{rel}: missing casing anchor {old!r}')
+                  text = text.replace(old, new, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+      - name: Regenerate sitemap and validate
+        run: |
+          python -m pip install --disable-pip-version-check beautifulsoup4
+          python tools/build_sitemap.py
+          python tools/audit_internet_editorial_structure.py
+          node --check tools/smoke_reader_ux.js
+          git diff --check
+      - name: Commit polish and remove temporary runner
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/dave-internet-polish.yml
+          git add -A
+          git commit -m "polish: normalize Internet editorial headings and sitemap"
+          git push origin HEAD:dave/internet-music-structure-2026-09-17
