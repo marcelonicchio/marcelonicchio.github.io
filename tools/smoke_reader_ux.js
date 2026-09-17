@@ -254,7 +254,7 @@ async function runDesktop(browser) {
   assert(await bbs.locator('details.reader-disclosure').count() === 0, 'Minduim/BBS must remain plain open HTML in Internet');
   assert(await bbs.locator('.reader-disclosure__toggle').count() === 0, 'Minduim/BBS unexpectedly exposes Reader toggle in Internet');
   assert(await bbs.locator(':scope > .phase-year').innerText() === '1992–1996', 'BBS date was not separated from its title');
-  assert(await bbs.locator(':scope > h2').innerText() === 'cultura BBS', 'BBS title still carries its date');
+  assert(await bbs.locator(':scope > h2').innerText() === 'Cultura BBS', 'BBS title still carries its date');
 
   const mirantte = page.locator('#mirantte');
   assert((await mirantte.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte featured class missing');
