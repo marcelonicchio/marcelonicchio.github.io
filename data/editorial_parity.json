@@ -464,9 +464,9 @@
       ]
     },
     "music-mp3-era-2000": {
-      "revision": 1,
-      "pt_hash": "fbe417e31f36deba6f1d40f4fe5620a5f096fb9df25e93f68285b62f814eaefb",
-      "en_hash": "2ddfce6cf374c19f00aa94a3663f4debe553a112bad0b4b46da08e257952834c",
+      "revision": 2,
+      "pt_hash": "8e841f8be474035118c25ee2fe515647330b4754da977dc7045c11ddd681da53",
+      "en_hash": "e6dc36f055dd87a4d82da5fed4a3e2cc10feefa509b64a16e0cb965262177707",
       "accepted_on": "2026-09-17",
       "changed_languages": [
         "pt",
