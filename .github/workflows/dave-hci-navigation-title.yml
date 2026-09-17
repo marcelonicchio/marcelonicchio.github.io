@@ -70,7 +70,7 @@ jobs:
           replace('pt/index.html', [
               ('Hub oficial de Marcelo Nicchio: biografia, música, Cultura & Audiovisual, Internet & Performance, publicações e pesquisa em Human–AI Interaction.', 'Hub oficial de Marcelo Nicchio: biografia, música, Cultura & Audiovisual, Internet & Performance, publicações e pesquisa em Human-Computer Interaction (HCI) e Human–AI Interaction (HAI).'),
               ('Uma trajetória desde 1989 em música, Cultura & Audiovisual, Internet & Performance e pesquisa em Human–AI Interaction.', 'Uma trajetória desde 1989 em música, Cultura & Audiovisual, Internet & Performance e pesquisa em HCI e Human–AI Interaction.'),
-              ('"Audiovisual Production", "Human–AI Interaction"', '"Audiovisual Production", "Human-Computer Interaction", "Human–AI Interaction"'),
+              ('"Produção Audiovisual", "Human–AI Interaction"', '"Produção Audiovisual", "Human-Computer Interaction", "Human–AI Interaction"'),
               ('pesquisa independente em Human–AI Interaction.</p>', 'pesquisa independente em HCI e Human–AI Interaction.</p>'),
               ('<a href="/pt/ia-hai/"><b>04</b>IA / HAI</a>', '<a href="/pt/ia-hai/"><b>04</b>IA / HCI / HAI</a>'),
               ('<article class="card"><span class="card-no">05 / HAI</span><h3>IA & Human–AI Interaction</h3><p>Melissa 1.0, Punk Rock Orchestra e o ciclo contemporâneo de pesquisa independente.</p>', '<article class="card"><span class="card-no">05 / HCI+HAI</span><h3>IA, HCI & Human–AI Interaction</h3><p>Pesquisa em Human-Computer Interaction (HCI), com foco em Human–AI Interaction (HAI), Melissa 1.0 e Punk Rock Orchestra.</p>'),
