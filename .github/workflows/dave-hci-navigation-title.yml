@@ -1,0 +1,120 @@
+name: Dave HCI Navigation Title
+
+on:
+  push:
+    branches:
+      - dave/hci-navigation-title-2026-09-17
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: dave/hci-navigation-title-2026-09-17
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install beautifulsoup4
+      - name: Apply HCI taxonomy and labels
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace(path, pairs):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              original = text
+              for old, new in pairs:
+                  if old not in text:
+                      raise SystemExit(f'{path}: expected text not found: {old[:90]}')
+                  text = text.replace(old, new)
+              if text == original:
+                  raise SystemExit(f'{path}: no changes made')
+              p.write_text(text, encoding='utf-8')
+
+          replace('tools/sync_navigation.py', [
+              ('    return block\n\n\ndef normalize_other_links', '''    if lang == "pt":\n        block = re.sub(r'<a href="/pt/ia-hai/">[^<]*</a>', '<a href="/pt/ia-hai/">IA/HCI/HAI</a>', block)\n    else:\n        block = re.sub(r'<a href="/en/ai-hai/">[^<]*</a>', '<a href="/en/ai-hai/">AI/HCI/HAI</a>', block)\n    return block\n\n\ndef normalize_other_links'''),
+          ])
+
+          replace('tools/build_chapter_pages.py', [
+              ('"pt": ("IA/HAI", "/pt/ia-hai/")', '"pt": ("IA / HCI / HAI", "/pt/ia-hai/")'),
+              ('"en": ("AI/HAI", "/en/ai-hai/")', '"en": ("AI / HCI / HAI", "/en/ai-hai/")'),
+              ('("/pt/ia-hai/", "IA/HAI")', '("/pt/ia-hai/", "IA/HCI/HAI")'),
+              ('("/en/ai-hai/", "AI/HAI")', '("/en/ai-hai/", "AI/HCI/HAI")'),
+          ])
+
+          replace('pt/ia-hai/index.html', [
+              ('<title>IA & Human–AI Interaction — Marcelo Nicchio</title>', '<title>IA, HCI & Human–AI Interaction — Marcelo Nicchio</title>'),
+              ('<meta name="description" content="Pesquisa independente de Marcelo Nicchio em Human–AI Interaction: Melissa 1.0, Punk Rock Orchestra e ciclo de pesquisa 2025–2026.">', '<meta name="description" content="Pesquisa independente de Marcelo Nicchio em Human-Computer Interaction (HCI) e Human–AI Interaction (HAI): Melissa 1.0, Punk Rock Orchestra e ciclo 2025–2026.">'),
+              ('"name":"IA & Human–AI Interaction — Marcelo Nicchio"', '"name":"IA, HCI & Human–AI Interaction — Marcelo Nicchio"'),
+              ('<h1>IA & Human–AI Interaction</h1>', '<h1>IA, HCI & Human–AI Interaction</h1>'),
+              ('<p class="hero-lead">O eixo contemporâneo da trajetória: um ciclo de pesquisa independente iniciado em 2025, documentado publicamente a partir de Melissa 1.0 e formalizado metodologicamente no Punk Rock Orchestra.</p>', '<p class="hero-lead">O eixo contemporâneo da trajetória: pesquisa independente no campo de Human-Computer Interaction (HCI), com foco em Human–AI Interaction (HAI), iniciada em 2025, documentada publicamente a partir de Melissa 1.0 e formalizada metodologicamente no Punk Rock Orchestra.</p>'),
+          ])
+
+          replace('en/ai-hai/index.html', [
+              ('<title>AI & Human–AI Interaction — Marcelo Nicchio</title>', '<title>AI, HCI & Human–AI Interaction — Marcelo Nicchio</title>'),
+              ('<meta name="description" content="Marcelo Nicchio\'s independent Human–AI Interaction research: Melissa 1.0, Punk Rock Orchestra and the 2025–2026 research cycle.">', '<meta name="description" content="Marcelo Nicchio\'s independent research in Human-Computer Interaction (HCI) and Human–AI Interaction (HAI): Melissa 1.0, Punk Rock Orchestra and the 2025–2026 research cycle.">'),
+              ('"name":"AI & Human–AI Interaction — Marcelo Nicchio"', '"name":"AI, HCI & Human–AI Interaction — Marcelo Nicchio"'),
+              ('<h1>AI & Human–AI Interaction</h1>', '<h1>AI, HCI & Human–AI Interaction</h1>'),
+              ('<p class="hero-lead">The contemporary axis of the trajectory: an independent research cycle begun in 2025, documented publicly through Melissa 1.0 and methodologically formalized through the Punk Rock Orchestra.</p>', '<p class="hero-lead">The contemporary axis of the trajectory: independent research within Human-Computer Interaction (HCI), focused on Human–AI Interaction (HAI), begun in 2025, documented publicly through Melissa 1.0 and methodologically formalized through the Punk Rock Orchestra.</p>'),
+          ])
+
+          replace('pt/index.html', [
+              ('Hub oficial de Marcelo Nicchio: biografia, música, Cultura & Audiovisual, Internet & Performance, publicações e pesquisa em Human–AI Interaction.', 'Hub oficial de Marcelo Nicchio: biografia, música, Cultura & Audiovisual, Internet & Performance, publicações e pesquisa em Human-Computer Interaction (HCI) e Human–AI Interaction (HAI).'),
+              ('Uma trajetória desde 1989 em música, Cultura & Audiovisual, Internet & Performance e pesquisa em Human–AI Interaction.', 'Uma trajetória desde 1989 em música, Cultura & Audiovisual, Internet & Performance e pesquisa em HCI e Human–AI Interaction.'),
+              ('"Audiovisual Production", "Human–AI Interaction"', '"Audiovisual Production", "Human-Computer Interaction", "Human–AI Interaction"'),
+              ('pesquisa independente em Human–AI Interaction.</p>', 'pesquisa independente em HCI e Human–AI Interaction.</p>'),
+              ('<a href="/pt/ia-hai/"><b>04</b>IA / HAI</a>', '<a href="/pt/ia-hai/"><b>04</b>IA / HCI / HAI</a>'),
+              ('<article class="card"><span class="card-no">05 / HAI</span><h3>IA & Human–AI Interaction</h3><p>Melissa 1.0, Punk Rock Orchestra e o ciclo contemporâneo de pesquisa independente.</p>', '<article class="card"><span class="card-no">05 / HCI+HAI</span><h3>IA, HCI & Human–AI Interaction</h3><p>Pesquisa em Human-Computer Interaction (HCI), com foco em Human–AI Interaction (HAI), Melissa 1.0 e Punk Rock Orchestra.</p>'),
+              ('<div class="time"><strong>2025–presente</strong><span>IA e Human–AI Interaction</span></div>', '<div class="time"><strong>2025–presente</strong><span>IA, HCI e Human–AI Interaction</span></div>'),
+          ])
+
+          replace('en/index.html', [
+              ('Official hub of Marcelo Nicchio: biography, music, communication, Internet & Performance, audiovisual work, publications and Human–AI Interaction research.', 'Official hub of Marcelo Nicchio: biography, music, communication, Internet & Performance, audiovisual work, publications and research in Human-Computer Interaction (HCI) and Human–AI Interaction (HAI).'),
+              ('A trajectory since 1989 across music, Culture & Audiovisual, Internet & Performance and Human–AI Interaction research.', 'A trajectory since 1989 across music, Culture & Audiovisual, Internet & Performance and research in HCI and Human–AI Interaction.'),
+              ('"Audiovisual Production", "Human–AI Interaction"', '"Audiovisual Production", "Human-Computer Interaction", "Human–AI Interaction"'),
+              ('independent Human–AI Interaction research.</p>', 'independent HCI and Human–AI Interaction research.</p>'),
+              ('<a href="/en/ai-hai/"><b>04</b>AI / HAI</a>', '<a href="/en/ai-hai/"><b>04</b>AI / HCI / HAI</a>'),
+              ('<article class="card"><span class="card-no">05 / HAI</span><h3>AI & Human–AI Interaction</h3><p>Melissa 1.0, the Punk Rock Orchestra and the current independent research cycle.</p>', '<article class="card"><span class="card-no">05 / HCI+HAI</span><h3>AI, HCI & Human–AI Interaction</h3><p>Research in Human-Computer Interaction (HCI), focused on Human–AI Interaction (HAI), Melissa 1.0 and the Punk Rock Orchestra.</p>'),
+              ('<div class="time"><strong>2025–present</strong><span>AI and Human–AI Interaction</span></div>', '<div class="time"><strong>2025–present</strong><span>AI, HCI and Human–AI Interaction</span></div>'),
+          ])
+
+          replace('index.html', [
+              ('Official hub of Marcelo Nicchio: biography, music, culture and audiovisual work, Internet and performance, archive, publications and Human–AI Interaction research.', 'Official hub of Marcelo Nicchio: biography, music, culture and audiovisual work, Internet and performance, archive, publications and research in Human-Computer Interaction (HCI) and Human–AI Interaction (HAI).'),
+              ('Hub oficial de Marcelo Nicchio: biografia, música, Cultura & Audiovisual, Internet & Performance, arquivo, publicações e pesquisa em Human–AI Interaction.', 'Hub oficial de Marcelo Nicchio: biografia, música, Cultura & Audiovisual, Internet & Performance, arquivo, publicações e pesquisa em Human-Computer Interaction (HCI) e Human–AI Interaction (HAI).'),
+              ('one multidisciplinary trajectory across music, culture, Internet, performance and Human–AI Interaction.', 'one multidisciplinary trajectory across music, culture, Internet, performance, HCI and Human–AI Interaction.'),
+              ('Search/Performance and Human–AI Interaction.', 'Search/Performance, Human-Computer Interaction (HCI) and Human–AI Interaction (HAI).'),
+              ('"Performance Marketing","Human–AI Interaction"', '"Performance Marketing","Human-Computer Interaction","Human–AI Interaction"'),
+              ('pesquisa independente em Human–AI Interaction.</p>', 'pesquisa independente em HCI e Human–AI Interaction.</p>'),
+              ('independent Human–AI Interaction research.</p>', 'independent HCI and Human–AI Interaction research.</p>'),
+              ('<a class="button" href="/pt/ia-hai/">IA & HAI</a>', '<a class="button" href="/pt/ia-hai/">IA / HCI / HAI</a>'),
+              ('<a class="button" href="/en/ai-hai/">AI & HAI</a>', '<a class="button" href="/en/ai-hai/">AI / HCI / HAI</a>'),
+          ])
+          PY
+      - name: Synchronize generated navigation and chapter pages
+        run: |
+          python tools/sync_navigation.py
+          python tools/build_chapter_pages.py
+      - name: Validate targeted architecture
+        run: |
+          python tools/sync_navigation.py --check
+          python tools/build_chapter_pages.py --check
+          python tools/audit_site.py
+          python tools/audit_entries.py
+          python tools/audit_person_schema.py
+      - name: Commit update and remove temporary runner
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -f .github/workflows/dave-hci-navigation-title.yml
+          git add -A
+          git commit -m "feat: add HCI to AI HAI navigation and vertical identity"
+          git push origin HEAD:dave/hci-navigation-title-2026-09-17
