@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Audit the Music-style editorial hierarchy on Internet & Performance."""
+"""Audit the Music-style editorial hierarchy on Internet & Performance.
+
+The date/title split is a paired PT/EN structural contract and must remain synchronized.
+"""
 
 from pathlib import Path
 from bs4 import BeautifulSoup
