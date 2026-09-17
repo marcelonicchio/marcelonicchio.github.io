@@ -40,6 +40,11 @@ jobs:
                   raise SystemExit(f'{path}: no changes made')
               p.write_text(text, encoding='utf-8')
 
+          replace('data/person.json', [
+              ('"description": "Brazilian independent researcher and creator with a trajectory across music, culture and audiovisual production, Internet, Search/Performance and Human–AI Interaction."', '"description": "Brazilian independent researcher and creator with a trajectory across music, culture and audiovisual production, Internet, Search/Performance, Human-Computer Interaction (HCI) and Human–AI Interaction (HAI)."'),
+              ('    "Performance Marketing",\n    "Human–AI Interaction",', '    "Performance Marketing",\n    "Human-Computer Interaction",\n    "Human–AI Interaction",'),
+          ])
+
           replace('tools/sync_navigation.py', [
               ('    return block\n\n\ndef normalize_other_links', '''    if lang == "pt":\n        block = re.sub(r'<a href="/pt/ia-hai/">[^<]*</a>', '<a href="/pt/ia-hai/">IA/HCI/HAI</a>', block)\n    else:\n        block = re.sub(r'<a href="/en/ai-hai/">[^<]*</a>', '<a href="/en/ai-hai/">AI/HCI/HAI</a>', block)\n    return block\n\n\ndef normalize_other_links'''),
           ])
