@@ -25,49 +25,30 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-
           js_path = Path('assets/js/reader-disclosure.js')
           js = js_path.read_text(encoding='utf-8')
           old = "      details.append(summary, body);\n      if (internetOpenByDefault) details.open = true;"
-          new = """      details.append(summary, body);
-      if (internetOpenByDefault) {
-        summary.addEventListener('click', (event) => {
-          if (details.open && !event.target.closest('a')) event.preventDefault();
-        });
-        details.open = true;
-      }"""
+          new = "      details.append(summary, body);\n      if (internetOpenByDefault) {\n        summary.addEventListener('click', (event) => {\n          if (details.open && !event.target.closest('a')) event.preventDefault();\n        });\n        details.open = true;\n      }"
           if old not in js:
               raise RuntimeError('Reader details/open anchor missing')
           js_path.write_text(js.replace(old, new, 1), encoding='utf-8')
-
           smoke_path = Path('tools/smoke_reader_ux.js')
           smoke = smoke_path.read_text(encoding='utf-8')
           old = "  if (await mirantteDetails.getAttribute('open') !== null) await mirantte.locator('summary').click();\n  const mirantteClosedBorder = await mirantteDetails.evaluate((el) => getComputedStyle(el).borderTopWidth);"
-          new = """  if (await mirantteDetails.getAttribute('open') !== null) {
-    await mirantte.locator('summary').evaluate((el) => el.click());
-    assert(await mirantteDetails.getAttribute('open') !== null, 'Open Internet summary unexpectedly collapsed the editorial entry');
-    await mirantte.locator('.reader-disclosure__collapse-button').click();
-  }
-  const mirantteClosedBorder = await mirantteDetails.evaluate((el) => getComputedStyle(el).borderTopWidth);"""
+          new = "  if (await mirantteDetails.getAttribute('open') !== null) {\n    await mirantte.locator('summary').evaluate((el) => el.click());\n    assert(await mirantteDetails.getAttribute('open') !== null, 'Open Internet summary unexpectedly collapsed the editorial entry');\n    await mirantte.locator('.reader-disclosure__collapse-button').click();\n  }\n  const mirantteClosedBorder = await mirantteDetails.evaluate((el) => getComputedStyle(el).borderTopWidth);"
           if old not in smoke:
               raise RuntimeError('Mirantte collapse smoke anchor missing')
           smoke_path.write_text(smoke.replace(old, new, 1), encoding='utf-8')
-
           loader_path = Path('assets/js/reader-disclosure-loader.js')
           loader = loader_path.read_text(encoding='utf-8')
-          old = 'reader-disclosure.js?v=20260917-reader14'
-          new = 'reader-disclosure.js?v=20260917-reader15'
-          if old not in loader:
+          if 'reader-disclosure.js?v=20260917-reader14' not in loader:
               raise RuntimeError('Reader child-JS cache anchor missing')
-          loader_path.write_text(loader.replace(old, new, 1), encoding='utf-8')
-
+          loader_path.write_text(loader.replace('reader-disclosure.js?v=20260917-reader14', 'reader-disclosure.js?v=20260917-reader15', 1), encoding='utf-8')
           sync_path = Path('tools/sync_reader_disclosure_loader.py')
           sync = sync_path.read_text(encoding='utf-8')
-          old = 'reader-disclosure-loader.js?v=20260917-reader14'
-          new = 'reader-disclosure-loader.js?v=20260917-reader15'
-          if old not in sync:
+          if 'reader-disclosure-loader.js?v=20260917-reader14' not in sync:
               raise RuntimeError('Reader loader cache anchor missing')
-          sync_path.write_text(sync.replace(old, new, 1), encoding='utf-8')
+          sync_path.write_text(sync.replace('reader-disclosure-loader.js?v=20260917-reader14', 'reader-disclosure-loader.js?v=20260917-reader15', 1), encoding='utf-8')
           PY
       - name: Sync loaders and validate syntax
         run: |
