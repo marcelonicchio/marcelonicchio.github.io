@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""Audit the Music-style editorial hierarchy on Internet & Performance."""
+
+from pathlib import Path
+from bs4 import BeautifulSoup
+import re
+
+ROOT = Path(__file__).resolve().parents[1]
+TARGETS = {
+    "pt": ROOT / "pt/internet/index.html",
+    "en": ROOT / "en/internet/index.html",
+}
+EXPECTED_IDS = {
+    "bbs", "internet", "psinet", "mirantte", "sem", "cookieweb",
+    "clickland", "petlove", "best", "dialetto", "independente", "driven",
+}
+YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+
+
+def direct_child(section, tag=None, cls=None):
+    for child in section.children:
+        if not getattr(child, "name", None):
+            continue
+        if tag and child.name != tag:
+            continue
+        if cls and cls not in (child.get("class") or []):
+            continue
+        return child
+    return None
+
+
+def audit(path: Path):
+    soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+    article = soup.select_one("article.article-body")
+    if article is None:
+        raise AssertionError(f"{path.relative_to(ROOT)}: article.article-body missing")
+
+    entries = []
+    for section in article.find_all("section", class_="chapter", recursive=False):
+        if "internet-entry" not in (section.get("class") or []):
+            continue
+        sid = section.get("id")
+        phase = direct_child(section, cls="phase-year")
+        heading = direct_child(section, tag="h2")
+        if not sid:
+            raise AssertionError(f"{path.relative_to(ROOT)}: internet-entry without id")
+        if phase is None:
+            raise AssertionError(f"{path.relative_to(ROOT)}#{sid}: missing direct .phase-year")
+        if heading is None:
+            raise AssertionError(f"{path.relative_to(ROOT)}#{sid}: missing direct h2")
+        phase_text = phase.get_text(" ", strip=True)
+        heading_text = heading.get_text(" ", strip=True)
+        if not YEAR_RE.search(phase_text):
+            raise AssertionError(f"{path.relative_to(ROOT)}#{sid}: phase-year has no year: {phase_text!r}")
+        if re.match(r"^(?:[^—]*?(?:19|20)\d{2}[^—]*?)\s+—\s+", heading_text):
+            raise AssertionError(f"{path.relative_to(ROOT)}#{sid}: date leaked back into h2: {heading_text!r}")
+        entries.append(sid)
+
+    found = set(entries)
+    if found != EXPECTED_IDS:
+        missing = sorted(EXPECTED_IDS - found)
+        extra = sorted(found - EXPECTED_IDS)
+        raise AssertionError(
+            f"{path.relative_to(ROOT)}: Internet entry set mismatch; missing={missing}, extra={extra}"
+        )
+    if len(entries) != len(EXPECTED_IDS):
+        raise AssertionError(f"{path.relative_to(ROOT)}: duplicate Internet entry ids")
+    return entries
+
+
+def main() -> int:
+    results = {lang: audit(path) for lang, path in TARGETS.items()}
+    if results["pt"] != results["en"]:
+        raise AssertionError(
+            f"PT/EN Internet entry order differs: pt={results['pt']}, en={results['en']}"
+        )
+    print(f"Internet editorial structure OK: {len(results['pt'])} dated entries in PT/EN.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
