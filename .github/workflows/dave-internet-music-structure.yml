@@ -51,7 +51,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm .github/workflows/dave-internet-music-structure.yml tools/_dave_refactor_internet_music_style.py
+          git rm -f .github/workflows/dave-internet-music-structure.yml tools/_dave_refactor_internet_music_style.py
           git add -A
           git commit -m "refactor: align Internet editorial structure with Music"
           git push origin HEAD:dave/internet-music-structure-2026-09-17
