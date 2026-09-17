@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 Pillow
       - name: Preserve continuous-reading IA/HAI policy
         run: |
           python - <<'PY'
