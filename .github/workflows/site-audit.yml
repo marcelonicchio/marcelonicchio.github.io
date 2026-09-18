@@ -64,6 +64,8 @@ jobs:
         run: python tools/audit_publication_schema.py
       - name: Audit canonical Person structured data
         run: python tools/audit_person_schema.py
+      - name: Audit priority authority vertical schema
+        run: python tools/audit_authority_vertical_schema.py
       - name: Audit machine-readable authority map
         run: python tools/audit_llms_map.py
       - name: Audit Media and Culture fusion
