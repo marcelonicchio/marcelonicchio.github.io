@@ -1,7 +1,7 @@
 # CURRENT HUB STATE — Marcelo Nicchio
 
-**Authoritative operational snapshot:** 5 Sep 2026 (BRT)  
-**Coverage:** current `main` through the post-Chet cycle plus Marcelo's explicit Billy-cycle directives.  
+**Authoritative operational snapshot:** 18 Sep 2026 (BRT)  
+**Coverage:** current `main` through the Kurt indexation/runtime cycle and Marcelo's explicit 18 Sep authority hierarchy.  
 **Precedence:** later explicit instruction from Marcelo → current `main` + green CI → this file → `BILLY-BASELINE-2026-09-05.md` / domain-specific current docs → dated historical handoffs.
 
 This file is the shortest path into the live architecture. Dated Duke/Chet dossiers remain historical rationale, not current implementation contracts.
@@ -78,11 +78,9 @@ Managed chronology infrastructure remains source-controlled through:
 
 PT/EN parity means factual/editorial equivalence, not literal translation.
 
-### Robots: current vs destination
+### Robots: current implementation
 
-**Current implementation on `main`:** Full Biography PT/EN remains `index,follow` and is in the sitemap.
-
-**Marcelo's new destination decision:** Full Biography / Biografia Completa should become **`noindex,follow`** after the standalone public-page discovery graph is safe.
+Full Biography / Biografia Completa PT/EN is **`noindex,follow`** and is absent from the sitemap. It remains a complete human-readable chronology and navigation surface, but it is no longer a search-authority target.
 
 Do not block these pages in `robots.txt`; crawlers must be able to read `noindex` and follow the page's ordinary links.
 
@@ -110,20 +108,16 @@ Creating an autonomous page still requires real reader value. The new destinatio
 
 ### Current `main`
 
-Current indexable core still includes root/language surfaces, Full Biography, Publications, Archive, AI/HAI and BEST/Kenshoo PT/EN.
+Current indexable top-level authority surfaces include the canonical root/language hubs, Music, Internet & Performance, Mídia & Cultura, AI/HCI/HAI, Publications and Archive. Some previously promoted standalone Chapter Pages also remain indexable pending one-by-one review.
 
-Music, Mídia & Cultura, Internet & Performance and Projects remain staged `noindex,follow` on current `main`. Most standalone Chapter Pages are also still staged `noindex,follow`.
+Full Biography PT/EN is `noindex,follow`. Selected Projects and most standalone Chapter Pages remain staged `noindex,follow`.
 
-### New operator destination
+### Operator authority hierarchy
 
-Marcelo's current target is:
-
-- root `/`: indexable;
-- `/pt/`, `/en/`: indexable;
-- substantive thematic verticals: `index,follow`;
-- legitimate autonomous Chapter Pages / biography-only URLs: `index,follow`;
-- Publications and Archive: indexable;
-- Full Biography / Biografia Completa: `noindex,follow`.
+1. **Home `/`** — primary name/entity authority surface.
+2. **Verticals** — current strategic priority: AI/HCI/HAI, Music and Internet & Performance.
+3. **Standalone URLs** — index only after individual content/metadata decision.
+4. **Full Biography** — navigation/continuity surface, not a search-authority target.
 
 This is a destination policy, not authorization for a blind one-release flip.
 
@@ -137,7 +131,7 @@ Promotion must remain reviewable by PT/EN pair where applicable and couple:
 6. sitemap membership;
 7. audit allowlists/invariants.
 
-Before Full Biography becomes `noindex`, standalone pages intended for Search must not depend exclusively on it for discovery.
+Standalone pages intended for Search must not depend exclusively on Full Biography for discovery.
 
 `tools/build_sitemap.py` remains the canonical sitemap generator and real Git history remains the source for per-page `lastmod`.
 
@@ -243,7 +237,7 @@ B0–B6 is now recorded in `BILLY-BASELINE-2026-09-05.md`:
 
 ## 13. CI invariants
 
-Site Audit continues to protect navigation, gallery/media synchronization, PT/EN parity, Full Biography generation, Reader behavior, Chapter Page registry, fused Mídia & Cultura architecture, JavaScript/runtime behavior, performance/media observability, page-image weight reporting, generated sitemap freshness, HTML/JSON/sitemap integrity, external presence and analytics installation.
+Site Audit continues to protect navigation, gallery/media synchronization, PT/EN parity, Full Biography generation/cutover, Reader behavior, Chapter Page registry, fused Mídia & Cultura architecture, JavaScript/runtime behavior, performance/media observability (including Music mobile + desktop), page-image weight reporting, generated sitemap freshness, HTML/JSON/sitemap integrity, external presence and analytics installation.
 
 When policy intentionally changes, update source/generator/audits together. When CI catches an unintended regression, fix the source model rather than weakening assertions merely to get green.
 
