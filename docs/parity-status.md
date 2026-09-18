@@ -32,6 +32,10 @@ Current managed workflow uses:
 
 A changed managed entry should not silently pass just because the other language still exists. The affected PT/EN pair must be editorially reviewed and its checkpoint accepted before the Full Biography synchronization is considered complete.
 
+## Reproducible audit environment
+
+The parity hash depends on normalized HTML produced by BeautifulSoup. Audit dependencies are therefore pinned in `requirements-audit.txt` and the Site Audit workflow installs that exact environment. A local parity result produced with a different parser version is not considered equivalent evidence until reproduced with the pinned environment.
+
 ## What parity means
 
 Parity means agreement on materially equivalent:
