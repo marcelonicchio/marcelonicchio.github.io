@@ -1,0 +1,78 @@
+name: Temporary Lighthouse remeasurement 2026-09-18
+
+on:
+  push:
+    branches: [work/lighthouse-remeasurement-2026-09-18]
+    paths:
+      - '.github/workflows/_tmp-lighthouse-remeasurement-2026-09-18.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Lighthouse
+        run: npm install --global lighthouse@13.4.1
+      - name: Record environment
+        run: |
+          node --version
+          lighthouse --version
+          google-chrome --version
+      - name: Run repeated same-protocol audits
+        run: |
+          mkdir -p .tmp-lighthouse
+          for run in 1 2 3; do
+            lighthouse 'https://marcelonicchio.github.io/pt/biografia/' --only-categories=performance --output=json --output-path=.tmp-lighthouse/fullbio-mobile-${run}.json --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
+            lighthouse 'https://marcelonicchio.github.io/pt/biografia/' --preset=desktop --only-categories=performance --output=json --output-path=.tmp-lighthouse/fullbio-desktop-${run}.json --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
+            lighthouse 'https://marcelonicchio.github.io/pt/internet/' --only-categories=performance --output=json --output-path=.tmp-lighthouse/internet-mobile-${run}.json --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
+            lighthouse 'https://marcelonicchio.github.io/pt/internet/' --preset=desktop --only-categories=performance --output=json --output-path=.tmp-lighthouse/internet-desktop-${run}.json --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
+            lighthouse 'https://marcelonicchio.github.io/pt/musica/' --only-categories=performance --output=json --output-path=.tmp-lighthouse/music-mobile-${run}.json --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
+            lighthouse 'https://marcelonicchio.github.io/pt/musica/' --preset=desktop --only-categories=performance --output=json --output-path=.tmp-lighthouse/music-desktop-${run}.json --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
+          done
+      - name: Print median report
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const specs=[
+            ['Full Biography PT','mobile','fullbio-mobile'],
+            ['Full Biography PT','desktop','fullbio-desktop'],
+            ['Internet & Performance PT','mobile','internet-mobile'],
+            ['Internet & Performance PT','desktop','internet-desktop'],
+            ['Music PT','mobile','music-mobile'],
+            ['Music PT','desktop','music-desktop'],
+          ];
+          const median=a=>{const s=[...a].sort((x,y)=>x-y); return s[Math.floor(s.length/2)];};
+          const rows=[]; let env=null;
+          for(const [surface,mode,key] of specs){
+            const runs=[1,2,3].map(n=>JSON.parse(fs.readFileSync(`.tmp-lighthouse/${key}-${n}.json`,'utf8')));
+            env ||= {lighthouse:runs[0].lighthouseVersion,userAgent:runs[0].userAgent,fetchTime:runs[0].fetchTime};
+            const vals=runs.map(lhr=>{
+              const a=lhr.audits; const req=a['network-requests']?.details?.items||[];
+              return {
+                score:Math.round((lhr.categories.performance.score||0)*100),
+                fcp:a['first-contentful-paint']?.numericValue||0,
+                lcp:a['largest-contentful-paint']?.numericValue||0,
+                cls:a['cumulative-layout-shift']?.numericValue||0,
+                tbt:a['total-blocking-time']?.numericValue||0,
+                si:a['speed-index']?.numericValue||0,
+                tti:a['interactive']?.numericValue||0,
+                transfer:req.reduce((s,i)=>s+(i.transferSize||0),0),
+                requests:req.length
+              };
+            });
+            const keys=Object.keys(vals[0]); const m={};
+            for(const k of keys)m[k]=median(vals.map(v=>v[k]));
+            rows.push({surface,mode,median:m,runs:vals});
+          }
+          console.log('LIGHTHOUSE_REPORT_START');
+          console.log(JSON.stringify({environment:env,rows},null,2));
+          console.log('LIGHTHOUSE_REPORT_END');
+          NODE
