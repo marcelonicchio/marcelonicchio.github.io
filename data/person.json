@@ -57,22 +57,32 @@
   "subjectOf": [
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/pt/biografia/",
+      "url": "https://marcelonicchio.github.io/pt/musica/",
       "inLanguage": "pt-BR"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/en/biography/",
+      "url": "https://marcelonicchio.github.io/en/music/",
       "inLanguage": "en"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/pt/publicacoes/",
+      "url": "https://marcelonicchio.github.io/pt/internet/",
       "inLanguage": "pt-BR"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/en/publications/",
+      "url": "https://marcelonicchio.github.io/en/internet/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://marcelonicchio.github.io/pt/ia-hai/",
+      "inLanguage": "pt-BR"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://marcelonicchio.github.io/en/ai-hai/",
       "inLanguage": "en"
     }
   ],
