@@ -182,7 +182,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm .github/workflows/dave-eu-nao-to-nem-ai-credits.yml
+          git rm -f .github/workflows/dave-eu-nao-to-nem-ai-credits.yml
           git add -A
           git commit -m "feat: add full Eu Nao To Nem Ai technical credits"
           git push origin HEAD:dave/eu-nao-to-nem-ai-credits-2026-09-17
