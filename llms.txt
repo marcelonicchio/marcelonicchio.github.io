@@ -24,8 +24,6 @@ Marcelo Nicchio is a Brazilian independent researcher and creator whose document
 
 ## Preferred reference pages
 Canonical person/entity page: https://marcelonicchio.github.io/
-Portuguese full biography: https://marcelonicchio.github.io/pt/biografia/
-English full biography: https://marcelonicchio.github.io/en/biography/
 Portuguese Music: https://marcelonicchio.github.io/pt/musica/
 English Music: https://marcelonicchio.github.io/en/music/
 Portuguese Culture & Audiovisual: https://marcelonicchio.github.io/pt/comunicacao/
@@ -38,6 +36,11 @@ Portuguese publications index: https://marcelonicchio.github.io/pt/publicacoes/
 English publications index: https://marcelonicchio.github.io/en/publications/
 Portuguese press/archive index: https://marcelonicchio.github.io/pt/arquivo/
 English press/archive index: https://marcelonicchio.github.io/en/archive/
+
+## Navigation-only long-form biography
+The Full Biography remains available to readers as a comprehensive navigation and continuity surface, but it is not a preferred search-authority page. Search authority is prioritized as: canonical Home → thematic Vertical → deliberately selected standalone URL.
+- https://marcelonicchio.github.io/pt/biografia/
+- https://marcelonicchio.github.io/en/biography/
 
 ## Selected standalone authority pages
 These URLs are autonomous subject/case pages derived from the same canonical biography and thematic-source architecture. They should be treated as focused views of one person/entity, not as separate people or identities.
