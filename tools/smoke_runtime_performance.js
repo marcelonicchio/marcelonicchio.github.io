@@ -270,6 +270,18 @@ async function main() {
       viewport: {width: 1365, height: 900},
       expectDeferredLazy: true,
     });
+    await probe(browser, {
+      label: 'Music mobile',
+      path: '/pt/musica/',
+      viewport: {width: 390, height: 844},
+      expectDeferredLazy: true,
+    });
+    await probe(browser, {
+      label: 'Music desktop',
+      path: '/pt/musica/',
+      viewport: {width: 1365, height: 900},
+      expectDeferredLazy: true,
+    });
     console.log('Runtime performance/media observability smoke passed.');
   } finally {
     if (browser) await browser.close();
