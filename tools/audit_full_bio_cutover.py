@@ -10,10 +10,11 @@ present in the sitemap first.
 from __future__ import annotations
 
 from pathlib import Path
+import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-SITEMAP = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+SITEMAP = ROOT / "sitemap.xml"
 BASE = "https://marcelonicchio.github.io"
 
 BIO = {
@@ -41,6 +42,16 @@ def url_for(rel: str) -> str:
     return BASE + "/" + rel.lstrip("/")
 
 
+def sitemap_urls() -> set[str]:
+    tree = ET.parse(SITEMAP)
+    ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    return {
+        node.text.strip()
+        for node in tree.findall(".//s:loc", ns)
+        if node.text and node.text.strip()
+    }
+
+
 def is_indexable(value: str) -> bool:
     return value.startswith("index,follow")
 
@@ -51,6 +62,7 @@ def is_noindex(value: str) -> bool:
 
 def main() -> int:
     bio_state = {lang: robots(rel) for lang, rel in BIO.items()}
+    sitemap = sitemap_urls()
 
     if is_noindex(bio_state["pt"]) != is_noindex(bio_state["en"]):
         raise AssertionError(
@@ -84,13 +96,13 @@ def main() -> int:
                 errors.append(
                     f"{rel}: must be index,follow before Full Biography can become noindex"
                 )
-            if url_for(rel) not in SITEMAP:
+            if url_for(rel) not in sitemap:
                 errors.append(
                     f"{rel}: must be in sitemap before Full Biography can become noindex"
                 )
 
     for rel in BIO.values():
-        if url_for(rel) in SITEMAP:
+        if url_for(rel) in sitemap:
             errors.append(
                 f"{rel}: noindex Full Biography must be removed from sitemap"
             )
