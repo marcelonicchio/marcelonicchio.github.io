@@ -92,8 +92,10 @@ jobs:
       - name: Synchronize entry targets
         run: python tools/sync_entries.py
 
-      - name: Accept PT EN editorial checkpoint
-        run: python tools/editorial_parity.py --accept music-album-1999-2000
+      - name: Accept PT EN editorial checkpoints
+        run: |
+          python tools/editorial_parity.py --accept music-album-1999-2000
+          python tools/editorial_parity.py --accept audiovisual-meia-noite
 
       - name: Synchronize Full Biography
         run: python tools/sync_full_biography.py
