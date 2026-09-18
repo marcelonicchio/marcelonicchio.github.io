@@ -27,7 +27,7 @@ jobs:
           node-version: '24'
       - name: Install audit dependencies
         run: |
-          python -m pip install --disable-pip-version-check Pillow beautifulsoup4
+          python -m pip install --disable-pip-version-check -r requirements-audit.txt
           mkdir -p /tmp/reader-ux-smoke
           npm install --prefix /tmp/reader-ux-smoke --no-save playwright-core
       - name: Audit synchronized navigation
