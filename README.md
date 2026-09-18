@@ -8,16 +8,17 @@ https://marcelonicchio.github.io
 
 ## Current development workflow
 
-- `main` — public, stable site
-- `site-v1` — active development branch
-- Pull Request #1 — review surface before publication
+- `main` — public, stable GitHub Pages source
+- short-lived task branches — one scoped change or audit at a time
+- Pull Requests into `main` — review/CI surface before publication
+- `.github/workflows/site-audit.yml` — required structural/runtime audit on PRs and `main`
 
 ## Site architecture
 
 - `/` — language entry / canonical hub root
 - `/pt/` — Portuguese hub
 - `/en/` — English hub
-- thematic sections — biography, music, communication, internet/digital culture, audiovisual, Search/Performance, AI/HAI, publications, projects and archive
+- thematic sections — Full Biography, Music, Media & Culture, Internet & Performance, AI/HCI/HAI, Publications, Projects and Archive
 
 ## Machine-readable authority layer
 
@@ -31,7 +32,10 @@ https://marcelonicchio.github.io
 
 ## Search and editorial rules
 
-- unfinished thematic pages remain `noindex,follow`
+- authority priority is **Home → thematic Vertical → deliberately selected standalone URL**
+- Full Biography / Biografia Completa is a navigation/continuity surface and remains `noindex,follow`
+- Music and Internet & Performance are active indexable authority verticals alongside the already-open authority surfaces
+- standalone Chapter Pages are promoted or retired one by one; do not mass-flip robots states
 - canonical URLs and `hreflang` are defined for PT/EN equivalents
 - the root profile uses Schema.org `WebSite` + `ProfilePage` / `Person`
 - evidence is linked where it adds historical context or verification
@@ -57,6 +61,6 @@ https://marcelonicchio.github.io
 - `docs/parity-status.md` — current PT/EN factual-parity status by section
 - `docs/external-profile-alignment.md` — post-launch reconciliation plan for HAL, ORCID, GitHub and other authority nodes
 
-The remaining pre-merge work is concentrated in rendered visual QA, metadata/link verification, first-wave rights-safe archive assets and the final decision about which thematic PT/EN pairs should be indexable at launch.
+Current work is concentrated in search-authority consolidation, social/semantic metadata, measured performance, repository governance and selective editorial refinement. The site is already public; indexation changes are staged deliberately rather than treated as one launch switch.
 
 `index.html` is the website entry point. `README.md` documents the repository and development process.
