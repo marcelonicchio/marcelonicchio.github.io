@@ -115,10 +115,10 @@
       ]
     },
     "music-album-1999-2000": {
-      "revision": 6,
-      "pt_hash": "86437cb650acfaafa8b79b41b821e6ae3098495d1141a1bd6f732d2527e16b07",
-      "en_hash": "9ecfa7e3df5d7d66d0817397ceec891c64a163463d095155bdf233f4e9aafbaa",
-      "accepted_on": "2026-09-17",
+      "revision": 7,
+      "pt_hash": "618ccf122d42f9df472e7db3d24f29feac1fc600f145423c86f57223958c4d09",
+      "en_hash": "2f6eeabfd899a5c693425b63ba66b80bdad1d18738c0a410a606f7afb21cbf05",
+      "accepted_on": "2026-09-18",
       "changed_languages": [
         "pt",
         "en"
@@ -215,10 +215,10 @@
       ]
     },
     "audiovisual-meia-noite": {
-      "revision": 5,
-      "pt_hash": "3d7d5547be2431e641ed2abb3b5d8a881087bef94df1189a8480261defcb2b79",
-      "en_hash": "828342004337c8ce44657076480aaa36adc8073f6b048c5baf3f67f027955470",
-      "accepted_on": "2026-09-14",
+      "revision": 6,
+      "pt_hash": "60bd4b31a8cf3c29c0a44d12aa32de03bd5ce64185af6449d6e27b61b2975d78",
+      "en_hash": "9ae247cd672ccacfac2e0d221c7e355b236554fa059b2c65cb6a4c344b4afdec",
+      "accepted_on": "2026-09-18",
       "changed_languages": [
         "pt",
         "en"
