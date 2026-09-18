@@ -55,6 +55,24 @@ Do not delete these without content inspection:
 
 “Exclusive” means Git commit ancestry differs; it does **not** prove the actual file content is still valuable or absent from main through another implementation. These nine require file-level inspection before any cleanup decision.
 
+## File-level triage of the nine divergent branches
+
+This second pass inspected the files introduced or changed by each branch's exclusive commit history.
+
+| Branch | What the exclusive history contains | Triage |
+|---|---|---|
+| `archive-minduim-bbs` | one-shot reconstruction workflow/tool, temporary base64 chunk, Minduim image and early Archive/Internet integration | likely implementation precursor; current main already uses the Minduim reconstruction, but compare tooling before deletion |
+| `archive-minduim-v2` | only `.tmp/minduim/chunk00.b64` | temporary upload artifact; strong cleanup candidate after confirming no recovery need |
+| `billy/chapter-semantic-graph-2026-09-06` | Chapter Page generator semantic/schema experiment | preserve until current semantic work is complete; concept may contain reusable logic |
+| `feat/video-media-wave1-music-20260914` | changes to Destemidos Limonadas content, Music/Full Bio renderings and CSS | editorial/media branch; inspect content diffs before deletion |
+| `media-home-portrait-v1` | four temporary base64 portrait chunks only | upload artifact; strong cleanup candidate because the final portrait asset exists on main |
+| `preview-block3a` | static preview copies of biography and internet pages | obsolete-looking preview artifact; safe only after confirming it is not a retained review fixture |
+| `work/chapter-page-seo-descriptions` | Chapter Page metadata changes in `data/entries.json`, generated Folhateen/BEST pages and generator support | potentially useful SEO copy/logic; preserve for comparison |
+| `work/chet-post-c8-closeout` | broad pre-clean closeout: workflows, JS, parity, entries, docs, page renderings and audit tools | high-volume precursor; likely superseded in part by later clean closeout, but requires content comparison before deletion |
+| `work/mobile-nav-operational` | initial mobile-nav JS/CSS, sync/audit changes and site-wide loader insertion | precursor to the later approved mobile-nav rollout; likely superseded, but verify against current assets before deletion |
+
+This classification is based on file history, not just branch names. “Likely precursor” is not deletion authorization.
+
 ## Open stale PRs at the snapshot
 
 Two pre-Kurt open PRs remain strategically stale:
