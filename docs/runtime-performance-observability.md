@@ -23,7 +23,8 @@ The HUB already had static full-scroll image-weight reporting and dated Lighthou
 Current probes cover:
 
 - Full Biography on a mobile viewport;
-- Internet & Performance on a desktop viewport.
+- Internet & Performance on a desktop viewport;
+- Music on both mobile and desktop viewports.
 
 ## What it does NOT claim
 
