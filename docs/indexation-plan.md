@@ -1,44 +1,41 @@
-# Staged indexation plan — current state and Billy destination
+# Staged indexation plan — current state and operator policy
 
-**Updated:** 5 Sep 2026 (BRT)
+**Updated:** 18 Sep 2026 (BRT)
 
 The HUB does not equate page count with authority. Indexation follows reader value, content maturity, stable architecture and deliberate rollout.
 
 ## 1. Current implementation on `main`
 
-Current indexable PT/EN surfaces include:
+Current top-level indexable authority surfaces include:
 
-- root/language/entity hub surfaces;
-- Full Biography / Biografia Completa;
-- Publications / Publicações;
-- Archive / Arquivo;
-- AI/HAI / IA/HAI;
-- BEST/Kenshoo Chapter Page pair.
-
-Current staged `noindex,follow` surfaces still include:
-
+- canonical root/language hub surfaces;
 - Music / Música;
-- Mídia & Cultura / Media & Culture;
 - Internet & Performance;
-- Selected Projects / Projetos;
-- most autonomous Chapter Pages, including Espiritualidade — “O Buscador” / Spirituality — “The Seeker”.
+- AI/HCI/HAI / IA/HCI/HAI;
+- Mídia & Cultura / Media & Culture;
+- Publications / Publicações;
+- Archive / Arquivo.
 
-This section describes implementation, not the newly decided destination policy.
+Full Biography / Biografia Completa is now `noindex,follow` and is absent from the sitemap. It remains fully readable and crawlable so its ordinary links continue to support human navigation and discovery.
 
-## 2. Marcelo's destination policy — 5 Sep 2026
+Some autonomous Chapter Pages promoted in earlier rollout phases remain indexable. Their continued indexation is **not** an automatic template for new pages: standalone URLs are now reviewed one by one.
 
-The intended end state is now:
+Selected Projects / Projetos and most autonomous Chapter Pages remain staged `noindex,follow`.
 
-| Surface | Destination |
-|---|---|
-| Home `/` | `index,follow` |
-| `/pt/`, `/en/` | `index,follow` |
-| Thematic verticals | `index,follow` |
-| Legitimate autonomous Chapter Pages / biography-only URLs | `index,follow` |
-| Publications / Archive | `index,follow` |
-| Full Biography / Biografia Completa | **`noindex,follow`** |
+## 2. Marcelo's authority hierarchy — 18 Sep 2026
 
-The Full Biography pages must remain crawlable. Do not block them in `robots.txt`, because search crawlers need access to read the `noindex` directive.
+The working priority is intentionally narrower than “index everything”:
+
+| Priority | Surface | Policy |
+|---|---|---|
+| 1 | Canonical Home `/` | primary name/entity authority surface; `index,follow` |
+| 2 | Thematic verticals | current strategic focus: AI/HCI/HAI, Music and Internet & Performance; `index,follow` |
+| 3 | Standalone URLs | decide one by one after content/metadata review; no mass promotion |
+| 4 | Full Biography / Biografia Completa | navigation/continuity only; `noindex,follow` |
+
+Other already-indexable top-level surfaces are not automatically removed merely because they are outside the current priority trio; any deindexation is a separate deliberate decision.
+
+HCI is explicit in titles, H1, descriptions, navigation and semantics. The established paths remain `/pt/ia-hai/` and `/en/ai-hai/`; do not migrate URLs merely to insert HCI into the slug without a separate migration decision.
 
 ## 3. Staging still matters
 
@@ -57,9 +54,11 @@ Before a PT/EN pair or autonomous URL becomes indexable:
 9. update audit indexable sets/allowlists in the same release;
 10. deploy and measure rather than assuming immediate Search behavior.
 
-## 4. Full Biography migration gate
+## 4. Full Biography cutover — completed 18 Sep 2026
 
-Full Biography PT/EN should move to `noindex,follow` **after**, not before, the intended standalone discovery graph is safe.
+Full Biography PT/EN moved atomically to `noindex,follow` only after Music and Internet & Performance were made indexable and added to the sitemap. The cutover guard remains in CI to prevent future asymmetric or incomplete reversals.
+
+A future indexable Chapter Page must not depend exclusively on Full Biography for its only meaningful internal link.
 
 A future indexable Chapter Page must not depend exclusively on Full Biography for its only meaningful internal link.
 
