@@ -48,3 +48,9 @@
   .root-canonical .root-section-kicker{font-size:.86rem}
   .root-canonical .root-milestone .year,.root-canonical .root-axis>span{font-size:.8rem}
 }
+
+
+/* Root microtype legibility — 2026-09-20 */
+.root-canonical .root-meta small{font-size:.8rem;line-height:1.35}
+.root-canonical .root-machine-note{font-size:.8rem;line-height:1.5}
+.root-canonical .root-footer{font-size:.8rem;line-height:1.5}
