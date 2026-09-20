@@ -69,6 +69,7 @@ def nav(lang: str, counterpart: str) -> str:
             ("/pt/comunicacao/", "Mídia & Cultura"),
             ("/pt/internet/", "Internet & Performance"),
             ("/pt/ia-hai/", "IA/HCI/HAI"),
+            ("/pt/publicacoes/", "Publicações"),
             ("/pt/arquivo/", "Arquivo"),
             (counterpart, "EN"),
         ]
@@ -81,6 +82,7 @@ def nav(lang: str, counterpart: str) -> str:
             ("/en/communication/", "Media & Culture"),
             ("/en/internet/", "Internet & Performance"),
             ("/en/ai-hai/", "AI/HCI/HAI"),
+            ("/en/publications/", "Publications"),
             ("/en/archive/", "Archive"),
             (counterpart, "PT"),
         ]
