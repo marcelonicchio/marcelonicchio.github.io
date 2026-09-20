@@ -1,0 +1,124 @@
+/* Music vertical — editorial archive treatment
+   Scope is intentionally limited by loading this stylesheet only on /pt/musica/ and /en/music/.
+   Keep Full Biography and standalone Chapter Pages isolated from this presentation layer. */
+
+.thread-media{
+  margin:34px 0 42px;
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  background:transparent;
+}
+.thread-media>a{background:transparent}
+.thread-media:not(.thread-media--pair)>a>img{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+}
+.thread-media figcaption{
+  padding:10px 2px 0;
+  font-size:.82rem;
+  line-height:1.48;
+}
+.thread-media figcaption strong{
+  font-size:.88rem;
+  margin-bottom:3px;
+}
+.thread-media-open{
+  margin-top:6px;
+  font-size:.78rem;
+  font-weight:680;
+}
+.thread-media--pair .thread-media-pair__images{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.record-gallery{margin:34px 0 18px}
+.record-gallery__head{
+  padding:0 0 9px;
+  margin-bottom:12px;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.record-gallery__head strong{
+  font-size:.78rem;
+  letter-spacing:.09em;
+  color:var(--accent-soft);
+}
+.record-gallery__head::after{
+  font-size:.78rem;
+  color:var(--muted);
+  font-weight:600;
+}
+.record-gallery__item{border-radius:8px}
+
+.video-library{
+  margin:30px 0 14px;
+  padding:14px 0 16px;
+  border:0;
+  border-top:1px solid rgba(255,255,255,.10);
+  border-bottom:1px solid rgba(255,255,255,.10);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.video-library__head{
+  padding-bottom:8px;
+  border-bottom:0;
+}
+.video-library__head strong{
+  font-size:.73rem;
+  color:var(--accent-soft);
+}
+.video-library__head span{
+  font-size:.76rem;
+  color:var(--muted);
+  font-weight:600;
+}
+.video-library__group{padding-top:6px}
+.video-library__group + .video-library__group{
+  margin-top:12px;
+  padding-top:12px;
+}
+.video-library__label{margin-bottom:2px}
+.video-library__label strong{
+  font-size:.84rem;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--soft);
+  font-weight:720;
+}
+.video-library .video-library__description{
+  margin:4px 0 9px!important;
+  font-size:.82rem!important;
+}
+.video-pill{
+  min-height:36px;
+  padding:6px 11px;
+  border-radius:8px;
+  background:transparent;
+  border-color:rgba(243,239,231,.30);
+  font-size:.8rem;
+}
+
+@media(max-width:580px){
+  .fact-strip{grid-template-columns:1fr 1fr;gap:8px}
+  .fact{padding:13px 12px}
+  .fact span{font-size:.65rem}
+  .fact strong{font-size:.88rem}
+
+  .thread-media{margin:26px 0 34px}
+  .thread-media figcaption{padding:9px 1px 0}
+
+  .record-gallery{margin-top:30px}
+  .record-gallery__head{gap:1px;padding:0 0 8px}
+  .record-gallery__head strong{font-size:.8rem}
+  .record-gallery__head::after{font-size:.8rem}
+
+  .video-library{padding:12px 0 14px;margin:26px 0 12px}
+  .video-library__head{gap:1px}
+}
