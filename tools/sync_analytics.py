@@ -35,6 +35,12 @@ def render_block(measurement_id: str) -> str:
 {END}'''
 
 
+def is_redirect_stub(text: str) -> bool:
+    has_refresh = re.search(r'<meta\s+http-equiv=["\']refresh["\']', text, flags=re.I) is not None
+    has_noindex = re.search(r'<meta\s+name=["\']robots["\']\s+content=["\'][^"\']*noindex', text, flags=re.I) is not None
+    return has_refresh and has_noindex
+
+
 def main() -> None:
     measurement_id = load_measurement_id()
     block = render_block(measurement_id)
@@ -47,8 +53,12 @@ def main() -> None:
         text = path.read_text(encoding="utf-8")
         original = text
 
+        # Compatibility redirect stubs should not generate analytics pageviews.
+        if is_redirect_stub(text):
+            text = block_re.sub("", text)
+            text = re.sub(r"\n{3,}", "\n\n", text)
         # Replace our managed block when present; otherwise insert exactly once after <head>.
-        if START in text:
+        elif START in text:
             text = block_re.sub(block, text)
         else:
             if measurement_id in text:
