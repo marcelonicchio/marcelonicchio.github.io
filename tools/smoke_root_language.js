@@ -53,7 +53,7 @@ async function assertLanguage(browser, locale, expected) {
   assert(await page.locator(`[data-root-lang-choice="${expected}"]`).getAttribute('aria-pressed') === 'true', `${locale}: selected language button state wrong`);
   assert(await page.locator('.root-portrait img').isVisible(), `${locale}: portrait missing on mobile`);
   assert(await page.locator(`.root-milestone-grid[data-root-lang="${expected}"] .root-milestone`).count() === 9, `${locale}: expected 9 milestones`);
-  assert(await page.locator(`.root-hero-actions[data-root-lang="${expected}"] a`).count() === 5, `${locale}: expected 5 balanced hero shortcuts`);
+  assert(await page.locator(`.root-hero-actions[data-root-lang="${expected}"] a`).count() === 6, `${locale}: expected 6 balanced hero shortcuts`);
   assert(await page.getByText(expected === 'pt' ? 'Abrir HUB em português' : 'Open English HUB', {exact:true}).count() === 0, `${locale}: redundant language HUB CTA still present`);
   const axisHref = expected === 'pt' ? '/pt/musica/' : '/en/music/';
   assert(await page.locator(`.root-axis[href="${axisHref}"]`).count() === 1, `${locale}: localized Music axis link missing`);
