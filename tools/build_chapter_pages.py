@@ -69,6 +69,7 @@ def nav(lang: str, counterpart: str) -> str:
             ("/pt/comunicacao/", "Mídia & Cultura"),
             ("/pt/internet/", "Internet & Performance"),
             ("/pt/ia-hai/", "IA/HCI/HAI"),
+            ("/pt/publicacoes/", "Publicações"),
             ("/pt/arquivo/", "Arquivo"),
             (counterpart, "EN"),
         ]
@@ -81,6 +82,7 @@ def nav(lang: str, counterpart: str) -> str:
             ("/en/communication/", "Media & Culture"),
             ("/en/internet/", "Internet & Performance"),
             ("/en/ai-hai/", "AI/HCI/HAI"),
+            ("/en/publications/", "Publications"),
             ("/en/archive/", "Archive"),
             (counterpart, "PT"),
         ]
@@ -145,6 +147,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     url = canonical(rel)
     other_url = canonical(other_rel)
     title = entry["title"][lang]
+    document_title = page.get("document_title", {}).get(lang, title)
     summary = entry["summary"][lang]
     description = page.get("description", {}).get(lang, summary)
     date = entry["date"][lang]
@@ -190,7 +193,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 {ga}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{html.escape(title)} — Marcelo Nicchio</title>
+  <title>{html.escape(document_title)} — Marcelo Nicchio</title>
   <meta name="description" content="{html.escape(description, quote=True)}">
   <meta name="robots" content="{html.escape(robots, quote=True)}">
   <link rel="canonical" href="{url}">

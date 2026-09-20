@@ -162,7 +162,7 @@ async function main() {
     browser = await chromium.launch({headless: true, executablePath: CHROME, args: ['--no-sandbox']});
     await assertMobile(browser, '/pt/', 'EN', 8, 'Categorias');
     await assertMobile(browser, '/en/', 'PT', 8, 'Categories');
-    await assertMobile(browser, '/pt/biografia/', 'EN', 7, 'Categorias');
+    await assertMobile(browser, '/pt/biografia/', 'EN', 8, 'Categorias');
     await assertDesktop(browser);
     console.log('Mobile navigation discoverability smoke passed.');
   } finally {

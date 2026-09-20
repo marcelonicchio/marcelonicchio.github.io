@@ -28,6 +28,13 @@ for path in sorted(ROOT.rglob("*.html")):
     text = path.read_text(encoding="utf-8")
     rel = path.relative_to(ROOT).as_posix()
 
+    has_refresh = re.search(r'<meta\s+http-equiv=["\']refresh["\']', text, flags=re.I) is not None
+    has_noindex = re.search(r'<meta\s+name=["\']robots["\']\s+content=["\'][^"\']*noindex', text, flags=re.I) is not None
+    if has_refresh and has_noindex:
+        if START in text or END in text or measurement_id in text:
+            errors.append(f"{rel}: redirect stub must not load Google Analytics")
+        continue
+
     if text.count(START) != 1 or text.count(END) != 1:
         errors.append(f"{rel}: expected exactly one managed Google Analytics block")
         continue
@@ -57,4 +64,4 @@ if errors:
         print(f"ERROR: {error}")
     sys.exit(1)
 
-print(f"Analytics audit: 0 errors across {checked} HTML file(s); measurement ID {measurement_id} installed once per page.")
+print(f"Analytics audit: 0 errors across {checked} HTML file(s); measurement ID {measurement_id} installed once per non-redirect page; compatibility redirect stubs excluded.")
