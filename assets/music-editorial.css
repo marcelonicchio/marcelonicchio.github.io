@@ -323,3 +323,76 @@
     margin-bottom:18px;
   }
 }
+
+
+/* Music editorial V4 — stop-the-scroll signal hierarchy
+   Dates and media-category labels are primary editorial signposts, not secondary metadata. */
+:root{
+  --music-signal:#ff625c;
+}
+
+.article-body > .music-entry > .phase-year{
+  color:var(--music-signal);
+  font-size:.92rem;
+  line-height:1.2;
+  letter-spacing:.10em;
+  font-weight:900;
+}
+
+/* Media/archive category headers: strong enough to interrupt scanning without becoming CTA chrome. */
+.video-library__head strong,
+.record-gallery__head strong,
+.record-media-block__head span,
+.album-credits h3{
+  color:var(--music-signal);
+  font-weight:900;
+}
+
+.video-library__head strong{
+  font-size:.94rem;
+  letter-spacing:.095em;
+}
+.record-gallery__head strong{
+  font-size:.94rem;
+  letter-spacing:.085em;
+}
+.record-media-block__head span{
+  font-size:.82rem;
+  letter-spacing:.105em;
+}
+.album-credits h3{
+  font-size:.94rem;
+  letter-spacing:.095em;
+}
+
+/* Item-level media labels remain subordinate to the red category signal, but no longer whisper. */
+.video-library__label strong{
+  font-size:.94rem;
+  line-height:1.35;
+  color:var(--text);
+  font-weight:800;
+}
+
+/* Archive/document status labels, when present inside Music, follow the same signal language. */
+.evidence .status{
+  color:var(--music-signal);
+  font-size:.76rem;
+  font-weight:850;
+}
+
+@media(max-width:580px){
+  .article-body > .music-entry > .phase-year{
+    font-size:.86rem;
+    letter-spacing:.085em;
+  }
+  .video-library__head strong,
+  .record-gallery__head strong{
+    font-size:.92rem;
+  }
+  .record-media-block__head span{
+    font-size:.8rem;
+  }
+  .video-library__label strong{
+    font-size:.92rem;
+  }
+}
