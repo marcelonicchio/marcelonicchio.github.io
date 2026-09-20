@@ -122,3 +122,103 @@
   .video-library{padding:12px 0 14px;margin:26px 0 12px}
   .video-library__head{gap:1px}
 }
+
+
+/* Music editorial V2 — special-case hierarchy for high-density archive moments */
+
+/* Reconstructed / illustrative images should not visually outrank primary documentary material. */
+#music-demo-tape-1994 > .thread-media--pair,
+#kid-vinil-97fm-rock-1994 > .thread-media,
+#music-reunion-2023 > .thread-media{
+  width:min(82%,720px);
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Album artwork behaves like a physical object, not a full-bleed hero image. */
+#music-album-1999-2000 > .thread-media{
+  width:min(54%,480px);
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Dense album credits: editorial dossier treatment instead of an undifferentiated text wall. */
+.album-credits{
+  margin:32px 0 38px;
+  padding:22px 0 24px;
+  border-top:1px solid rgba(255,255,255,.12);
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.album-credits h3{
+  margin:0 0 18px;
+  font-size:.86rem;
+  line-height:1.3;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  color:var(--accent-soft);
+}
+.album-credits h4{
+  margin:20px 0 7px;
+  font-size:.78rem;
+  line-height:1.35;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+.album-credits ol,
+.album-credits ul{
+  margin:0;
+  padding-left:1.25rem;
+  color:var(--muted);
+}
+.album-credits li{
+  margin:.26rem 0;
+  line-height:1.55;
+}
+.album-credits p{
+  margin:.35rem 0 0!important;
+  color:var(--muted)!important;
+  font-size:.92rem!important;
+  line-height:1.55!important;
+}
+
+/* Event galleries deserve larger documentary thumbnails on desktop. */
+#music-album-1999-2000 .record-gallery__item{flex-basis:180px}
+#music-olympia-2000 .record-gallery__item{flex-basis:210px}
+#music-jo-2001 .record-gallery__item{flex-basis:174px}
+#music-reunion-2023 .record-gallery__item{flex-basis:210px}
+
+@media(max-width:900px){
+  #music-demo-tape-1994 > .thread-media--pair,
+  #kid-vinil-97fm-rock-1994 > .thread-media,
+  #music-reunion-2023 > .thread-media{
+    width:min(92%,720px);
+  }
+  #music-album-1999-2000 > .thread-media{
+    width:min(68%,480px);
+  }
+}
+
+@media(max-width:580px){
+  #music-demo-tape-1994 > .thread-media--pair,
+  #kid-vinil-97fm-rock-1994 > .thread-media,
+  #music-reunion-2023 > .thread-media,
+  #music-album-1999-2000 > .thread-media{
+    width:100%;
+  }
+
+  .album-credits{
+    margin:28px 0 32px;
+    padding:18px 0 20px;
+  }
+  .album-credits h3{font-size:.82rem}
+  .album-credits h4{margin-top:17px;font-size:.76rem}
+
+  #music-album-1999-2000 .record-gallery__item,
+  #music-olympia-2000 .record-gallery__item,
+  #music-jo-2001 .record-gallery__item,
+  #music-reunion-2023 .record-gallery__item{
+    flex-basis:72vw;
+    max-width:330px;
+  }
+}
