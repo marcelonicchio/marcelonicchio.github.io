@@ -63,8 +63,19 @@ def normalize_nav_block(block: str, lang: str) -> str:
         block = re.sub(av_pattern, '', block)
     if lang == "pt":
         block = re.sub(r'<a href="/pt/ia-hai/">[^<]*</a>', '<a href="/pt/ia-hai/">IA/HCI/HAI</a>', block)
+        publication_href = '/pt/publicacoes/'
+        publication_anchor = '<a href="/pt/publicacoes/">Publicações</a>'
+        archive_anchor = '<a href="/pt/arquivo/">Arquivo</a>'
     else:
         block = re.sub(r'<a href="/en/ai-hai/">[^<]*</a>', '<a href="/en/ai-hai/">AI/HCI/HAI</a>', block)
+        publication_href = '/en/publications/'
+        publication_anchor = '<a href="/en/publications/">Publications</a>'
+        archive_anchor = '<a href="/en/archive/">Archive</a>'
+    if f'href="{publication_href}"' not in block:
+        if archive_anchor in block:
+            block = block.replace(archive_anchor, publication_anchor + archive_anchor, 1)
+        else:
+            block = block.replace('</nav>', publication_anchor + '</nav>', 1)
     return block
 
 
