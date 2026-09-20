@@ -1,6 +1,6 @@
 # CURRENT HUB STATE — Marcelo Nicchio
 
-**Authoritative operational snapshot:** 18 Sep 2026 (BRT)  
+**Authoritative operational snapshot:** 20 Sep 2026 (BRT)  
 **Coverage:** current `main` through the Kurt indexation/runtime cycle and Marcelo's explicit 18 Sep authority hierarchy.  
 **Precedence:** later explicit instruction from Marcelo → current `main` + green CI → this file → `BILLY-BASELINE-2026-09-05.md` / domain-specific current docs → dated historical handoffs.
 
@@ -97,8 +97,8 @@ Later work added a distinct biography-only model:
 - **Espiritualidade — “O Buscador” / Spirituality — “The Seeker”** has its own PT/EN URL and tags;
 - it remains part of the Full Biography rather than creating a Spirituality vertical;
 - it is linked from Home trajectory highlights;
-- current implementation is still `noindex,follow`;
-- Marcelo has explicitly decided that its autonomous URL belongs in the future indexable set.
+- current implementation is `index,follow` and the page is present in the sitemap;
+- its autonomous URL is part of the current selective indexable set.
 
 Creating an autonomous page still requires real reader value. The new destination policy is broader indexation of legitimate autonomous pages, **not** mass page generation.
 
@@ -139,7 +139,7 @@ Standalone pages intended for Search must not depend exclusively on Full Biograp
 
 ## 7. Home / canonical entity page
 
-Root `/` is still primarily a language/entity gateway and needs substantive human-readable entity content.
+Root `/` is a substantive bilingual canonical entity page, not merely a language gateway. It currently combines human-readable biography, an audiovisual memorial, trajectory milestones, thematic axes, distributed identity links and embedded entity metadata.
 
 Current root already includes embedded JSON-LD with:
 
@@ -150,12 +150,7 @@ Current root already includes embedded JSON-LD with:
 
 Therefore older audit findings saying schema existed only in an external JSON file or that `sameAs` had only four profiles are stale.
 
-Open semantic work includes:
-
-- substantive entity prose;
-- more specific/accurate `knowsAbout` and related Person semantics;
-- review of root language/hreflang architecture once the new content is written;
-- ensuring the root remains useful to humans rather than becoming a keyword/AI-target page.
+Current semantic state includes substantive entity prose, a canonical Person graph, priority-axis `subjectOf` links and detailed `knowsAbout`. Any future root language/hreflang change must be evidence-led; do not reopen it from generic SEO advice alone. The root must remain useful to humans rather than becoming a keyword/AI-target page.
 
 Do not automatically use long side-by-side PT/EN translations merely for crawlers; dedicated language URLs remain part of the architecture.
 
@@ -167,9 +162,9 @@ Do not automatically use long side-by-side PT/EN translations merely for crawler
 
 > **one work/version, multiple repository instances are not multiple publications.**
 
-Current repository code does not yet implement `ScholarlyArticle` structured data.
+Current PT and EN publication pages implement structured research metadata: five `ScholarlyArticle` nodes plus `CollectionPage` and `ItemList`, linked to the canonical Person entity. The one-work/multiple-repository rule remains explicit.
 
-Future structured-data work should model the intellectual work and repository instances accurately rather than mechanically declaring every DOI `sameAs`. PRO v2 remains work in progress and must not be represented as a public publication before it exists publicly.
+Future structured-data work should continue to model the intellectual work and repository instances accurately rather than mechanically declaring every DOI `sameAs`. PRO v2 remains work in progress and must not be represented as a public publication before it exists publicly.
 
 ---
 
@@ -180,7 +175,7 @@ Known substantive priorities now include:
 1. **Music / Música:** Coitado do Próximo and its historical archive;
 2. **Internet & Performance:** incomplete/refinable passages;
 3. **Mídia & Cultura / Media & Culture:** selected entry adjustments;
-4. **Home:** canonical entity prose.
+4. **Home:** selective UX refinement only; the canonical entity prose is already substantive.
 
 The previous assessment that a vertical was structurally ready for eventual indexing does not mean its content is finished. Marcelo's later content priorities govern sequencing.
 
