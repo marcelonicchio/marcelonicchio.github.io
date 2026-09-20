@@ -222,3 +222,104 @@
     max-width:330px;
   }
 }
+
+
+/* Music editorial V3 — narrative rhythm between episodes */
+
+/* Landmark episodes get a little more air and a slightly warmer divider.
+   This creates hierarchy without adding another card or decorative component. */
+#destemidos-limonadas-punkecas-1992,
+#music-demo-tape-1994,
+#music-album-1997,
+#music-album-1999-2000,
+#music-olympia-2000,
+#music-jo-2001,
+#music-reunion-2023{
+  border-top-color:rgba(211,164,160,.20);
+}
+#destemidos-limonadas-punkecas-1992 > .phase-year,
+#music-demo-tape-1994 > .phase-year,
+#music-album-1997 > .phase-year,
+#music-album-1999-2000 > .phase-year,
+#music-olympia-2000 > .phase-year,
+#music-jo-2001 > .phase-year,
+#music-reunion-2023 > .phase-year{
+  margin-top:58px;
+  font-size:.79rem;
+}
+
+/* Bridge entries carry chronology, but should not compete visually with the major archive moments. */
+#music-mp3-era-2000,
+#music-active-2001-2003,
+#music-end-2003{
+  border-top-color:rgba(255,255,255,.065);
+}
+#music-mp3-era-2000 > .phase-year,
+#music-active-2001-2003 > .phase-year,
+#music-end-2003 > .phase-year{
+  margin-top:30px;
+  margin-bottom:.42rem;
+  font-size:.68rem;
+  color:var(--muted);
+}
+#music-mp3-era-2000 > h2,
+#music-active-2001-2003 > h2,
+#music-end-2003 > h2{
+  font-size:clamp(1.55rem,2.65vw,2.1rem);
+  line-height:1.08;
+  letter-spacing:-.035em;
+  margin-bottom:.42em;
+}
+#music-mp3-era-2000 > p,
+#music-active-2001-2003 > p,
+#music-end-2003 > p{
+  max-width:72ch;
+  font-size:.98rem;
+  color:var(--muted);
+}
+
+/* Media inserted mid-narrative should read as evidence inside the story, not as an ending. */
+.music-entry > .video-library:has(+ p){
+  margin-top:22px;
+  margin-bottom:20px;
+}
+.music-entry > .video-library:has(+ p) + p{
+  margin-top:20px;
+}
+
+/* Keep the last archival object of an episode visually attached to that episode. */
+.music-entry > .record-gallery:last-child,
+.music-entry > .video-library:last-child,
+.music-entry > .thread-media:last-child{
+  margin-bottom:32px;
+}
+
+@media(max-width:580px){
+  #destemidos-limonadas-punkecas-1992 > .phase-year,
+  #music-demo-tape-1994 > .phase-year,
+  #music-album-1997 > .phase-year,
+  #music-album-1999-2000 > .phase-year,
+  #music-olympia-2000 > .phase-year,
+  #music-jo-2001 > .phase-year,
+  #music-reunion-2023 > .phase-year{
+    margin-top:46px;
+    font-size:.74rem;
+  }
+
+  #music-mp3-era-2000 > .phase-year,
+  #music-active-2001-2003 > .phase-year,
+  #music-end-2003 > .phase-year{
+    margin-top:26px;
+    font-size:.66rem;
+  }
+  #music-mp3-era-2000 > h2,
+  #music-active-2001-2003 > h2,
+  #music-end-2003 > h2{
+    font-size:1.62rem;
+  }
+
+  .music-entry > .video-library:has(+ p){
+    margin-top:20px;
+    margin-bottom:18px;
+  }
+}
