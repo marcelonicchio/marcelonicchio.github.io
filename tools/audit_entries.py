@@ -165,6 +165,19 @@ def main() -> int:
                         f"maximum is {MAX_READER_PREVIEW_CHARS}"
                     )
 
+        content_indicators = entry.get("content_indicators", {})
+        if content_indicators is not None and not isinstance(content_indicators, dict):
+            errors.append(f"{entry_id}: content_indicators must be an object when present")
+        elif isinstance(content_indicators, dict):
+            for lang in ("pt", "en"):
+                indicators = content_indicators.get(lang)
+                if indicators is None:
+                    continue
+                if not isinstance(indicators, list) or not indicators or not all(
+                    isinstance(item, str) and item.strip() for item in indicators
+                ):
+                    errors.append(f"{entry_id}:{lang}: content_indicators must be a non-empty list of strings")
+
         preview_paths = entry.get("reader_preview_paths", {})
         if preview_paths is not None and not isinstance(preview_paths, dict):
             errors.append(f"{entry_id}: reader_preview_paths must be an object when present")
