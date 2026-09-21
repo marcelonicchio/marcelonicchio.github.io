@@ -182,6 +182,35 @@ body.prateleira-page .entry-page-shell{
   font-weight:780;
 }
 
+
+.prateleira-mobile-toc{
+  display:none;
+}
+.prateleira-mobile-toc h3{
+  margin:0 0 12px;
+  color:var(--prateleira-signal);
+  font-size:.76rem;
+  line-height:1.2;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.prateleira-mobile-toc .prateleira-toc__year{
+  margin-top:16px;
+}
+.prateleira-mobile-toc a{
+  display:block;
+  padding:6px 0;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.35;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.045);
+}
+.prateleira-mobile-toc a:hover,
+.prateleira-mobile-toc a:focus-visible{
+  color:var(--text);
+}
+
 @media(max-width:1040px){
   .prateleira-layout{
     grid-template-columns:minmax(0,1fr) 240px;
@@ -195,22 +224,22 @@ body.prateleira-page .entry-page-shell{
     gap:34px;
   }
   .prateleira-toc{
-    position:static;
-    order:-1;
-    max-height:none;
+    display:none;
+  }
+  .prateleira-mobile-toc{
+    display:block;
+    margin:26px 0 38px;
     padding:16px 0 18px;
-    border-left:0;
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
     columns:2;
     column-gap:24px;
   }
-  .prateleira-toc h2,
-  .prateleira-toc__year,
-  .prateleira-toc__back{
+  .prateleira-mobile-toc h3,
+  .prateleira-mobile-toc .prateleira-toc__year{
     break-after:avoid;
   }
-  .prateleira-toc a{
+  .prateleira-mobile-toc a{
     break-inside:avoid;
   }
 }
@@ -238,13 +267,13 @@ body.prateleira-page .entry-page-shell{
   .article-body .prateleira-column h3{
     font-size:1.46rem;
   }
-  .prateleira-toc{
+  .prateleira-mobile-toc{
     columns:1;
   }
 }
 
 @media print{
-  .prateleira-toc{display:none}
+  .prateleira-toc,.prateleira-mobile-toc{display:none}
   .prateleira-layout{display:block}
   .prateleira-column{break-inside:avoid}
 }
