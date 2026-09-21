@@ -81,6 +81,8 @@ Examples: photos, videos, DOI documents, download links, repository links.
 
 They are UX promises, not taxonomy. Curated indicators are allowed when automatic DOM media counting cannot express the useful resource type.
 
+Entry-level `content_indicators` may be used when a useful internal resource should be advertised on ordinary Reader summaries without promoting the entry to a rich preview. These indicators use the same red visual language and may complement automatic photo/video/document counts.
+
 Visual treatment: red.
 
 Never merge the two badge families.
