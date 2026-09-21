@@ -3,6 +3,16 @@ body.prateleira-page{
   --prateleira-signal:#ff625c;
 }
 
+.prateleira-page .entry-page-hero .hero-lead{max-width:66ch}
+.prateleira-page .entry-page-hero .entry-discovery{margin-top:24px}
+.prateleira-page .entry-page-hero .archive-reading-action{margin-bottom:4px}
+.prateleira-archive{scroll-margin-top:110px}
+#prateleira-cultural-gallery-title{scroll-margin-top:110px}
+.prateleira-column__body{max-width:70ch}
+.prateleira-column__body p{line-height:1.8}
+.prateleira-page .prateleira-toc a{padding-block:8px;line-height:1.45}
+@media(pointer:coarse){.prateleira-mobile-toc a{min-height:44px;display:flex;align-items:center}}
+
 body.prateleira-page .entry-page-shell{
   max-width:1180px;
 }

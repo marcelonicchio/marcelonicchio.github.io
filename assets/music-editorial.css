@@ -2,6 +2,18 @@
    Scope is intentionally limited by loading this stylesheet only on /pt/musica/ and /en/music/.
    Keep Full Biography and standalone Chapter Pages isolated from this presentation layer. */
 
+/* Entry points for a long archive; native anchors also work without JavaScript. */
+.music-page .article-hero .hero-lead{max-width:66ch}
+.music-discovery{margin-top:26px}
+.music-discovery .archive-reading-action{margin:0 0 8px}
+.music-jump-links{display:flex;flex-wrap:wrap;gap:8px}
+.music-jump-links a{min-height:44px;padding:8px 13px;font-size:.8rem}
+.music-page .article-aside{max-height:calc(100vh - 118px);overflow:auto;scrollbar-width:thin}
+.music-page .article-aside a{padding-block:10px;line-height:1.4}
+.music-page .article-body > .chapter > p{max-width:72ch;line-height:1.75}
+@media(max-width:1040px){.music-page .article-aside{max-height:none}}
+@media(max-width:580px){.music-page .article-hero{padding-top:46px}.music-discovery{margin-top:20px}}
+
 .thread-media{
   margin:34px 0 42px;
   border:0;

@@ -1,5 +1,14 @@
 <div class="entry-discovery entry-discovery--page"><a class="entry-discovery__badge entry-discovery__badge--page" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/">Página própria</a></div>
 <p>Entre 2003 e 2006, Nicchio assinou regularmente a coluna <strong>Prateleira Cultural</strong> na revista <em>Sinal Verde</em>, além de publicar textos em outras seções. Este arquivo reúne 22 textos autorais preservados desse período.</p>
+<div class="entry-discovery entry-discovery--contents" aria-label="Conteúdo interno da página própria">
+  <span class="entry-discovery__label">Conteúdo interno</span>
+  <div class="entry-discovery__badges">
+    <span class="entry-discovery__badge">2003–2006</span>
+    <a class="entry-discovery__badge" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/#arquivo-colunas">22 colunas na íntegra</a>
+    <a class="entry-discovery__badge" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/#prateleira-cultural-gallery-title">24 páginas digitalizadas</a>
+  </div>
+</div>
+<p class="archive-reading-action"><a class="archive-text-link" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/#arquivo-colunas">Ler as 22 colunas na íntegra →</a></p>
 <!-- thread-media:prateleira-cultural:start -->
 <figure class="thread-media thread-media--linked">
 <a aria-label="Abrir a fotografia original da Prateleira Cultural" href="/assets/archive/communication/prateleira-cultural/prateleiracultural_thread_marcelo-nicchio.jpg" rel="noopener noreferrer" target="_blank">
@@ -9,14 +18,8 @@
 </figure>
 <!-- thread-media:prateleira-cultural:end --><p>A curadoria e os textos cobriram Ramones, Kurt Cobain, Seu Jorge, banda 365, cinema brasileiro, televisão, literatura, rádio e espaços culturais, além de temas digitais como <strong>Skype e VoIP, Google Earth, RSS/XML, rádio via internet e Orkut</strong>.</p><p>A combinação de crítica cultural e cultura digital mostra como a tecnologia já fazia parte de sua pauta editorial antes da especialização profissional em Search.</p>
 <p>O arquivo integral da <strong>Prateleira Cultural</strong> está preservado em uma página própria do HUB, reunindo <strong>22 colunas e textos autorais publicados entre 2003 e 2006</strong>, com transcrições revisadas e as páginas digitalizadas da revista.</p>
-<div class="entry-discovery entry-discovery--contents" aria-label="Conteúdo interno da página própria">
-  <span class="entry-discovery__label">Conteúdo interno</span>
-  <div class="entry-discovery__badges">
-    <a class="entry-discovery__badge" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/#arquivo-colunas">22 colunas na íntegra</a>
-    <a class="entry-discovery__badge" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/#prateleira-cultural-gallery-title">24 páginas digitalizadas</a>
-  </div>
-</div>
-<div class="actions"><a class="button accent" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/">Ler as 22 colunas na íntegra →</a></div>
+
+
 <!-- gallery:prateleira-cultural:start -->
 <div class="record-gallery" data-gallery="prateleira-cultural" aria-labelledby="prateleira-cultural-gallery-title">
   <div class="record-gallery__head"><strong id="prateleira-cultural-gallery-title">Páginas digitalizadas · 24</strong></div>
