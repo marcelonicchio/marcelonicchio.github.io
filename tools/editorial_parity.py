@@ -131,7 +131,8 @@ def check(manifest: dict[str, Any], registry: dict[str, Any]) -> int:
             )
         else:
             errors.append(
-                f"{entry_id}: PT and EN both changed after editorial revision {revision}; jointly review and accept a new checkpoint"
+                f"{entry_id}: PT and EN both changed after editorial revision {revision}; jointly review and accept a new checkpoint "
+                f"[pt_hash={current['pt']} en_hash={current['en']}]"
             )
 
     if errors:
