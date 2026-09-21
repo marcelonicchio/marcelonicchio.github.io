@@ -1,4 +1,4 @@
-<p>Between 2003 and 2006, Nicchio regularly wrote the <strong>Prateleira Cultural</strong> column for <em>Sinal Verde</em> magazine, while also publishing pieces in other sections. Altogether, the period comprises roughly twenty unique editorial pieces.</p>
+<p>Between 2003 and 2006, Nicchio regularly wrote the <strong>Prateleira Cultural</strong> column for <em>Sinal Verde</em> magazine, while also publishing pieces in other sections. The preserved archive comprises 22 authored texts from that period.</p>
 <!-- thread-media:prateleira-cultural:start -->
 <figure class="thread-media thread-media--linked">
 <a aria-label="Open the original Prateleira Cultural photo" href="/assets/archive/communication/prateleira-cultural/prateleiracultural_thread_marcelo-nicchio.jpg" rel="noopener noreferrer" target="_blank">
@@ -7,6 +7,8 @@
 <figcaption><strong>Marcelo Nicchio during the Prateleira Cultural column period at Revista Sinal Verde.</strong><a class="thread-media-open" href="/assets/archive/communication/prateleira-cultural/prateleiracultural_thread_marcelo-nicchio.jpg" rel="noopener noreferrer" target="_blank">Open original image ↗</a></figcaption>
 </figure>
 <!-- thread-media:prateleira-cultural:end --><p>His curation and writing covered the Ramones, Kurt Cobain, Seu Jorge, the band 365, Brazilian cinema, television, literature, radio and cultural spaces, as well as digital subjects including <strong>Skype and VoIP, Google Earth, RSS/XML, internet radio and Orkut</strong>.</p><p>The combination of cultural criticism and digital culture shows that technology was already part of his editorial agenda before his later professional specialization in Search.</p>
+<p>The complete original <strong>Prateleira Cultural</strong> archive is preserved on a dedicated HUB page, bringing together <strong>22 Portuguese-language columns and authored texts published between 2003 and 2006</strong>, with reviewed transcriptions and digitized magazine pages.</p>
+<div class="actions"><a class="button accent" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/">Read the 22 original columns in Portuguese →</a></div>
 <!-- gallery:prateleira-cultural:start -->
 <div class="record-gallery" data-gallery="prateleira-cultural" aria-labelledby="prateleira-cultural-gallery-title">
   <div class="record-gallery__head"><strong id="prateleira-cultural-gallery-title">Digitized pages · 24</strong></div>
