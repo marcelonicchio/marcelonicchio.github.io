@@ -1,0 +1,218 @@
+/* Shared editorial vertical system — derived from the validated Music/CDP visual language.
+   Opt-in only: pages must add body.vertical-editorial and load this stylesheet.
+   Vertical-specific exceptions belong in their own stylesheet, not here. */
+
+body.vertical-editorial{
+  --editorial-signal:#ff625c;
+}
+
+/* Chronology is navigation, not metadata. */
+body.vertical-editorial .article-body > .chapter{
+  padding-top:1px;
+  border-top:1px solid rgba(255,255,255,.09);
+  scroll-margin-top:100px;
+}
+body.vertical-editorial .article-body > .chapter > .phase-year{
+  margin:46px 0 .58rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--editorial-signal);
+  font-size:1.18rem;
+  line-height:1.1;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+body.vertical-editorial .article-body > .chapter > .phase-year + h2{
+  margin-top:0;
+}
+
+/* Documentary figures should read as editorial material, not nested cards. */
+body.vertical-editorial .thread-media{
+  margin:34px 0 42px;
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  background:transparent;
+}
+body.vertical-editorial .thread-media>a{
+  background:transparent;
+}
+body.vertical-editorial .thread-media:not(.thread-media--pair)>a>img{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+}
+body.vertical-editorial .thread-media figcaption{
+  padding:10px 2px 0;
+  font-size:.82rem;
+  line-height:1.48;
+}
+body.vertical-editorial .thread-media figcaption strong{
+  font-size:.88rem;
+  margin-bottom:3px;
+}
+body.vertical-editorial .thread-media-open{
+  margin-top:6px;
+  font-size:.78rem;
+  font-weight:680;
+}
+
+/* Galleries are primary evidence: clear header, larger records, less box-within-box chrome. */
+body.vertical-editorial .record-gallery{
+  margin:34px 0 22px;
+}
+body.vertical-editorial .record-gallery__head{
+  padding:0 0 10px;
+  margin-bottom:13px;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.11);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.vertical-editorial .record-gallery__head strong{
+  color:var(--editorial-signal);
+  font-size:.94rem;
+  line-height:1.25;
+  letter-spacing:.085em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+body.vertical-editorial .record-gallery__head::after{
+  font-size:.8rem;
+  color:var(--muted);
+  font-weight:650;
+}
+body.vertical-editorial .record-gallery__item{
+  flex-basis:180px;
+  border-radius:8px;
+}
+
+/* Media-library language shared with Music and future Media & Culture rollout. */
+body.vertical-editorial .video-library{
+  margin:30px 0 14px;
+  padding:14px 0 16px;
+  border:0;
+  border-top:1px solid rgba(255,255,255,.11);
+  border-bottom:1px solid rgba(255,255,255,.11);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.vertical-editorial .video-library__head{
+  padding-bottom:8px;
+  border-bottom:0;
+}
+body.vertical-editorial .video-library__head strong{
+  color:var(--editorial-signal);
+  font-size:.94rem;
+  letter-spacing:.095em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+body.vertical-editorial .video-library__head span{
+  font-size:.78rem;
+  color:var(--muted);
+  font-weight:650;
+}
+body.vertical-editorial .video-library__label strong{
+  color:var(--text);
+  font-size:.94rem;
+  line-height:1.35;
+  letter-spacing:0;
+  text-transform:none;
+  font-weight:800;
+}
+body.vertical-editorial .video-library .video-library__description{
+  margin:4px 0 9px!important;
+  font-size:.84rem!important;
+}
+body.vertical-editorial .video-pill{
+  min-height:36px;
+  padding:6px 11px;
+  border-radius:8px;
+  background:rgba(243,239,231,.105);
+  border-color:rgba(243,239,231,.56);
+  color:rgba(255,252,246,.98)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 0 0 1px rgba(255,255,255,.018);
+}
+body.vertical-editorial .video-pill::before{
+  color:var(--editorial-signal);
+  opacity:.96;
+}
+body.vertical-editorial .video-pill:hover,
+body.vertical-editorial .video-pill:focus-visible{
+  background:rgba(243,239,231,.19);
+  color:#fffdf8!important;
+  border-color:rgba(255,255,255,.78);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 18px rgba(0,0,0,.22);
+}
+body.vertical-editorial .video-pill:hover::before,
+body.vertical-editorial .video-pill:focus-visible::before{
+  color:var(--editorial-signal);
+}
+
+/* Evidence/status labels on research-oriented verticals can opt into the same signal language later. */
+body.vertical-editorial .evidence .status{
+  color:var(--editorial-signal);
+  font-size:.76rem;
+  font-weight:850;
+}
+
+@media(max-width:580px){
+  body.vertical-editorial .fact-strip{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  body.vertical-editorial .fact{
+    padding:13px 12px;
+  }
+
+  body.vertical-editorial .article-body > .chapter > .phase-year{
+    margin-top:38px;
+    font-size:1.08rem;
+    letter-spacing:.065em;
+  }
+
+  body.vertical-editorial .thread-media{
+    margin:26px 0 34px;
+  }
+  body.vertical-editorial .thread-media figcaption{
+    padding:9px 1px 0;
+  }
+
+  body.vertical-editorial .record-gallery{
+    margin-top:30px;
+  }
+  body.vertical-editorial .record-gallery__head{
+    gap:1px;
+    padding:0 0 8px;
+  }
+  body.vertical-editorial .record-gallery__head strong{
+    font-size:.92rem;
+  }
+  body.vertical-editorial .record-gallery__head::after{
+    font-size:.8rem;
+  }
+  body.vertical-editorial .record-gallery__item{
+    flex-basis:72vw;
+    max-width:330px;
+  }
+
+  body.vertical-editorial .video-library{
+    padding:12px 0 14px;
+    margin:26px 0 12px;
+  }
+  body.vertical-editorial .video-library__head{
+    gap:2px;
+  }
+  body.vertical-editorial .video-library__head strong,
+  body.vertical-editorial .video-library__label strong{
+    font-size:.92rem;
+  }
+  body.vertical-editorial .video-pill{
+    min-height:40px;
+    padding:8px 11px;
+    background:rgba(243,239,231,.12);
+    border-color:rgba(243,239,231,.60);
+  }
+}
