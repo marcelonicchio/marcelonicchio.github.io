@@ -248,3 +248,30 @@ body.prateleira-page .entry-page-shell{
   .prateleira-layout{display:block}
   .prateleira-column{break-inside:avoid}
 }
+
+.prateleira-column__body ul{
+  margin:1rem 0 1.35rem;
+  padding-left:1.25rem;
+}
+.prateleira-column__body li{
+  margin:.42rem 0;
+  color:#ddd8ce;
+  font-size:1rem;
+  line-height:1.58;
+}
+.prateleira-column__box{
+  margin:1.45rem 0 0;
+  padding:16px 18px;
+  border-left:3px solid var(--prateleira-signal);
+  background:rgba(255,255,255,.025);
+}
+.prateleira-column__box p{
+  margin:.55rem 0;
+  font-size:.94rem;
+}
+.prateleira-column__box ul{
+  margin:.75rem 0;
+}
+.prateleira-column__body em{
+  color:var(--soft);
+}
