@@ -432,3 +432,14 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 .audio-library .audio-library__note{margin:14px 0 0!important;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);color:var(--muted)!important;font-size:.78rem!important;line-height:1.5!important}
 .audio-library__note strong{color:var(--soft)}
 @media(max-width:580px){.audio-library__player{max-width:none;height:44px}}
+
+
+/* Standalone-page discovery signals */
+.entry-discovery{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.entry-discovery--page{margin:.35rem 0 1rem}
+.entry-discovery--contents{margin:18px 0 12px}
+.entry-discovery__label{color:var(--muted);font-size:.72rem;line-height:1.25;letter-spacing:.09em;text-transform:uppercase;font-weight:760}
+.entry-discovery__badges{display:flex;flex-wrap:wrap;gap:6px}
+.entry-discovery__badge{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px solid rgba(211,164,160,.45);border-radius:999px;background:rgba(155,47,47,.14);color:#f0c2be;font-size:.73rem;line-height:1.2;font-weight:800;letter-spacing:.015em;text-decoration:none}
+a.entry-discovery__badge:hover,a.entry-discovery__badge:focus-visible{background:rgba(170,47,47,.27);border-color:rgba(224,120,113,.62);color:#f7d4d0}
+@media(max-width:580px){.entry-discovery--contents{align-items:flex-start;flex-direction:column;gap:7px}.entry-discovery__badge{font-size:.75rem}}

@@ -1,3 +1,4 @@
+<div class="entry-discovery entry-discovery--page"><a class="entry-discovery__badge entry-discovery__badge--page" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/">Original archive · PT</a></div>
 <p>Between 2003 and 2006, Nicchio regularly wrote the <strong>Prateleira Cultural</strong> column for <em>Sinal Verde</em> magazine, while also publishing pieces in other sections. The preserved archive comprises 22 authored texts from that period.</p>
 <!-- thread-media:prateleira-cultural:start -->
 <figure class="thread-media thread-media--linked">
@@ -8,6 +9,13 @@
 </figure>
 <!-- thread-media:prateleira-cultural:end --><p>His curation and writing covered the Ramones, Kurt Cobain, Seu Jorge, the band 365, Brazilian cinema, television, literature, radio and cultural spaces, as well as digital subjects including <strong>Skype and VoIP, Google Earth, RSS/XML, internet radio and Orkut</strong>.</p><p>The combination of cultural criticism and digital culture shows that technology was already part of his editorial agenda before his later professional specialization in Search.</p>
 <p>The complete original <strong>Prateleira Cultural</strong> archive is preserved on a dedicated HUB page, bringing together <strong>22 Portuguese-language columns and authored texts published between 2003 and 2006</strong>, with reviewed transcriptions and digitized magazine pages.</p>
+<div class="entry-discovery entry-discovery--contents" aria-label="Content inside the original archive">
+  <span class="entry-discovery__label">Inside the archive</span>
+  <div class="entry-discovery__badges">
+    <a class="entry-discovery__badge" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/#arquivo-colunas">22 original columns · PT</a>
+    <a class="entry-discovery__badge" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/#prateleira-cultural-gallery-title">24 digitized pages</a>
+  </div>
+</div>
 <div class="actions"><a class="button accent" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/">Read the 22 original columns in Portuguese →</a></div>
 <!-- gallery:prateleira-cultural:start -->
 <div class="record-gallery" data-gallery="prateleira-cultural" aria-labelledby="prateleira-cultural-gallery-title">
