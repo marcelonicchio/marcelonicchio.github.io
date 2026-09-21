@@ -278,7 +278,8 @@
       if (topicRow) summary.appendChild(topicRow);
 
       const badges = [...contentBadges];
-      if (entry?.chapter_page?.status === 'pilot') badges.push(labels.page);
+      const hasStandalonePage = ['pilot', 'custom'].includes(entry?.chapter_page?.status);
+      if (hasStandalonePage) badges.push(labels.page);
       if (badges.length) {
         const row = document.createElement('div');
         row.className = 'reader-disclosure__badges';
@@ -311,7 +312,7 @@
       body.className = 'reader-disclosure__body';
       while (section.firstChild) body.appendChild(section.firstChild);
 
-      if (entry?.chapter_page?.status === 'pilot') {
+      if (hasStandalonePage) {
         const rawPath = entry.chapter_page?.[`${language}_path`];
         if (rawPath) {
           const pageLink = document.createElement('p');
