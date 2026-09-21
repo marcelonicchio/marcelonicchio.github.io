@@ -396,3 +396,53 @@
     font-size:.92rem;
   }
 }
+
+
+/* Music editorial V4.1 — chronology must read at scroll speed
+   Explicit !important is intentional here: older episode-ID rules must not shrink dates again. */
+.article-body > .music-entry > .phase-year{
+  font-size:1.18rem!important;
+  line-height:1.1;
+  letter-spacing:.075em;
+  margin-bottom:.58rem;
+}
+
+/* Major milestones carry slightly more chronological weight. */
+#destemidos-limonadas-punkecas-1992 > .phase-year,
+#music-demo-tape-1994 > .phase-year,
+#music-album-1997 > .phase-year,
+#music-album-1999-2000 > .phase-year,
+#music-olympia-2000 > .phase-year,
+#music-jo-2001 > .phase-year,
+#music-reunion-2023 > .phase-year{
+  font-size:1.34rem!important;
+}
+
+/* Bridge entries stay secondary, but their years remain unmistakably readable. */
+#music-mp3-era-2000 > .phase-year,
+#music-active-2001-2003 > .phase-year,
+#music-end-2003 > .phase-year{
+  font-size:1.06rem!important;
+  color:var(--music-signal);
+}
+
+@media(max-width:580px){
+  .article-body > .music-entry > .phase-year{
+    font-size:1.08rem!important;
+    letter-spacing:.065em;
+  }
+  #destemidos-limonadas-punkecas-1992 > .phase-year,
+  #music-demo-tape-1994 > .phase-year,
+  #music-album-1997 > .phase-year,
+  #music-album-1999-2000 > .phase-year,
+  #music-olympia-2000 > .phase-year,
+  #music-jo-2001 > .phase-year,
+  #music-reunion-2023 > .phase-year{
+    font-size:1.2rem!important;
+  }
+  #music-mp3-era-2000 > .phase-year,
+  #music-active-2001-2003 > .phase-year,
+  #music-end-2003 > .phase-year{
+    font-size:1rem!important;
+  }
+}
