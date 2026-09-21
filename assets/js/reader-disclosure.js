@@ -207,7 +207,11 @@
       const previewPaths = entry?.reader_preview_paths?.[language];
       const previewAllowed = !Array.isArray(previewPaths) || previewPaths.includes(repoPath);
       const readerPreview = previewAllowed ? (entry?.reader_preview?.[language] || null) : null;
-      const contentBadges = readerPreview?.indicators?.length ? readerPreview.indicators : contentBadgesFor(section);
+      const entryIndicators = entry?.content_indicators?.[language] || [];
+      const automaticBadges = contentBadgesFor(section);
+      const contentBadges = entryIndicators.length
+        ? [...new Set([...entryIndicators, ...automaticBadges])]
+        : (readerPreview?.indicators?.length ? readerPreview.indicators : automaticBadges);
       const topicIds = entry?.topic_ids || [];
       const topicRow = topicRowFor(topicIds);
       const alwaysOpenPaths = entry?.reader_presentation?.always_open_paths || [];
