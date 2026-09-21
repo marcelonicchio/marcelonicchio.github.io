@@ -203,9 +203,9 @@
       ]
     },
     "communication-sinal-verde": {
-      "revision": 5,
-      "pt_hash": "37fb0575e1ef80cdcbe27fcfc6f50bfb8e7e1b38947a486b57e9731ce391e945",
-      "en_hash": "03bda507c04a6830003db0a206cd318bd080cb07f5dc0cf9d5d03d62714b2b51",
+      "revision": 6,
+      "pt_hash": "9d2eeb399669f0ce6bba54b252260939f2d1babf7b24ac91c1922761f564700e",
+      "en_hash": "bd0a0e4f4847e12ca248a143411845f31dd209750b65539475693fc2acae1561",
       "accepted_on": "2026-09-21",
       "changed_languages": [
         "pt",
