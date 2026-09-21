@@ -1,4 +1,4 @@
-<p>Entre 2003 e 2006, Nicchio assinou regularmente a coluna <strong>Prateleira Cultural</strong> na revista <em>Sinal Verde</em>, além de publicar textos em outras seções. Ao todo, há aproximadamente vinte peças editoriais únicas desse período.</p>
+<p>Entre 2003 e 2006, Nicchio assinou regularmente a coluna <strong>Prateleira Cultural</strong> na revista <em>Sinal Verde</em>, além de publicar textos em outras seções. Este arquivo reúne 22 textos autorais preservados desse período.</p>
 <!-- thread-media:prateleira-cultural:start -->
 <figure class="thread-media thread-media--linked">
 <a aria-label="Abrir a fotografia original da Prateleira Cultural" href="/assets/archive/communication/prateleira-cultural/prateleiracultural_thread_marcelo-nicchio.jpg" rel="noopener noreferrer" target="_blank">
@@ -7,6 +7,8 @@
 <figcaption><strong>Marcelo Nicchio no período da coluna Prateleira Cultural, Revista Sinal Verde.</strong><a class="thread-media-open" href="/assets/archive/communication/prateleira-cultural/prateleiracultural_thread_marcelo-nicchio.jpg" rel="noopener noreferrer" target="_blank">Abrir imagem original ↗</a></figcaption>
 </figure>
 <!-- thread-media:prateleira-cultural:end --><p>A curadoria e os textos cobriram Ramones, Kurt Cobain, Seu Jorge, banda 365, cinema brasileiro, televisão, literatura, rádio e espaços culturais, além de temas digitais como <strong>Skype e VoIP, Google Earth, RSS/XML, rádio via internet e Orkut</strong>.</p><p>A combinação de crítica cultural e cultura digital mostra como a tecnologia já fazia parte de sua pauta editorial antes da especialização profissional em Search.</p>
+<p>O arquivo integral da <strong>Prateleira Cultural</strong> está preservado em uma página própria do HUB, reunindo <strong>22 colunas e textos autorais publicados entre 2003 e 2006</strong>, com transcrições revisadas e as páginas digitalizadas da revista.</p>
+<div class="actions"><a class="button accent" href="/pt/comunicacao/prateleira-cultural-revista-sinal-verde/">Ler as 22 colunas na íntegra →</a></div>
 <!-- gallery:prateleira-cultural:start -->
 <div class="record-gallery" data-gallery="prateleira-cultural" aria-labelledby="prateleira-cultural-gallery-title">
   <div class="record-gallery__head"><strong id="prateleira-cultural-gallery-title">Páginas digitalizadas · 24</strong></div>
