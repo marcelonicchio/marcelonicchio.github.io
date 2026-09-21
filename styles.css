@@ -443,3 +443,10 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 .entry-discovery__badge{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border:1px solid rgba(211,164,160,.45);border-radius:999px;background:rgba(155,47,47,.14);color:#f0c2be;font-size:.73rem;line-height:1.2;font-weight:800;letter-spacing:.015em;text-decoration:none}
 a.entry-discovery__badge:hover,a.entry-discovery__badge:focus-visible{background:rgba(170,47,47,.27);border-color:rgba(224,120,113,.62);color:#f7d4d0}
 @media(max-width:580px){.entry-discovery--contents{align-items:flex-start;flex-direction:column;gap:7px}.entry-discovery__badge{font-size:.75rem}}
+
+/* Textual archive actions share the existing red discovery language. */
+.archive-reading-action{margin:14px 0 22px}
+.archive-text-link{display:inline-flex;align-items:center;min-height:44px;padding:6px 0;color:#f1c5c1;font-weight:780;font-size:1rem;line-height:1.5;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.24em}
+.archive-text-link:hover{color:var(--text);text-decoration-thickness:2px}
+.archive-text-link:focus-visible{outline:2px solid var(--accent-soft);outline-offset:5px;border-radius:2px}
+@media(pointer:coarse){a.entry-discovery__badge{min-height:44px}}
