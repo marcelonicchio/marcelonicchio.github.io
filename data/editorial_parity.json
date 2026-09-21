@@ -33,10 +33,14 @@
       ]
     },
     "communication-tremonte": {
-      "revision": 1,
-      "pt_hash": "9abc87d721237ae1f930ca914283f5caeb5cdd440e3ec04f41ae3aec95f8f552",
-      "en_hash": "04f35d19cba4cc3d0e9a8c67bc80a2062a60c377d0c0ec6ae8125dba7387ed66",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "dbb6850cf1641bba778423c703b35e210548cd2c947678bdb609c1d1764ef763",
+      "en_hash": "6e98215c3e37d6cf170b84b745cab8d227a659373e290251155f59171e62f282",
+      "accepted_on": "2026-09-21",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "music-circuit": {
       "revision": 3,
@@ -59,10 +63,14 @@
       ]
     },
     "communication-metropole": {
-      "revision": 1,
-      "pt_hash": "e398ef893b5896997a5c05676efbc640dbe8e3bba02466bf70288cdc9be6daed",
-      "en_hash": "2453ee0fbac6e047bafd8e195b8dc0d8a730df7cb070287f58b6c233f5c4fbdb",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "e3491b3b92cd6a21da5ab88e4a65364802069a164aea0d8a13bc20a17482fd12",
+      "en_hash": "53b06dfaedae312de5cf34d547ef931bdd80ca6d4700d3cf42982c46b321e6cd",
+      "accepted_on": "2026-09-21",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "internet-commercial": {
       "revision": 2,
@@ -85,20 +93,20 @@
       ]
     },
     "audiovisual-homens": {
-      "revision": 2,
-      "pt_hash": "aca677354f2de5e3e22c56d462aa74631391b6aa8d12a67d44c3f2e1ab6e6bbb",
-      "en_hash": "63eea6402412a40f4b1348dc251ea4c588fb0b080a4e5e8a48cb5153b3c58e08",
-      "accepted_on": "2026-09-17",
+      "revision": 3,
+      "pt_hash": "f1c04346b71d2d86c052d5cd194e93e635f8e7dc2ccdb3cb599f5327dfb7a62b",
+      "en_hash": "d574aba1a8bfe2b8b60cbc9d7ea6d40f97c76ad0144d23c281f16d8ea32fb313",
+      "accepted_on": "2026-09-21",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "audiovisual-film": {
-      "revision": 2,
-      "pt_hash": "8b4b871b2fb3f4fcf8eb827d84543cc9e397d1bfe2cb1d3ee45acb6e6445c8dd",
-      "en_hash": "d88889c64edc3d615af8794e3d6091af123d39084041f4405476c66894ad3aa6",
-      "accepted_on": "2026-09-03",
+      "revision": 3,
+      "pt_hash": "189a201063f64a160224e112c7818474bed3db29b72361ba43a111c6bb57a0f5",
+      "en_hash": "720a8ca9b7e0d814b99a41da5892b7d2866e8ea07bb66a8b5ea823338977ddfe",
+      "accepted_on": "2026-09-21",
       "changed_languages": [
         "pt",
         "en"
@@ -155,10 +163,10 @@
       ]
     },
     "communication-folha": {
-      "revision": 8,
-      "pt_hash": "3e8ccbb3746f4e950b37f1b41ef5f842b68717061c6cacab7548d218832f1046",
-      "en_hash": "77ee65e5b7f461968522202fc6b0d4e651279dc5904574006ae575dd317e3310",
-      "accepted_on": "2026-09-03",
+      "revision": 9,
+      "pt_hash": "cc6f2247004b566a9e5b5372cf8fabe549e8064e1f32358e670eafe5387c2168",
+      "en_hash": "94805848489e7cae23cc0b5556f418d0efc764b45bc2d78ee19698e7cb32dee5",
+      "accepted_on": "2026-09-21",
       "changed_languages": [
         "pt",
         "en"
@@ -195,10 +203,10 @@
       ]
     },
     "communication-sinal-verde": {
-      "revision": 4,
-      "pt_hash": "2840bcdf7bc2adb8a66f2d857ab35a738e1acff5229cc59aff99be4217897baf",
-      "en_hash": "9354bfed6b16fdbf47b4a30f4469c89b0dbc049be857cc435b9448be3ce04090",
-      "accepted_on": "2026-09-17",
+      "revision": 5,
+      "pt_hash": "37fb0575e1ef80cdcbe27fcfc6f50bfb8e7e1b38947a486b57e9731ce391e945",
+      "en_hash": "03bda507c04a6830003db0a206cd318bd080cb07f5dc0cf9d5d03d62714b2b51",
+      "accepted_on": "2026-09-21",
       "changed_languages": [
         "pt",
         "en"
@@ -215,10 +223,10 @@
       ]
     },
     "audiovisual-meia-noite": {
-      "revision": 6,
-      "pt_hash": "60bd4b31a8cf3c29c0a44d12aa32de03bd5ce64185af6449d6e27b61b2975d78",
-      "en_hash": "9ae247cd672ccacfac2e0d221c7e355b236554fa059b2c65cb6a4c344b4afdec",
-      "accepted_on": "2026-09-18",
+      "revision": 7,
+      "pt_hash": "f3752e1d67c12ea2b5150ff02055c70e631a8dfcc85179548819adf1b90dbeda",
+      "en_hash": "e4221082648aad4fbf891593dec1bce76c7c6e056b752c16b77ffb238ae4fad0",
+      "accepted_on": "2026-09-21",
       "changed_languages": [
         "pt",
         "en"
@@ -295,16 +303,20 @@
       ]
     },
     "audiovisual-arquiteto": {
-      "revision": 1,
-      "pt_hash": "178c27e46f1ab677ef5000b4bd81b497c16575a674e3c59cd411714ab10c67fd",
-      "en_hash": "d44d0731e22700d191b0ba6388b460e9e4f56cd24bc5af7fc794964a3152df0c",
-      "accepted_on": "2026-08-27"
+      "revision": 2,
+      "pt_hash": "e55359121f3da4854cd0fe883deae19c4243502a19cd78197079396c32c68bb2",
+      "en_hash": "4dd99766284a514f938a1b15800b3b2a6b02d5d910e87cecb0b337cb5dae44b6",
+      "accepted_on": "2026-09-21",
+      "changed_languages": [
+        "pt",
+        "en"
+      ]
     },
     "audiovisual-autopsia": {
-      "revision": 2,
-      "pt_hash": "dca7a9f88f0668d6beef6b47a0192428c904df674752615bab2b6e1d415b755f",
-      "en_hash": "ca7c68c3d9717df2e81016eaaa95bebc4ff74f9353363741355657062ef7c98a",
-      "accepted_on": "2026-09-03",
+      "revision": 3,
+      "pt_hash": "85fc595a24aa27da779cd7e9c7f05a3d7a408e29f89c589dcd022f26ea34403b",
+      "en_hash": "3ffcf5b2809a49c015a04f03f370f66a15b29bf361d0f43b98fd5f1ff90e6191",
+      "accepted_on": "2026-09-21",
       "changed_languages": [
         "pt",
         "en"
