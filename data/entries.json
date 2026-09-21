@@ -1668,7 +1668,7 @@
         "en": "Column \"Prateleira Cultural\" - Sinal Verde Magazine"
       },
       "summary": {
-        "pt": "Entre 2003 e 2006, Nicchio assinou regularmente a coluna Prateleira Cultural na revista Sinal Verde, além de publicar textos em outras seções. Ao todo, há aproximadamente vinte peças editoriais únicas desse período.",
+        "pt": "Entre 2003 e 2006, Nicchio assinou regularmente a coluna Prateleira Cultural na revista Sinal Verde, além de publicar textos em outras seções. Este arquivo reúne 22 textos autorais preservados desse período.",
         "en": "Between 2003 and 2006, Nicchio regularly wrote the Prateleira Cultural column for Sinal Verde magazine, while also publishing pieces in other sections. Altogether, the period comprises roughly twenty unique editorial pieces."
       },
       "topic_ids": [],
@@ -1703,8 +1703,12 @@
         ]
       },
       "chapter_page": {
-        "status": "pilot",
+        "status": "custom",
         "indexing": "noindex,follow",
+        "indexing_by_lang": {
+          "pt": "index,follow",
+          "en": "noindex,follow"
+        },
         "pt_path": "pt/comunicacao/prateleira-cultural-revista-sinal-verde/index.html",
         "en_path": "en/communication/prateleira-cultural-sinal-verde/index.html"
       }

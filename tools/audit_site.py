@@ -40,6 +40,7 @@ LAUNCH_INDEXABLE = {
     "pt/internet/cookieweb/index.html",
     "en/internet/cookieweb/index.html",
     "pt/comunicacao/folhateen-orfaos-do-rock/index.html",
+    "pt/comunicacao/prateleira-cultural-revista-sinal-verde/index.html",
     "en/communication/folhateen-orphans-of-rock/index.html",
     "pt/comunicacao/meia-noite-e-uns/index.html",
     "en/communication/meia-noite-e-uns/index.html",

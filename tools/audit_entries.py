@@ -16,7 +16,7 @@ TAGS = ROOT / "data" / "tags.json"
 SITEMAP = ROOT / "sitemap.xml"
 BASE_URL = "https://marcelonicchio.github.io/"
 ALLOWED_SOURCE_KINDS = {"reader-section", "fragment", "composite-reader-landmarks"}
-ALLOWED_PAGE_STATUS = {"pilot", "candidate", "none"}
+ALLOWED_PAGE_STATUS = {"pilot", "custom", "candidate", "none"}
 ALLOWED_INDEXING = {"index,follow", "noindex,follow", "none"}
 ALLOWED_READER_PRESENTATION = {"normal", "always-open", "featured"}
 ALLOWED_READER_SCOPES = {"vertical", "biography-only"}
@@ -290,6 +290,16 @@ def main() -> int:
             continue
         if indexing not in ALLOWED_INDEXING:
             errors.append(f"{entry_id}: unsupported Chapter Page indexing policy {indexing!r}")
+        indexing_by_lang = page.get("indexing_by_lang", {})
+        if indexing_by_lang is not None and not isinstance(indexing_by_lang, dict):
+            errors.append(f"{entry_id}: indexing_by_lang must be an object when present")
+            indexing_by_lang = {}
+        if isinstance(indexing_by_lang, dict):
+            for lang, policy in indexing_by_lang.items():
+                if lang not in {"pt", "en"}:
+                    errors.append(f"{entry_id}: unsupported indexing_by_lang key {lang!r}")
+                elif policy not in ALLOWED_INDEXING - {"none"}:
+                    errors.append(f"{entry_id}:{lang}: unsupported Chapter Page indexing override {policy!r}")
 
         if status == "none":
             if indexing != "none":
@@ -305,8 +315,8 @@ def main() -> int:
                     errors.append(f"{entry_id}:{lang}: candidate Chapter Page exists on disk before promotion: {rel}")
             continue
 
-        # status == pilot
-        if source_kind != "fragment":
+        # pilot pages are generator-owned; custom pages are hand-authored but still audited.
+        if status == "pilot" and source_kind != "fragment":
             errors.append(f"{entry_id}: pilot Chapter Page requires fragment source")
         for lang in ("pt", "en"):
             rel = page.get(f"{lang}_path")
@@ -315,11 +325,12 @@ def main() -> int:
                 continue
             path = ROOT / rel
             if not path.exists():
-                errors.append(f"{entry_id}:{lang}: pilot Chapter Page not generated: {rel}")
+                label = "pilot Chapter Page not generated" if status == "pilot" else "custom Chapter Page missing"
+                errors.append(f"{entry_id}:{lang}: {label}: {rel}")
                 continue
             soup = soup_for(rel, cache)
             robots = soup.find("meta", attrs={"name": "robots"})
-            expected_robots = indexing or "noindex,follow"
+            expected_robots = indexing_by_lang.get(lang, indexing or "noindex,follow")
             if robots is None or robots.get("content") != expected_robots:
                 errors.append(f"{entry_id}:{lang}: Chapter Page robots must be {expected_robots!r}")
 
@@ -353,7 +364,7 @@ def main() -> int:
 
             in_sitemap = expected_canonical in sitemap_text
             if expected_robots.startswith("noindex") and in_sitemap:
-                errors.append(f"{entry_id}:{lang}: noindex pilot Chapter Page must not be listed in sitemap")
+                errors.append(f"{entry_id}:{lang}: noindex Chapter Page must not be listed in sitemap")
 
             # Once a Chapter Page becomes indexable, search/crawlers must have normal static links to it.
             if expected_robots == "index,follow":
