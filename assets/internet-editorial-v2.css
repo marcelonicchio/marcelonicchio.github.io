@@ -16,7 +16,7 @@ body.vertical-internet .article-body > .internet-entry{
   border-top:1px solid rgba(255,255,255,.09);
   scroll-margin-top:100px;
 }
-body.vertical-internet .article-body > .internet-entry > .phase-year{
+body.vertical-internet .article-body > .internet-entry .phase-year{
   margin:46px 0 .58rem;
   color:var(--internet-signal);
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -26,7 +26,7 @@ body.vertical-internet .article-body > .internet-entry > .phase-year{
   text-transform:uppercase;
   font-weight:900;
 }
-body.vertical-internet .article-body > .internet-entry > .phase-year + h2{
+body.vertical-internet .article-body > .internet-entry .phase-year + h2{
   margin-top:0;
 }
 
@@ -39,7 +39,7 @@ body.vertical-internet :is(
   #clickland,
   #petlove,
   #best
-) > .phase-year{
+) .phase-year{
   margin-top:58px;
   font-size:1.34rem!important;
 }
@@ -158,7 +158,7 @@ body.vertical-internet .internet-entry > .inline-records:last-child{
 }
 
 @media(max-width:580px){
-  body.vertical-internet .article-body > .internet-entry > .phase-year{
+  body.vertical-internet .article-body > .internet-entry .phase-year{
     margin-top:38px;
     font-size:1.08rem!important;
     letter-spacing:.065em;
@@ -171,7 +171,7 @@ body.vertical-internet .internet-entry > .inline-records:last-child{
     #clickland,
     #petlove,
     #best
-  ) > .phase-year{
+  ) .phase-year{
     margin-top:46px;
     font-size:1.2rem!important;
   }
@@ -197,14 +197,14 @@ body.vertical-internet .internet-entry > .inline-records:last-child{
 
 
 /* Public hard guarantee — these are the visual invariants Marcelo approved in Music. */
-html body.vertical-internet .article-body > .internet-entry > .phase-year{
+html body.vertical-internet .article-body > .internet-entry .phase-year{
   color:#ff625c!important;
   font-size:1.18rem!important;
   line-height:1.1!important;
   letter-spacing:.075em!important;
   font-weight:900!important;
 }
-html body.vertical-internet .article-body > :is(#psinet,#mirantte,#sem,#cookieweb,#clickland,#petlove,#best) > .phase-year{
+html body.vertical-internet .article-body > :is(#psinet,#mirantte,#sem,#cookieweb,#clickland,#petlove,#best) .phase-year{
   font-size:1.34rem!important;
 }
 html body.vertical-internet .record-gallery__item{
@@ -221,10 +221,10 @@ html body.vertical-internet .internet-entry .evidence-links > a{
   border-radius:8px!important;
 }
 @media(max-width:580px){
-  html body.vertical-internet .article-body > .internet-entry > .phase-year{
+  html body.vertical-internet .article-body > .internet-entry .phase-year{
     font-size:1.08rem!important;
   }
-  html body.vertical-internet .article-body > :is(#psinet,#mirantte,#sem,#cookieweb,#clickland,#petlove,#best) > .phase-year{
+  html body.vertical-internet .article-body > :is(#psinet,#mirantte,#sem,#cookieweb,#clickland,#petlove,#best) .phase-year{
     font-size:1.2rem!important;
   }
   html body.vertical-internet .record-gallery__item{
