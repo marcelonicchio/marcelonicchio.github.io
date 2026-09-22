@@ -14,3 +14,9 @@
 .entry-page-body .page-tools{margin-top:44px}
 @media(max-width:640px){.entry-page-hero .entry-breadcrumbs{margin-bottom:17px}.entry-breadcrumbs{font-size:.74rem}.entry-topic-row{margin-top:14px}}
 @media print{.entry-breadcrumbs,.entry-topic-row{display:none}.entry-page-shell,.entry-page-body{max-width:none}}
+
+/* Album archive extensions — full players live on standalone album pages. */
+.entry-page-body .album-audio-library{margin-top:38px;scroll-margin-top:96px}
+.entry-page-body .album-audio-library__bonus{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,98,92,.38)}
+.entry-page-body .album-audio-library__bonus .video-library__label strong{color:#ff625c}
+@media(max-width:580px){.entry-page-body .album-audio-library{margin-top:30px;scroll-margin-top:78px}}
