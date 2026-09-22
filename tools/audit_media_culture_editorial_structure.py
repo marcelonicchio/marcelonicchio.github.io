@@ -15,8 +15,16 @@ EXPECTED_IDS = {
     "en": ["bbs","radio","homens","film","folha","sinal-verde","meia-noite","architect","autopsia"],
 }
 CONTEXT = {
-    "pt": {"themes":"temas","names":"nomes","theme_label":"MÚSICA"},
-    "en": {"themes":"themes","names":"names","theme_label":"MUSIC"},
+    "pt": {
+        "themes":"temas",
+        "names":"nomes",
+        "theme_labels":["MÚSICA","CINEMA/TV","DIGITAL","REPORTAGEM"],
+    },
+    "en": {
+        "themes":"themes",
+        "names":"names",
+        "theme_labels":["MUSIC","FILM/TV","DIGITAL","REPORTING"],
+    },
 }
 CSS = "/assets/media-culture-editorial.css?v=20260922-v1"
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
@@ -68,13 +76,23 @@ def audit(lang: str, path: Path):
     names = article.select_one(f"section#{context['names']}")
     if themes is None or names is None:
         raise AssertionError(f"{path.relative_to(ROOT)}: contextual sections missing")
-    themes_phase = direct_child(themes, cls="phase-year")
-    if themes_phase is None or themes_phase.get_text(" ", strip=True) != context["theme_label"]:
+    if direct_child(themes, cls="phase-year") is not None:
         raise AssertionError(
-            f"{path.relative_to(ROOT)}#{context['themes']}: topical label drifted"
+            f"{path.relative_to(ROOT)}#{context['themes']}: contextual section must not have a direct chronology date"
         )
-    if YEAR_RE.search(themes_phase.get_text(" ", strip=True)):
-        raise AssertionError(f"{path.relative_to(ROOT)}#{context['themes']}: context label became chronological")
+    theme_labels = [
+        node.get_text(" ", strip=True)
+        for node in themes.select(".phase-list > .phase > .phase-year")
+    ]
+    if theme_labels != context["theme_labels"]:
+        raise AssertionError(
+            f"{path.relative_to(ROOT)}#{context['themes']}: topical labels drifted; "
+            f"expected={context['theme_labels']}, found={theme_labels}"
+        )
+    if any(YEAR_RE.search(label) for label in theme_labels):
+        raise AssertionError(
+            f"{path.relative_to(ROOT)}#{context['themes']}: topical labels must remain non-chronological"
+        )
     if direct_child(names, cls="phase-year") is not None:
         raise AssertionError(f"{path.relative_to(ROOT)}#{context['names']}: names context must remain undated")
 
