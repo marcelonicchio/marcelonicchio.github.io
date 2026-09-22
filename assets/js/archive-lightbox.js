@@ -123,8 +123,12 @@
 
   const open = (link) => {
     returnFocus = link;
+    const lightboxGroup = link.closest('[data-lightbox-group]');
     const gallery = link.closest('[data-gallery]');
-    if (gallery && link.classList.contains('record-gallery__item')) {
+    if (lightboxGroup) {
+      activeItems = [...lightboxGroup.querySelectorAll('a.record-gallery__item, a.inline-record')].filter((item) => isImage(item.href));
+      activeIndex = Math.max(0, activeItems.indexOf(link));
+    } else if (gallery && link.classList.contains('record-gallery__item')) {
       activeItems = [...gallery.querySelectorAll('a.record-gallery__item')].filter((item) => isImage(item.href));
       activeIndex = Math.max(0, activeItems.indexOf(link));
     } else {
