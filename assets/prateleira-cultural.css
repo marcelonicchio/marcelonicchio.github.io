@@ -314,3 +314,103 @@ body.prateleira-page .entry-page-shell{
 .prateleira-column__body em{
   color:var(--soft);
 }
+
+
+/* Prateleira facsimiles — original print paired with each transcription */
+.prateleira-column{
+  display:flow-root;
+}
+.prateleira-archive-facsimile-note{
+  max-width:70ch;
+  margin:.7rem 0 0;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.55;
+}
+.prateleira-facsimile{
+  float:right;
+  width:240px;
+  margin:.15rem 0 1.45rem 26px;
+  padding:10px 10px 9px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:rgba(255,255,255,.025);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+.prateleira-facsimile--pair{
+  width:320px;
+}
+.prateleira-facsimile__pages{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+.prateleira-facsimile--pair .prateleira-facsimile__pages{
+  grid-template-columns:1fr 1fr;
+}
+.prateleira-facsimile .record-gallery__item{
+  width:100%;
+  max-width:none;
+  flex:none;
+  aspect-ratio:auto;
+  border-radius:8px;
+  background:#050506;
+}
+.prateleira-facsimile .record-gallery__item img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  background:#050506;
+}
+.prateleira-facsimile figcaption{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  padding:9px 1px 0;
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.35;
+}
+.prateleira-facsimile figcaption strong{
+  color:var(--soft);
+  font-size:.76rem;
+  line-height:1.35;
+}
+.prateleira-facsimile figcaption span{
+  color:var(--prateleira-signal);
+  font-weight:760;
+}
+@media(max-width:680px){
+  .prateleira-facsimile,
+  .prateleira-facsimile--pair{
+    float:none;
+    width:min(100%,440px);
+    margin:18px auto 24px;
+    padding:10px;
+  }
+  .prateleira-facsimile--single .prateleira-facsimile__item{
+    width:min(72vw,320px);
+    margin-inline:auto;
+  }
+  .prateleira-facsimile--pair .prateleira-facsimile__pages{
+    grid-template-columns:1fr 1fr;
+  }
+  .prateleira-facsimile figcaption{
+    font-size:.74rem;
+  }
+}
+@media(max-width:420px){
+  .prateleira-facsimile--pair .prateleira-facsimile__pages{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+  }
+}
+@media print{
+  .prateleira-facsimile{
+    float:none;
+    width:220px;
+    margin:10px 0 18px;
+    break-inside:avoid;
+  }
+}
