@@ -120,15 +120,26 @@ def chapter_body(entry: dict[str, Any], lang: str) -> str:
     source_rel = entry["source"][f"{lang}_path"]
     raw = (ROOT / source_rel).read_text(encoding="utf-8").strip()
     if entry.get("reader_scope") != "biography-only":
-        return raw
-    soup = BeautifulSoup(raw, "html.parser")
-    section = soup.find("section")
-    if section is None:
-        raise RuntimeError(f"{entry['id']}:{lang}: biography-only source has no section")
-    heading = section.find("h2", recursive=False)
-    if heading is not None:
-        heading.decompose()
-    return section.decode_contents().strip()
+        body = raw
+    else:
+        soup = BeautifulSoup(raw, "html.parser")
+        section = soup.find("section")
+        if section is None:
+            raise RuntimeError(f"{entry['id']}:{lang}: biography-only source has no section")
+        heading = section.find("h2", recursive=False)
+        if heading is not None:
+            heading.decompose()
+        body = section.decode_contents().strip()
+
+    extension_rel = entry.get("chapter_page", {}).get("body_extension", {}).get(f"{lang}_path")
+    if extension_rel:
+        extension_path = ROOT / extension_rel
+        if not extension_path.exists():
+            raise RuntimeError(f"{entry['id']}:{lang}: missing Chapter Page body extension {extension_rel}")
+        extension = extension_path.read_text(encoding="utf-8").strip()
+        if extension:
+            body += "\n" + extension
+    return body
 
 
 def breadcrumbs(entry: dict[str, Any], lang: str, current_url: str) -> tuple[str, str]:
