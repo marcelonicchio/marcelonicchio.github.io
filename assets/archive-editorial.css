@@ -1,0 +1,45 @@
+/* Archive — historical preservation epigraph */
+body.vertical-archive .archive-epigraph{
+  margin:0 0 26px;
+  padding:2px 0 20px 22px;
+  border-left:3px solid var(--editorial-signal);
+  background:transparent;
+}
+body.vertical-archive .archive-epigraph p{
+  margin:0;
+  max-width:32ch;
+  color:var(--text);
+  font-size:clamp(1.34rem,2.6vw,1.86rem);
+  line-height:1.24;
+  letter-spacing:-.02em;
+  font-weight:720;
+}
+body.vertical-archive .archive-epigraph footer{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.5;
+}
+body.vertical-archive .archive-epigraph a{
+  color:var(--soft);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.26);
+}
+body.vertical-archive .archive-epigraph a:hover,
+body.vertical-archive .archive-epigraph a:focus-visible{
+  color:var(--text);
+  border-bottom-color:var(--editorial-signal);
+}
+@media(max-width:580px){
+  body.vertical-archive .archive-epigraph{
+    margin-bottom:22px;
+    padding-left:16px;
+  }
+  body.vertical-archive .archive-epigraph p{
+    font-size:1.3rem;
+    max-width:28ch;
+  }
+  body.vertical-archive .archive-epigraph footer{
+    font-size:.78rem;
+  }
+}
