@@ -275,3 +275,23 @@ body.vertical-media-culture .chapter > :is(.record-gallery,.video-library,.threa
     border-color:rgba(243,239,231,.60);
   }
 }
+
+
+/* Context theme list is categorical, not chronological. */
+body.vertical-media-culture .article-body > :is(#temas,#themes) .phase-list{
+  gap:0;
+  margin-top:24px;
+  border-top:1px solid rgba(255,255,255,.10);
+}
+body.vertical-media-culture .article-body > :is(#temas,#themes) .phase{
+  padding:18px 0;
+  border-top:0;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+body.vertical-media-culture .article-body > :is(#temas,#themes) .phase-year{
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.3;
+  letter-spacing:.12em;
+  font-weight:850;
+}
