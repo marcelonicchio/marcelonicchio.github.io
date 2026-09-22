@@ -205,7 +205,7 @@ async function assertInternetEditorialComputed(page) {
   const result = await page.evaluate(() => {
     const entries = [...document.querySelectorAll('article.article-body > .internet-entry')];
     const dates = entries.map((entry) => {
-      const node = entry.querySelector(':scope > .phase-year');
+      const node = [...entry.children].find((child) => child.classList.contains('phase-year')) || null;
       if (!node) return {id: entry.id, missing: true};
       const style = getComputedStyle(node);
       return {
