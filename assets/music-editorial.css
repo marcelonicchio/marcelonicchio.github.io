@@ -502,3 +502,37 @@
     border-color:rgba(243,239,231,.60);
   }
 }
+
+
+/* Music cross-list — Folhateen / Órfãos do Rock */
+.music-crosslist{
+  border-top-color:rgba(211,164,160,.20);
+}
+.music-crosslist > .phase-year{
+  margin-top:58px!important;
+  font-size:1.34rem!important;
+}
+.music-crosslist > .entry-discovery{
+  margin:0 0 16px;
+}
+.music-crosslist > .thread-media{
+  width:min(48%,420px);
+  margin-left:auto;
+  margin-right:auto;
+}
+.music-crosslist > p{
+  max-width:72ch;
+  line-height:1.75;
+}
+.music-crosslist .archive-reading-action{
+  margin-top:14px;
+}
+@media(max-width:580px){
+  .music-crosslist > .phase-year{
+    margin-top:46px!important;
+    font-size:1.2rem!important;
+  }
+  .music-crosslist > .thread-media{
+    width:100%;
+  }
+}
