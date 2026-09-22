@@ -1,0 +1,56 @@
+/* AI / HCI / HAI — research chronology layer
+   The three project entries are major research milestones, so their years use
+   the same stop-the-scroll hierarchy as major Music episodes. */
+
+body.vertical-ai{
+  --ai-signal:#ff625c;
+}
+
+body.vertical-ai .article-body > :is(#pro2,#pro1,#melissa) > .phase-year{
+  margin:58px 0 .58rem;
+  color:var(--ai-signal);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:1.34rem!important;
+  line-height:1.1;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+body.vertical-ai .article-body > :is(#pro2,#pro1,#melissa) > .phase-year + h2{
+  margin-top:0;
+}
+
+/* Detailed timing remains useful evidence, but the year above the title is now
+   the primary chronological signal. */
+body.vertical-ai .article-body > :is(#pro1,#melissa) > h2 + .meta:first-of-type{
+  margin:.35rem 0 1.05rem;
+  color:var(--muted);
+  font-family:inherit;
+  font-size:.88rem;
+  line-height:1.45;
+  letter-spacing:0;
+  font-weight:650;
+}
+
+/* Standalone-page titles must not change color just because they are links. */
+body.vertical-ai .article-body > :is(#pro2,#pro1,#melissa) > h2 > .entry-title-permalink{
+  color:var(--text);
+  text-decoration:none;
+}
+body.vertical-ai .article-body > :is(#pro2,#pro1,#melissa) > h2 > .entry-title-permalink:hover,
+body.vertical-ai .article-body > :is(#pro2,#pro1,#melissa) > h2 > .entry-title-permalink:focus-visible{
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.16em;
+}
+
+@media(max-width:580px){
+  body.vertical-ai .article-body > :is(#pro2,#pro1,#melissa) > .phase-year{
+    margin-top:46px;
+    font-size:1.2rem!important;
+    letter-spacing:.065em;
+  }
+  body.vertical-ai .article-body > :is(#pro1,#melissa) > h2 + .meta:first-of-type{
+    font-size:.84rem;
+  }
+}
