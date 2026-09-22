@@ -20,6 +20,7 @@ ALLOWED_PAGE_STATUS = {"pilot", "custom", "candidate", "none"}
 ALLOWED_INDEXING = {"index,follow", "noindex,follow", "none"}
 ALLOWED_READER_PRESENTATION = {"normal", "always-open", "featured"}
 ALLOWED_READER_SCOPES = {"vertical", "biography-only"}
+ALLOWED_DOMAINS = {"communication", "internet", "music", "hai", "context"}
 MAX_READER_PREVIEW_CHARS = 1650
 
 
@@ -128,6 +129,69 @@ def main() -> int:
         reader_scope = entry.get("reader_scope", "vertical")
         if reader_scope not in ALLOWED_READER_SCOPES:
             errors.append(f"{entry_id}: unsupported Reader scope {reader_scope!r}")
+
+        primary_domain = entry.get("domain")
+        if primary_domain not in ALLOWED_DOMAINS:
+            errors.append(f"{entry_id}: unsupported primary domain {primary_domain!r}")
+
+        contexts = entry.get("contexts", [primary_domain])
+        if not isinstance(contexts, list) or not contexts or not all(isinstance(item, str) for item in contexts):
+            errors.append(f"{entry_id}: contexts must be a non-empty list of domain ids")
+            contexts = [primary_domain]
+        elif len(contexts) != len(set(contexts)):
+            errors.append(f"{entry_id}: duplicate context domains")
+        for context in contexts:
+            if context not in ALLOWED_DOMAINS:
+                errors.append(f"{entry_id}: unsupported context domain {context!r}")
+        if primary_domain not in contexts:
+            errors.append(f"{entry_id}: primary domain must be included in contexts")
+
+        cross_listings = entry.get("cross_listings", {})
+        if cross_listings is not None and not isinstance(cross_listings, dict):
+            errors.append(f"{entry_id}: cross_listings must be an object when present")
+            cross_listings = {}
+        if isinstance(cross_listings, dict):
+            expected_secondary = set(contexts) - {primary_domain}
+            for lang in ("pt", "en"):
+                listings = cross_listings.get(lang, [])
+                if not isinstance(listings, list):
+                    errors.append(f"{entry_id}:{lang}: cross_listings must be a list")
+                    continue
+                listed_domains: set[str] = set()
+                for listing in listings:
+                    if not isinstance(listing, dict):
+                        errors.append(f"{entry_id}:{lang}: cross-listing must be an object")
+                        continue
+                    domain = listing.get("domain")
+                    path = listing.get("path")
+                    selector = listing.get("selector")
+                    summary = listing.get("summary")
+                    if domain not in expected_secondary:
+                        errors.append(
+                            f"{entry_id}:{lang}: cross-listing domain {domain!r} is not a registered secondary context"
+                        )
+                    if domain in listed_domains:
+                        errors.append(f"{entry_id}:{lang}: duplicate cross-listing domain {domain!r}")
+                    listed_domains.add(domain)
+                    if not isinstance(summary, str) or not summary.strip():
+                        errors.append(f"{entry_id}:{lang}: cross-listing requires a non-empty summary")
+                    try:
+                        node = select_one(path, selector, cache)
+                    except (FileNotFoundError, RuntimeError, TypeError) as exc:
+                        errors.append(f"{entry_id}:{lang}: invalid cross-listing target: {exc}")
+                        continue
+                    page_rel = entry.get("chapter_page", {}).get(f"{lang}_path")
+                    if page_rel:
+                        expected_href = public_path_for(page_rel)
+                        if node.select_one(f'a[href="{expected_href}"]') is None:
+                            errors.append(
+                                f"{entry_id}:{lang}: cross-listing target must link to canonical Chapter Page {expected_href!r}"
+                            )
+                if listed_domains != expected_secondary:
+                    errors.append(
+                        f"{entry_id}:{lang}: cross-listing domains {sorted(listed_domains)} "
+                        f"do not match secondary contexts {sorted(expected_secondary)}"
+                    )
 
         for lang in ("pt", "en"):
             if not entry.get("title", {}).get(lang, "").strip():
