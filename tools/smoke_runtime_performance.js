@@ -201,6 +201,57 @@ function warn(label, message) {
   console.log(`::warning title=Runtime performance ${label}::${message}`);
 }
 
+async function assertInternetEditorialComputed(page) {
+  const result = await page.evaluate(() => {
+    const entries = [...document.querySelectorAll('article.article-body > .internet-entry')];
+    const dates = entries.map((entry) => {
+      const node = entry.querySelector('.phase-year');
+      if (!node) return {id: entry.id, missing: true};
+      const style = getComputedStyle(node);
+      return {
+        id: entry.id,
+        color: style.color,
+        fontSize: parseFloat(style.fontSize),
+        fontWeight: parseInt(style.fontWeight, 10) || 0,
+      };
+    });
+
+    const loadedSheet = [...document.styleSheets]
+      .map((sheet) => sheet.href || '')
+      .some((href) => href.includes('/assets/internet-editorial-v2.css?v=20260922-hardfix1'));
+
+    const galleryItem = document.querySelector('.record-gallery__item');
+    const galleryStyle = galleryItem ? getComputedStyle(galleryItem) : null;
+
+    const action = document.querySelector('.internet-entry .inline-links > a:not(.inline-record), .internet-entry .evidence-links > a');
+    const actionStyle = action ? getComputedStyle(action) : null;
+
+    return {
+      loadedSheet,
+      dates,
+      galleryFlexBasis: galleryStyle ? galleryStyle.flexBasis : null,
+      actionBackground: actionStyle ? actionStyle.backgroundColor : null,
+      actionBorderRadius: actionStyle ? actionStyle.borderRadius : null,
+    };
+  });
+
+  assert(result.loadedSheet, 'Internet: cache-busted editorial stylesheet is not loaded');
+  assert(result.dates.length === 12, `Internet: expected 12 dated entries, found ${result.dates.length}`);
+  for (const item of result.dates) {
+    assert(!item.missing, `Internet #${item.id}: phase-year missing at runtime`);
+    assert(item.color === 'rgb(255, 98, 92)', `Internet #${item.id}: legacy date color still active (${item.color})`);
+    assert(item.fontSize >= 18, `Internet #${item.id}: legacy date size still active (${item.fontSize}px)`);
+    assert(item.fontWeight >= 800, `Internet #${item.id}: chronology weight too weak (${item.fontWeight})`);
+  }
+  assert(result.galleryFlexBasis === '210px', `Internet: gallery thumbnail layout is not V5 parity (${result.galleryFlexBasis})`);
+  if (result.actionBackground) {
+    assert(result.actionBackground !== 'rgba(0, 0, 0, 0)', 'Internet: media/action button background is still legacy transparent');
+    assert(result.actionBorderRadius === '8px', `Internet: action button radius is not V5 parity (${result.actionBorderRadius})`);
+  }
+  console.log('Internet computed-style parity OK: 12/12 chronology dates + gallery/action controls use the fresh V5 layer.');
+}
+
+
 async function probe(browser, config) {
   const context = await browser.newContext({viewport: config.viewport});
   const page = await context.newPage();
@@ -208,6 +259,8 @@ async function probe(browser, config) {
   await installObservers(page);
   await page.goto(`${BASE}${config.path}`, {waitUntil: 'networkidle'});
   await page.waitForTimeout(250);
+
+  if (config.path === '/pt/internet/') await assertInternetEditorialComputed(page);
 
   const initial = await snapshot(page);
   const latency = await readerLatencyProxy(page);
