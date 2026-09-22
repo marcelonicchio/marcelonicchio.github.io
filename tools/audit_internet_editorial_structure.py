@@ -26,6 +26,7 @@ EXPECTED_IDS = {
 }
 CLOSING_ID = {"pt": "continuidade", "en": "continuity"}
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+INTERNET_CSS = "/assets/internet-editorial.css?v=20260922-v1"
 
 
 def direct_child(section, tag=None, cls=None):
@@ -45,6 +46,12 @@ def audit(lang: str, path: Path):
     article = soup.select_one("article.article-body")
     if article is None:
         raise AssertionError(f"{path.relative_to(ROOT)}: article.article-body missing")
+
+    stylesheets = [node.get("href") for node in soup.select('link[rel="stylesheet"][href]')]
+    if INTERNET_CSS not in stylesheets:
+        raise AssertionError(
+            f"{path.relative_to(ROOT)}: dedicated Internet stylesheet missing: {INTERNET_CSS}"
+        )
 
     entries = []
     for section in article.find_all("section", class_="chapter", recursive=False):

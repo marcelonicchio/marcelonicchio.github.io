@@ -1,0 +1,192 @@
+/* Internet & Performance — editorial parity with Music V5
+   Dedicated layer: keep shared primitives in vertical-editorial.css and put
+   Internet-specific chronology/media hierarchy here. */
+
+body.vertical-internet{
+  --internet-signal:#ff625c;
+}
+
+/* Chronology: every Internet episode must stop the scroll like Music. */
+body.vertical-internet .article-body > .internet-entry{
+  padding-top:1px;
+  border-top:1px solid rgba(255,255,255,.09);
+  scroll-margin-top:100px;
+}
+body.vertical-internet .article-body > .internet-entry > .phase-year{
+  margin:46px 0 .58rem;
+  color:var(--internet-signal);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:1.18rem!important;
+  line-height:1.1;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+body.vertical-internet .article-body > .internet-entry > .phase-year + h2{
+  margin-top:0;
+}
+
+/* Promoted / document-rich milestones carry the stronger Music milestone size. */
+body.vertical-internet :is(
+  #psinet,
+  #mirantte,
+  #sem,
+  #cookieweb,
+  #clickland,
+  #petlove,
+  #best
+) > .phase-year{
+  margin-top:58px;
+  font-size:1.34rem!important;
+}
+
+/* Post titles remain one hierarchy whether or not they have a standalone URL. */
+body.vertical-internet .internet-entry > h2,
+body.vertical-internet .internet-entry > h2 > .entry-title-permalink{
+  color:var(--text);
+}
+body.vertical-internet .internet-entry > h2 > .entry-title-permalink{
+  text-decoration:none;
+}
+body.vertical-internet .internet-entry > h2 > .entry-title-permalink:hover,
+body.vertical-internet .internet-entry > h2 > .entry-title-permalink:focus-visible{
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.16em;
+}
+
+/* Gallery and media-category headings are the red editorial signal. */
+body.vertical-internet .record-gallery__head strong,
+body.vertical-internet .video-library__head strong{
+  color:var(--internet-signal);
+  font-size:.94rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+/* Documentary thumbnails: same scale language as the richer Music galleries. */
+body.vertical-internet .record-gallery__item{
+  flex-basis:210px;
+  border-radius:8px;
+}
+body.vertical-internet #mirantte .record-gallery__item{
+  flex-basis:196px;
+}
+
+/* Legacy inline records now read as documentary thumbnails, not old mini-cards. */
+body.vertical-internet .inline-records{
+  gap:16px;
+  margin:26px 0 12px;
+}
+body.vertical-internet .inline-record{
+  width:min(250px,100%);
+}
+body.vertical-internet .inline-record img{
+  max-height:220px;
+  border-radius:10px;
+  border-color:rgba(255,255,255,.12);
+  box-shadow:none;
+}
+body.vertical-internet .inline-record:hover img{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.34);
+  box-shadow:0 10px 24px rgba(0,0,0,.22);
+}
+body.vertical-internet .inline-record strong{
+  color:var(--text);
+  font-size:.88rem;
+  font-weight:800;
+}
+body.vertical-internet .inline-record small{
+  margin-top:4px;
+  color:var(--internet-signal);
+  font-size:.74rem;
+  line-height:1.3;
+  letter-spacing:.035em;
+  font-weight:820;
+}
+
+/* Text actions use the translucent Music V5 control language. */
+body.vertical-internet .internet-entry .inline-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0 8px;
+}
+body.vertical-internet .internet-entry .inline-links > a:not(.inline-record),
+body.vertical-internet .internet-entry .evidence-links > a{
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  padding:6px 11px;
+  border:1px solid rgba(243,239,231,.56);
+  border-radius:8px;
+  background:rgba(243,239,231,.105);
+  color:rgba(255,252,246,.98)!important;
+  font-size:.8rem;
+  line-height:1.3;
+  text-decoration:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 0 0 1px rgba(255,255,255,.018);
+}
+body.vertical-internet .internet-entry .inline-links > a:not(.inline-record):hover,
+body.vertical-internet .internet-entry .inline-links > a:not(.inline-record):focus-visible,
+body.vertical-internet .internet-entry .evidence-links > a:hover,
+body.vertical-internet .internet-entry .evidence-links > a:focus-visible{
+  background:rgba(243,239,231,.19);
+  border-color:rgba(255,255,255,.78);
+  color:#fffdf8!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 18px rgba(0,0,0,.22);
+}
+body.vertical-internet .thread-media-open{
+  color:#f1c5c1;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.22em;
+}
+
+/* Media remains attached to the episode it documents. */
+body.vertical-internet .internet-entry > .record-gallery:last-child,
+body.vertical-internet .internet-entry > .video-library:last-child,
+body.vertical-internet .internet-entry > .thread-media:last-child,
+body.vertical-internet .internet-entry > .inline-records:last-child{
+  margin-bottom:32px;
+}
+
+@media(max-width:580px){
+  body.vertical-internet .article-body > .internet-entry > .phase-year{
+    margin-top:38px;
+    font-size:1.08rem!important;
+    letter-spacing:.065em;
+  }
+  body.vertical-internet :is(
+    #psinet,
+    #mirantte,
+    #sem,
+    #cookieweb,
+    #clickland,
+    #petlove,
+    #best
+  ) > .phase-year{
+    margin-top:46px;
+    font-size:1.2rem!important;
+  }
+  body.vertical-internet .record-gallery__item,
+  body.vertical-internet #mirantte .record-gallery__item{
+    flex-basis:72vw;
+    max-width:330px;
+  }
+  body.vertical-internet .inline-record{
+    width:min(72vw,330px);
+  }
+  body.vertical-internet .inline-record img{
+    max-height:240px;
+  }
+  body.vertical-internet .internet-entry .inline-links > a:not(.inline-record),
+  body.vertical-internet .internet-entry .evidence-links > a{
+    min-height:40px;
+    padding:8px 11px;
+    background:rgba(243,239,231,.12);
+    border-color:rgba(243,239,231,.60);
+  }
+}
