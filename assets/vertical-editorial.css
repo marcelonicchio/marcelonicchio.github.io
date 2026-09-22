@@ -386,3 +386,84 @@ body.vertical-research .thread-media{
     font-size:1.02rem;
   }
 }
+
+
+/* Topical vertical parity — Music editorial V5
+   Communication, Internet and AI/HCI/HAI inherit the validated reading rhythm
+   and media-control language from Music without importing music-only exceptions. */
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .article-hero .hero-lead{
+  max-width:66ch;
+}
+
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .article-body > .chapter > p{
+  max-width:72ch;
+  line-height:1.75;
+}
+
+/* Paired documentary images should behave like one archival object. */
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .thread-media--pair .thread-media-pair__images{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+/* Media libraries use the same compact hierarchy and spacing validated in Music. */
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .video-library__group{
+  padding-top:6px;
+}
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .video-library__group + .video-library__group{
+  margin-top:12px;
+  padding-top:12px;
+}
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .video-library__head span{
+  font-size:.76rem;
+}
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .video-library .video-library__description{
+  font-size:.82rem!important;
+}
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .video-pill{
+  font-size:.8rem;
+}
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .video-pill:focus-visible{
+  outline:2px solid rgba(255,255,255,.82);
+  outline-offset:3px;
+}
+
+/* Evidence inserted inside an episode stays attached to the narrative instead of
+   reading as a visual ending. */
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .chapter > .video-library:has(+ p){
+  margin-top:22px;
+  margin-bottom:20px;
+}
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .chapter > .video-library:has(+ p) + p{
+  margin-top:20px;
+}
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .chapter > .record-gallery:last-child,
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .chapter > .video-library:last-child,
+:is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .chapter > .thread-media:last-child{
+  margin-bottom:32px;
+}
+
+/* AI/HCI/HAI uses dated meta lines rather than phase-year blocks; give those
+   dates the same stop-the-scroll weight as chronology in the other verticals. */
+body.vertical-ai .article-body > .chapter > .meta:first-of-type{
+  font-size:1.12rem;
+  letter-spacing:.055em;
+}
+
+/* Mobile fact cards and editorial signals match the proportions proven in Music. */
+@media(max-width:580px){
+  :is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .fact span{
+    font-size:.65rem;
+  }
+  :is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .fact strong{
+    font-size:.88rem;
+  }
+  :is(body.vertical-media-culture, body.vertical-internet, body.vertical-ai) .chapter > .video-library:has(+ p){
+    margin-top:20px;
+    margin-bottom:18px;
+  }
+  body.vertical-ai .article-body > .chapter > .meta:first-of-type{
+    font-size:1.04rem;
+  }
+}
