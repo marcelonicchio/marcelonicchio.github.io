@@ -1404,7 +1404,11 @@
         "status": "pilot",
         "indexing": "noindex,follow",
         "pt_path": "pt/musica/meu-querido-diario/index.html",
-        "en_path": "en/music/meu-querido-diario/index.html"
+        "en_path": "en/music/meu-querido-diario/index.html",
+        "body_extension": {
+          "pt_path": "content/chapter-supplements/pt/music-album-1997-audio.inc",
+          "en_path": "content/chapter-supplements/en/music-album-1997-audio.inc"
+        }
       }
     },
     {
@@ -1566,7 +1570,11 @@
         "status": "pilot",
         "indexing": "noindex,follow",
         "pt_path": "pt/musica/eu-nao-to-nem-ai/index.html",
-        "en_path": "en/music/eu-nao-to-nem-ai/index.html"
+        "en_path": "en/music/eu-nao-to-nem-ai/index.html",
+        "body_extension": {
+          "pt_path": "content/chapter-supplements/pt/music-album-1999-2000-audio.inc",
+          "en_path": "content/chapter-supplements/en/music-album-1999-2000-audio.inc"
+        }
       }
     },
     {
