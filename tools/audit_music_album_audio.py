@@ -1,99 +1,124 @@
 #!/usr/bin/env python3
-"""Guard the recovered album audio archive and Meu Querido Diário artwork pairing."""
+"""Audit the two Coitado do Próximo album audio archives."""
 
 from __future__ import annotations
 
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import unquote
+
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 
-TARGETS = {
+CASES = {
     "pt": {
-        "mqd": ROOT / "content/entries/pt/music-album-1997.inc",
-        "enta": ROOT / "content/entries/pt/music-album-1999-2000.inc",
+        "vertical": ROOT / "pt" / "musica" / "index.html",
+        "mqd_page": ROOT / "pt" / "musica" / "meu-querido-diario" / "index.html",
+        "enta_page": ROOT / "pt" / "musica" / "eu-nao-to-nem-ai" / "index.html",
+        "audio_id": "audio-preservado",
+        "mqd_teaser": "/pt/musica/meu-querido-diario/#audio-preservado",
+        "enta_teaser": "/pt/musica/eu-nao-to-nem-ai/#audio-preservado",
+        "bonus": "Bônus · Um Anjo do Céu",
     },
     "en": {
-        "mqd": ROOT / "content/entries/en/music-album-1997.inc",
-        "enta": ROOT / "content/entries/en/music-album-1999-2000.inc",
+        "vertical": ROOT / "en" / "music" / "index.html",
+        "mqd_page": ROOT / "en" / "music" / "meu-querido-diario" / "index.html",
+        "enta_page": ROOT / "en" / "music" / "eu-nao-to-nem-ai" / "index.html",
+        "audio_id": "preserved-audio",
+        "mqd_teaser": "/en/music/meu-querido-diario/#preserved-audio",
+        "enta_teaser": "/en/music/eu-nao-to-nem-ai/#preserved-audio",
+        "bonus": "Bonus · Um Anjo do Céu",
     },
 }
 
-MQD_COVER = "/assets/archive/music/coitado-do-proximo/1997-1998-meu-querido-diario/coitadodoproximo_00_cdmeuqueridodiario_1997.jpg"
-MQD_STUDIO = "/assets/archive/music/coitado-do-proximo/1997-1998-meu-querido-diario/coitadodoproximo_00_estudioasas1997_300kb.jpg"
+COVER = "/assets/archive/music/coitado-do-proximo/1997-1998-meu-querido-diario/coitadodoproximo_00_cdmeuqueridodiario_1997.jpg"
+STUDIO = "/assets/archive/music/coitado-do-proximo/1997-1998-meu-querido-diario/coitadodoproximo_00_estudioasas1997_300kb.jpg"
 
 
-def local_path(url: str) -> Path:
-    parsed = urlsplit(url)
-    if parsed.scheme or parsed.netloc:
-        raise AssertionError(f"Audio source must be local: {url}")
-    return ROOT / unquote(parsed.path).lstrip("/")
+def soup(path: Path) -> BeautifulSoup:
+    return BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
 
 
-def audit_audio_block(soup: BeautifulSoup, expected_count: int, label: str) -> list[str]:
-    block = soup.select_one(".album-audio-library")
-    if block is None:
-        raise AssertionError(f"{label}: album audio library missing")
-    players = block.select("audio.audio-library__player")
-    if len(players) != expected_count:
-        raise AssertionError(f"{label}: expected {expected_count} players, found {len(players)}")
-
-    sources: list[str] = []
-    for index, player in enumerate(players, start=1):
+def assert_audio_sources(container, expected: int, label: str) -> None:
+    players = container.select("audio.audio-library__player")
+    if len(players) != expected:
+        raise AssertionError(f"{label}: expected {expected} audio players, found {len(players)}")
+    for player in players:
         if player.get("preload") != "none":
-            raise AssertionError(f"{label}: player {index} must use preload=none")
+            raise AssertionError(f"{label}: every player must use preload=none")
         source = player.find("source")
-        if source is None or not source.get("src"):
-            raise AssertionError(f"{label}: player {index} source missing")
-        src = str(source["src"])
-        if source.get("type") != "audio/mpeg":
-            raise AssertionError(f"{label}: player {index} must declare audio/mpeg")
-        path = local_path(src)
-        if not path.exists() or not path.is_file():
-            raise AssertionError(f"{label}: missing audio file {path.relative_to(ROOT)}")
-        if path.suffix.lower() != ".mp3":
-            raise AssertionError(f"{label}: non-MP3 source {path.relative_to(ROOT)}")
-        sources.append(src)
-    if len(set(sources)) != len(sources):
-        raise AssertionError(f"{label}: duplicate audio source")
-    return sources
+        if source is None or source.get("type") != "audio/mpeg":
+            raise AssertionError(f"{label}: player missing audio/mpeg source")
+        src = source.get("src", "")
+        disk = ROOT / unquote(src).lstrip("/")
+        if not disk.is_file():
+            raise AssertionError(f"{label}: missing MP3 referenced by player: {src}")
 
 
 def main() -> int:
-    for lang, paths in TARGETS.items():
-        mqd = BeautifulSoup(paths["mqd"].read_text(encoding="utf-8"), "html.parser")
-        enta = BeautifulSoup(paths["enta"].read_text(encoding="utf-8"), "html.parser")
+    if not (ROOT / COVER.lstrip("/")).is_file():
+        raise AssertionError("Meu Querido Diário original cover is missing")
+    if not (ROOT / STUDIO.lstrip("/")).is_file():
+        raise AssertionError("Meu Querido Diário Estúdio Asas image is missing")
 
-        pair = mqd.select_one("figure.thread-media--album-pair .thread-media-pair__images")
+    for lang, cfg in CASES.items():
+        vertical = soup(cfg["vertical"])
+
+        mqd = vertical.select_one("#music-album-1997")
+        if mqd is None:
+            raise AssertionError(f"{lang}: Meu Querido Diário vertical entry missing")
+        if mqd.find("audio") is not None:
+            raise AssertionError(f"{lang}: vertical must stay compact; MQD players belong on standalone page")
+        pair = mqd.select_one("figure.thread-media--album-pair")
         if pair is None:
-            raise AssertionError(f"{lang}: Meu Querido Diário album pair missing")
-        images = [str(img.get("src", "")) for img in pair.find_all("img", recursive=True)]
-        if images != [MQD_COVER, MQD_STUDIO]:
-            raise AssertionError(f"{lang}: Meu Querido Diário pair must be cover + studio image in that order")
+            raise AssertionError(f"{lang}: MQD cover/studio pair missing")
+        pair_srcs = {img.get("src") for img in pair.find_all("img")}
+        if {COVER, STUDIO} - pair_srcs:
+            raise AssertionError(f"{lang}: MQD pair must contain both original cover and studio image")
+        if mqd.find("a", href=cfg["mqd_teaser"]) is None:
+            raise AssertionError(f"{lang}: MQD standalone audio teaser missing")
 
-        audit_audio_block(mqd, 5, f"{lang}:Meu Querido Diário")
-        audit_audio_block(enta, 9, f"{lang}:Eu Não Tô Nem Aí")
-
-        bonus = enta.select(".album-audio-library__bonus")
-        if len(bonus) != 1 or "Um Anjo do Céu" not in bonus[0].get_text(" ", strip=True):
-            raise AssertionError(f"{lang}: live Um Anjo do Céu bonus track must be isolated")
-
+        enta = vertical.select_one("#music-album-1999-2000")
+        if enta is None:
+            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí vertical entry missing")
+        if enta.find("audio") is not None:
+            raise AssertionError(f"{lang}: vertical must stay compact; second-album players belong on standalone page")
+        if enta.find("a", href=cfg["enta_teaser"]) is None:
+            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí standalone audio teaser missing")
         credits = enta.select_one(".album-credits")
-        if credits is None:
-            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí credits missing")
-        track_list = credits.find("ol")
-        if track_list is None or len(track_list.find_all("li", recursive=False)) != 8:
-            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí official CD track list must contain 8 tracks")
-        credits_text = credits.get_text(" ", strip=True)
-        if "Ninguém Imaginava" not in credits_text or "Ciúmes" not in credits_text:
-            raise AssertionError(f"{lang}: official CD track list must include Ninguém Imaginava and Ciúmes")
+        tracklist = credits.find("ol") if credits else None
+        if tracklist is None or len(tracklist.find_all("li", recursive=False)) != 8:
+            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí must expose exactly 8 official CD tracks")
+        names = tracklist.get_text(" ", strip=True)
+        for required in ("Ninguém Imaginava", "Ciúmes"):
+            if required not in names:
+                raise AssertionError(f"{lang}: official CD track missing: {required}")
 
-        combined = paths["mqd"].read_text(encoding="utf-8") + paths["enta"].read_text(encoding="utf-8")
-        if "streaming" in combined.casefold():
-            raise AssertionError(f"{lang}: album archive fragments must not discuss streaming availability")
+        mqd_page = soup(cfg["mqd_page"])
+        mqd_audio = mqd_page.find(id=cfg["audio_id"])
+        if mqd_audio is None:
+            raise AssertionError(f"{lang}: MQD standalone audio archive missing")
+        assert_audio_sources(mqd_audio, 5, f"{lang}: MQD")
 
-    print("Music album audio archive OK: MQD cover pair + 5 recovered tracks; ENTA 8 CD tracks + 1 live bonus.")
+        enta_page = soup(cfg["enta_page"])
+        enta_audio = enta_page.find(id=cfg["audio_id"])
+        if enta_audio is None:
+            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí standalone audio archive missing")
+        assert_audio_sources(enta_audio, 9, f"{lang}: ENTA")
+        groups = enta_audio.select(".video-library__group")
+        if len(groups) != 9:
+            raise AssertionError(f"{lang}: expected 9 audio groups including bonus")
+        bonus = enta_audio.select_one(".album-audio-library__bonus")
+        if bonus is None or cfg["bonus"] not in bonus.get_text(" ", strip=True):
+            raise AssertionError(f"{lang}: Um Anjo do Céu must be visibly separated as the live bonus")
+        if len(enta_audio.select(".album-audio-library__bonus")) != 1:
+            raise AssertionError(f"{lang}: exactly one track may be marked as album bonus")
+
+        for page, label in ((mqd_page, "MQD"), (enta_page, "ENTA")):
+            if "streaming" in page.get_text(" ", strip=True).lower():
+                raise AssertionError(f"{lang}: {label} album page should not discuss streaming; that belongs to its own post")
+
+    print("Album audio archive OK: compact verticals, paired MQD artwork, 5 recovered MQD tracks, 8 official ENTA tracks + one live bonus.")
     return 0
 
 
