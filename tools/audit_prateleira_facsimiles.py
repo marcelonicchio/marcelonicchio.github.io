@@ -67,11 +67,18 @@ def main() -> int:
         raise AssertionError("Only O Planeta Google should map to two scanned pages")
 
     for article_id, rows in grouped.items():
-        article = soup.select_one(f"article#{article_id}")
+        article = soup.find("article", id=article_id)
         if article is None:
             raise AssertionError(f"Missing article #{article_id}")
 
-        figure = article.select_one(":scope > figure.prateleira-facsimile")
+        figure = next(
+            (
+                child for child in article.children
+                if getattr(child, "name", None) == "figure"
+                and "prateleira-facsimile" in (child.get("class") or [])
+            ),
+            None,
+        )
         if figure is None:
             raise AssertionError(f"#{article_id}: facsimile figure missing")
 
