@@ -182,7 +182,9 @@ def main() -> int:
                         continue
                     summary_node = node.select_one("[data-cross-list-summary]")
                     visible_summary = " ".join(summary_node.stripped_strings) if summary_node is not None else ""
+                    visible_summary = re.sub(r"\s+([,.;:!?'’])", r"\1", visible_summary)
                     normalized_summary = " ".join(summary.split()) if isinstance(summary, str) else ""
+                    normalized_summary = re.sub(r"\s+([,.;:!?'’])", r"\1", normalized_summary)
                     if visible_summary != normalized_summary:
                         errors.append(
                             f"{entry_id}:{lang}: visible cross-list summary differs from registry"
