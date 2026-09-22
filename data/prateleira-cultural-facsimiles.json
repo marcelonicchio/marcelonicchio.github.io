@@ -1,0 +1,157 @@
+{
+  "updated": "2026-09-22",
+  "gallery_id": "prateleira-cultural",
+  "page": "pt/comunicacao/prateleira-cultural-revista-sinal-verde/index.html",
+  "note": "Editorial mapping supplied by Marcelo Nicchio. Photo 19 remains archive-only; O Planeta Google spans two scanned pages.",
+  "items": [
+    {
+      "photo": "1",
+      "gallery_item": "01",
+      "article_id": "desespero-2003",
+      "title": "Desespero"
+    },
+    {
+      "photo": "2",
+      "gallery_item": "02",
+      "article_id": "cidade-de-deus-2003",
+      "title": "Cidade de Deus chega às locadoras"
+    },
+    {
+      "photo": "3",
+      "gallery_item": "03",
+      "article_id": "ramones-2003",
+      "title": "Hey Ho – Let’s Go!!! Enfim Música!"
+    },
+    {
+      "photo": "4",
+      "gallery_item": "04",
+      "article_id": "vmb-2003",
+      "title": "VMB 2003 — Charlie Brown de novo!"
+    },
+    {
+      "photo": "5",
+      "gallery_item": "05",
+      "article_id": "panico-na-tv-2004",
+      "title": "A TV em estado de Pânico"
+    },
+    {
+      "photo": "6",
+      "gallery_item": "06",
+      "article_id": "paralisia-cultural-2004",
+      "title": "Paralisia cultural: você sofre desse mal?"
+    },
+    {
+      "photo": "7",
+      "gallery_item": "07",
+      "article_id": "orkut-2004",
+      "title": "Vitrine da Vida"
+    },
+    {
+      "photo": "8-1",
+      "gallery_item": "08",
+      "article_id": "planeta-google-2005",
+      "title": "O Planeta Google",
+      "page_part": 1,
+      "page_total": 2
+    },
+    {
+      "photo": "8-2",
+      "gallery_item": "09",
+      "article_id": "planeta-google-2005",
+      "title": "O Planeta Google",
+      "page_part": 2,
+      "page_total": 2
+    },
+    {
+      "photo": "9",
+      "gallery_item": "10",
+      "article_id": "lounge-2006",
+      "title": "Lounge"
+    },
+    {
+      "photo": "10",
+      "gallery_item": "11",
+      "article_id": "cantamos-a-bola-2004",
+      "title": "Cantamos a Bola!!"
+    },
+    {
+      "photo": "11",
+      "gallery_item": "12",
+      "article_id": "romeu-julieta-2005",
+      "title": "Romeu e Julieta"
+    },
+    {
+      "photo": "12",
+      "gallery_item": "13",
+      "article_id": "seu-jorge-2005",
+      "title": "Seu Jorge"
+    },
+    {
+      "photo": "13",
+      "gallery_item": "14",
+      "article_id": "kurt-cobain-2004",
+      "title": "10 anos sem Kurt"
+    },
+    {
+      "photo": "14",
+      "gallery_item": "15",
+      "article_id": "skype-parte-1",
+      "title": "Telefone é coisa do passado"
+    },
+    {
+      "photo": "15",
+      "gallery_item": "16",
+      "article_id": "domingo-ilegal-2003",
+      "title": "A Televisão e o Domingo Ilegal"
+    },
+    {
+      "photo": "16",
+      "gallery_item": "17",
+      "article_id": "encontros-de-natal-2003",
+      "title": "Encontros de Natal"
+    },
+    {
+      "photo": "17",
+      "gallery_item": "18",
+      "article_id": "matrix-2003",
+      "title": "Matrix Revolutions"
+    },
+    {
+      "photo": "18",
+      "gallery_item": "19",
+      "article_id": "365-2005",
+      "title": "Do nosso lado do rio"
+    },
+    {
+      "photo": "19",
+      "gallery_item": "20",
+      "article_id": null,
+      "title": "Galeria de Arte e Cafeteria",
+      "status": "archive-only"
+    },
+    {
+      "photo": "20",
+      "gallery_item": "21",
+      "article_id": "ondas-do-radio-2005",
+      "title": "Nas ondas do Rádio"
+    },
+    {
+      "photo": "21",
+      "gallery_item": "22",
+      "article_id": "mapas-sentimentais",
+      "title": "Os Mapas Sentimentais"
+    },
+    {
+      "photo": "22",
+      "gallery_item": "23",
+      "article_id": "rss-2005",
+      "title": "Sua vida vai mudar com o RSS!"
+    },
+    {
+      "photo": "23",
+      "gallery_item": "24",
+      "article_id": "skypeout-2004",
+      "title": "Telefone é coisa do passado — Parte 2"
+    }
+  ]
+}
