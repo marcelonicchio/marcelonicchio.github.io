@@ -61,6 +61,22 @@ def canonical(rel: str) -> str:
     return BASE + directory.lstrip("/")
 
 
+def public_path(rel: str) -> str:
+    directory = rel[:-10] if rel.endswith("index.html") else rel
+    return "/" + directory.lstrip("/")
+
+
+def cross_listing_links(entry: dict[str, Any], lang: str) -> str:
+    links: list[str] = []
+    prefix = "Ver em" if lang == "pt" else "View in"
+    for listing in entry.get("cross_listings", {}).get(lang, []):
+        domain = listing["domain"]
+        label = DOMAIN[domain][lang][0]
+        href = public_path(listing["path"]) + listing["selector"]
+        links.append(f'<a href="{href}">{html.escape(prefix + " " + label)}</a>')
+    return "".join(links)
+
+
 def nav(lang: str, counterpart: str) -> str:
     if lang == "pt":
         links = [
@@ -176,8 +192,10 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
         return_label = "Voltar à Biografia Completa" if lang == "pt" else "Back to Full Biography"
         page_tools = f'<div class="page-tools"><a href="{back_bio}{bio_anchor}">{html.escape(return_label)}</a></div>'
     else:
+        cross_links = cross_listing_links(entry, lang)
         page_tools = (
             f'<div class="page-tools"><a href="{domain_path}">{html.escape(vertical_label)}</a>'
+            f'{cross_links}'
             f'<a href="{back_bio}{bio_anchor}">{html.escape(full_bio_label)}</a></div>'
         )
     og = ""
