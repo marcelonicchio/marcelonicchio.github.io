@@ -1,4 +1,4 @@
-<div class="video-library audio-library album-audio-library" aria-label="Áudios preservados" aria-labelledby="music-album-2000-audio-title">
+<div id="audio-preservado" class="video-library audio-library album-audio-library" aria-label="Áudios preservados" aria-labelledby="music-album-2000-audio-title">
   <div class="video-library__head"><strong id="music-album-2000-audio-title">Áudio preservado · 9</strong><span>8 faixas do CD + 1 bônus ao vivo</span></div>
   <div class="video-library__group">
     <div class="video-library__label"><strong>01 · A Enchente</strong></div>
