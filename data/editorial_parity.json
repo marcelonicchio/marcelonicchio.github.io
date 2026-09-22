@@ -83,10 +83,10 @@
       ]
     },
     "music-album-1997": {
-      "revision": 7,
-      "pt_hash": "ecba4ed181daf5e6ea4d2c7c5107eeeef103dba44fe143d7599e8ce9b71d3229",
-      "en_hash": "5385878dee629d3bc06f0501a7dc1cbd1024ace4064effc3ee0de7d342a487f5",
-      "accepted_on": "2026-09-17",
+      "revision": 8,
+      "pt_hash": "04beadc8e4513c15cc4505fe3bb48275973f8869e0d7d5f171e5b4671d52ba42",
+      "en_hash": "666f53cbddcb382f64b8cb732435c50a449acdca159e9f81389d9b8b8058b55f",
+      "accepted_on": "2026-09-22",
       "changed_languages": [
         "pt",
         "en"
@@ -123,10 +123,10 @@
       ]
     },
     "music-album-1999-2000": {
-      "revision": 8,
-      "pt_hash": "49c980a1dd33c2a1d5f759157ad1e7e0649583d3f897be574a213f4889e5c719",
-      "en_hash": "cdf64661925d02fcd793143fa262d71917073f5c5adc87feb7c18a6babe1186a",
-      "accepted_on": "2026-09-18",
+      "revision": 9,
+      "pt_hash": "2d8fe2cd80f1d0b5c01e0a2926435a024498232186431a228a4f2aa98afdbc25",
+      "en_hash": "49a079fc90b064da428eb786787a7ff587f1654a60a351418cebaebbe010ca75",
+      "accepted_on": "2026-09-22",
       "changed_languages": [
         "pt",
         "en"
