@@ -280,8 +280,11 @@ def audit_html(errors: list[str], warnings: list[str]) -> dict[str, str]:
                 audit_local_reference(href, path, rel, errors, page_cache, label=f"hreflang {lang}")
 
         if rel in LAUNCH_INDEXABLE:
-            if "noindex" in robots:
-                errors.append(f"{rel}: launch-indexable page must not be noindex")
+            robots_tokens = {token.strip() for token in robots.split(",") if token.strip()}
+            if "index" not in robots_tokens or "noindex" in robots_tokens:
+                errors.append(f"{rel}: launch-indexable page must explicitly be index")
+            if "follow" not in robots_tokens or "nofollow" in robots_tokens:
+                errors.append(f"{rel}: launch-indexable page must explicitly be follow")
         elif rel != "404.html" and (rel.startswith("pt/") or rel.startswith("en/")):
             if "noindex" not in robots:
                 warnings.append(f"{rel}: non-launch thematic page is indexable; confirm this is intentional")

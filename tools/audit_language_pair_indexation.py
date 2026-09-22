@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Guard atomic PT/EN indexation and hreflang for main authority surfaces.
+"""Guard the explicit PT/EN indexing constitution for main authority surfaces.
 
 Chapter Page pairs already have registry/generator audits. This check focuses on
-hand-authored top-level language surfaces so a future promotion (especially Music
-or Internet) cannot accidentally move only one language, drift out of the sitemap,
-or break reciprocal hreflang/canonical relationships.
+hand-authored top-level language surfaces and encodes the site's current authority
+model so future edits cannot silently change index/follow state, sitemap membership,
+or reciprocal hreflang/canonical relationships.
 """
 
 from __future__ import annotations
@@ -19,16 +19,18 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://marcelonicchio.github.io"
 X_DEFAULT = BASE + "/"
 
+# Constitutional policy for the hand-authored PT/EN authority surfaces.
+# Format: (PT path, EN path, index disposition, link-follow disposition)
 PAIRS = [
-    ("pt/index.html", "en/index.html"),
-    ("pt/biografia/index.html", "en/biography/index.html"),
-    ("pt/musica/index.html", "en/music/index.html"),
-    ("pt/comunicacao/index.html", "en/communication/index.html"),
-    ("pt/internet/index.html", "en/internet/index.html"),
-    ("pt/ia-hai/index.html", "en/ai-hai/index.html"),
-    ("pt/projetos/index.html", "en/projects/index.html"),
-    ("pt/publicacoes/index.html", "en/publications/index.html"),
-    ("pt/arquivo/index.html", "en/archive/index.html"),
+    ("pt/index.html", "en/index.html", "index", "follow"),
+    ("pt/biografia/index.html", "en/biography/index.html", "noindex", "follow"),
+    ("pt/musica/index.html", "en/music/index.html", "index", "follow"),
+    ("pt/comunicacao/index.html", "en/communication/index.html", "index", "follow"),
+    ("pt/internet/index.html", "en/internet/index.html", "index", "follow"),
+    ("pt/ia-hai/index.html", "en/ai-hai/index.html", "index", "follow"),
+    ("pt/projetos/index.html", "en/projects/index.html", "noindex", "nofollow"),
+    ("pt/publicacoes/index.html", "en/publications/index.html", "index", "follow"),
+    ("pt/arquivo/index.html", "en/archive/index.html", "index", "follow"),
 ]
 
 
@@ -64,6 +66,15 @@ def disposition(robots: str) -> str:
     return "unspecified"
 
 
+def follow_disposition(robots: str) -> str:
+    tokens = {token.strip() for token in robots.split(",") if token.strip()}
+    if "nofollow" in tokens:
+        return "nofollow"
+    if "follow" in tokens:
+        return "follow"
+    return "unspecified"
+
+
 def sitemap_urls() -> set[str]:
     tree = ET.parse(ROOT / "sitemap.xml")
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
@@ -92,7 +103,7 @@ def main() -> int:
     sitemap = sitemap_urls()
     errors: list[str] = []
 
-    for pt_rel, en_rel in PAIRS:
+    for pt_rel, en_rel, expected_indexing, expected_follow in PAIRS:
         pt_url = page_url(pt_rel)
         en_url = page_url(en_rel)
         pt = page_state(pt_rel)
@@ -100,15 +111,29 @@ def main() -> int:
 
         pt_disposition = disposition(str(pt["robots"]))
         en_disposition = disposition(str(en["robots"]))
-        if pt_disposition != en_disposition:
+        pt_follow = follow_disposition(str(pt["robots"]))
+        en_follow = follow_disposition(str(en["robots"]))
+
+        if pt_disposition != expected_indexing:
             errors.append(
-                f"{pt_rel} / {en_rel}: PT/EN robots dispositions differ: "
-                f"{pt_disposition!r} vs {en_disposition!r}"
+                f"{pt_rel}: indexing constitution requires {expected_indexing!r}; "
+                f"found {pt_disposition!r}"
             )
-        if pt_disposition == "unspecified":
-            errors.append(f"{pt_rel}: robots must explicitly declare index or noindex")
-        if en_disposition == "unspecified":
-            errors.append(f"{en_rel}: robots must explicitly declare index or noindex")
+        if en_disposition != expected_indexing:
+            errors.append(
+                f"{en_rel}: indexing constitution requires {expected_indexing!r}; "
+                f"found {en_disposition!r}"
+            )
+        if pt_follow != expected_follow:
+            errors.append(
+                f"{pt_rel}: indexing constitution requires {expected_follow!r}; "
+                f"found {pt_follow!r}"
+            )
+        if en_follow != expected_follow:
+            errors.append(
+                f"{en_rel}: indexing constitution requires {expected_follow!r}; "
+                f"found {en_follow!r}"
+            )
 
         pt_in_sitemap = pt_url in sitemap
         en_in_sitemap = en_url in sitemap
@@ -149,8 +174,8 @@ def main() -> int:
         return 1
 
     print(
-        f"PT/EN main-surface authority audit passed: {len(PAIRS)} pairs have atomic "
-        "robots/sitemap state, self-canonical URLs and reciprocal hreflang."
+        f"PT/EN indexing constitution passed: {len(PAIRS)} pairs match their explicit "
+        "index/follow policy, sitemap state, self-canonical URLs and reciprocal hreflang."
     )
     return 0
 
