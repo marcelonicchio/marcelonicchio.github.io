@@ -112,6 +112,25 @@ def main() -> int:
                 f"expected={expected!r}, found={found!r}"
             )
 
+    ramones = soup.find("article", id="ramones-2003")
+    if ramones is None:
+        raise AssertionError("Ramones transcription missing")
+    folhateen_link = ramones.find(
+        "a",
+        href="/pt/comunicacao/folhateen-orfaos-do-rock/",
+    )
+    if folhateen_link is None or "Órfãos do Rock" not in folhateen_link.get_text(" ", strip=True):
+        raise AssertionError("Ramones transcription must cross-link to the Folhateen standalone page")
+
+    archive_intro = soup.select_one(".prateleira-archive-intro")
+    if archive_intro is None:
+        raise AssertionError("Prateleira archive intro missing")
+    intro_text = archive_intro.get_text(" ", strip=True)
+    if "serão normalizados" in intro_text:
+        raise AssertionError("Prateleira archive note still uses future-tense normalization wording")
+    if "foram normalizados" not in intro_text:
+        raise AssertionError("Prateleira archive note must describe normalization as completed")
+
     archive_gallery = soup.select_one('[data-gallery="prateleira-cultural"]')
     if archive_gallery is None:
         raise AssertionError("Top Prateleira archive carousel missing")
