@@ -180,6 +180,13 @@ def main() -> int:
                     except (FileNotFoundError, RuntimeError, TypeError) as exc:
                         errors.append(f"{entry_id}:{lang}: invalid cross-listing target: {exc}")
                         continue
+                    summary_node = node.select_one("[data-cross-list-summary]")
+                    visible_summary = " ".join(summary_node.stripped_strings) if summary_node is not None else ""
+                    normalized_summary = " ".join(summary.split()) if isinstance(summary, str) else ""
+                    if visible_summary != normalized_summary:
+                        errors.append(
+                            f"{entry_id}:{lang}: visible cross-list summary differs from registry"
+                        )
                     page_rel = entry.get("chapter_page", {}).get(f"{lang}_path")
                     if page_rel:
                         expected_href = public_path_for(page_rel)
