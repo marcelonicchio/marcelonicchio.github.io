@@ -1,0 +1,247 @@
+/* Full Biography — compact editorial system
+   The biography carries 45 chronological entries + 5 context entries, so it
+   adopts the Music V5 signal language at lower density rather than copying the
+   vertical scale literally. */
+
+body.full-biography-page{
+  --bio-signal:#ff625c;
+}
+
+/* The archive needs tighter titles and reading width than thematic verticals. */
+body.full-biography-page .article-body > .bio-entry{
+  padding-bottom:48px;
+  margin-bottom:14px;
+}
+body.full-biography-page .article-body > .bio-entry > h2{
+  margin-top:0;
+  margin-bottom:.62em;
+  font-size:clamp(1.75rem,3vw,2.45rem);
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+body.full-biography-page .article-body > .bio-entry > p{
+  max-width:72ch;
+  line-height:1.72;
+}
+body.full-biography-page .bio-entry > h2 > .entry-title-permalink{
+  color:var(--text);
+  text-decoration:none;
+}
+body.full-biography-page .bio-entry > h2 > .entry-title-permalink:hover,
+body.full-biography-page .bio-entry > h2 > .entry-title-permalink:focus-visible{
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.16em;
+}
+
+/* Chronological meta: date is the red stop-the-scroll signal; domain stays quiet.
+   Context entries contain only one span, so they remain domain labels. */
+body.full-biography-page .bio-entry-meta{
+  gap:.42rem .68rem;
+  margin:0 0 .58rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.075em;
+  font-weight:850;
+}
+body.full-biography-page .bio-entry-meta span:first-child:not(:last-child){
+  color:var(--bio-signal);
+  font-size:1.02rem;
+}
+body.full-biography-page .bio-entry-meta span:last-child{
+  color:var(--muted);
+  font-size:.7rem;
+}
+body.full-biography-page .bio-entry-meta span + span::before{
+  color:rgba(255,255,255,.20);
+}
+
+/* Era breaks carry chronology, but at a lower level than individual entry dates. */
+body.full-biography-page .bio-era-break{
+  margin:5rem 0 1.55rem;
+  padding-top:1.15rem;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+body.full-biography-page .bio-era-break > span{
+  color:var(--bio-signal);
+  font-size:.8rem;
+  font-weight:900;
+  letter-spacing:.11em;
+}
+body.full-biography-page .bio-era-break > strong{
+  margin-top:.18rem;
+  font-size:1.12rem;
+}
+body.full-biography-page .bio-context-break{
+  margin-top:5rem;
+  border-top-color:rgba(255,255,255,.14);
+}
+body.full-biography-page .bio-context-break > span{
+  color:var(--muted);
+}
+
+/* Media category labels use the current red signal, but controls remain neutral. */
+body.full-biography-page .record-gallery__head{
+  padding:0 0 10px;
+  margin-bottom:13px;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.11);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.full-biography-page .record-gallery__head strong,
+body.full-biography-page .video-library__head strong,
+body.full-biography-page .record-media-block__head span{
+  color:var(--bio-signal);
+  font-weight:900;
+  text-transform:uppercase;
+}
+body.full-biography-page .record-gallery__head strong,
+body.full-biography-page .video-library__head strong{
+  font-size:.9rem;
+  letter-spacing:.09em;
+}
+body.full-biography-page .record-media-block__head span{
+  font-size:.78rem;
+  letter-spacing:.105em;
+}
+
+/* Slightly smaller than thematic verticals: this page can carry hundreds of images. */
+body.full-biography-page .record-gallery__item{
+  flex-basis:180px;
+  border-radius:8px;
+}
+
+/* Documentary records are visually consistent without becoming large cards. */
+body.full-biography-page .inline-records{
+  gap:14px;
+  margin:24px 0 10px;
+}
+body.full-biography-page .inline-record{
+  width:min(230px,100%);
+}
+body.full-biography-page .inline-record img{
+  max-height:205px;
+  border-radius:9px;
+  border-color:rgba(255,255,255,.12);
+  box-shadow:none;
+}
+body.full-biography-page .inline-record:hover img{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.34);
+  box-shadow:0 10px 24px rgba(0,0,0,.20);
+}
+body.full-biography-page .inline-record strong{
+  color:var(--text);
+  font-size:.86rem;
+  font-weight:800;
+}
+body.full-biography-page .inline-record small{
+  color:var(--bio-signal);
+  font-size:.72rem;
+  font-weight:820;
+}
+
+/* Music-V5-style translucent media actions, scoped to the biography. */
+body.full-biography-page .video-pill,
+body.full-biography-page .record-media-block__links a,
+body.full-biography-page .bio-entry .inline-links > a:not(.inline-record),
+body.full-biography-page .bio-entry .evidence-links > a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:36px;
+  padding:6px 11px;
+  border:1px solid rgba(243,239,231,.54);
+  border-radius:8px;
+  background:rgba(243,239,231,.095);
+  color:rgba(255,252,246,.98)!important;
+  font-size:.78rem;
+  line-height:1.3;
+  font-weight:720;
+  text-decoration:none;
+  white-space:normal;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 0 0 1px rgba(255,255,255,.018);
+}
+body.full-biography-page .video-pill::before{
+  color:var(--bio-signal);
+  opacity:.96;
+}
+body.full-biography-page .video-pill:hover,
+body.full-biography-page .video-pill:focus-visible,
+body.full-biography-page .record-media-block__links a:hover,
+body.full-biography-page .record-media-block__links a:focus-visible,
+body.full-biography-page .bio-entry .inline-links > a:not(.inline-record):hover,
+body.full-biography-page .bio-entry .inline-links > a:not(.inline-record):focus-visible,
+body.full-biography-page .bio-entry .evidence-links > a:hover,
+body.full-biography-page .bio-entry .evidence-links > a:focus-visible{
+  background:rgba(243,239,231,.18);
+  border-color:rgba(255,255,255,.76);
+  color:#fffdf8!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 6px 18px rgba(0,0,0,.20);
+}
+body.full-biography-page .thread-media-open,
+body.full-biography-page .archive-text-link{
+  color:#f1c5c1;
+  text-underline-offset:.22em;
+}
+
+/* Flatten the older Meia-Noite record block inside the integrated archive. */
+body.full-biography-page .record-media-block{
+  grid-template-columns:minmax(140px,.34fr) minmax(0,1fr);
+  gap:18px;
+  margin:28px 0 32px;
+  padding:14px 0;
+  border:0;
+  border-top:1px solid rgba(255,255,255,.10);
+  border-bottom:1px solid rgba(255,255,255,.10);
+  border-radius:0;
+  background:transparent;
+}
+
+/* Reader/disclosure machinery remains untouched; only surrounding entry rhythm changes. */
+body.full-biography-page .bio-entry > :is(.record-gallery,.video-library,.thread-media,.inline-records):last-child{
+  margin-bottom:28px;
+}
+
+@media(max-width:580px){
+  body.full-biography-page .article-body > .bio-entry{
+    padding-bottom:40px;
+    margin-bottom:8px;
+  }
+  body.full-biography-page .article-body > .bio-entry > h2{
+    font-size:clamp(1.62rem,8vw,2.05rem);
+  }
+  body.full-biography-page .bio-entry-meta span:first-child:not(:last-child){
+    font-size:.96rem;
+  }
+  body.full-biography-page .bio-entry-meta span:last-child{
+    font-size:.66rem;
+  }
+  body.full-biography-page .bio-era-break{
+    margin-top:4.1rem;
+  }
+  body.full-biography-page .record-gallery__item{
+    flex-basis:70vw;
+    max-width:315px;
+  }
+  body.full-biography-page .inline-record{
+    width:min(70vw,315px);
+  }
+  body.full-biography-page .record-media-block{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  body.full-biography-page .record-media-block__links{
+    justify-content:flex-start;
+  }
+  body.full-biography-page .video-pill,
+  body.full-biography-page .record-media-block__links a,
+  body.full-biography-page .bio-entry .inline-links > a:not(.inline-record),
+  body.full-biography-page .bio-entry .evidence-links > a{
+    min-height:40px;
+    padding:8px 11px;
+    background:rgba(243,239,231,.11);
+    border-color:rgba(243,239,231,.58);
+  }
+}
