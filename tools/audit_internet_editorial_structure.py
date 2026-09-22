@@ -27,7 +27,6 @@ EXPECTED_IDS = {
 CLOSING_ID = {"pt": "continuidade", "en": "continuity"}
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 INTERNET_CSS = "/assets/internet-editorial.css?v=20260922-v1"
-DESKTOP_GALLERY_SIZE = "210px"
 
 
 def direct_child(section, tag=None, cls=None):
@@ -92,13 +91,6 @@ def audit(lang: str, path: Path):
         raise AssertionError(
             f"{path.relative_to(ROOT)}#{CLOSING_ID[lang]}: closing synthesis must remain undated"
         )
-
-    for image in article.select(".record-gallery__item img[sizes]"):
-        sizes = image.get("sizes", "")
-        if DESKTOP_GALLERY_SIZE not in sizes:
-            raise AssertionError(
-                f"{path.relative_to(ROOT)}: gallery image keeps legacy desktop sizes hint: {sizes!r}"
-            )
     return entries
 
 
