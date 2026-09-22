@@ -375,6 +375,16 @@ html[lang^="en"] .record-gallery__head::after{content:"Browse the photos"}
 .thread-media-pair__open{display:flex;flex-wrap:wrap;gap:8px 16px}
 @media(max-width:580px){.thread-media--pair .thread-media-pair__images{grid-template-columns:1fr}}
 
+/* Album archive pair + recovered audio */
+.thread-media--album-pair{width:min(100%,760px);margin-left:auto;margin-right:auto}
+.thread-media--album-pair .thread-media-pair__images>a{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;background:#050506}
+.thread-media--album-pair .thread-media-pair__images img{width:100%;height:100%;object-fit:contain}
+.album-audio-library__bonus{margin-top:18px!important;padding-top:18px!important;border-top:1px solid rgba(211,164,160,.30)!important}
+.album-audio-library__bonus .video-library__label strong{color:var(--accent-soft)}
+@media(max-width:580px){
+  .thread-media--album-pair{width:100%}
+}
+
 
 
 /* Music / Coitado do Próximo: flat top-level entry hierarchy — 2026-09-16 */
