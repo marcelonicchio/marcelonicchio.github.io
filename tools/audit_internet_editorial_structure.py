@@ -26,7 +26,7 @@ EXPECTED_IDS = {
 }
 CLOSING_ID = {"pt": "continuidade", "en": "continuity"}
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
-INTERNET_CSS = "/assets/internet-editorial.css?v=20260922-v1"
+INTERNET_CSS = "/assets/internet-editorial-v2.css?v=20260922-hardfix1"
 
 
 def direct_child(section, tag=None, cls=None):
