@@ -511,6 +511,28 @@
         },
         "pt_path": "pt/comunicacao/folhateen-orfaos-do-rock/index.html",
         "en_path": "en/communication/folhateen-orphans-of-rock/index.html"
+      },
+      "contexts": [
+        "communication",
+        "music"
+      ],
+      "cross_listings": {
+        "pt": [
+          {
+            "domain": "music",
+            "path": "pt/musica/index.html",
+            "selector": "#music-folhateen-orfaos-2001",
+            "summary": "A matéria de capa publicada após a morte de Joey Ramone também pertence à linha musical de Marcelo Nicchio: Ramones estavam entre as influências declaradas do Coitado do Próximo, e sua participação na Folha registra uma leitura sobre punk, faça-você-mesmo e o underground brasileiro."
+          }
+        ],
+        "en": [
+          {
+            "domain": "music",
+            "path": "en/music/index.html",
+            "selector": "#music-folhateen-orphans-2001",
+            "summary": "The cover story published after Joey Ramone's death also belongs to Marcelo Nicchio's musical timeline: Ramones were among Coitado do Próximo's declared influences, and his appearance in Folha records his perspective on punk, DIY practice and Brazil's underground scene."
+          }
+        ]
       }
     },
     {
