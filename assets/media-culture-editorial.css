@@ -1,0 +1,277 @@
+/* Media & Culture — deep editorial parity with Music V5
+   This layer treats dated episodes as one chronology while keeping contextual
+   sections outside that hierarchy. */
+
+body.vertical-media-culture{
+  --media-culture-signal:#ff625c;
+}
+
+/* Nine dated episodes: one chronology, one visual grammar. */
+body.vertical-media-culture .article-body > :is(
+  #bbs,
+  #radio,
+  #homens,
+  #cinema,
+  #film,
+  #folha,
+  #sinal-verde,
+  #meia-noite,
+  #arquiteto,
+  #architect,
+  #autopsia
+){
+  padding-top:1px;
+  border-top:1px solid rgba(255,255,255,.09);
+  scroll-margin-top:100px;
+}
+body.vertical-media-culture .article-body > :is(
+  #bbs,
+  #radio,
+  #homens,
+  #cinema,
+  #film,
+  #folha,
+  #sinal-verde,
+  #meia-noite,
+  #arquiteto,
+  #architect,
+  #autopsia
+) > .phase-year{
+  margin:46px 0 .58rem;
+  color:var(--media-culture-signal);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:1.18rem!important;
+  line-height:1.1;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+body.vertical-media-culture .article-body > :is(
+  #bbs,
+  #radio,
+  #homens,
+  #cinema,
+  #film,
+  #folha,
+  #sinal-verde,
+  #meia-noite,
+  #arquiteto,
+  #architect,
+  #autopsia
+) > .phase-year + h2{
+  margin-top:0;
+}
+
+/* Archive-rich milestones receive the stronger Music milestone scale. */
+body.vertical-media-culture .article-body > :is(
+  #homens,
+  #folha,
+  #sinal-verde,
+  #meia-noite
+) > .phase-year{
+  margin-top:58px;
+  font-size:1.34rem!important;
+}
+
+/* Linked titles are still titles, not CTA-colored links. */
+body.vertical-media-culture .article-body > .chapter > h2 > .entry-title-permalink{
+  color:var(--text);
+  text-decoration:none;
+}
+body.vertical-media-culture .article-body > .chapter > h2 > .entry-title-permalink:hover,
+body.vertical-media-culture .article-body > .chapter > h2 > .entry-title-permalink:focus-visible{
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.16em;
+}
+
+/* “Temas preservados” is a context divider, not a dated episode. */
+body.vertical-media-culture .article-body > :is(#temas,#themes) > .phase-year{
+  margin:44px 0 .65rem;
+  color:var(--muted);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.8rem!important;
+  line-height:1.25;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:850;
+}
+body.vertical-media-culture .article-body > :is(#temas,#themes) > .phase-year + h2{
+  margin-top:0;
+}
+
+/* Gallery and video headings use the same red editorial signal as Music. */
+body.vertical-media-culture .record-gallery__head{
+  padding:0 0 10px;
+  margin-bottom:13px;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.11);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.vertical-media-culture .record-gallery__head strong,
+body.vertical-media-culture .video-library__head strong,
+body.vertical-media-culture .record-media-block__head span{
+  color:var(--media-culture-signal);
+  font-weight:900;
+  text-transform:uppercase;
+}
+body.vertical-media-culture .record-gallery__head strong{
+  font-size:.94rem;
+  letter-spacing:.085em;
+}
+body.vertical-media-culture .video-library__head strong{
+  font-size:.94rem;
+  letter-spacing:.095em;
+}
+body.vertical-media-culture .record-media-block__head span{
+  font-size:.82rem;
+  letter-spacing:.105em;
+}
+
+/* Documentary galleries: larger, calmer thumbnails across the whole vertical. */
+body.vertical-media-culture .record-gallery__item{
+  flex-basis:210px;
+  border-radius:8px;
+}
+
+/* Old inline-record blocks become documentary thumbnails rather than mini-cards. */
+body.vertical-media-culture .inline-records{
+  gap:16px;
+  margin:26px 0 12px;
+}
+body.vertical-media-culture .inline-record{
+  width:min(250px,100%);
+}
+body.vertical-media-culture .inline-record img{
+  max-height:220px;
+  border-radius:10px;
+  border-color:rgba(255,255,255,.12);
+  box-shadow:none;
+}
+body.vertical-media-culture .inline-record:hover img{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.34);
+  box-shadow:0 10px 24px rgba(0,0,0,.22);
+}
+body.vertical-media-culture .inline-record strong{
+  color:var(--text);
+  font-size:.88rem;
+  font-weight:800;
+}
+body.vertical-media-culture .inline-record small{
+  margin-top:4px;
+  color:var(--media-culture-signal);
+  font-size:.74rem;
+  line-height:1.3;
+  letter-spacing:.035em;
+  font-weight:820;
+}
+
+/* Meia-Noite’s legacy media card is flattened into the current editorial language. */
+body.vertical-media-culture .record-media-block{
+  grid-template-columns:minmax(150px,.36fr) minmax(0,1fr);
+  gap:20px;
+  margin:30px 0 34px;
+  padding:16px 0;
+  border:0;
+  border-top:1px solid rgba(255,255,255,.11);
+  border-bottom:1px solid rgba(255,255,255,.11);
+  border-radius:0;
+  background:transparent;
+}
+body.vertical-media-culture .record-media-block__head strong{
+  margin-top:5px;
+  color:var(--text);
+  font-size:1rem;
+}
+body.vertical-media-culture .record-media-block__links{
+  gap:8px;
+}
+body.vertical-media-culture .record-media-block__links a,
+body.vertical-media-culture .chapter .inline-links > a:not(.inline-record),
+body.vertical-media-culture .chapter .evidence-links > a{
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  padding:6px 11px;
+  border:1px solid rgba(243,239,231,.56);
+  border-radius:8px;
+  background:rgba(243,239,231,.105);
+  color:rgba(255,252,246,.98)!important;
+  font-size:.8rem;
+  line-height:1.3;
+  font-weight:720;
+  text-decoration:none;
+  white-space:normal;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 0 0 1px rgba(255,255,255,.018);
+}
+body.vertical-media-culture .record-media-block__links a:hover,
+body.vertical-media-culture .record-media-block__links a:focus-visible,
+body.vertical-media-culture .chapter .inline-links > a:not(.inline-record):hover,
+body.vertical-media-culture .chapter .inline-links > a:not(.inline-record):focus-visible,
+body.vertical-media-culture .chapter .evidence-links > a:hover,
+body.vertical-media-culture .chapter .evidence-links > a:focus-visible{
+  background:rgba(243,239,231,.19);
+  border-color:rgba(255,255,255,.78);
+  color:#fffdf8!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 18px rgba(0,0,0,.22);
+}
+
+/* Existing textual archive CTAs remain text actions; only sharpen hierarchy. */
+body.vertical-media-culture .archive-text-link{
+  color:#f1c5c1;
+  font-weight:800;
+}
+body.vertical-media-culture .thread-media-open{
+  color:#f1c5c1;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.22em;
+}
+
+/* Media stays visually attached to the episode it documents. */
+body.vertical-media-culture .chapter > :is(.record-gallery,.video-library,.thread-media,.inline-records):last-child{
+  margin-bottom:32px;
+}
+
+@media(max-width:580px){
+  body.vertical-media-culture .article-body > :is(
+    #bbs,#radio,#homens,#cinema,#film,#folha,#sinal-verde,#meia-noite,#arquiteto,#architect,#autopsia
+  ) > .phase-year{
+    margin-top:38px;
+    font-size:1.08rem!important;
+    letter-spacing:.065em;
+  }
+  body.vertical-media-culture .article-body > :is(#homens,#folha,#sinal-verde,#meia-noite) > .phase-year{
+    margin-top:46px;
+    font-size:1.2rem!important;
+  }
+  body.vertical-media-culture .record-gallery__item{
+    flex-basis:72vw;
+    max-width:330px;
+  }
+  body.vertical-media-culture .inline-record{
+    width:min(72vw,330px);
+  }
+  body.vertical-media-culture .inline-record img{
+    max-height:240px;
+  }
+  body.vertical-media-culture .record-media-block{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:14px 0;
+  }
+  body.vertical-media-culture .record-media-block__links{
+    justify-content:flex-start;
+  }
+  body.vertical-media-culture .record-media-block__links a,
+  body.vertical-media-culture .chapter .inline-links > a:not(.inline-record),
+  body.vertical-media-culture .chapter .evidence-links > a{
+    min-height:40px;
+    padding:8px 11px;
+    background:rgba(243,239,231,.12);
+    border-color:rgba(243,239,231,.60);
+  }
+}
