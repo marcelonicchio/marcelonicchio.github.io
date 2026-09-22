@@ -1,4 +1,4 @@
-<div class="video-library audio-library album-audio-library" aria-label="Preserved audio" aria-labelledby="music-album-1997-audio-title">
+<div id="preserved-audio" class="video-library audio-library album-audio-library" aria-label="Preserved audio" aria-labelledby="music-album-1997-audio-title">
   <div class="video-library__head"><strong id="music-album-1997-audio-title">Preserved audio · 5</strong><span>Meu Querido Diário · recovered tracks</span></div>
   <div class="video-library__group">
     <div class="video-library__label"><strong>01 · Estava Comigo</strong></div>
