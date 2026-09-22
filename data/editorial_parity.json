@@ -349,30 +349,30 @@
       "accepted_on": "2026-08-27"
     },
     "hai-melissa": {
-      "revision": 6,
-      "pt_hash": "23540067e814c2dd24cccbb94199a3277513ecd9e41b31c503dce2014ea4b435",
-      "en_hash": "cfb50c6fba3c1055c2fb798c7fbaf9934f8509b4301e8702f8df832181efb393",
-      "accepted_on": "2026-09-03",
+      "revision": 7,
+      "pt_hash": "28fdcb5aec92fed33ebb4d542855c1271101f5756a9445da336c11ea663fbc2b",
+      "en_hash": "8190e53dd781c8412c05ee462874dc44a050acec0d5cd5c6af64d33950a4b4b9",
+      "accepted_on": "2026-09-22",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "hai-pro1": {
-      "revision": 5,
-      "pt_hash": "0494e88aa99ffd78f9f4384b3ebf78db087cde320154336cf8e92559f3397b65",
-      "en_hash": "b7c0d7d03184101823534500e10392f33a85e91e15921d33cb6f5a10ef1e67c4",
-      "accepted_on": "2026-09-17",
+      "revision": 6,
+      "pt_hash": "6db2b043911eda623a311a657b9f5e2cdce59a4e4cf201cea2fce6884ce74942",
+      "en_hash": "3efea856347aa1e415ba21b939003824c5f330d9894534da700cd78b71fc65c0",
+      "accepted_on": "2026-09-22",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "hai-pro2": {
-      "revision": 4,
-      "pt_hash": "a9398b4cda30b1c084eed19d7dcf4b954a1eeb3903a575916d6714e048a57b93",
-      "en_hash": "7c2674415cce4958d58c47f30a48f9780e244bf7d74b32cc81eb5cac645133f8",
-      "accepted_on": "2026-09-17",
+      "revision": 5,
+      "pt_hash": "89c350be40aa74b194ca8d20870d6843c18ba36d3e2b00de5b1a0bf2fcb822b8",
+      "en_hash": "f00608749cd16108cd1a9638ffc0bf38303d5577683c0b03d961e59e17e0bc56",
+      "accepted_on": "2026-09-22",
       "changed_languages": [
         "pt",
         "en"
