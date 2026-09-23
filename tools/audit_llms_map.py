@@ -21,7 +21,7 @@ ENTRIES = ROOT / "data" / "entries.json"
 HOST = "marcelonicchio.com"
 BASE = f"https://{HOST}"
 
-URL_RE = re.compile(r"https://marcelonicchio\.github\.io(?:/[^\s)>,;]*)?")
+URL_RE = re.compile(rf"https://{re.escape(HOST)}(?:/[^\\s)>,;]*)?")
 
 
 def local_path(url: str) -> Path:
