@@ -14,8 +14,8 @@ from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = "https://marcelonicchio.github.io"
-SITE_HOST = "marcelonicchio.github.io"
+SITE = "https://marcelonicchio.com"
+SITE_HOST = "marcelonicchio.com"
 
 LAUNCH_INDEXABLE = {
     "index.html",
