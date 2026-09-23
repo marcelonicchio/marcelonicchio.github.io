@@ -8,8 +8,8 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-PERSON_ID = "https://marcelonicchio.github.io/#marcelo-nicchio"
-WEBSITE_ID = "https://marcelonicchio.github.io/#website"
+PERSON_ID = "https://marcelonicchio.com/#marcelo-nicchio"
+WEBSITE_ID = "https://marcelonicchio.com/#website"
 
 TARGETS = (
     "pt/ia-hai/index.html",

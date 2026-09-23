@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 SITEMAP = ROOT / "sitemap.xml"
-BASE = "https://marcelonicchio.github.io"
+BASE = "https://marcelonicchio.com"
 
 BIO = {
     "pt": "pt/biografia/index.html",

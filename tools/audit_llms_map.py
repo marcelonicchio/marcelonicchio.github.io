@@ -18,7 +18,7 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 LLMS = ROOT / "llms.txt"
 ENTRIES = ROOT / "data" / "entries.json"
-HOST = "marcelonicchio.github.io"
+HOST = "marcelonicchio.com"
 BASE = f"https://{HOST}"
 
 URL_RE = re.compile(r"https://marcelonicchio\.github\.io(?:/[^\s)>,;]*)?")
