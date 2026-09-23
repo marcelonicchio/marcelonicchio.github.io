@@ -1,5 +1,5 @@
 {
-  "person": "https://marcelonicchio.github.io/#marcelo-nicchio",
+  "person": "https://marcelonicchio.com/#marcelo-nicchio",
   "scope": "Selected lifetime chronology; not an exhaustive CV.",
   "events": [
     {"date":"1989-1990","domain":"music","event":"Played snare drum in the Mocidade Alegre samba-school percussion section.","evidence":"autobiographical"},
@@ -33,7 +33,7 @@
     {"date":"2023-2024","domain":"internet and performance","event":"Worked remotely at Driven.cx in a full-time agency operation.","evidence":"autobiographical"},
     {"date":"2023-12","domain":"music","event":"Coitado do Próximo reunited for a surprise performance at Cassasp.","evidence":"preserved video"},
     {"date":"2025","domain":"human-ai interaction","event":"Began the current independent Human–AI Interaction research cycle.","evidence":"research development chronology"},
-    {"date":"2026-01","domain":"human-ai interaction","event":"Published four Melissa 1.0 research works on Zenodo, each with its own DOI.","evidence":"public persistent records","url":"https://marcelonicchio.github.io/data/publications.json"},
+    {"date":"2026-01","domain":"human-ai interaction","event":"Published four Melissa 1.0 research works on Zenodo, each with its own DOI.","evidence":"public persistent records","url":"https://marcelonicchio.com/data/publications.json"},
     {"date":"2026-05","domain":"human-ai interaction","event":"Released The Punk Rock Orchestra v1, with instances on OSF, SSRN, Zenodo, PubPub and GitHub.","evidence":"public persistent records","url":"https://github.com/marcelonicchio/punk-rock-orchestra"},
     {"date":"2026","domain":"human-ai interaction","event":"Developing Punk Rock Orchestra v2 as the intended definitive version closing the current Melissa → PRO research cycle.","evidence":"work in progress","note":"No future DOI, repository deposit or formal publication is asserted until it exists publicly."}
   ]

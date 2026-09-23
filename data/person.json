@@ -1,16 +1,16 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "@id": "https://marcelonicchio.github.io/#marcelo-nicchio",
+  "@id": "https://marcelonicchio.com/#marcelo-nicchio",
   "name": "Marcelo Nicchio",
   "alternateName": [
     "Marcelo Henrique Nicchio",
     "Marcelo H. Nicchio",
     "Marcelo Minduim"
   ],
-  "url": "https://marcelonicchio.github.io/",
+  "url": "https://marcelonicchio.com/",
   "mainEntityOfPage": {
-    "@id": "https://marcelonicchio.github.io/#profile"
+    "@id": "https://marcelonicchio.com/#profile"
   },
   "description": "Brazilian independent researcher and creator with a trajectory across music, culture and audiovisual production, Internet, Search/Performance, Human-Computer Interaction (HCI) and Human–AI Interaction (HAI).",
   "identifier": [
@@ -57,34 +57,34 @@
   "subjectOf": [
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/pt/musica/",
+      "url": "https://marcelonicchio.com/pt/musica/",
       "inLanguage": "pt-BR"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/en/music/",
+      "url": "https://marcelonicchio.com/en/music/",
       "inLanguage": "en"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/pt/internet/",
+      "url": "https://marcelonicchio.com/pt/internet/",
       "inLanguage": "pt-BR"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/en/internet/",
+      "url": "https://marcelonicchio.com/en/internet/",
       "inLanguage": "en"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/pt/ia-hai/",
+      "url": "https://marcelonicchio.com/pt/ia-hai/",
       "inLanguage": "pt-BR"
     },
     {
       "@type": "WebPage",
-      "url": "https://marcelonicchio.github.io/en/ai-hai/",
+      "url": "https://marcelonicchio.com/en/ai-hai/",
       "inLanguage": "en"
     }
   ],
-  "image": "https://marcelonicchio.github.io/assets/img/marcelo-home-portrait.png"
+  "image": "https://marcelonicchio.com/assets/img/marcelo-home-portrait.png"
 }

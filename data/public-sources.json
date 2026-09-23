@@ -1,6 +1,6 @@
 {
-  "person": "https://marcelonicchio.github.io/#marcelo-nicchio",
-  "canonicalArchive": "https://marcelonicchio.github.io/pt/arquivo/",
+  "person": "https://marcelonicchio.com/#marcelo-nicchio",
+  "canonicalArchive": "https://marcelonicchio.com/pt/arquivo/",
   "sources": [
     {
       "date": "2000-07",
@@ -49,7 +49,7 @@
       "date": "2026",
       "type": "research-identity",
       "orcid": "https://orcid.org/0009-0002-5626-8973",
-      "publicationsData": "https://marcelonicchio.github.io/data/publications.json"
+      "publicationsData": "https://marcelonicchio.com/data/publications.json"
     }
   ],
   "scopeNote": "This file indexes selected public sources only. The private/preserved archive is intentionally not enumerated here when publication would create copyright, privacy or third-party-rights concerns."

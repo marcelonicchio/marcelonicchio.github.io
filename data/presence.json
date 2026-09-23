@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "person": "https://marcelonicchio.github.io/#marcelo-nicchio",
+  "person": "https://marcelonicchio.com/#marcelo-nicchio",
   "updated": "2026-08-25",
   "purpose": "Canonical registry for Marcelo Nicchio's external profiles and network presence. Used to keep site-wide footer links and identity data synchronized.",
   "profiles": [
