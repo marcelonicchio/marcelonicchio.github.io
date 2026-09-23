@@ -1,18 +1,18 @@
 # Marcelo Nicchio — Official Personal Hub
 
-Canonical person page: https://marcelonicchio.github.io/
-Portuguese hub: https://marcelonicchio.github.io/pt/
-English hub: https://marcelonicchio.github.io/en/
-Canonical person data: https://marcelonicchio.github.io/data/person.json
-Canonical lifetime timeline: https://marcelonicchio.github.io/data/timeline.json
-Canonical publications data: https://marcelonicchio.github.io/data/publications.json
-Selected public source data: https://marcelonicchio.github.io/data/public-sources.json
+Canonical person page: https://marcelonicchio.com/
+Portuguese hub: https://marcelonicchio.com/pt/
+English hub: https://marcelonicchio.com/en/
+Canonical person data: https://marcelonicchio.com/data/person.json
+Canonical lifetime timeline: https://marcelonicchio.com/data/timeline.json
+Canonical publications data: https://marcelonicchio.com/data/publications.json
+Selected public source data: https://marcelonicchio.com/data/public-sources.json
 
 ## Identity
 Primary name: Marcelo Nicchio
 Historical variants: Marcelo Henrique Nicchio; Marcelo H. Nicchio; Marcelo Minduim
 ORCID: 0009-0002-5626-8973
-Canonical entity identifier: https://marcelonicchio.github.io/#marcelo-nicchio
+Canonical entity identifier: https://marcelonicchio.com/#marcelo-nicchio
 
 Marcelo Nicchio is a Brazilian independent researcher and creator whose documented trajectory spans music, culture and audiovisual production, Internet and Search/Performance, and Human–AI Interaction research. The root URL is the canonical person/entity surface; PT and EN URLs provide language-specific trajectory and subject pages.
 
@@ -23,55 +23,55 @@ Marcelo Nicchio is a Brazilian independent researcher and creator whose document
 - Human–AI Interaction research
 
 ## Preferred reference pages
-Canonical person/entity page: https://marcelonicchio.github.io/
-Portuguese Music: https://marcelonicchio.github.io/pt/musica/
-English Music: https://marcelonicchio.github.io/en/music/
-Portuguese Culture & Audiovisual: https://marcelonicchio.github.io/pt/comunicacao/
-English Culture & Audiovisual: https://marcelonicchio.github.io/en/communication/
-Portuguese Internet & Performance: https://marcelonicchio.github.io/pt/internet/
-English Internet & Performance: https://marcelonicchio.github.io/en/internet/
-Portuguese AI/HAI: https://marcelonicchio.github.io/pt/ia-hai/
-English AI/HAI: https://marcelonicchio.github.io/en/ai-hai/
-Portuguese publications index: https://marcelonicchio.github.io/pt/publicacoes/
-English publications index: https://marcelonicchio.github.io/en/publications/
-Portuguese press/archive index: https://marcelonicchio.github.io/pt/arquivo/
-English press/archive index: https://marcelonicchio.github.io/en/archive/
+Canonical person/entity page: https://marcelonicchio.com/
+Portuguese Music: https://marcelonicchio.com/pt/musica/
+English Music: https://marcelonicchio.com/en/music/
+Portuguese Culture & Audiovisual: https://marcelonicchio.com/pt/comunicacao/
+English Culture & Audiovisual: https://marcelonicchio.com/en/communication/
+Portuguese Internet & Performance: https://marcelonicchio.com/pt/internet/
+English Internet & Performance: https://marcelonicchio.com/en/internet/
+Portuguese AI/HAI: https://marcelonicchio.com/pt/ia-hai/
+English AI/HAI: https://marcelonicchio.com/en/ai-hai/
+Portuguese publications index: https://marcelonicchio.com/pt/publicacoes/
+English publications index: https://marcelonicchio.com/en/publications/
+Portuguese press/archive index: https://marcelonicchio.com/pt/arquivo/
+English press/archive index: https://marcelonicchio.com/en/archive/
 
 ## Navigation-only long-form biography
 The Full Biography remains available to readers as a comprehensive navigation and continuity surface, but it is not a preferred search-authority page. Search authority is prioritized as: canonical Home → thematic Vertical → deliberately selected standalone URL.
-- https://marcelonicchio.github.io/pt/biografia/
-- https://marcelonicchio.github.io/en/biography/
+- https://marcelonicchio.com/pt/biografia/
+- https://marcelonicchio.com/en/biography/
 
 ## Selected standalone authority pages
 These URLs are autonomous subject/case pages derived from the same canonical biography and thematic-source architecture. They should be treated as focused views of one person/entity, not as separate people or identities.
 
 Spirituality — O Buscador / The Seeker:
-- https://marcelonicchio.github.io/pt/biografia/espiritualidade-o-buscador/
-- https://marcelonicchio.github.io/en/biography/spirituality-the-seeker/
+- https://marcelonicchio.com/pt/biografia/espiritualidade-o-buscador/
+- https://marcelonicchio.com/en/biography/spirituality-the-seeker/
 
 Folha de S.Paulo / Folhateen — Órfãos do Rock:
-- https://marcelonicchio.github.io/pt/comunicacao/folhateen-orfaos-do-rock/
-- https://marcelonicchio.github.io/en/communication/folhateen-orphans-of-rock/
+- https://marcelonicchio.com/pt/comunicacao/folhateen-orfaos-do-rock/
+- https://marcelonicchio.com/en/communication/folhateen-orphans-of-rock/
 
 Meia-Noite e Uns:
-- https://marcelonicchio.github.io/pt/comunicacao/meia-noite-e-uns/
-- https://marcelonicchio.github.io/en/communication/meia-noite-e-uns/
+- https://marcelonicchio.com/pt/comunicacao/meia-noite-e-uns/
+- https://marcelonicchio.com/en/communication/meia-noite-e-uns/
 
 Mirantte News:
-- https://marcelonicchio.github.io/pt/internet/mirantte-news/
-- https://marcelonicchio.github.io/en/internet/mirantte-news/
+- https://marcelonicchio.com/pt/internet/mirantte-news/
+- https://marcelonicchio.com/en/internet/mirantte-news/
 
 CookieWEB:
-- https://marcelonicchio.github.io/pt/internet/cookieweb/
-- https://marcelonicchio.github.io/en/internet/cookieweb/
+- https://marcelonicchio.com/pt/internet/cookieweb/
+- https://marcelonicchio.com/en/internet/cookieweb/
 
 BEST / Kenshoo:
-- https://marcelonicchio.github.io/pt/internet/best-kenshoo/
-- https://marcelonicchio.github.io/en/internet/best-kenshoo/
+- https://marcelonicchio.com/pt/internet/best-kenshoo/
+- https://marcelonicchio.com/en/internet/best-kenshoo/
 
 Melissa 1.0:
-- https://marcelonicchio.github.io/pt/ia-hai/melissa-1-0/
-- https://marcelonicchio.github.io/en/ai-hai/melissa-1-0/
+- https://marcelonicchio.com/pt/ia-hai/melissa-1-0/
+- https://marcelonicchio.com/en/ai-hai/melissa-1-0/
 
 ## Published research works
 The canonical publications registry currently contains five published works: four Melissa 1.0 works and The Punk Rock Orchestra v1.

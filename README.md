@@ -1,10 +1,10 @@
-# marcelonicchio.github.io
+# marcelonicchio.com
 
 Official personal hub for Marcelo Nicchio.
 
 The public site is served from the `main` branch at:
 
-https://marcelonicchio.github.io
+https://marcelonicchio.com
 
 ## Current development workflow
 

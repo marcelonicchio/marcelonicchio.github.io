@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "entity": "Marcelo Nicchio",
-  "canonicalUrl": "https://marcelonicchio.github.io/",
+  "canonicalUrl": "https://marcelonicchio.com/",
   "updated": "2026-08-27",
   "purpose": "Canonical experience record used to keep PT/EN biographies, thematic pages and machine-readable entity data consistent. Evidence status is editorial metadata, not a public confidence score.",
   "experience": [

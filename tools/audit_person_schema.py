@@ -21,15 +21,15 @@ ROOT_HTML = ROOT / "index.html"
 PERSON_JSON = ROOT / "data" / "person.json"
 LANGUAGE_HUBS = {
     "pt/index.html": {
-        "profile_id": "https://marcelonicchio.github.io/pt/#profile",
+        "profile_id": "https://marcelonicchio.com/pt/#profile",
         "language": "pt-BR",
     },
     "en/index.html": {
-        "profile_id": "https://marcelonicchio.github.io/en/#profile",
+        "profile_id": "https://marcelonicchio.com/en/#profile",
         "language": "en",
     },
 }
-WEBSITE_ID = "https://marcelonicchio.github.io/#website"
+WEBSITE_ID = "https://marcelonicchio.com/#website"
 
 
 def as_list(value: Any) -> list[Any]:
@@ -179,7 +179,7 @@ def main() -> int:
     website = exactly_one(graph, entity_id=WEBSITE_ID, entity_type="WebSite")
     profile = exactly_one(
         graph,
-        entity_id="https://marcelonicchio.github.io/#profile",
+        entity_id="https://marcelonicchio.com/#profile",
         entity_type="ProfilePage",
     )
 

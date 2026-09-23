@@ -22,7 +22,7 @@ from sync_presence import load_profiles, render_block as presence_block
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "entries.json"
 TAGS = ROOT / "data" / "tags.json"
-BASE = "https://marcelonicchio.github.io/"
+BASE = "https://marcelonicchio.com/"
 
 DOMAIN = {
     "communication": {

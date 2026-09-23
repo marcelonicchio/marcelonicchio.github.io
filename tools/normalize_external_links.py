@@ -4,7 +4,7 @@
 Rules:
 - Links to external http(s) hosts open in a new browsing context via target="_blank".
 - External links carry rel="noopener noreferrer" for safety/privacy.
-- Internal links to marcelonicchio.github.io retain normal same-tab navigation.
+- Internal links to marcelonicchio.com retain normal same-tab navigation.
 - The persistent ORCID shown in the root gateway is linked to the canonical ORCID URL.
 """
 from __future__ import annotations
@@ -14,7 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE_HOSTS = {"marcelonicchio.github.io"}
+SITE_HOSTS = {"marcelonicchio.com"}
 ORCID = "0009-0002-5626-8973"
 ORCID_URL = f"https://orcid.org/{ORCID}"
 

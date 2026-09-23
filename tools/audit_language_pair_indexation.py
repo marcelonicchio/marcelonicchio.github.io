@@ -16,7 +16,7 @@ from urllib.parse import urlsplit
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = "https://marcelonicchio.github.io"
+BASE = "https://marcelonicchio.com"
 X_DEFAULT = BASE + "/"
 
 # Constitutional policy for the hand-authored PT/EN authority surfaces.
