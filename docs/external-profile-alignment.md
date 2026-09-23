@@ -5,14 +5,14 @@ Internal working document for entity reconciliation.
 **Latest strategy update:** 5 Sep 2026 (BRT)  
 **Latest public recheck baseline:** 3–5 Sep 2026.
 
-The goal is not to make every external profile identical. The goal is to make name, chronology, URLs, research-version metadata, current positioning and public-contact exposure compatible with the canonical HUB, while creating legitimate inward links to `https://marcelonicchio.github.io/` where platforms permit them.
+The goal is not to make every external profile identical. The goal is to make name, chronology, URLs, research-version metadata, current positioning and public-contact exposure compatible with the canonical HUB, while creating legitimate inward links to `https://marcelonicchio.com/` where platforms permit them.
 
 ## Core rule
 
 External links must not be treated as decorative social icons only. Material external profiles/records should participate in a coherent entity graph:
 
 - preferred public name = Marcelo Nicchio;
-- official personal-site destination = `https://marcelonicchio.github.io/` where possible;
+- official personal-site destination = `https://marcelonicchio.com/` where possible;
 - chronology/current positioning compatible with the HUB;
 - exact publication titles and version relationships;
 - persistent identifiers connected accurately;
@@ -76,7 +76,7 @@ Canonical account:
 
 Priority repositories include:
 
-- `marcelonicchio.github.io`;
+- `marcelonicchio.com`;
 - `melissa-framework`;
 - `punk-rock-orchestra`.
 
