@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<!-- google-analytics:start -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MQPK9VX0MF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MQPK9VX0MF');
+</script>
+<!-- google-analytics:end -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ouvindo agora — integração Spotify | Marcelo Nicchio</title>
+  <meta name="description" content="Como funciona o status Ouvindo agora no HUB Marcelo Nicchio e quais dados da conta Spotify são usados.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://marcelonicchio.com/pt/spotify-status/">
+  <link rel="alternate" hreflang="pt-BR" href="https://marcelonicchio.com/pt/spotify-status/">
+  <link rel="alternate" hreflang="en" href="https://marcelonicchio.com/en/spotify-status/">
+  <link rel="alternate" hreflang="x-default" href="https://marcelonicchio.com/">
+  <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/mobile-nav.css?v=20260903-mobile1">
+</head>
+<body>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/" aria-label="Voltar à página inicial e seleção de idioma">Marcelo Nicchio</a><nav class="nav-links"><a href="/pt/biografia/">Biografia</a><a href="/pt/musica/">Música</a><a href="/pt/internet/">Internet &amp; Performance</a><a href="/pt/comunicacao/">Mídia & Cultura</a><a href="/pt/ia-hai/">IA/HCI/HAI</a><a href="/pt/projetos/">Projetos</a><a href="/pt/publicacoes/">Publicações</a><a href="/pt/arquivo/">Arquivo</a><a href="/en/spotify-status/">EN</a></nav></div></header>
+<main>
+<section class="article-hero"><div class="wrap"><div class="eyebrow">HUB · recurso ao vivo · Spotify</div><h1>Ouvindo agora</h1><p class="hero-lead">Um pequeno sinal de presença na Home: quando há reprodução ativa na conta Spotify de Marcelo Nicchio, o HUB pode mostrar a faixa ou episódio em tempo quase real.</p></div></section>
+<section class="section"><div class="wrap article-shell"><article class="article-body">
+<h2>O que aparece</h2>
+<p>Somente informações necessárias para identificar o item em reprodução: título, artista ou criador, álbum ou programa, capa fornecida pelo Spotify e link de retorno ao conteúdo no Spotify.</p>
+<h2>O que não acontece</h2>
+<p>O HUB não reproduz nem copia áudio do Spotify, não controla a reprodução, não expõe dispositivos e não cria um histórico público de audições. Quando não há reprodução ativa, o módulo da Home simplesmente não aparece.</p>
+<h2>Como a conexão funciona</h2>
+<p>A Home consulta um endpoint próprio do HUB. Esse endpoint acessa a API oficial do Spotify com autorização de leitura da própria conta de Marcelo. As credenciais privadas não ficam no código público do site; são mantidas como segredos no Cloudflare Worker, e o token de renovação fica armazenado em Workers KV.</p>
+<h2>Visitantes</h2>
+<p>Visitantes não conectam suas contas Spotify ao HUB e nenhum dado da conta Spotify do visitante é solicitado por esta integração. Ao abrir uma faixa pelo módulo, a navegação segue para o serviço Spotify.</p>
+<h2>Manutenção e desconexão</h2>
+<p>A autorização do Spotify tem duração limitada e precisa ser renovada periodicamente. Marcelo pode também desconectar a integração e apagar os tokens armazenados no Worker. A ausência de autorização faz apenas o módulo desaparecer; o restante do site continua independente dessa integração.</p>
+<div class="page-tools"><a href="/pt/">← Voltar à Home</a><a href="/en/spotify-status/">English version</a></div>
+</article></div></section>
+</main>
+<footer>
+<!-- presence:start -->
+  <div class="wrap presence-panel">
+    <div class="presence-head"><strong>Presença online</strong><span>Perfis, pesquisa, redes e arquivo</span></div>
+    <nav class="presence-links" aria-label="Perfis externos de Marcelo Nicchio">
+        <a class="presence-link" href="https://www.linkedin.com/in/marcelonicchio/" target="_blank" rel="me noopener noreferrer" data-label="LinkedIn" aria-label="LinkedIn — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#linkedin"></use></svg></a>
+        <a class="presence-link" href="https://medium.com/@marcelonicchio" target="_blank" rel="me noopener noreferrer" data-label="Medium" aria-label="Medium — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#medium"></use></svg></a>
+        <a class="presence-link" href="https://substack.com/@marcelonicchio" target="_blank" rel="me noopener noreferrer" data-label="Substack" aria-label="Substack — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#substack"></use></svg></a>
+        <a class="presence-link" href="https://x.com/marcelonicchio" target="_blank" rel="me noopener noreferrer" data-label="X" aria-label="X — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#x"></use></svg></a>
+        <a class="presence-link" href="https://www.facebook.com/marcelonicchio" target="_blank" rel="me noopener noreferrer" data-label="Facebook" aria-label="Facebook — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#facebook"></use></svg></a>
+        <a class="presence-link" href="https://www.instagram.com/marcelonicchio/" target="_blank" rel="me noopener noreferrer" data-label="Instagram" aria-label="Instagram — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#instagram"></use></svg></a>
+        <a class="presence-link" href="https://www.youtube.com/@MarceloNicchio" target="_blank" rel="me noopener noreferrer" data-label="YouTube" aria-label="YouTube — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#youtube"></use></svg></a>
+        <a class="presence-link" href="https://orcid.org/0009-0002-5626-8973" target="_blank" rel="me noopener noreferrer" data-label="ORCID" aria-label="ORCID — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#orcid"></use></svg></a>
+        <a class="presence-link" href="https://github.com/marcelonicchio" target="_blank" rel="me noopener noreferrer" data-label="GitHub" aria-label="GitHub — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#github"></use></svg></a>
+        <a class="presence-link" href="https://osf.io/user/b4y7r" target="_blank" rel="me noopener noreferrer" data-label="OSF" aria-label="OSF — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#osf"></use></svg></a>
+        <a class="presence-link" href="https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=11881088" target="_blank" rel="me noopener noreferrer" data-label="SSRN" aria-label="SSRN — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#ssrn"></use></svg></a>
+        <a class="presence-link" href="https://cv.hal.science/marcelonicchio" target="_blank" rel="me noopener noreferrer" data-label="HAL Science" aria-label="HAL Science — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#hal"></use></svg></a>
+        <a class="presence-link" href="https://www.pubpub.org/user/marcelo-nicchio" target="_blank" rel="me noopener noreferrer" data-label="PubPub" aria-label="PubPub — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#pubpub"></use></svg></a>
+        <a class="presence-link" href="https://independent.academia.edu/MarceloNicchio" target="_blank" rel="me noopener noreferrer" data-label="Academia.edu" aria-label="Academia.edu — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#academia"></use></svg></a>
+        <a class="presence-link" href="https://archive.org/details/@marcelo_nicchio" target="_blank" rel="me noopener noreferrer" data-label="Internet Archive" aria-label="Internet Archive — abre em nova aba"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/brand/social-sprite.svg#internetarchive"></use></svg></a>
+    </nav>
+  </div>
+<!-- presence:end --><div class="wrap footer-grid"><span><a href="/pt/">← Voltar ao hub</a></span><span><a href="/en/projects/">English version</a></span></div></footer>
+<script src="/assets/js/mobile-nav.js?v=20260903-mobile1" defer></script>
+</body></html>
