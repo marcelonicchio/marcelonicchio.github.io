@@ -349,7 +349,10 @@
       "title": {
         "pt": "Primeiro Álbum: Meu Querido Diário",
         "en": "First Album: Meu Querido Diário"
-      }
+      },
+      "exclude_selectors": [
+        ".album-audio-library"
+      ]
     },
     {
       "id": "audiovisual-homens",
@@ -429,7 +432,10 @@
       "title": {
         "pt": "Segundo Álbum: Eu Não Tô Nem Aí",
         "en": "Second Album: Eu Não Tô Nem Aí"
-      }
+      },
+      "exclude_selectors": [
+        ".album-audio-library"
+      ]
     },
     {
       "id": "internet-psinet",
