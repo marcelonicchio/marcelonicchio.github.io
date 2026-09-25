@@ -10,6 +10,8 @@ from typing import Any
 
 from bs4 import BeautifulSoup, Tag
 
+from sync_entries import render_vertical_fragment
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "entries.json"
 TAGS = ROOT / "data" / "tags.json"
@@ -340,8 +342,12 @@ def main() -> int:
                 match = pattern.search(text)
                 if match is None:
                     errors.append(f"{entry_id}:{lang}: thematic vertical is not managed by entry-source markers")
-                elif match.group(1).strip() != src.read_text(encoding="utf-8").strip():
-                    errors.append(f"{entry_id}:{lang}: thematic vertical body differs from neutral fragment")
+                else:
+                    expected_body = render_vertical_fragment(entry, lang).strip()
+                    if match.group(1).strip() != expected_body:
+                        errors.append(
+                            f"{entry_id}:{lang}: thematic vertical body differs from neutral fragment + declared vertical extension"
+                        )
 
         # Machine-derived media checks: registry stores associations/known counts, not duplicate DOM counts.
         if kind != "landmark-set":
