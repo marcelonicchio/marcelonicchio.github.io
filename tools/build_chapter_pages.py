@@ -38,8 +38,8 @@ DOMAIN = {
         "en": ("Music", "/en/music/"),
     },
     "hai": {
-        "pt": ("IA / HCI / HAI", "/pt/ia-hai/"),
-        "en": ("AI / HCI / HAI", "/en/ai-hai/"),
+        "pt": ("Pesquisa · HCI & Human-AI", "/pt/ia-hai/"),
+        "en": ("Research · HCI & Human-AI", "/en/ai-hai/"),
     },
     "context": {
         "pt": ("Biografia Completa", "/pt/biografia/"),
