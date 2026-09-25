@@ -98,7 +98,7 @@ def render_vertical_fragment(entry: dict[str, Any], lang: str) -> str:
     # Chapter-page supplements reuse generic anchors such as audio-preservado.
     # The Music vertical contains both albums, so make that first anchor unique.
     extension = re.sub(
-        r'(<div\\b[^>]*\\bid=")([^"]+)(")',
+        r'(<div\b[^>]*\bid=")([^"]+)(")',
         lambda match: f'{match.group(1)}{match.group(2)}-{entry["id"]}{match.group(3)}',
         extension,
         count=1,
@@ -111,12 +111,12 @@ def render_vertical_fragment(entry: dict[str, Any], lang: str) -> str:
         raise RuntimeError(f"{entry['id']}:{lang}: incomplete vertical extension CTA configuration")
 
     teaser_pattern = re.compile(
-        rf'<p\\b(?=[^>]*\\bclass="[^"]*\\b{re.escape(teaser_class)}\\b[^"]*")[^>]*>.*?</p>',
+        rf'<p\b(?=[^>]*\bclass="[^"]*\b{re.escape(teaser_class)}\b[^"]*")[^>]*>.*?</p>',
         flags=re.S | re.I,
     )
     replacement = (
         extension
-        + "\\n"
+        + "\n"
         + f'<p class="archive-reading-action {html.escape(teaser_class, quote=True)}">'
         + f'<a class="archive-text-link" href="{html.escape(cta["href"], quote=True)}">'
         + f'{html.escape(cta["label"])}</a></p>'
