@@ -84,7 +84,7 @@ def render_heading(heading_html: str, entry: dict[str, Any], lang: str) -> str:
 
 
 def render_vertical_fragment(entry: dict[str, Any], lang: str) -> str:
-    fragment = render_vertical_fragment(entry, lang)
+    fragment = fragment_path(entry, lang).read_text(encoding="utf-8").strip()
     cfg = entry.get("vertical_extension", {})
     raw_extension = cfg.get(f"{lang}_path")
     if not raw_extension:
