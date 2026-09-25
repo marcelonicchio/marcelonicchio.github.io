@@ -16,8 +16,8 @@ CASES = {
         "mqd_page": ROOT / "pt" / "musica" / "meu-querido-diario" / "index.html",
         "enta_page": ROOT / "pt" / "musica" / "eu-nao-to-nem-ai" / "index.html",
         "audio_id": "audio-preservado",
-        "mqd_teaser": "/pt/musica/meu-querido-diario/#audio-preservado",
-        "enta_teaser": "/pt/musica/eu-nao-to-nem-ai/#audio-preservado",
+        "mqd_page_link": "/pt/musica/meu-querido-diario/",
+        "enta_page_link": "/pt/musica/eu-nao-to-nem-ai/",
         "bonus": "Bônus · Um Anjo do Céu",
     },
     "en": {
@@ -25,8 +25,8 @@ CASES = {
         "mqd_page": ROOT / "en" / "music" / "meu-querido-diario" / "index.html",
         "enta_page": ROOT / "en" / "music" / "eu-nao-to-nem-ai" / "index.html",
         "audio_id": "preserved-audio",
-        "mqd_teaser": "/en/music/meu-querido-diario/#preserved-audio",
-        "enta_teaser": "/en/music/eu-nao-to-nem-ai/#preserved-audio",
+        "mqd_page_link": "/en/music/meu-querido-diario/",
+        "enta_page_link": "/en/music/eu-nao-to-nem-ai/",
         "bonus": "Bonus · Um Anjo do Céu",
     },
 }
@@ -67,24 +67,22 @@ def main() -> int:
         mqd = vertical.select_one("#music-album-1997")
         if mqd is None:
             raise AssertionError(f"{lang}: Meu Querido Diário vertical entry missing")
-        if mqd.find("audio") is not None:
-            raise AssertionError(f"{lang}: vertical must stay compact; MQD players belong on standalone page")
+        assert_audio_sources(mqd, 5, f"{lang}: MQD vertical")
         pair = mqd.select_one("figure.thread-media--album-pair")
         if pair is None:
             raise AssertionError(f"{lang}: MQD cover/studio pair missing")
         pair_srcs = {img.get("src") for img in pair.find_all("img")}
         if {COVER, STUDIO} - pair_srcs:
             raise AssertionError(f"{lang}: MQD pair must contain both original cover and studio image")
-        if mqd.find("a", href=cfg["mqd_teaser"]) is None:
-            raise AssertionError(f"{lang}: MQD standalone audio teaser missing")
+        if mqd.find("a", href=cfg["mqd_page_link"]) is None:
+            raise AssertionError(f"{lang}: MQD full-page link missing after inline audio")
 
         enta = vertical.select_one("#music-album-1999-2000")
         if enta is None:
             raise AssertionError(f"{lang}: Eu Não Tô Nem Aí vertical entry missing")
-        if enta.find("audio") is not None:
-            raise AssertionError(f"{lang}: vertical must stay compact; second-album players belong on standalone page")
-        if enta.find("a", href=cfg["enta_teaser"]) is None:
-            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí standalone audio teaser missing")
+        assert_audio_sources(enta, 9, f"{lang}: ENTA vertical")
+        if enta.find("a", href=cfg["enta_page_link"]) is None:
+            raise AssertionError(f"{lang}: Eu Não Tô Nem Aí full-page link missing after inline audio")
         credits = enta.select_one(".album-credits")
         tracklist = credits.find("ol") if credits else None
         if tracklist is None or len(tracklist.find_all("li", recursive=False)) != 8:
@@ -93,6 +91,9 @@ def main() -> int:
         for required in ("Ninguém Imaginava", "Ciúmes"):
             if required not in names:
                 raise AssertionError(f"{lang}: official CD track missing: {required}")
+        vertical_bonus = enta.select_one(".album-audio-library__bonus")
+        if vertical_bonus is None or cfg["bonus"] not in vertical_bonus.get_text(" ", strip=True):
+            raise AssertionError(f"{lang}: ENTA vertical must expose Um Anjo do Céu as the live bonus")
 
         mqd_page = soup(cfg["mqd_page"])
         mqd_audio = mqd_page.find(id=cfg["audio_id"])
@@ -118,7 +119,7 @@ def main() -> int:
             if "streaming" in page.get_text(" ", strip=True).lower():
                 raise AssertionError(f"{lang}: {label} album page should not discuss streaming; that belongs to its own post")
 
-    print("Album audio archive OK: compact verticals, paired MQD artwork, 5 recovered MQD tracks, 8 official ENTA tracks + one live bonus.")
+    print("Album audio archive OK: Music vertical exposes 5 MQD tracks and 8 ENTA tracks + one live bonus inline; standalone album pages preserve the same audio archive.")
     return 0
 
 
