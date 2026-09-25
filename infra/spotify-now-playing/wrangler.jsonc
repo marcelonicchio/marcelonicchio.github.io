@@ -3,15 +3,12 @@
   "name": "marcelonicchio-now-playing",
   "main": "src/index.js",
   "compatibility_date": "2026-09-25",
-  "workers_dev": true,
+  "workers_dev": false,
   "kv_namespaces": [
     {
       "binding": "SPOTIFY_STATE"
     }
   ],
-  "vars": {
-    "PUBLIC_ORIGIN": "https://marcelonicchio.com"
-  },
   "secrets": {
     "required": [
       "SPOTIFY_CLIENT_ID",
@@ -19,5 +16,11 @@
       "ADMIN_KEY",
       "STATE_SECRET"
     ]
-  }
+  },
+  "routes": [
+    {
+      "pattern": "now.marcelonicchio.com",
+      "custom_domain": true
+    }
+  ]
 }
