@@ -460,3 +460,28 @@ a.entry-discovery__badge:hover,a.entry-discovery__badge:focus-visible{background
 .archive-text-link:hover{color:var(--text);text-decoration-thickness:2px}
 .archive-text-link:focus-visible{outline:2px solid var(--accent-soft);outline-offset:5px;border-radius:2px}
 @media(pointer:coarse){a.entry-discovery__badge{min-height:44px}}
+
+
+/* Home · Spotify Now Playing */
+.now-playing-band{margin-top:-34px;padding:0 0 34px}
+.now-playing-card{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.014));text-decoration:none;transition:border-color .2s ease,transform .2s ease}
+.now-playing-card:hover{border-color:#49494d;transform:translateY(-1px)}
+.now-playing-art{display:block;width:72px;height:72px;object-fit:contain;border-radius:8px;background:#191414}
+.now-playing-copy{min-width:0;display:grid;gap:2px}
+.now-playing-kicker{display:flex;align-items:center;gap:7px;margin-bottom:3px;font-size:.68rem;line-height:1;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-soft);font-weight:820}
+.now-playing-pulse{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(211,164,160,.08)}
+.now-playing-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:1.02rem;letter-spacing:-.018em;color:var(--text)}
+.now-playing-creator,.now-playing-context{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.82rem}
+.now-playing-service{display:grid;justify-items:end;gap:5px;padding-left:18px;border-left:1px solid var(--line);white-space:nowrap}
+.spotify-attribution{font-weight:800;font-size:.88rem;color:var(--text)}
+.now-playing-action{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--accent-soft);font-weight:780}
+.now-playing-about{display:block;width:max-content;margin:7px 2px 0 auto;font-size:.68rem;color:var(--muted);text-decoration:none}
+.now-playing-about:hover{color:var(--text)}
+@media(max-width:580px){
+  .now-playing-band{margin-top:-30px;padding-bottom:28px}
+  .now-playing-card{grid-template-columns:58px minmax(0,1fr);gap:12px;padding:11px 12px}
+  .now-playing-art{width:58px;height:58px;border-radius:4px}
+  .now-playing-service{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:9px 0 0;border-left:0;border-top:1px solid var(--line)}
+  .now-playing-about{margin-right:2px}
+}
+@media(prefers-reduced-motion:reduce){.now-playing-card{transition:none!important}.now-playing-card:hover{transform:none!important}}
