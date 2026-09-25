@@ -145,7 +145,7 @@ def render_managed_section(text: str, entry: dict[str, Any], lang: str) -> str:
     if heading is None:
         raise RuntimeError(f"{entry_id}:{lang}: target section has no h2")
 
-    fragment = fragment_path(entry, lang).read_text(encoding="utf-8").strip()
+    fragment = render_vertical_fragment(entry, lang)
     prefix = inner[: heading.start()]
     rendered_heading = render_heading(heading.group(0), entry, lang)
     managed = (
