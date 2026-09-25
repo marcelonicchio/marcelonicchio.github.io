@@ -93,6 +93,8 @@ jobs:
           node --check assets/js/reader-disclosure-loader.js
           node --check assets/js/reader-disclosure.js
           node --check assets/js/root-language.js
+          node --check assets/js/now-playing.js
+          node --check infra/spotify-now-playing/src/index.js
           node --check tools/smoke_mobile_nav.js
           node --check tools/smoke_reader_ux.js
           node --check tools/smoke_reader_en_rich.js
@@ -126,5 +128,7 @@ jobs:
         run: python tools/audit_site.py
       - name: Audit site-wide external presence
         run: python tools/audit_presence.py
+      - name: Audit Spotify now-playing architecture
+        run: python tools/audit_spotify_now_playing.py
       - name: Audit Google Analytics installation
         run: python tools/audit_analytics.py
