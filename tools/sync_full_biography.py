@@ -17,7 +17,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data" / "full_biography.json"
@@ -69,6 +69,12 @@ def render_section(node: Tag, entry: dict[str, Any], lang: str, manifest: dict[s
     if section is None:
         raise RuntimeError(f"{entry['id']}: registered section source is not a section")
     section["id"] = f"bio-{entry['id']}"
+    for selector in entry.get("exclude_selectors", []):
+        for vertical_only in section.select(selector):
+            following = vertical_only.next_sibling
+            vertical_only.decompose()
+            if isinstance(following, NavigableString) and not str(following).strip():
+                following.extract()
     # Vertical-only layout classes must never leak into the Full Biography.
     classes = [cls for cls in section.get("class", []) if cls not in {"phase", "music-entry", "internet-entry"}]
     if "chapter" not in classes:

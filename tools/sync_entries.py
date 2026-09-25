@@ -10,6 +10,7 @@ and must be synchronized after this script.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import re
 from pathlib import Path
@@ -82,6 +83,50 @@ def render_heading(heading_html: str, entry: dict[str, Any], lang: str) -> str:
     return f'{opening}<a class="entry-title-permalink" href="{href}">{inner}</a>{closing}'
 
 
+def render_vertical_fragment(entry: dict[str, Any], lang: str) -> str:
+    fragment = fragment_path(entry, lang).read_text(encoding="utf-8").strip()
+    cfg = entry.get("vertical_extension", {})
+    raw_extension = cfg.get(f"{lang}_path")
+    if not raw_extension:
+        return fragment
+
+    extension_path = ROOT / raw_extension
+    if not extension_path.exists():
+        raise RuntimeError(f"{entry['id']}:{lang}: missing vertical extension {raw_extension}")
+    extension = extension_path.read_text(encoding="utf-8").strip()
+
+    # Chapter-page supplements reuse generic anchors such as audio-preservado.
+    # The Music vertical contains both albums, so make that first anchor unique.
+    extension = re.sub(
+        r'(<div\b[^>]*\bid=")([^"]+)(")',
+        lambda match: f'{match.group(1)}{match.group(2)}-{entry["id"]}{match.group(3)}',
+        extension,
+        count=1,
+        flags=re.I,
+    )
+
+    teaser_class = cfg.get("replace_teaser_class")
+    cta = cfg.get("cta", {}).get(lang, {})
+    if not teaser_class or not cta.get("href") or not cta.get("label"):
+        raise RuntimeError(f"{entry['id']}:{lang}: incomplete vertical extension CTA configuration")
+
+    teaser_pattern = re.compile(
+        rf'<p\b(?=[^>]*\bclass="[^"]*\b{re.escape(teaser_class)}\b[^"]*")[^>]*>.*?</p>',
+        flags=re.S | re.I,
+    )
+    replacement = (
+        extension
+        + "\n"
+        + f'<p class="archive-reading-action {html.escape(teaser_class, quote=True)}">'
+        + f'<a class="archive-text-link" href="{html.escape(cta["href"], quote=True)}">'
+        + f'{html.escape(cta["label"])}</a></p>'
+    )
+    fragment, count = teaser_pattern.subn(replacement, fragment, count=1)
+    if count != 1:
+        raise RuntimeError(f"{entry['id']}:{lang}: vertical extension teaser matched {count} times")
+    return fragment
+
+
 def render_managed_section(text: str, entry: dict[str, Any], lang: str) -> str:
     entry_id = entry["id"]
     target = vertical_target(entry, lang)
@@ -100,7 +145,7 @@ def render_managed_section(text: str, entry: dict[str, Any], lang: str) -> str:
     if heading is None:
         raise RuntimeError(f"{entry_id}:{lang}: target section has no h2")
 
-    fragment = fragment_path(entry, lang).read_text(encoding="utf-8").strip()
+    fragment = render_vertical_fragment(entry, lang)
     prefix = inner[: heading.start()]
     rendered_heading = render_heading(heading.group(0), entry, lang)
     managed = (

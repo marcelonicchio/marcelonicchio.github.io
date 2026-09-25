@@ -1409,6 +1409,21 @@
           "pt_path": "content/chapter-supplements/pt/music-album-1997-audio.inc",
           "en_path": "content/chapter-supplements/en/music-album-1997-audio.inc"
         }
+      },
+      "vertical_extension": {
+        "pt_path": "content/chapter-supplements/pt/music-album-1997-audio.inc",
+        "en_path": "content/chapter-supplements/en/music-album-1997-audio.inc",
+        "replace_teaser_class": "album-audio-teaser",
+        "cta": {
+          "pt": {
+            "href": "/pt/musica/meu-querido-diario/",
+            "label": "Abrir página completa de Meu Querido Diário →"
+          },
+          "en": {
+            "href": "/en/music/meu-querido-diario/",
+            "label": "Open the full Meu Querido Diário page →"
+          }
+        }
       }
     },
     {
@@ -1574,6 +1589,21 @@
         "body_extension": {
           "pt_path": "content/chapter-supplements/pt/music-album-1999-2000-audio.inc",
           "en_path": "content/chapter-supplements/en/music-album-1999-2000-audio.inc"
+        }
+      },
+      "vertical_extension": {
+        "pt_path": "content/chapter-supplements/pt/music-album-1999-2000-audio.inc",
+        "en_path": "content/chapter-supplements/en/music-album-1999-2000-audio.inc",
+        "replace_teaser_class": "album-audio-teaser",
+        "cta": {
+          "pt": {
+            "href": "/pt/musica/eu-nao-to-nem-ai/",
+            "label": "Abrir página completa de Eu Não Tô Nem Aí →"
+          },
+          "en": {
+            "href": "/en/music/eu-nao-to-nem-ai/",
+            "label": "Open the full Eu Não Tô Nem Aí page →"
+          }
         }
       }
     },
