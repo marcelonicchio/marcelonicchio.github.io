@@ -124,6 +124,25 @@
     </div>
   </section>
 
+  <section class="now-playing-band" data-now-playing data-endpoint="https://now.marcelonicchio.com/now-playing" hidden aria-live="polite">
+    <div class="wrap">
+      <a class="now-playing-card" data-now-playing-link href="#" target="_blank" rel="noopener noreferrer" aria-label="Listen on Spotify">
+        <img class="now-playing-art" data-now-playing-art alt="" hidden>
+        <span class="now-playing-copy">
+          <span class="now-playing-kicker"><span class="now-playing-pulse" aria-hidden="true"></span>Listening now</span>
+          <strong class="now-playing-title" data-now-playing-title></strong>
+          <span class="now-playing-creator" data-now-playing-creator></span>
+          <span class="now-playing-context" data-now-playing-context></span>
+        </span>
+        <span class="now-playing-service">
+          <span class="spotify-attribution" aria-label="Content supplied by Spotify">Spotify</span>
+          <span class="now-playing-action">Listen on Spotify ↗</span>
+        </span>
+      </a>
+      <a class="now-playing-about" href="/en/spotify-status/">About this integration</a>
+    </div>
+  </section>
+
   <div class="field-rail" aria-label="Trajectory fields">
     <div class="wrap field-rail-inner">
       <a href="/en/music/"><b>01</b>Music</a>
@@ -237,5 +256,6 @@
   <div class="wrap footer-grid"><span>© Marcelo Nicchio · Official hub.</span><span>Hosted on GitHub Pages · archive under development.</span></div>
 </footer>
 <script src="/assets/js/mobile-nav.js?v=20260903-mobile1" defer></script>
+<script src="/assets/js/now-playing.js?v=20260925-1" defer></script>
 </body>
 </html>
