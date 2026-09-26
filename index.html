@@ -103,6 +103,32 @@
     </div>
   </section>
 
+  <div class="now-playing-band root-now-playing" data-now-playing data-endpoint="https://now.marcelonicchio.com/now-playing" hidden aria-live="polite">
+    <div class="wrap">
+      <a class="now-playing-card" data-now-playing-link href="#" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+        <img class="now-playing-art" data-now-playing-art alt="" hidden>
+        <span class="now-playing-copy">
+          <span class="now-playing-kicker">
+            <span class="now-playing-pulse" aria-hidden="true"></span>
+            <span data-root-lang="pt">Ouvindo agora</span>
+            <span data-root-lang="en">Listening now</span>
+          </span>
+          <strong class="now-playing-title" data-now-playing-title></strong>
+          <span class="now-playing-creator" data-now-playing-creator></span>
+          <span class="now-playing-context" data-now-playing-context></span>
+        </span>
+        <span class="now-playing-service">
+          <span class="spotify-attribution" aria-label="Spotify"><span class="spotify-logo-field"><img src="https://developer-assets.spotifycdn.com/images/guidelines/design/logo.svg" width="70" alt="Spotify"></span></span>
+          <span class="now-playing-action" data-root-lang="pt">Ouvir no Spotify ↗</span>
+          <span class="now-playing-action" data-root-lang="en">Listen on Spotify ↗</span>
+        </span>
+      </a>
+      <a class="now-playing-about" data-root-lang="pt" href="/pt/spotify-status/">Sobre esta integração</a>
+      <a class="now-playing-about" data-root-lang="en" href="/en/spotify-status/">About this integration</a>
+    </div>
+  </div>
+
+
   <section class="root-section root-biography" aria-labelledby="root-bio-title-pt">
     <div class="wrap root-reading-column" data-root-lang="pt">
       <div class="root-section-kicker">Quem é Marcelo Nicchio</div>
@@ -304,6 +330,7 @@
     <span data-root-lang="en">Portuguese and English on dedicated URLs.</span>
   </div>
 </footer>
+<script src="/assets/js/now-playing.js?v=20260926-root1" defer></script>
 <script src="/assets/js/root-language.js?v=20260906-root1" defer></script>
 <script src="/assets/js/root-video.js?v=20260907-benny1" defer></script>
 </body>
