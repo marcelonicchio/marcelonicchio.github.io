@@ -143,7 +143,8 @@ async function assertDesktopPlaying(browser) {
   assert(actionStyle.fontWeight <= 600, `Desktop: Spotify CTA is too bold (${actionStyle.fontWeight})`);
 
   const cardBox = await card.boundingBox();
-  assert(cardBox && cardBox.left >= 0 && cardBox.right <= 1365, 'Desktop: Spotify card escapes viewport');
+  assert(cardBox && cardBox.x >= 0 && cardBox.x + cardBox.width <= 1366,
+    `Desktop: Spotify card escapes viewport (x=${cardBox?.x}, width=${cardBox?.width})`);
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, 'Desktop: Spotify widget introduces horizontal overflow');
   await context.close();
