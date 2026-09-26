@@ -51,7 +51,12 @@
       if (contextText) context.title = contextText;
       else context.removeAttribute("title");
 
-      if (item.image?.url) {
+      const hasArtwork = Boolean(item.image?.url);
+      widget.classList.toggle("has-now-playing-art", hasArtwork);
+      if (item.type) widget.dataset.itemType = item.type;
+      else delete widget.dataset.itemType;
+
+      if (hasArtwork) {
         artwork.src = item.image.url;
         artwork.alt = "";
         artwork.hidden = false;
