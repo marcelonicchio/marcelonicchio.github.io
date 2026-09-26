@@ -116,6 +116,60 @@ async function waitForWidget(page) {
   }, {timeout: 5000});
 }
 
+async function assertCanonicalRootPlacement(browser) {
+  const context = await browser.newContext({viewport: {width: 1440, height: 900}, locale: 'pt-BR'});
+  const page = await context.newPage();
+  await wireRoutes(page, {status:'playing', is_playing:true, item:baseItem});
+  await page.goto(`${BASE}/`, {waitUntil:'networkidle'});
+  await waitForWidget(page);
+
+  const portrait = page.locator('.root-portrait-panel');
+  const actions = page.locator('.root-hero-actions[data-root-lang="pt"]');
+  const hero = page.locator('.root-hero');
+  const widget = page.locator('[data-now-playing]');
+  const bio = page.locator('.root-section.root-biography').first();
+
+  assert(await portrait.isVisible(), 'Root desktop: canonical portrait disappeared');
+  assert(await actions.isVisible(), 'Root desktop: vertical shortcut buttons disappeared');
+
+  const [heroBox, widgetBox, bioBox] = await Promise.all([hero.boundingBox(), widget.boundingBox(), bio.boundingBox()]);
+  assert(heroBox && widgetBox && bioBox, 'Root desktop: required layout boxes are missing');
+  assert(widgetBox.y >= heroBox.y + heroBox.height - 2,
+    `Root desktop: Listening Now overlaps/replaces hero (hero bottom=${heroBox.y + heroBox.height}, widget y=${widgetBox.y})`);
+  assert(bioBox.y >= widgetBox.y + widgetBox.height - 2,
+    `Root desktop: biography starts before Listening Now ends (widget bottom=${widgetBox.y + widgetBox.height}, bio y=${bioBox.y})`);
+
+  await context.close();
+}
+
+async function assertCanonicalMobilePlacement(browser) {
+  const context = await browser.newContext({viewport: {width: 390, height: 844}, locale: 'pt-BR'});
+  const page = await context.newPage();
+  await wireRoutes(page, {status:'playing', is_playing:true, item:baseItem});
+  await page.goto(`${BASE}/`, {waitUntil:'networkidle'});
+  await waitForWidget(page);
+
+  const portrait = page.locator('.root-portrait-panel');
+  const actions = page.locator('.root-hero-actions[data-root-lang="pt"]');
+  const hero = page.locator('.root-hero');
+  const widget = page.locator('[data-now-playing]');
+  const bio = page.locator('.root-section.root-biography').first();
+
+  assert(await portrait.isVisible(), 'Root mobile: canonical portrait disappeared');
+  assert(await actions.isVisible(), 'Root mobile: vertical shortcut buttons disappeared');
+
+  const [heroBox, widgetBox, bioBox] = await Promise.all([hero.boundingBox(), widget.boundingBox(), bio.boundingBox()]);
+  assert(heroBox && widgetBox && bioBox, 'Root mobile: required layout boxes are missing');
+  assert(widgetBox.y >= heroBox.y + heroBox.height - 2,
+    'Root mobile: Listening Now must begin only after title/photo/buttons hero is complete');
+  assert(bioBox.y >= widgetBox.y + widgetBox.height - 2,
+    'Root mobile: Listening Now must remain before biography section');
+
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
+  assert(!overflow, 'Root mobile: Listening Now introduces horizontal overflow');
+  await context.close();
+}
+
 async function assertDesktopPlaying(browser) {
   const context = await browser.newContext({viewport: {width: 1365, height: 900}});
   const page = await context.newPage();
@@ -246,6 +300,8 @@ async function main() {
   let browser;
   try {
     browser = await chromium.launch({headless:true, executablePath:CHROME, args:['--no-sandbox']});
+    await assertCanonicalRootPlacement(browser);
+    await assertCanonicalMobilePlacement(browser);
     await assertDesktopPlaying(browser);
     await assertPausedHidden(browser);
     await assertMobileEpisode(browser);
