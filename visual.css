@@ -51,9 +51,9 @@
 html[data-root-language="pt"] [data-root-lang="en"],html[data-root-language="en"] [data-root-lang="pt"]{display:none!important}
 .root-canonical{background:#09090a}
 .root-lang-toggle{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;padding:4px;border-radius:999px;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.36);border:1px solid rgba(0,0,0,.1)}
-.root-lang-toggle button{appearance:none;border:0;background:transparent;color:#111;min-width:46px;min-height:40px;border-radius:999px;font:800 .76rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;cursor:pointer}
-.root-lang-toggle button.is-active,.root-lang-toggle button[aria-pressed="true"]{background:#111;color:#fff}
-.root-lang-toggle button:focus-visible{outline:3px solid var(--signal-2);outline-offset:2px}
+.root-lang-toggle button,.root-lang-toggle a{appearance:none;border:0;background:transparent;color:#111;min-width:46px;min-height:40px;border-radius:999px;font:800 .76rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;cursor:pointer;display:grid;place-items:center;text-decoration:none}
+.root-lang-toggle button.is-active,.root-lang-toggle button[aria-pressed="true"],.root-lang-toggle a.is-active,.root-lang-toggle a[aria-current="page"]{background:#111;color:#fff}
+.root-lang-toggle button:focus-visible,.root-lang-toggle a:focus-visible{outline:3px solid var(--signal-2);outline-offset:2px}
 .root-hero{position:relative;overflow:hidden;padding:86px 0 76px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 78% 28%,rgba(181,64,63,.16),transparent 28%),linear-gradient(180deg,#09090a,#0c0c0e)}
 .root-hero:after{content:"MN";position:absolute;right:-.05em;bottom:-.12em;font-size:clamp(13rem,28vw,29rem);font-weight:900;line-height:.8;letter-spacing:-.12em;color:rgba(255,255,255,.015);pointer-events:none}
 .root-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:64px;align-items:center}
@@ -68,7 +68,7 @@ html[data-root-language="pt"] [data-root-lang="en"],html[data-root-language="en"
 .root-meta small{display:block;color:var(--muted);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em}
 .root-meta strong{display:block;margin-top:4px;font-size:.87rem;line-height:1.35}
 .root-section{padding:88px 0;border-bottom:1px solid rgba(255,255,255,.055)}
-.root-section:nth-child(even){background:linear-gradient(180deg,rgba(255,255,255,.011),rgba(255,255,255,.003))}
+.root-section:nth-of-type(even){background:linear-gradient(180deg,rgba(255,255,255,.011),rgba(255,255,255,.003))}
 .root-reading-column{max-width:930px}
 .root-section-kicker{font:800 .7rem/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-soft);margin-bottom:18px}
 .root-section h2{font-size:clamp(2.25rem,5vw,4.25rem);line-height:.98;letter-spacing:-.045em;margin:0 0 28px}
@@ -111,3 +111,11 @@ html[data-root-language="pt"] [data-root-lang="en"],html[data-root-language="en"
 @media(max-width:900px){.root-hero{padding:66px 0}.root-hero-grid{grid-template-columns:1fr;gap:38px}.root-portrait-panel{max-width:420px}.root-axis-grid{grid-template-columns:1fr}.root-milestone-grid{grid-template-columns:1fr 1fr}.root-presence-groups{grid-template-columns:1fr}.root-presence-social{grid-column:auto}.root-section{padding:70px 0}}
 @media(max-width:620px){.root-lang-toggle{right:12px;bottom:12px}.root-lang-toggle button{min-width:42px;min-height:38px}.root-hero{padding:48px 0 54px}.root-hero-grid{gap:30px}.root-hero-copy h1{font-size:clamp(4rem,21vw,6.2rem)}.root-tagline{font-size:1.02rem}.root-hero-actions{display:grid;grid-template-columns:1fr}.root-hero-actions .button{text-align:center}.root-portrait-panel{max-width:none}.root-section{padding:56px 0}.root-section h2{font-size:clamp(2rem,11vw,3.1rem)}.root-bio-copy{font-size:1rem;line-height:1.72}.root-bio-copy p:first-child{font-size:1.05rem}.root-axis{grid-template-columns:34px 1fr 18px;gap:10px;padding:19px 16px;min-height:110px}.root-milestone-grid{grid-template-columns:1fr}.root-milestone{min-height:0;padding:20px}.root-presence-group{padding:18px}.root-presence-links{display:grid;grid-template-columns:1fr 1fr}.root-presence-section .presence-link{width:100%;box-sizing:border-box}.root-footer{padding-bottom:86px}}
 @media(max-width:390px){.root-presence-links{grid-template-columns:1fr}.root-hero-copy h1{font-size:3.85rem}}
+
+
+/* Canonical Home · Listening Now placement */
+.root-canonical .root-now-playing{margin-top:0;padding:18px 0 20px;border-bottom:1px solid rgba(255,255,255,.055);background:#09090a}
+.root-canonical .root-now-playing .now-playing-about{margin-top:7px}
+@media(max-width:620px){
+  .root-canonical .root-now-playing{margin-top:0;padding:14px 0 18px}
+}
