@@ -160,9 +160,11 @@ async function main() {
   let browser;
   try {
     browser = await chromium.launch({headless: true, executablePath: CHROME, args: ['--no-sandbox']});
-    await assertMobile(browser, '/pt/', 'EN', 8, 'Categorias');
-    await assertMobile(browser, '/en/', 'PT', 8, 'Categories');
+    // Dedicated Home URLs now intentionally use the canonical cover layout
+    // (portrait + shortcut buttons + language pill), not the inner-page header.
+    // Mobile Categories remains required on inner pages.
     await assertMobile(browser, '/pt/biografia/', 'EN', 8, 'Categorias');
+    await assertMobile(browser, '/en/biography/', 'PT', 8, 'Categories');
     await assertDesktop(browser);
     console.log('Mobile navigation discoverability smoke passed.');
   } finally {
