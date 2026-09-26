@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Audit the optional Spotify now-playing Home integration.
 
-This audit protects architecture and privacy boundaries only. Spotify's official
-full-logo asset is a launch-time branding requirement and is intentionally kept
-outside this repository until the official asset is supplied.
+This audit protects architecture, privacy, and the minimum Spotify attribution
+contract used by the public Home widget.
 """
 
 from __future__ import annotations
@@ -15,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ENDPOINT = "https://now.marcelonicchio.com/now-playing"
 CUSTOM_DOMAIN = "now.marcelonicchio.com"
+SPOTIFY_LOGO = "https://developer-assets.spotifycdn.com/images/guidelines/design/logo.svg"
 
 HOME = {
     "pt": ROOT / "pt" / "index.html",
@@ -59,6 +59,8 @@ def main() -> int:
         require('hidden aria-live="polite"' in html, f"{lang} Home widget must be hidden by default", errors)
         require('/assets/js/now-playing.js?v=' in html, f"{lang} Home missing now-playing client", errors)
         require('<audio' not in _widget(html), f"{lang} Home now-playing widget must not embed Spotify audio", errors)
+        require(SPOTIFY_LOGO in _widget(html), f"{lang} Home must use Spotify's official full-logo asset", errors)
+        require('width="70"' in _widget(html), f"{lang} Spotify full logo must respect the 70px digital minimum", errors)
 
     for lang, path in STATUS.items():
         html = path.read_text(encoding="utf-8")
@@ -115,8 +117,7 @@ def main() -> int:
             print(" -", error)
         return 1
 
-    print("Spotify now-playing architecture OK: hidden live Home slot, read-only Worker, KV token storage, no public secrets, no Spotify audio proxy.")
-    print("LAUNCH GATE: add Spotify's official full logo according to current branding guidelines before publishing the widget.")
+    print("Spotify now-playing architecture OK: hidden live Home slot, official Spotify attribution, read-only Worker, KV token storage, no public secrets, no Spotify audio proxy.")
     return 0
 
 
