@@ -467,7 +467,7 @@ a.entry-discovery__badge:hover,a.entry-discovery__badge:focus-visible{background
 .now-playing-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.014));text-decoration:none;transition:border-color .2s ease,transform .2s ease}
 .now-playing-band.has-now-playing-art .now-playing-card{grid-template-columns:72px minmax(0,1fr) auto}
 .now-playing-card:hover{border-color:#49494d;transform:translateY(-1px)}
-.now-playing-art{display:block;width:72px;height:72px;object-fit:contain;border-radius:8px;background:#191414}
+.now-playing-art{display:block;width:72px;height:72px;object-fit:contain;border-radius:8px;background:#191414}\n.now-playing-art[hidden]{display:none}
 .now-playing-copy{min-width:0;display:grid;gap:2px}
 .now-playing-kicker{display:flex;align-items:center;gap:8px;margin-bottom:3px;font-size:.68rem;line-height:1;text-transform:uppercase;letter-spacing:.12em;color:var(--spotify-live);font-weight:850}
 .now-playing-pulse{position:relative;flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--spotify-live);transform-origin:center;animation:now-playing-dot-breathe 1.8s ease-in-out infinite}
