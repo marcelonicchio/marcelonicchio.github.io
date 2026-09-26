@@ -35,10 +35,21 @@
       const creator = widget.querySelector("[data-now-playing-creator]");
       const context = widget.querySelector("[data-now-playing-context]");
 
+      const titleText = item.name || "";
+      const creatorText = (item.creators || []).join(", ");
+      const contextText = item.context_name || "";
+
       link.href = item.spotify_url;
-      title.textContent = item.name || "";
-      creator.textContent = (item.creators || []).join(", ");
-      context.textContent = item.context_name || "";
+      title.textContent = titleText;
+      creator.textContent = creatorText;
+      context.textContent = contextText;
+
+      if (titleText) title.title = titleText;
+      else title.removeAttribute("title");
+      if (creatorText) creator.title = creatorText;
+      else creator.removeAttribute("title");
+      if (contextText) context.title = contextText;
+      else context.removeAttribute("title");
 
       if (item.image?.url) {
         artwork.src = item.image.url;
