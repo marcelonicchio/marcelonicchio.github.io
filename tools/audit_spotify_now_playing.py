@@ -17,6 +17,7 @@ CUSTOM_DOMAIN = "now.marcelonicchio.com"
 SPOTIFY_LOGO = "https://developer-assets.spotifycdn.com/images/guidelines/design/logo.svg"
 
 HOME = {
+    "root": ROOT / "index.html",
     "pt": ROOT / "pt" / "index.html",
     "en": ROOT / "en" / "index.html",
 }
@@ -59,6 +60,13 @@ def main() -> int:
         require('hidden aria-live="polite"' in html, f"{lang} Home widget must be hidden by default", errors)
         require('/assets/js/now-playing.js?v=' in html, f"{lang} Home missing now-playing client", errors)
         require('<audio' not in _widget(html), f"{lang} Home now-playing widget must not embed Spotify audio", errors)
+        require('root-hero' in html and 'root-portrait-panel' in html and 'root-hero-actions' in html,
+                f"{lang} Home must preserve the canonical hero layout", errors)
+        require(html.index('root-hero') < html.index('now-playing-band') < html.index('root-section root-biography'),
+                f"{lang} Home must place Listening Now immediately between hero and biography", errors)
+        if lang in {"pt", "en"}:
+            require('site-header' not in html and 'hero-side' not in html and 'field-rail' not in html,
+                    f"{lang} Home must not regress to the legacy alternate Home layout", errors)
         require(SPOTIFY_LOGO in _widget(html), f"{lang} Home must use Spotify's official full-logo asset", errors)
         require('width="70"' in _widget(html), f"{lang} Spotify full logo must respect the 70px digital minimum", errors)
 
@@ -122,7 +130,7 @@ def main() -> int:
 
 
 def _widget(html: str) -> str:
-    match = re.search(r'<section class="now-playing-band".*?</section>', html, flags=re.S)
+    match = re.search(r'<(?:section|div) class="now-playing-band[^"]*".*?</(?:section|div)>', html, flags=re.S)
     return match.group(0) if match else ""
 
 
