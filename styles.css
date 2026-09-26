@@ -477,7 +477,7 @@ a.entry-discovery__badge:hover,a.entry-discovery__badge:focus-visible{background
 .now-playing-creator,.now-playing-context{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.82rem}
 .now-playing-service{display:grid;justify-items:end;gap:5px;padding-left:18px;border-left:1px solid var(--line);white-space:nowrap}
 .spotify-attribution{font-weight:800;font-size:.88rem;color:var(--text)}
-.now-playing-action{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--spotify-live);font-weight:820}
+.now-playing-action{font-size:.62rem;text-transform:uppercase;letter-spacing:.07em;color:var(--spotify-live);font-weight:600}
 .now-playing-about{display:block;width:max-content;margin:7px 2px 0 auto;font-size:.68rem;color:var(--muted);text-decoration:none}
 .now-playing-about:hover{color:var(--text)}
 @media(max-width:580px){
