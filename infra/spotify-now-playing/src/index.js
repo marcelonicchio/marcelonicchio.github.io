@@ -170,7 +170,7 @@ async function getAccessToken(env) {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${btoa(`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`)}`,
+      Authorization: `Basic ${btoa(`${env.SPOTIFY_CLIENT_ID.trim()}:${env.SPOTIFY_CLIENT_SECRET.trim()}`)}`,
     },
     body: new URLSearchParams({
       grant_type: "refresh_token",
@@ -242,7 +242,7 @@ async function authCallback(url, env) {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${btoa(`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`)}`,
+      Authorization: `Basic ${btoa(`${env.SPOTIFY_CLIENT_ID.trim()}:${env.SPOTIFY_CLIENT_SECRET.trim()}`)}`,
     },
     body: new URLSearchParams({
       grant_type: "authorization_code",
