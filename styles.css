@@ -460,3 +460,43 @@ a.entry-discovery__badge:hover,a.entry-discovery__badge:focus-visible{background
 .archive-text-link:hover{color:var(--text);text-decoration-thickness:2px}
 .archive-text-link:focus-visible{outline:2px solid var(--accent-soft);outline-offset:5px;border-radius:2px}
 @media(pointer:coarse){a.entry-discovery__badge{min-height:44px}}
+
+
+/* Home · Spotify Now Playing */
+.now-playing-band{--spotify-live:#1db954;margin-top:-34px;padding:0 0 34px}
+.now-playing-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.014));text-decoration:none;transition:border-color .2s ease,transform .2s ease}
+.now-playing-band.has-now-playing-art .now-playing-card{grid-template-columns:72px minmax(0,1fr) auto}
+.now-playing-card:hover{border-color:#49494d;transform:translateY(-1px)}
+.now-playing-art{display:block;width:72px;height:72px;object-fit:contain;border-radius:8px;background:#191414}
+.now-playing-art[hidden]{display:none}
+.now-playing-copy{min-width:0;display:grid;gap:2px}
+.now-playing-kicker{display:flex;align-items:center;gap:8px;margin-bottom:3px;font-size:.68rem;line-height:1;text-transform:uppercase;letter-spacing:.12em;color:var(--spotify-live);font-weight:850}
+.now-playing-pulse{position:relative;flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--spotify-live);transform-origin:center;animation:now-playing-dot-breathe 1.8s ease-in-out infinite}
+.now-playing-pulse::after{content:"";position:absolute;inset:-1px;border:1px solid var(--spotify-live);border-radius:50%;opacity:.45;animation:now-playing-ring-pulse 1.8s ease-out infinite}
+@keyframes now-playing-dot-breathe{0%,100%{transform:scale(.82)}50%{transform:scale(1.16)}}
+@keyframes now-playing-ring-pulse{0%{transform:scale(.72);opacity:.48}72%,100%{transform:scale(2.25);opacity:0}}
+.now-playing-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:1.02rem;letter-spacing:-.018em;color:var(--text)}
+.now-playing-band[data-item-type="episode"] .now-playing-title{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;white-space:normal;line-height:1.28}
+.now-playing-creator,.now-playing-context{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.82rem}
+.now-playing-service{display:grid;justify-items:end;gap:5px;padding-left:18px;border-left:1px solid var(--line);white-space:nowrap}
+.spotify-attribution{display:inline-flex;align-items:center;justify-content:center;color:var(--text)}
+.spotify-logo-field{display:inline-flex;align-items:center;justify-content:center;min-width:82px;min-height:30px;padding:4px 6px;border-radius:8px;background:#000}
+.spotify-logo-field img{display:block;width:70px;height:auto;max-width:none}
+.now-playing-action{font-size:.62rem;text-transform:uppercase;letter-spacing:.07em;color:var(--spotify-live);font-weight:600}
+.now-playing-about{display:block;width:max-content;margin:7px 2px 0 auto;font-size:.68rem;color:var(--muted);text-decoration:none}
+.now-playing-about:hover{color:var(--text)}
+@media(max-width:580px){
+  .now-playing-band{margin-top:-30px;padding-bottom:28px}
+  .now-playing-card{grid-template-columns:minmax(0,1fr);gap:12px;padding:11px 12px}
+  .now-playing-band.has-now-playing-art .now-playing-card{grid-template-columns:58px minmax(0,1fr)}
+  .now-playing-art{width:58px;height:58px;border-radius:4px}
+  .now-playing-service{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:9px 0 0;border-left:0;border-top:1px solid var(--line)}
+  .now-playing-about{margin-right:2px}
+}
+@media(prefers-reduced-motion:reduce){
+  .now-playing-card{transition:none!important}
+  .now-playing-card:hover{transform:none!important}
+  .now-playing-pulse,.now-playing-pulse::after{animation:none!important}
+  .now-playing-pulse{transform:none;box-shadow:0 0 0 4px rgba(29,185,84,.12)}
+  .now-playing-pulse::after{display:none}
+}

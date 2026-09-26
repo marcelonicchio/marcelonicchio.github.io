@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "marcelonicchio-now-playing",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-25",
+  "workers_dev": false,
+  "kv_namespaces": [
+    {
+      "binding": "SPOTIFY_STATE"
+    }
+  ],
+  "secrets": {
+    "required": [
+      "SPOTIFY_CLIENT_ID",
+      "SPOTIFY_CLIENT_SECRET",
+      "ADMIN_KEY",
+      "STATE_SECRET"
+    ]
+  },
+  "routes": [
+    {
+      "pattern": "now.marcelonicchio.com",
+      "custom_domain": true
+    }
+  ]
+}
