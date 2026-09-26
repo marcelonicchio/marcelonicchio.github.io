@@ -199,7 +199,14 @@ async function assertMissingArtwork(browser) {
 
   const widget = page.locator('[data-now-playing]');
   assert(!(await widget.evaluate((node) => node.classList.contains('has-now-playing-art'))), 'Missing artwork should not retain artwork layout');
-  assert(await widget.locator('[data-now-playing-art]').isHidden(), 'Missing artwork image should be hidden');
+  const artworkState = await widget.locator('[data-now-playing-art]').evaluate((node) => ({
+    hidden: node.hidden,
+    display: getComputedStyle(node).display,
+    hasSrc: node.hasAttribute('src'),
+  }));
+  assert(artworkState.hidden, `Missing artwork image should keep hidden=true (${JSON.stringify(artworkState)})`);
+  assert(artworkState.display === 'none', `Missing artwork image should render display:none (${JSON.stringify(artworkState)})`);
+  assert(!artworkState.hasSrc, `Missing artwork image should not retain src (${JSON.stringify(artworkState)})`);
   const geometry = await widget.evaluate((node) => {
     const card = node.querySelector('.now-playing-card').getBoundingClientRect();
     const copy = node.querySelector('.now-playing-copy').getBoundingClientRect();
