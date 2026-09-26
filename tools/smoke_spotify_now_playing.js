@@ -233,8 +233,10 @@ async function assertEnglish(browser) {
   await wireRoutes(page, {status:'playing', is_playing:true, item:baseItem});
   await page.goto(`${BASE}/en/`, {waitUntil:'networkidle'});
   await waitForWidget(page);
-  assert((await page.locator('.now-playing-kicker').innerText()).trim() === 'Listening now', 'EN kicker copy regressed');
-  assert((await page.locator('.now-playing-action').innerText()).trim().includes('Listen on Spotify'), 'EN Spotify CTA copy regressed');
+  const kickerCopy = await page.locator('.now-playing-kicker').evaluate((node) => node.textContent.trim());
+  const actionCopy = await page.locator('.now-playing-action').evaluate((node) => node.textContent.trim());
+  assert(kickerCopy === 'Listening now', `EN kicker copy regressed (${kickerCopy})`);
+  assert(actionCopy.includes('Listen on Spotify'), `EN Spotify CTA copy regressed (${actionCopy})`);
   await context.close();
 }
 
