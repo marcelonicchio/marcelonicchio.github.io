@@ -180,7 +180,7 @@ async function assertDesktopPlaying(browser) {
   const widget = page.locator('[data-now-playing]');
   const card = widget.locator('.now-playing-card');
   const logo = widget.locator('.spotify-logo-field img');
-  const action = widget.locator('.now-playing-action');
+  const action = widget.locator('.now-playing-action:visible');
   const title = widget.locator('.now-playing-title');
 
   assert(await logo.count() === 1, 'Desktop: official Spotify full-logo image missing');
