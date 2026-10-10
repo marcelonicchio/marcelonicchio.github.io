@@ -60,7 +60,7 @@ def main() -> int:
     generator = (ROOT / "tools/build_chapter_pages.py").read_text(encoding="utf-8")
     assert 'entry["id"] == "hai-melissa"' in generator
     assert 'melissa-podcast.css?v=20261010-v1' in generator
-    assert 'melissa-podcast.js?v=20261010-v1' in generator
+    assert 'melissa-podcast.js?v=20261010-v2' in generator
     code = (ROOT / "assets/js/melissa-podcast.js").read_text(encoding="utf-8")
     for token in ('/data/melissa-podcasts.json', "show_artwork: 'true'", "auto_play: 'false'", "visual: 'false'", "soundcloud_url"):
         assert token in code, f"missing client behavior {token}"
