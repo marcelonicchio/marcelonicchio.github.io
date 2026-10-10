@@ -46,15 +46,14 @@
     const header = make('div', CSS_CLASS + '__header');
     const kicker = make('div', CSS_CLASS + '__eyebrow', labels.kicker);
     const tabs = make('div', CSS_CLASS + '__tabs');
-    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('role', 'group');
     tabs.setAttribute('aria-label', SITE_LANG === 'pt' ? 'Idioma do podcast' : 'Podcast language');
     const controls = {};
     for (const lang of ['pt', 'en']) {
       const button = make('button', '', (lang === 'pt' ? '🇧🇷 ' : '🇺🇸 ') + labels[lang]);
       button.type = 'button';
       button.dataset.podcastLang = lang;
-      button.setAttribute('role', 'tab');
-      button.setAttribute('aria-selected', 'false');
+      button.setAttribute('aria-pressed', 'false');
       tabs.appendChild(button);
       controls[lang] = button;
     }
@@ -84,8 +83,7 @@
       const chosen = EPISODES[lang];
       for (const [buttonLang, button] of Object.entries(controls)) {
         const active = buttonLang === lang;
-        button.setAttribute('aria-selected', String(active));
-        button.tabIndex = active ? 0 : -1;
+        button.setAttribute('aria-pressed', String(active));
       }
       title.textContent = chosen.title;
       outbound.href = chosen.url;
