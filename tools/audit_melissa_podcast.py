@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data/melissa-podcasts.json"
 CSS = "/assets/melissa-podcast.css?v=20261010-v1"
 BASE_CSS = "/assets/research-podcast.css?v=20261010-v1"
-JS = "/assets/js/melissa-podcast.js?v=20261010-v1"
+JS = "/assets/js/melissa-podcast.js?v=20261010-v2"
 PAGES = {
     "pt/ia-hai/index.html": "vertical",
     "en/ai-hai/index.html": "vertical",
@@ -44,10 +44,13 @@ def check_html(path: str, kind: str) -> None:
         assert styles.count(css) == 1, f"{path}: expected exactly one {css}"
     assert scripts.count(JS) == 1, f"{path}: Melissa script missing or duplicated"
     anchor = (
-        soup.select_one("#melissa > p.meta") if kind == "vertical"
-        else soup.select_one('main[data-entry-id="hai-melissa"] article.entry-page-body > p.meta')
+        soup.select_one("#melissa > figure.melissa-selfportrait") if kind == "vertical"
+        else soup.select_one('main[data-entry-id="hai-melissa"] article.entry-page-body > figure.melissa-selfportrait')
     )
     assert anchor is not None, f"{path}: insertion anchor missing"
+    assert anchor.find("img") is not None, f"{path}: portrait image missing"
+    assert anchor.find("figcaption") is not None, f"{path}: portrait caption missing"
+    assert anchor.find_previous_sibling("p", class_="meta") is not None, f"{path}: portrait must follow date"
 
 
 def main() -> int:
