@@ -1,0 +1,57 @@
+/* Melissa audio collection: extends the approved PRO v1 SoundCloud style. */
+.research-podcast--library .melissa-podcast__choices{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
+  gap:9px;
+  margin-bottom:14px;
+}
+.research-podcast--library .melissa-podcast__choice{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  min-width:0;
+  min-height:73px;
+  padding:11px 13px;
+  border:1px solid #414147;
+  border-radius:9px;
+  background:#232328;
+  color:#f0f0f2;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+  transition:border-color .16s ease,background .16s ease;
+}
+.research-podcast--library .melissa-podcast__choice:hover{border-color:#ff807b}
+.research-podcast--library .melissa-podcast__choice[aria-pressed="true"]{
+  border-color:#ff625c;
+  background:#352124;
+}
+.research-podcast--library .melissa-podcast__choice:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:2px;
+}
+.research-podcast--library .melissa-podcast__language{
+  color:#ffa29d;
+  font-size:.76rem;
+  font-weight:750;
+}
+.research-podcast--library .melissa-podcast__episode-title{
+  overflow-wrap:anywhere;
+  color:#f0f0f2;
+  font-size:.88rem;
+  font-weight:650;
+  line-height:1.36;
+}
+.research-podcast--library .melissa-podcast__player{
+  padding-top:10px;
+  border-top:1px solid #38383d;
+}
+.research-podcast--library .melissa-podcast__note{
+  margin:-4px 0 10px;
+  color:#b6b6bc;
+  font-size:.8rem;
+}
+@media(max-width:580px){
+  .research-podcast--library .melissa-podcast__choices{grid-template-columns:1fr;gap:7px}
+  .research-podcast--library .melissa-podcast__choice{min-height:0}
+}

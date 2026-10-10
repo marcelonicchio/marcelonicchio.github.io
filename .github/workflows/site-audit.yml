@@ -88,10 +88,13 @@ jobs:
         run: python tools/audit_ai_editorial_structure.py
       - name: Audit PRO v1 SoundCloud integration
         run: python tools/audit_research_podcast.py
+      - name: Audit Melissa episode library
+        run: python tools/audit_melissa_podcast.py
       - name: Check navigation/Reader/runtime JavaScript syntax
         run: |
           node --check assets/js/mobile-nav.js
           node --check assets/js/research-podcast.js
+          node --check assets/js/melissa-podcast.js
           node --check assets/js/archive-lightbox.js
           node --check assets/js/reader-disclosure-loader.js
           node --check assets/js/reader-disclosure.js

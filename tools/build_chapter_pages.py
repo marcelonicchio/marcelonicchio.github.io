@@ -180,8 +180,18 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     date = entry["date"][lang]
     body = chapter_body(entry, lang)
     # PRO v1 audio lives only on the vertical and its Chapter Page, never in Full Biography.
-    podcast_css = '\n  <link rel="stylesheet" href="/assets/research-podcast.css?v=20261010-v1">' if entry["id"] == "hai-pro1" else ""
-    podcast_js = '\n<script src="/assets/js/research-podcast.js?v=20261010-v1" defer></script>' if entry["id"] == "hai-pro1" else ""
+    if entry["id"] == "hai-pro1":
+        podcast_css = '\n  <link rel="stylesheet" href="/assets/research-podcast.css?v=20261010-v1">'
+        podcast_js = '\n<script src="/assets/js/research-podcast.js?v=20261010-v1" defer></script>'
+    elif entry["id"] == "hai-melissa":
+        podcast_css = (
+            '\n  <link rel="stylesheet" href="/assets/research-podcast.css?v=20261010-v1">'
+            '\n  <link rel="stylesheet" href="/assets/melissa-podcast.css?v=20261010-v1">'
+        )
+        podcast_js = '\n<script src="/assets/js/melissa-podcast.js?v=20261010-v1" defer></script>'
+    else:
+        podcast_css = ""
+        podcast_js = ""
     domain_label, domain_path = DOMAIN[entry["domain"]][lang]
     labels = tag_labels(taxonomy)
     chips = "".join(

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "entry_id": "hai-melissa",
+  "episodes": [
+    {
+      "id": "testamento",
+      "language": "pt",
+      "title": "O Testamento de Melissa",
+      "soundcloud_url": "https://soundcloud.com/marcelonicchio/o-testamento-de-melissa"
+    },
+    {
+      "id": "traumas",
+      "language": "pt",
+      "title": "Como Traumas Criaram a Melissa 1.0",
+      "soundcloud_url": "https://soundcloud.com/marcelonicchio/como-traumas-criaram-a-melissa"
+    }
+  ]
+}
