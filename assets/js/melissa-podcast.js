@@ -4,8 +4,10 @@
    Audio isn't loaded or played before the visitor chooses it. */
 (() => {
   'use strict';
-  const vertical = document.querySelector('body.vertical-ai #melissa > p.meta');
-  const chapter = document.querySelector('main[data-entry-id="hai-melissa"] article.entry-page-body > p.meta');
+  // Place immediately after Melissa's portrait (including its caption),
+  // not after the date. Both pages render the same neutral editorial fragment.
+  const vertical = document.querySelector('body.vertical-ai #melissa > figure.melissa-selfportrait');
+  const chapter = document.querySelector('main[data-entry-id="hai-melissa"] article.entry-page-body > figure.melissa-selfportrait');
   const anchor = vertical || chapter;
   if (!anchor || document.querySelector('[data-melissa-podcasts]')) return;
 

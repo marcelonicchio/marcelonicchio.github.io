@@ -188,7 +188,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
             '\n  <link rel="stylesheet" href="/assets/research-podcast.css?v=20261010-v1">'
             '\n  <link rel="stylesheet" href="/assets/melissa-podcast.css?v=20261010-v1">'
         )
-        podcast_js = '\n<script src="/assets/js/melissa-podcast.js?v=20261010-v1" defer></script>'
+        podcast_js = '\n<script src="/assets/js/melissa-podcast.js?v=20261010-v2" defer></script>'
     else:
         podcast_css = ""
         podcast_js = ""
