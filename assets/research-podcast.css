@@ -43,7 +43,7 @@
   font-size: .82rem;
   font-weight: 720;
 }
-.research-podcast__tabs button[aria-selected="true"] {
+.research-podcast__tabs button[aria-pressed="true"] {
   background: #ff625c;
   color: #171719;
 }
