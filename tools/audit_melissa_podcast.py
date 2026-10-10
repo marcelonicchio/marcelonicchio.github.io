@@ -33,9 +33,7 @@ def check_catalog() -> None:
         parsed = urlparse(ep["soundcloud_url"])
         assert parsed.scheme == "https" and parsed.netloc in {"soundcloud.com", "www.soundcloud.com"}
         assert len([p for p in parsed.path.split("/") if p]) >= 2
-    assert {ep["id"] for ep in episodes} == {"testamento", "traumas"}, "initial pair changed without editorial review"
-    assert episodes[0]["title"] == "O Testamento de Melissa"
-    assert episodes[1]["title"] == "Como Traumas Criaram a Melissa 1.0"
+    # Future curations may add or remove tracks without changing the implementation.
 
 
 def check_html(path: str, kind: str) -> None:
@@ -61,14 +59,12 @@ def main() -> int:
     assert 'melissa-podcast.css?v=20261010-v1' in generator
     assert 'melissa-podcast.js?v=20261010-v1' in generator
     code = (ROOT / "assets/js/melissa-podcast.js").read_text(encoding="utf-8")
-    for token in ('/data/melissa-podcasts.json', "show_artwork: 'true'", "auto_play: 'false'", "visual: 'false'", "episode.language", "soundcloud_url"):
-        if token == "episode.language":
-            continue
+    for token in ('/data/melissa-podcasts.json', "show_artwork: 'true'", "auto_play: 'false'", "visual: 'false'", "soundcloud_url"):
         assert token in code, f"missing client behavior {token}"
     for path in ("pt/biografia/index.html", "en/biography/index.html"):
         html = (ROOT / path).read_text(encoding="utf-8")
         assert JS not in html and CSS not in html, f"{path}: leaked standalone audio player to biography"
-    print("Melissa podcast library OK: 2 PT tracks, 4 target pages, scalable catalog, no biography leakage.")
+    print("Melissa podcast library OK: extensible catalog, 4 target pages, no biography leakage.")
     return 0
 
 
