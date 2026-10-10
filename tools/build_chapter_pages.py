@@ -179,6 +179,9 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     description = page.get("description", {}).get(lang, summary)
     date = entry["date"][lang]
     body = chapter_body(entry, lang)
+    # PRO v1 audio lives only on the vertical and its Chapter Page, never in Full Biography.
+    podcast_css = '\n  <link rel="stylesheet" href="/assets/research-podcast.css?v=20261010-v1">' if entry["id"] == "hai-pro1" else ""
+    podcast_js = '\n<script src="/assets/js/research-podcast.js?v=20261010-v1" defer></script>' if entry["id"] == "hai-pro1" else ""
     domain_label, domain_path = DOMAIN[entry["domain"]][lang]
     labels = tag_labels(taxonomy)
     chips = "".join(
@@ -235,7 +238,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
   <meta property="og:type" content="website">{og}
   <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/assets/chapter-page.css">
+  <link rel="stylesheet" href="/assets/chapter-page.css">{podcast_css}
   {MOBILE_NAV_CSS}
   {crumb_schema}
 </head>
@@ -260,7 +263,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 <div class="wrap footer-grid"><span><a href="{domain_path}">← {html.escape(domain_label)}</a></span><span><a href="/{other_rel[:-10]}">{'English version' if lang == 'pt' else 'Versão em português'}</a></span></div>
 </footer>
 <script src="/assets/js/archive-lightbox.js?v=20260901-gallery2" defer></script>
-{MOBILE_NAV_JS}
+{MOBILE_NAV_JS}{podcast_js}
 </body></html>
 '''
 
