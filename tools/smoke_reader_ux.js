@@ -281,7 +281,7 @@ async function runDesktop(browser) {
     position: getComputedStyle(img).objectPosition,
     cropRatio: getComputedStyle(img.parentElement).aspectRatio
   }));
-  assert(imageStyle.fit === 'cover' && imageStyle.position.includes('top'), 'Mirantte highlight must crop images at the top');
+  assert(imageStyle.fit === 'cover' && /(?:^|\\s)(?:top|0%)(?:$|\\s)/.test(imageStyle.position), 'Mirantte highlight must crop images at the top');
   assert(imageStyle.cropRatio === '3 / 2', 'Mirantte highlight must use the rectangular crop');
   assert(await mirantte.locator('a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'Mirantte obsolete business card still visible');
 
