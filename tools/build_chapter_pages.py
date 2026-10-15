@@ -192,7 +192,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     else:
         podcast_css = ""
         podcast_js = ""
-    mirantte_css = ('\n  <link rel="stylesheet" href="/assets/mirantte-feature.css?v=20261015-v1">'
+    psinet_css = ('\n  <link rel="stylesheet" href="/assets/psinet-testimony.css?v=20261015-v2">'\n                  if entry["id"] == "internet-psinet" else "")\n    mirantte_css = ('\n  <link rel="stylesheet" href="/assets/mirantte-feature.css?v=20261015-v1">'
                     if entry["id"] == "internet-mirantte" else "")
     gallery_version = "20261015-mirantte1" if entry["id"] == "internet-mirantte" else "20260901-gallery2"
     domain_label, domain_path = DOMAIN[entry["domain"]][lang]
@@ -251,7 +251,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
   <meta property="og:type" content="website">{og}
   <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/assets/chapter-page.css">{mirantte_css}{podcast_css}
+  <link rel="stylesheet" href="/assets/chapter-page.css">{mirantte_css}{psinet_css}{podcast_css}
   {MOBILE_NAV_CSS}
   {crumb_schema}
 </head>
