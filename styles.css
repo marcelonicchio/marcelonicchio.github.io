@@ -501,11 +501,3 @@ a.entry-discovery__badge:hover,a.entry-discovery__badge:focus-visible{background
   .now-playing-pulse{transform:none;box-shadow:0 0 0 4px rgba(29,185,84,.12)}
   .now-playing-pulse::before,.now-playing-pulse::after{display:none}
 }
-
-/* PSINet: single first-person recollection in an otherwise third-person chapter. */
-.psinet-testimony{margin:26px 0 30px;padding:20px 22px;background:rgba(255,199,76,.10);border:1px solid rgba(255,204,99,.55);border-left:4px solid #f2c454;border-radius:13px;color:var(--text)}
-.article-body .psinet-testimony__label{display:block;margin:0 0 12px;color:#f8d478;font-size:.76rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
-.psinet-testimony blockquote{margin:0;padding:0;border:0;font-style:normal}
-.article-body .psinet-testimony p{margin:0 0 12px;color:#f0e7d3;font-size:.97rem;line-height:1.68}
-.article-body .psinet-testimony p:last-child{margin-bottom:0}
-@media(max-width:580px){.psinet-testimony{padding:16px 16px 18px;margin:22px 0 25px}}

@@ -305,6 +305,54 @@ async function probe(browser, config) {
   await context.close();
 }
 
+async function auditPsinetYellowTestimony(browser) {
+  const targets = [
+    {path:'/pt/internet/', viewport:{width:1365,height:900}},
+    {path:'/en/internet/', viewport:{width:1365,height:900}},
+    {path:'/pt/biografia/', viewport:{width:390,height:844}},
+    {path:'/en/biography/', viewport:{width:390,height:844}},
+    {path:'/pt/internet/psinet-hosting-corporativo/', viewport:{width:390,height:844}},
+    {path:'/en/internet/psinet-corporate-hosting/', viewport:{width:390,height:844}},
+  ];
+
+  for (const target of targets) {
+    const context = await browser.newContext({viewport:target.viewport});
+    try {
+      const page = await context.newPage();
+      await blockExternal(page);
+      await page.goto(BASE + target.path, {waitUntil:'load'});
+      const box = await page.evaluate(() => {
+        const el = document.querySelector('.psinet-testimony');
+        const cssLink = document.querySelector('link[rel="stylesheet"][href*="/assets/psinet-testimony.css?v=20261015-v2"]');
+        if (!el) return {missing:true};
+        const style = getComputedStyle(el);
+        const paragraph = el.querySelector('blockquote p');
+        const textColor = paragraph ? getComputedStyle(paragraph).color : null;
+        const rect = el.getBoundingClientRect();
+        return {
+          cssLink:!!cssLink,
+          backgroundImage:style.backgroundImage,
+          textColor,
+          borderLeftWidth:style.borderLeftWidth,
+          width:rect.width,
+          height:rect.height,
+          hasFolha:el.textContent.includes('Folha de S.Paulo'),
+        };
+      });
+      assert(!box.missing, target.path + ': PSINet testimony missing');
+      assert(box.cssLink, target.path + ': dedicated PSINet stylesheet not linked');
+      assert(box.backgroundImage.includes('linear-gradient'), target.path + ': yellow background not rendered');
+      assert(box.textColor === 'rgb(41, 33, 20)', target.path + ': testimony text is not dark on yellow (' + box.textColor + ')');
+      assert(parseFloat(box.borderLeftWidth) >= 4, target.path + ': missing amber rule');
+      assert(box.width >= 190 && box.height >= 160, target.path + ': testimony has no visible layout');
+      assert(box.hasFolha, target.path + ': approved newspaper recollection missing');
+      console.log('PSINet amber testimony visible: ' + target.path + ' (' + Math.round(box.width) + '×' + Math.round(box.height) + ' px)');
+    } finally {
+      await context.close();
+    }
+  }
+}
+
 async function main() {
   const server = createServer();
   await new Promise((resolve) => server.listen(PORT, HOST, resolve));
@@ -335,6 +383,7 @@ async function main() {
       viewport: {width: 1365, height: 900},
       expectDeferredLazy: true,
     });
+    await auditPsinetYellowTestimony(browser);
     console.log('Runtime performance/media observability smoke passed.');
   } finally {
     if (browser) await browser.close();
