@@ -649,6 +649,7 @@
       "era": "expansao-2001-2008",
       "date": "2004–2008",
       "domain": "internet",
+      "exclude_selectors": [".mirantte-feature"],
       "source": {
         "pt": {
           "path": "pt/internet/index.html",
