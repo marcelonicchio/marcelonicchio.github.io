@@ -133,10 +133,10 @@
       ]
     },
     "internet-psinet": {
-      "revision": 4,
-      "pt_hash": "d5a031fa2fb7a4d7dbdaf2971b68b3edbbc6c7713927d40116a68441e866f641",
-      "en_hash": "8fcf78c36b6fbed4a6eabc9484c08004b378d0772acf7a9846d37019fa209270",
-      "accepted_on": "2026-09-17",
+      "revision": 5,
+      "pt_hash": "04b4ab265f24ba029b622fd6a975441a510f43200037fc2874f8c2179e6c8dc4",
+      "en_hash": "533e4786380c4e038e8ad234237965682f3f25042c9041d57763002e1aee73ec",
+      "accepted_on": "2026-10-15",
       "changed_languages": [
         "pt",
         "en"
