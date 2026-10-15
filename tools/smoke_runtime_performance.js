@@ -323,7 +323,7 @@ async function auditPsinetYellowTestimony(browser) {
       await page.goto(BASE + target.path, {waitUntil:'load'});
       const box = await page.evaluate(() => {
         const el = document.querySelector('.psinet-testimony');
-        const cssLink = document.querySelector('link[rel="stylesheet"][href*="/assets/psinet-testimony.css?v=20261015-v2"]');
+        const cssLink = document.querySelector('link[rel="stylesheet"][href*="/assets/psinet-testimony.css?v=20261015-v3"]');
         if (!el) return {missing:true};
         const style = getComputedStyle(el);
         const paragraph = el.querySelector('blockquote p');
@@ -347,6 +347,51 @@ async function auditPsinetYellowTestimony(browser) {
       assert(box.width >= 190 && box.height >= 160, target.path + ': testimony has no visible layout');
       assert(box.hasFolha, target.path + ': approved newspaper recollection missing');
       console.log('PSINet amber testimony visible: ' + target.path + ' (' + Math.round(box.width) + '×' + Math.round(box.height) + ' px)');
+
+      const chartLocator = page.locator('.psinet-market-figure img');
+      assert(await chartLocator.count() === 1, target.path + ': expected one PSINet Nasdaq chart');
+      // Full Biography Reader content can be deferred/collapsed on mobile.
+      // Expand those sections before asking Chrome to load the lazy chart.
+      await page.evaluate(() => {
+        document.querySelectorAll('details.reader-disclosure').forEach(node => { node.open = true; });
+        const img = document.querySelector('.psinet-market-figure img');
+        if (img) img.loading = 'eager';
+      });
+      await chartLocator.scrollIntoViewIfNeeded();
+      await page.waitForFunction(() => {
+        const img = document.querySelector('.psinet-market-figure img');
+        return img && img.complete && img.naturalWidth > 0;
+      }, undefined, {timeout:30000});
+      const chart = await page.evaluate(() => {
+        const figure = document.querySelector('.psinet-market-figure');
+        const img = figure?.querySelector('img');
+        const mainLink = figure?.querySelector('a.psinet-market-figure__open');
+        const caption = figure?.querySelector('figcaption');
+        const h3 = [...document.querySelectorAll('h3')].find(h => 
+          /Quando os telefones começaram a silenciar|When the phones began to fall silent/.test(h.textContent)
+        );
+        const rect = img?.getBoundingClientRect();
+        return {
+          src: img?.getAttribute('src'),
+          alt: img?.alt,
+          fullSizeHref: mainLink?.getAttribute('href'),
+          naturalWidth: img?.naturalWidth,
+          naturalHeight: img?.naturalHeight,
+          renderedWidth: rect?.width,
+          viewportWidth: document.documentElement.clientWidth,
+          caption: caption?.textContent,
+          precedesPhones: Boolean(h3 && (figure.compareDocumentPosition(h3) & Node.DOCUMENT_POSITION_FOLLOWING)),
+        };
+      });
+      const expected = '/assets/archive/internet/psinet/grafico_psinet_nasdaq02_300kb.jpg';
+      assert(chart.src === expected && chart.fullSizeHref === expected, target.path + ': original author JPG not linked');
+      assert(chart.naturalWidth === 1536 && chart.naturalHeight === 1024, target.path + ': wrong original JPEG or load failed');
+      assert(chart.alt?.length > 25, target.path + ': missing accessible chart description');
+      assert(chart.precedesPhones, target.path + ': chart not placed before silent-phone section');
+      assert(chart.renderedWidth > 180 && chart.renderedWidth <= chart.viewportWidth, target.path + ': chart not responsive on viewport');
+      assert(chart.caption?.includes('1999') && chart.caption?.includes('2001'), target.path + ': chart caption missing years');
+      console.log('PSINet Nasdaq JPG responsive: ' + target.path + ' (' + Math.round(chart.renderedWidth) + ' px)');
+
     } finally {
       await context.close();
     }

@@ -192,7 +192,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     else:
         podcast_css = ""
         podcast_js = ""
-    psinet_css = ('\n  <link rel="stylesheet" href="/assets/psinet-testimony.css?v=20261015-v2">'
+    psinet_css = ('\n  <link rel="stylesheet" href="/assets/psinet-testimony.css?v=20261015-v3">'
                   if entry["id"] == "internet-psinet" else "")
     mirantte_css = ('\n  <link rel="stylesheet" href="/assets/mirantte-feature.css?v=20261015-v1">'
                     if entry["id"] == "internet-mirantte" else "")
