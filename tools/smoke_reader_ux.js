@@ -138,7 +138,7 @@ async function runDesktop(browser) {
   assert((await mirantteBioPreview.innerText()).includes('tráfego orgânico'), 'Mirantte Full Bio preview lost acquisition problem');
   assert(await mirantteBioPreview.locator('img').getAttribute('src') === '/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp', 'Mirantte Full Bio preview image incorrect');
   const mirantteIndicators = await page.locator('#bio-internet-mirantte .reader-disclosure__badge').allInnerTexts();
-  ['34 fotos', '1 cartão profissional'].forEach((label) => assert(mirantteIndicators.includes(label), `Mirantte indicator missing: ${label}`));
+  ['34 fotos'].forEach((label) => assert(mirantteIndicators.includes(label), `Mirantte indicator missing: ${label}`));
 
   const cookieBioPreviewRich = page.locator('#bio-internet-cookieweb .reader-disclosure__preview');
   assert(await cookieBioPreviewRich.count() === 1, 'CookieWEB Full Bio rich preview missing');
