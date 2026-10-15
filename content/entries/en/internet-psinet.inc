@@ -49,6 +49,14 @@
 <p>Its shares declined sharply through the second half of 2000. The fall continued in early 2001 until they were trading for mere cents.</p>
 <p>Within the Brazilian operation, checking PSINet's Nasdaq quote became part of employees' daily routine.</p>
 <p>The decline was no longer just a distant business story reported in newspapers or discussed by analysts. Its consequences were beginning to appear in employees' everyday lives.</p>
+<!-- market-chart:psinet:start -->
+<figure class="psinet-market-figure">
+  <a aria-label="Open the original full-size PSINet Nasdaq chart" class="psinet-market-figure__open" href="/assets/archive/internet/psinet/grafico_psinet_nasdaq02_300kb.jpg" rel="noopener noreferrer" target="_blank">
+    <img alt="Chart of PSINet's Nasdaq share prices from 1999 to 2001, highlighting the acquisition of STI in May 1999." decoding="async" height="1024" loading="lazy" src="/assets/archive/internet/psinet/grafico_psinet_nasdaq02_300kb.jpg" width="1536">
+  </a>
+  <figcaption>PSINet on Nasdaq · 1999–2001 · <a href="/assets/archive/internet/psinet/grafico_psinet_nasdaq02_300kb.jpg" rel="noopener noreferrer" target="_blank">View full-size chart ↗</a></figcaption>
+</figure>
+<!-- market-chart:psinet:end -->
 <h3>When the phones began to fall silent</h3>
 <p>When Nicchio first joined PSINet, the commercial department handled a substantial volume of incoming calls.</p>
 <p>The company invested in advertising, including <strong>billboards and print media</strong>, which helped attract demand for its corporate hosting and connectivity services.</p>
