@@ -4,7 +4,6 @@
 
   const defaultSupported = new Set([
     '/pt/biografia/', '/en/biography/',
-    '/pt/internet/', '/en/internet/',
     '/pt/ia-hai/', '/en/ai-hai/'
   ]);
   if (!defaultSupported.has(pagePath)) return;
