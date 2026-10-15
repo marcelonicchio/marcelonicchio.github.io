@@ -192,6 +192,9 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
     else:
         podcast_css = ""
         podcast_js = ""
+    mirantte_css = ('\n  <link rel="stylesheet" href="/assets/mirantte-feature.css?v=20261015-v1">'
+                    if entry["id"] == "internet-mirantte" else "")
+    gallery_version = "20261015-mirantte1" if entry["id"] == "internet-mirantte" else "20260901-gallery2"
     domain_label, domain_path = DOMAIN[entry["domain"]][lang]
     labels = tag_labels(taxonomy)
     chips = "".join(
@@ -248,7 +251,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
   <meta property="og:type" content="website">{og}
   <link rel="icon" href="/assets/brand/monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/assets/chapter-page.css">{podcast_css}
+  <link rel="stylesheet" href="/assets/chapter-page.css">{mirantte_css}{podcast_css}
   {MOBILE_NAV_CSS}
   {crumb_schema}
 </head>
@@ -272,7 +275,7 @@ def render(entry: dict[str, Any], lang: str, taxonomy: dict[str, Any], profiles:
 {presence}
 <div class="wrap footer-grid"><span><a href="{domain_path}">← {html.escape(domain_label)}</a></span><span><a href="/{other_rel[:-10]}">{'English version' if lang == 'pt' else 'Versão em português'}</a></span></div>
 </footer>
-<script src="/assets/js/archive-lightbox.js?v=20260901-gallery2" defer></script>
+<script src="/assets/js/archive-lightbox.js?v={gallery_version}" defer></script>
 {MOBILE_NAV_JS}{podcast_js}
 </body></html>
 '''

@@ -213,10 +213,10 @@
       ]
     },
     "internet-mirantte": {
-      "revision": 7,
-      "pt_hash": "89db0e370bd4d698ef34b07bdb977019f2b64d9041441b4f6f9a1cc503bd6373",
-      "en_hash": "aa659803e3544d6b90c344c30e0bebfe0ed119badf5dd7cc5157b99f8838c38c",
-      "accepted_on": "2026-09-17",
+      "revision": 8,
+      "pt_hash": "06fd62cfc4999c75ab31fb28ad96a6a6601843c765151ef46acb5cad26829d07",
+      "en_hash": "2d54c45429841c009b3afaa01e06614cdff9684e9289e6578268202ae8f5e78a",
+      "accepted_on": "2026-10-15",
       "changed_languages": [
         "pt",
         "en"
@@ -243,10 +243,10 @@
       ]
     },
     "internet-cookieweb": {
-      "revision": 8,
-      "pt_hash": "fd2111e6489418f3e324daa3a51f8d43451d0db06fb60f7e0ee963d8f40a7a06",
-      "en_hash": "19c744422dbb6a834f925808ebfdcb7385a0411e7700030d6b485bb8bce04c38",
-      "accepted_on": "2026-09-17",
+      "revision": 10,
+      "pt_hash": "9199c2a27cb958219358aedf331fc3df0ea1d2d4e127152ad99a225255f0d5cd",
+      "en_hash": "17d35224d881a383360b456cc81b56d2397965df269f280e6a682faf9eadbf1a",
+      "accepted_on": "2026-10-15",
       "changed_languages": [
         "pt",
         "en"

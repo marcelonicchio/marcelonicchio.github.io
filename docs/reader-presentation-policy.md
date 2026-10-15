@@ -35,6 +35,24 @@ The Full Biography rule does not decide thematic-vertical layout. Verticals keep
 
 A Full Biography rich preview must not force a vertical to become collapsed or visually featured.
 
+### Internet & Performance — continuous-reading correction (15 Oct 2026)
+
+The PT and EN **Internet & Performance** vertical landing pages now use the
+original, full-length chapter HTML directly. They must **not** load the Reader
+disclosure script, wrap chapters in `<details>`, or display the global
+"Controles de leitura / Reading controls" toolbar or per-chapter bottom
+"Clique para recolher / Click to collapse" buttons.
+
+This removal is a *behavioral cleanup*, not an editorial change: preserve
+the original chronology, chapter headings/permalinks, source fragments,
+images, galleries and indexing metadata. The Reader continues to operate
+in Full Biography (with its compact entries and controls); the existing
+selective IA/HAI behavior is not affected.
+
+The loader allowlist and `tools/sync_reader_disclosure_loader.py --check`
+protect against accidentally reinstalling the script on Internet pages.
+`tools/smoke_reader_ux.js` tests both languages.
+
 ## 4. Biography-only chapters
 
 A Full Biography entry may become a registered `biography-only` chapter when it is editorially substantial enough to deserve controlled tags and/or a standalone Chapter Page but does not belong to a thematic vertical.

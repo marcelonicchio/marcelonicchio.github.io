@@ -2,9 +2,9 @@
 /**
  * Browser-level regression smoke test for Reader Page disclosure + pilot Chapter Pages.
  *
- * Full Biography uses compact disclosure by default. Internet & Performance keeps
- * disclosure controls but starts every disclosure open. IA/HAI uses selective disclosure
- * for explicitly registered entries. Culture & Audiovisual remains
+ * Full Biography uses compact disclosure by default. Internet & Performance
+ * is fully open native HTML without Reader controls. IA/HAI uses selective
+ * disclosure for registered entries. Culture & Audiovisual also remains
  * a continuous-reading page and never initializes disclosure.
  *
  * Requires playwright-core supplied outside the repository. CI sets
@@ -138,7 +138,7 @@ async function runDesktop(browser) {
   assert((await mirantteBioPreview.innerText()).includes('tráfego orgânico'), 'Mirantte Full Bio preview lost acquisition problem');
   assert(await mirantteBioPreview.locator('img').getAttribute('src') === '/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp', 'Mirantte Full Bio preview image incorrect');
   const mirantteIndicators = await page.locator('#bio-internet-mirantte .reader-disclosure__badge').allInnerTexts();
-  ['34 fotos', '1 cartão profissional'].forEach((label) => assert(mirantteIndicators.includes(label), `Mirantte indicator missing: ${label}`));
+  ['34 fotos'].forEach((label) => assert(mirantteIndicators.includes(label), `Mirantte indicator missing: ${label}`));
 
   const cookieBioPreviewRich = page.locator('#bio-internet-cookieweb .reader-disclosure__preview');
   assert(await cookieBioPreviewRich.count() === 1, 'CookieWEB Full Bio rich preview missing');
@@ -242,82 +242,86 @@ async function runDesktop(browser) {
   assert(await cookieBio.locator('details.reader-disclosure').getAttribute('open') === null, 'Bottom collapse action did not close CookieWEB');
 
   // Internet stress set: normal URL + large galleries, composite landmark, video count and Chapter Page link.
+  // Internet & Performance is a native, continuous-reading editorial vertical.
+  // No details, Reader toolbar or bottom collapse buttons; the full HTML stays readable.
   await page.goto(`${BASE}/pt/internet/`, {waitUntil: 'networkidle'});
-  const internetDisclosureCount = await page.locator('details.reader-disclosure').count();
-  assert(internetDisclosureCount >= 9, 'Internet normal URL produced too few disclosures');
-  assert(await page.locator('details.reader-disclosure[open]').count() === internetDisclosureCount, 'Internet disclosures must start open by default');
-  assert((await page.locator('html').getAttribute('class') || '').includes('reader-internet-open-default'), 'Internet root lost open-editorial Reader class');
-  assert((await page.getByText('Controles de leitura', {exact: true}).count()) === 1, 'Internet reading-controls label missing');
+  const internetChapters = page.locator('article.article-body > section.chapter.internet-entry');
+  assert(await internetChapters.count() >= 11, 'Internet must preserve its full collection of chapters');
+  assert(await page.locator('details.reader-disclosure').count() === 0, 'Internet must not wrap chapters in collapsible details');
+  assert(await page.locator('.reader-disclosure-controls').count() === 0, 'Internet must not show the legacy reading toolbar');
+  assert(await page.locator('.reader-disclosure__collapse-button, .reader-disclosure__toggle').count() === 0, 'Internet must not expose collapse buttons');
+  assert(!((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active')), 'Internet must not initialize the disclosure Reader');
+  for (const label of ['Controles de leitura', 'Abrir todos', 'Recolher todos', 'Clique para recolher']) {
+    assert(await page.getByText(label, {exact: true}).count() === 0, `Internet still displays legacy Reader text: ${label}`);
+  }
 
   const bbs = page.locator('#bbs');
-  assert(await bbs.getAttribute('data-reader-presentation') === 'always-open', 'Minduim/BBS always-open state missing in Internet');
-  assert(await bbs.locator('details.reader-disclosure').count() === 0, 'Minduim/BBS must remain plain open HTML in Internet');
-  assert(await bbs.locator('.reader-disclosure__toggle').count() === 0, 'Minduim/BBS unexpectedly exposes Reader toggle in Internet');
-  assert(await bbs.locator(':scope > .phase-year').innerText() === '1992–1996', 'BBS date was not separated from its title');
-  assert(await bbs.locator(':scope > h2').innerText() === 'Cultura BBS', 'BBS title still carries its date');
+  assert(await bbs.locator(':scope > .phase-year').innerText() === '1992–1996', 'BBS date lost its original location');
+  assert(await bbs.locator(':scope > h2').innerText() === 'Cultura BBS', 'BBS heading changed');
 
   const mirantte = page.locator('#mirantte');
-  assert((await mirantte.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'Mirantte featured class missing');
-  assert(await mirantte.locator('.reader-disclosure__preview').count() === 0, 'Mirantte rich preview leaked from Full Bio into Internet');
-  assert((await mirantte.locator('.reader-disclosure__excerpt').innerText()).includes('problema de aquisição de tráfego'), 'Mirantte curated summary missing');
-  assert((await mirantte.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('34 fotos')), 'Mirantte gallery badge incorrect');
+  assert(await mirantte.locator(':scope > .phase-year').innerText() === '2004–2008', 'Mirantte date changed');
+  assert(await mirantte.locator(':scope > h2 .entry-title-permalink').getAttribute('href') === '/pt/internet/mirantte-news/', 'Mirantte standalone page link missing');
+  assert(await mirantte.locator('.record-gallery__item').count() === 34, 'Mirantte gallery items were lost');
+  assert(await mirantte.isVisible(), 'Mirantte chapter became hidden');
+  // The editorial header uses the upper half of the original gallery photos 1 and 2.
+  const mirantteFeature = mirantte.locator('.mirantte-feature');
+  const mirantteTiles = mirantteFeature.locator('a.mirantte-feature__link');
+  assert(await mirantteTiles.count() === 2, 'Mirantte lead must contain exactly two stacked images');
+  assert(await mirantteTiles.nth(0).getAttribute('data-gallery-preview') === 'mirantte-news', 'Mirantte photo 1 is not linked to the gallery');
+  assert(await mirantteTiles.nth(1).getAttribute('data-gallery-preview') === 'mirantte-news', 'Mirantte photo 2 is not linked to the gallery');
+  const leadBeforeCopy = await mirantte.evaluate((section) => {
+    const heading = section.querySelector(':scope > h2');
+    const imagePair = section.querySelector(':scope > .mirantte-feature');
+    return heading && imagePair && heading.nextElementSibling === imagePair;
+  });
+  assert(leadBeforeCopy, 'Mirantte cropped pair is not directly below its heading');
+  const imageStyle = await mirantteTiles.nth(0).locator('img').evaluate((img) => ({
+    fit: getComputedStyle(img).objectFit,
+    position: getComputedStyle(img).objectPosition,
+    cropRatio: getComputedStyle(img.parentElement).aspectRatio
+  }));
+  assert(imageStyle.fit === 'cover' && (imageStyle.position.endsWith('0%') || imageStyle.position.includes('top')), `Mirantte highlight needs top crop: ${JSON.stringify(imageStyle)}`);
+  assert(imageStyle.cropRatio === '3 / 2', 'Mirantte highlight must use the rectangular crop');
+  assert(await mirantte.locator('a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'Mirantte obsolete business card still visible');
 
-  const sem = page.locator('#sem');
-  assert((await sem.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'Goobec landmark missing from SEM');
+  await mirantteTiles.nth(0).click();
+  assert(await page.locator('.archive-lightbox:not([hidden]) .archive-lightbox__counter').innerText() === '1 / 34', 'Cropped photo 1 should open at gallery position 1/34');
+  await page.keyboard.press('Escape');
+  await mirantteTiles.nth(1).click();
+  assert(await page.locator('.archive-lightbox:not([hidden]) .archive-lightbox__counter').innerText() === '2 / 34', 'Cropped photo 2 should open at gallery position 2/34');
+  await page.keyboard.press('Escape');
+
   const cookieweb = page.locator('#cookieweb');
-  assert((await cookieweb.locator('details.reader-disclosure').getAttribute('class')).includes('reader-disclosure--featured'), 'CookieWEB featured class missing');
-  assert(await cookieweb.locator('.reader-disclosure__preview').count() === 0, 'CookieWEB rich preview leaked from Full Bio into Internet');
-  assert((await cookieweb.locator('.reader-disclosure__related').innerText()).includes('Goobec'), 'GAP landmark missing from CookieWEB');
-  assert(await cookieweb.locator('summary > .phase-year').innerText() === '2010–2012', 'CookieWEB date was not separated from its title');
-  assert(await cookieweb.locator('summary h2').innerText() === 'Beleza na Web e CookieWEB: Search em escala', 'CookieWEB title still carries its date');
-  const cookieOpenStyle = await cookieweb.locator('details.reader-disclosure').evaluate((el) => ({borderTopWidth: getComputedStyle(el).borderTopWidth, backgroundImage: getComputedStyle(el).backgroundImage, borderRadius: getComputedStyle(el).borderRadius}));
-  assert(cookieOpenStyle.borderTopWidth === '0px', `Open CookieWEB still looks boxed: ${cookieOpenStyle.borderTopWidth}`);
-  assert(cookieOpenStyle.backgroundImage === 'none', `Open CookieWEB still has card background: ${cookieOpenStyle.backgroundImage}`);
-  assert(await cookieweb.locator('.reader-disclosure__toggle').isHidden(), 'Open CookieWEB still exposes accordion CTA');
+  assert(await cookieweb.locator(':scope > .phase-year').innerText() === '2010–2012', 'CookieWEB date changed');
+  assert(await cookieweb.locator(':scope > h2').innerText() === 'Agência CookieWEB - Search em Escala', 'CookieWEB heading changed');
+  assert(await cookieweb.locator('.record-gallery__item').count() === 20, 'CookieWEB gallery items were lost');
+
+  const cookiePhoto18 = cookieweb.locator('.record-gallery__item').nth(17);
+  assert((await cookiePhoto18.getAttribute('data-caption')) === 'Marcelo Nicchio e Natan Sztamfater no aniversário de Natan, em 2012.', 'CookieWEB photo 18 birthday attribution incorrect');
+  assert((await cookiePhoto18.locator('img').getAttribute('alt')) === 'Marcelo Nicchio e Natan Sztamfater no aniversário de Natan, em 2012.', 'CookieWEB photo 18 alt text incorrect');
+  assert((await cookiePhoto18.getAttribute('href')).endsWith('cookieweb04-marcelonicchio_natansztamfater.jpg'), 'CookieWEB photo 18 source image changed');
+
+  assert(await cookieweb.isVisible(), 'CookieWEB chapter became hidden');
 
   const best = page.locator('#best');
-  assert((await best.locator('.reader-disclosure__badge').allInnerTexts()).some((t) => t.includes('4 vídeos')), 'BEST video badge incorrect');
-  assert(await best.locator('.reader-disclosure__preview').count() === 0, 'BEST rich preview leaked from Full Bio into Internet');
-  assert(await best.locator('details.reader-disclosure').getAttribute('open') !== null, 'BEST must start open in Internet');
-  assert(await best.locator('.reader-disclosure__page-link a').getAttribute('href') === '/pt/internet/best-kenshoo/', 'BEST Chapter Page link incorrect');
-  assert(await best.locator('.reader-disclosure__collapse-button').count() === 1, 'Bottom collapse action missing from BEST');
+  assert(await best.locator(':scope > h2 .entry-title-permalink').getAttribute('href') === '/pt/internet/best-kenshoo/', 'BEST Chapter Page link missing');
+  assert(await best.locator('.video-pill').count() === 4, 'BEST video collection was lost');
 
-  // Native keyboard operation and independent-open behavior.
-  const mirantteDetails = mirantte.locator('details.reader-disclosure');
-  const bestDetails = best.locator('details.reader-disclosure');
-  if (await mirantteDetails.getAttribute('open') !== null) {
-    await mirantte.locator('summary').evaluate((el) => el.click());
-    assert(await mirantteDetails.getAttribute('open') !== null, 'Open Internet summary unexpectedly collapsed the editorial entry');
-    await mirantte.locator('.reader-disclosure__collapse-button').click();
-  }
-  const mirantteClosedBorder = await mirantteDetails.evaluate((el) => getComputedStyle(el).borderTopWidth);
-  assert(mirantteClosedBorder !== '0px', 'Collapsed Mirantte did not return to compact card presentation');
-  await mirantte.locator('summary').focus();
-  await page.keyboard.press('Enter');
-  assert(await mirantteDetails.getAttribute('open') !== null, 'Enter key did not open Mirantte disclosure');
-  assert(await bestDetails.getAttribute('open') !== null, 'Opening Mirantte closed BEST');
-
-  // Global controls operate only on actual disclosures; always-open entries stay outside them.
-  await page.getByRole('button', {name: 'Abrir todos'}).click();
-  const total = await page.locator('details.reader-disclosure').count();
-  assert(await page.locator('details.reader-disclosure[open]').count() === total, 'Open all did not open every disclosure');
-  await page.getByRole('button', {name: 'Recolher todos'}).click();
-  assert(await page.locator('details.reader-disclosure[open]').count() === 0, 'Collapse all did not close every disclosure');
-
-  // Print event contract: complete content while printing, state restored afterward.
-  await page.evaluate(() => window.dispatchEvent(new Event('beforeprint')));
-  assert(await page.locator('details.reader-disclosure[open]').count() === total, 'beforeprint did not expose all chapters');
-  await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
-  assert(await page.locator('details.reader-disclosure[open]').count() === 0, 'afterprint did not restore disclosure state');
-
-  // English Internet follows the same open-by-default rule.
+  // English has the identical non-collapsible policy and full open content.
   await page.goto(`${BASE}/en/internet/`, {waitUntil: 'networkidle'});
-  const internetDisclosureCountEn = await page.locator('details.reader-disclosure').count();
-  assert(internetDisclosureCountEn >= 9, 'English Internet normal URL produced too few disclosures');
-  assert(await page.locator('details.reader-disclosure[open]').count() === internetDisclosureCountEn, 'English Internet disclosures must start open by default');
-  assert((await page.locator('html').getAttribute('class') || '').includes('reader-internet-open-default'), 'English Internet root lost open-editorial Reader class');
-  assert((await page.getByText('Reading controls', {exact: true}).count()) === 1, 'English Internet reading-controls label missing');
-  assert(await page.locator('#cookieweb summary > .phase-year').innerText() === '2010–2012', 'English CookieWEB date was not separated from its title');
+  assert(await page.locator('article.article-body > section.chapter.internet-entry').count() >= 11, 'English Internet chapters missing');
+  assert(await page.locator('details.reader-disclosure, .reader-disclosure-controls, .reader-disclosure__collapse-button, .reader-disclosure__toggle').count() === 0, 'English Internet still has disclosure UI');
+  assert(!((await page.locator('html').getAttribute('class') || '').includes('reader-disclosure-active')), 'English Internet initialized disclosure');
+  for (const label of ['Reading controls', 'Open all', 'Collapse all', 'Click to collapse']) {
+    assert(await page.getByText(label, {exact: true}).count() === 0, `English Internet still displays Reader text: ${label}`);
+  }
+  assert(await page.locator('#cookieweb > .phase-year').innerText() === '2010–2012', 'English CookieWEB date changed');
+  assert(await page.locator('#cookieweb > h2').innerText() === 'CookieWEB Agency - Search at Scale', 'English CookieWEB heading changed');
+  assert(await page.locator('#cookieweb .record-gallery__item').nth(17).getAttribute('data-caption') === "Marcelo Nicchio and Natan Sztamfater at Natan's birthday in 2012.", 'English CookieWEB photo 18 birthday attribution incorrect');
+  assert(await page.locator('#mirantte .record-gallery__item').count() === 34, 'English Mirantte gallery was lost');
+  assert(await page.locator('#mirantte .mirantte-feature__link').count() === 2, 'English Mirantte lead pair missing');
+  assert(await page.locator('#mirantte a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'English Mirantte card remains');
 
   // Culture & Audiovisual is intentionally continuous reading: normal and legacy query-flag URLs remain fully open.
   await page.goto(`${BASE}/pt/comunicacao/`, {waitUntil: 'networkidle'});
@@ -344,6 +348,18 @@ async function runDesktop(browser) {
   assert((await page.locator('link[rel="canonical"]').getAttribute('href')).endsWith('/pt/comunicacao/folhateen-orfaos-do-rock/'), 'Folha canonical incorrect');
   assert(await page.locator('.fact-strip .fact').count() === 1, 'Folha hero exposes taxonomy as a KPI');
   assert(await page.locator('.entry-breadcrumbs').count() === 1, 'Folha visible breadcrumbs missing');
+
+  // Generated standalone Chapter Page inherits Mirantte features from the neutral PT/EN fragment.
+  await page.goto(`${BASE}/pt/internet/mirantte-news/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('.entry-page-body > .mirantte-feature .mirantte-feature__link').count() === 2, 'Mirantte standalone feature missing');
+  assert(await page.locator('.record-gallery[data-gallery="mirantte-news"] .record-gallery__item').count() === 34, 'Mirantte standalone gallery lost images');
+  assert(await page.locator('a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'Mirantte standalone card remains');
+  await page.locator('.mirantte-feature__link').nth(1).click();
+  assert(await page.locator('.archive-lightbox:not([hidden]) .archive-lightbox__counter').innerText() === '2 / 34', 'Standalone cropped Mirantte image does not expand into gallery');
+  await page.keyboard.press('Escape');
+  await page.goto(`${BASE}/en/internet/mirantte-news/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('.mirantte-feature__link').count() === 2, 'English standalone Mirantte feature missing');
+  assert(await page.locator('a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'English standalone Mirantte card remains');
 
   await page.goto(`${BASE}/pt/internet/best-kenshoo/`, {waitUntil: 'networkidle'});
   assert(await page.locator('main[data-entry-id="internet-best"]').count() === 1, 'BEST Chapter Page stable id missing');

@@ -7,8 +7,6 @@
   const repoPathByUrl = {
     '/pt/biografia/': 'pt/biografia/index.html',
     '/en/biography/': 'en/biography/index.html',
-    '/pt/internet/': 'pt/internet/index.html',
-    '/en/internet/': 'en/internet/index.html',
     '/pt/ia-hai/': 'pt/ia-hai/index.html',
     '/en/ai-hai/': 'en/ai-hai/index.html'
   };

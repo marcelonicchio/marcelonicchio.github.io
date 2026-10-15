@@ -49,7 +49,7 @@
     requestAnimationFrame(updateControls);
   });
 
-  const links = [...document.querySelectorAll('a.inline-record, a.record-gallery__item')].filter((link) => isImage(link.href));
+  const links = [...document.querySelectorAll('a.inline-record, a.record-gallery__item, a.mirantte-feature__link')].filter((link) => isImage(link.href));
   if (!links.length) return;
 
   // The hidden lightbox image exists from initial page load. Seed it with a
@@ -125,7 +125,16 @@
     returnFocus = link;
     const lightboxGroup = link.closest('[data-lightbox-group]');
     const gallery = link.closest('[data-gallery]');
-    if (lightboxGroup) {
+    const previewGallery = link.dataset.galleryPreview
+      ? galleries.find((item) => item.dataset.gallery === link.dataset.galleryPreview)
+      : null;
+    if (previewGallery) {
+      const galleryItems = [...previewGallery.querySelectorAll('a.record-gallery__item')].filter((item) => isImage(item.href));
+      const matchIndex = galleryItems.findIndex((item) => item.href === link.href);
+      // A stale gallery reference must still open the full image, without a false counter.
+      activeItems = matchIndex >= 0 ? galleryItems : [link];
+      activeIndex = matchIndex >= 0 ? matchIndex : 0;
+    } else if (lightboxGroup) {
       activeItems = [...lightboxGroup.querySelectorAll('a.record-gallery__item, a.inline-record')].filter((item) => isImage(item.href));
       activeIndex = Math.max(0, activeItems.indexOf(link));
     } else if (gallery && link.classList.contains('record-gallery__item')) {

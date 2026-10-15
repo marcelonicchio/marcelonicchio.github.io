@@ -95,7 +95,7 @@ async function main() {
       {
         name: 'Mirantte News', selector: '#bio-internet-mirantte', paragraphs: 4,
         phrase: 'organic traffic', image: '/assets/media/galleries/mirantte-news/mirantte-news-02-480.webp',
-        badges: ['34 photos', '1 business card'], permalink: '/en/internet/mirantte-news/', robots: 'index,follow'
+        badges: ['34 photos'], permalink: '/en/internet/mirantte-news/', robots: 'index,follow'
       },
       {
         name: 'CookieWEB', selector: '#bio-internet-cookieweb', paragraphs: 4,
