@@ -294,7 +294,7 @@ async function runDesktop(browser) {
 
   const cookieweb = page.locator('#cookieweb');
   assert(await cookieweb.locator(':scope > .phase-year').innerText() === '2010–2012', 'CookieWEB date changed');
-  assert(await cookieweb.locator(':scope > h2').innerText() === 'Beleza na Web e CookieWEB: Search em escala', 'CookieWEB heading changed');
+  assert(await cookieweb.locator(':scope > h2').innerText() === 'Agência CookieWEB - Search em Escala', 'CookieWEB heading changed');
   assert(await cookieweb.locator('.record-gallery__item').count() === 20, 'CookieWEB gallery items were lost');
   assert(await cookieweb.isVisible(), 'CookieWEB chapter became hidden');
 
@@ -311,6 +311,7 @@ async function runDesktop(browser) {
     assert(await page.getByText(label, {exact: true}).count() === 0, `English Internet still displays Reader text: ${label}`);
   }
   assert(await page.locator('#cookieweb > .phase-year').innerText() === '2010–2012', 'English CookieWEB date changed');
+  assert(await page.locator('#cookieweb > h2').innerText() === 'CookieWEB Agency - Search at Scale', 'English CookieWEB heading changed');
   assert(await page.locator('#mirantte .record-gallery__item').count() === 34, 'English Mirantte gallery was lost');
   assert(await page.locator('#mirantte .mirantte-feature__link').count() === 2, 'English Mirantte lead pair missing');
   assert(await page.locator('#mirantte a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'English Mirantte card remains');
