@@ -1,0 +1,51 @@
+/* Mirantte News: two archival lead photographs, top-half crops.
+   Source files and the 34-item gallery are never modified. */
+.mirantte-feature{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:10px;
+  width:min(100%,450px);
+  margin:23px 0 30px;
+}
+.mirantte-feature__link{
+  position:relative;
+  display:block;
+  width:100%;
+  aspect-ratio:3 / 2;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:12px;
+  background:#090909;
+  cursor:zoom-in;
+  text-decoration:none;
+  transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.mirantte-feature__link img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  background:#090909;
+}
+.mirantte-feature__link:hover{
+  border-color:rgba(255,255,255,.46);
+  box-shadow:0 9px 28px rgba(0,0,0,.22);
+  transform:translateY(-2px);
+}
+.mirantte-feature__link:focus-visible{
+  outline:2px solid var(--accent-soft);
+  outline-offset:4px;
+}
+@media(max-width:580px){
+  .mirantte-feature{width:100%;gap:8px;margin:20px 0 25px}
+  .mirantte-feature__link{border-radius:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .mirantte-feature__link{transition:none}
+  .mirantte-feature__link:hover{transform:none}
+}
+@media print{
+  .mirantte-feature{width:min(100%,400px);break-inside:avoid}
+  .mirantte-feature__link{break-inside:avoid}
+}
