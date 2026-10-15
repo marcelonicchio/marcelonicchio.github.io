@@ -296,6 +296,12 @@ async function runDesktop(browser) {
   assert(await cookieweb.locator(':scope > .phase-year').innerText() === '2010–2012', 'CookieWEB date changed');
   assert(await cookieweb.locator(':scope > h2').innerText() === 'Agência CookieWEB - Search em Escala', 'CookieWEB heading changed');
   assert(await cookieweb.locator('.record-gallery__item').count() === 20, 'CookieWEB gallery items were lost');
+
+  const cookiePhoto18 = cookieweb.locator('.record-gallery__item').nth(17);
+  assert((await cookiePhoto18.getAttribute('data-caption')) === 'Marcelo Nicchio e Natan Sztamfater no aniversário de Natan, em 2012.', 'CookieWEB photo 18 birthday attribution incorrect');
+  assert((await cookiePhoto18.locator('img').getAttribute('alt')) === 'Marcelo Nicchio e Natan Sztamfater no aniversário de Natan, em 2012.', 'CookieWEB photo 18 alt text incorrect');
+  assert((await cookiePhoto18.getAttribute('href')).endsWith('cookieweb04-marcelonicchio_natansztamfater.jpg'), 'CookieWEB photo 18 source image changed');
+
   assert(await cookieweb.isVisible(), 'CookieWEB chapter became hidden');
 
   const best = page.locator('#best');
@@ -312,6 +318,7 @@ async function runDesktop(browser) {
   }
   assert(await page.locator('#cookieweb > .phase-year').innerText() === '2010–2012', 'English CookieWEB date changed');
   assert(await page.locator('#cookieweb > h2').innerText() === 'CookieWEB Agency - Search at Scale', 'English CookieWEB heading changed');
+  assert(await page.locator('#cookieweb .record-gallery__item').nth(17).getAttribute('data-caption') === "Marcelo Nicchio and Natan Sztamfater at Natan's birthday in 2012.", 'English CookieWEB photo 18 birthday attribution incorrect');
   assert(await page.locator('#mirantte .record-gallery__item').count() === 34, 'English Mirantte gallery was lost');
   assert(await page.locator('#mirantte .mirantte-feature__link').count() === 2, 'English Mirantte lead pair missing');
   assert(await page.locator('#mirantte a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'English Mirantte card remains');
