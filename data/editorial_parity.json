@@ -213,10 +213,10 @@
       ]
     },
     "internet-mirantte": {
-      "revision": 7,
-      "pt_hash": "89db0e370bd4d698ef34b07bdb977019f2b64d9041441b4f6f9a1cc503bd6373",
-      "en_hash": "aa659803e3544d6b90c344c30e0bebfe0ed119badf5dd7cc5157b99f8838c38c",
-      "accepted_on": "2026-09-17",
+      "revision": 8,
+      "pt_hash": "06fd62cfc4999c75ab31fb28ad96a6a6601843c765151ef46acb5cad26829d07",
+      "en_hash": "2d54c45429841c009b3afaa01e06614cdff9684e9289e6578268202ae8f5e78a",
+      "accepted_on": "2026-10-15",
       "changed_languages": [
         "pt",
         "en"
