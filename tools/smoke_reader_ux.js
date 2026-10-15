@@ -264,6 +264,33 @@ async function runDesktop(browser) {
   assert(await mirantte.locator(':scope > h2 .entry-title-permalink').getAttribute('href') === '/pt/internet/mirantte-news/', 'Mirantte standalone page link missing');
   assert(await mirantte.locator('.record-gallery__item').count() === 34, 'Mirantte gallery items were lost');
   assert(await mirantte.isVisible(), 'Mirantte chapter became hidden');
+  // The editorial header uses the upper half of the original gallery photos 1 and 2.
+  const mirantteFeature = mirantte.locator('.mirantte-feature');
+  const mirantteTiles = mirantteFeature.locator('a.mirantte-feature__link');
+  assert(await mirantteTiles.count() === 2, 'Mirantte lead must contain exactly two stacked images');
+  assert(await mirantteTiles.nth(0).getAttribute('data-gallery-preview') === 'mirantte-news', 'Mirantte photo 1 is not linked to the gallery');
+  assert(await mirantteTiles.nth(1).getAttribute('data-gallery-preview') === 'mirantte-news', 'Mirantte photo 2 is not linked to the gallery');
+  const leadBeforeCopy = await mirantte.evaluate((section) => {
+    const heading = section.querySelector(':scope > h2');
+    const imagePair = section.querySelector(':scope > .mirantte-feature');
+    return heading && imagePair && heading.nextElementSibling === imagePair;
+  });
+  assert(leadBeforeCopy, 'Mirantte cropped pair is not directly below its heading');
+  const imageStyle = await mirantteTiles.nth(0).locator('img').evaluate((img) => ({
+    fit: getComputedStyle(img).objectFit,
+    position: getComputedStyle(img).objectPosition,
+    cropRatio: getComputedStyle(img.parentElement).aspectRatio
+  }));
+  assert(imageStyle.fit === 'cover' && imageStyle.position.includes('top'), 'Mirantte highlight must crop images at the top');
+  assert(imageStyle.cropRatio === '3 / 2', 'Mirantte highlight must use the rectangular crop');
+  assert(await mirantte.locator('a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'Mirantte obsolete business card still visible');
+
+  await mirantteTiles.nth(0).click();
+  assert(await page.locator('.archive-lightbox:not([hidden]) .archive-lightbox__counter').innerText() === '1 / 34', 'Cropped photo 1 should open at gallery position 1/34');
+  await page.keyboard.press('Escape');
+  await mirantteTiles.nth(1).click();
+  assert(await page.locator('.archive-lightbox:not([hidden]) .archive-lightbox__counter').innerText() === '2 / 34', 'Cropped photo 2 should open at gallery position 2/34');
+  await page.keyboard.press('Escape');
 
   const cookieweb = page.locator('#cookieweb');
   assert(await cookieweb.locator(':scope > .phase-year').innerText() === '2010–2012', 'CookieWEB date changed');
@@ -285,6 +312,8 @@ async function runDesktop(browser) {
   }
   assert(await page.locator('#cookieweb > .phase-year').innerText() === '2010–2012', 'English CookieWEB date changed');
   assert(await page.locator('#mirantte .record-gallery__item').count() === 34, 'English Mirantte gallery was lost');
+  assert(await page.locator('#mirantte .mirantte-feature__link').count() === 2, 'English Mirantte lead pair missing');
+  assert(await page.locator('#mirantte a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'English Mirantte card remains');
 
   // Culture & Audiovisual is intentionally continuous reading: normal and legacy query-flag URLs remain fully open.
   await page.goto(`${BASE}/pt/comunicacao/`, {waitUntil: 'networkidle'});
@@ -311,6 +340,18 @@ async function runDesktop(browser) {
   assert((await page.locator('link[rel="canonical"]').getAttribute('href')).endsWith('/pt/comunicacao/folhateen-orfaos-do-rock/'), 'Folha canonical incorrect');
   assert(await page.locator('.fact-strip .fact').count() === 1, 'Folha hero exposes taxonomy as a KPI');
   assert(await page.locator('.entry-breadcrumbs').count() === 1, 'Folha visible breadcrumbs missing');
+
+  // Generated standalone Chapter Page inherits Mirantte features from the neutral PT/EN fragment.
+  await page.goto(`${BASE}/pt/internet/mirantte-news/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('.entry-page-body > .mirantte-feature .mirantte-feature__link').count() === 2, 'Mirantte standalone feature missing');
+  assert(await page.locator('.record-gallery[data-gallery="mirantte-news"] .record-gallery__item').count() === 34, 'Mirantte standalone gallery lost images');
+  assert(await page.locator('a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'Mirantte standalone card remains');
+  await page.locator('.mirantte-feature__link').nth(1).click();
+  assert(await page.locator('.archive-lightbox:not([hidden]) .archive-lightbox__counter').innerText() === '2 / 34', 'Standalone cropped Mirantte image does not expand into gallery');
+  await page.keyboard.press('Escape');
+  await page.goto(`${BASE}/en/internet/mirantte-news/`, {waitUntil: 'networkidle'});
+  assert(await page.locator('.mirantte-feature__link').count() === 2, 'English standalone Mirantte feature missing');
+  assert(await page.locator('a[href="/assets/archive/mirantte-news-card.webp"]').count() === 0, 'English standalone Mirantte card remains');
 
   await page.goto(`${BASE}/pt/internet/best-kenshoo/`, {waitUntil: 'networkidle'});
   assert(await page.locator('main[data-entry-id="internet-best"]').count() === 1, 'BEST Chapter Page stable id missing');
