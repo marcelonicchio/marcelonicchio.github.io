@@ -350,11 +350,18 @@ async function auditPsinetYellowTestimony(browser) {
 
       const chartLocator = page.locator('.psinet-market-figure img');
       assert(await chartLocator.count() === 1, target.path + ': expected one PSINet Nasdaq chart');
+      // Full Biography Reader content can be deferred/collapsed on mobile.
+      // Expand those sections before asking Chrome to load the lazy chart.
+      await page.evaluate(() => {
+        document.querySelectorAll('details.reader-disclosure').forEach(node => { node.open = true; });
+        const img = document.querySelector('.psinet-market-figure img');
+        if (img) img.loading = 'eager';
+      });
       await chartLocator.scrollIntoViewIfNeeded();
       await page.waitForFunction(() => {
         const img = document.querySelector('.psinet-market-figure img');
         return img && img.complete && img.naturalWidth > 0;
-      }, undefined, {timeout:15000});
+      }, undefined, {timeout:30000});
       const chart = await page.evaluate(() => {
         const figure = document.querySelector('.psinet-market-figure');
         const img = figure?.querySelector('img');
