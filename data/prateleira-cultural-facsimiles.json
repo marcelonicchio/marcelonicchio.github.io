@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-22",
+  "updated": "2026-10-17",
   "gallery_id": "prateleira-cultural",
   "page": "pt/comunicacao/prateleira-cultural-revista-sinal-verde/index.html",
-  "note": "Editorial mapping supplied by Marcelo Nicchio. Photo 19 remains archive-only; O Planeta Google spans two scanned pages.",
+  "note": "Publication months and years supplied by Marcelo Nicchio from his Google Photos archive of the original Sinal Verde issues. Photo 19 remains archive-only; O Planeta Google spans two scanned pages.",
   "items": [
     {
       "photo": "1",
@@ -152,6 +152,142 @@
       "gallery_item": "24",
       "article_id": "skypeout-2004",
       "title": "Telefone é coisa do passado — Parte 2"
+    }
+  ],
+  "chronology": [
+    {
+      "article_id": "desespero-2003",
+      "start": "2003-06",
+      "label": "Junho 2003",
+      "caption_date": "junho de 2003"
+    },
+    {
+      "article_id": "cidade-de-deus-2003",
+      "start": "2003-07",
+      "label": "Julho 2003",
+      "caption_date": "julho de 2003"
+    },
+    {
+      "article_id": "ramones-2003",
+      "start": "2003-08",
+      "label": "Agosto 2003",
+      "caption_date": "agosto de 2003"
+    },
+    {
+      "article_id": "vmb-2003",
+      "start": "2003-09",
+      "label": "Setembro 2003",
+      "caption_date": "setembro de 2003"
+    },
+    {
+      "article_id": "domingo-ilegal-2003",
+      "start": "2003-10",
+      "label": "Outubro 2003",
+      "caption_date": "outubro de 2003"
+    },
+    {
+      "article_id": "matrix-2003",
+      "start": "2003-11",
+      "label": "Novembro 2003",
+      "caption_date": "novembro de 2003"
+    },
+    {
+      "article_id": "encontros-de-natal-2003",
+      "start": "2003-12",
+      "label": "Dezembro 2003",
+      "caption_date": "dezembro de 2003"
+    },
+    {
+      "article_id": "cantamos-a-bola-2004",
+      "start": "2004-01",
+      "label": "Janeiro 2004",
+      "caption_date": "janeiro de 2004"
+    },
+    {
+      "article_id": "kurt-cobain-2004",
+      "start": "2004-05",
+      "label": "Maio 2004",
+      "caption_date": "maio de 2004"
+    },
+    {
+      "article_id": "skype-parte-1",
+      "start": "2004-05",
+      "label": "Maio 2004",
+      "caption_date": "maio de 2004"
+    },
+    {
+      "article_id": "panico-na-tv-2004",
+      "start": "2004-08",
+      "label": "Agosto 2004",
+      "caption_date": "agosto de 2004"
+    },
+    {
+      "article_id": "mapas-sentimentais",
+      "start": "2004-10",
+      "label": "Outubro 2004",
+      "caption_date": "outubro de 2004"
+    },
+    {
+      "article_id": "skypeout-2004",
+      "start": "2004-10",
+      "label": "Outubro 2004",
+      "caption_date": "outubro de 2004"
+    },
+    {
+      "article_id": "paralisia-cultural-2004",
+      "start": "2004-12",
+      "label": "Dezembro 2004",
+      "caption_date": "dezembro de 2004"
+    },
+    {
+      "article_id": "orkut-2004",
+      "start": "2004-12",
+      "label": "Dezembro 2004",
+      "caption_date": "dezembro de 2004"
+    },
+    {
+      "article_id": "seu-jorge-2005",
+      "start": "2005-03",
+      "label": "Março 2005",
+      "caption_date": "março de 2005"
+    },
+    {
+      "article_id": "romeu-julieta-2005",
+      "start": "2005-03",
+      "label": "Março 2005",
+      "caption_date": "março de 2005"
+    },
+    {
+      "article_id": "ondas-do-radio-2005",
+      "start": "2005-06",
+      "label": "Junho 2005",
+      "caption_date": "junho de 2005"
+    },
+    {
+      "article_id": "rss-2005",
+      "start": "2005-09",
+      "label": "Setembro 2005",
+      "caption_date": "setembro de 2005"
+    },
+    {
+      "article_id": "planeta-google-2005",
+      "start": "2005-09",
+      "label": "Setembro 2005",
+      "caption_date": "setembro de 2005"
+    },
+    {
+      "article_id": "365-2005",
+      "start": "2005-11",
+      "end": "2005-12",
+      "label": "Novembro/dezembro 2005",
+      "caption_date": "novembro/dezembro de 2005"
+    },
+    {
+      "article_id": "lounge-2006",
+      "start": "2006-03",
+      "end": "2006-04",
+      "label": "Março/abril 2006",
+      "caption_date": "março/abril de 2006"
     }
   ]
 }

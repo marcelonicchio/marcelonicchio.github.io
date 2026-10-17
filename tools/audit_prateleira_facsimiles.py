@@ -137,9 +137,67 @@ def main() -> int:
     if len(archive_gallery.select("a.record-gallery__item")) != EXPECTED_SCANS:
         raise AssertionError("Top Prateleira archive carousel no longer contains 24 scans")
 
+
+    # Chronology: author-confirmed publication month/year must match page order,
+    # both navigation indexes, visible article dates and facsimile captions.
+    chronology = mapping.get("chronology", [])
+    if len(chronology) != EXPECTED_TRANSCRIPTIONS:
+        raise AssertionError(f"Expected 22 publication dates, found {len(chronology)}")
+    chronological_ids = [row["article_id"] for row in chronology]
+    if len(set(chronological_ids)) != EXPECTED_TRANSCRIPTIONS or set(chronological_ids) != set(article_ids):
+        raise AssertionError("Publication chronology and facsimile article ids disagree")
+    if chronological_ids != [article["id"] for article in page_articles]:
+        raise AssertionError("Transcriptions are not rendered in confirmed publication order")
+    dates = [row["start"] for row in chronology]
+    if dates != sorted(dates):
+        raise AssertionError("Publication chronology must follow ascending month/year")
+    for row in chronology:
+        if len(row["start"]) != 7 or row["start"][4] != "-" or row["start"][5:] not in [f"{m:02d}" for m in range(1, 13)]:
+            raise AssertionError(f"Invalid year/month for {row['article_id']}")
+        if row.get("end") and row["end"] < row["start"]:
+            raise AssertionError(f"Invalid issue range for {row['article_id']}")
+        article = soup.find("article", id=row["article_id"])
+        meta = article.select_one(".prateleira-column__meta")
+        if meta is None or not meta.get_text(" ", strip=True).startswith(row["label"] + " ·"):
+            raise AssertionError(f"{row['article_id']}: publication date in article differs from registry")
+        caption = article.select_one(".prateleira-facsimile figcaption")
+        if caption is None or row["label"] not in caption.get_text(" ", strip=True):
+            raise AssertionError(f"{row['article_id']}: facsimile caption missing publication date")
+    expected_years = ["2003", "2004", "2005", "2006"]
+    rendered_years = [year.find("h2").get_text(" ", strip=True) for year in soup.select("section.prateleira-year")]
+    if rendered_years != expected_years:
+        raise AssertionError(f"Unexpected year sections: {rendered_years}")
+    for selector in (".prateleira-mobile-toc", "aside.prateleira-toc"):
+        nav = soup.select_one(selector)
+        nav_ids = [a["href"].lstrip("#") for a in nav.select('a[href^="#"]') if a["href"] != "#arquivo-colunas"]
+        if nav_ids != chronological_ids:
+            raise AssertionError(f"{selector}: navigation not in confirmed chronological order")
+        nav_years = [tag.get_text(" ", strip=True) for tag in nav.select(".prateleira-toc__year")]
+        if nav_years != expected_years:
+            raise AssertionError(f"{selector}: has obsolete inferred year groups")
+    carousel_items = archive_gallery.select("a.record-gallery__item")
+    by_date_id = {row["article_id"]: row for row in chronology}
+    for scan, row in zip(carousel_items, mapping["items"]):
+        expected = by_date_id.get(row["article_id"])
+        visible = scan.get("data-caption", "")
+        if expected and expected["caption_date"] not in visible:
+            raise AssertionError(f"Gallery photo {row['photo']}: confirmed date absent from lightbox caption")
+        if not expected and "sem data identificada" not in visible:
+            raise AssertionError(f"Archive-only gallery photo {row['photo']}: must not assert a publication date")
+    scripts = [json.loads(script.string) for script in soup.select('script[type="application/ld+json"]') if script.string]
+    lists = [node["mainEntity"]["itemListElement"]
+             for graph in scripts for node in (graph.get("@graph", [graph]))
+             if isinstance(node, dict) and isinstance(node.get("mainEntity"), dict)
+             and node["mainEntity"].get("@type") == "ItemList"]
+    if len(lists) != 1:
+        raise AssertionError("Expected exactly one Prateleira Article ItemList in structured data")
+    schema_ids = [entry["item"]["url"].split("#")[-1] for entry in lists[0]]
+    if schema_ids != chronological_ids:
+        raise AssertionError("Article structured data not in confirmed chronological order")
+
     print(
         "Prateleira facsimile mapping OK: "
-        "22 transcriptions, 23 paired scan pages, 1 archive-only page, 24-page carousel preserved."
+        "22 dated transcriptions in verified chronology, 23 paired scan pages, 1 archive-only page, 24-page carousel preserved."
     )
     return 0
 
