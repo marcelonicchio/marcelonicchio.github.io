@@ -37,6 +37,8 @@ LAUNCH_INDEXABLE = {
     "en/internet/best-kenshoo/index.html",
     "pt/internet/mirantte-news/index.html",
     "en/internet/mirantte-news/index.html",
+    "pt/internet/psinet-hosting-corporativo/index.html",
+    "en/internet/psinet-corporate-hosting/index.html",
     "pt/internet/cookieweb/index.html",
     "en/internet/cookieweb/index.html",
     "pt/comunicacao/folhateen-orfaos-do-rock/index.html",

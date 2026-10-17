@@ -80,6 +80,29 @@ def audit(lang: str, path: Path):
             f"{path.relative_to(ROOT)}: Internet entry order mismatch; expected={expected}, found={entries}"
         )
 
+
+    # PSINet has a concise Reader view and a preserved indexable long-form archive.
+    import json
+    registry = json.loads((ROOT / "data/entries.json").read_text(encoding="utf-8"))
+    psinet = next(e for e in registry["entries"] if e["id"] == "internet-psinet")
+    vertical = article.select_one("#psinet")
+    if vertical.select_one(".psinet-testimony") is None or vertical.select_one(".psinet-market-figure") is None:
+        raise AssertionError("PSINet Reader lacks testimony or Nasdaq chart")
+    if vertical.select_one('[data-gallery="psinet"]') is None:
+        raise AssertionError("PSINet Reader lacks gallery")
+    chapter_url = "/pt/internet/psinet-hosting-corporativo/" if lang == "pt" else "/en/internet/psinet-corporate-hosting/"
+    if vertical.select_one(f'a.archive-text-link[href="{chapter_url}"]') is None:
+        raise AssertionError("PSINet Reader lacks long-form archive CTA")
+    archived = (ROOT / psinet["chapter_page"]["body_source"][f"{lang}_path"]).read_text(encoding="utf-8")
+    if len(archived) < 12000 or len(archived) <= len(vertical.get_text(" ", strip=True)):
+        raise AssertionError("Complete PSINet source is missing or truncated")
+    chapter = BeautifulSoup((ROOT / psinet["chapter_page"][f"{lang}_path"]).read_text(encoding="utf-8"), "html.parser")
+    robots = chapter.find("meta", attrs={"name": "robots"})
+    if robots is None or robots.get("content") != "index,follow":
+        raise AssertionError("PSINet full page must be index,follow")
+    if psinet["date"][lang] != "2000–2001":
+        raise AssertionError("PSINet dates must cover 2000–2001")
+
     closing = article.select_one(f"#{CLOSING_ID[lang]}")
     if closing is None:
         raise AssertionError(f"{path.relative_to(ROOT)}: closing synthesis #{CLOSING_ID[lang]} missing")

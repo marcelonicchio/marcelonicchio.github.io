@@ -117,7 +117,8 @@ def tag_labels(taxonomy: dict[str, Any]) -> dict[str, dict[str, str]]:
 
 
 def chapter_body(entry: dict[str, Any], lang: str) -> str:
-    source_rel = entry["source"][f"{lang}_path"]
+    source_rel = (entry.get("chapter_page", {}).get("body_source", {}).get(f"{lang}_path")
+                  or entry["source"][f"{lang}_path"])
     raw = (ROOT / source_rel).read_text(encoding="utf-8").strip()
     if entry.get("reader_scope") != "biography-only":
         body = raw

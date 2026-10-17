@@ -1610,8 +1610,8 @@
       "kind": "chapter",
       "domain": "internet",
       "date": {
-        "pt": "2000",
-        "en": "2000"
+        "pt": "2000–2001",
+        "en": "2000–2001"
       },
       "title": {
         "pt": "PSINet: Hosting Corporativo. A \"Bolha Ponto Com\" vista de dentro.",
@@ -1654,9 +1654,13 @@
       },
       "chapter_page": {
         "status": "pilot",
-        "indexing": "noindex,follow",
+        "indexing": "index,follow",
         "pt_path": "pt/internet/psinet-hosting-corporativo/index.html",
-        "en_path": "en/internet/psinet-corporate-hosting/index.html"
+        "en_path": "en/internet/psinet-corporate-hosting/index.html",
+        "body_source": {
+          "pt_path": "content/chapters/pt/internet-psinet-full.inc",
+          "en_path": "content/chapters/en/internet-psinet-full.inc"
+        }
       }
     },
     {

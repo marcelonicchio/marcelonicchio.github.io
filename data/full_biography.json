@@ -440,7 +440,7 @@
     {
       "id": "internet-psinet",
       "era": "cruzamentos-1992-2000",
-      "date": "2000",
+      "date": "2000–2001",
       "domain": "internet",
       "source": {
         "pt": {
@@ -649,7 +649,9 @@
       "era": "expansao-2001-2008",
       "date": "2004–2008",
       "domain": "internet",
-      "exclude_selectors": [".mirantte-feature"],
+      "exclude_selectors": [
+        ".mirantte-feature"
+      ],
       "source": {
         "pt": {
           "path": "pt/internet/index.html",
