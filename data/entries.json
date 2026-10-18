@@ -221,6 +221,10 @@
           "pt": "Mirantte News e a descoberta de Search",
           "en": "Mirantte News and the discovery of Search"
         }
+      },
+      "vertical_read_more": {
+        "pt": "Abrir Mirantte News em página própria →",
+        "en": "Open the Mirantte News feature page →"
       }
     },
     {
@@ -387,6 +391,10 @@
           "pt": "Marcelo Nicchio na CookieWEB (2010–2012): Beleza na Web, liderança de SEM, certificações Google e operação de mais de 22 contas.",
           "en": "Marcelo Nicchio at CookieWEB (2010–2012): Beleza na Web, SEM leadership, Google certifications and an operation spanning 22+ accounts."
         }
+      },
+      "vertical_read_more": {
+        "pt": "Abrir a história da CookieWEB em página própria →",
+        "en": "Open the CookieWEB feature page →"
       }
     },
     {
@@ -531,6 +539,10 @@
             "summary": "The cover story published after Joey Ramone's death also belongs to Marcelo Nicchio's musical timeline: Ramones were among Coitado do Próximo's declared influences, and his appearance in Folha de S.Paulo records his perspective on punk, DIY practice and Brazil's underground scene."
           }
         ]
+      },
+      "vertical_read_more": {
+        "pt": "Abrir Órfãos do Rock e seus documentos →",
+        "en": "Open Orphans of Rock and its archival documents →"
       }
     },
     {
@@ -686,6 +698,10 @@
           "pt": "Meia-Noite e Uns (RedeTV!, 2006): direção artística e produção executiva de Marcelo Nicchio, conceito visual, trilha, fotos e vídeos.",
           "en": "Meia-Noite e Uns (RedeTV!, 2006): Marcelo Nicchio’s artistic direction and executive production, visual concept, music, photos and video."
         }
+      },
+      "vertical_read_more": {
+        "pt": "Explorar Meia-Noite e Uns em página própria →",
+        "en": "Explore Meia-Noite e Uns on its own page →"
       }
     },
     {
@@ -950,6 +966,10 @@
           "width": 1100,
           "height": 619
         }
+      },
+      "vertical_read_more": {
+        "pt": "Explorar BEST / Kenshoo em página própria →",
+        "en": "Explore BEST / Kenshoo on its own page →"
       }
     },
     {
@@ -1116,6 +1136,10 @@
         "en": [
           "en/biography/index.html"
         ]
+      },
+      "vertical_read_more": {
+        "pt": "Explorar Melissa 1.0 em página própria →",
+        "en": "Explore Melissa 1.0 on its own page →"
       }
     },
     {
@@ -1661,6 +1685,10 @@
           "pt_path": "content/chapters/pt/internet-psinet-full.inc",
           "en_path": "content/chapters/en/internet-psinet-full.inc"
         }
+      },
+      "vertical_read_more": {
+        "pt": "Ler a história completa da PSINet →",
+        "en": "Read the complete PSINet story →"
       }
     },
     {

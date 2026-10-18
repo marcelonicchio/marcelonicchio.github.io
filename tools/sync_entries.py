@@ -85,6 +85,26 @@ def render_heading(heading_html: str, entry: dict[str, Any], lang: str) -> str:
 
 def render_vertical_fragment(entry: dict[str, Any], lang: str) -> str:
     fragment = fragment_path(entry, lang).read_text(encoding="utf-8").strip()
+    # The standalone reader CTA lives only on thematic verticals, not on the
+    # independently generated Chapter Page. If an old inline action exists,
+    # move it after the entire entry (including its image gallery).
+    read_more = entry.get("vertical_read_more", {}).get(lang)
+    if read_more:
+        href = chapter_page_href(entry, lang)
+        if href is None:
+            raise RuntimeError(f"{entry['id']}:{lang}: reader CTA requires a Chapter Page")
+        old_cta = re.compile(
+            r'<p class="archive-reading-action"><a class="archive-text-link"[^>]*>.*?</a></p>',
+            flags=re.S | re.I,
+        )
+        fragment, removed = old_cta.subn("", fragment)
+        if removed > 1:
+            raise RuntimeError(f"{entry['id']}:{lang}: multiple old reader CTAs")
+        fragment = fragment.rstrip() + (
+            '\n<p class="archive-reading-action">'
+            f'<a class="archive-text-link" href="{html.escape(href, quote=True)}">'
+            f'{html.escape(read_more)}</a></p>'
+        )
     cfg = entry.get("vertical_extension", {})
     raw_extension = cfg.get(f"{lang}_path")
     if not raw_extension:
