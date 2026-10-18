@@ -453,7 +453,10 @@
           "kind": "section",
           "selector": "#psinet"
         }
-      }
+      },
+      "exclude_selectors": [
+        "p.archive-reading-action"
+      ]
     },
     {
       "id": "music-etesp-fatec-2000",
@@ -557,7 +560,10 @@
           "selector": "#folha"
         }
       },
-      "date_en": "Apr. 23, 2001"
+      "date_en": "Apr. 23, 2001",
+      "exclude_selectors": [
+        "p.archive-reading-action"
+      ]
     },
     {
       "id": "music-programa-jo",
@@ -650,7 +656,8 @@
       "date": "2004–2008",
       "domain": "internet",
       "exclude_selectors": [
-        ".mirantte-feature"
+        ".mirantte-feature",
+        "p.archive-reading-action"
       ],
       "source": {
         "pt": {
@@ -681,7 +688,10 @@
           "kind": "section",
           "selector": "#meia-noite"
         }
-      }
+      },
+      "exclude_selectors": [
+        "p.archive-reading-action"
+      ]
     },
     {
       "id": "spirituality-seeker",
@@ -734,7 +744,10 @@
           "kind": "section",
           "selector": "#cookieweb"
         }
-      }
+      },
+      "exclude_selectors": [
+        "p.archive-reading-action"
+      ]
     },
     {
       "id": "internet-clickland",
@@ -789,7 +802,10 @@
           "kind": "section",
           "selector": "#best"
         }
-      }
+      },
+      "exclude_selectors": [
+        "p.archive-reading-action"
+      ]
     },
     {
       "id": "internet-dialetto",
@@ -939,7 +955,10 @@
           "selector": "#melissa"
         }
       },
-      "date_en": "Jan. 2026"
+      "date_en": "Jan. 2026",
+      "exclude_selectors": [
+        "p.archive-reading-action"
+      ]
     },
     {
       "id": "hai-pro1",
