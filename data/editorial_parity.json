@@ -133,10 +133,10 @@
       ]
     },
     "internet-psinet": {
-      "revision": 8,
-      "pt_hash": "54a9212e272d8618b701e44436d54e1910358fd115ec627958c4712c100d67ec",
-      "en_hash": "b9a166bd2d9cc68e11bb08efdf132f522a2938d99cddf9e94427e6321972967f",
-      "accepted_on": "2026-10-17",
+      "revision": 9,
+      "pt_hash": "4442be6300a3266c0d1e9d9b2959dc260b1224910d97b5801967daeda26dea1c",
+      "en_hash": "91d45a8e760c0112362dd95034e5c15cc37046e17bead3e2874201525dd4f434",
+      "accepted_on": "2026-10-18",
       "changed_languages": [
         "pt",
         "en"
@@ -163,10 +163,10 @@
       ]
     },
     "communication-folha": {
-      "revision": 9,
-      "pt_hash": "cc6f2247004b566a9e5b5372cf8fabe549e8064e1f32358e670eafe5387c2168",
-      "en_hash": "94805848489e7cae23cc0b5556f418d0efc764b45bc2d78ee19698e7cb32dee5",
-      "accepted_on": "2026-09-21",
+      "revision": 10,
+      "pt_hash": "23019bf0d08bc3ab1d375326704569187cbe1483a64a01ae69957d18d414c175",
+      "en_hash": "ec27608d14c188951858bdba05277951239a0a2a885a67d0a8b6961b92fd4226",
+      "accepted_on": "2026-10-18",
       "changed_languages": [
         "pt",
         "en"
@@ -213,20 +213,20 @@
       ]
     },
     "internet-mirantte": {
-      "revision": 8,
-      "pt_hash": "06fd62cfc4999c75ab31fb28ad96a6a6601843c765151ef46acb5cad26829d07",
-      "en_hash": "2d54c45429841c009b3afaa01e06614cdff9684e9289e6578268202ae8f5e78a",
-      "accepted_on": "2026-10-15",
+      "revision": 9,
+      "pt_hash": "833e80aa94311cf6aa1174a2d53651a6ff705c99d3fc55e0d202a7bdd2ecffc4",
+      "en_hash": "6bbb233280f7359a57cb88938168152f58cadf67e17836059dd4d57fc2c280c1",
+      "accepted_on": "2026-10-18",
       "changed_languages": [
         "pt",
         "en"
       ]
     },
     "audiovisual-meia-noite": {
-      "revision": 7,
-      "pt_hash": "f3752e1d67c12ea2b5150ff02055c70e631a8dfcc85179548819adf1b90dbeda",
-      "en_hash": "e4221082648aad4fbf891593dec1bce76c7c6e056b752c16b77ffb238ae4fad0",
-      "accepted_on": "2026-09-21",
+      "revision": 8,
+      "pt_hash": "65220098d668315fda52f24ca8f0cfb0b8acf6443d00df07ebf5eca8bd55a6a1",
+      "en_hash": "727f06a359e19b0ad49c9f5f1923f5c26564a4a059fd148929cb821ffb76da5c",
+      "accepted_on": "2026-10-18",
       "changed_languages": [
         "pt",
         "en"
@@ -243,10 +243,10 @@
       ]
     },
     "internet-cookieweb": {
-      "revision": 10,
-      "pt_hash": "9199c2a27cb958219358aedf331fc3df0ea1d2d4e127152ad99a225255f0d5cd",
-      "en_hash": "17d35224d881a383360b456cc81b56d2397965df269f280e6a682faf9eadbf1a",
-      "accepted_on": "2026-10-15",
+      "revision": 11,
+      "pt_hash": "d7ca526f0ec9f5165268d50abafa01aacf071995f6115a205a69eec64770d83c",
+      "en_hash": "abe1dd8ed9e39e6b79a4d127f5abea487fcb45f0851e5cdaf6c7219afeb18bdd",
+      "accepted_on": "2026-10-18",
       "changed_languages": [
         "pt",
         "en"
@@ -273,10 +273,10 @@
       ]
     },
     "internet-best": {
-      "revision": 13,
-      "pt_hash": "9ff50b8445620dd356888ebd289d40de8eafb4f97b027886eb183c37d23205c3",
-      "en_hash": "e829c2b92342722ffd96528987670d67accc9b1397ddbd87c7690e0c7ea0cce0",
-      "accepted_on": "2026-09-17",
+      "revision": 14,
+      "pt_hash": "079f62d5654d3a2b69f7fa4af31c29f120447c92aa53e8a0f9c77eaca90b8ff7",
+      "en_hash": "9c388d52bd88537e9bc9deb69caea43514d80cb34e7257f76eac50a839c3d986",
+      "accepted_on": "2026-10-18",
       "changed_languages": [
         "pt",
         "en"
@@ -349,10 +349,10 @@
       "accepted_on": "2026-08-27"
     },
     "hai-melissa": {
-      "revision": 7,
-      "pt_hash": "28fdcb5aec92fed33ebb4d542855c1271101f5756a9445da336c11ea663fbc2b",
-      "en_hash": "8190e53dd781c8412c05ee462874dc44a050acec0d5cd5c6af64d33950a4b4b9",
-      "accepted_on": "2026-09-22",
+      "revision": 8,
+      "pt_hash": "3c9a96645166efcf37d956d3f770c4060420b65b8df6425a8a2bc49531de1f19",
+      "en_hash": "93844fd98557be0a91587a5073ae5baec4930d6ada1a1e6bf1b02736018788da",
+      "accepted_on": "2026-10-18",
       "changed_languages": [
         "pt",
         "en"

@@ -343,6 +343,30 @@ def main() -> int:
                 if match is None:
                     errors.append(f"{entry_id}:{lang}: thematic vertical is not managed by entry-source markers")
                 else:
+                    read_more = entry.get("vertical_read_more", {}).get(lang)
+                    if read_more:
+                        target_node = select_one(verticals[0]["path"], verticals[0]["selector"], cache)
+                        chapter_href = public_path_for(entry["chapter_page"][f"{lang}_path"])
+                        actions = target_node.select("p.archive-reading-action > a.archive-text-link")
+                        matches = [
+                            link for link in actions
+                            if link.get("href") == chapter_href
+                            and link.get_text(" ", strip=True) == read_more
+                        ]
+                        if len(matches) != 1:
+                            errors.append(
+                                f"{entry_id}:{lang}: expected one explicit editorial CTA to {chapter_href}"
+                            )
+                        else:
+                            gallery_nodes = target_node.select("[data-gallery]")
+                            if gallery_nodes:
+                                nodes = list(target_node.descendants)
+                                if nodes.index(matches[0]) <= nodes.index(gallery_nodes[-1]):
+                                    errors.append(
+                                        f"{entry_id}:{lang}: editorial CTA must follow the gallery"
+                                    )
+                        if not match.group(1).rstrip().endswith("</p>"):
+                            errors.append(f"{entry_id}:{lang}: reader CTA must close the chapter")
                     expected_body = render_vertical_fragment(entry, lang).strip()
                     if match.group(1).strip() != expected_body:
                         errors.append(
